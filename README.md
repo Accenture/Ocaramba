@@ -24,13 +24,13 @@ NUnit Example Test:
         [Test]
         public void SendKeysAndClickTest()
         {
-            var loginPage = Pages.Create<HomePage>()
-                                 .OpenHomePage();
+                var loginPage = Pages.Create<HomePage>()
+                        .OpenHomePage();
 
-            var searchResultsPage = loginPage.Search("objectivity");
-            searchResultsPage.MarkStackOverFlowFilter();
+                var searchResultsPage = loginPage.Search("objectivity");
+                searchResultsPage.MarkStackOverFlowFilter();
 
-            Assert.IsTrue(searchResultsPage.IsAtPage("Search Results"), "Search results page is not displayed");
+                Assert.IsTrue(searchResultsPage.IsAtPage("Search Results"), "Search results page is not displayed");
         }
 
 
