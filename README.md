@@ -38,21 +38,21 @@ NUnit Example Page Object:
 
         public class SearchResultsPage : ProjectPageBase
         {
-        /// <summary>
-        /// Locators for elements
-        /// </summary>
-        private readonly ElementLocator stackOverFlowCheckbox = new ElementLocator(Locator.Id, "500");
+                /// <summary>
+                /// Locators for elements
+                /// </summary>
+                private readonly ElementLocator stackOverFlowCheckbox = new ElementLocator(Locator.Id, "500");
 
-        /// <summary>
-        /// Marks the stack over flow filter.
-        /// </summary>
-        public SearchResultsPage MarkStackOverFlowFilter()
-        {
-                var checkbox = this.Browser.GetElement<Checkbox>(this.stackOverFlowCheckbox);
-                checkbox.TickCheckbox();
-                return this;
+                /// <summary>
+                /// Marks the stack over flow filter.
+                /// </summary>
+                public SearchResultsPage MarkStackOverFlowFilter()
+                {
+                        var checkbox = this.Browser.GetElement<Checkbox>(this.stackOverFlowCheckbox);
+                        checkbox.TickCheckbox();
+                        return this;
+                }
         }
-}
 
 
  
