@@ -22,16 +22,17 @@ To create new project using Test Framework simply copy and change example projec
 NUnit Example Test:
 
 [Test]
-public void SendKeysAndClickTest()
-{
-   var loginPage = Pages.Create<HomePage>()
-                        .OpenHomePage();
+        public void SendKeysAndClickTest()
+        {
+            var loginPage = Pages.Create<HomePage>()
+                                 .OpenHomePage();
 
-   var searchResultsPage = loginPage.Search("objectivity");
-   searchResultsPage.MarkStackOverFlowFilter();
+            var searchResultsPage = loginPage.Search("objectivity");
+            searchResultsPage.MarkStackOverFlowFilter();
 
-   Assert.IsTrue(searchResultsPage.IsAtPage("Search Results"), "Search results page is not displayed");
-}
+            Assert.IsTrue(searchResultsPage.IsAtPage("Search Results"), "Search results page is not displayed");
+        }
+
 
 NUnit Example Page Object:
 
