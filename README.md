@@ -21,7 +21,7 @@ To create new project using Test Framework simply copy and change example projec
 
 NUnit Example Test:
 
-[Test]
+        [Test]
         public void SendKeysAndClickTest()
         {
             var loginPage = Pages.Create<HomePage>()
@@ -36,22 +36,22 @@ NUnit Example Test:
 
 NUnit Example Page Object:
 
-public class SearchResultsPage : ProjectPageBase
-{
-    /// <summary>
-    /// Locators for elements
-    /// </summary>
-    private readonly ElementLocator stackOverFlowCheckbox = new ElementLocator(Locator.Id, "500");
+        public class SearchResultsPage : ProjectPageBase
+        {
+        /// <summary>
+        /// Locators for elements
+        /// </summary>
+        private readonly ElementLocator stackOverFlowCheckbox = new ElementLocator(Locator.Id, "500");
 
-    /// <summary>
-    /// Marks the stack over flow filter.
-    /// </summary>
-    public SearchResultsPage MarkStackOverFlowFilter()
-    {
-        var checkbox = this.Browser.GetElement<Checkbox>(this.stackOverFlowCheckbox);
-        checkbox.TickCheckbox();
-        return this;
-    }
+        /// <summary>
+        /// Marks the stack over flow filter.
+        /// </summary>
+        public SearchResultsPage MarkStackOverFlowFilter()
+        {
+                var checkbox = this.Browser.GetElement<Checkbox>(this.stackOverFlowCheckbox);
+                checkbox.TickCheckbox();
+                return this;
+        }
 }
 
 
