@@ -61,6 +61,7 @@
     <Compile Include="Checkbox.cs" />
     <Compile Include="Extensions\LocatorExtensions.cs" />
     <Compile Include="Extensions\SearchContextExtensions.cs" />
+    <Compile Include="Helpers\NUnit\DataDrivenHelper.cs" />
     <Compile Include="Helpers\DateHelper.cs" />
     <Compile Include="Helpers\NameHelper.cs" />
     <Compile Include="Helpers\PerformanceHelper.cs" />
@@ -96,6 +97,8 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WebDriver">
       <HintPath>..\packages\Selenium.WebDriver.2.44.0\lib\net40\WebDriver.dll</HintPath>
     </Reference>

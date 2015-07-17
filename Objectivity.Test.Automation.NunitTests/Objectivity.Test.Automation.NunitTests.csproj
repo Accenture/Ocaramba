@@ -57,8 +57,6 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.XML" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="WebDriver">
       <HintPath>..\packages\Selenium.WebDriver.2.44.0\lib\net40\WebDriver.dll</HintPath>
     </Reference>
@@ -67,7 +65,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataDriven\DataDrivenHelper.cs" />
+    <Compile Include="DataDriven\TestData.cs" />
     <Compile Include="PageObjects\TechnologiesBusinessPage.cs" />
     <Compile Include="PageObjects\SearchResultsPage.cs" />
     <Compile Include="PageObjects\HomePage.cs" />
@@ -99,7 +97,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DataDrivenFiles\DataDriven.xml">
+    <Content Include="DataDriven\DataDriven.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>

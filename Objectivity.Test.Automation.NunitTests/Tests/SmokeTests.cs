@@ -50,7 +50,7 @@ namespace Objectivity.Test.Automation.NunitTests.Tests
         }
 
         [Test]
-        [TestCaseSource(typeof(DataDrivenHelper), "WordsToSearch")]
+        [TestCaseSource(typeof(TestData), "WordsToSearch")]
         public void SendKeysAndClickDataDrivenSetTest(IDictionary<string, string> parameters)
         {
             var loginPage = Pages.Create<HomePage>()
@@ -62,7 +62,7 @@ namespace Objectivity.Test.Automation.NunitTests.Tests
         }
 
         [Test]
-        [TestCaseSource(typeof(DataDrivenHelper), "WordsToSearchSetTestName")]
+        [TestCaseSource(typeof(TestData), "WordsToSearchSetTestName")]
         public void SendKeysAndClickDataDrivenSetNameOfTest(IDictionary<string, string> parameters)
         {
             var loginPage = Pages.Create<HomePage>()
