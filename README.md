@@ -62,7 +62,6 @@ NUnit Example Page Object:
                 }
         }
 
-To select internet browser for tests to be carried out edit App.config file at previously selected sample project:
-- <add key="browser" value="Firefox" />
+To select internet browser for tests to be carried out edit App.config file at previously selected sample project.
  
 
