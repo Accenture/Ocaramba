@@ -63,10 +63,6 @@ NUnit Example Page Object:
         }
 
 To select internet browser for tests to be carried out edit App.config file at previously selected sample project:
-    <!--<add key="browser" value="Chrome" />-->
-    <!--<add key="browser" value="InternetExplorer" />-->
-	<add key="browser" value="Firefox" />
-    <add key="waitingTime" value="20" />
-    <add key="ajaxWaitingTime" value="10" />
+- <add key="browser" value="Firefox" />
  
 
