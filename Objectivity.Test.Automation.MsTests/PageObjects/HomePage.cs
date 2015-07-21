@@ -39,8 +39,8 @@ namespace Objectivity.Test.Automation.MsTests.PageObjects
         /// Locators for elements
         /// </summary>
         private readonly ElementLocator
-            searchTextbox = new ElementLocator(Locator.Id, "HeaderSearchTextBox"),
-            searchButton = new ElementLocator(Locator.Id, "HeaderSearchButton"),
+             searchTextbox = new ElementLocator(Locator.Id, "HeaderSearchTextBox"),
+            searchButton = new ElementLocator(Locator.Id, "FakeHeaderSearchButton"),
             menuLink = new ElementLocator(Locator.XPath, "//*[@title='{0}' and @ms.title='{1}']"),
             menuAllLinks = new ElementLocator(Locator.CssSelector, "ul.navL1>li>a"),
             technologiesMenuLink = new ElementLocator(Locator.XPath, "//a[@title='Technologies']");
@@ -67,9 +67,10 @@ namespace Objectivity.Test.Automation.MsTests.PageObjects
 
         public SearchResultsPage Search(string value)
         {
+            this.Browser.GetElement(this.searchButton).Click();
             this.Browser.GetElement(this.searchTextbox).SendKeys(value);
             this.Browser.GetElement(this.searchButton).Click();
-            
+
             return Pages.Create<SearchResultsPage>();
         }
 

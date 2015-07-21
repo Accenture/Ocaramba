@@ -24,11 +24,12 @@ SOFTWARE.
 
 namespace Objectivity.Test.Automation.MsTests.Tests
 {
+    using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using Objectivity.Test.Automation.Common;
     using Objectivity.Test.Automation.MsTests.PageObjects;
-
+ 
     /// <summary>
     /// Tests to test framework
     /// </summary>
@@ -53,23 +54,36 @@ namespace Objectivity.Test.Automation.MsTests.Tests
             StopPerfromanceMeasure();
         }
 
-        [DeploymentItem("Objectivity.Test.Automation.MsTests\\DDT.xml"), 
-            DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML",
-            "|DataDirectory|\\DDT.xml", "Row", 
-            DataAccessMethod.Sequential), TestMethod]
+        [TestMethod]
         public void OpenHomePage()
         {
             var loginPage = Pages.Create<HomePage>();
             loginPage.OpenHomePageAndMeasureTime();
         }
-
-        [TestMethod]
+        
+        [DeploymentItem("Objectivity.Test.Automation.MsTests\\DDT.xml"),
+            DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML",
+            "|DataDirectory|\\DDT.xml", "Links",
+            DataAccessMethod.Sequential), TestMethod]
         public void FindChildElementsTest()
         {
             var loginPage = Pages.Create<HomePage>()
                                  .OpenHomePage();
+            Assert.AreEqual(Convert.ToInt16((string)TestContext.DataRow["number"]), loginPage.CountAllTechnologiesSubLinks());
+        }
 
-            Assert.AreEqual(5, loginPage.CountAllTechnologiesSubLinks());
+        [DeploymentItem("Objectivity.Test.Automation.MsTests\\DDT.xml"),
+            DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML",
+            "|DataDirectory|\\DDT.xml", "WordsToSearch",
+            DataAccessMethod.Sequential), TestMethod]
+        public void SendKeysAndClickDataDrivenTest()
+        {
+            var loginPage = Pages.Create<HomePage>()
+                                 .OpenHomePage();
+
+            var searchResultsPage = loginPage.Search((string)TestContext.DataRow["word"]);
+
+            Assert.IsTrue(searchResultsPage.IsAtPageDataDriven((string)TestContext.DataRow["expected_title"]), "Search results page is not displayed");
         }
     }
 }

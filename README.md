@@ -16,8 +16,16 @@ It provides following features:
 - Several methods to interact with kendo controls
 - Verify along with Assert
 - Measures average and 90 Percentile action times
+- DataDriven for NUnit and MSTest with examples 
 
-To create new project using Test Framework simply copy and change example projects
+To create new project using Test Framework simply copy and change  one of example  project:
+- Objectivity.Test.Automation.Features for Specflow
+- Objectivity.Test.Automation.MsTests for MSTest
+- Objectivity.Test.Automation.NunitTests for NUnit
+
+In case of problems with running tests in your internet browser remember to update version of Selenium WebDriver from Nuget packages.
+To run NUnit tests from Visual Studio remember to install NUnit TestAdapter.
+
 
 NUnit Example Test:
 
@@ -54,6 +62,11 @@ NUnit Example Page Object:
                 }
         }
 
-
+To select internet browser for tests to be carried out edit App.config file at previously selected sample project:
+    <!--<add key="browser" value="Chrome" />-->
+    <!--<add key="browser" value="InternetExplorer" />-->
+	<add key="browser" value="Firefox" />
+    <add key="waitingTime" value="20" />
+    <add key="ajaxWaitingTime" value="10" />
  
 

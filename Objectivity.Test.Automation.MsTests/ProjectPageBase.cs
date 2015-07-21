@@ -56,5 +56,15 @@ namespace Objectivity.Test.Automation.MsTests
         {
             return this.Browser.IsPageTitle(this.pageTitleDictionary[pageName], BaseConfiguration.AjaxWaitingTime);
         }
+
+        /// <summary>
+        /// Determines whether [is at page data driven] [the specified page name].
+        /// </summary>
+        /// <param name="pageName">Name of the page.</param>
+        /// <returns></returns>
+        public bool IsAtPageDataDriven(string pageName)
+        {
+            return this.Browser.IsPageTitle(pageName, BaseConfiguration.AjaxWaitingTime);
+        }
     }
 }
