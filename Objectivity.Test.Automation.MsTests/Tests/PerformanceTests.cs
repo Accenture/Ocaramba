@@ -25,6 +25,8 @@ SOFTWARE.
 namespace Objectivity.Test.Automation.MsTests.Tests
 {
     using System;
+    using System.Globalization;
+
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using Objectivity.Test.Automation.Common;
@@ -69,7 +71,7 @@ namespace Objectivity.Test.Automation.MsTests.Tests
         {
             var loginPage = Pages.Create<HomePage>()
                                  .OpenHomePage();
-            Assert.AreEqual(Convert.ToInt16((string)TestContext.DataRow["number"]), loginPage.CountAllTechnologiesSubLinks());
+            Assert.AreEqual(Convert.ToInt16((string)TestContext.DataRow["number"], CultureInfo.CurrentCulture), loginPage.CountAllTechnologiesSubLinks());
         }
 
         [DeploymentItem("Objectivity.Test.Automation.MsTests\\DDT.xml"),
