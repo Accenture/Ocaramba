@@ -71,7 +71,10 @@ namespace Objectivity.Test.Automation.NunitTests.DataDriven
 
                         if (keyFlag)
                         {
-                            testCaseName += "_" + keyValue;
+                            if (!string.IsNullOrEmpty(keyValue))
+                            {
+                                testCaseName += "_" + keyValue;
+                            }
                         }
                         else
                         {
