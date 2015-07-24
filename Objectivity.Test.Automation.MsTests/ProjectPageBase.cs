@@ -25,6 +25,7 @@ SOFTWARE.
 namespace Objectivity.Test.Automation.MsTests
 {
     using System.Collections.Generic;
+    using System.Globalization;
 
     using Objectivity.Test.Automation.Common;
     using Objectivity.Test.Automation.Common.Extensions;
@@ -48,23 +49,25 @@ namespace Objectivity.Test.Automation.MsTests
             { "Technologies Business", "Business and Enterprise Application Development" }
         };
 
-        /// <summary>
-        /// Common methods for all pages
-        /// </summary>
-        /// <param name="pageName">Name of the page.</param>
-        public bool IsAtPage(string pageName)
+        public string GetPageTitleDataDriven
         {
-            return this.Browser.IsPageTitle(this.pageTitleDictionary[pageName], BaseConfiguration.AjaxWaitingTime);
+            get
+            {
+                return this.Browser.GetPageTitle();
+            }
         }
 
         /// <summary>
-        /// Determines whether [is at page data driven] [the specified page name].
+        /// Returns expected and actual page titles
         /// </summary>
         /// <param name="pageName">Name of the page.</param>
-        /// <returns></returns>
-        public bool IsAtPageDataDriven(string pageName)
+        public Dictionary<string, string> GetPageTitle(string pageName)
         {
-            return this.Browser.IsPageTitle(pageName, BaseConfiguration.AjaxWaitingTime);
-        }
+            return new Dictionary<string, string>
+            { 
+                { "actual", this.Browser.GetPageTitle() }, 
+                { "expected", this.pageTitleDictionary[pageName].ToLower(CultureInfo.CurrentCulture) },  
+            };
+        } 
     }
 }

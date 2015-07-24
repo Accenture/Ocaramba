@@ -28,6 +28,7 @@ namespace Objectivity.Test.Automation.Common.Extensions
 {
     using System;
     using System.Globalization;
+
     using Objectivity.Test.Automation.Common.Types;
 
     using OpenQA.Selenium;
@@ -121,28 +122,13 @@ namespace Objectivity.Test.Automation.Common.Extensions
         }
 
         /// <summary>
-        /// Determines whether [is page title] [the specified page title].
+        /// Returns current page title.
         /// </summary>
         /// <param name="webDriver">The web driver.</param>
-        /// <param name="pageTitle">The page title.</param>
-        /// <param name="timeout">The timeout.</param>
-        /// <returns>
-        /// Return true if proper title is displayed. In other cases return false.
-        /// </returns>
-        public static bool IsPageTitle(this IWebDriver webDriver, string pageTitle, double timeout)
-        {
-            var wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(timeout));
-
-            try
-            {
-                wait.Until(d => d.Title.ToLower(CultureInfo.CurrentCulture) == pageTitle.ToLower(CultureInfo.CurrentCulture));
-            }
-            catch (WebDriverTimeoutException)
-            {
-                return false;
-            }
-
-            return true;
+        /// <returns></returns>
+        public static string GetPageTitle(this IWebDriver webDriver)
+        {       
+            return webDriver.Title.ToLower(CultureInfo.CurrentCulture);
         }
 
         /// <summary>

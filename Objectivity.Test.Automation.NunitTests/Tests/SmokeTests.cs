@@ -26,6 +26,8 @@ using System.Collections.Generic;
 
 namespace Objectivity.Test.Automation.NunitTests.Tests
 {
+    using System.Globalization;
+
     using NUnit.Framework;
 
     using Objectivity.Test.Automation.Common;
@@ -46,7 +48,8 @@ namespace Objectivity.Test.Automation.NunitTests.Tests
             var searchResultsPage = loginPage.Search("objectivity");
             searchResultsPage.MarkStackOverFlowFilter();
 
-            Assert.IsTrue(searchResultsPage.IsAtPage("Search Results"), "Search results page is not displayed");
+            var pageTitle = searchResultsPage.GetPageTitle("Search Results");
+            Assert.AreEqual(pageTitle["expected"], pageTitle["actual"], "Search results page is not displayed");
         }
 
         [Test]
@@ -58,7 +61,7 @@ namespace Objectivity.Test.Automation.NunitTests.Tests
 
             var searchResultsPage = loginPage.Search(parameters["word"]);
 
-            Assert.IsTrue(searchResultsPage.IsAtPageDataDriven(parameters["expected_title"]), "Search results page is not displayed");
+            Assert.AreEqual(parameters["expected_title"].ToLower(CultureInfo.CurrentCulture), searchResultsPage.GetPageTitleDataDriven, "Search results page is not displayed");
         }
 
         [Test]
@@ -70,7 +73,7 @@ namespace Objectivity.Test.Automation.NunitTests.Tests
 
             var searchResultsPage = loginPage.Search(parameters["word"]);
 
-            Assert.IsTrue(searchResultsPage.IsAtPageDataDriven(parameters["expected_title"]), "Search results page is not displayed");
+            Assert.AreEqual(parameters["expected_title"].ToLower(CultureInfo.CurrentCulture), searchResultsPage.GetPageTitleDataDriven, "Search results page is not displayed");
         }
 
         [Test]
@@ -107,8 +110,8 @@ namespace Objectivity.Test.Automation.NunitTests.Tests
                                  .OpenHomePage();
 
             var technologiesBusinessPage = loginPage.ClickTechnologiesWebLink();
-
-            Assert.IsTrue(technologiesBusinessPage.IsAtPage("Technologies Web"), "Wrong title of the page");
+            var pageTitle = technologiesBusinessPage.GetPageTitle("Technologies Web");
+            Assert.AreEqual(pageTitle["expected"], pageTitle["actual"], "Wrong title of the page");
         }
 
         [Test]
@@ -119,7 +122,8 @@ namespace Objectivity.Test.Automation.NunitTests.Tests
 
             var technologiesBusinessPage = loginPage.JavaScriptClickTechnologiesWebLink();
 
-            Assert.IsTrue(technologiesBusinessPage.IsAtPage("Technologies Web"), "Wrong title of the page");
+            var pageTitle = technologiesBusinessPage.GetPageTitle("Technologies Web");
+            Assert.AreEqual(pageTitle["expected"], pageTitle["actual"], "Wrong title of the page");
         }
 
         [Test]

@@ -43,7 +43,8 @@ namespace Objectivity.Test.Automation.NunitTests.Tests
             var searchResultsPage = loginPage.SearchUsingActions("objectivity");
             searchResultsPage.MarkStackOverFlowFilter();
 
-            Assert.IsTrue(searchResultsPage.IsAtPage("Search Results"), "Search results page is not displayed");
+            var pageTitle = searchResultsPage.GetPageTitle("Search Results");
+            Assert.AreEqual(pageTitle["expected"], pageTitle["actual"], "Wrong title of the page");
         }
     }
 }

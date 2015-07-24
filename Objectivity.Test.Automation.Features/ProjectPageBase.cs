@@ -25,6 +25,7 @@ SOFTWARE.
 namespace Objectivity.Test.Automation.Features
 {
     using System.Collections.Generic;
+    using System.Globalization;
 
     using Objectivity.Test.Automation.Common;
     using Objectivity.Test.Automation.Common.Extensions;
@@ -49,12 +50,16 @@ namespace Objectivity.Test.Automation.Features
         };
 
         /// <summary>
-        /// Common methods for all pages
+        /// Returns expected and actual page titles
         /// </summary>
         /// <param name="pageName">Name of the page.</param>
-        public bool IsAtPage(string pageName)
+        public Dictionary<string, string> GetPageTitle(string pageName)
         {
-            return this.Browser.IsPageTitle(this.pageTitleDictionary[pageName], BaseConfiguration.AjaxWaitingTime);
+            return new Dictionary<string, string>
+            { 
+                { "actual", this.Browser.GetPageTitle() }, 
+                { "expected", this.pageTitleDictionary[pageName].ToLower(CultureInfo.CurrentCulture) },  
+            };
         }
     }
 }
