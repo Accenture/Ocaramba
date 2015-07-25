@@ -122,12 +122,26 @@ namespace Objectivity.Test.Automation.Common.Extensions
         }
 
         /// <summary>
-        /// Returns current page title.
+        /// Determines whether [is page title] [the specified page title].
         /// </summary>
         /// <param name="webDriver">The web driver.</param>
-        /// <returns></returns>
-        public static string GetPageTitle(this IWebDriver webDriver)
-        {       
+        /// <param name="pageTitle">The page title.</param>
+        /// <param name="timeout">The timeout.</param>
+        /// <returns>
+        /// Returns title of page
+        /// </returns>
+        public static string GetPageTitle(this IWebDriver webDriver, string pageTitle, double timeout)
+        {
+            var wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(timeout));
+
+            try
+            {
+                wait.Until(d => d.Title.ToLower(CultureInfo.CurrentCulture) == pageTitle.ToLower(CultureInfo.CurrentCulture));
+            }
+            catch (WebDriverTimeoutException)
+            {
+            }
+
             return webDriver.Title.ToLower(CultureInfo.CurrentCulture);
         }
 

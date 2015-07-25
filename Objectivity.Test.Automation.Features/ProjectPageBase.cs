@@ -57,7 +57,7 @@ namespace Objectivity.Test.Automation.Features
         {
             return new Dictionary<string, string>
             { 
-                { "actual", this.Browser.GetPageTitle() }, 
+                { "actual", this.Browser.GetPageTitle(pageName, BaseConfiguration.AjaxWaitingTime) }, 
                 { "expected", this.pageTitleDictionary[pageName].ToLower(CultureInfo.CurrentCulture) },  
             };
         }

@@ -85,7 +85,7 @@ namespace Objectivity.Test.Automation.MsTests.Tests
 
             var searchResultsPage = loginPage.Search((string)TestContext.DataRow["word"]);
 
-            Assert.AreEqual(TestContext.DataRow["expected_title"].ToString().ToLower(CultureInfo.CurrentCulture), searchResultsPage.GetPageTitleDataDriven, "Search results page is not displayed");
+            Assert.AreEqual(TestContext.DataRow["expected_title"].ToString().ToLower(CultureInfo.CurrentCulture), searchResultsPage.GetPageTitleDataDriven(TestContext.DataRow["expected_title"].ToString()), "Search results page is not displayed");
         }
     }
 }

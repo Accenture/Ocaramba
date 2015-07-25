@@ -49,12 +49,9 @@ namespace Objectivity.Test.Automation.NunitTests
             { "Technologies Web", "Web Application Development Resources From Microsoft" }
         };
 
-        public string GetPageTitleDataDriven
+        public string GetPageTitleDataDriven(string pageName)
         {
-            get
-            {
-                return this.Browser.GetPageTitle();
-            }
+            return this.Browser.GetPageTitle(pageName, BaseConfiguration.AjaxWaitingTime);
         }
 
         /// <summary>
@@ -65,7 +62,7 @@ namespace Objectivity.Test.Automation.NunitTests
         {
             return new Dictionary<string, string>
             { 
-                { "actual", this.Browser.GetPageTitle() }, 
+                { "actual", this.Browser.GetPageTitle(pageName, BaseConfiguration.AjaxWaitingTime) }, 
                 { "expected", this.pageTitleDictionary[pageName].ToLower(CultureInfo.CurrentCulture) },  
             };
         }

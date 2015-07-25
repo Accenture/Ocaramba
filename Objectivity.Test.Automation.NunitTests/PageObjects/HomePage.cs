@@ -27,14 +27,16 @@ namespace Objectivity.Test.Automation.NunitTests.PageObjects
     using System;
     using System.Globalization;
 
+    using NLog;
+
     using Objectivity.Test.Automation.Common;
     using Objectivity.Test.Automation.Common.Extensions;
     using Objectivity.Test.Automation.Common.Types;
 
-    using OpenQA.Selenium.Interactions;
-
     public class HomePage : ProjectPageBase
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
+
         /// <summary>
         /// Locators for elements
         /// </summary>
@@ -52,6 +54,7 @@ namespace Objectivity.Test.Automation.NunitTests.PageObjects
         {
             var url = this.GetUrlValue();
             this.Browser.NavigateTo(new Uri(url));
+            logger.Debug(CultureInfo.CurrentCulture, "Opening page {0}", url);
             return this;
         }
 

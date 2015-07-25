@@ -61,7 +61,7 @@ namespace Objectivity.Test.Automation.NunitTests.Tests
 
             var searchResultsPage = loginPage.Search(parameters["word"]);
 
-            Assert.AreEqual(parameters["expected_title"].ToLower(CultureInfo.CurrentCulture), searchResultsPage.GetPageTitleDataDriven, "Search results page is not displayed");
+            Assert.AreEqual(parameters["expected_title"].ToLower(CultureInfo.CurrentCulture), searchResultsPage.GetPageTitleDataDriven(parameters["word"]), "Search results page is not displayed");
         }
 
         [Test]
@@ -73,7 +73,7 @@ namespace Objectivity.Test.Automation.NunitTests.Tests
 
             var searchResultsPage = loginPage.Search(parameters["word"]);
 
-            Assert.AreEqual(parameters["expected_title"].ToLower(CultureInfo.CurrentCulture), searchResultsPage.GetPageTitleDataDriven, "Search results page is not displayed");
+            Assert.AreEqual(parameters["expected_title"].ToLower(CultureInfo.CurrentCulture), searchResultsPage.GetPageTitleDataDriven(parameters["expected_title"]), "Search results page is not displayed");
         }
 
         [Test]
