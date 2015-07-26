@@ -27,6 +27,8 @@ namespace Objectivity.Test.Automation.MsTests.PageObjects
     using System;
     using System.Globalization;
 
+    using NLog;
+
     using Objectivity.Test.Automation.Common;
     using Objectivity.Test.Automation.Common.Extensions;
     using Objectivity.Test.Automation.Common.Types;
@@ -35,6 +37,8 @@ namespace Objectivity.Test.Automation.MsTests.PageObjects
 
     public class HomePage : ProjectPageBase
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
+
         /// <summary>
         /// Locators for elements
         /// </summary>
@@ -52,6 +56,7 @@ namespace Objectivity.Test.Automation.MsTests.PageObjects
         {
             var url = this.GetUrlValue();
             this.Browser.NavigateTo(new Uri(url));
+            logger.Info(CultureInfo.CurrentCulture, "Opening page {0}", url);
             return this;
         }
 
@@ -62,6 +67,7 @@ namespace Objectivity.Test.Automation.MsTests.PageObjects
         {
             var url = this.GetUrlValue();
             this.Browser.NavigateToAndMeasureTimeForAjaxFinished(new Uri(url));
+            logger.Info(CultureInfo.CurrentCulture, "Opening page {0}", url);
             return this;
         }
 

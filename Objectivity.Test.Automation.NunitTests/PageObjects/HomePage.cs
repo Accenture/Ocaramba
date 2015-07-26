@@ -54,7 +54,7 @@ namespace Objectivity.Test.Automation.NunitTests.PageObjects
         {
             var url = this.GetUrlValue();
             this.Browser.NavigateTo(new Uri(url));
-            logger.Debug(CultureInfo.CurrentCulture, "Opening page {0}", url);
+            logger.Info(CultureInfo.CurrentCulture, "Opening page {0}", url);
             return this;
         }
 
@@ -65,6 +65,7 @@ namespace Objectivity.Test.Automation.NunitTests.PageObjects
         {
             var url = this.GetUrlValue();
             this.Browser.NavigateToAndMeasureTimeForAjaxFinished(new Uri(url));
+            logger.Info(CultureInfo.CurrentCulture, "Opening page {0}", url);
             return this;
         }
 
