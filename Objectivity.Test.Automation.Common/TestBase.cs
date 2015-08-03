@@ -114,12 +114,34 @@ namespace Objectivity.Test.Automation.Common
         }
 
         /// <summary>
+        /// Verify group of assets
+        /// </summary>
+        /// <param name="myAsserts">
+        /// Group asserts
+        /// </param>
+        public void Verify(params Action[] myAsserts)
+        {
+            foreach (var myAssert in myAsserts)
+            {
+                this.Verify(myAssert, false);
+            }
+
+            if (!this.verifyMessages.Count.Equals(0))
+            {
+                BrowserManager.SaveScreenshot(new ErrorDetail(BrowserManager.TakeScreenshot(), DateTime.Now, null), TestTitle); 
+            }
+        }
+
+        /// <summary>
         /// Verify assert conditions
         /// </summary>
         /// <param name="myAssert">
         /// Assert condition
         /// </param>
-        public void Verify(Action myAssert)
+        /// <param name="enableScreenShot">
+        /// Enabling screenshot
+        /// </param>
+        public void Verify(Action myAssert, bool enableScreenShot)
         {
             try
             {
@@ -128,10 +150,27 @@ namespace Objectivity.Test.Automation.Common
             catch (AssertionException e)
             {
                 var screenshot = BrowserManager.TakeScreenshot();
-                this.verifyMessages.Add(new ErrorDetail(BrowserManager.TakeScreenshot(), DateTime.Now, e));
-                BrowserManager.SaveScreenshot(new ErrorDetail(screenshot, DateTime.Now, null), TestTitle);
+
+                this.verifyMessages.Add(new ErrorDetail(screenshot, DateTime.Now, e));
+
+                if (enableScreenShot)
+                {
+                    BrowserManager.SaveScreenshot(new ErrorDetail(screenshot, DateTime.Now, null), TestTitle); 
+                }
+
                 Console.WriteLine("\n-----VERIFY FAILS-----\n" + e + "\n-------------------\n");
             }
+        }
+
+        /// <summary>
+        /// Verify assert conditions
+        /// </summary>
+        /// <param name="myAssert">
+        /// Assert condition
+        /// </param>
+        public void Verify(Action myAssert)
+        {
+            Verify(myAssert, true);
         }
 
         /// <summary>
@@ -141,8 +180,18 @@ namespace Objectivity.Test.Automation.Common
         {
             if (!this.verifyMessages.Count.Equals(0) && !IsTestFailed)
             {
+                this.CleanVerifyMessages();
+
                 Assert.Fail();
             }
+        }
+
+        /// <summary>
+        /// Cleans all verify messages
+        /// </summary>
+        public void CleanVerifyMessages()
+        {
+            this.verifyMessages.Clear();
         }
     }
 }
