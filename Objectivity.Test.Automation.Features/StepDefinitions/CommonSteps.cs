@@ -24,6 +24,10 @@ SOFTWARE.
 
 namespace Objectivity.Test.Automation.Features.StepDefinitions
 {
+    using System.Globalization;
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     using Objectivity.Test.Automation.Common;
     using Objectivity.Test.Automation.Features.PageObjects;
 
@@ -38,25 +42,17 @@ namespace Objectivity.Test.Automation.Features.StepDefinitions
             Pages.Create<HomePage>().OpenHomePage();
         }
 
-        [Given(@"I search for '(.*)'")]
+        [Given(@"I search for ""(.*)""")]
         public void GivenISearchFor(string searchedValue)
         {
             Pages.Create<HomePage>().Search(searchedValue);
         }
 
-        [When(@"I mark stack overflow filter")]
-        public void WhenIMarkStackOverflowFilter()
+        [Then(@"I should be on ""(.*)"" page")]
+        public void ThenIShouldBeOnPage(string pageName)
         {
-            Pages.Create<SearchResultsPage>().MarkStackOverFlowFilter();
+            var searchResultsPage = Pages.Create<SearchResultsPage>();
+            Assert.AreEqual(pageName.ToLower(CultureInfo.CurrentCulture), searchResultsPage.GetPageTitle(pageName));
         }
-
-        ////[Then(@"I should be on '(.*)' page")]
-        ////public void ThenIShouldBeOnPage(string pageName)
-        ////{
-        ////    var searchResultsPage = Pages.Create<SearchResultsPage>();
-        ////    Assert.IsTrue(
-        ////        searchResultsPage.IsAtPage("Search Results"),
-        ////        "Search results page is not displayed");
-        ////}
     }
 }

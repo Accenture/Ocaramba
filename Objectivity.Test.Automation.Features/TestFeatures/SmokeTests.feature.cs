@@ -67,18 +67,25 @@ namespace Objectivity.Test.Automation.Features.TestFeatures
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Send Keys And Click Test")]
         [NUnit.Framework.CategoryAttribute("smoke")]
-        public virtual void SendKeysAndClickTest()
+        [NUnit.Framework.TestCaseAttribute("\"objectivity\"", "\"objectivity - MSDN Search\"", null)]
+        [NUnit.Framework.TestCaseAttribute("\"visual studio\"", "\"visual studio - MSDN Search\"", null)]
+        public virtual void SendKeysAndClickTest(string word, string title, string[] exampleTags)
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Send Keys And Click Test", new string[] {
-                        "smoke"});
+            string[] @__tags = new string[] {
+                    "smoke"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Send Keys And Click Test", @__tags);
 #line 28
 this.ScenarioSetup(scenarioInfo);
 #line 29
  testRunner.Given("I log on and default page is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 30
- testRunner.And("I search for \'Objectivity\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And(string.Format("I search for {0}", word), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 31
- testRunner.When("I mark stack overflow filter", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+    testRunner.Then(string.Format("I should be on {0} page", title), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

@@ -40,26 +40,12 @@ namespace Objectivity.Test.Automation.Features
     public class ProjectPageBase : Page
     {
         /// <summary>
-        /// The page title dictionary
-        /// </summary>
-        private readonly Dictionary<string, string> pageTitleDictionary = new Dictionary<string, string>
-        {
-            { "Home", "MSDN-the microsoft developer network" },
-            { "Search Results", "objectivity - MSDN Search" },
-            { "Technologies Business", "Business and Enterprise Application Development" }
-        };
-
-        /// <summary>
         /// Returns expected and actual page titles
         /// </summary>
         /// <param name="pageName">Name of the page.</param>
-        public Dictionary<string, string> GetPageTitle(string pageName)
+        public string GetPageTitle(string pageName)
         {
-            return new Dictionary<string, string>
-            { 
-                { "actual", this.Browser.GetPageTitle(pageName, BaseConfiguration.AjaxWaitingTime) }, 
-                { "expected", this.pageTitleDictionary[pageName].ToLower(CultureInfo.CurrentCulture) },  
-            };
+            return this.Browser.GetPageTitle(pageName, BaseConfiguration.AjaxWaitingTime);
         }
     }
 }

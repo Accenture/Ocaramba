@@ -25,8 +25,12 @@ Feature: SmokeTests
 	In order to check if framework works correctly
 
 @smoke
-Scenario: Send Keys And Click Test
+Scenario Outline: Send Keys And Click Test
 	Given I log on and default page is opened
-	And I search for 'Objectivity'
-	When I mark stack overflow filter
-	#Then I should be on 'search result' page
+	And I search for <word>
+    Then I should be on <title> page
+
+Examples: 
+| word            | title                         |
+| "objectivity"   | "objectivity - MSDN Search"   |
+| "visual studio" | "visual studio - MSDN Search" |
