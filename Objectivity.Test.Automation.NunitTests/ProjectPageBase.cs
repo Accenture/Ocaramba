@@ -46,7 +46,7 @@ namespace Objectivity.Test.Automation.NunitTests
         {
             { "Home", "MSDN-the microsoft developer network" },
             { "Search Results", "objectivity - MSDN Search" },
-            { "Technologies Web", "Web Application Development Resources From Microsoft" }
+            { "Technologies Web", "web application development resources | msdn" }
         };
 
         public string GetPageTitleDataDriven(string pageName)
