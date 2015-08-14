@@ -1,0 +1,6 @@
+/*/bin
+/*/obj
+/packages
+StyleCop.Cache
+*.suo
+*.GhostDoc.xml
