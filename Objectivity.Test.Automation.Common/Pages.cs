@@ -52,19 +52,8 @@ namespace Objectivity.Test.Automation.Common
         /// <returns>Instance of a page object.</returns>
         public static T Create<T>() where T : Page, new()
         {
-            if (ExistingPages.ContainsKey(typeof(T)))
-            {
-                var page = ExistingPages[typeof(T)];
-                return page as T;
-            }
-            else
-            {
-                var page = new T { Browser = BrowserManager.Handle };
-
-                ExistingPages.Add(typeof(T), page);
-
-                return page;
-            }
+            var page = new T { Browser = BrowserManager.Handle };
+            return page;
         }
     }
 }

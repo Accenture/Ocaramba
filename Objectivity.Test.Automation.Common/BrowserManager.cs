@@ -25,10 +25,12 @@ SOFTWARE.
 namespace Objectivity.Test.Automation.Common
 {
     using System;
+    using System.Collections.Generic;
     using System.Drawing.Imaging;
     using System.Globalization;
     using System.IO;
     using System.Linq;
+    using System.Threading;
 
     using Objectivity.Test.Automation.Common.Types;
 
@@ -48,9 +50,17 @@ namespace Objectivity.Test.Automation.Common
         /// <value>
         /// The handle to driver.
         /// </value>
-        internal static IWebDriver Handle { get; set; }
+        private static readonly Dictionary<int, IWebDriver> CurrentDrivers = new Dictionary<int, IWebDriver>();
 
-        private FirefoxProfile FirefoxProfile
+        internal static IWebDriver Handle
+        {
+            get
+            {
+                return CurrentDrivers[Thread.CurrentThread.ManagedThreadId];
+            } 
+        }
+
+    private FirefoxProfile FirefoxProfile
         {
             get
             {
@@ -65,36 +75,40 @@ namespace Objectivity.Test.Automation.Common
         /// Starts the specified browser.
         /// </summary>
         /// <param name="browser">The browser.</param>
-        /// <exception cref="System.NotSupportedException">When driver not supported</exception>
+        /// <exception cref="NotSupportedException">When driver not supported</exception>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "Driver disposed later in stop method")]
         public void Start(string browser)
         {
+            IWebDriver driver;
+
             switch (browser)
             {
                 case "Firefox":
-                    Handle = new FirefoxDriver(this.FirefoxProfile);
+                    driver = new FirefoxDriver(this.FirefoxProfile);
                     break;
                 case "FirefoxPortable":
 
                     var profile = this.FirefoxProfile;
                     var firefoxBinary = new FirefoxBinary(BaseConfiguration.FirefoxPath);
-                    Handle = new FirefoxDriver(firefoxBinary, profile);
+                    driver = new FirefoxDriver(firefoxBinary, profile);
                     break;
                 case "InternetExplorer":
                     var options = new InternetExplorerOptions
                     {
                         EnsureCleanSession = true,
                     };
-                    Handle = new InternetExplorerDriver(@"Drivers\", options);
+                    driver = new InternetExplorerDriver(@"Drivers\", options);
                     break;
                 case "Chrome":
-                    Handle = new ChromeDriver(@"Drivers\");
+                    driver = new ChromeDriver(@"Drivers\");
                     break;
                 default:
                     throw new NotSupportedException(
                         string.Format(CultureInfo.CurrentCulture, "Driver {0} is not supported", browser));
             }
 
-            Handle.Manage().Window.Maximize();
+            driver.Manage().Window.Maximize();
+            CurrentDrivers.Add(Thread.CurrentThread.ManagedThreadId, driver);
         }
 
         /// <summary>
@@ -102,7 +116,13 @@ namespace Objectivity.Test.Automation.Common
         /// </summary>
         public void Stop()
         {
-            Handle.Quit();
+            if (!CurrentDrivers.ContainsKey(Thread.CurrentThread.ManagedThreadId))
+            {
+                return;
+            }
+
+            CurrentDrivers[Thread.CurrentThread.ManagedThreadId].Dispose();
+            CurrentDrivers.Remove(Thread.CurrentThread.ManagedThreadId);
         }
 
         /// <summary>

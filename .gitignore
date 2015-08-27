@@ -1,6 +1,11 @@
 /*/bin
 /*/obj
+/TestResults
 /packages
+
 StyleCop.Cache
 *.suo
 *.GhostDoc.xml
+TestFramework.sln.DotSettings.user
+
+/Objectivity.Test.Automation.Features/TestFeatures/*.feature.cs
