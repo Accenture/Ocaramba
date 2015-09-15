@@ -158,6 +158,18 @@ namespace Objectivity.Test.Automation.Common.Extensions
         }
 
         /// <summary>
+        /// Waits for element until is displayed and enabled.
+        /// </summary>
+        /// <param name="webDriver">The web driver.</param>
+        /// <param name="locator">The locator.</param>
+        /// <param name="timeout">The timeout.</param>
+        public static void WaitForElement(this IWebDriver webDriver, ElementLocator locator, double timeout)
+        {
+            var wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(timeout));
+            wait.Until(driver => webDriver.GetElement(locator).Displayed & webDriver.GetElement(locator).Enabled);
+        }
+
+        /// <summary>
         /// The scroll into middle.
         /// </summary>
         /// <param name="webDriver">The web driver.</param>
