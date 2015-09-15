@@ -115,6 +115,12 @@ namespace Objectivity.Test.Automation.Common.Extensions
                 webDriver.GetDisplayedElement(locator, customTimeout);
                 return true;
             }
+
+            catch (NoSuchElementException)
+            {
+                return false;
+            }
+
             catch (WebDriverTimeoutException)
             {
                 return false;

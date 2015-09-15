@@ -132,5 +132,14 @@ namespace Objectivity.Test.Automation.NunitTests.Tests
             this.Verify(() => Assert.AreEqual(1, 1));
             this.Verify(() => Assert.IsTrue(true));
         }
+
+        [Test]
+        public void ElementNotPresent()
+        {
+            var homepage = Pages.Create<HomePage>()
+                                 .OpenHomePage();
+
+            Assert.IsFalse(homepage.CheckIfObjectivityLinkNotExistsonMSDNPage());
+        }
     }
 }

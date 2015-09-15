@@ -45,7 +45,8 @@ namespace Objectivity.Test.Automation.NunitTests.PageObjects
             searchButton = new ElementLocator(Locator.Id, "FakeHeaderSearchButton"),
             menuLink = new ElementLocator(Locator.XPath, "//*[@title='{0}' and @ms.title='{1}']"),
             menuAllLinks = new ElementLocator(Locator.CssSelector, "ul.navL1>li>a"),
-            technologiesMenuLink = new ElementLocator(Locator.XPath, "//a[@title='Technologies']");
+            technologiesMenuLink = new ElementLocator(Locator.XPath, "//a[@title='Technologies']"),
+            objectivityMenuLink = new ElementLocator(Locator.XPath, "//a[@title='Objectivity']");
 
         /// <summary>
         /// Methods for this HomePage
@@ -118,6 +119,12 @@ namespace Objectivity.Test.Automation.NunitTests.PageObjects
             var elements = this.Browser.GetElement(this.technologiesMenuLink);
             elements.GetElement(new ElementLocator(Locator.XPath, "./../ul/li/a[@title='Web']")).Click();
             return Pages.Create<TechnologiesBusinessPage>();
+        }
+
+
+        public bool CheckIfObjectivityLinkNotExistsonMSDNPage()
+        {
+            return this.Browser.IsElementPresent(this.objectivityMenuLink, 2);
         }
 
         public TechnologiesBusinessPage JavaScriptClickTechnologiesWebLink()

@@ -66,19 +66,15 @@ namespace Objectivity.Test.Automation.Common.Extensions
         {
             var by = locator.ToBy();
 
-            try
-            {
-                new WebDriverWait(BrowserManager.Handle, TimeSpan.FromSeconds(timeout)).Until(
+            var wait = new WebDriverWait(BrowserManager.Handle, TimeSpan.FromSeconds(timeout));
+            wait.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
+            
+            wait.Until(
                     drv =>
                     {
                         var ele = element.FindElement(@by);
                         return condition(ele);
                     });
-            }
-            catch (StaleElementReferenceException)
-            {
-                return element.GetElement(locator, timeout, condition);
-            }
 
             return element.FindElement(@by);
         }
