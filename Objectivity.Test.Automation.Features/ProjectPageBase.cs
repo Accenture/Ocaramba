@@ -45,7 +45,7 @@ namespace Objectivity.Test.Automation.Features
         /// <param name="pageName">Name of the page.</param>
         public string GetPageTitle(string pageName)
         {
-            return this.Browser.GetPageTitle(pageName, BaseConfiguration.AjaxWaitingTime);
+            return this.Browser.GetPageTitle(pageName, BaseConfiguration.MediumTimeout);
         }
     }
 }

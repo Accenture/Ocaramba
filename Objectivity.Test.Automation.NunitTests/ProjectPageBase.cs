@@ -51,7 +51,7 @@ namespace Objectivity.Test.Automation.NunitTests
 
         public string GetPageTitleDataDriven(string pageName)
         {
-            return this.Browser.GetPageTitle(pageName, BaseConfiguration.AjaxWaitingTime);
+            return this.Browser.GetPageTitle(pageName, BaseConfiguration.MediumTimeout);
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace Objectivity.Test.Automation.NunitTests
         {
             return new Dictionary<string, string>
             { 
-                { "actual", this.Browser.GetPageTitle(pageName, BaseConfiguration.AjaxWaitingTime) }, 
+                { "actual", this.Browser.GetPageTitle(pageName, BaseConfiguration.MediumTimeout) }, 
                 { "expected", this.pageTitleDictionary[pageName].ToLower(CultureInfo.CurrentCulture) },  
             };
         }

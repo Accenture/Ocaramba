@@ -59,7 +59,7 @@ namespace Objectivity.Test.Automation.Common
         /// <param name="selectValue">Text to be selected.</param>
         public void SelectByText(string selectValue)
         {
-            var element = this.WaitUntilDropdownIsPopulated(BaseConfiguration.AjaxWaitingTime);
+            var element = this.WaitUntilDropdownIsPopulated(BaseConfiguration.MediumTimeout);
 
             var selectElement = new SelectElement(element);
 
@@ -102,7 +102,7 @@ namespace Objectivity.Test.Automation.Common
         /// <param name="index">Index value to be selected.</param>
         public void SelectByIndex(int index)
         {
-            var element = this.WaitUntilDropdownIsPopulated(BaseConfiguration.AjaxWaitingTime);
+            var element = this.WaitUntilDropdownIsPopulated(BaseConfiguration.MediumTimeout);
             var selectElement = new SelectElement(element);
 
             try
@@ -123,7 +123,7 @@ namespace Objectivity.Test.Automation.Common
         /// <param name="timeout">The timeout.</param>
         public void SelectByIndex(int index, double timeout)
         {
-            timeout = timeout.Equals(0) ? BaseConfiguration.AjaxWaitingTime : timeout;
+            timeout = timeout.Equals(0) ? BaseConfiguration.MediumTimeout : timeout;
 
             var element = this.WaitUntilDropdownIsPopulated(timeout);
 
@@ -149,7 +149,7 @@ namespace Objectivity.Test.Automation.Common
         /// </returns>
         public bool IsSelectOptionAvailable(string option)
         {
-            return this.IsSelectOptionAvailable(option, BaseConfiguration.AjaxWaitingTime);
+            return this.IsSelectOptionAvailable(option, BaseConfiguration.MediumTimeout);
         }
 
         /// <summary>

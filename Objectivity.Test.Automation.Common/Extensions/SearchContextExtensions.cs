@@ -87,7 +87,7 @@ namespace Objectivity.Test.Automation.Common.Extensions
         /// <returns>Found element</returns>
         public static IWebElement GetElement(this ISearchContext element, ElementLocator locator)
         {
-            return element.GetElement(locator, BaseConfiguration.WaitingTime);
+            return element.GetElement(locator, BaseConfiguration.LongTimeout);
         }
 
         /// <summary>
@@ -112,7 +112,7 @@ namespace Objectivity.Test.Automation.Common.Extensions
         /// <returns>Found displayed element</returns>
         public static IWebElement GetDisplayedElement(this ISearchContext element, ElementLocator locator)
         {
-            return element.GetDisplayedElement(locator, BaseConfiguration.WaitingTime);
+            return element.GetDisplayedElement(locator, BaseConfiguration.LongTimeout);
         }
 
         /// <summary>
@@ -139,7 +139,7 @@ namespace Objectivity.Test.Automation.Common.Extensions
         /// </returns>
         public static IWebElement GetHiddenElement(this ISearchContext element, ElementLocator locator)
         {
-            return element.GetElement(locator, BaseConfiguration.WaitingTime, e => !e.Displayed);
+            return element.GetElement(locator, BaseConfiguration.LongTimeout, e => !e.Displayed);
         }
 
         /// <summary>

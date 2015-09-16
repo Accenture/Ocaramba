@@ -86,7 +86,7 @@ namespace Objectivity.Test.Automation.Common.Extensions
         {
             try
             {
-                new WebDriverWait(webDriver, TimeSpan.FromSeconds(BaseConfiguration.AjaxWaitingTime)).Until(
+                new WebDriverWait(webDriver, TimeSpan.FromSeconds(BaseConfiguration.MediumTimeout)).Until(
                     driver =>
                     {
                         var javaScriptExecutor = driver as IJavaScriptExecutor;

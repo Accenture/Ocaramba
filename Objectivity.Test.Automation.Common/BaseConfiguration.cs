@@ -82,19 +82,27 @@ namespace Objectivity.Test.Automation.Common
         }
 
         /// <summary>
-        /// Gets the assertion waiting time.
+        /// Gets the java script or ajax waiting time.
         /// </summary>
-        public static double AjaxWaitingTime
+        public static double MediumTimeout
         {
-            get { return Convert.ToDouble(ConfigurationManager.AppSettings["ajaxWaitingTime"], CultureInfo.CurrentCulture); }
+            get { return Convert.ToDouble(ConfigurationManager.AppSettings["mediumTimeout"], CultureInfo.CurrentCulture); }
         }
 
         /// <summary>
-        /// Gets the waiting time.
+        /// Gets the page load waiting time.
         /// </summary>
-        public static double WaitingTime
+        public static double LongTimeout
         {
-            get { return Convert.ToDouble(ConfigurationManager.AppSettings["waitingTime"], CultureInfo.CurrentCulture); }
+            get { return Convert.ToDouble(ConfigurationManager.AppSettings["longTimeout"], CultureInfo.CurrentCulture); }
+        }
+
+        /// <summary>
+        /// Gets the assertion waiting time.
+        /// </summary>
+        public static double ShortTimeout
+        {
+            get { return Convert.ToDouble(ConfigurationManager.AppSettings["shortTimeout"], CultureInfo.CurrentCulture); }
         }
 
         /// <summary>
