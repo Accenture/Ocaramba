@@ -46,10 +46,22 @@ namespace Objectivity.Test.Automation.Common.Extensions
         /// </summary>
         /// <param name="element">The element.</param>
         /// <param name="locator">The locator.</param>
-        /// <returns>Return all found elements</returns>
-        public static ReadOnlyCollection<IWebElement> GetElements(this ISearchContext element, ElementLocator locator)
+        /// <returns>Return all found and displayed and enabled elements</returns>
+        public static IList<IWebElement> GetElements(this ISearchContext element, ElementLocator locator)
         {
-            return element.FindElements(locator.ToBy());
+            return element.GetElements(locator, e => e.Displayed && e.Enabled).ToList();
+        }
+
+        /// <summary>
+        /// Finds the elements, the lowest level find elements in framework.
+        /// </summary>
+        /// <param name="element">The element.</param>
+        /// <param name="locator">The locator.</param>
+        /// <param name="condition">Condition to be fulfilled by elements</param>
+        /// <returns>Return all found elements for specified conditions</returns>
+        public static IList<IWebElement> GetElements(this ISearchContext element, ElementLocator locator, Func<IWebElement, bool> condition)
+        {
+            return element.FindElements(locator.ToBy()).Where(condition).ToList();
         }
 
         /// <summary>

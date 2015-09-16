@@ -124,7 +124,7 @@ namespace Objectivity.Test.Automation.NunitTests.PageObjects
 
         public bool CheckIfObjectivityLinkNotExistsonMSDNPage()
         {
-            return this.Browser.IsElementPresent(this.objectivityMenuLink, 2);
+            return this.Browser.IsElementPresent(this.objectivityMenuLink, BaseConfiguration.ShortTimeout);
         }
 
         public TechnologiesBusinessPage JavaScriptClickTechnologiesWebLink()
