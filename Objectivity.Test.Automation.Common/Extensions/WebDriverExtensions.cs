@@ -158,6 +158,7 @@ namespace Objectivity.Test.Automation.Common.Extensions
         public static void WaitUntilElementIsNoLongerFound(this IWebDriver webDriver, ElementLocator locator, double timeout)
         {
             var wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(timeout));
+            wait.IgnoreExceptionTypes(typeof(StaleElementReferenceException), typeof(NoSuchElementException));
             wait.Until(driver => webDriver.GetElements(locator).Count == 0);
         }
 
