@@ -84,9 +84,19 @@ namespace Objectivity.Test.Automation.Common.Extensions
         /// <param name="webDriver">The web driver.</param>
         public static void WaitForAjax(this IWebDriver webDriver)
         {
+            WaitForAjax(webDriver, BaseConfiguration.MediumTimeout);
+        }
+
+        /// <summary>
+        /// Waits for all ajax actions to be completed.
+        /// </summary>
+        /// <param name="webDriver">The web driver.</param>
+        /// <param name="timeout">The timeout.</param>
+        public static void WaitForAjax(this IWebDriver webDriver, double timeout)
+        {
             try
             {
-                new WebDriverWait(webDriver, TimeSpan.FromSeconds(BaseConfiguration.MediumTimeout)).Until(
+                new WebDriverWait(webDriver, TimeSpan.FromSeconds(timeout)).Until(
                     driver =>
                     {
                         var javaScriptExecutor = driver as IJavaScriptExecutor;
@@ -172,6 +182,31 @@ namespace Objectivity.Test.Automation.Common.Extensions
         {
             var wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(timeout));
             wait.Until(driver => webDriver.GetElement(locator).Displayed & webDriver.GetElement(locator).Enabled);
+        }
+
+        /// <summary>
+        /// Switch to new window using url.
+        /// </summary>
+        /// <param name="webDriver">The web driver.</param>
+        /// <param name="url">The url.</param>
+        /// <param name="timeout">The timeout.</param>
+        public static void SwitchToWindowUsingUrl(this IWebDriver webDriver, Uri url, double timeout)
+        {
+            var wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(timeout));
+            wait.Until(
+                driver =>
+                {
+                    foreach (var handle in webDriver.WindowHandles)
+                    {
+                        webDriver.SwitchTo().Window(handle);
+                        if (driver.Url.Equals(url.ToString()))
+                        {
+                            return true;
+                        }
+                    }
+
+                    return false;
+                });
         }
 
         /// <summary>
