@@ -26,6 +26,7 @@ namespace Objectivity.Test.Automation.Common
 {
     using System;
     using System.Collections.Generic;
+    using System.Drawing.Imaging;
 
     using Helpers;
 
@@ -104,10 +105,9 @@ namespace Objectivity.Test.Automation.Common
         /// </summary>
         protected void FinalizeTest()
         {
-            if (IsTestFailed)
+            if (this.IsTestFailed)
             {
-                var screenshot = BrowserManager.TakeScreenshot();
-                BrowserManager.SaveScreenshot(new ErrorDetail(screenshot, DateTime.Now, null), TestTitle);
+                this.TakeAndSaveScreenshot();
             }
 
             Pages.DeleteCachedPages();
@@ -128,7 +128,7 @@ namespace Objectivity.Test.Automation.Common
 
             if (!this.verifyMessages.Count.Equals(0))
             {
-                BrowserManager.SaveScreenshot(new ErrorDetail(BrowserManager.TakeScreenshot(), DateTime.Now, null), TestTitle); 
+                this.TakeAndSaveScreenshot();
             }
         }
 
@@ -149,14 +149,12 @@ namespace Objectivity.Test.Automation.Common
             }
             catch (AssertionException e)
             {
-                var screenshot = BrowserManager.TakeScreenshot();
-
-                this.verifyMessages.Add(new ErrorDetail(screenshot, DateTime.Now, e));
-
                 if (enableScreenShot)
                 {
-                    BrowserManager.SaveScreenshot(new ErrorDetail(screenshot, DateTime.Now, null), TestTitle); 
+                    this.TakeAndSaveScreenshot();
                 }
+
+                this.verifyMessages.Add(new ErrorDetail(null, DateTime.Now, e));
 
                 Console.WriteLine("\n-----VERIFY FAILS-----\n" + e + "\n-------------------\n");
             }
@@ -192,6 +190,22 @@ namespace Objectivity.Test.Automation.Common
         public void CleanVerifyMessages()
         {
             this.verifyMessages.Clear();
+        }
+
+        /// <summary>
+        /// Takes and saves screen shot
+        /// </summary>
+        public void TakeAndSaveScreenshot()
+        {
+            if (BaseConfiguration.FullDesktopScreenShotEnabled)
+            {
+                TakeScreenShot.Save(TakeScreenShot.DoIt(), ImageFormat.Png, this.TestTitle);
+            }
+
+            if (BaseConfiguration.SeleniumScreenShotEnabled)
+            {
+                this.BrowserManager.SaveScreenshot(new ErrorDetail(this.BrowserManager.TakeScreenshot(), DateTime.Now, null), this.TestTitle);
+            }
         }
     }
 }

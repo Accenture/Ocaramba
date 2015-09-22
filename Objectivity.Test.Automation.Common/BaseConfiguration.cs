@@ -129,5 +129,58 @@ namespace Objectivity.Test.Automation.Common
                 return ConfigurationManager.AppSettings["DataDrivenFile"];
             }
         }
+
+        /// <summary>
+        /// Enable full desktop screen shot. False by default.
+        /// </summary>
+        public static bool FullDesktopScreenShotEnabled
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["FullDesktopScreenShotEnabled"]))
+                {
+                    return false;
+                }
+
+                if (ConfigurationManager.AppSettings["FullDesktopScreenShotEnabled"].ToLower(CultureInfo.CurrentCulture).Equals("true"))
+                {
+                    return true;
+                }
+
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Enable full desktop screen shot. True by default.
+        /// </summary>
+        public static bool SeleniumScreenShotEnabled
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["SeleniumScreenShotEnabled"]))
+                {
+                    return true;
+                }
+
+                if (ConfigurationManager.AppSettings["SeleniumScreenShotEnabled"].ToLower(CultureInfo.CurrentCulture).Equals("true"))
+                {
+                    return true;
+                }
+
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Gets the screenshot folder path.
+        /// </summary>
+        public static string ScreenShotFolderPath
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["ScreenShotFolderPath"];
+            }
+        }
     }
 }

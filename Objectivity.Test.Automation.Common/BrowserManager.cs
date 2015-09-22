@@ -57,10 +57,10 @@ namespace Objectivity.Test.Automation.Common
             get
             {
                 return CurrentDrivers[Thread.CurrentThread.ManagedThreadId];
-            } 
+            }
         }
 
-    private FirefoxProfile FirefoxProfile
+        private FirefoxProfile FirefoxProfile
         {
             get
             {
@@ -87,7 +87,6 @@ namespace Objectivity.Test.Automation.Common
                     driver = new FirefoxDriver(this.FirefoxProfile);
                     break;
                 case "FirefoxPortable":
-
                     var profile = this.FirefoxProfile;
                     var firefoxBinary = new FirefoxBinary(BaseConfiguration.FirefoxPath);
                     driver = new FirefoxDriver(firefoxBinary, profile);
@@ -155,8 +154,17 @@ namespace Objectivity.Test.Automation.Common
             var correctFileName = Path.GetInvalidFileNameChars().Aggregate(fileName, (current, c) => current.Replace(c.ToString(CultureInfo.CurrentCulture), string.Empty));
             var filePath = Path.Combine(Environment.CurrentDirectory, correctFileName);
 
+            if (!string.IsNullOrEmpty(BaseConfiguration.ScreenShotFolderPath))
+            {
+                filePath = Path.Combine(BaseConfiguration.ScreenShotFolderPath, correctFileName);
+                if (!Directory.Exists(BaseConfiguration.ScreenShotFolderPath))
+                {
+                    Directory.CreateDirectory(BaseConfiguration.ScreenShotFolderPath);
+                }
+            }
+
             errorDetail.Screenshot.SaveAsFile(filePath, ImageFormat.Png);
-            
+
             Console.Error.WriteLine("Test failed: screenshot saved to {0}.", filePath);
         }
     }

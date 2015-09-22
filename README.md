@@ -17,6 +17,7 @@ It provides following features:
 - Verify along with Assert
 - Measures average and 90 Percentile action times
 - DataDriven for NUnit and MSTest with examples 
+- Possibility to take full desktop screen shot
 
 To create new project using Test Framework simply copy and change  one of example  project:
 - Objectivity.Test.Automation.Features for Specflow
