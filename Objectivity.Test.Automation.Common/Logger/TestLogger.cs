@@ -38,7 +38,7 @@ namespace Objectivity.Test.Automation.Common.Logger
         /// <value>
         /// The test folder.
         /// </value>
-        public string TestFolder { get; }
+        public string TestFolder { get; set; }
 
         /// <summary>
         /// Gets the name of the test.
@@ -46,7 +46,7 @@ namespace Objectivity.Test.Automation.Common.Logger
         /// <value>
         /// The name of the test.
         /// </value>
-        private string TestName { get; }
+        private string TestName { get; set; }
 
         /// <summary>
         /// Tests the folder pattern.
