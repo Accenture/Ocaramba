@@ -22,6 +22,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+using System.Reflection;
+
 namespace Objectivity.Test.Automation.Common.Extensions
 {
     using System;
@@ -172,14 +174,22 @@ namespace Objectivity.Test.Automation.Common.Extensions
         /// To the driver.
         /// </summary>
         /// <param name="webElement">The web element.</param>
-        /// <returns>Driver from element</returns>
-        /// <exception cref="System.ArgumentException">Element must wrap a web driver</exception>
+        /// <returns></returns>
+        /// <exception cref="System.ArgumentException">Element must wrap a web driver;webElement</exception>
         public static IWebDriver ToDriver(this ISearchContext webElement)
         {
             var wrappedElement = webElement as IWrapsDriver;
             if (wrappedElement == null)
             {
-                throw new ArgumentException("Element must wrap a web driver");
+                FieldInfo fieldInfo = webElement.GetType().GetField("underlyingElement", BindingFlags.NonPublic | BindingFlags.Instance);
+                if (fieldInfo != null)
+                {
+                    wrappedElement = fieldInfo.GetValue(webElement) as IWrapsDriver;
+                    if (wrappedElement == null)
+                    {
+                        throw new ArgumentException("Element must wrap a web driver", "webElement");
+                    }
+                }
             }
 
             return wrappedElement.WrappedDriver;

@@ -59,19 +59,23 @@ namespace Objectivity.Test.Automation.MsTests.Tests
         [TestMethod]
         public void OpenHomePage()
         {
+            LogTest.Info("I go to HomePage");
             var loginPage = Pages.Create<HomePage>();
             loginPage.OpenHomePageAndMeasureTime();
         }
-        
+
         [DeploymentItem("Objectivity.Test.Automation.MsTests\\DDT.xml"),
             DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML",
             "|DataDirectory|\\DDT.xml", "Links",
             DataAccessMethod.Sequential), TestMethod]
         public void FindChildElementsTest()
         {
+            LogTest.Info("I go to HomePage");
             var loginPage = Pages.Create<HomePage>()
                                  .OpenHomePage();
-            Assert.AreEqual(Convert.ToInt16((string)TestContext.DataRow["number"], CultureInfo.CurrentCulture), loginPage.CountAllTechnologiesSubLinks());
+            var numOfSubLinks = loginPage.CountAllTechnologiesSubLinks();
+            LogTest.Info("Number of links: {0}", numOfSubLinks);
+            Assert.AreEqual(Convert.ToInt16((string)TestContext.DataRow["number"], CultureInfo.CurrentCulture), numOfSubLinks);
         }
 
         [DeploymentItem("Objectivity.Test.Automation.MsTests\\DDT.xml"),

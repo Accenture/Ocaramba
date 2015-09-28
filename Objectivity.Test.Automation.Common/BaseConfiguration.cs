@@ -173,13 +173,40 @@ namespace Objectivity.Test.Automation.Common
         }
 
         /// <summary>
-        /// Gets the screenshot folder path.
+        /// Gets the test folder.
         /// </summary>
-        public static string ScreenShotFolderPath
+        /// <value>
+        /// The test folder.
+        /// </value>
+        public static string TestFolder
         {
             get
             {
-                return ConfigurationManager.AppSettings["ScreenShotFolderPath"];
+                return ConfigurationManager.AppSettings["TestFolder"];
+            }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether [get page source enabled].
+        /// </summary>
+        /// <value>
+        /// <c>true</c> if [get page source enabled]; otherwise, <c>false</c>.
+        /// </value>
+        public static bool GetPageSourceEnabled
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["GetPageSourceEnabled"]))
+                {
+                    return true;
+                }
+
+                if (ConfigurationManager.AppSettings["GetPageSourceEnabled"].ToLower(CultureInfo.CurrentCulture).Equals("true"))
+                {
+                    return true;
+                }
+
+                return false;
             }
         }
     }

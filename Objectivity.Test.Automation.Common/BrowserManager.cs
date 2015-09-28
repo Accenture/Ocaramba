@@ -22,6 +22,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+using System.Text;
+using Objectivity.Test.Automation.Common.Logger;
+
 namespace Objectivity.Test.Automation.Common
 {
     using System;
@@ -95,6 +98,7 @@ namespace Objectivity.Test.Automation.Common
                     var options = new InternetExplorerOptions
                     {
                         EnsureCleanSession = true,
+                        IgnoreZoomLevel = true,                        
                     };
                     driver = new InternetExplorerDriver(@"Drivers\", options);
                     break;
@@ -107,7 +111,8 @@ namespace Objectivity.Test.Automation.Common
             }
 
             driver.Manage().Window.Maximize();
-            CurrentDrivers.Add(Thread.CurrentThread.ManagedThreadId, driver);
+            var driverEventListener = new MyEventFiringWebDriver(driver);
+            CurrentDrivers.Add(Thread.CurrentThread.ManagedThreadId, driverEventListener);
         }
 
         /// <summary>
@@ -144,28 +149,38 @@ namespace Objectivity.Test.Automation.Common
         }
 
         /// <summary>
-        /// Takes the screenshot.
+        /// Saves the screenshot.
         /// </summary>
         /// <param name="errorDetail">The error detail.</param>
+        /// <param name="folder">The folder.</param>
         /// <param name="title">The title.</param>
-        public void SaveScreenshot(ErrorDetail errorDetail, string title)
+        public void SaveScreenshot(ErrorDetail errorDetail, string folder, string title)
         {
             var fileName = string.Format(CultureInfo.CurrentCulture, "{0}_{1}.png", title, errorDetail.DateTime.ToString("yyyy-MM-dd HH-mm-ss-fff", CultureInfo.CurrentCulture));
             var correctFileName = Path.GetInvalidFileNameChars().Aggregate(fileName, (current, c) => current.Replace(c.ToString(CultureInfo.CurrentCulture), string.Empty));
-            var filePath = Path.Combine(Environment.CurrentDirectory, correctFileName);
-
-            if (!string.IsNullOrEmpty(BaseConfiguration.ScreenShotFolderPath))
-            {
-                filePath = Path.Combine(BaseConfiguration.ScreenShotFolderPath, correctFileName);
-                if (!Directory.Exists(BaseConfiguration.ScreenShotFolderPath))
-                {
-                    Directory.CreateDirectory(BaseConfiguration.ScreenShotFolderPath);
-                }
-            }
+            var filePath = Path.Combine(Environment.CurrentDirectory, folder, correctFileName);
 
             errorDetail.Screenshot.SaveAsFile(filePath, ImageFormat.Png);
 
             Console.Error.WriteLine("Test failed: screenshot saved to {0}.", filePath);
+        }
+
+        /// <summary>
+        /// Saves the page source.
+        /// </summary>
+        /// <param name="testFolder">The test folder.</param>
+        /// <param name="fileName">Name of the file.</param>
+        public void SavePageSource(string testFolder, string fileName)
+        {
+            var path = Path.Combine(Environment.CurrentDirectory, testFolder, string.Format(CultureInfo.CurrentCulture, "{0}{1}", fileName, ".html"));
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }
+
+            var pageSource = Handle.PageSource;
+            pageSource = pageSource.Replace("<head>", string.Format(CultureInfo.CurrentCulture, "<head><base href=\"http://{0}\" target=\"_blank\">", BaseConfiguration.Host));
+            File.WriteAllText(path, pageSource);
         }
     }
 }

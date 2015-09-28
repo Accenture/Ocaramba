@@ -22,6 +22,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+using Objectivity.Test.Automation.Common.Logger;
+
 namespace Objectivity.Test.Automation.Common
 {
     using System;
@@ -40,6 +42,7 @@ namespace Objectivity.Test.Automation.Common
     public class TestBase
     {
         private readonly List<ErrorDetail> verifyMessages = new List<ErrorDetail>();
+        private TestLogger logTest;
 
         /// <summary>
         /// The browser manager
@@ -49,6 +52,27 @@ namespace Objectivity.Test.Automation.Common
             get
             {
                 return new BrowserManager();
+            }
+        }
+
+        /// <summary>
+        /// Test logger
+        /// </summary>
+        public TestLogger LogTest
+        {
+            get
+            {
+                if (logTest == null)
+                {
+                    logTest = new TestLogger(TestTitle);
+                }
+
+                return logTest;
+            }
+
+            set
+            {
+                logTest = value;
             }
         }
 
@@ -108,6 +132,7 @@ namespace Objectivity.Test.Automation.Common
             if (this.IsTestFailed)
             {
                 this.TakeAndSaveScreenshot();
+                this.SavePageSource();
             }
 
             Pages.DeleteCachedPages();
@@ -199,12 +224,23 @@ namespace Objectivity.Test.Automation.Common
         {
             if (BaseConfiguration.FullDesktopScreenShotEnabled)
             {
-                TakeScreenShot.Save(TakeScreenShot.DoIt(), ImageFormat.Png, this.TestTitle);
+                TakeScreenShot.Save(TakeScreenShot.DoIt(), ImageFormat.Png, logTest.TestFolder, TestTitle);
             }
 
             if (BaseConfiguration.SeleniumScreenShotEnabled)
             {
-                this.BrowserManager.SaveScreenshot(new ErrorDetail(this.BrowserManager.TakeScreenshot(), DateTime.Now, null), this.TestTitle);
+                this.BrowserManager.SaveScreenshot(new ErrorDetail(this.BrowserManager.TakeScreenshot(), DateTime.Now, null), logTest.TestFolder, TestTitle);
+            }
+        }
+
+        /// <summary>
+        /// Save Page Source
+        /// </summary>
+        public void SavePageSource()
+        {
+            if (BaseConfiguration.GetPageSourceEnabled)
+            {
+                this.BrowserManager.SavePageSource(logTest.TestFolder, TestTitle);
             }
         }
     }

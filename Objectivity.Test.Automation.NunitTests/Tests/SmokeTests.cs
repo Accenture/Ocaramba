@@ -22,6 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+using System;
 using System.Collections.Generic;
 
 namespace Objectivity.Test.Automation.NunitTests.Tests
@@ -103,27 +104,43 @@ namespace Objectivity.Test.Automation.NunitTests.Tests
             Assert.AreEqual(5, loginPage.CountAllTechnologiesSubLinks());
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Exception")]
         [Test]
         public void FindChildElementTest()
         {
-            var loginPage = Pages.Create<HomePage>()
-                                 .OpenHomePage();
+            try
+            {
+                var loginPage = Pages.Create<HomePage>()
+                    .OpenHomePage();
 
-            var technologiesBusinessPage = loginPage.ClickTechnologiesWebLink();
-            var pageTitle = technologiesBusinessPage.GetPageTitle("Technologies Web");
-            Assert.AreEqual(pageTitle["expected"], pageTitle["actual"], "Wrong title of the page");
+                var technologiesBusinessPage = loginPage.ClickTechnologiesWebLink();
+                var pageTitle = technologiesBusinessPage.GetPageTitle("Technologies Web");
+                Assert.AreEqual(pageTitle["expected"], pageTitle["actual"], "Wrong title of the page");
+            }
+            catch (Exception e)
+            {
+                LogTest.LogError(e);
+            }
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Exception")]
         [Test]
         public void JavaScriptClickTest()
         {
-            var loginPage = Pages.Create<HomePage>()
-                                 .OpenHomePage();
+            try
+            {
+                var loginPage = Pages.Create<HomePage>()
+                    .OpenHomePage();
 
-            var technologiesBusinessPage = loginPage.JavaScriptClickTechnologiesWebLink();
+                var technologiesBusinessPage = loginPage.JavaScriptClickTechnologiesWebLink();
 
-            var pageTitle = technologiesBusinessPage.GetPageTitle("Technologies Web");
-            Assert.AreEqual(pageTitle["expected"], pageTitle["actual"], "Wrong title of the page");
+                var pageTitle = technologiesBusinessPage.GetPageTitle("Technologies Web");
+                Assert.AreEqual(pageTitle["expected"], pageTitle["actual"], "Wrong title of the page");
+            }
+            catch (Exception e)
+            {
+                LogTest.LogError(e);
+            }
         }
 
         [Test]

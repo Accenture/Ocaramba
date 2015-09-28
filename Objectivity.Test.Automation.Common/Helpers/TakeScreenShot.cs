@@ -60,24 +60,16 @@ namespace Objectivity.Test.Automation.Common.Helpers
         }
 
         /// <summary>
-        /// Saves screen shot to file.
+        /// Saves the specified bitmap.
         /// </summary>
-        /// <param name="bitmap">The screen shot.</param>
-        /// <param name="format">The image format to save.</param>
-        /// <param name="title">The test title.</param>
-        public static void Save(Bitmap bitmap, ImageFormat format, string title)
+        /// <param name="bitmap">The bitmap.</param>
+        /// <param name="format">The format.</param>
+        /// <param name="folder">The folder.</param>
+        /// <param name="title">The title.</param>
+        public static void Save(Bitmap bitmap, ImageFormat format, string folder, string title)
         {
             var fileName = string.Format(CultureInfo.CurrentCulture, "{0}_{1}.png", title, DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss-fff", CultureInfo.CurrentCulture));
-            var filePath = Path.Combine(Environment.CurrentDirectory, fileName);
-
-            if (!string.IsNullOrEmpty(BaseConfiguration.ScreenShotFolderPath))
-            {
-                filePath = Path.Combine(BaseConfiguration.ScreenShotFolderPath, fileName);
-                if (!Directory.Exists(BaseConfiguration.ScreenShotFolderPath))
-                {
-                    Directory.CreateDirectory(BaseConfiguration.ScreenShotFolderPath);
-                }
-            }
+            var filePath = Path.Combine(Environment.CurrentDirectory, folder, fileName);
 
             bitmap.Save(filePath, format);
             bitmap.Dispose();

@@ -68,6 +68,8 @@
     <Compile Include="Helpers\PerformanceHelper.cs" />
     <Compile Include="Helpers\SqlHelper.cs" />
     <Compile Include="JavaScriptAlert.cs" />
+    <Compile Include="Logger\TestLogger.cs" />
+    <Compile Include="Logger\MyEventFiringWebDriver.cs" />
     <Compile Include="Types\ErrorDetail.cs" />
     <Compile Include="Types\Kendo\KendoComboBox.cs" />
     <Compile Include="Types\Kendo\KendoDropDownList.cs" />
@@ -128,6 +130,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

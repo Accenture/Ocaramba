@@ -22,6 +22,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+using System;
+using System.Linq;
+using NLog;
+using NLog.Targets;
+using Objectivity.Test.Automation.Common.Logger;
+
 namespace Objectivity.Test.Automation.MsTests
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -41,27 +47,48 @@ namespace Objectivity.Test.Automation.MsTests
         /// The microsoft test context.
         /// </value>
         public TestContext TestContext { get; set; }
-       
+
         /// <summary>
         /// Before the test.
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Exception")]
         [TestInitialize]
         public void BeforeTest()
         {
-            this.StartBrowser();
             TestTitle = TestContext.TestName;
+            LogTest.LogTestStarting();
+            try
+            {
+                this.StartBrowser();
+            }
+            catch (Exception e)
+            {
+                LogTest.LogError(e);
+            }
         }
 
         /// <summary>
         /// After the test.
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Exception")]
         [TestCleanup]
         public void AfterTest()
         {
-            IsTestFailed = TestContext.CurrentTestOutcome == UnitTestOutcome.Failed;
-            this.FinalizeTest();
-            StopBrowser();
-            this.FailTestIfVerifyFailed();
+            try
+            {
+                IsTestFailed = TestContext.CurrentTestOutcome == UnitTestOutcome.Failed;
+                this.FinalizeTest();
+                StopBrowser();
+                this.FailTestIfVerifyFailed();
+            }
+            catch (Exception e)
+            {
+                LogTest.LogError(e);
+            }
+            finally
+            {
+                LogTest.LogTestEnding();
+            }            
         }
     }
 }
