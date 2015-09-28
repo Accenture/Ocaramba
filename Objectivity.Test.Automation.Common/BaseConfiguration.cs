@@ -117,17 +117,6 @@ namespace Objectivity.Test.Automation.Common
         }
 
         /// <summary>
-        /// Gets the path to InternetExplorer driver
-        /// </summary>
-        public static string InternetExplorerPath
-        {
-            get
-            {
-                return ConfigurationManager.AppSettings["InternetExplorerPath"];
-            }
-        }
-
-        /// <summary>
         /// Gets the data driven file.
         /// </summary>
         /// <value>
