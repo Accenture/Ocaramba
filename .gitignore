@@ -9,3 +9,4 @@ StyleCop.Cache
 TestFramework.sln.DotSettings.user
 
 /Objectivity.Test.Automation.Features/TestFeatures/*.feature.cs
+*.user

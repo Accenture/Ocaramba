@@ -104,43 +104,25 @@ namespace Objectivity.Test.Automation.NunitTests.Tests
             Assert.AreEqual(5, loginPage.CountAllTechnologiesSubLinks());
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Exception")]
         [Test]
         public void FindChildElementTest()
         {
-            try
-            {
-                var loginPage = Pages.Create<HomePage>()
-                    .OpenHomePage();
+            var loginPage = Pages.Create<HomePage>().OpenHomePage();
 
-                var technologiesBusinessPage = loginPage.ClickTechnologiesWebLink();
-                var pageTitle = technologiesBusinessPage.GetPageTitle("Technologies Web");
-                Assert.AreEqual(pageTitle["expected"], pageTitle["actual"], "Wrong title of the page");
-            }
-            catch (Exception e)
-            {
-                LogTest.LogError(e);
-            }
+            var technologiesBusinessPage = loginPage.ClickTechnologiesWebLink();
+            var pageTitle = technologiesBusinessPage.GetPageTitle("Technologies Web");
+            Assert.AreEqual(pageTitle["expected"], pageTitle["actual"], "Wrong title of the page");
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Exception")]
         [Test]
         public void JavaScriptClickTest()
         {
-            try
-            {
-                var loginPage = Pages.Create<HomePage>()
-                    .OpenHomePage();
+            var loginPage = Pages.Create<HomePage>().OpenHomePage();
 
-                var technologiesBusinessPage = loginPage.JavaScriptClickTechnologiesWebLink();
+            var technologiesBusinessPage = loginPage.JavaScriptClickTechnologiesWebLink();
 
-                var pageTitle = technologiesBusinessPage.GetPageTitle("Technologies Web");
-                Assert.AreEqual(pageTitle["expected"], pageTitle["actual"], "Wrong title of the page");
-            }
-            catch (Exception e)
-            {
-                LogTest.LogError(e);
-            }
+            var pageTitle = technologiesBusinessPage.GetPageTitle("Technologies Web");
+            Assert.AreEqual(pageTitle["expected"], pageTitle["actual"], "Wrong title of the page");
         }
 
         [Test]

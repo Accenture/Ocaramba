@@ -22,11 +22,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-using System;
-using Objectivity.Test.Automation.Common.Logger;
-
 namespace Objectivity.Test.Automation.NunitTests
 {
+    using System;
+    using System.Diagnostics.CodeAnalysis;
+
     using NUnit.Framework;
 
     using Objectivity.Test.Automation.Common;
@@ -57,7 +57,7 @@ namespace Objectivity.Test.Automation.NunitTests
         /// <summary>
         /// Before the test.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Exception")]
+        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Exception")]
         [SetUp]
         public void BeforeTest()
         {
@@ -76,7 +76,7 @@ namespace Objectivity.Test.Automation.NunitTests
         /// <summary>
         /// After the test.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Exception")]
+        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Exception")]
         [TearDown]
         public void AfterTest()
         {
