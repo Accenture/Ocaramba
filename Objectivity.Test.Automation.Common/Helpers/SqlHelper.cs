@@ -26,12 +26,17 @@ namespace Objectivity.Test.Automation.Common.Helpers
 {
     using System.Collections.Generic;
     using System.Data.SqlClient;
+    using System.Linq;
+
+    using NLog;
 
     /// <summary>
     /// Class is used for execution SQL queries and reading data from database.
     /// </summary>
     public static class SqlHelper
     {
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
         /// <summary>
         /// Method is used for execution SQL query (select) and reading each row from column.
         /// </summary>
@@ -54,6 +59,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
                     {
                         if (!sqlDataReader.HasRows)
                         {
+                            Logger.Error("No result for: {0} \n {1}", command, connectionString);
                             return resultList;
                         }
 
@@ -63,6 +69,70 @@ namespace Objectivity.Test.Automation.Common.Helpers
                         }
                     }
                 }
+            }
+
+            if (resultList.Count == 0)
+            {
+                Logger.Error("No result for: {0} \n {1}", command, connectionString);
+            }
+            else
+            {
+                Logger.Trace("sql results: {0}", resultList);
+            }
+
+            return resultList;
+        }
+
+        /// <summary>
+        /// Method is used for execution SQL query (select) and reading each column from row.
+        /// </summary>
+        /// <param name="command">SQL query</param>
+        /// <param name="connectionString">Server, user, pass</param>
+        /// <param name="columns">Name of columns </param>
+        /// <returns>Dictionary of each column existed in raw.</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2100:Review SQL queries for security vulnerabilities", Justification = "SQL injection is in this case expected.")]
+        public static Dictionary<string, string> ExecuteSqlCommand(string command, string connectionString, IEnumerable<string> columns)
+        {
+            var resultList = new Dictionary<string, string>();
+            var resultTemp = new Dictionary<string, string>();
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                using (var sqlCommand = new SqlCommand(command, connection))
+                {
+                    using (var sqlDataReader = sqlCommand.ExecuteReader())
+                    {
+                        if (!sqlDataReader.HasRows)
+                        {
+                            Logger.Error("No result for: {0} \n {1}", command, connectionString);
+                            return resultList;
+                        }
+
+                        while (sqlDataReader.Read())
+                        {
+                            for (int i = 0; i < sqlDataReader.FieldCount; i++)
+                            {
+                                resultTemp[sqlDataReader.GetName(i)] = sqlDataReader.GetSqlValue(i).ToString();
+                            }
+                        }
+                    }
+                }
+            }
+
+            foreach (string column in columns)
+            {
+                resultList[column] = resultTemp[column];
+            }
+
+            if (resultList.Count == 0)
+            {
+                Logger.Error("No result for: {0} \n {1}", command, connectionString);
+            }
+            else
+            {
+                Logger.Trace("sql results: {0}", resultList);
             }
 
             return resultList;
