@@ -100,7 +100,7 @@ namespace Objectivity.Test.Automation.Common
                         EnsureCleanSession = true,
                         IgnoreZoomLevel = true,                        
                     };
-                    driver = new InternetExplorerDriver(@"Drivers\", options);
+                    driver = new InternetExplorerDriver(BaseConfiguration.InternetExplorerPath, options);
                     break;
                 case "Chrome":
                     driver = new ChromeDriver(@"Drivers\");
