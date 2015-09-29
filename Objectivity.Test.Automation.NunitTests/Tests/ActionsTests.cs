@@ -35,7 +35,7 @@ namespace Objectivity.Test.Automation.NunitTests.Tests
     public class ActionsTests : ProjectTestBase
     {
         [Test]
-        public void SendKeysAndClickTest()
+        public void SendKeysAndClickUsingActionsTest()
         {
             var loginPage = Pages.Create<HomePage>()
                                  .OpenHomePage();
