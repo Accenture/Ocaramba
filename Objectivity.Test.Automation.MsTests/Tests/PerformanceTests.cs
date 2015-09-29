@@ -65,6 +65,7 @@ namespace Objectivity.Test.Automation.MsTests.Tests
         }
 
         [DeploymentItem("Objectivity.Test.Automation.MsTests\\DDT.xml"),
+            DeploymentItem("Objectivity.Test.Automation.MsTests\\IEDriverServer.exe"),
             DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML",
             "|DataDirectory|\\DDT.xml", "Links",
             DataAccessMethod.Sequential), TestMethod]
@@ -79,6 +80,7 @@ namespace Objectivity.Test.Automation.MsTests.Tests
         }
 
         [DeploymentItem("Objectivity.Test.Automation.MsTests\\DDT.xml"),
+            DeploymentItem("Objectivity.Test.Automation.MsTests\\IEDriverServer.exe"),
             DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML",
             "|DataDirectory|\\DDT.xml", "WordsToSearch",
             DataAccessMethod.Sequential), TestMethod]

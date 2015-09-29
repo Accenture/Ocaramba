@@ -63,14 +63,7 @@ namespace Objectivity.Test.Automation.NunitTests
         {
             TestTitle = TestContext.CurrentContext.Test.Name;
             LogTest.LogTestStarting();
-            try
-            {
-                this.StartBrowser();
-            }
-            catch (Exception e)
-            {
-                LogTest.LogError(e);
-            }                      
+            this.StartBrowser();
         }
 
         /// <summary>
@@ -80,22 +73,12 @@ namespace Objectivity.Test.Automation.NunitTests
         [TearDown]
         public void AfterTest()
         {
-            try
-            {
-                IsTestFailed = TestContext.CurrentContext.Result.Status == TestStatus.Failed;
-                this.FinalizeTest();
-                StopBrowser();
-                this.FailTestIfVerifyFailed();
-            }
-            catch (Exception e)
-            {
-                LogTest.LogError(e);
-            }
-            finally
-            {
-                LogTest.LogTestEnding();
-                LogTest = null;
-            }
+            IsTestFailed = TestContext.CurrentContext.Result.Status == TestStatus.Failed;
+            this.FinalizeTest();
+            StopBrowser();
+            this.FailTestIfVerifyFailed();
+            LogTest.LogTestEnding();
+            LogTest = null;
         }
     }
 }
