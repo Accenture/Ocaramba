@@ -131,11 +131,11 @@ namespace Objectivity.Test.Automation.Common
         /// </summary>
         protected void FinalizeTest()
         {
-            if (this.IsTestFailed)
-            {
+            ////  if (this.IsTestFailed)
+            //// {
                 this.TakeAndSaveScreenshot();
                 this.SavePageSource();
-            }
+            //// }
 
             Pages.DeleteCachedPages();
         }
