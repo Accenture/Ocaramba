@@ -26,7 +26,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
 {
     using System.Collections.Generic;
     using System.Data.SqlClient;
-    using System.Linq;
+    using System.Diagnostics.CodeAnalysis;
 
     using NLog;
 
@@ -44,7 +44,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// <param name="connectionString">Server, user, pass</param>
         /// <param name="column">Name of column </param>
         /// <returns> Collection of each row existed in column.</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2100:Review SQL queries for security vulnerabilities", Justification = "SQL injection is in this case expected.")]
+        [SuppressMessage("Microsoft.Security", "CA2100:Review SQL queries for security vulnerabilities", Justification = "SQL injection is in this case expected.")]
         public static ICollection<string> ExecuteSqlCommand(string command, string connectionString, string column)
         {
             var resultList = new List<string>();
@@ -90,7 +90,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// <param name="connectionString">Server, user, pass</param>
         /// <param name="columns">Name of columns </param>
         /// <returns>Dictionary of each column existed in raw.</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2100:Review SQL queries for security vulnerabilities", Justification = "SQL injection is in this case expected.")]
+        [SuppressMessage("Microsoft.Security", "CA2100:Review SQL queries for security vulnerabilities", Justification = "SQL injection is in this case expected.")]
         public static Dictionary<string, string> ExecuteSqlCommand(string command, string connectionString, IEnumerable<string> columns)
         {
             var resultList = new Dictionary<string, string>();

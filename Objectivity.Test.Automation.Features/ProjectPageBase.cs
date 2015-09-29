@@ -24,9 +24,6 @@ SOFTWARE.
 
 namespace Objectivity.Test.Automation.Features
 {
-    using System.Collections.Generic;
-    using System.Globalization;
-
     using Objectivity.Test.Automation.Common;
     using Objectivity.Test.Automation.Common.Extensions;
 

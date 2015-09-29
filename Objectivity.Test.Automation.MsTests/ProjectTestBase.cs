@@ -48,44 +48,25 @@ namespace Objectivity.Test.Automation.MsTests
         /// <summary>
         /// Before the test.
         /// </summary>
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Exception")]
         [TestInitialize]
         public void BeforeTest()
         {
             TestTitle = TestContext.TestName;
             LogTest.LogTestStarting();
-            try
-            {
-                this.StartBrowser();
-            }
-            catch (Exception e)
-            {
-                LogTest.LogError(e);
-            }
+            this.StartBrowser();
         }
 
         /// <summary>
         /// After the test.
         /// </summary>
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Exception")]
         [TestCleanup]
         public void AfterTest()
         {
-            try
-            {
-                IsTestFailed = TestContext.CurrentTestOutcome == UnitTestOutcome.Failed;
-                this.FinalizeTest();
-                StopBrowser();
-                this.FailTestIfVerifyFailed();
-            }
-            catch (Exception e)
-            {
-                LogTest.LogError(e);
-            }
-            finally
-            {
-                LogTest.LogTestEnding();
-            }            
+            IsTestFailed = TestContext.CurrentTestOutcome == UnitTestOutcome.Failed;
+            this.FinalizeTest();
+            StopBrowser();
+            this.FailTestIfVerifyFailed();
+            LogTest.LogTestEnding();
         }
     }
 }

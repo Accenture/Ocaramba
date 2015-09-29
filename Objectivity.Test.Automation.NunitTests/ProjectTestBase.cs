@@ -57,7 +57,6 @@ namespace Objectivity.Test.Automation.NunitTests
         /// <summary>
         /// Before the test.
         /// </summary>
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Exception")]
         [SetUp]
         public void BeforeTest()
         {
@@ -69,7 +68,6 @@ namespace Objectivity.Test.Automation.NunitTests
         /// <summary>
         /// After the test.
         /// </summary>
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Exception")]
         [TearDown]
         public void AfterTest()
         {
