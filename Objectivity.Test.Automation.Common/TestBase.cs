@@ -28,7 +28,9 @@ namespace Objectivity.Test.Automation.Common
 {
     using System;
     using System.Collections.Generic;
+    using System.Configuration;
     using System.Drawing.Imaging;
+    using System.Linq;
 
     using Helpers;
 
@@ -113,7 +115,7 @@ namespace Objectivity.Test.Automation.Common
         /// </summary>
         protected void StopBrowser()
         {
-            BrowserManager.Stop();
+            this.BrowserManager.Stop();
         }
 
         /// <summary>
@@ -121,7 +123,7 @@ namespace Objectivity.Test.Automation.Common
         /// </summary>
         protected void StartBrowser()
         {
-            BrowserManager.Start(BaseConfiguration.TestBrowser);
+            this.BrowserManager.Start(BaseConfiguration.TestBrowser);
         }
 
         /// <summary>
@@ -224,12 +226,26 @@ namespace Objectivity.Test.Automation.Common
         {
             if (BaseConfiguration.FullDesktopScreenShotEnabled)
             {
-                TakeScreenShot.Save(TakeScreenShot.DoIt(), ImageFormat.Png, logTest.TestFolder, TestTitle);
+                if (ConfigurationManager.AppSettings.AllKeys.Contains("TestFolder"))
+                {
+                    TakeScreenShot.Save(TakeScreenShot.DoIt(), ImageFormat.Png, this.LogTest.TestFolder, this.TestTitle);
+                }
+                else
+                {
+                    TakeScreenShot.Save(TakeScreenShot.DoIt(), ImageFormat.Png, BaseConfiguration.ScreenShotFolder, this.TestTitle);
+                }
             }
 
             if (BaseConfiguration.SeleniumScreenShotEnabled)
             {
-                this.BrowserManager.SaveScreenshot(new ErrorDetail(this.BrowserManager.TakeScreenshot(), DateTime.Now, null), logTest.TestFolder, TestTitle);
+                if (ConfigurationManager.AppSettings.AllKeys.Contains("TestFolder"))
+                {
+                    this.BrowserManager.SaveScreenshot(new ErrorDetail(this.BrowserManager.TakeScreenshot(), DateTime.Now, null), this.LogTest.TestFolder, this.TestTitle);
+                }
+                else
+                {
+                    this.BrowserManager.SaveScreenshot(new ErrorDetail(this.BrowserManager.TakeScreenshot(), DateTime.Now, null), BaseConfiguration.ScreenShotFolder, this.TestTitle);
+                }
             }
         }
 
@@ -240,7 +256,7 @@ namespace Objectivity.Test.Automation.Common
         {
             if (BaseConfiguration.GetPageSourceEnabled)
             {
-                this.BrowserManager.SavePageSource(logTest.TestFolder, TestTitle);
+                this.BrowserManager.SavePageSource(this.LogTest.TestFolder, this.TestTitle);
             }
         }
     }
