@@ -6,6 +6,8 @@ using NLog.Targets;
 
 namespace Objectivity.Test.Automation.Common.Logger
 {
+    using System.IO;
+
     /// <summary>
     /// Class for test logger
     /// </summary>
@@ -56,7 +58,9 @@ namespace Objectivity.Test.Automation.Common.Logger
         private string TestFolderPattern(string testName)
         {
             var testFolder = AppDomain.CurrentDomain.BaseDirectory + BaseConfiguration.TestFolder;
-            log.Info("TESTFOLDER:  " + testFolder);
+            Console.WriteLine("TESTFOLDER:  " + testFolder);
+            Console.WriteLine("CodeBase: " + GetType().Assembly.CodeBase);
+            Console.WriteLine("Working Directory: " + Directory.GetCurrentDirectory());
             if (string.IsNullOrEmpty(testFolder))
             {
                 return string.Empty;
