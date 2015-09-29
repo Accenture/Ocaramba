@@ -58,8 +58,9 @@ namespace Objectivity.Test.Automation.Features
         [Before]
         public void BeforeTest()
         {
-            this.StartBrowser();
             this.TestTitle = ScenarioContext.Current.ScenarioInfo.Title;
+            LogTest.LogTestStarting();
+            this.StartBrowser();
         }
 
         /// <summary>
@@ -72,6 +73,7 @@ namespace Objectivity.Test.Automation.Features
             this.FinalizeTest();
             this.StopBrowser();
             this.FailTestIfVerifyFailed();
+            LogTest.LogTestEnding();
         }
     }
 }
