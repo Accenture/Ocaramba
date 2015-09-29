@@ -187,6 +187,20 @@ namespace Objectivity.Test.Automation.Common
         }
 
         /// <summary>
+        /// Gets the test folder.
+        /// </summary>
+        /// <value>
+        /// The test folder.
+        /// </value>
+        public static string ScreenShotFolder
+        {
+            get
+            {
+                return string.IsNullOrEmpty(ConfigurationManager.AppSettings["ScreenShotFolder"]) ? string.Empty : ConfigurationManager.AppSettings["ScreenShotFolder"];
+            }
+        }
+
+        /// <summary>
         /// Gets a value indicating whether [get page source enabled].
         /// </summary>
         /// <value>
