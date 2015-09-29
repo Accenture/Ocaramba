@@ -57,10 +57,7 @@ namespace Objectivity.Test.Automation.Common.Logger
         /// <returns>Folder name</returns>
         private string TestFolderPattern(string testName)
         {
-            var testFolder = AppDomain.CurrentDomain.BaseDirectory + BaseConfiguration.TestFolder;
-            Console.WriteLine("TESTFOLDER:  " + testFolder);
-            Console.WriteLine("CodeBase: " + GetType().Assembly.CodeBase);
-            Console.WriteLine("Working Directory: " + Directory.GetCurrentDirectory());
+            var testFolder = BaseConfiguration.TestFolder;
             if (string.IsNullOrEmpty(testFolder))
             {
                 return string.Empty;
