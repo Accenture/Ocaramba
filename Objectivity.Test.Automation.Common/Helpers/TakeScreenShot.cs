@@ -25,6 +25,7 @@ SOFTWARE.
 namespace Objectivity.Test.Automation.Common.Helpers
 {
     using System;
+    using System.ComponentModel;
     using System.Drawing;
     using System.Drawing.Imaging;
     using System.Globalization;
@@ -51,7 +52,16 @@ namespace Objectivity.Test.Automation.Common.Helpers
             {
                 using (var graphics = Graphics.FromImage(bitmap))
                 {
-                    graphics.CopyFromScreen(0, 0, 0, 0, screen.Bounds.Size);
+                    try
+                    {
+                        graphics.CopyFromScreen(0, 0, 0, 0, screen.Bounds.Size);
+                    }
+                    catch (Win32Exception)
+                    {
+                        Logger.Error("Win32Exception Exception, user is locked out with no access to windows desktop");
+                        return null;
+                    }
+
                     Logger.Error("Screenshot taken.");
                 }
 
@@ -71,9 +81,16 @@ namespace Objectivity.Test.Automation.Common.Helpers
             var fileName = string.Format(CultureInfo.CurrentCulture, "{0}_{1}.png", title, DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss-fff", CultureInfo.CurrentCulture));
             var filePath = Path.Combine(Environment.CurrentDirectory, folder, fileName);
 
-            bitmap.Save(filePath, format);
-            bitmap.Dispose();
-            Logger.Error(CultureInfo.CurrentCulture, "Test failed: screenshot saved to {0}.", filePath);
+            if (bitmap == null)
+            {
+                Logger.Error("Screen shot is not saved");
+            }
+            else
+            {
+                bitmap.Save(filePath, format);
+                bitmap.Dispose();
+                Logger.Error(CultureInfo.CurrentCulture, "Test failed: screenshot saved to {0}.", filePath);
+            }
         }
     }
 }
