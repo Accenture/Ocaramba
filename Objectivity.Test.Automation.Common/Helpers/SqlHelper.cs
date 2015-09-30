@@ -133,7 +133,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
                 }
                 else
                 {
-                    throw new Exception(string.Format(CultureInfo.CurrentCulture, " Exception while trying to get results from sql query, lack of column '{0}'", column));
+                    throw new KeyNotFoundException(string.Format(CultureInfo.CurrentCulture, " Exception while trying to get results from sql query, lack of column '{0}'", column));
                 }
             }
 
