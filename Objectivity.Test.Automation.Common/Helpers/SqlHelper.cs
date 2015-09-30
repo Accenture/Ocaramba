@@ -24,6 +24,7 @@ SOFTWARE.
 
 namespace Objectivity.Test.Automation.Common.Helpers
 {
+    using System;
     using System.Collections.Generic;
     using System.Data.SqlClient;
     using System.Diagnostics.CodeAnalysis;
@@ -123,16 +124,16 @@ namespace Objectivity.Test.Automation.Common.Helpers
 
             foreach (string column in columns)
             {
-                resultList[column] = resultTemp[column];
-            }
+                string keyValue;
 
-            if (resultList.Count == 0)
-            {
-                Logger.Error("No result for: {0} \n {1}", command, connectionString);
-            }
-            else
-            {
-                Logger.Trace("sql results: {0}", resultList);
+                if (resultTemp.TryGetValue(column, out keyValue))
+                {
+                    resultList[column] = keyValue;
+                }
+                else
+                {
+                    throw new Exception(string.Format(" Exception while trying to get results from sql query, lack of column '{0}'", column));
+                }
             }
 
             return resultList;
