@@ -28,6 +28,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
     using System.Collections.Generic;
     using System.Data.SqlClient;
     using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
 
     using NLog;
 
@@ -132,7 +133,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
                 }
                 else
                 {
-                    throw new Exception(string.Format(" Exception while trying to get results from sql query, lack of column '{0}'", column));
+                    throw new Exception(string.Format(CultureInfo.CurrentCulture, " Exception while trying to get results from sql query, lack of column '{0}'", column));
                 }
             }
 
