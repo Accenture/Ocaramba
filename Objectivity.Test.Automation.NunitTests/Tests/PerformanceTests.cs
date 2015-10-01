@@ -26,7 +26,6 @@ namespace Objectivity.Test.Automation.NunitTests.Tests
 {
     using NUnit.Framework;
 
-    using Objectivity.Test.Automation.Common;
     using Objectivity.Test.Automation.NunitTests.PageObjects;
 
     /// <summary>
@@ -37,7 +36,7 @@ namespace Objectivity.Test.Automation.NunitTests.Tests
         [Test, Repeat(2)]
         public void OpenHomePage()
         {
-            var loginPage = Pages.Create<HomePage>();
+            var loginPage = new HomePage(this.DriverContext);
             
             loginPage.OpenHomePageAndMeasureTime();
         }

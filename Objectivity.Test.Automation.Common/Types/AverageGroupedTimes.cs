@@ -38,10 +38,10 @@ namespace Objectivity.Test.Automation.Common.Types
         public string StepName { get; set; }
         
         /// <summary>
-        /// Gets or sets the browser.
+        /// Gets or sets the Driver.
         /// </summary>
         /// <value>
-        /// The browser.
+        /// The Driver.
         /// </value>
         public string Browser { get; set; }
         

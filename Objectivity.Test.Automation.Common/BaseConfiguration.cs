@@ -34,7 +34,7 @@ namespace Objectivity.Test.Automation.Common
     public static class BaseConfiguration
     {
         /// <summary>
-        /// Gets the browser.
+        /// Gets the Driver.
         /// </summary>
         public static string TestBrowser
         {

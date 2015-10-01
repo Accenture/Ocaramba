@@ -26,7 +26,6 @@ namespace Objectivity.Test.Automation.NunitTests.Tests
 {
     using NUnit.Framework;
 
-    using Objectivity.Test.Automation.Common;
     using Objectivity.Test.Automation.NunitTests.PageObjects;
 
     /// <summary>
@@ -37,14 +36,14 @@ namespace Objectivity.Test.Automation.NunitTests.Tests
         [Test]
         public void SendKeysAndClickUsingActionsTest()
         {
-            var loginPage = Pages.Create<HomePage>()
+            var loginPage = new HomePage(this.DriverContext)
                                  .OpenHomePage();
 
             var searchResultsPage = loginPage.SearchUsingActions("objectivity");
             searchResultsPage.MarkStackOverFlowFilter();
 
             var pageTitle = searchResultsPage.GetPageTitle("Search Results");
-            Assert.AreEqual(pageTitle["expected"], pageTitle["actual"], "Wrong title of the page");
+            Assert.IsTrue(searchResultsPage.IsPageTitle(pageTitle), "Wrong title of the page");
         }
     }
 }

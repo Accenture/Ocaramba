@@ -29,9 +29,8 @@ namespace Objectivity.Test.Automation.MsTests.Tests
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    using Objectivity.Test.Automation.Common;
     using Objectivity.Test.Automation.MsTests.PageObjects;
- 
+
     /// <summary>
     /// Tests to test framework
     /// </summary>
@@ -60,7 +59,7 @@ namespace Objectivity.Test.Automation.MsTests.Tests
         public void OpenHomePage()
         {
             LogTest.Info("I go to HomePage");
-            var loginPage = Pages.Create<HomePage>();
+            var loginPage = new HomePage(this.DriverContext);
             loginPage.OpenHomePageAndMeasureTime();
         }
 
@@ -72,7 +71,7 @@ namespace Objectivity.Test.Automation.MsTests.Tests
         public void FindChildElementsTest()
         {
             LogTest.Info("I go to HomePage");
-            var loginPage = Pages.Create<HomePage>()
+            var loginPage = new HomePage(this.DriverContext)
                                  .OpenHomePage();
             var numOfSubLinks = loginPage.CountAllTechnologiesSubLinks();
             LogTest.Info("Number of links: {0}", numOfSubLinks);
@@ -86,12 +85,13 @@ namespace Objectivity.Test.Automation.MsTests.Tests
             DataAccessMethod.Sequential), TestMethod]
         public void SendKeysAndClickDataDrivenTest()
         {
-            var loginPage = Pages.Create<HomePage>()
+            var loginPage = new HomePage(this.DriverContext)
                                  .OpenHomePage();
 
-            var searchResultsPage = loginPage.Search((string)TestContext.DataRow["word"]);
+            var searchResultsPage = loginPage.Search((string)this.TestContext.DataRow["word"]);
+            var expectedPagetitle = this.TestContext.DataRow["expected_title"].ToString().ToLower(CultureInfo.CurrentCulture);
 
-            Assert.AreEqual(TestContext.DataRow["expected_title"].ToString().ToLower(CultureInfo.CurrentCulture), searchResultsPage.GetPageTitleDataDriven(TestContext.DataRow["expected_title"].ToString()), "Search results page is not displayed");
+            Assert.IsTrue(searchResultsPage.IsPageTitle(expectedPagetitle),  "Search results page is not displayed");
         }
     }
 }

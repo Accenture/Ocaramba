@@ -25,10 +25,11 @@ SOFTWARE.
 namespace Objectivity.Test.Automation.NunitTests
 {
     using System.Collections.Generic;
-    using System.Globalization;
 
     using Objectivity.Test.Automation.Common;
     using Objectivity.Test.Automation.Common.Extensions;
+
+    using OpenQA.Selenium;
 
     public enum PageTitles
     {
@@ -37,7 +38,7 @@ namespace Objectivity.Test.Automation.NunitTests
         TechnologiesBusinessPage
     }
 
-    public class ProjectPageBase : Page
+    public class ProjectPageBase
     {
         /// <summary>
         /// The page title dictionary
@@ -49,22 +50,24 @@ namespace Objectivity.Test.Automation.NunitTests
             { "Technologies Web", "web application development resources | msdn" }
         };
 
-        public string GetPageTitleDataDriven(string pageName)
+        public IWebDriver Driver { get; set; }
+
+        public DriverContext DriverContext { get; set; }
+
+        protected ProjectPageBase(DriverContext driverContext)
         {
-            return this.Browser.GetPageTitle(pageName, BaseConfiguration.MediumTimeout);
+            this.DriverContext = driverContext;
+            this.Driver = driverContext.Driver;
         }
 
-        /// <summary>
-        /// Returns expected and actual page titles
-        /// </summary>
-        /// <param name="pageName">Name of the page.</param>
-        public Dictionary<string, string> GetPageTitle(string pageName)
+        public bool IsPageTitle(string pageName)
         {
-            return new Dictionary<string, string>
-            { 
-                { "actual", this.Browser.GetPageTitle(pageName, BaseConfiguration.MediumTimeout) }, 
-                { "expected", this.pageTitleDictionary[pageName].ToLower(CultureInfo.CurrentCulture) },  
-            };
+            return this.Driver.IsPageTitle(pageName, BaseConfiguration.MediumTimeout);
+        }
+
+        public string GetPageTitle(string pageName)
+        {
+            return this.pageTitleDictionary[pageName];
         }
     }
 }

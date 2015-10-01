@@ -58,9 +58,10 @@ namespace Objectivity.Test.Automation.Features
         [Before]
         public void BeforeTest()
         {
-            this.TestTitle = ScenarioContext.Current.ScenarioInfo.Title;
-            LogTest.LogTestStarting();
-            this.StartBrowser();
+            this.DriverContext.TestTitle = ScenarioContext.Current.ScenarioInfo.Title;
+            this.DriverContext.LogTest.LogTestStarting();
+            this.DriverContext.Start();
+            ScenarioContext.Current["DriverContext"] = this.DriverContext;
         }
 
         /// <summary>
@@ -69,11 +70,11 @@ namespace Objectivity.Test.Automation.Features
         [After]
         public void AfterTest()
         {
-            this.IsTestFailed = ScenarioContext.Current.TestError != null;
-            this.FinalizeTest();
-            this.StopBrowser();
+            this.DriverContext.IsTestFailed = ScenarioContext.Current.TestError != null;
+            this.SaveTestDetailsIfTestFailed();
+            this.DriverContext.Stop();
             this.FailTestIfVerifyFailed();
-            LogTest.LogTestEnding();
+            this.DriverContext.LogTest.LogTestEnding();
         }
     }
 }

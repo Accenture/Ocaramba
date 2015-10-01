@@ -22,17 +22,20 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-namespace Objectivity.Test.Automation.NunitTests.DataDriven
+namespace Objectivity.Test.Automation.Common.Helpers.NUnit
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Linq;
     using System.Runtime.InteropServices;
     using System.Xml.Linq;
 
-    using NUnit.Framework;
+    using global::NUnit.Framework;
 
     using Objectivity.Test.Automation.Common;
+
+    using OpenQA.Selenium;
 
     /// <summary>
     /// DataDriven methods for NUnit test framework
@@ -99,15 +102,10 @@ namespace Objectivity.Test.Automation.NunitTests.DataDriven
             var doc = XDocument.Load(Path);
             if (!doc.Descendants(testData).Any())
             {
-                throw new Exception(string.Format(" Exception while reading Data Driven file\n row '{0}' not found \n in file '{1}'", testData, Path));
+                throw new KeyNotFoundException(string.Format(CultureInfo.CurrentCulture, "Exception while reading Data Driven file\n row '{0}' not found \n in file '{1}'", testData, Path));
             }
 
-            foreach (XElement element in doc.Descendants(testData))
-            {
-                var testParams = element.Attributes().ToDictionary(k => k.Name.ToString(), v => v.Value);
-                var data = new TestCaseData(testParams);
-                yield return data;
-            }
+            return doc.Descendants(testData).Select(element => element.Attributes().ToDictionary(k => k.Name.ToString(), v => v.Value)).Select(testParams => new TestCaseData(testParams));
         }
     }
 }

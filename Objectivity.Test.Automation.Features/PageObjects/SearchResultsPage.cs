@@ -35,12 +35,17 @@ namespace Objectivity.Test.Automation.Features.PageObjects
         /// </summary>
         private readonly ElementLocator stackOverFlowCheckbox = new ElementLocator(Locator.Id, "500");
 
+        public SearchResultsPage(DriverContext driverContext)
+            : base(driverContext)
+        {
+        }
+
         /// <summary>
         /// Marks the stack over flow filter.
         /// </summary>
         public SearchResultsPage MarkStackOverFlowFilter()
         {
-            var checkbox = this.Browser.GetElement<Checkbox>(this.stackOverFlowCheckbox);
+            var checkbox = this.Driver.GetElement<Checkbox>(this.stackOverFlowCheckbox);
             checkbox.TickCheckbox();
             return this;
         }

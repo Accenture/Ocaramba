@@ -37,7 +37,7 @@ namespace Objectivity.Test.Automation.MsTests.PageObjects
 
     public class HomePage : ProjectPageBase
     {
-        private static Logger logger = LogManager.GetCurrentClassLogger();
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
         /// Locators for elements
@@ -49,14 +49,18 @@ namespace Objectivity.Test.Automation.MsTests.PageObjects
             menuAllLinks = new ElementLocator(Locator.CssSelector, "ul.navL1>li>a"),
             technologiesMenuLink = new ElementLocator(Locator.XPath, "//a[@title='Technologies']");
 
+        public HomePage(DriverContext driverContext) : base(driverContext)
+        {
+        }
+
         /// <summary>
         /// Methods for this HomePage
         /// </summary>
         public HomePage OpenHomePage()
         {
             var url = this.GetUrlValue();
-            this.Browser.NavigateTo(new Uri(url));
-            logger.Info(CultureInfo.CurrentCulture, "Opening page {0}", url);
+            this.Driver.NavigateTo(new Uri(url));
+            Logger.Info(CultureInfo.CurrentCulture, "Opening page {0}", url);
             return this;
         }
 
@@ -66,66 +70,66 @@ namespace Objectivity.Test.Automation.MsTests.PageObjects
         public HomePage OpenHomePageAndMeasureTime()
         {
             var url = this.GetUrlValue();
-            this.Browser.NavigateToAndMeasureTimeForAjaxFinished(new Uri(url));
-            logger.Info(CultureInfo.CurrentCulture, "Opening page {0}", url);
+            this.Driver.NavigateToAndMeasureTimeForAjaxFinished(new Uri(url));
+            Logger.Info(CultureInfo.CurrentCulture, "Opening page {0}", url);
             return this;
         }
 
         public SearchResultsPage Search(string value)
         {
-            this.Browser.GetElement(this.searchButton).Click();
-            this.Browser.GetElement(this.searchTextbox).SendKeys(value);
-            this.Browser.GetElement(this.searchButton).Click();
+            this.Driver.GetElement(this.searchButton).Click();
+            this.Driver.GetElement(this.searchTextbox).SendKeys(value);
+            this.Driver.GetElement(this.searchButton).Click();
 
-            return Pages.Create<SearchResultsPage>();
+            return new SearchResultsPage(this.DriverContext);
         }
 
         public SearchResultsPage SearchUsingActions(string value)
         {
-            var searchTextboxElement = this.Browser.GetElement(this.searchTextbox);
-            new Actions(this.Browser).SendKeys(searchTextboxElement, value).Build().Perform();
-            var searchButtonElement = this.Browser.GetElement(this.searchButton);
-            new Actions(this.Browser).Click(searchButtonElement).Build().Perform();
+            var searchTextboxElement = this.Driver.GetElement(this.searchTextbox);
+            new Actions(this.Driver).SendKeys(searchTextboxElement, value).Build().Perform();
+            var searchButtonElement = this.Driver.GetElement(this.searchButton);
+            new Actions(this.Driver).Click(searchButtonElement).Build().Perform();
 
-            return Pages.Create<SearchResultsPage>();
+            return new SearchResultsPage(this.DriverContext);
         }
 
         public string GetLinkText(params object[] parameters)
         {
-            var element = this.Browser.GetElement(this.menuLink.Evaluate(parameters));
+            var element = this.Driver.GetElement(this.menuLink.Evaluate(parameters));
             return element.Text;
         }
 
         public int CountAllLinks()
         {
-            var elements = this.Browser.GetElements(this.menuAllLinks);
+            var elements = this.Driver.GetElements(this.menuAllLinks);
             return elements.Count;
         }
 
         public int CountAllTechnologiesSubLinks()
         {
-            this.Browser.GetElement(this.technologiesMenuLink).Click();
+            this.Driver.GetElement(this.technologiesMenuLink).Click();
 
-            var elements = this.Browser.GetElement(this.technologiesMenuLink);
+            var elements = this.Driver.GetElement(this.technologiesMenuLink);
             return elements.GetElements(new ElementLocator(Locator.XPath, "./../ul/li")).Count;
         }
 
         public TechnologiesBusinessPage ClickTechnologiesBusinessLink()
         {
-            this.Browser.GetElement(this.technologiesMenuLink).Click();
+            this.Driver.GetElement(this.technologiesMenuLink).Click();
 
-            var elements = this.Browser.GetElement(this.technologiesMenuLink);
+            var elements = this.Driver.GetElement(this.technologiesMenuLink);
             elements.GetElement(new ElementLocator(Locator.XPath, "./../ul/li/a[@title='Business']")).Click();
-            return Pages.Create<TechnologiesBusinessPage>();
+            return new TechnologiesBusinessPage(this.DriverContext);
         }
 
         public TechnologiesBusinessPage JavaScriptClickTechnologiesBusinessLink()
         {
-            this.Browser.GetElement(this.technologiesMenuLink).JavaScriptClick();
+            this.Driver.GetElement(this.technologiesMenuLink).JavaScriptClick();
 
-            var elements = this.Browser.GetElement(this.technologiesMenuLink);
+            var elements = this.Driver.GetElement(this.technologiesMenuLink);
             elements.GetElement(new ElementLocator(Locator.XPath, "./../ul/li/a[@title='Business']")).JavaScriptClick();
-            return Pages.Create<TechnologiesBusinessPage>();
+            return new TechnologiesBusinessPage(this.DriverContext);
         }
 
         private string GetUrlValue()

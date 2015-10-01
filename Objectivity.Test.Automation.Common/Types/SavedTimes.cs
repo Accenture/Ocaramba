@@ -71,10 +71,10 @@ namespace Objectivity.Test.Automation.Common.Types
         }
 
         /// <summary>
-        /// Gets the name of the browser.
+        /// Gets the name of the Driver.
         /// </summary>
         /// <value>
-        /// The name of the browser.
+        /// The name of the Driver.
         /// </value>
         public string BrowserName
         {

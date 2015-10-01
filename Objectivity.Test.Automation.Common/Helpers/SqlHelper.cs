@@ -24,7 +24,6 @@ SOFTWARE.
 
 namespace Objectivity.Test.Automation.Common.Helpers
 {
-    using System;
     using System.Collections.Generic;
     using System.Data.SqlClient;
     using System.Diagnostics.CodeAnalysis;

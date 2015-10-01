@@ -22,11 +22,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-using System;
-using System.Collections.Generic;
-
 namespace Objectivity.Test.Automation.NunitTests.Tests
 {
+    using System.Collections.Generic;
     using System.Globalization;
 
     using NUnit.Framework;
@@ -43,44 +41,46 @@ namespace Objectivity.Test.Automation.NunitTests.Tests
         [Test]
         public void SendKeysAndClickTest()
         {
-            var loginPage = Pages.Create<HomePage>()
+            var loginPage = new HomePage(this.DriverContext)
                                  .OpenHomePage();
 
             var searchResultsPage = loginPage.Search("objectivity");
             searchResultsPage.MarkStackOverFlowFilter();
 
-            var pageTitle = searchResultsPage.GetPageTitle("Search Results");
-            Assert.AreEqual(pageTitle["expected"], pageTitle["actual"], "Search results page is not displayed");
+            var expectedPageTitle = searchResultsPage.GetPageTitle("Search Results");
+            Assert.IsTrue(searchResultsPage.IsPageTitle(expectedPageTitle), "Search results page is not displayed");
         }
 
         [Test]
         [TestCaseSource(typeof(TestData), "WordsToSearch")]
         public void SendKeysAndClickDataDrivenSetTest(IDictionary<string, string> parameters)
         {
-            var loginPage = Pages.Create<HomePage>()
+            var loginPage = new HomePage(this.DriverContext)
                                  .OpenHomePage();
 
             var searchResultsPage = loginPage.Search(parameters["word"]);
+            var expectedPageTitle = parameters["expected_title"].ToLower(CultureInfo.CurrentCulture);
 
-            Assert.AreEqual(parameters["expected_title"].ToLower(CultureInfo.CurrentCulture), searchResultsPage.GetPageTitleDataDriven(parameters["word"]), "Search results page is not displayed");
+            Assert.IsTrue(searchResultsPage.IsPageTitle(expectedPageTitle), string.Format(CultureInfo.CurrentCulture, "{0} page is not displayed", expectedPageTitle));
         }
 
         [Test]
         [TestCaseSource(typeof(TestData), "WordsToSearchSetTestName")]
         public void SendKeysAndClickDataDrivenSetNameOfTest(IDictionary<string, string> parameters)
         {
-            var loginPage = Pages.Create<HomePage>()
+            var loginPage = new HomePage(this.DriverContext)
                                  .OpenHomePage();
 
             var searchResultsPage = loginPage.Search(parameters["word"]);
+            var expectedPageTitle = parameters["expected_title"].ToLower(CultureInfo.CurrentCulture);
 
-            Assert.AreEqual(parameters["expected_title"].ToLower(CultureInfo.CurrentCulture), searchResultsPage.GetPageTitleDataDriven(parameters["expected_title"]), "Search results page is not displayed");
+            Assert.IsTrue(searchResultsPage.IsPageTitle(expectedPageTitle), string.Format(CultureInfo.CurrentCulture, "{0} page is not displayed", expectedPageTitle));
         }
 
         [Test]
         public void EvaluateLocatorTest()
         {
-            var loginPage = Pages.Create<HomePage>()
+            var loginPage = new HomePage(this.DriverContext)
                                  .OpenHomePage();
 
             Assert.AreEqual("Technologies", loginPage.GetLinkText("Technologies", "Technologies"));
@@ -89,7 +89,7 @@ namespace Objectivity.Test.Automation.NunitTests.Tests
         [Test]
         public void FindElementsTest()
         {
-            var loginPage = Pages.Create<HomePage>()
+            var loginPage = new HomePage(this.DriverContext)
                                  .OpenHomePage();
 
             Assert.AreEqual(6, loginPage.CountAllLinks());
@@ -98,7 +98,7 @@ namespace Objectivity.Test.Automation.NunitTests.Tests
         [Test]
         public void FindChildElementsTest()
         {
-            var loginPage = Pages.Create<HomePage>()
+            var loginPage = new HomePage(this.DriverContext)
                                  .OpenHomePage();
 
             Assert.AreEqual(5, loginPage.CountAllTechnologiesSubLinks());
@@ -107,38 +107,40 @@ namespace Objectivity.Test.Automation.NunitTests.Tests
         [Test]
         public void FindChildElementTest()
         {
-            var loginPage = Pages.Create<HomePage>().OpenHomePage();
+            var loginPage = new HomePage(this.DriverContext).OpenHomePage();
 
             var technologiesBusinessPage = loginPage.ClickTechnologiesWebLink();
-            var pageTitle = technologiesBusinessPage.GetPageTitle("Technologies Web");
-            Assert.AreEqual(pageTitle["expected"], pageTitle["actual"], "Wrong title of the page");
+
+            var expectedPageTitle = technologiesBusinessPage.GetPageTitle("Technologies Web");
+            Assert.IsTrue(technologiesBusinessPage.IsPageTitle(expectedPageTitle), "Technologies Web page is not displayed");
         }
 
         [Test]
         public void JavaScriptClickTest()
         {
-            var loginPage = Pages.Create<HomePage>().OpenHomePage();
+            var loginPage = new HomePage(this.DriverContext).OpenHomePage();
 
             var technologiesBusinessPage = loginPage.JavaScriptClickTechnologiesWebLink();
 
-            var pageTitle = technologiesBusinessPage.GetPageTitle("Technologies Web");
-            Assert.AreEqual(pageTitle["expected"], pageTitle["actual"], "Wrong title of the page");
+            var expectedPageTitle = technologiesBusinessPage.GetPageTitle("Technologies Web");
+            Assert.IsTrue(technologiesBusinessPage.IsPageTitle(expectedPageTitle), "Technologies Web page is not displayed");
         }
 
         [Test]
         public void VerifyTest()
         {
-            this.Verify(() => Assert.AreEqual(1, 1));
-            this.Verify(() => Assert.IsTrue(true));
+            Verify.That(this.DriverContext, () => Assert.AreEqual(1, 1), () => Assert.AreEqual(2, 2), () => Assert.AreEqual(3, 3));
+            Verify.That(this.DriverContext, () => Assert.IsFalse(false), enableScreenShot:true);
+            Verify.That(this.DriverContext, () => Assert.IsTrue(true));
         }
 
         [Test]
         public void ElementNotPresent()
         {
-            var homepage = Pages.Create<HomePage>()
+            var homepage = new HomePage(this.DriverContext)
                                  .OpenHomePage();
 
-            Assert.IsFalse(homepage.CheckIfObjectivityLinkNotExistsonMSDNPage());
+            Assert.IsFalse(homepage.CheckIfObjectivityLinkNotExistsonMsdnPage());
         }
     }
 }

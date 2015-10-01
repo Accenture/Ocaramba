@@ -22,9 +22,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+using Objectivity.Test.Automation.Common;
+
 namespace Objectivity.Test.Automation.Features.PageObjects
 {
     public class TechnologiesBusinessPage : ProjectPageBase
     {
+        public TechnologiesBusinessPage(DriverContext driverContext) : base(driverContext)
+        {
+        }
     }
 }

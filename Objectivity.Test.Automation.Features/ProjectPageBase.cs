@@ -27,6 +27,8 @@ namespace Objectivity.Test.Automation.Features
     using Objectivity.Test.Automation.Common;
     using Objectivity.Test.Automation.Common.Extensions;
 
+    using OpenQA.Selenium;
+
     public enum PageTitles
     {
         HomePage,
@@ -34,15 +36,25 @@ namespace Objectivity.Test.Automation.Features
         TechnologiesBusinessPage
     }
 
-    public class ProjectPageBase : Page
+    public class ProjectPageBase
     {
+        protected ProjectPageBase(DriverContext driverContext)
+        {
+            this.DriverContext = driverContext;
+            this.Driver = driverContext.Driver;
+        }
+
+        public DriverContext DriverContext { get; set; }
+
+        public IWebDriver Driver { get; set; }
+
         /// <summary>
         /// Returns expected and actual page titles
         /// </summary>
         /// <param name="pageName">Name of the page.</param>
-        public string GetPageTitle(string pageName)
+        public bool IsPageTitle(string pageName)
         {
-            return this.Browser.GetPageTitle(pageName, BaseConfiguration.MediumTimeout);
+            return this.Driver.IsPageTitle(pageName, BaseConfiguration.MediumTimeout);
         }
     }
 }

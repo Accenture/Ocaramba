@@ -22,19 +22,19 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-using System.Text;
-using Objectivity.Test.Automation.Common.Logger;
-
 namespace Objectivity.Test.Automation.Common
 {
     using System;
-    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Configuration;
+    using System.Diagnostics.CodeAnalysis;
     using System.Drawing.Imaging;
     using System.Globalization;
     using System.IO;
     using System.Linq;
-    using System.Threading;
 
+    using Objectivity.Test.Automation.Common.Helpers;
+    using Objectivity.Test.Automation.Common.Logger;
     using Objectivity.Test.Automation.Common.Types;
 
     using OpenQA.Selenium;
@@ -45,21 +45,72 @@ namespace Objectivity.Test.Automation.Common
     /// <summary>
     /// Contains handle to driver and methods for web browser
     /// </summary>
-    public class BrowserManager
+    [SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable", Justification = "Driver is disposed on test end")]
+    public class DriverContext
     {
+        private readonly Collection<ErrorDetail> verifyMessages = new Collection<ErrorDetail>();
+
         /// <summary>
         /// Gets or sets the handle to current driver.
         /// </summary>
         /// <value>
         /// The handle to driver.
         /// </value>
-        private static readonly Dictionary<int, IWebDriver> CurrentDrivers = new Dictionary<int, IWebDriver>();
+        private IWebDriver driver;
 
-        internal static IWebDriver Handle
+        private TestLogger logTest;
+
+        /// <summary>
+        /// Gets or sets the test title.
+        /// </summary>
+        /// <value>
+        /// The test title.
+        /// </value>
+        public string TestTitle { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether [test failed].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [test failed]; otherwise, <c>false</c>.
+        /// </value>
+        public bool IsTestFailed { get; set; }
+
+        /// <summary>
+        /// Test logger
+        /// </summary>
+        public TestLogger LogTest
         {
             get
             {
-                return CurrentDrivers[Thread.CurrentThread.ManagedThreadId];
+                return this.logTest ?? (this.logTest = new TestLogger(this.TestTitle));
+            }
+
+            set
+            {
+                this.logTest = value;
+            }
+        }
+
+        /// <summary>
+        /// Driver Handle
+        /// </summary>
+        public IWebDriver Driver
+        {
+            get
+            {
+                return this.driver;
+            }
+        }
+
+        /// <summary>
+        /// Held all verify messages
+        /// </summary>
+        public Collection<ErrorDetail> VerifyMessages
+        {
+            get
+            {
+                return this.verifyMessages;
             }
         }
 
@@ -75,24 +126,23 @@ namespace Objectivity.Test.Automation.Common
         }
 
         /// <summary>
-        /// Starts the specified browser.
+        /// Starts the specified Driver.
         /// </summary>
-        /// <param name="browser">The browser.</param>
         /// <exception cref="NotSupportedException">When driver not supported</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "Driver disposed later in stop method")]
-        public void Start(string browser)
+        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "Driver disposed later in stop method")]
+        public void Start()
         {
-            IWebDriver driver;
+            IWebDriver chosenDriver;
 
-            switch (browser)
+            switch (BaseConfiguration.TestBrowser)
             {
                 case "Firefox":
-                    driver = new FirefoxDriver(this.FirefoxProfile);
+                    chosenDriver = new FirefoxDriver(this.FirefoxProfile);
                     break;
                 case "FirefoxPortable":
                     var profile = this.FirefoxProfile;
                     var firefoxBinary = new FirefoxBinary(BaseConfiguration.FirefoxPath);
-                    driver = new FirefoxDriver(firefoxBinary, profile);
+                    chosenDriver = new FirefoxDriver(firefoxBinary, profile);
                     break;
                 case "InternetExplorer":
                     var options = new InternetExplorerOptions
@@ -100,19 +150,18 @@ namespace Objectivity.Test.Automation.Common
                         EnsureCleanSession = true,
                         IgnoreZoomLevel = true,                        
                     };
-                    driver = new InternetExplorerDriver(options);
+                    chosenDriver = new InternetExplorerDriver(options);
                     break;
                 case "Chrome":
-                    driver = new ChromeDriver();
+                    chosenDriver = new ChromeDriver();
                     break;
                 default:
                     throw new NotSupportedException(
-                        string.Format(CultureInfo.CurrentCulture, "Driver {0} is not supported", browser));
+                        string.Format(CultureInfo.CurrentCulture, "Driver {0} is not supported", BaseConfiguration.TestBrowser));
             }
 
-            driver.Manage().Window.Maximize();
-            var driverEventListener = new MyEventFiringWebDriver(driver);
-            CurrentDrivers.Add(Thread.CurrentThread.ManagedThreadId, driverEventListener);
+            chosenDriver.Manage().Window.Maximize();
+            this.driver = new MyEventFiringWebDriver(chosenDriver);
         }
 
         /// <summary>
@@ -120,13 +169,7 @@ namespace Objectivity.Test.Automation.Common
         /// </summary>
         public void Stop()
         {
-            if (!CurrentDrivers.ContainsKey(Thread.CurrentThread.ManagedThreadId))
-            {
-                return;
-            }
-
-            CurrentDrivers[Thread.CurrentThread.ManagedThreadId].Dispose();
-            CurrentDrivers.Remove(Thread.CurrentThread.ManagedThreadId);
+            this.driver.Quit();
         }
 
         /// <summary>
@@ -136,7 +179,7 @@ namespace Objectivity.Test.Automation.Common
         {
             try
             {
-                var screenshotDriver = (ITakesScreenshot)Handle;
+                var screenshotDriver = (ITakesScreenshot)this.driver;
                 var screenshot = screenshotDriver.GetScreenshot();
                 return screenshot;
             }
@@ -178,9 +221,39 @@ namespace Objectivity.Test.Automation.Common
                 File.Delete(path);
             }
 
-            var pageSource = Handle.PageSource;
+            var pageSource = this.driver.PageSource;
             pageSource = pageSource.Replace("<head>", string.Format(CultureInfo.CurrentCulture, "<head><base href=\"http://{0}\" target=\"_blank\">", BaseConfiguration.Host));
             File.WriteAllText(path, pageSource);
+        }
+
+        /// <summary>
+        /// Takes and saves screen shot
+        /// </summary>
+        public void TakeAndSaveScreenshot()
+        {
+            if (BaseConfiguration.FullDesktopScreenShotEnabled)
+            {
+                if (ConfigurationManager.AppSettings.AllKeys.Contains("TestFolder"))
+                {
+                    TakeScreenShot.Save(TakeScreenShot.DoIt(), ImageFormat.Png, this.LogTest.TestFolder, this.TestTitle);
+                }
+                else
+                {
+                    TakeScreenShot.Save(TakeScreenShot.DoIt(), ImageFormat.Png, BaseConfiguration.ScreenShotFolder, this.TestTitle);
+                }
+            }
+
+            if (BaseConfiguration.SeleniumScreenShotEnabled)
+            {
+                if (ConfigurationManager.AppSettings.AllKeys.Contains("TestFolder"))
+                {
+                    this.SaveScreenshot(new ErrorDetail(this.TakeScreenshot(), DateTime.Now, null), this.LogTest.TestFolder, this.TestTitle);
+                }
+                else
+                {
+                    this.SaveScreenshot(new ErrorDetail(this.TakeScreenshot(), DateTime.Now, null), BaseConfiguration.ScreenShotFolder, this.TestTitle);
+                }
+            }
         }
     }
 }

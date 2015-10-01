@@ -24,7 +24,13 @@ SOFTWARE.
 
 namespace Objectivity.Test.Automation.NunitTests.PageObjects
 {
+    using Objectivity.Test.Automation.Common;
+
     public class TechnologiesBusinessPage : ProjectPageBase
     {
+        public TechnologiesBusinessPage(DriverContext driverContext)
+            : base(driverContext)
+        {
+        }
     }
 }

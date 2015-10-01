@@ -24,9 +24,6 @@ SOFTWARE.
 
 namespace Objectivity.Test.Automation.MsTests
 {
-    using System;
-    using System.Diagnostics.CodeAnalysis;
-
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using Objectivity.Test.Automation.Common;
@@ -51,9 +48,9 @@ namespace Objectivity.Test.Automation.MsTests
         [TestInitialize]
         public void BeforeTest()
         {
-            TestTitle = TestContext.TestName;
-            LogTest.LogTestStarting();
-            this.StartBrowser();
+            this.DriverContext.TestTitle = TestContext.TestName;
+            this.DriverContext.LogTest.LogTestStarting();
+            this.DriverContext.Start();
         }
 
         /// <summary>
@@ -62,11 +59,11 @@ namespace Objectivity.Test.Automation.MsTests
         [TestCleanup]
         public void AfterTest()
         {
-            IsTestFailed = TestContext.CurrentTestOutcome == UnitTestOutcome.Failed;
-            this.FinalizeTest();
-            StopBrowser();
+            this.DriverContext.IsTestFailed = TestContext.CurrentTestOutcome == UnitTestOutcome.Failed;
+            this.SaveTestDetailsIfTestFailed();
+            this.DriverContext.Stop();
             this.FailTestIfVerifyFailed();
-            LogTest.LogTestEnding();
+            this.DriverContext.LogTest.LogTestEnding();
         }
     }
 }

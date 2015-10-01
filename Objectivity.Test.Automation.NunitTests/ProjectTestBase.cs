@@ -24,9 +24,6 @@ SOFTWARE.
 
 namespace Objectivity.Test.Automation.NunitTests
 {
-    using System;
-    using System.Diagnostics.CodeAnalysis;
-
     using NUnit.Framework;
 
     using Objectivity.Test.Automation.Common;
@@ -60,9 +57,9 @@ namespace Objectivity.Test.Automation.NunitTests
         [SetUp]
         public void BeforeTest()
         {
-            TestTitle = TestContext.CurrentContext.Test.Name;
-            LogTest.LogTestStarting();
-            this.StartBrowser();
+            this.DriverContext.TestTitle = TestContext.CurrentContext.Test.Name;
+            this.LogTest.LogTestStarting();
+            this.DriverContext.Start();
         }
 
         /// <summary>
@@ -71,12 +68,12 @@ namespace Objectivity.Test.Automation.NunitTests
         [TearDown]
         public void AfterTest()
         {
-            IsTestFailed = TestContext.CurrentContext.Result.Status == TestStatus.Failed;
-            this.FinalizeTest();
-            StopBrowser();
+            this.DriverContext.IsTestFailed = TestContext.CurrentContext.Result.Status == TestStatus.Failed;
+            this.SaveTestDetailsIfTestFailed();
+            this.DriverContext.Stop();
             this.FailTestIfVerifyFailed();
-            LogTest.LogTestEnding();
-            LogTest = null;
+            this.LogTest.LogTestEnding();
+            this.LogTest = null;
         }
     }
 }

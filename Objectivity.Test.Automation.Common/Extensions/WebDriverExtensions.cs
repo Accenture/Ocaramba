@@ -29,6 +29,8 @@ namespace Objectivity.Test.Automation.Common.Extensions
     using System;
     using System.Globalization;
 
+    using NLog;
+
     using Objectivity.Test.Automation.Common.Types;
 
     using OpenQA.Selenium;
@@ -41,6 +43,8 @@ namespace Objectivity.Test.Automation.Common.Extensions
     /// </summary>
     public static class WebDriverExtensions
     {
+        private static readonly Logger Logger = LogManager.GetLogger("DRIVER");
+
         /// <summary>
         /// Tables the specified web element.
         /// </summary>
@@ -144,7 +148,7 @@ namespace Objectivity.Test.Automation.Common.Extensions
         /// <returns>
         /// Returns title of page
         /// </returns>
-        public static string GetPageTitle(this IWebDriver webDriver, string pageTitle, double timeout)
+        public static bool IsPageTitle(this IWebDriver webDriver, string pageTitle, double timeout)
         {
             var wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(timeout));
 
@@ -154,9 +158,11 @@ namespace Objectivity.Test.Automation.Common.Extensions
             }
             catch (WebDriverTimeoutException)
             {
+                Logger.Error(CultureInfo.CurrentCulture, "Actual page title is {0};", webDriver.Title);
+                return false;
             }
 
-            return webDriver.Title.ToLower(CultureInfo.CurrentCulture);
+            return true;
         }
 
         /// <summary>

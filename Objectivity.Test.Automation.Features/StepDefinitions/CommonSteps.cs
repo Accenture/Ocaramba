@@ -24,8 +24,6 @@ SOFTWARE.
 
 namespace Objectivity.Test.Automation.Features.StepDefinitions
 {
-    using System.Globalization;
-
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using Objectivity.Test.Automation.Common;
@@ -36,23 +34,30 @@ namespace Objectivity.Test.Automation.Features.StepDefinitions
     [Binding]
     public class CommonSteps
     {
+        private readonly DriverContext driverContext;
+
+        public CommonSteps()
+        {
+            this.driverContext = ScenarioContext.Current["DriverContext"] as DriverContext;
+        }
+
         [Given(@"I log on and default page is opened")]
         public void GivenILogOnAndDefaultPageIsOpened()
         {
-            Pages.Create<HomePage>().OpenHomePage();
+            new HomePage(this.driverContext).OpenHomePage();
         }
 
         [Given(@"I search for ""(.*)""")]
         public void GivenISearchFor(string searchedValue)
         {
-            Pages.Create<HomePage>().Search(searchedValue);
+            new HomePage(this.driverContext).Search(searchedValue);
         }
 
         [Then(@"I should be on ""(.*)"" page")]
         public void ThenIShouldBeOnPage(string pageName)
         {
-            var searchResultsPage = Pages.Create<SearchResultsPage>();
-            Assert.AreEqual(pageName.ToLower(CultureInfo.CurrentCulture), searchResultsPage.GetPageTitle(pageName));
+            var searchResultsPage = new SearchResultsPage(this.driverContext);
+            Assert.IsTrue(searchResultsPage.IsPageTitle(pageName));
         }
     }
 }

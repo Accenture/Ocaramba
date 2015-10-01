@@ -80,7 +80,7 @@ namespace Objectivity.Test.Automation.Common.Extensions
         {
             var by = locator.ToBy();
 
-            var wait = new WebDriverWait(BrowserManager.Handle, TimeSpan.FromSeconds(timeout));
+            var wait = new WebDriverWait(element.ToDriver(), TimeSpan.FromSeconds(timeout));
             wait.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
             
             wait.Until(
@@ -176,7 +176,7 @@ namespace Objectivity.Test.Automation.Common.Extensions
         /// <param name="webElement">The web element.</param>
         /// <returns></returns>
         /// <exception cref="System.ArgumentException">Element must wrap a web driver;webElement</exception>
-        public static IWebDriver ToDriver(this ISearchContext webElement)
+        internal static IWebDriver ToDriver(this ISearchContext webElement)
         {
             var wrappedElement = webElement as IWrapsDriver;
             if (wrappedElement == null)
@@ -187,7 +187,7 @@ namespace Objectivity.Test.Automation.Common.Extensions
                     wrappedElement = fieldInfo.GetValue(webElement) as IWrapsDriver;
                     if (wrappedElement == null)
                     {
-                        throw new ArgumentException("Element must wrap a web driver", "webElement");
+                        return (IWebDriver)webElement;
                     }
                 }
             }
