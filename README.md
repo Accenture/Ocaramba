@@ -18,6 +18,7 @@ It provides following features:
 - Measures average and 90 Percentile action times
 - DataDriven for NUnit and MSTest with examples 
 - Possibility to take full desktop screen shot
+- Logging (including selenium events)
 
 To create new project using Test Framework simply copy and change  one of example  project:
 - Objectivity.Test.Automation.Features for Specflow
@@ -33,35 +34,41 @@ NUnit Example Test:
         [Test]
         public void SendKeysAndClickTest()
         {
-                var loginPage = Pages.Create<HomePage>()
-                        .OpenHomePage();
+            var loginPage = new HomePage(this.DriverContext)
+                                 .OpenHomePage();
 
-                var searchResultsPage = loginPage.Search("objectivity");
-                searchResultsPage.MarkStackOverFlowFilter();
+            var searchResultsPage = loginPage.Search("objectivity");
+            searchResultsPage.MarkStackOverFlowFilter();
 
-                Assert.IsTrue(searchResultsPage.IsAtPage("Search Results"), "Search results page is not displayed");
+            var expectedPageTitle = searchResultsPage.GetPageTitle("Search Results");
+            Assert.IsTrue(searchResultsPage.IsPageTitle(expectedPageTitle), "Search results page is not displayed");
         }
 
 
 NUnit Example Page Object:
 
         public class SearchResultsPage : ProjectPageBase
-        {
-                /// <summary>
-                /// Locators for elements
-                /// </summary>
-                private readonly ElementLocator stackOverFlowCheckbox = new ElementLocator(Locator.Id, "500");
+		{
+			/// <summary>
+			/// Locators for elements
+			/// </summary>
+			private readonly ElementLocator stackOverFlowCheckbox = new ElementLocator(Locator.Id, "500");
 
-                /// <summary>
-                /// Marks the stack over flow filter.
-                /// </summary>
-                public SearchResultsPage MarkStackOverFlowFilter()
-                {
-                        var checkbox = this.Browser.GetElement<Checkbox>(this.stackOverFlowCheckbox);
-                        checkbox.TickCheckbox();
-                        return this;
-                }
-        }
+			public SearchResultsPage(DriverContext driverContext)
+				: base(driverContext)
+			{
+			}
+
+			/// <summary>
+			/// Marks the stack over flow filter.
+			/// </summary>
+			public SearchResultsPage MarkStackOverFlowFilter()
+			{
+				var checkbox = this.Driver.GetElement<Checkbox>(this.stackOverFlowCheckbox);
+				checkbox.TickCheckbox();
+				return this;
+			}
+		}
 
 To select internet browser for tests to be carried out edit App.config file at previously selected sample project.
  
