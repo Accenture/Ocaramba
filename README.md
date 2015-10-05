@@ -71,5 +71,10 @@ NUnit Example Page Object:
 		}
 
 To select internet browser for tests to be carried out edit App.config file at previously selected sample project.
+
+#### Where to start?
+-------------
+- See [Getting started](https://github.com/ObjectivityBSS/Test.Automation/wiki/Getting%20started).
+- Checkout the code or get it from [nuget](https://www.nuget.org/packages/Objectivity.Test.Automation.Common/)
  
 
