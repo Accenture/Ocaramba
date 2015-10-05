@@ -19,8 +19,9 @@ It provides following features:
 - DataDriven for NUnit and MSTest with examples 
 - Possibility to take full desktop screen shot
 - Logging (including selenium events)
+- Ready for parallel tests execution
 
-To create new project using Test Framework simply copy and change  one of example  project:
+Projects examples of using Test Framework :
 - Objectivity.Test.Automation.Features for Specflow
 - Objectivity.Test.Automation.MsTests for MSTest
 - Objectivity.Test.Automation.NunitTests for NUnit
