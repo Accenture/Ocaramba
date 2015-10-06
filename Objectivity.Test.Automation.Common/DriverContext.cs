@@ -69,6 +69,11 @@ namespace Objectivity.Test.Automation.Common
         public string TestTitle { get; set; }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public string TestFolder { get; set; }
+
+        /// <summary>
         /// Gets or sets a value indicating whether [test failed].
         /// </summary>
         /// <value>
@@ -83,7 +88,7 @@ namespace Objectivity.Test.Automation.Common
         {
             get
             {
-                return this.logTest ?? (this.logTest = new TestLogger(this.TestTitle));
+                return this.logTest ?? (this.logTest = new TestLogger(this.TestFolder, this.TestTitle));
             }
 
             set

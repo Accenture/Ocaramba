@@ -92,6 +92,18 @@ namespace Objectivity.Test.Automation.Common
         }
 
         /// <summary>
+        /// Take screenshot if test failed and delete cached page objects.
+        /// </summary>
+        public void SaveTestDetailsIfTestFailed(DriverContext driverContext)
+        {
+            if (driverContext.IsTestFailed)
+            {
+                driverContext.TakeAndSaveScreenshot();
+                this.SavePageSource(driverContext);
+            }
+        }
+
+        /// <summary>
         /// Save Page Source
         /// </summary>
         public void SavePageSource()
@@ -103,6 +115,18 @@ namespace Objectivity.Test.Automation.Common
         }
 
         /// <summary>
+        /// Save Page Source
+        /// </summary>
+        /// <param name="driverContext"></param>
+        public void SavePageSource(DriverContext driverContext)
+        {
+            if (BaseConfiguration.GetPageSourceEnabled)
+            {
+                driverContext.SavePageSource(driverContext.LogTest.TestFolder, driverContext.TestTitle);
+            }
+        }
+
+        /// <summary>
         /// Fails the test if verify failed.
         /// </summary>
         public void FailTestIfVerifyFailed()
@@ -110,6 +134,19 @@ namespace Objectivity.Test.Automation.Common
             if (!this.driverContext.VerifyMessages.Count.Equals(0) && !this.driverContext.IsTestFailed)
             {
                 this.driverContext.VerifyMessages.Clear();
+                Assert.Fail();
+            }
+        }
+
+        /// <summary>
+        /// FailTestIfVerifyFailed
+        /// </summary>
+        /// <param name="driverContext"></param>
+        public void FailTestIfVerifyFailed(DriverContext driverContext)
+        {
+            if (!driverContext.VerifyMessages.Count.Equals(0) && !driverContext.IsTestFailed)
+            {
+                driverContext.VerifyMessages.Clear();
                 Assert.Fail();
             }
         }
