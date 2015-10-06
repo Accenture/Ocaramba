@@ -94,12 +94,12 @@ namespace Objectivity.Test.Automation.Common
         /// <summary>
         /// Take screenshot if test failed and delete cached page objects.
         /// </summary>
-        public void SaveTestDetailsIfTestFailed(DriverContext driverContext)
+        public void SaveTestDetailsIfTestFailed(DriverContext externalDriverContext)
         {
-            if (driverContext.IsTestFailed)
+            if (externalDriverContext.IsTestFailed)
             {
-                driverContext.TakeAndSaveScreenshot();
-                this.SavePageSource(driverContext);
+                externalDriverContext.TakeAndSaveScreenshot();
+                this.SavePageSource(externalDriverContext);
             }
         }
 
@@ -117,12 +117,14 @@ namespace Objectivity.Test.Automation.Common
         /// <summary>
         /// Save Page Source
         /// </summary>
-        /// <param name="driverContext"></param>
-        public void SavePageSource(DriverContext driverContext)
+        /// <param name="externalDriverContext">
+        /// Driver context includes
+        /// </param>
+        public void SavePageSource(DriverContext externalDriverContext)
         {
             if (BaseConfiguration.GetPageSourceEnabled)
             {
-                driverContext.SavePageSource(driverContext.LogTest.TestFolder, driverContext.TestTitle);
+                externalDriverContext.SavePageSource(externalDriverContext.LogTest.TestFolder, externalDriverContext.TestTitle);
             }
         }
 
@@ -139,14 +141,16 @@ namespace Objectivity.Test.Automation.Common
         }
 
         /// <summary>
-        /// FailTestIfVerifyFailed
+        /// Fail Test If Verify Failed
         /// </summary>
-        /// <param name="driverContext"></param>
-        public void FailTestIfVerifyFailed(DriverContext driverContext)
+        /// <param name="externalDriverContext">
+        /// Driver context includes
+        /// </param>
+        public void FailTestIfVerifyFailed(DriverContext externalDriverContext)
         {
-            if (!driverContext.VerifyMessages.Count.Equals(0) && !driverContext.IsTestFailed)
+            if (!externalDriverContext.VerifyMessages.Count.Equals(0) && !externalDriverContext.IsTestFailed)
             {
-                driverContext.VerifyMessages.Clear();
+                externalDriverContext.VerifyMessages.Clear();
                 Assert.Fail();
             }
         }

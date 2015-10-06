@@ -48,7 +48,7 @@ namespace Objectivity.Test.Automation.Common.Logger
         /// <summary>
         /// Initializes a new instance of the <see cref="TestLogger"/> class.
         /// </summary>
-        /// <param name="testFolder"></param>
+        /// <param name="testFolder">Name of the folder</param>
         /// <param name="testName">Name of the test.</param>
         public TestLogger(string testFolder, string testName)
         {
@@ -61,6 +61,7 @@ namespace Objectivity.Test.Automation.Common.Logger
             {
                 this.TestFolder = testFolder;
             }
+
             this.SetLogFileLocalization(this.TestFolder, testName);
         }
 

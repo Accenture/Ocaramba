@@ -69,7 +69,7 @@ namespace Objectivity.Test.Automation.Common
         public string TestTitle { get; set; }
 
         /// <summary>
-        /// 
+        /// Gets Folder name
         /// </summary>
         public string TestFolder { get; set; }
 
