@@ -76,7 +76,7 @@ namespace Objectivity.Test.Automation.Common.Helpers.NUnit
                         {
                             if (!string.IsNullOrEmpty(keyValue))
                             {
-                                testCaseName += "_" + keyValue;
+                                testCaseName += "_" + keyValue.Replace(" ", "_").Replace(".", "_");
                             }
                         }
                         else
