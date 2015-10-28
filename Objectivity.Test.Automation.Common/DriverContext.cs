@@ -126,6 +126,20 @@ namespace Objectivity.Test.Automation.Common
                 var profile = new FirefoxProfile();
                 profile.SetPreference("toolkit.startup.max_resumed_crashes", "999999");
                 profile.SetPreference("network.automatic-ntlm-auth.trusted-uris", BaseConfiguration.Host ?? string.Empty);
+
+                // preverences for downloading files
+                profile.SetPreference("browser.download.dir", BaseConfiguration.DownloadFolder);
+                profile.SetPreference("browser.download.folderList", 2);
+                profile.SetPreference("browser.download.managershowWhenStarting", false);
+                profile.SetPreference("browser.helperApps.neverAsk.saveToDisk", "application/vnd.ms-excel, application/x-msexcel, application/pdf, text/csv");
+                
+                // disable Firefox's built-in PDF viewer
+                profile.SetPreference("pdfjs.disabled", true);
+
+                // disable Adobe Acrobat PDF preview plugin
+                profile.SetPreference("plugin.scan.Acrobat", "99.0");
+                profile.SetPreference("plugin.scan.plid.all", false);
+
                 return profile;
             }
         }

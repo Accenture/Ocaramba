@@ -201,6 +201,20 @@ namespace Objectivity.Test.Automation.Common
         }
 
         /// <summary>
+        /// Gets the download folder.
+        /// </summary>
+        /// <value>
+        /// The download folder.
+        /// </value>
+        public static string DownloadFolder
+        {
+            get
+            {
+                return string.IsNullOrEmpty(ConfigurationManager.AppSettings["DownloadFolder"]) ? string.Empty : ConfigurationManager.AppSettings["DownloadFolder"];
+            }
+        }
+
+        /// <summary>
         /// Gets a value indicating whether [get page source enabled].
         /// </summary>
         /// <value>
