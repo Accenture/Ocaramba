@@ -128,7 +128,7 @@ namespace Objectivity.Test.Automation.Common
                 profile.SetPreference("network.automatic-ntlm-auth.trusted-uris", BaseConfiguration.Host ?? string.Empty);
 
                 // preverences for downloading files
-                profile.SetPreference("browser.download.dir", "." + Path.DirectorySeparatorChar + BaseConfiguration.DownloadFolder);
+                profile.SetPreference("browser.download.dir", Environment.CurrentDirectory + BaseConfiguration.DownloadFolder);
                 profile.SetPreference("browser.download.folderList", 2);
                 profile.SetPreference("browser.download.managershowWhenStarting", false);
                 profile.SetPreference("browser.helperApps.neverAsk.saveToDisk", "application/vnd.ms-excel, application/x-msexcel, application/pdf, text/csv, text/html, application/octet-stream");
