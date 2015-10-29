@@ -131,7 +131,7 @@ namespace Objectivity.Test.Automation.Common
                 profile.SetPreference("browser.download.dir", BaseConfiguration.DownloadFolder);
                 profile.SetPreference("browser.download.folderList", 2);
                 profile.SetPreference("browser.download.managershowWhenStarting", false);
-                profile.SetPreference("browser.helperApps.neverAsk.saveToDisk", "application/vnd.ms-excel, application/x-msexcel, application/pdf, text/csv, application/octet-stream");
+                profile.SetPreference("browser.helperApps.neverAsk.saveToDisk", "application/vnd.ms-excel, application/x-msexcel, application/pdf, text/csv, text/html, application/octet-stream");
                 
                 // disable Firefox's built-in PDF viewer
                 profile.SetPreference("pdfjs.disabled", true);
