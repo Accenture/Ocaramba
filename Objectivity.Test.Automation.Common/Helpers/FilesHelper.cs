@@ -1,14 +1,28 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="FilesHelper.cs" company="Objectivity Ltd">
-//   Copyright (c) Objectivity Ltd. All rights reserved.
-// </copyright>
-// <author>jraczek</author>
-// <date>23-10-2015</date>
-// <summary>
-//   Methods to compare Excel files 
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
-namespace Objectivity.Test.Automation.NunitTests.Support
+﻿/*
+The MIT License (MIT)
+
+Copyright (c) 2015 Objectivity Bespoke Software Specialists
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+
+namespace Objectivity.Test.Automation.Common.Helpers
 {
     using System;
     using System.Collections.Generic;
@@ -25,18 +39,46 @@ namespace Objectivity.Test.Automation.NunitTests.Support
     using OpenQA.Selenium;
     using OpenQA.Selenium.Support.UI;
 
+    /// <summary>
+    /// Class for handling downloading files
+    /// </summary>
     public static class FilesHelper
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-        static readonly char Separator = Path.DirectorySeparatorChar;
+        /// <summary>
+        /// Directory separator
+        /// </summary>
+        public static readonly char Separator = Path.DirectorySeparatorChar;
 
+        /// <summary>
+        /// File type
+        /// </summary>
         public enum FileType
         {
+            /// <summary>
+            /// File type not implemented
+            /// </summary>
             None = 0,
+
+            /// <summary>
+            /// Pdf files
+            /// </summary>
             Pdf = 1,
+
+            /// <summary>
+            /// Excel files - xls, xlsx
+            /// </summary>
             Excel = 2,
+
+            /// <summary>
+            /// Comma-separated values files
+            /// </summary>
             Csv = 3,
+
+            /// <summary>
+            /// Text files
+            /// </summary>
             Txt = 4
         }
 
@@ -104,12 +146,12 @@ namespace Objectivity.Test.Automation.NunitTests.Support
              return GetFilesOfGivenType(subFolder, type, environment);
          }
 
-        /// <summary>
-        /// Counts the files of given type.
-        /// </summary>
-        /// <param name="subFolder">The sub folder.</param>
-        /// <param name="type"></param>
-        /// <returns></returns>
+         /// <summary>
+         /// Counts the files of given type.
+         /// </summary>
+         /// <param name="subFolder">The sub folder.</param>
+         /// <param name="type">The type.</param>
+         /// <returns></returns>
         public static int CountFiles(string subFolder, FileType type)
         {
             Logger.Trace(CultureInfo.CurrentCulture, "Count Excel Files '{0}'", subFolder);
@@ -128,7 +170,7 @@ namespace Objectivity.Test.Automation.NunitTests.Support
             Logger.Trace("Get Last File");
             CreateFolder(subFolder);
             var lastFile = new DirectoryInfo(subFolder).GetFiles()
-                .Where(f => f.Extension == ReturnFileExtension(type).Replace("?", ""))
+                .Where(f => f.Extension == ReturnFileExtension(type).Replace("?", string.Empty))
                 .OrderByDescending(f => f.CreationTime)
                 .First();
             Logger.Trace("Last File: {0}", lastFile);
@@ -136,11 +178,11 @@ namespace Objectivity.Test.Automation.NunitTests.Support
         }
 
         /// <summary>
-        /// Waits for file for given timeout till number of files increas in sub folder.
+        /// Waits for file for given timeout till number of files increase in sub folder.
         /// </summary>
         /// <param name="type">The type of file.</param>
         /// <param name="driver">The driver.</param>
-        /// <param name="waitTime">wait timeout</param>
+        /// <param name="waitTime">Wait timeout</param>
         /// <param name="filesNumber">The initial files number.</param>
         /// <param name="subFolder">The subfolder.</param>
         public static void WaitForFile(FileType type, IWebDriver driver, double waitTime, int filesNumber, string subFolder)
@@ -157,7 +199,7 @@ namespace Objectivity.Test.Automation.NunitTests.Support
         }
 
         /// <summary>
-        /// Waits for file till number of files increas in sub folder..
+        /// Waits for file till number of files increase in sub folder..
         /// </summary>
         /// <param name="type">The type.</param>
         /// <param name="driver">The driver.</param>
@@ -173,7 +215,7 @@ namespace Objectivity.Test.Automation.NunitTests.Support
         /// </summary>
         /// <param name="type">The type.</param>
         /// <param name="driver">The driver.</param>
-        /// <param name="waitTime">wait timeout</param>
+        /// <param name="waitTime">Wait timeout</param>
         /// <param name="filesName">Name of the files.</param>
         /// <param name="subFolder">The subfolder.</param>
         public static void WaitForFile(FileType type, IWebDriver driver, double waitTime, string filesName, string subFolder)
@@ -187,7 +229,6 @@ namespace Objectivity.Test.Automation.NunitTests.Support
             wait.Message = "Waiting for file";
             wait.Until(x => File.Exists(subFolder + Separator + filesName));
         }
-
 
         /// <summary>
         /// Waits for file until file not exists.
@@ -206,14 +247,12 @@ namespace Objectivity.Test.Automation.NunitTests.Support
         /// </summary>
         /// <param name="oldName">The old name.</param>
         /// <param name="newName">The new name.</param>
-        /// <param name="subFolder">the subFolder.</param>
+        /// <param name="subFolder">The subFolder.</param>
         /// <param name="type">The type of file.</param>
         public static void RenameFile(string oldName, string newName, string subFolder, FileType type)
         {
-
             CreateFolder(subFolder);
-            newName = newName + ReturnFileExtension(type).Replace("?", "");
-            
+            newName = newName + ReturnFileExtension(type).Replace("?", string.Empty);         
 
             Logger.Info(CultureInfo.CurrentCulture, "new name file name {0}", newName);
             if (File.Exists(newName))

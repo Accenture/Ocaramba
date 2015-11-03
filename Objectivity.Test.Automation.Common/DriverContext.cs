@@ -127,7 +127,7 @@ namespace Objectivity.Test.Automation.Common
                 profile.SetPreference("toolkit.startup.max_resumed_crashes", "999999");
                 profile.SetPreference("network.automatic-ntlm-auth.trusted-uris", BaseConfiguration.Host ?? string.Empty);
 
-                // preverences for downloading files
+                // preference for downloading files
                 profile.SetPreference("browser.download.dir", Path.Combine(Environment.CurrentDirectory + Path.DirectorySeparatorChar + BaseConfiguration.DownloadFolder));
                 profile.SetPreference("browser.download.folderList", 2);
                 profile.SetPreference("browser.download.managershowWhenStarting", false);
@@ -143,6 +143,7 @@ namespace Objectivity.Test.Automation.Common
                 return profile;
             }
         }
+
         private ChromeOptions chromeProfile
         {
             get
