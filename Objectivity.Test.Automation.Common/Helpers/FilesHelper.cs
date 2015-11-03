@@ -1,0 +1,236 @@
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="FilesHelper.cs" company="Objectivity Ltd">
+//   Copyright (c) Objectivity Ltd. All rights reserved.
+// </copyright>
+// <author>jraczek</author>
+// <date>23-10-2015</date>
+// <summary>
+//   Methods to compare Excel files 
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+namespace Objectivity.Test.Automation.NunitTests.Support
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Globalization;
+    using System.IO;
+    using System.Linq;
+    using System.Threading;
+
+    using NLog;
+
+    using Objectivity.Test.Automation.Common;
+
+    using OpenQA.Selenium;
+    using OpenQA.Selenium.Support.UI;
+
+    public static class FilesHelper
+    {
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+        static readonly char Separator = Path.DirectorySeparatorChar;
+
+        public enum FileType
+        {
+            None = 0,
+            Pdf = 1,
+            Excel = 2,
+            Csv = 3,
+            Txt = 4
+        }
+
+        /// <summary>
+        /// Returns the file extension.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <returns></returns>
+        private static string ReturnFileExtension(FileType type)
+        {
+            switch ((int)type)
+            {
+                case 1:
+                    return ".pdf";
+                case 2:
+                    return ".xls?";
+                case 3:
+                    return ".csv";
+                case 4:
+                    return ".txt";
+                default:
+                    return "none";
+            }
+        }
+
+        /// <summary>
+        /// Creates the folder if not exists.
+        /// </summary>
+        /// <param name="subDirectory">The sub directory.</param>
+        public static void CreateFolder(string subDirectory)
+        {
+            if (!Directory.Exists(subDirectory))
+            {
+                Directory.CreateDirectory(subDirectory);
+            }
+        }
+
+        /// <summary>
+        /// Gets the files of given type, use postfixFilesName in search pattern.
+        /// </summary>
+        /// <param name="subFolder">The sub folder.</param>
+        /// <param name="type">The type of files.</param>
+        /// <param name="postfixFilesName">Name of the postfix files for search pattern.</param>
+        /// <returns></returns>
+        public static ICollection<FileInfo> GetFilesOfGivenType(string subFolder, FileType type, string postfixFilesName)
+        {
+            Logger.Info("Get Files '{0}', postfixFilesName '{1}'", subFolder, postfixFilesName);
+            CreateFolder(subFolder);
+            ICollection<FileInfo> files =
+                new DirectoryInfo(subFolder)
+                    .GetFiles("*" + postfixFilesName + ReturnFileExtension(type)).OrderBy(f => f.Name).ToList();
+
+            return files;
+        }
+
+        /// <summary>
+        /// Gets the files of given type.
+        /// </summary>
+        /// <param name="subFolder">The sub folder.</param>
+        /// <param name="type">The type.</param>
+        /// <returns></returns>
+         public static ICollection<FileInfo> GetFilesOfGivenType(string subFolder, FileType type)
+         {
+             string environment = string.Empty;
+             return GetFilesOfGivenType(subFolder, type, environment);
+         }
+
+        /// <summary>
+        /// Counts the files of given type.
+        /// </summary>
+        /// <param name="subFolder">The sub folder.</param>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public static int CountFiles(string subFolder, FileType type)
+        {
+            Logger.Trace(CultureInfo.CurrentCulture, "Count Excel Files '{0}'", subFolder);
+
+            return GetFilesOfGivenType(subFolder, type).Count;
+        }
+
+        /// <summary>
+        /// Gets the last file of given type.
+        /// </summary>
+        /// <param name="subFolder">The sub folder.</param>
+        /// <param name="type">The type of file.</param>
+        /// <returns></returns>
+        public static FileInfo GetLastFile(string subFolder, FileType type)
+        {
+            Logger.Trace("Get Last File");
+            CreateFolder(subFolder);
+            var lastFile = new DirectoryInfo(subFolder).GetFiles()
+                .Where(f => f.Extension == ReturnFileExtension(type).Replace("?", ""))
+                .OrderByDescending(f => f.CreationTime)
+                .First();
+            Logger.Trace("Last File: {0}", lastFile);
+            return lastFile;
+        }
+
+        /// <summary>
+        /// Waits for file for given timeout till number of files increas in sub folder.
+        /// </summary>
+        /// <param name="type">The type of file.</param>
+        /// <param name="driver">The driver.</param>
+        /// <param name="waitTime">wait timeout</param>
+        /// <param name="filesNumber">The initial files number.</param>
+        /// <param name="subFolder">The subfolder.</param>
+        public static void WaitForFile(FileType type, IWebDriver driver, double waitTime, int filesNumber, string subFolder)
+        {
+            Logger.Info("Wait for file: {0}", type);
+            CreateFolder(subFolder);
+            IWait<IWebDriver> wait = new WebDriverWait(
+                    driver,
+                    TimeSpan.FromSeconds(waitTime));
+
+            wait.Message = "Waiting for file";
+            wait.Until(x => CountFiles(subFolder, type) > filesNumber);
+            wait.Until(x => GetLastFile(subFolder, type).Length > 0);
+        }
+
+        /// <summary>
+        /// Waits for file till number of files increas in sub folder..
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <param name="driver">The driver.</param>
+        /// <param name="filesNumber">The files number.</param>
+        /// <param name="subfolder">The subfolder.</param>
+        public static void WaitForFile(FileType type, IWebDriver driver, int filesNumber, string subfolder)
+        {
+            WaitForFile(type, driver, BaseConfiguration.LongTimeout, filesNumber, subfolder);
+        }
+
+        /// <summary>
+        /// Waits for file  for given timeout until file not exists.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <param name="driver">The driver.</param>
+        /// <param name="waitTime">wait timeout</param>
+        /// <param name="filesName">Name of the files.</param>
+        /// <param name="subFolder">The subfolder.</param>
+        public static void WaitForFile(FileType type, IWebDriver driver, double waitTime, string filesName, string subFolder)
+        {
+            Logger.Info("Wait for file: {0}", type);
+            CreateFolder(subFolder);
+            IWait<IWebDriver> wait = new WebDriverWait(
+                    driver,
+                    TimeSpan.FromSeconds(waitTime));
+
+            wait.Message = "Waiting for file";
+            wait.Until(x => File.Exists(subFolder + Separator + filesName));
+        }
+
+
+        /// <summary>
+        /// Waits for file until file not exists.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <param name="driver">The driver.</param>
+        /// <param name="filesName">Name of the files.</param>
+        /// <param name="subfolder">The subfolder.</param>
+        public static void WaitForFile(FileType type, IWebDriver driver, string filesName, string subfolder)
+        {
+            WaitForFile(type, driver, BaseConfiguration.LongTimeout, filesName, subfolder);
+        }
+
+        /// <summary>
+        /// Rename the file.
+        /// </summary>
+        /// <param name="oldName">The old name.</param>
+        /// <param name="newName">The new name.</param>
+        /// <param name="subFolder">the subFolder.</param>
+        /// <param name="type">The type of file.</param>
+        public static void RenameFile(string oldName, string newName, string subFolder, FileType type)
+        {
+
+            CreateFolder(subFolder);
+            newName = newName + ReturnFileExtension(type).Replace("?", "");
+            
+
+            Logger.Info(CultureInfo.CurrentCulture, "new name file name {0}", newName);
+            if (File.Exists(newName))
+            {
+                File.Delete(newName);
+            }
+
+            // Use ProcessStartInfo class   
+            string command = "/c ren " + '\u0022' + oldName + '\u0022' + " " + '\u0022' + newName +
+                             '\u0022';
+            ProcessStartInfo cmdsi = new ProcessStartInfo("cmd.exe")
+                                         {
+                                             WorkingDirectory = subFolder,
+                                             Arguments = command
+                                         };
+            Thread.Sleep(1000);
+            Process.Start(cmdsi);
+        }
+    }
+}

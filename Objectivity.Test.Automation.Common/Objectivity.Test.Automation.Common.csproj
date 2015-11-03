@@ -61,6 +61,7 @@
     <Compile Include="Checkbox.cs" />
     <Compile Include="Extensions\LocatorExtensions.cs" />
     <Compile Include="Extensions\SearchContextExtensions.cs" />
+    <Compile Include="Helpers\FilesHelper.cs" />
     <Compile Include="Helpers\TakeScreenShot.cs" />
     <Compile Include="Helpers\NUnit\DataDrivenHelper.cs" />
     <Compile Include="Helpers\DateHelper.cs" />

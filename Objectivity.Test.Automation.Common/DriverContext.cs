@@ -143,6 +143,18 @@ namespace Objectivity.Test.Automation.Common
                 return profile;
             }
         }
+        private ChromeOptions chromeProfile
+        {
+            get
+            {
+                ChromeOptions options = new ChromeOptions();
+                options.AddUserProfilePreference("profile.default_content_settings.popups", 0);
+                options.AddUserProfilePreference("download.default_directory", Path.Combine(Environment.CurrentDirectory + Path.DirectorySeparatorChar + BaseConfiguration.DownloadFolder));
+                options.AddUserProfilePreference("download.prompt_for_download", false);
+
+                return options;
+            }
+        }
 
         /// <summary>
         /// Starts the specified Driver.
@@ -172,7 +184,7 @@ namespace Objectivity.Test.Automation.Common
                     chosenDriver = new InternetExplorerDriver(options);
                     break;
                 case "Chrome":
-                    chosenDriver = new ChromeDriver();
+                    chosenDriver = new ChromeDriver(this.chromeProfile);
                     break;
                 default:
                     throw new NotSupportedException(
