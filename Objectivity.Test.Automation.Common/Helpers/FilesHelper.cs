@@ -62,12 +62,12 @@ namespace Objectivity.Test.Automation.Common.Helpers
             None = 0,
 
             /// <summary>
-            /// Pdf files
+            /// Portable document format files
             /// </summary>
             Pdf = 1,
 
             /// <summary>
-            /// Excel files - xls, xlsx
+            /// Excel files
             /// </summary>
             Excel = 2,
 
