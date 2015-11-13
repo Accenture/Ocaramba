@@ -125,7 +125,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// <returns></returns>
         public static ICollection<FileInfo> GetFilesOfGivenType(string subFolder, FileType type, string postfixFilesName)
         {
-            Logger.Info("Get Files '{0}', postfixFilesName '{1}'", subFolder, postfixFilesName);
+            Logger.Info("Get Files '{0}' from '{1}', postfixFilesName '{2}'", type, subFolder, postfixFilesName);
             CreateFolder(subFolder);
             ICollection<FileInfo> files =
                 new DirectoryInfo(subFolder)

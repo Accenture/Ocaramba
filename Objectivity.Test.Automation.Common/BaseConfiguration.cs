@@ -215,6 +215,27 @@ namespace Objectivity.Test.Automation.Common
         }
 
         /// <summary>
+        /// Use CurrentDirectory and DownloadFolder as download path.
+        /// </summary>
+        public static bool UseCurrentDirectory
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["UseCurrentDirectory"]))
+                {
+                    return false;
+                }
+
+                if (ConfigurationManager.AppSettings["UseCurrentDirectory"].ToLower(CultureInfo.CurrentCulture).Equals("true"))
+                {
+                    return true;
+                }
+
+                return false;
+            }
+        }
+
+        /// <summary>
         /// Gets a value indicating whether [get page source enabled].
         /// </summary>
         /// <value>
