@@ -33,6 +33,8 @@ namespace Objectivity.Test.Automation.NunitTests.PageObjects
     using Objectivity.Test.Automation.Common.Extensions;
     using Objectivity.Test.Automation.Common.Types;
 
+    using OpenQA.Selenium;
+
     public class HomePage : ProjectPageBase
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
@@ -78,8 +80,8 @@ namespace Objectivity.Test.Automation.NunitTests.PageObjects
         {
             this.Driver.GetElement(this.searchButton).Click();
             this.Driver.GetElement(this.searchTextbox).SendKeys(value);
-            this.Driver.GetElement(this.searchButton).Click();
-            
+            this.Driver.Actions().SendKeys(Keys.Return).Perform();
+
             return new SearchResultsPage(DriverContext);
         }
 
@@ -91,7 +93,7 @@ namespace Objectivity.Test.Automation.NunitTests.PageObjects
             var searchTextboxElement = this.Driver.GetElement(this.searchTextbox);
             this.Driver.Actions().SendKeys(searchTextboxElement, value).Build().Perform();
 
-            this.Driver.Actions().Click(searchButtonElement).Build().Perform();
+            this.Driver.Actions().SendKeys(Keys.Return).Perform();
 
             return new SearchResultsPage(this.DriverContext);
         }

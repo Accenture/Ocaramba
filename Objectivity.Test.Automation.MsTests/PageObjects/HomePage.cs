@@ -33,6 +33,7 @@ namespace Objectivity.Test.Automation.MsTests.PageObjects
     using Objectivity.Test.Automation.Common.Extensions;
     using Objectivity.Test.Automation.Common.Types;
 
+    using OpenQA.Selenium;
     using OpenQA.Selenium.Interactions;
 
     public class HomePage : ProjectPageBase
@@ -79,7 +80,7 @@ namespace Objectivity.Test.Automation.MsTests.PageObjects
         {
             this.Driver.GetElement(this.searchButton).Click();
             this.Driver.GetElement(this.searchTextbox).SendKeys(value);
-            this.Driver.GetElement(this.searchButton).Click();
+            this.Driver.Actions().SendKeys(Keys.Return).Perform();
 
             return new SearchResultsPage(this.DriverContext);
         }
