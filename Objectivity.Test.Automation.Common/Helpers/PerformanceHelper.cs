@@ -128,7 +128,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
                                 StepName = key.Scenario,
                                 Browser = key.BName,
                                 AverageDuration = Math.Round(savedTimeses.Average(dur => dur.Duration)),
-                                Percentile90 = savedTimeses[(int)(Math.Ceiling(savedTimeses.Count() * 0.9) - 1)].Duration
+                                Percentile90 = savedTimeses[(int)(Math.Ceiling(savedTimeses.Count * 0.9) - 1)].Duration
                             };
                         }).ToList().OrderBy(listElement => listElement.StepName);
             return groupedList;

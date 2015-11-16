@@ -128,7 +128,7 @@ namespace Objectivity.Test.Automation.Common
                 profile.SetPreference("network.automatic-ntlm-auth.trusted-uris", BaseConfiguration.Host ?? string.Empty);
 
                 // preference for downloading files
-                profile.SetPreference("browser.download.dir", this.GetDownloadFolder());
+                profile.SetPreference("browser.download.dir", FilesHelper.GetDownloadFolder);
                 profile.SetPreference("browser.download.folderList", 2);
                 profile.SetPreference("browser.download.managershowWhenStarting", false);
                 profile.SetPreference("browser.helperApps.neverAsk.saveToDisk", "application/vnd.ms-excel, application/x-msexcel, application/pdf, text/csv, text/html, application/octet-stream");
@@ -150,7 +150,7 @@ namespace Objectivity.Test.Automation.Common
             {
                 ChromeOptions options = new ChromeOptions();
                 options.AddUserProfilePreference("profile.default_content_settings.popups", 0);
-                options.AddUserProfilePreference("download.default_directory", this.GetDownloadFolder());
+                options.AddUserProfilePreference("download.default_directory", FilesHelper.GetDownloadFolder);
                 options.AddUserProfilePreference("download.prompt_for_download", false);
 
                 return options;
@@ -286,20 +286,6 @@ namespace Objectivity.Test.Automation.Common
                     this.SaveScreenshot(new ErrorDetail(this.TakeScreenshot(), DateTime.Now, null), BaseConfiguration.ScreenShotFolder, this.TestTitle);
                 }
             }
-        }
-
-        /// <summary>
-        /// Gets the download folder.
-        /// </summary>
-        /// <returns>Download folder path</returns>
-        private string GetDownloadFolder()
-        {
-            if (BaseConfiguration.UseCurrentDirectory)
-            {
-                return Path.Combine(Environment.CurrentDirectory + Path.DirectorySeparatorChar + BaseConfiguration.DownloadFolder);
-            }
-
-            return BaseConfiguration.DownloadFolder;
-        }
+        }  
     }
 }

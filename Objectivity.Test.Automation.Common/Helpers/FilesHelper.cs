@@ -83,10 +83,30 @@ namespace Objectivity.Test.Automation.Common.Helpers
         }
 
         /// <summary>
+        /// Gets the download folder.
+        /// </summary>
+        /// <value>Download folder path</value>
+        public static string GetDownloadFolder
+        {
+            get
+            {
+                if (BaseConfiguration.UseCurrentDirectory)
+                {
+                    return
+                        Path.Combine(
+                            Environment.CurrentDirectory + Path.DirectorySeparatorChar
+                            + BaseConfiguration.DownloadFolder);
+                }
+
+                return BaseConfiguration.DownloadFolder;
+            }
+        }
+
+        /// <summary>
         /// Returns the file extension.
         /// </summary>
         /// <param name="type">The type.</param>
-        /// <returns></returns>
+        /// <returns>Files extension</returns>
         private static string ReturnFileExtension(FileType type)
         {
             switch ((int)type)
@@ -121,8 +141,8 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// </summary>
         /// <param name="subFolder">The sub folder.</param>
         /// <param name="type">The type of files.</param>
-        /// <param name="postfixFilesName">Name of the postfix files for search pattern.</param>
-        /// <returns></returns>
+        /// <param name="postfixFilesName">Postfix name of files for search pattern.</param>
+        /// <returns>Collection of files</returns>
         public static ICollection<FileInfo> GetFilesOfGivenType(string subFolder, FileType type, string postfixFilesName)
         {
             Logger.Info("Get Files '{0}' from '{1}', postfixFilesName '{2}'", type, subFolder, postfixFilesName);
@@ -139,7 +159,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// </summary>
         /// <param name="subFolder">The sub folder.</param>
         /// <param name="type">The type.</param>
-        /// <returns></returns>
+        /// <returns>Collection of files</returns>
          public static ICollection<FileInfo> GetFilesOfGivenType(string subFolder, FileType type)
          {
              string environment = string.Empty;
@@ -151,7 +171,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
          /// </summary>
          /// <param name="subFolder">The sub folder.</param>
          /// <param name="type">The type.</param>
-         /// <returns></returns>
+         /// <returns>Number of files in subfolder</returns>
         public static int CountFiles(string subFolder, FileType type)
         {
             Logger.Trace(CultureInfo.CurrentCulture, "Count Excel Files '{0}'", subFolder);
@@ -164,7 +184,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// </summary>
         /// <param name="subFolder">The sub folder.</param>
         /// <param name="type">The type of file.</param>
-        /// <returns></returns>
+        /// <returns>Last file of given type</returns>
         public static FileInfo GetLastFile(string subFolder, FileType type)
         {
             Logger.Trace("Get Last File");
@@ -199,7 +219,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
         }
 
         /// <summary>
-        /// Waits for file till number of files increase in sub folder..
+        /// Waits for file for LongTimeout till number of files increase in sub folder.
         /// </summary>
         /// <param name="type">The type.</param>
         /// <param name="driver">The driver.</param>
@@ -211,7 +231,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
         }
 
         /// <summary>
-        /// Waits for file  for given timeout until file not exists.
+        /// Waits for file with given name with given timeout.
         /// </summary>
         /// <param name="type">The type.</param>
         /// <param name="driver">The driver.</param>
@@ -231,7 +251,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
         }
 
         /// <summary>
-        /// Waits for file until file not exists.
+        /// Waits for file with given name with LongTimeout
         /// </summary>
         /// <param name="type">The type.</param>
         /// <param name="driver">The driver.</param>

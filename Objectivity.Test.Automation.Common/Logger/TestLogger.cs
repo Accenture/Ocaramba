@@ -124,7 +124,7 @@ namespace Objectivity.Test.Automation.Common.Logger
         {
             var endTestTime = DateTime.Now;
             var timeInSec = (endTestTime - this.startTestTime).TotalMilliseconds / 1000d;
-            Info("END: {0} ends at {1} after {2} sec.", this.TestName, endTestTime, timeInSec.ToString("##,###", CultureInfo.CurrentCulture));
+            this.Info("END: {0} ends at {1} after {2} sec.", this.TestName, endTestTime, timeInSec.ToString("##,###", CultureInfo.CurrentCulture));
         }
 
         /// TODO: does it required?

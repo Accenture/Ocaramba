@@ -58,7 +58,7 @@ namespace Objectivity.Test.Automation.MsTests.Tests
         [TestMethod]
         public void OpenHomePage()
         {
-            LogTest.Info("I go to HomePage");
+            this.LogTest.Info("I go to HomePage");
             var loginPage = new HomePage(this.DriverContext);
             loginPage.OpenHomePageAndMeasureTime();
         }
@@ -70,12 +70,12 @@ namespace Objectivity.Test.Automation.MsTests.Tests
             DataAccessMethod.Sequential), TestMethod]
         public void FindChildElementsTest()
         {
-            LogTest.Info("I go to HomePage");
+            this.LogTest.Info("I go to HomePage");
             var loginPage = new HomePage(this.DriverContext)
                                  .OpenHomePage();
             var numOfSubLinks = loginPage.CountAllTechnologiesSubLinks();
-            LogTest.Info("Number of links: {0}", numOfSubLinks);
-            Assert.AreEqual(Convert.ToInt16((string)TestContext.DataRow["number"], CultureInfo.CurrentCulture), numOfSubLinks);
+            this.LogTest.Info("Number of links: {0}", numOfSubLinks);
+            Assert.AreEqual(Convert.ToInt16((string)this.TestContext.DataRow["number"], CultureInfo.CurrentCulture), numOfSubLinks);
         }
 
         [DeploymentItem("Objectivity.Test.Automation.MsTests\\DDT.xml"),

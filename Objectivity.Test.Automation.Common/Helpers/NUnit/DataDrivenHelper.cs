@@ -35,8 +35,6 @@ namespace Objectivity.Test.Automation.Common.Helpers.NUnit
 
     using Objectivity.Test.Automation.Common;
 
-    using OpenQA.Selenium;
-
     /// <summary>
     /// DataDriven methods for NUnit test framework
     /// </summary>

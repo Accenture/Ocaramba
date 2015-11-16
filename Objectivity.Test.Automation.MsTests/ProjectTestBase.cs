@@ -48,7 +48,7 @@ namespace Objectivity.Test.Automation.MsTests
         [TestInitialize]
         public void BeforeTest()
         {
-            this.DriverContext.TestTitle = TestContext.TestName;
+            this.DriverContext.TestTitle = this.TestContext.TestName;
             this.DriverContext.LogTest.LogTestStarting();
             this.DriverContext.Start();
         }
@@ -59,7 +59,7 @@ namespace Objectivity.Test.Automation.MsTests
         [TestCleanup]
         public void AfterTest()
         {
-            this.DriverContext.IsTestFailed = TestContext.CurrentTestOutcome == UnitTestOutcome.Failed;
+            this.DriverContext.IsTestFailed = this.TestContext.CurrentTestOutcome == UnitTestOutcome.Failed;
             this.SaveTestDetailsIfTestFailed();
             this.DriverContext.Stop();
             this.FailTestIfVerifyFailed();

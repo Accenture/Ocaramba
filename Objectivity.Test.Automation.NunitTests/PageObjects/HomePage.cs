@@ -82,7 +82,7 @@ namespace Objectivity.Test.Automation.NunitTests.PageObjects
             this.Driver.GetElement(this.searchTextbox).SendKeys(value);
             this.Driver.Actions().SendKeys(Keys.Return).Perform();
 
-            return new SearchResultsPage(DriverContext);
+            return new SearchResultsPage(this.DriverContext);
         }
 
         public SearchResultsPage SearchUsingActions(string value)
