@@ -233,14 +233,13 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// <summary>
         /// Waits for file with given name with given timeout.
         /// </summary>
-        /// <param name="type">The type.</param>
         /// <param name="driver">The driver.</param>
         /// <param name="waitTime">Wait timeout</param>
         /// <param name="filesName">Name of the files.</param>
         /// <param name="subFolder">The subfolder.</param>
-        public static void WaitForFile(FileType type, IWebDriver driver, double waitTime, string filesName, string subFolder)
+        public static void WaitForFile(IWebDriver driver, double waitTime, string filesName, string subFolder)
         {
-            Logger.Info("Wait for file: {0}", type);
+            Logger.Info(CultureInfo.CurrentCulture, "Wait for file: {0}", filesName);
             CreateFolder(subFolder);
             IWait<IWebDriver> wait = new WebDriverWait(
                     driver,
@@ -253,13 +252,12 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// <summary>
         /// Waits for file with given name with LongTimeout
         /// </summary>
-        /// <param name="type">The type.</param>
         /// <param name="driver">The driver.</param>
         /// <param name="filesName">Name of the files.</param>
         /// <param name="subfolder">The subfolder.</param>
-        public static void WaitForFile(FileType type, IWebDriver driver, string filesName, string subfolder)
+        public static void WaitForFile(IWebDriver driver, string filesName, string subfolder)
         {
-            WaitForFile(type, driver, BaseConfiguration.LongTimeout, filesName, subfolder);
+            WaitForFile(driver, BaseConfiguration.LongTimeout, filesName, subfolder);
         }
 
         /// <summary>

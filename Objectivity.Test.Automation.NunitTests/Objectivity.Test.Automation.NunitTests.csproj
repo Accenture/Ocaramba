@@ -74,6 +74,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataDriven\TestData.cs" />
+    <Compile Include="PageObjects\InternetDownloadPage.cs" />
+    <Compile Include="PageObjects\InternetPage.cs" />
     <Compile Include="PageObjects\TechnologiesBusinessPage.cs" />
     <Compile Include="PageObjects\SearchResultsPage.cs" />
     <Compile Include="PageObjects\HomePage.cs" />
@@ -86,6 +88,7 @@
     <Compile Include="Tests\PerformanceTests.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Tests\InternetSmokeTests.cs" />
     <Compile Include="Tests\SmokeTests.cs" />
   </ItemGroup>
   <ItemGroup>
