@@ -19,6 +19,7 @@ It provides following features:
 - DataDriven for NUnit and MSTest with examples 
 - Possibility to take full desktop screen shot
 - Logging (including selenium events)
+- Files downloading (Firefox, Chrome)
 - Ready for parallel tests execution
 
 Projects examples of using Test Framework :
