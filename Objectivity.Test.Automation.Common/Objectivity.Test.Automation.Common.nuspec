@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Objectivity.Test.Automation.Common</id>
+    <version>$version$</version>
+    <title>Objectivity.Test.Automation.Common</title>
+    <authors>Objectivity Bespoke Software Specialists</authors>
+    <owners>Objectivity Bespoke Software Specialists</owners>
+    <licenseUrl>https://github.com/ObjectivityBSS/Test.Automation/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/ObjectivityBSS/Test.Automation</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Framework to automate tests using Selenium WebDriver</description>
+    <!--<releaseNotes>Summary of changes made in this release of the package.</releaseNotes>-->
+    <copyright>Copyright 2015</copyright>
+    <tags>selenium webdriver testautomation tests</tags>
+  </metadata>
+  <files>
+	<file src="App.config" target="content" />
+  </files>
+</package>
