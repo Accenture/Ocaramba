@@ -43,7 +43,7 @@ namespace Objectivity.Test.Automation.NunitTests.PageObjects
         /// Locators for elements
         /// </summary>
         private readonly ElementLocator downloadPageHeader = new ElementLocator(Locator.XPath, "//h3[.='File Downloader']"),
-                                        fileLink = new ElementLocator(Locator.CssSelector, ".example>a:nth-of-type({0})");
+                                        fileLink = new ElementLocator(Locator.CssSelector, "a[href='download/{0}']");
 
         public InternetDownloadPage(DriverContext driverContext)
             : base(driverContext)
@@ -54,7 +54,7 @@ namespace Objectivity.Test.Automation.NunitTests.PageObjects
 
         public InternetDownloadPage SaveFile(string fileName)
         {
-            this.Driver.GetElement(this.fileLink.Evaluate(1)).Click();
+            this.Driver.GetElement(this.fileLink.Evaluate("some-file.txt")).Click();
             FilesHelper.WaitForFile(this.Driver, fileName, BaseConfiguration.DownloadFolder);
             return this;
         }
@@ -62,7 +62,7 @@ namespace Objectivity.Test.Automation.NunitTests.PageObjects
         public InternetDownloadPage SaveFile()
         {
             var filesNumber = FilesHelper.CountFiles(BaseConfiguration.DownloadFolder, FilesHelper.FileType.Txt);
-            this.Driver.GetElement(this.fileLink.Evaluate(1)).Click();
+            this.Driver.GetElement(this.fileLink.Evaluate("some-file.txt")).Click();
             FilesHelper.WaitForFile(FilesHelper.FileType.Txt, this.Driver,filesNumber, BaseConfiguration.DownloadFolder);
             FileInfo file = FilesHelper.GetLastFile(BaseConfiguration.DownloadFolder, FilesHelper.FileType.Txt);
             FilesHelper.RenameFile(file.Name, "new_name_of_file", BaseConfiguration.DownloadFolder, FilesHelper.FileType.Txt);
