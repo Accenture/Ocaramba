@@ -49,7 +49,7 @@ namespace Objectivity.Test.Automation.NunitTests.PageObjects
             : base(driverContext)
         {
             Logger.Info("Waiting for File Download page to open");
-            this.Driver.WaitForElement(this.downloadPageHeader, BaseConfiguration.ShortTimeout);
+            this.Driver.IsElementPresent(this.downloadPageHeader, BaseConfiguration.ShortTimeout);
         }
 
         public InternetDownloadPage SaveFile(string fileName)

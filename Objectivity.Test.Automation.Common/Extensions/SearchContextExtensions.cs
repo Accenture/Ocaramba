@@ -44,35 +44,47 @@ namespace Objectivity.Test.Automation.Common.Extensions
     public static class SearchContextExtensions
     {
         /// <summary>
-        /// Finds the elements, the lowest level find elements in framework.
+        /// Finds and waits for an element that is visible and displayed for long timeout.
         /// </summary>
         /// <param name="element">The element.</param>
         /// <param name="locator">The locator.</param>
-        /// <returns>Return all found and displayed and enabled elements</returns>
-        public static IList<IWebElement> GetElements(this ISearchContext element, ElementLocator locator)
+        /// <returns>Found element</returns>
+        public static IWebElement GetElement(this ISearchContext element, ElementLocator locator)
         {
-            return element.GetElements(locator, e => e.Displayed && e.Enabled).ToList();
+            return element.GetElement(locator, BaseConfiguration.LongTimeout, e => e.Displayed & e.Enabled);
         }
 
         /// <summary>
-        /// Finds the elements, the lowest level find elements in framework.
+        /// Finds and waits for an element that is visible and displayed at specified time.
         /// </summary>
         /// <param name="element">The element.</param>
         /// <param name="locator">The locator.</param>
-        /// <param name="condition">Condition to be fulfilled by elements</param>
-        /// <returns>Return all found elements for specified conditions</returns>
-        public static IList<IWebElement> GetElements(this ISearchContext element, ElementLocator locator, Func<IWebElement, bool> condition)
+        /// <param name="timeout">Specified time to wait.</param>
+        /// <returns>Found element</returns>
+        public static IWebElement GetElement(this ISearchContext element, ElementLocator locator, double timeout)
         {
-            return element.FindElements(locator.ToBy()).Where(condition).ToList();
+            return element.GetElement(locator, timeout, e => e.Displayed & e.Enabled);
         }
 
         /// <summary>
-        /// Finds the element with any specified condition, the lowest level find in framework.
+        /// Finds and waits for an element that meets specified conditions for long timeout.
+        /// </summary>
+        /// <param name="element">The element.</param>
+        /// <param name="locator">The locator.</param>
+        /// <param name="condition">Wait until condition met.</param>
+        /// <returns>Found element</returns>
+        public static IWebElement GetElement(this ISearchContext element, ElementLocator locator, Func<IWebElement, bool> condition)
+        {
+            return element.GetElement(locator, BaseConfiguration.LongTimeout, condition);
+        }
+
+        /// <summary>
+        /// Finds and waits for an element that meets specified conditions at specified time.
         /// </summary>
         /// <param name="element">The element.</param>
         /// <param name="locator">The locator.</param>
         /// <param name="timeout">The timeout.</param>
-        /// <param name="condition">The condition.</param>
+        /// <param name="condition">The condition to be met.</param>
         /// <returns>
         /// Return found element
         /// </returns>
@@ -82,7 +94,7 @@ namespace Objectivity.Test.Automation.Common.Extensions
 
             var wait = new WebDriverWait(element.ToDriver(), TimeSpan.FromSeconds(timeout));
             wait.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
-            
+
             wait.Until(
                     drv =>
                     {
@@ -94,80 +106,121 @@ namespace Objectivity.Test.Automation.Common.Extensions
         }
 
         /// <summary>
-        /// Finds the element.
+        /// Finds and waits for an element that is visible and displayed for long timeout.
         /// </summary>
-        /// <param name="element">The element.</param>
-        /// <param name="locator">The locator.</param>
-        /// <returns>Found element</returns>
-        public static IWebElement GetElement(this ISearchContext element, ElementLocator locator)
-        {
-            return element.GetElement(locator, BaseConfiguration.LongTimeout);
-        }
-
-        /// <summary>
-        /// Finds the element.
-        /// </summary>
-        /// <param name="element">The element.</param>
-        /// <param name="locator">The locator.</param>
-        /// <param name="timeout">The timeout.</param>
-        /// <returns>
-        /// Found element
-        /// </returns>
-        public static IWebElement GetElement(this ISearchContext element, ElementLocator locator, double timeout)
-        {
-            return element.GetElement(locator, timeout, e => e.Displayed & e.Enabled);
-        }
-
-        /// <summary>
-        /// Finds the displayed element.
-        /// </summary>
-        /// <param name="element">The element.</param>
-        /// <param name="locator">The locator.</param>
-        /// <returns>Found displayed element</returns>
-        public static IWebElement GetDisplayedElement(this ISearchContext element, ElementLocator locator)
-        {
-            return element.GetDisplayedElement(locator, BaseConfiguration.LongTimeout);
-        }
-
-        /// <summary>
-        /// Finds the displayed element.
-        /// </summary>
-        /// <param name="element">The element.</param>
-        /// <param name="locator">The locator.</param>
-        /// <param name="timeout">The timeout.</param>
-        /// <returns>
-        /// Found displayed element
-        /// </returns>
-        public static IWebElement GetDisplayedElement(this ISearchContext element, ElementLocator locator, double timeout)
-        {
-            return element.GetElement(locator, timeout, e => e.Displayed);
-        }
-
-        /// <summary>
-        /// Finds hidden element
-        /// </summary>
-        /// <param name="element">The element.</param>
+        /// <typeparam name="T">IWebComponent like ICheckbox, ISelect, etc.</typeparam>
+        /// <param name="searchContext">The search context.</param>
         /// <param name="locator">The locator.</param>
         /// <returns>
-        /// Found hidden element
+        /// Located and displayed element
         /// </returns>
-        public static IWebElement GetHiddenElement(this ISearchContext element, ElementLocator locator)
+        public static T GetElement<T>(this ISearchContext searchContext, ElementLocator locator) where T : class, IWebElement
         {
-            return element.GetElement(locator, BaseConfiguration.LongTimeout, e => !e.Displayed);
+            IWebElement webElemement = searchContext.GetElement(locator);
+            return webElemement.As<T>();
         }
 
         /// <summary>
-        /// Finds hidden element
+        /// Finds and waits for an element that is visible and displayed at specified time.
+        /// </summary>
+        /// <typeparam name="T">IWebComponent like ICheckbox, ISelect, etc.</typeparam>
+        /// <param name="searchContext">The search context.</param>
+        /// <param name="locator">The locator.</param>
+        /// <param name="timeout">Specified time to wait.</param>
+        /// <returns>
+        /// Located and displayed element
+        /// </returns>
+        public static T GetElement<T>(this ISearchContext searchContext, ElementLocator locator, double timeout) where T : class, IWebElement
+        {
+            IWebElement webElemement = searchContext.GetElement(locator, timeout);
+            return webElemement.As<T>();
+        }
+
+        /// <summary>
+        /// Finds and waits for an element that meets specified conditions for long timeout.
+        /// </summary>
+        /// <typeparam name="T">IWebComponent like ICheckbox, ISelect, etc.</typeparam>
+        /// <param name="searchContext">The search context.</param>
+        /// <param name="locator">The locator.</param>
+        /// <param name="condition">The condition to be met.</param>
+        /// <returns>
+        /// Located and displayed element
+        /// </returns>
+        public static T GetElement<T>(this ISearchContext searchContext, ElementLocator locator, Func<IWebElement, bool> condition) where T : class, IWebElement
+        {
+            IWebElement webElemement = searchContext.GetElement(locator, condition);
+            return webElemement.As<T>();
+        }
+
+        /// <summary>
+        /// Finds and waits for an element that meets specified conditions at specified time.
+        /// </summary>
+        /// <typeparam name="T">IWebComponent like ICheckbox, ISelect, etc.</typeparam>
+        /// <param name="searchContext">The search context.</param>
+        /// <param name="locator">The locator.</param>
+        /// <param name="timeout">Specified time to wait.</param>
+        /// <param name="condition">The condition to be met.</param>
+        /// <returns>
+        /// Located and displayed element
+        /// </returns>
+        public static T GetElement<T>(this ISearchContext searchContext, ElementLocator locator, double timeout, Func<IWebElement, bool> condition) where T : class, IWebElement
+        {
+            IWebElement webElemement = searchContext.GetElement(locator, timeout, condition);
+            return webElemement.As<T>();
+        }
+
+        /// <summary>
+        /// Finds elements that are visible and displayed.
         /// </summary>
         /// <param name="element">The element.</param>
         /// <param name="locator">The locator.</param>
-        /// <param name="timeout">The timeout.</param>
-        /// <returns>
-        /// Found hidden element
-        /// </returns>
-        public static IWebElement GetHiddenElement(this ISearchContext element, ElementLocator locator, double timeout)
+        /// <returns>Return all found and displayed and enabled elements</returns>
+        public static IList<IWebElement> GetElements(this ISearchContext element, ElementLocator locator)
         {
-            return element.GetElement(locator, timeout, e => !e.Displayed);
+            return element.GetElements(locator, e => e.Displayed && e.Enabled).ToList();
+        }
+
+        /// <summary>
+        /// Finds elements that meet specified conditions.
+        /// </summary>
+        /// <param name="element">The element.</param>
+        /// <param name="locator">The locator.</param>
+        /// <param name="condition">Condition to be fulfilled by elements</param>
+        /// <returns>Return all found elements for specified conditions</returns>
+        public static IList<IWebElement> GetElements(this ISearchContext element, ElementLocator locator, Func<IWebElement, bool> condition)
+        {
+            return element.FindElements(locator.ToBy()).Where(condition).ToList();
+        }
+
+        /// <summary>
+        /// Finds elements that are visible and displayed.
+        /// </summary>
+        /// <typeparam name="T">IWebComponent like ICheckbox, ISelect, etc.</typeparam>
+        /// <param name="searchContext">The search context.</param>
+        /// <param name="locator">The locator.</param>
+        /// <returns>Located elements</returns>
+        public static IList<T> GetElements<T>(this ISearchContext searchContext, ElementLocator locator) where T : class, IWebElement
+        {
+            var webElements = searchContext.GetElements(locator);
+            return
+                new ReadOnlyCollection<T>(
+                    webElements.Select(e => e.As<T>()).ToList());
+        }
+
+        /// <summary>
+        /// Finds elements that meet specified conditions.
+        /// </summary>
+        /// <typeparam name="T">IWebComponent like Checkbox, Select, etc.</typeparam>
+        /// <param name="searchContext">The search context.</param>
+        /// <param name="locator">The locator.</param>
+        /// <param name="condition">The condition to be met.</param>
+        /// <returns>Located elements</returns>
+        public static IList<T> GetElements<T>(this ISearchContext searchContext, ElementLocator locator, Func<IWebElement, bool> condition) where T : class, IWebElement
+        {
+            var webElements = searchContext.GetElements(locator, condition);
+            return
+                new ReadOnlyCollection<T>(
+                    webElements.Select(e => e.As<T>()).ToList());
         }
 
         /// <summary>
@@ -193,36 +246,6 @@ namespace Objectivity.Test.Automation.Common.Extensions
             }
 
             return wrappedElement.WrappedDriver;
-        }
-
-        /// <summary>
-        /// Finds the displayed element.
-        /// </summary>
-        /// <typeparam name="T">IWebComponent like ICheckbox, ISelect, etc.</typeparam>
-        /// <param name="searchContext">The search context.</param>
-        /// <param name="locator">The locator.</param>
-        /// <returns>
-        /// Located and displayed element
-        /// </returns>
-        public static T GetElement<T>(this ISearchContext searchContext, ElementLocator locator) where T : class, IWebElement
-        {
-            IWebElement webElemement = searchContext.GetElement(locator);
-            return webElemement.As<T>();
-        }
-
-        /// <summary>
-        /// Finds the elements.
-        /// </summary>
-        /// <typeparam name="T">IWebComponent like ICheckbox, ISelect, etc.</typeparam>
-        /// <param name="searchContext">The search context.</param>
-        /// <param name="locator">The locator.</param>
-        /// <returns>Located elements</returns>
-        public static IList<T> GetElements<T>(this ISearchContext searchContext, ElementLocator locator) where T : class, IWebElement
-        {
-            var webElements = searchContext.GetElements(locator);
-            return
-                new ReadOnlyCollection<T>(
-                    webElements.Select(e => e.As<T>()).ToList());
         }
 
         /// <summary>

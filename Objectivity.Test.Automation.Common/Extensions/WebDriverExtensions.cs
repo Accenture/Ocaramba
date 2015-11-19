@@ -126,7 +126,7 @@ namespace Objectivity.Test.Automation.Common.Extensions
         {
             try
             {
-                webDriver.GetDisplayedElement(locator, customTimeout);
+                webDriver.GetElement(locator, customTimeout, e => e.Displayed);
                 return true;
             }
             catch (NoSuchElementException)
@@ -176,18 +176,6 @@ namespace Objectivity.Test.Automation.Common.Extensions
             var wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(timeout));
             wait.IgnoreExceptionTypes(typeof(StaleElementReferenceException), typeof(NoSuchElementException));
             wait.Until(driver => webDriver.GetElements(locator).Count == 0);
-        }
-
-        /// <summary>
-        /// Waits for element until is displayed and enabled.
-        /// </summary>
-        /// <param name="webDriver">The web driver.</param>
-        /// <param name="locator">The locator.</param>
-        /// <param name="timeout">The timeout.</param>
-        public static void WaitForElement(this IWebDriver webDriver, ElementLocator locator, double timeout)
-        {
-            var wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(timeout));
-            wait.Until(driver => webDriver.GetElement(locator).Displayed & webDriver.GetElement(locator).Enabled);
         }
 
         /// <summary>
