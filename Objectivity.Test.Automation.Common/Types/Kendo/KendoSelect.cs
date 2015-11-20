@@ -41,6 +41,9 @@ namespace Objectivity.Test.Automation.Common.Types.Kendo
 
         private readonly string elementCssSelector;
 
+        private ElementLocator 
+            kendoSelect = new ElementLocator(Locator.XPath, "./ancestor-or-self::span[contains(@class, 'k-widget')]//input[@id]");
+
         /// <summary>
         /// Initializes a new instance of the <see cref="KendoSelect"/> class.
         /// </summary>
@@ -49,7 +52,7 @@ namespace Objectivity.Test.Automation.Common.Types.Kendo
             : base(webElement.ToDriver() as RemoteWebDriver, null)
         {
             this.webElement = webElement;
-            var id = this.webElement.GetHiddenElement(new ElementLocator(Locator.XPath, "./ancestor-or-self::span[contains(@class, 'k-widget')]//input[@id]")).GetAttribute("id");
+            var id = this.webElement.GetElement(this.kendoSelect, e => e.Displayed == false).GetAttribute("id");
             this.elementCssSelector = string.Format(CultureInfo.InvariantCulture, "#{0}", id);
         }
 
