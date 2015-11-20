@@ -33,6 +33,7 @@ To run NUnit tests from Visual Studio remember to install NUnit TestAdapter.
 
 NUnit Example Test:
 
+```csharp
         [Test]
         public void SendKeysAndClickTest()
         {
@@ -45,10 +46,11 @@ NUnit Example Test:
             var expectedPageTitle = searchResultsPage.GetPageTitle("Search Results");
             Assert.IsTrue(searchResultsPage.IsPageTitle(expectedPageTitle), "Search results page is not displayed");
         }
-
+```
 
 NUnit Example Page Object:
 
+```csharp
         public class SearchResultsPage : ProjectPageBase
 		{
 			/// <summary>
@@ -71,7 +73,8 @@ NUnit Example Page Object:
 				return this;
 			}
 		}
-
+```
+		
 To select internet browser for tests to be carried out edit App.config file at previously selected sample project.
 
 #### Where to start?
