@@ -36,50 +36,43 @@ namespace Objectivity.Test.Automation.Common.Extensions
         /// <summary>
         /// From the locator to selenium by converter.
         /// </summary>
-        /// <param name="locator">The locator value.</param>
+        /// <example>Using standard method FindElement, even we have locator as ElementLocator: <code>
+        /// private readonly ElementLocator searchTextbox = new ElementLocator(Locator.Id, "SearchTextBoxId");
+        /// this.Driver.FindElement(locator.ToBy());
+        /// </code> </example>
+        /// <param name="locator">The element locator.</param>
         /// <returns>The Selenium By</returns>
-        internal static By ToBy(this ElementLocator locator)
-        {
-            return locator.Kind.ToBy(locator.Value);
-        }
-
-        /// <summary>
-        /// From the locator to selenium by converter.
-        /// </summary>
-        /// <param name="locatorType">GetType of the locator.</param>
-        /// <param name="locator">The locator value.</param>
-        /// <returns>The Selenium By</returns>
-        public static By ToBy(this Locator locatorType, string locator)
+        public static By ToBy(this ElementLocator locator)
         {
             By by;
-            switch (locatorType)
+            switch (locator.Kind)
             {
                 case Locator.Id:
-                    by = By.Id(locator);
+                    by = By.Id(locator.Value);
                     break;
                 case Locator.ClassName:
-                    by = By.ClassName(locator);
+                    by = By.ClassName(locator.Value);
                     break;
                 case Locator.CssSelector:
-                    by = By.CssSelector(locator);
+                    by = By.CssSelector(locator.Value);
                     break;
                 case Locator.LinkText:
-                    by = By.LinkText(locator);
+                    by = By.LinkText(locator.Value);
                     break;
                 case Locator.Name:
-                    by = By.Name(locator);
+                    by = By.Name(locator.Value);
                     break;
                 case Locator.PartialLinkText:
-                    by = By.PartialLinkText(locator);
+                    by = By.PartialLinkText(locator.Value);
                     break;
                 case Locator.TagName:
-                    by = By.TagName(locator);
+                    by = By.TagName(locator.Value);
                     break;
                 case Locator.XPath:
-                    by = By.XPath(locator);
+                    by = By.XPath(locator.Value);
                     break;
                 default:
-                    by = By.Id(locator);
+                    by = By.Id(locator.Value);
                     break;
             }
 

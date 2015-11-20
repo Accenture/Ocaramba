@@ -34,6 +34,9 @@ namespace Objectivity.Test.Automation.Common.Types
         /// <summary>
         /// Initializes a new instance of the <see cref="ElementLocator"/> class.
         /// </summary>
+        /// <example>How we define locator: <code>
+        /// private readonly ElementLocator searchTextbox = new ElementLocator(Locator.Id, "SearchTextBoxId");
+        /// </code> </example>
         /// <param name="kind">The locator type.</param>
         /// <param name="value">The locator value.</param>
         public ElementLocator(Locator kind, string value)
@@ -61,12 +64,15 @@ namespace Objectivity.Test.Automation.Common.Types
         /// <summary>
         /// Evaluates the generic element locator definition and create the instance
         /// </summary>
+        /// <example>How we can replace parts of defined locator: <code>
+        /// private readonly ElementLocator menuLink = new ElementLocator(Locator.XPath, "//*[@title='{0}' and @ms.title='{1}']");
+        /// var element = this.Driver.GetElement(this.menuLink.Evaluate("info","news"));
+        /// </code> </example>
         /// <param name="parameters">The parameters.</param>
         /// <returns>New element locator with value changed by injected parameters</returns>
         public ElementLocator Evaluate(params object[] parameters)
         {
-            // TODO: remove object[0]
-            return new ElementLocator(this.Kind, string.Format(CultureInfo.CurrentCulture, this.Value, parameters ?? new object[0]));
+            return new ElementLocator(this.Kind, string.Format(CultureInfo.CurrentCulture, this.Value, parameters));
         }
     }
 }

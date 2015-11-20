@@ -46,6 +46,9 @@ namespace Objectivity.Test.Automation.Common.Extensions
         /// <summary>
         /// Finds and waits for an element that is visible and displayed for long timeout.
         /// </summary>
+        /// <example>How to use it: <code>
+        /// this.Driver.GetElement(this.loginButton);
+        /// </code></example>
         /// <param name="element">The element.</param>
         /// <param name="locator">The locator.</param>
         /// <returns>Found element</returns>
@@ -57,6 +60,9 @@ namespace Objectivity.Test.Automation.Common.Extensions
         /// <summary>
         /// Finds and waits for an element that is visible and displayed at specified time.
         /// </summary>
+        /// <example>How to use it: <code>
+        /// this.Driver.GetElement(this.loginButton, timeout);
+        /// </code></example>
         /// <param name="element">The element.</param>
         /// <param name="locator">The locator.</param>
         /// <param name="timeout">Specified time to wait.</param>
@@ -69,6 +75,9 @@ namespace Objectivity.Test.Automation.Common.Extensions
         /// <summary>
         /// Finds and waits for an element that meets specified conditions for long timeout.
         /// </summary>
+        /// <example>How to use it: <code>
+        /// this.Driver.GetElement(this.loginButton, e => e.Displayed);
+        /// </code></example>
         /// <param name="element">The element.</param>
         /// <param name="locator">The locator.</param>
         /// <param name="condition">Wait until condition met.</param>
@@ -81,6 +90,9 @@ namespace Objectivity.Test.Automation.Common.Extensions
         /// <summary>
         /// Finds and waits for an element that meets specified conditions at specified time.
         /// </summary>
+        /// <example>How to use it: <code>
+        /// this.Driver.GetElement(this.loginButton, timeout, e => e.Displayed);
+        /// </code></example>
         /// <param name="element">The element.</param>
         /// <param name="locator">The locator.</param>
         /// <param name="timeout">The timeout.</param>
@@ -108,6 +120,10 @@ namespace Objectivity.Test.Automation.Common.Extensions
         /// <summary>
         /// Finds and waits for an element that is visible and displayed for long timeout.
         /// </summary>
+        /// <example>How to specify element type to get additional actions for it: <code>
+        /// var checkbox = this.Driver.GetElement&lt;Checkbox&gt;(this.stackOverFlowCheckbox);
+        /// checkbox.TickCheckbox();
+        /// </code></example>
         /// <typeparam name="T">IWebComponent like ICheckbox, ISelect, etc.</typeparam>
         /// <param name="searchContext">The search context.</param>
         /// <param name="locator">The locator.</param>
@@ -123,6 +139,10 @@ namespace Objectivity.Test.Automation.Common.Extensions
         /// <summary>
         /// Finds and waits for an element that is visible and displayed at specified time.
         /// </summary>
+        /// <example>How to specify element type to get additional actions for it: <code>
+        /// var checkbox = this.Driver.GetElement&lt;Checkbox&gt;(this.stackOverFlowCheckbox, timeout);
+        /// checkbox.TickCheckbox();
+        /// </code></example>
         /// <typeparam name="T">IWebComponent like ICheckbox, ISelect, etc.</typeparam>
         /// <param name="searchContext">The search context.</param>
         /// <param name="locator">The locator.</param>
@@ -139,6 +159,10 @@ namespace Objectivity.Test.Automation.Common.Extensions
         /// <summary>
         /// Finds and waits for an element that meets specified conditions for long timeout.
         /// </summary>
+        /// <example>How to find hidden element, specify element type to get additional actions for it and specify condition : <code>
+        /// var checkbox = this.Driver.GetElement&lt;Checkbox&gt;(this.stackOverFlowCheckbox, e => e.Displayed == false);
+        /// checkbox.TickCheckbox();
+        /// </code></example>
         /// <typeparam name="T">IWebComponent like ICheckbox, ISelect, etc.</typeparam>
         /// <param name="searchContext">The search context.</param>
         /// <param name="locator">The locator.</param>
@@ -155,6 +179,10 @@ namespace Objectivity.Test.Automation.Common.Extensions
         /// <summary>
         /// Finds and waits for an element that meets specified conditions at specified time.
         /// </summary>
+        /// <example>How to specify element type to get additional actions for it and specify time and condition to find this element: <code>
+        /// var checkbox = this.Driver.GetElement&lt;Checkbox&gt;(this.stackOverFlowCheckbox, timeout, e => e.Displayed);
+        /// checkbox.TickCheckbox();
+        /// </code></example>
         /// <typeparam name="T">IWebComponent like ICheckbox, ISelect, etc.</typeparam>
         /// <param name="searchContext">The search context.</param>
         /// <param name="locator">The locator.</param>
@@ -172,6 +200,9 @@ namespace Objectivity.Test.Automation.Common.Extensions
         /// <summary>
         /// Finds elements that are visible and displayed.
         /// </summary>
+        /// <example>How to find elements : <code>
+        /// var checkboxes = this.Driver.GetElements(this.stackOverFlowCheckbox);
+        /// </code></example>
         /// <param name="element">The element.</param>
         /// <param name="locator">The locator.</param>
         /// <returns>Return all found and displayed and enabled elements</returns>
@@ -183,6 +214,9 @@ namespace Objectivity.Test.Automation.Common.Extensions
         /// <summary>
         /// Finds elements that meet specified conditions.
         /// </summary>
+        /// <example>How to find disabled elements : <code>
+        /// var checkboxes = this.Driver.GetElements(this.stackOverFlowCheckbox, e => e.Enabled == false);
+        /// </code></example>
         /// <param name="element">The element.</param>
         /// <param name="locator">The locator.</param>
         /// <param name="condition">Condition to be fulfilled by elements</param>
@@ -195,6 +229,10 @@ namespace Objectivity.Test.Automation.Common.Extensions
         /// <summary>
         /// Finds elements that are visible and displayed.
         /// </summary>
+        /// <example>How to find elements and specify element type to get additional actions for them : <code>
+        /// var checkboxes = this.Driver.GetElements&lt;Checkbox&gt;(this.stackOverFlowCheckbox);
+        /// checkboxes[0].TickCheckbox();
+        /// </code></example>
         /// <typeparam name="T">IWebComponent like ICheckbox, ISelect, etc.</typeparam>
         /// <param name="searchContext">The search context.</param>
         /// <param name="locator">The locator.</param>
@@ -210,6 +248,10 @@ namespace Objectivity.Test.Automation.Common.Extensions
         /// <summary>
         /// Finds elements that meet specified conditions.
         /// </summary>
+        /// <example>How to find displayed elements and specify element type to get additional actions for them : <code>
+        /// var checkboxes = this.Driver.GetElements&lt;Checkbox&gt;(this.stackOverFlowCheckbox, e => e.Displayed);
+        /// checkboxes[0].TickCheckbox();
+        /// </code></example>
         /// <typeparam name="T">IWebComponent like Checkbox, Select, etc.</typeparam>
         /// <param name="searchContext">The search context.</param>
         /// <param name="locator">The locator.</param>
