@@ -24,58 +24,63 @@ SOFTWARE.
 
 namespace Objectivity.Test.Automation.NunitTests.PageObjects
 {
-    using System;
-    using System.Globalization;
-
     using NLog;
 
     using Objectivity.Test.Automation.Common;
     using Objectivity.Test.Automation.Common.Extensions;
     using Objectivity.Test.Automation.Common.Types;
 
-    public class InternetPage : ProjectPageBase
+    public class JavaScriptAlertsPage : ProjectPageBase
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
         /// Locators for elements
         /// </summary>
-        private readonly ElementLocator
-            javaScriptAlertsLinkLocator = new ElementLocator(Locator.CssSelector, "a[href='/javascript_alerts']"),
-            fileDownload = new ElementLocator(Locator.LinkText, "File Download");
+        private readonly ElementLocator 
+            jsAlertButtonLocator = new ElementLocator(Locator.CssSelector, "button[onclick='jsAlert()']"),
+            jsConfirmButtonLocator = new ElementLocator(Locator.CssSelector, "button[onclick='jsConfirm()']"),
+            jsPromptButtonLocator = new ElementLocator(Locator.CssSelector, "button[onclick='jsPrompt()']"),
+            resultTextLocator = new ElementLocator(Locator.Id, "result");
 
-        public InternetPage(DriverContext driverContext): base(driverContext)
+        public JavaScriptAlertsPage(DriverContext driverContext)
+            : base(driverContext)
         {
         }
 
-        /// <summary>
-        /// Methods for this HomePage
-        /// </summary>
-        public InternetPage OpenHomePage()
+        public void OpenJsAlert()
         {
-            var url = this.GetUrlValue();
-            this.Driver.NavigateTo(new Uri(url));
-            Logger.Info(CultureInfo.CurrentCulture, "Opening page {0}", url);
-            return this;
+            this.Driver.GetElement(this.jsAlertButtonLocator).Click();
+        }
+        public void OpenJsConfirm()
+        {
+            this.Driver.GetElement(this.jsConfirmButtonLocator).Click();
         }
 
-        public JavaScriptAlertsPage GoToJavaScriptAlerts()
+        public void OpenJsPrompt()
         {
-            this.Driver.GetElement(this.javaScriptAlertsLinkLocator).Click();
-            return new JavaScriptAlertsPage(this.DriverContext);
+            this.Driver.GetElement(this.jsPromptButtonLocator).Click();
         }
 
-
-        public InternetDownloadPage GoToFileDownloader()
+        public void AcceptAlert()
         {
-            this.Driver.GetElement(this.fileDownload).Click();
-            return new InternetDownloadPage(this.DriverContext);
+            this.Driver.SwitchTo().Alert().Accept();
         }
 
-
-        private string GetUrlValue()
+        public void DismissAlert()
         {
-            return "http://the-internet.herokuapp.com/";
+            this.Driver.SwitchTo().Alert().Dismiss();
+        }
+
+        public void TypeTextOnAlert(string text)
+        {
+            this.Driver.SwitchTo().Alert().SendKeys(text);
+        }
+
+        public string GetResultText()
+        {
+            var result = this.Driver.GetElement(this.resultTextLocator).Text;
+            return result;
         }
     }
 }
