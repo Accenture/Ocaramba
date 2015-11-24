@@ -145,13 +145,30 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// <returns>Collection of files</returns>
         public static ICollection<FileInfo> GetFilesOfGivenType(string subFolder, FileType type, string postfixFilesName)
         {
-            Logger.Info("Get Files '{0}' from '{1}', postfixFilesName '{2}'", type, subFolder, postfixFilesName);
+            Logger.Debug("Get Files '{0}' from '{1}', postfixFilesName '{2}'", type, subFolder, postfixFilesName);
             CreateFolder(subFolder);
             ICollection<FileInfo> files =
                 new DirectoryInfo(subFolder)
                     .GetFiles("*" + postfixFilesName + ReturnFileExtension(type)).OrderBy(f => f.Name).ToList();
 
             return files;
+        }
+
+        /// <summary>
+        /// Get file by its name in given folder
+        /// </summary>
+        /// <param name="subFolder">The subFolder</param>
+        /// <param name="fileName">The file name</param>
+        /// <returns>FileInfo of file</returns>
+        public static FileInfo GetFileByName(string subFolder, string fileName)
+        {
+            Logger.Debug("Get File '{0}' from '{1}'", fileName, subFolder);
+            CreateFolder(subFolder);
+            FileInfo file =
+                new DirectoryInfo(subFolder)
+                    .GetFiles(fileName).First();
+
+            return file;
         }
 
         /// <summary>
@@ -174,9 +191,10 @@ namespace Objectivity.Test.Automation.Common.Helpers
          /// <returns>Number of files in subfolder</returns>
         public static int CountFiles(string subFolder, FileType type)
         {
-            Logger.Trace(CultureInfo.CurrentCulture, "Count Excel Files '{0}'", subFolder);
-
-            return GetFilesOfGivenType(subFolder, type).Count;
+            Logger.Debug(CultureInfo.CurrentCulture, "Count {0} Files in '{1}'", type, subFolder);
+            var fileNumber = GetFilesOfGivenType(subFolder, type).Count;
+            Logger.Debug(CultureInfo.CurrentCulture, "Number of files in '{0}': {1}", subFolder, fileNumber);
+            return fileNumber;
         }
 
         /// <summary>
@@ -187,7 +205,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// <returns>Last file of given type</returns>
         public static FileInfo GetLastFile(string subFolder, FileType type)
         {
-            Logger.Trace("Get Last File");
+            Logger.Debug("Get Last File");
             CreateFolder(subFolder);
             var lastFile = new DirectoryInfo(subFolder).GetFiles()
                 .Where(f => f.Extension == ReturnFileExtension(type).Replace("?", string.Empty))
@@ -207,14 +225,16 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// <param name="subFolder">The subfolder.</param>
         public static void WaitForFile(FileType type, IWebDriver driver, double waitTime, int filesNumber, string subFolder)
         {
-            Logger.Info("Wait for file: {0}", type);
+            Logger.Debug("Wait for file: {0}", type);
             CreateFolder(subFolder);
             IWait<IWebDriver> wait = new WebDriverWait(
                     driver,
                     TimeSpan.FromSeconds(waitTime));
 
-            wait.Message = "Waiting for file";
+            wait.Message = string.Format(CultureInfo.CurrentCulture, "Waiting for file number to increase in {0}", subFolder);
             wait.Until(x => CountFiles(subFolder, type) > filesNumber);
+            Logger.Debug("Number of files increased, checking if size of last file > 0 bytes");
+            wait.Message = "Checking if size of last file > 0 bytes";
             wait.Until(x => GetLastFile(subFolder, type).Length > 0);
         }
 
@@ -239,14 +259,18 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// <param name="subFolder">The subfolder.</param>
         public static void WaitForFile(IWebDriver driver, double waitTime, string filesName, string subFolder)
         {
-            Logger.Info(CultureInfo.CurrentCulture, "Wait for file: {0}", filesName);
+            Logger.Debug(CultureInfo.CurrentCulture, "Wait for file: {0}", filesName);
             CreateFolder(subFolder);
             IWait<IWebDriver> wait = new WebDriverWait(
                     driver,
                     TimeSpan.FromSeconds(waitTime));
 
-            wait.Message = "Waiting for file";
+            wait.Message = string.Format(CultureInfo.CurrentCulture, "Waiting for file {0} in folder {1}", filesName, subFolder);
             wait.Until(x => File.Exists(subFolder + Separator + filesName));
+
+            Logger.Debug("File exists, checking if size of last file > 0 bytes");
+            wait.Message = string.Format(CultureInfo.CurrentCulture, "Checking if size of file {0} > 0 bytes", filesName);
+            wait.Until(x => GetFileByName(subFolder, filesName).Length > 0);
         }
 
         /// <summary>
@@ -270,9 +294,9 @@ namespace Objectivity.Test.Automation.Common.Helpers
         public static void RenameFile(string oldName, string newName, string subFolder, FileType type)
         {
             CreateFolder(subFolder);
-            newName = newName + ReturnFileExtension(type).Replace("?", string.Empty);         
+            newName = newName + ReturnFileExtension(type).Replace("?", string.Empty);
 
-            Logger.Info(CultureInfo.CurrentCulture, "new name file name {0}", newName);
+            Logger.Debug(CultureInfo.CurrentCulture, "new name file name {0}", newName);
             if (File.Exists(newName))
             {
                 File.Delete(newName);

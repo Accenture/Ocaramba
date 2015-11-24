@@ -50,7 +50,7 @@ namespace Objectivity.Test.Automation.Common.Logger
         /// <param name="e">The <see cref="WebDriverNavigationEventArgs"/> instance containing the event data.</param>
         protected override void OnNavigating(WebDriverNavigationEventArgs e)
         {
-            Logger.Info(CultureInfo.CurrentCulture, "Navigating to: {0}", e.Url);
+            Logger.Trace(CultureInfo.CurrentCulture, "Navigating to: {0}", e.Url);
             base.OnNavigating(e);
         }
 
@@ -60,7 +60,7 @@ namespace Objectivity.Test.Automation.Common.Logger
         /// <param name="e">The <see cref="WebElementEventArgs"/> instance containing the event data.</param>
         protected override void OnElementClicking(WebElementEventArgs e)
         {
-            Logger.Info(CultureInfo.CurrentCulture, "Clicking: {0}", ToStringElement(e));
+            Logger.Trace(CultureInfo.CurrentCulture, "Clicking: {0}", ToStringElement(e));
             base.OnElementClicking(e);
         }
 
@@ -70,7 +70,7 @@ namespace Objectivity.Test.Automation.Common.Logger
         /// <param name="e">The <see cref="WebElementEventArgs"/> instance containing the event data.</param>
         protected override void OnElementValueChanging(WebElementEventArgs e)
         {
-            Logger.Info(CultureInfo.CurrentCulture, "On Element Value Changing: {0}", ToStringElement(e));
+            Logger.Trace(CultureInfo.CurrentCulture, "On Element Value Changing: {0}", ToStringElement(e));
             base.OnElementValueChanging(e);
         }
 
@@ -80,7 +80,7 @@ namespace Objectivity.Test.Automation.Common.Logger
         /// <param name="e">The <see cref="WebElementEventArgs"/> instance containing the event data.</param>
         protected override void OnElementValueChanged(WebElementEventArgs e)
         {
-            Logger.Info(CultureInfo.CurrentCulture, "On Element Value Changed: {0}", ToStringElement(e));
+            Logger.Trace(CultureInfo.CurrentCulture, "On Element Value Changed: {0}", ToStringElement(e));
             base.OnElementValueChanged(e);
         }
 
@@ -90,7 +90,7 @@ namespace Objectivity.Test.Automation.Common.Logger
         /// <param name="e">The <see cref="FindElementEventArgs"/> instance containing the event data.</param>
         protected override void OnFindingElement(FindElementEventArgs e)
         {
-            Logger.Info(CultureInfo.CurrentCulture, "OnFindingElement: {0}", e.FindMethod);
+            Logger.Trace(CultureInfo.CurrentCulture, "OnFindingElement: {0}", e.FindMethod);
             base.OnFindingElement(e);
         }
 
@@ -100,7 +100,7 @@ namespace Objectivity.Test.Automation.Common.Logger
         /// <param name="e">The <see cref="WebDriverScriptEventArgs"/> instance containing the event data.</param>
         protected override void OnScriptExecuting(WebDriverScriptEventArgs e)
         {
-            Logger.Info(CultureInfo.CurrentCulture, "On Script Executing: {0}", e.Script);
+            Logger.Trace(CultureInfo.CurrentCulture, "On Script Executing: {0}", e.Script);
             base.OnScriptExecuting(e);
         }
 
@@ -110,7 +110,7 @@ namespace Objectivity.Test.Automation.Common.Logger
         /// <param name="e">The <see cref="WebDriverScriptEventArgs"/> instance containing the event data.</param>
         protected override void OnScriptExecuted(WebDriverScriptEventArgs e)
         {
-            Logger.Info(CultureInfo.CurrentCulture, "On Script Executed: {0}", e.Script);
+            Logger.Trace(CultureInfo.CurrentCulture, "On Script Executed: {0}", e.Script);
             base.OnScriptExecuted(e);
         }
 
