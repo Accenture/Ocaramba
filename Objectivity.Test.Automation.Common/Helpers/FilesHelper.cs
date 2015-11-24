@@ -192,9 +192,9 @@ namespace Objectivity.Test.Automation.Common.Helpers
         public static int CountFiles(string subFolder, FileType type)
         {
             Logger.Debug(CultureInfo.CurrentCulture, "Count {0} Files in '{1}'", type, subFolder);
-            var nrOfFile = GetFilesOfGivenType(subFolder, type).Count;
-            Logger.Debug(CultureInfo.CurrentCulture, "Number of files in '{0}': {1}", subFolder, nrOfFile);
-            return nrOfFile;
+            var fileNumber = GetFilesOfGivenType(subFolder, type).Count;
+            Logger.Debug(CultureInfo.CurrentCulture, "Number of files in '{0}': {1}", subFolder, fileNumber);
+            return fileNumber;
         }
 
         /// <summary>
