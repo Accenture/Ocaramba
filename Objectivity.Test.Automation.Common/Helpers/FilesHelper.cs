@@ -155,6 +155,23 @@ namespace Objectivity.Test.Automation.Common.Helpers
         }
 
         /// <summary>
+        /// Get file by its name in given folder
+        /// </summary>
+        /// <param name="subFolder">The subFolder</param>
+        /// <param name="fileName">The file name</param>
+        /// <returns>FileInfo of file</returns>
+        public static FileInfo GetFileByName(string subFolder, string fileName)
+        {
+            Logger.Info("Get File '{0}' from '{1}'", fileName, subFolder);
+            CreateFolder(subFolder);
+            FileInfo file =
+                new DirectoryInfo(subFolder)
+                    .GetFiles(fileName).First();
+
+            return file;
+        }
+
+        /// <summary>
         /// Gets the files of given type.
         /// </summary>
         /// <param name="subFolder">The sub folder.</param>
@@ -213,8 +230,10 @@ namespace Objectivity.Test.Automation.Common.Helpers
                     driver,
                     TimeSpan.FromSeconds(waitTime));
 
-            wait.Message = "Waiting for file";
+            wait.Message = string.Format(CultureInfo.CurrentCulture, "Waiting for file number to increase in {0}", subFolder);
             wait.Until(x => CountFiles(subFolder, type) > filesNumber);
+            Logger.Info("Number of files increased, checking if size of last file > 0 bytes");
+            wait.Message = "Checking if size of last file > 0 bytes";
             wait.Until(x => GetLastFile(subFolder, type).Length > 0);
         }
 
@@ -245,8 +264,12 @@ namespace Objectivity.Test.Automation.Common.Helpers
                     driver,
                     TimeSpan.FromSeconds(waitTime));
 
-            wait.Message = "Waiting for file";
+            wait.Message = string.Format(CultureInfo.CurrentCulture, "Waiting for file {0} in folder {1}", filesName, subFolder);
             wait.Until(x => File.Exists(subFolder + Separator + filesName));
+
+            Logger.Info("File exists, checking if size of last file > 0 bytes");
+            wait.Message = string.Format(CultureInfo.CurrentCulture, "Checking if size of file {0} > 0 bytes", filesName);
+            wait.Until(x => GetFileByName(subFolder, filesName).Length > 0);
         }
 
         /// <summary>
