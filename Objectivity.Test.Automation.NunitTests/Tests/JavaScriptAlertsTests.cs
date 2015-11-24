@@ -37,7 +37,7 @@ namespace Objectivity.Test.Automation.NunitTests.Tests
             var jsAlertsPage = internetPage.GoToJavaScriptAlerts();
             jsAlertsPage.OpenJsAlert();
             jsAlertsPage.AcceptAlert();
-            Assert.AreEqual("You successfuly clicked an alert", jsAlertsPage.GetResultText());
+            Assert.AreEqual("You successfuly clicked an alert", jsAlertsPage.ResultText);
         }
 
         [Test]
@@ -47,7 +47,7 @@ namespace Objectivity.Test.Automation.NunitTests.Tests
             var jsAlertsPage = internetPage.GoToJavaScriptAlerts();
             jsAlertsPage.OpenJsConfirm();
             jsAlertsPage.AcceptAlert();
-            Assert.AreEqual("You clicked: Ok", jsAlertsPage.GetResultText());
+            Assert.AreEqual("You clicked: Ok", jsAlertsPage.ResultText);
         }
 
         [Test]
@@ -57,19 +57,19 @@ namespace Objectivity.Test.Automation.NunitTests.Tests
             var jsAlertsPage = internetPage.GoToJavaScriptAlerts();
             jsAlertsPage.OpenJsConfirm();
             jsAlertsPage.DismissAlert();
-            Assert.AreEqual("You clicked: Cancel", jsAlertsPage.GetResultText());
+            Assert.AreEqual("You clicked: Cancel", jsAlertsPage.ResultText);
         }
 
         [Test]
         public void TypeTextAndAcceptJsPromptTest()
         {
-            var text = "Lorem ipsum";
+            var text = "Sample text";
             var internetPage = new InternetPage(this.DriverContext).OpenHomePage();
             var jsAlertsPage = internetPage.GoToJavaScriptAlerts();
             jsAlertsPage.OpenJsPrompt();
             jsAlertsPage.TypeTextOnAlert(text);
             jsAlertsPage.AcceptAlert();
-            Assert.AreEqual("You entered: " + text, jsAlertsPage.GetResultText());
+            Assert.AreEqual("You entered: " + text, jsAlertsPage.ResultText);
         }
 
         [Test]
@@ -79,7 +79,7 @@ namespace Objectivity.Test.Automation.NunitTests.Tests
             var jsAlertsPage = internetPage.GoToJavaScriptAlerts();
             jsAlertsPage.OpenJsPrompt();
             jsAlertsPage.DismissAlert();
-            Assert.AreEqual("You entered: null", jsAlertsPage.GetResultText());
+            Assert.AreEqual("You entered: null", jsAlertsPage.ResultText);
         }
     }
 }

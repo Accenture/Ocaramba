@@ -24,16 +24,12 @@ SOFTWARE.
 
 namespace Objectivity.Test.Automation.NunitTests.PageObjects
 {
-    using NLog;
-
     using Objectivity.Test.Automation.Common;
     using Objectivity.Test.Automation.Common.Extensions;
     using Objectivity.Test.Automation.Common.Types;
 
     public class JavaScriptAlertsPage : ProjectPageBase
     {
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-
         /// <summary>
         /// Locators for elements
         /// </summary>
@@ -77,10 +73,13 @@ namespace Objectivity.Test.Automation.NunitTests.PageObjects
             this.Driver.SwitchTo().Alert().SendKeys(text);
         }
 
-        public string GetResultText()
+        public string ResultText
         {
-            var result = this.Driver.GetElement(this.resultTextLocator).Text;
-            return result;
+            get
+            {
+                var result = this.Driver.GetElement(this.resultTextLocator).Text;
+                return result;
+            }
         }
     }
 }
