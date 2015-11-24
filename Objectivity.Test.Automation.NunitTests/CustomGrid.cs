@@ -22,32 +22,39 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-namespace Objectivity.Test.Automation.Common.Types.Kendo
+namespace Objectivity.Test.Automation.NunitTests
 {
+    using Objectivity.Test.Automation.Common.Extensions;
+
     using OpenQA.Selenium;
+    using OpenQA.Selenium.Remote;
 
     /// <summary>
-    /// Kendo Drop Down List element
+    /// Sample class to extends framework with new webElement
     /// </summary>
-    public class KendoDropDownList : KendoSelect
+    public class CustomGrid : RemoteWebElement
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="KendoDropDownList"/> class.
+        /// The web element
         /// </summary>
-        /// <param name="webElement">The webElement</param>
-        public KendoDropDownList(IWebElement webElement)
-            : base(webElement)
-        {
-        }
+        private readonly IWebElement webElement;
 
-        /// <summary>Gets the selector.</summary>
-        /// <value>The selector.</value>
-        protected override string SelectType
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CustomGrid"/> class.
+        /// </summary>
+        /// <param name="webElement">The webElement.</param>
+        public CustomGrid(IWebElement webElement)
+            : base(webElement.ToDriver() as RemoteWebDriver, null)
         {
-            get
-            {
-                return "kendoDropDownList";
-            }
+            this.webElement = webElement;
+        }
+ 
+        /// <summary>
+        /// Sample method to extends framework with new webElement and actions for it
+        /// </summary>
+        private bool IsGridDisplayed()
+        {
+            return this.webElement.Displayed;
         }
     }
 }

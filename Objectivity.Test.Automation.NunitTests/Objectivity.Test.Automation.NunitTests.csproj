@@ -84,6 +84,7 @@
     <Compile Include="ProjectTestBase.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="CustomGrid.cs" />
     <Compile Include="Tests\ActionsTests.cs" />
     <Compile Include="Tests\PerformanceTests.cs">
       <SubType>Code</SubType>

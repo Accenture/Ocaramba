@@ -60,9 +60,9 @@ namespace Objectivity.Test.Automation.NunitTests
             this.Driver = driverContext.Driver;
         }
 
-        public bool IsPageTitle(string pageName)
+        public bool IsPageTitle(string expectedPageTitle)
         {
-            return this.Driver.IsPageTitle(pageName, BaseConfiguration.MediumTimeout);
+            return this.Driver.IsPageTitle(expectedPageTitle, BaseConfiguration.MediumTimeout);
         }
 
         public string GetPageTitle(string pageName)

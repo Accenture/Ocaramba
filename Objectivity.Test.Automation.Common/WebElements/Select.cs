@@ -22,7 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-namespace Objectivity.Test.Automation.Common
+namespace Objectivity.Test.Automation.Common.WebElements
 {
     using System;
     using System.Linq;

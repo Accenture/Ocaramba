@@ -34,7 +34,7 @@ namespace Objectivity.Test.Automation.Common.Extensions
     public static class WebElementExtensions
     {
         /// <summary>
-        /// The is element text equals to expected.
+        /// Verify if actual element text equals to expected.
         /// </summary>
         /// <param name="webElement">The web element.</param>
         /// <param name="text">The text.</param>
@@ -47,8 +47,11 @@ namespace Objectivity.Test.Automation.Common.Extensions
         }
 
         /// <summary>
-        /// The set element attribute.
+        /// Set element attribute using java script.
         /// </summary>
+        /// <example>Sample code to check page title: <code>
+        /// this.Driver.SetAttribute(this.username, "attr", "10");
+        /// </code></example>
         /// <param name="webElement">The web element.</param>
         /// <param name="attribute">The attribute.</param>
         /// <param name="attributeValue">The attribute value.</param>
@@ -71,7 +74,7 @@ namespace Objectivity.Test.Automation.Common.Extensions
         }
 
         /// <summary>
-        /// Javas the script click.
+        /// Click on element using java script.
         /// </summary>
         /// <param name="webElement">The web element.</param>
         public static void JavaScriptClick(this IWebElement webElement)

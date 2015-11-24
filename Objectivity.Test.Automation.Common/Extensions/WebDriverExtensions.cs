@@ -32,6 +32,7 @@ namespace Objectivity.Test.Automation.Common.Extensions
     using NLog;
 
     using Objectivity.Test.Automation.Common.Types;
+    using Objectivity.Test.Automation.Common.WebElements;
 
     using OpenQA.Selenium;
     using OpenQA.Selenium.IE;
@@ -46,12 +47,13 @@ namespace Objectivity.Test.Automation.Common.Extensions
         private static readonly Logger Logger = LogManager.GetLogger("DRIVER");
 
         /// <summary>
-        /// Tables the specified web element.
+        /// Handler for simple use JavaScriptAlert.
         /// </summary>
+        /// <example>Sample confirmation for java script alert: <code>
+        /// this.Driver.JavaScriptAlert().ConfirmJavaScriptAlert();
+        /// </code></example>
         /// <param name="webDriver">The web driver.</param>
-        /// <returns>
-        /// Table element
-        /// </returns>
+        /// <returns>JavaScriptAlert Handle</returns>
         public static JavaScriptAlert JavaScriptAlert(this IWebDriver webDriver)
         {
             return new JavaScriptAlert(webDriver);
@@ -71,14 +73,23 @@ namespace Objectivity.Test.Automation.Common.Extensions
         }
 
         /// <summary>
-        /// Navigates to given url.
+        /// Navigates to given url and measure time for this action including or not Ajax.
         /// </summary>
+        /// <example>Sample confirmation for java script alert: <code>
+        /// this.Driver.NavigateToAndMeasureTime("http://objectivity.co.uk", waitForAjax: true);
+        /// </code></example>
         /// <param name="webDriver">The web driver.</param>
         /// <param name="url">The URL.</param>
-        public static void NavigateToAndMeasureTimeForAjaxFinished(this IWebDriver webDriver, Uri url)
+        /// <param name="waitForAjax">Wait or not for Ajax</param>
+        public static void NavigateToAndMeasureTime(this IWebDriver webDriver, Uri url, bool waitForAjax)
         {
             PerformanceHelper.Instance.StartMeasure();
             webDriver.Navigate().GoToUrl(url);
+            if (waitForAjax)
+            {
+                webDriver.WaitForAjax();
+            }
+
             PerformanceHelper.Instance.StopMeasure(url.AbsolutePath);
         }
 
@@ -114,8 +125,11 @@ namespace Objectivity.Test.Automation.Common.Extensions
         }
 
         /// <summary>
-        /// The element is present.
+        /// Wait for element to be displayed for specified time
         /// </summary>
+        /// <example>Example code to wait for login Button: <code>
+        /// this.Driver.IsElementPresent(this.loginButton, BaseConfiguration.ShortTimeout);
+        /// </code></example>
         /// <param name="webDriver">The web driver.</param>
         /// <param name="locator">The locator.</param>
         /// <param name="customTimeout">The timeout.</param>
@@ -140,8 +154,11 @@ namespace Objectivity.Test.Automation.Common.Extensions
         }
 
         /// <summary>
-        /// Determines whether [is page title] [the specified page title].
+        /// Determines whether [is page title] equals [the specified page title].
         /// </summary>
+        /// <example>Sample code to check page title: <code>
+        /// this.Driver.IsPageTitle(expectedPageTitle, BaseConfiguration.MediumTimeout);
+        /// </code></example>
         /// <param name="webDriver">The web driver.</param>
         /// <param name="pageTitle">The page title.</param>
         /// <param name="timeout">The timeout.</param>
@@ -168,6 +185,9 @@ namespace Objectivity.Test.Automation.Common.Extensions
         /// <summary>
         /// Waits the until element is no longer found.
         /// </summary>
+        /// <example>Sample code to check page title: <code>
+        /// this.Driver.WaitUntilElementIsNoLongerFound(dissapearingInfo, BaseConfiguration.ShortTimeout);
+        /// </code></example>
         /// <param name="webDriver">The web driver.</param>
         /// <param name="locator">The locator.</param>
         /// <param name="timeout">The timeout.</param>
@@ -179,7 +199,7 @@ namespace Objectivity.Test.Automation.Common.Extensions
         }
 
         /// <summary>
-        /// Switch to new window using url.
+        /// Switch to existing window using url.
         /// </summary>
         /// <param name="webDriver">The web driver.</param>
         /// <param name="url">The url.</param>
@@ -224,8 +244,11 @@ namespace Objectivity.Test.Automation.Common.Extensions
         }
 
         /// <summary>
-        /// The scroll into middle.
+        /// Selenium Actions.
         /// </summary>
+        /// <example>Simple use of Actions: <code>
+        /// this.Driver.Actions().SendKeys(Keys.Return).Perform();
+        /// </code></example>
         /// <param name="webDriver">The web driver.</param>
         /// <returns>Return new Action handle</returns>
         public static Actions Actions(this IWebDriver webDriver)
@@ -233,7 +256,7 @@ namespace Objectivity.Test.Automation.Common.Extensions
             return new Actions(webDriver);
         }
 
-        /// <summary>An IWebDriver extension method that page source contains case.</summary>
+        /// <summary>Checks that page source contains text for specified time.</summary>
         /// <param name="webDriver">The web webDriver.</param>
         /// <param name="text">The text.</param>
         /// <param name="timeoutInSeconds">The timeout in seconds.</param>
@@ -261,10 +284,13 @@ namespace Objectivity.Test.Automation.Common.Extensions
             return condition.Invoke(webDriver);
         }
 
-        /// <summary>An IWebDriver extension method that scripts the given webDriver.</summary>
+        /// <summary>Easy use for java scripts.</summary>
+        /// <example>Sample use of java scripts: <code>
+        /// this.Driver.JavaScripts().ExecuteScript("return document.getElementById("demo").innerHTML");
+        /// </code></example>
         /// <param name="webDriver">The webDriver to act on.</param>
-        /// <returns>An IJavaScriptExecutor.</returns>
-        public static IJavaScriptExecutor Scripts(this IWebDriver webDriver)
+        /// <returns>An IJavaScriptExecutor Handle.</returns>
+        public static IJavaScriptExecutor JavaScripts(this IWebDriver webDriver)
         {
             return (IJavaScriptExecutor)webDriver;
         }

@@ -60,9 +60,9 @@ namespace Objectivity.Test.Automation.MsTests
 
         protected DriverContext DriverContext { get; set; }
 
-        public bool IsPageTitle(string pageTitle)
+        public bool IsPageTitle(string expectedPageTitle)
         {
-            return this.Driver.IsPageTitle(pageTitle, BaseConfiguration.MediumTimeout);
+            return this.Driver.IsPageTitle(expectedPageTitle, BaseConfiguration.MediumTimeout);
         }
 
         public string GetPageTitle(string pageName)

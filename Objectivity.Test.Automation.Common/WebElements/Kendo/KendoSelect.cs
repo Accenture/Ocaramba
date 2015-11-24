@@ -22,12 +22,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-namespace Objectivity.Test.Automation.Common.Types.Kendo
+namespace Objectivity.Test.Automation.Common.WebElements.Kendo
 {
     using System.Collections.ObjectModel;
     using System.Globalization;
 
     using Objectivity.Test.Automation.Common.Extensions;
+    using Objectivity.Test.Automation.Common.Types;
 
     using OpenQA.Selenium;
     using OpenQA.Selenium.Remote;
@@ -59,7 +60,7 @@ namespace Objectivity.Test.Automation.Common.Types.Kendo
         /// <summary>
         /// Gets the driver.
         /// </summary>
-        public IWebDriver Browser
+        public IWebDriver Driver
         {
             get
             {
@@ -73,7 +74,7 @@ namespace Objectivity.Test.Automation.Common.Types.Kendo
         {
             get
             {
-                object elements = this.Browser.Scripts()
+                object elements = this.Driver.JavaScripts()
                 .ExecuteScript(
                     string.Format(
                         CultureInfo.InvariantCulture,
@@ -99,7 +100,7 @@ namespace Objectivity.Test.Automation.Common.Types.Kendo
             {
                 var count =
                 (long)
-                this.Browser.Scripts()
+                this.Driver.JavaScripts()
                     .ExecuteScript(
                         string.Format(
                             CultureInfo.InvariantCulture,
@@ -111,7 +112,7 @@ namespace Objectivity.Test.Automation.Common.Types.Kendo
                 {
                     options.Add(
                         (string)
-                        this.Browser.Scripts()
+                        this.Driver.JavaScripts()
                             .ExecuteScript(
                                 string.Format(
                                     CultureInfo.InvariantCulture,
@@ -133,7 +134,7 @@ namespace Objectivity.Test.Automation.Common.Types.Kendo
             {
                 var option =
                     (string)
-                    this.Browser.Scripts()
+                    this.Driver.JavaScripts()
                         .ExecuteScript(
                             string.Format(
                                 CultureInfo.InvariantCulture,
@@ -148,7 +149,7 @@ namespace Objectivity.Test.Automation.Common.Types.Kendo
         /// <param name="text">The text.</param>
         public void SelectByText(string text)
         {
-            this.Browser.Scripts().ExecuteScript(
+            this.Driver.JavaScripts().ExecuteScript(
                 string.Format(
                     CultureInfo.InvariantCulture,
                     "$('{0}').data('{1}').select(function(dataItem) {{return dataItem.text === '{2}';}});",
@@ -160,7 +161,7 @@ namespace Objectivity.Test.Automation.Common.Types.Kendo
         /// <summary>Closes this object.</summary>
         public void Close()
         {
-            this.Browser.Scripts()
+            this.Driver.JavaScripts()
                 .ExecuteScript(
                     string.Format(
                         CultureInfo.InvariantCulture,
@@ -172,7 +173,7 @@ namespace Objectivity.Test.Automation.Common.Types.Kendo
         /// <summary>Opens this object.</summary>
         public void Open()
         {
-            this.Browser.Scripts()
+            this.Driver.JavaScripts()
                 .ExecuteScript(
                     string.Format(
                         CultureInfo.InvariantCulture,

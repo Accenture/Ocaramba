@@ -22,33 +22,32 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-namespace Objectivity.Test.Automation.MsTests.PageObjects
+namespace Objectivity.Test.Automation.Common.WebElements.Kendo
 {
-    using Objectivity.Test.Automation.Common;
-    using Objectivity.Test.Automation.Common.Extensions;
-    using Objectivity.Test.Automation.Common.Types;
-    using Objectivity.Test.Automation.Common.WebElements;
+    using OpenQA.Selenium;
 
-    public class SearchResultsPage : ProjectPageBase
+    /// <summary>
+    /// Kendo Combo Box element
+    /// </summary>
+    public class KendoComboBox : KendoSelect
     {
         /// <summary>
-        /// Locators for elements
+        /// Initializes a new instance of the <see cref="KendoComboBox"/> class.
         /// </summary>
-        private readonly ElementLocator stackOverFlowCheckbox = new ElementLocator(Locator.Id, "500");
-
-        public SearchResultsPage(DriverContext driverContext)
-            : base(driverContext)
+        /// <param name="webElement">The webElement</param>
+        public KendoComboBox(IWebElement webElement)
+            : base(webElement)
         {
         }
 
-        /// <summary>
-        /// Marks the stack over flow filter.
-        /// </summary>
-        public SearchResultsPage MarkStackOverFlowFilter()
+        /// <summary>Gets the selector.</summary>
+        /// <value>The selector.</value>
+        protected override string SelectType
         {
-            var checkbox = this.Driver.GetElement<Checkbox>(this.stackOverFlowCheckbox);
-            checkbox.TickCheckbox();
-            return this;
+            get
+            {
+                return "kendoComboBox";
+            }
         }
     }
 }

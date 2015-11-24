@@ -22,7 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-namespace Objectivity.Test.Automation.Common
+namespace Objectivity.Test.Automation.Common.WebElements
 {
     using Objectivity.Test.Automation.Common.Extensions;
     using Objectivity.Test.Automation.Common.Types;
@@ -61,7 +61,7 @@ namespace Objectivity.Test.Automation.Common
         public string[][] GetTable(ElementLocator rowLocator, ElementLocator columnLocator)
         {
             var table = this.webElement;
-            var rows = table.FindElements(rowLocator.ToBy());
+            var rows = table.GetElements(rowLocator);
 
             var result = new string[rows.Count][];
             var i = 0;

@@ -51,10 +51,10 @@ namespace Objectivity.Test.Automation.Features
         /// <summary>
         /// Returns expected and actual page titles
         /// </summary>
-        /// <param name="pageName">Name of the page.</param>
-        public bool IsPageTitle(string pageName)
+        /// <param name="expectedPageTitle">Name of the page.</param>
+        public bool IsPageTitle(string expectedPageTitle)
         {
-            return this.Driver.IsPageTitle(pageName, BaseConfiguration.MediumTimeout);
+            return this.Driver.IsPageTitle(expectedPageTitle, BaseConfiguration.MediumTimeout);
         }
     }
 }

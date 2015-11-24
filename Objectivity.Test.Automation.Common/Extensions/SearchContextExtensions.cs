@@ -269,9 +269,9 @@ namespace Objectivity.Test.Automation.Common.Extensions
         /// To the driver.
         /// </summary>
         /// <param name="webElement">The web element.</param>
-        /// <returns></returns>
+        /// <returns>Driver from element</returns>
         /// <exception cref="System.ArgumentException">Element must wrap a web driver;webElement</exception>
-        internal static IWebDriver ToDriver(this ISearchContext webElement)
+        public static IWebDriver ToDriver(this ISearchContext webElement)
         {
             var wrappedElement = webElement as IWrapsDriver;
             if (wrappedElement == null)

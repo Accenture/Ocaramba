@@ -58,7 +58,7 @@
   <ItemGroup>
     <Compile Include="BaseConfiguration.cs" />
     <Compile Include="DriverContext.cs" />
-    <Compile Include="Checkbox.cs" />
+    <Compile Include="WebElements\Checkbox.cs" />
     <Compile Include="Extensions\LocatorExtensions.cs" />
     <Compile Include="Extensions\SearchContextExtensions.cs" />
     <Compile Include="Helpers\FilesHelper.cs" />
@@ -68,19 +68,19 @@
     <Compile Include="Helpers\NameHelper.cs" />
     <Compile Include="Helpers\PerformanceHelper.cs" />
     <Compile Include="Helpers\SqlHelper.cs" />
-    <Compile Include="JavaScriptAlert.cs" />
+    <Compile Include="WebElements\JavaScriptAlert.cs" />
     <Compile Include="Logger\TestLogger.cs" />
     <Compile Include="Logger\MyEventFiringWebDriver.cs" />
     <Compile Include="Types\ErrorDetail.cs" />
-    <Compile Include="Types\Kendo\KendoComboBox.cs" />
-    <Compile Include="Types\Kendo\KendoDropDownList.cs" />
-    <Compile Include="Types\Kendo\KendoGrid.cs" />
-    <Compile Include="Types\Kendo\KendoSelect.cs" />
-    <Compile Include="Types\Kendo\KendoTreeView.cs" />
+    <Compile Include="WebElements\Kendo\KendoComboBox.cs" />
+    <Compile Include="WebElements\Kendo\KendoDropDownList.cs" />
+    <Compile Include="WebElements\Kendo\KendoGrid.cs" />
+    <Compile Include="WebElements\Kendo\KendoSelect.cs" />
+    <Compile Include="WebElements\Kendo\KendoTreeView.cs" />
     <Compile Include="Locator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Select.cs" />
-    <Compile Include="Table.cs" />
+    <Compile Include="WebElements\Select.cs" />
+    <Compile Include="WebElements\Table.cs" />
     <Compile Include="TestBase.cs" />
     <Compile Include="Types\AverageGroupedTimes.cs" />
     <Compile Include="Types\ElementLocator.cs" />
@@ -116,6 +116,9 @@
       <HintPath>..\packages\Selenium.Support.2.47.0\lib\net40\WebDriver.Support.dll</HintPath>
       <Private>True</Private>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Types\Kendo\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

@@ -44,7 +44,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// <summary>
         /// Takes screen shot.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Image contains desktop screenshot</returns>
         public static Bitmap DoIt()
         {
             var screen = Screen.PrimaryScreen;

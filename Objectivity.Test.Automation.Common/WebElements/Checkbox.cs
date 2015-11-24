@@ -22,31 +22,52 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-namespace Objectivity.Test.Automation.Common.Types.Kendo
+namespace Objectivity.Test.Automation.Common.WebElements
 {
+    using Objectivity.Test.Automation.Common.Extensions;
+
     using OpenQA.Selenium;
+    using OpenQA.Selenium.Remote;
 
     /// <summary>
-    /// Kendo Combo Box element
+    /// Contains methods for checkbox.
     /// </summary>
-    public class KendoComboBox : KendoSelect
+    public class Checkbox : RemoteWebElement
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="KendoComboBox"/> class.
+        /// The web element
         /// </summary>
-        /// <param name="webElement">The webElement</param>
-        public KendoComboBox(IWebElement webElement)
-            : base(webElement)
+        private readonly IWebElement webElement;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Checkbox"/> class.
+        /// </summary>
+        /// <param name="webElement">The webElement.</param>
+        public Checkbox(IWebElement webElement)
+            : base(webElement.ToDriver() as RemoteWebDriver, null)
         {
+            this.webElement = webElement;
         }
 
-        /// <summary>Gets the selector.</summary>
-        /// <value>The selector.</value>
-        protected override string SelectType
+        /// <summary>
+        /// Set check box.
+        /// </summary>
+        public void TickCheckbox()
         {
-            get
+            if (this.webElement.Selected == false)
             {
-                return "kendoComboBox";
+                this.webElement.Click();
+            }
+        }
+
+        /// <summary>
+        /// Clear the check box.
+        /// </summary>
+        public void UntickCheckbox()
+        {
+            if (this.webElement.Selected)
+            {
+                this.webElement.Click();
             }
         }
     }

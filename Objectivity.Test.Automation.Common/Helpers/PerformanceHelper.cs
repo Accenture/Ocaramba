@@ -96,8 +96,9 @@ namespace Objectivity.Test.Automation.Common.Helpers
         }
 
         /// <summary>
-        /// Prints the average durations in milliseconds.
+        /// Prints the performance summary.
         /// </summary>
+        /// TODO: Decide what parameters must be printed
         public void PrintAveragePercentiles90DurationMilliseconds()
         {
             var groupedDurations = this.AllGroupedDurationsMilliseconds().Select(v => 

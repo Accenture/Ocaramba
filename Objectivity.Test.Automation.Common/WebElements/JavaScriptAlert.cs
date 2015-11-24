@@ -22,53 +22,44 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-namespace Objectivity.Test.Automation.Common
+namespace Objectivity.Test.Automation.Common.WebElements
 {
-    using Objectivity.Test.Automation.Common.Extensions;
-
     using OpenQA.Selenium;
-    using OpenQA.Selenium.Remote;
 
     /// <summary>
-    /// Contains methods for checkbox.
+    /// Implementation for JavaScript Alert interface.
     /// </summary>
-    public class Checkbox : RemoteWebElement
+    public class JavaScriptAlert
     {
         /// <summary>
-        /// The web element
+        /// The web driver
         /// </summary>
-        private readonly IWebElement webElement;
+        private readonly IWebDriver webDriver;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Checkbox"/> class.
+        /// Initializes a new instance of the <see cref="JavaScriptAlert"/> class.
         /// </summary>
-        /// <param name="webElement">The webElement.</param>
-        public Checkbox(IWebElement webElement)
-            : base(webElement.ToDriver() as RemoteWebDriver, null)
+        /// <param name="webDriver">The web driver.</param>
+        public JavaScriptAlert(IWebDriver webDriver)
         {
-            this.webElement = webElement;
+            this.webDriver = webDriver;
         }
 
         /// <summary>
-        /// Set check box.
+        /// Confirms the java script alert popup.
         /// </summary>
-        public void TickCheckbox()
+        public void ConfirmJavaScriptAlert()
         {
-            if (this.webElement.Selected == false)
-            {
-                this.webElement.Click();
-            }
+            this.webDriver.SwitchTo().Alert().Accept();
+            this.webDriver.SwitchTo().DefaultContent();
         }
 
         /// <summary>
-        /// Clear the check box.
+        /// Dismisses the java script alert popup.
         /// </summary>
-        public void UntickCheckbox()
+        public void DismissJavaScriptAlert()
         {
-            if (this.webElement.Selected)
-            {
-                this.webElement.Click();
-            }
+            this.webDriver.SwitchTo().Alert().Dismiss();
         }
     }
 }

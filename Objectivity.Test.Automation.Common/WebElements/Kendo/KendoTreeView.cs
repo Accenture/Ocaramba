@@ -22,7 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-namespace Objectivity.Test.Automation.Common.Types.Kendo
+namespace Objectivity.Test.Automation.Common.WebElements.Kendo
 {
     using System.Collections.ObjectModel;
     using System.Globalization;
@@ -57,7 +57,7 @@ namespace Objectivity.Test.Automation.Common.Types.Kendo
         /// <summary>
         /// Gets the driver.
         /// </summary>
-        public IWebDriver Browser
+        public IWebDriver Driver
         {
             get
             {
@@ -70,13 +70,13 @@ namespace Objectivity.Test.Automation.Common.Types.Kendo
         /// </summary>
         public void Expand()
         {
-            this.Browser.Scripts()
+            this.Driver.JavaScripts()
                 .ExecuteScript(
                     string.Format(
                         CultureInfo.InvariantCulture,
                         "var treeView = {0}.expand('.k-item'); ",
                         this.kendoTreeView));
-            ////this.Browser.WaitForSourceChanged(1);
+            ////this.Driver.WaitForSourceChanged(1);
         }
 
         /// <summary>
@@ -87,14 +87,14 @@ namespace Objectivity.Test.Automation.Common.Types.Kendo
         /// </param>
         public void SelectByText(string text)
         {
-            this.Browser.Scripts()
+            this.Driver.JavaScripts()
                 .ExecuteScript(
                     string.Format(
                         CultureInfo.InvariantCulture,
                         "var treeView = {0}; var element = treeView.findByText('{1}'); treeView.select(element); treeView.trigger('select',{{node:element}});",
                         this.kendoTreeView,
                     text));
-            ////this.Browser.WaitForSourceChanged(1);
+            ////this.Driver.WaitForSourceChanged(1);
         }
 
         /// <summary>Searches for the first text.</summary>
@@ -102,7 +102,7 @@ namespace Objectivity.Test.Automation.Common.Types.Kendo
         /// <returns>The found text.</returns>
         public Collection<string> FindByText(string text)
         {
-            object elements = this.Browser.Scripts()
+            object elements = this.Driver.JavaScripts()
                 .ExecuteScript(
                     string.Format(
                         CultureInfo.InvariantCulture,
@@ -116,7 +116,7 @@ namespace Objectivity.Test.Automation.Common.Types.Kendo
                 return
                     (Collection<string>)webElements.Select(
                         element =>
-                        (string)this.Browser.Scripts().ExecuteScript("return arguments[0].textContent", element));
+                        (string)this.Driver.JavaScripts().ExecuteScript("return arguments[0].textContent", element));
             }
 
             return new Collection<string>();

@@ -22,44 +22,32 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-namespace Objectivity.Test.Automation.Common
+namespace Objectivity.Test.Automation.Common.WebElements.Kendo
 {
     using OpenQA.Selenium;
 
     /// <summary>
-    /// Implementation for JavaScript Alert interface.
+    /// Kendo Drop Down List element
     /// </summary>
-    public class JavaScriptAlert
+    public class KendoDropDownList : KendoSelect
     {
         /// <summary>
-        /// The web driver
+        /// Initializes a new instance of the <see cref="KendoDropDownList"/> class.
         /// </summary>
-        private readonly IWebDriver webDriver;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="JavaScriptAlert"/> class.
-        /// </summary>
-        /// <param name="webDriver">The web driver.</param>
-        public JavaScriptAlert(IWebDriver webDriver)
+        /// <param name="webElement">The webElement</param>
+        public KendoDropDownList(IWebElement webElement)
+            : base(webElement)
         {
-            this.webDriver = webDriver;
         }
 
-        /// <summary>
-        /// Confirms the java script alert popup.
-        /// </summary>
-        public void ConfirmJavaScriptAlert()
+        /// <summary>Gets the selector.</summary>
+        /// <value>The selector.</value>
+        protected override string SelectType
         {
-            this.webDriver.SwitchTo().Alert().Accept();
-            this.webDriver.SwitchTo().DefaultContent();
-        }
-
-        /// <summary>
-        /// Dismisses the java script alert popup.
-        /// </summary>
-        public void DismissJavaScriptAlert()
-        {
-            this.webDriver.SwitchTo().Alert().Dismiss();
+            get
+            {
+                return "kendoDropDownList";
+            }
         }
     }
 }

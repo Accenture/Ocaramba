@@ -22,7 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-namespace Objectivity.Test.Automation.Common.Types.Kendo
+namespace Objectivity.Test.Automation.Common.WebElements.Kendo
 {
     using System;
     using System.Globalization;
@@ -57,7 +57,7 @@ namespace Objectivity.Test.Automation.Common.Types.Kendo
         /// <summary>
         /// Gets the driver.
         /// </summary>
-        public IWebDriver Browser
+        public IWebDriver Driver
         {
             get
             {
@@ -74,7 +74,7 @@ namespace Objectivity.Test.Automation.Common.Types.Kendo
             {
                 return
                     (long)
-                    this.Browser.Scripts()
+                    this.Driver.JavaScripts()
                         .ExecuteScript(
                             string.Format(CultureInfo.InvariantCulture, "return {0}.pager.page();", this.kendoGrid));
             }
@@ -89,7 +89,7 @@ namespace Objectivity.Test.Automation.Common.Types.Kendo
             {
                 return
                     (long)
-                    this.Browser.Scripts()
+                    this.Driver.JavaScripts()
                         .ExecuteScript(
                             string.Format(
                                 CultureInfo.InvariantCulture,
@@ -106,10 +106,10 @@ namespace Objectivity.Test.Automation.Common.Types.Kendo
         /// </param>
         public void SetPage(int page)
         {
-            this.Browser.Scripts()
+            this.Driver.JavaScripts()
                 .ExecuteScript(
                     string.Format(CultureInfo.InvariantCulture, "{0}.pager.page({1});", this.kendoGrid, page));
-            this.Browser.WaitForAjax();
+            this.Driver.WaitForAjax();
         }
 
         /// <summary>
@@ -161,7 +161,7 @@ namespace Objectivity.Test.Automation.Common.Types.Kendo
         {
             try
             {
-                WebDriverWait wait = new WebDriverWait(this.Browser, TimeSpan.FromSeconds(timeoutInSeconds));
+                WebDriverWait wait = new WebDriverWait(this.Driver, TimeSpan.FromSeconds(timeoutInSeconds));
                 wait.Until(x => this.SearchRowWithText(text) != null);
             }
             catch (WebDriverTimeoutException)
@@ -185,7 +185,7 @@ namespace Objectivity.Test.Automation.Common.Types.Kendo
         {
             return
                 (IWebElement)
-                this.Browser.Scripts()
+                this.Driver.JavaScripts()
                     .ExecuteScript(
                         string.Format(
                             CultureInfo.InvariantCulture,

@@ -36,8 +36,11 @@ namespace Objectivity.Test.Automation.Common.Helpers
     /// </summary>
     public static class SqlHelper
     {
+        /// <summary>
+        /// NLog logger handle
+        /// </summary>
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-
+        
         /// <summary>
         /// Method is used for execution SQL query (select) and reading each row from column.
         /// </summary>
