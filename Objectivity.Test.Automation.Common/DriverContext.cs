@@ -66,7 +66,7 @@ namespace Objectivity.Test.Automation.Common
         public enum BrowserType
         {
             /// <summary>
-            /// Firefox
+            /// Firefox browser
             /// </summary>
             Firefox,
 
@@ -76,17 +76,17 @@ namespace Objectivity.Test.Automation.Common
             FirefoxPortable,
 
             /// <summary>
-            /// InternetExplorer
+            /// InternetExplorer browser
             /// </summary>
             InternetExplorer,
 
             /// <summary>
-            /// Chrome
+            /// Chrome browser
             /// </summary>
             Chrome,
 
             /// <summary>
-            /// Not supported
+            /// Not supported browser
             /// </summary>
             None
         }

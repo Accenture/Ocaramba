@@ -47,6 +47,7 @@ namespace Objectivity.Test.Automation.Common
                 {
                     return browserType;
                 }
+
                 return DriverContext.BrowserType.None;
             }
         }
