@@ -109,15 +109,15 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// <returns>Files extension</returns>
         private static string ReturnFileExtension(FileType type)
         {
-            switch (type)
+            switch ((int)type)
             {
-                case FileType.Pdf:
+                case 1:
                     return ".pdf";
-                case FileType.Excel:
+                case 2:
                     return ".xls?";
-                case FileType.Csv:
+                case 3:
                     return ".csv";
-                case FileType.Txt:
+                case 4:
                     return ".txt";
                 default:
                     return "none";

@@ -56,7 +56,7 @@ namespace Objectivity.Test.Automation.Common.Types
         public SavedTimes(string title)
         {
             this.scenario = title;
-            this.browserName = BaseConfiguration.TestBrowser.ToString();
+            this.browserName = BaseConfiguration.TestBrowser;
         }
 
         /// <summary>

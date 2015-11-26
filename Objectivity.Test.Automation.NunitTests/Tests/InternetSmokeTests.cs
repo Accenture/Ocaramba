@@ -30,7 +30,7 @@ namespace Objectivity.Test.Automation.NunitTests.Tests
     using NUnit.Framework;
 
     using Objectivity.Test.Automation.Common;
-    //using Objectivity.Test.Automation.NunitTests.DataDriven;
+    using Objectivity.Test.Automation.NunitTests.DataDriven;
     using Objectivity.Test.Automation.NunitTests.PageObjects;
 
     /// <summary>
