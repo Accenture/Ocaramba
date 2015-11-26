@@ -61,6 +61,37 @@ namespace Objectivity.Test.Automation.Common
         private TestLogger logTest;
 
         /// <summary>
+        /// Supported browsers
+        /// </summary>
+        public enum BrowserType
+        {
+           /// <summary>
+           /// Firefox
+           /// </summary>
+           Firefox,
+
+           /// <summary>
+           /// Firefox portable
+           /// </summary>
+           FirefoxPortable,
+
+           /// <summary>
+           /// InternetExplorer
+           /// </summary>
+           InternetExplorer, 
+
+           /// <summary>
+           /// Chrome
+           /// </summary>
+           Chrome,
+
+           /// <summary>
+           /// Not supported
+           /// </summary>
+           None
+        }
+
+        /// <summary>
         /// Gets or sets the test title.
         /// </summary>
         /// <value>
@@ -168,15 +199,15 @@ namespace Objectivity.Test.Automation.Common
 
             switch (BaseConfiguration.TestBrowser)
             {
-                case "Firefox":
+                case BrowserType.Firefox:
                     chosenDriver = new FirefoxDriver(this.FirefoxProfile);
                     break;
-                case "FirefoxPortable":
+                case BrowserType.FirefoxPortable:
                     var profile = this.FirefoxProfile;
                     var firefoxBinary = new FirefoxBinary(BaseConfiguration.FirefoxPath);
                     chosenDriver = new FirefoxDriver(firefoxBinary, profile);
                     break;
-                case "InternetExplorer":
+                case BrowserType.InternetExplorer:
                     var options = new InternetExplorerOptions
                     {
                         EnsureCleanSession = true,
@@ -184,7 +215,7 @@ namespace Objectivity.Test.Automation.Common
                     };
                     chosenDriver = new InternetExplorerDriver(options);
                     break;
-                case "Chrome":
+                case BrowserType.Chrome:
                     chosenDriver = new ChromeDriver(this.ChromeProfile);
                     break;
                 default:

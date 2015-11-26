@@ -25,6 +25,7 @@ SOFTWARE.
 namespace Objectivity.Test.Automation.NunitTests
 {
     using NUnit.Framework;
+    using NUnit.Framework.Interfaces;
 
     using Objectivity.Test.Automation.Common;
 
@@ -36,7 +37,7 @@ namespace Objectivity.Test.Automation.NunitTests
         /// <summary>
         /// Before the class.
         /// </summary>
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void BeforeClass()
         {
             StartPerformanceMeasure();
@@ -45,7 +46,7 @@ namespace Objectivity.Test.Automation.NunitTests
         /// <summary>
         /// After the class.
         /// </summary>
-        [TestFixtureTearDown]
+        [OneTimeTearDown]
         public void AfterClass()
         {
             StopPerfromanceMeasure();
@@ -68,7 +69,7 @@ namespace Objectivity.Test.Automation.NunitTests
         [TearDown]
         public void AfterTest()
         {
-            this.DriverContext.IsTestFailed = TestContext.CurrentContext.Result.Status == TestStatus.Failed;
+            this.DriverContext.IsTestFailed = TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed;
             this.SaveTestDetailsIfTestFailed();
             this.DriverContext.Stop();
             this.FailTestIfVerifyFailed();

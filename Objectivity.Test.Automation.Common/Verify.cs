@@ -29,7 +29,7 @@ namespace Objectivity.Test.Automation.Common
 
     using NLog;
 
-    using NUnit.Framework;
+    //using NUnit.Framework;
 
     using Objectivity.Test.Automation.Common.Types;
 

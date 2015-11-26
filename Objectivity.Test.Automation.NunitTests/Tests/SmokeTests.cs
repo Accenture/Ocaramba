@@ -30,7 +30,7 @@ namespace Objectivity.Test.Automation.NunitTests.Tests
     using NUnit.Framework;
 
     using Objectivity.Test.Automation.Common;
-    using Objectivity.Test.Automation.NunitTests.DataDriven;
+   // using Objectivity.Test.Automation.NunitTests.DataDriven;
     using Objectivity.Test.Automation.NunitTests.PageObjects;
 
     /// <summary>
@@ -51,31 +51,31 @@ namespace Objectivity.Test.Automation.NunitTests.Tests
             Assert.IsTrue(searchResultsPage.IsPageTitle(expectedPageTitle), "Search results page is not displayed");
         }
 
-        [Test]
-        [TestCaseSource(typeof(TestData), "WordsToSearch")]
-        public void SendKeysAndClickDataDrivenSetTest(IDictionary<string, string> parameters)
-        {
-            var loginPage = new HomePage(this.DriverContext)
-                                 .OpenHomePage();
+        //[Test]
+        //[TestCaseSource(typeof(TestData), "WordsToSearch")]
+        //public void SendKeysAndClickDataDrivenSetTest(IDictionary<string, string> parameters)
+        //{
+        //    var loginPage = new HomePage(this.DriverContext)
+        //                         .OpenHomePage();
 
-            var searchResultsPage = loginPage.Search(parameters["word"]);
-            var expectedPageTitle = parameters["expected_title"].ToLower(CultureInfo.CurrentCulture);
+        //    var searchResultsPage = loginPage.Search(parameters["word"]);
+        //    var expectedPageTitle = parameters["expected_title"].ToLower(CultureInfo.CurrentCulture);
 
-            Assert.IsTrue(searchResultsPage.IsPageTitle(expectedPageTitle), string.Format(CultureInfo.CurrentCulture, "{0} page is not displayed", expectedPageTitle));
-        }
+        //    Assert.IsTrue(searchResultsPage.IsPageTitle(expectedPageTitle), string.Format(CultureInfo.CurrentCulture, "{0} page is not displayed", expectedPageTitle));
+        //}
 
-        [Test]
-        [TestCaseSource(typeof(TestData), "WordsToSearchSetTestName")]
-        public void SendKeysAndClickDataDrivenSetNameOfTest(IDictionary<string, string> parameters)
-        {
-            var loginPage = new HomePage(this.DriverContext)
-                                 .OpenHomePage();
+        //[Test]
+        //[TestCaseSource(typeof(TestData), "WordsToSearchSetTestName")]
+        //public void SendKeysAndClickDataDrivenSetNameOfTest(IDictionary<string, string> parameters)
+        //{
+        //    var loginPage = new HomePage(this.DriverContext)
+        //                         .OpenHomePage();
 
-            var searchResultsPage = loginPage.Search(parameters["word"]);
-            var expectedPageTitle = parameters["expected_title"].ToLower(CultureInfo.CurrentCulture);
+        //    var searchResultsPage = loginPage.Search(parameters["word"]);
+        //    var expectedPageTitle = parameters["expected_title"].ToLower(CultureInfo.CurrentCulture);
 
-            Assert.IsTrue(searchResultsPage.IsPageTitle(expectedPageTitle), string.Format(CultureInfo.CurrentCulture, "{0} page is not displayed", expectedPageTitle));
-        }
+        //    Assert.IsTrue(searchResultsPage.IsPageTitle(expectedPageTitle), string.Format(CultureInfo.CurrentCulture, "{0} page is not displayed", expectedPageTitle));
+        //}
 
         [Test]
         public void EvaluateLocatorTest()
@@ -126,13 +126,13 @@ namespace Objectivity.Test.Automation.NunitTests.Tests
             Assert.IsTrue(technologiesBusinessPage.IsPageTitle(expectedPageTitle), "Technologies Web page is not displayed");
         }
 
-        [Test]
-        public void VerifyTest()
-        {
-            Verify.That(this.DriverContext, () => Assert.AreEqual(1, 1), () => Assert.AreEqual(2, 2), () => Assert.AreEqual(3, 3));
-            Verify.That(this.DriverContext, () => Assert.IsFalse(false), enableScreenShot:true);
-            Verify.That(this.DriverContext, () => Assert.IsTrue(true));
-        }
+        //[Test]
+        //public void VerifyTest()
+        //{
+        //    Verify.That(this.DriverContext, () => Assert.AreEqual(1, 1), () => Assert.AreEqual(2, 2), () => Assert.AreEqual(3, 3));
+        //    Verify.That(this.DriverContext, () => Assert.IsFalse(false), enableScreenShot:true);
+        //    Verify.That(this.DriverContext, () => Assert.IsTrue(true));
+        //}
 
         [Test]
         public void ElementNotPresent()

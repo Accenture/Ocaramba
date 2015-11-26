@@ -22,38 +22,48 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-namespace Objectivity.Test.Automation.NunitTests.Tests
+namespace Objectivity.Test.Automation.MsTests
 {
-    using System.Collections.Generic;
-    using System.Globalization;
-
-    using NUnit.Framework;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using Objectivity.Test.Automation.Common;
-    //using Objectivity.Test.Automation.NunitTests.DataDriven;
-    using Objectivity.Test.Automation.NunitTests.PageObjects;
 
     /// <summary>
-    /// Tests to test framework
+    /// The base class for all tests
     /// </summary>
-    public class InternetSmokeTests : ProjectTestBase
+    [TestClass]
+    public class ProjectTestBase : TestBase
     {
-        [Test]
-        public void DownloadFileByNameTest()
+        /// <summary>
+        /// Gets or sets the microsoft test context.
+        /// </summary>
+        /// <value>
+        /// The microsoft test context.
+        /// </value>
+        public TestContext TestContext { get; set; }
+
+        /// <summary>
+        /// Before the test.
+        /// </summary>
+        [TestInitialize]
+        public void BeforeTest()
         {
-            new InternetPage(this.DriverContext)
-                .OpenHomePage()
-                .GoToFileDownloader()
-                .SaveFile("some-file.txt");
+            this.DriverContext.TestTitle = this.TestContext.TestName;
+            this.DriverContext.LogTest.LogTestStarting();
+            this.DriverContext.Start();
         }
 
-        [Test]
-        public void DownloadFileByCountTest()
+        /// <summary>
+        /// After the test.
+        /// </summary>
+        [TestCleanup]
+        public void AfterTest()
         {
-            new InternetPage(this.DriverContext)
-                .OpenHomePage()
-                .GoToFileDownloader()
-                .SaveFile();
+            this.DriverContext.IsTestFailed = this.TestContext.CurrentTestOutcome == UnitTestOutcome.Failed;
+            this.SaveTestDetailsIfTestFailed();
+            this.DriverContext.Stop();
+            this.FailTestIfVerifyFailed();
+            this.DriverContext.LogTest.LogTestEnding();
         }
     }
 }

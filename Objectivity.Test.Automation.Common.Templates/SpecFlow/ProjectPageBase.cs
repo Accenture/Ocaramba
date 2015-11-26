@@ -22,38 +22,23 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-namespace Objectivity.Test.Automation.NunitTests.Tests
+namespace Objectivity.Test.Automation.Features
 {
-    using System.Collections.Generic;
-    using System.Globalization;
-
-    using NUnit.Framework;
-
     using Objectivity.Test.Automation.Common;
-    //using Objectivity.Test.Automation.NunitTests.DataDriven;
-    using Objectivity.Test.Automation.NunitTests.PageObjects;
+    using Objectivity.Test.Automation.Common.Extensions;
 
-    /// <summary>
-    /// Tests to test framework
-    /// </summary>
-    public class InternetSmokeTests : ProjectTestBase
+    using OpenQA.Selenium;
+
+    public class ProjectPageBase
     {
-        [Test]
-        public void DownloadFileByNameTest()
+        protected ProjectPageBase(DriverContext driverContext)
         {
-            new InternetPage(this.DriverContext)
-                .OpenHomePage()
-                .GoToFileDownloader()
-                .SaveFile("some-file.txt");
+            this.DriverContext = driverContext;
+            this.Driver = driverContext.Driver;
         }
 
-        [Test]
-        public void DownloadFileByCountTest()
-        {
-            new InternetPage(this.DriverContext)
-                .OpenHomePage()
-                .GoToFileDownloader()
-                .SaveFile();
-        }
+        public DriverContext DriverContext { get; set; }
+
+        public IWebDriver Driver { get; set; }
     }
 }

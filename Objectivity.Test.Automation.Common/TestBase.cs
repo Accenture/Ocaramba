@@ -24,7 +24,7 @@ SOFTWARE.
 
 namespace Objectivity.Test.Automation.Common
 {
-    using NUnit.Framework;
+    //using NUnit.Framework;
 
     using Objectivity.Test.Automation.Common.Helpers;
     using Objectivity.Test.Automation.Common.Logger;
@@ -136,7 +136,7 @@ namespace Objectivity.Test.Automation.Common
             if (!this.driverContext.VerifyMessages.Count.Equals(0) && !this.driverContext.IsTestFailed)
             {
                 this.driverContext.VerifyMessages.Clear();
-                Assert.Fail();
+               // Assert.Fail();
             }
         }
 
@@ -151,7 +151,7 @@ namespace Objectivity.Test.Automation.Common
             if (!externalDriverContext.VerifyMessages.Count.Equals(0) && !externalDriverContext.IsTestFailed)
             {
                 externalDriverContext.VerifyMessages.Clear();
-                Assert.Fail();
+               // Assert.Fail();
             }
         }
     }
