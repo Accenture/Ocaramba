@@ -36,9 +36,19 @@ namespace Objectivity.Test.Automation.Common
         /// <summary>
         /// Gets the Driver.
         /// </summary>
-        public static string TestBrowser
+        public static DriverContext.BrowserType TestBrowser
         {
-            get { return ConfigurationManager.AppSettings["browser"]; }
+            get
+            {
+                DriverContext.BrowserType browserType;
+                bool supportedBrowser = Enum.TryParse(ConfigurationManager.AppSettings["browser"], out browserType);
+
+                if (supportedBrowser)
+                {
+                    return browserType;
+                }
+                return DriverContext.BrowserType.None;
+            }
         }
 
         /// <summary>

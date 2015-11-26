@@ -109,15 +109,15 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// <returns>Files extension</returns>
         private static string ReturnFileExtension(FileType type)
         {
-            switch ((int)type)
+            switch (type)
             {
-                case 1:
+                case FileType.Pdf:
                     return ".pdf";
-                case 2:
+                case FileType.Excel:
                     return ".xls?";
-                case 3:
+                case FileType.Csv:
                     return ".csv";
-                case 4:
+                case FileType.Txt:
                     return ".txt";
                 default:
                     return "none";
@@ -296,7 +296,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
             CreateFolder(subFolder);
             newName = newName + ReturnFileExtension(type).Replace("?", string.Empty);
 
-            Logger.Debug(CultureInfo.CurrentCulture, "new name file name {0}", newName);
+            Logger.Debug(CultureInfo.CurrentCulture, "new file name: {0}", newName);
             if (File.Exists(newName))
             {
                 File.Delete(newName);
