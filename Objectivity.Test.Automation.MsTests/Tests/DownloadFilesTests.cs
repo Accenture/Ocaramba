@@ -22,23 +22,20 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-namespace Objectivity.Test.Automation.NunitTests.Tests
+namespace Objectivity.Test.Automation.MsTests.Tests
 {
-    using System.Collections.Generic;
-    using System.Globalization;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    using NUnit.Framework;
-
-    using Objectivity.Test.Automation.Common;
-    using Objectivity.Test.Automation.NunitTests.DataDriven;
-    using Objectivity.Test.Automation.NunitTests.PageObjects;
+    using Objectivity.Test.Automation.MsTests;
+    using Objectivity.Test.Automation.MsTests.PageObjects;
 
     /// <summary>
     /// Tests to test framework
     /// </summary>
-    public class InternetSmokeTests : ProjectTestBase
+    [TestClass]
+    public class DownloadFilesTests : ProjectTestBase
     {
-        [Test]
+        [TestMethod]
         public void DownloadFileByNameTest()
         {
             new InternetPage(this.DriverContext)
@@ -47,7 +44,7 @@ namespace Objectivity.Test.Automation.NunitTests.Tests
                 .SaveFile("some-file.txt");
         }
 
-        [Test]
+        [TestMethod]
         public void DownloadFileByCountTest()
         {
             new InternetPage(this.DriverContext)
