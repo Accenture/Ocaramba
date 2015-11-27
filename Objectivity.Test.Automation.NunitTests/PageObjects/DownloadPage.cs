@@ -35,7 +35,7 @@ namespace Objectivity.Test.Automation.NunitTests.PageObjects
     using Objectivity.Test.Automation.Common.Helpers;
     using Objectivity.Test.Automation.Common.Types;
 
-    public class InternetDownloadPage : ProjectPageBase
+    public class DownloadPage : ProjectPageBase
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
@@ -45,14 +45,14 @@ namespace Objectivity.Test.Automation.NunitTests.PageObjects
         private readonly ElementLocator downloadPageHeader = new ElementLocator(Locator.XPath, "//h3[.='File Downloader']"),
                                         fileLink = new ElementLocator(Locator.CssSelector, "a[href='download/{0}']");
 
-        public InternetDownloadPage(DriverContext driverContext)
+        public DownloadPage(DriverContext driverContext)
             : base(driverContext)
         {
             Logger.Info("Waiting for File Download page to open");
             this.Driver.IsElementPresent(this.downloadPageHeader, BaseConfiguration.ShortTimeout);
         }
 
-        public InternetDownloadPage SaveFile(string fileName)
+        public DownloadPage SaveFile(string fileName)
         {
             if (BaseConfiguration.TestBrowser == DriverContext.BrowserType.Firefox
                 || BaseConfiguration.TestBrowser == DriverContext.BrowserType.Chrome)
@@ -69,7 +69,7 @@ namespace Objectivity.Test.Automation.NunitTests.PageObjects
             return this;
         }
 
-        public InternetDownloadPage SaveFile()
+        public DownloadPage SaveFile()
         {
            if (BaseConfiguration.TestBrowser == DriverContext.BrowserType.Firefox
                 || BaseConfiguration.TestBrowser == DriverContext.BrowserType.Chrome)

@@ -74,7 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataDriven\TestData.cs" />
-    <Compile Include="PageObjects\InternetDownloadPage.cs" />
+    <Compile Include="PageObjects\DownloadPage.cs" />
     <Compile Include="PageObjects\InternetPage.cs" />
     <Compile Include="PageObjects\JavaScriptAlertsPage.cs" />
     <Compile Include="PageObjects\TechnologiesBusinessPage.cs" />

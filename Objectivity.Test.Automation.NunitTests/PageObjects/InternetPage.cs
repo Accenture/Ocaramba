@@ -66,10 +66,10 @@ namespace Objectivity.Test.Automation.NunitTests.PageObjects
         }
 
 
-        public InternetDownloadPage GoToFileDownloader()
+        public DownloadPage GoToFileDownloader()
         {
             this.Driver.GetElement(this.fileDownload).Click();
-            return new InternetDownloadPage(this.DriverContext);
+            return new DownloadPage(this.DriverContext);
         }
 
 
