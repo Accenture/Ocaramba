@@ -98,7 +98,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
                             + folder);
                 }
 
-                return BaseConfiguration.DownloadFolder;
+                return folder;
         }
 
         /// <summary>
