@@ -42,6 +42,7 @@ namespace Objectivity.Test.Automation.Common.WebElements.Kendo
         /// <summary>
         /// The element selector.
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields", Justification = "Temporary solution")]
         protected readonly string ElementCssSelector;
 
         private readonly ElementLocator kendoSelect = new ElementLocator(
