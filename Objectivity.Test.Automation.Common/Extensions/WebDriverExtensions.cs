@@ -28,6 +28,7 @@ namespace Objectivity.Test.Automation.Common.Extensions
 {
     using System;
     using System.Globalization;
+    using System.Runtime.CompilerServices;
 
     using NLog;
 
@@ -301,10 +302,9 @@ namespace Objectivity.Test.Automation.Common.Extensions
         /// <param name="webDriver">The web driver.</param>
         private static void ApproveCertificateForInternetExplorer(this IWebDriver webDriver)
         {
-            if (webDriver.GetType() == typeof(InternetExplorerDriver)
-                && webDriver.Title.Contains("Certificate"))
+            if (BaseConfiguration.TestBrowser.Equals(DriverContext.BrowserType.InternetExplorer) && webDriver.Title.Contains("Certificate"))
             {
-                webDriver.Navigate().GoToUrl(new Uri("javascript:document.FindElementById('overridelink').click()"));
+                webDriver.FindElement(By.Id("overridelink")).JavaScriptClick();
             }
         }
     }

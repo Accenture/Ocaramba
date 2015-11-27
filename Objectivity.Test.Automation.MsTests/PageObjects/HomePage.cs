@@ -71,6 +71,7 @@ namespace Objectivity.Test.Automation.MsTests.PageObjects
         public HomePage OpenHomePageAndMeasureTime()
         {
             var url = this.GetUrlValue();
+            this.Driver.NavigateTo(new Uri(url));
             this.Driver.NavigateToAndMeasureTime(new Uri(url), waitForAjax: true);
             Logger.Info(CultureInfo.CurrentCulture, "Opening page {0}", url);
             return this;

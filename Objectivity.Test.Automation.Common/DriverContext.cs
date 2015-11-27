@@ -155,6 +155,13 @@ namespace Objectivity.Test.Automation.Common
             get
             {
                 var profile = new FirefoxProfile();
+
+                // set browser proxy for firefox
+                if (!String.IsNullOrEmpty(BaseConfiguration.Proxy))
+                {
+                    profile.SetProxyPreferences(this.CurrentProxy());
+                }
+
                 profile.SetPreference("toolkit.startup.max_resumed_crashes", "999999");
                 profile.SetPreference("network.automatic-ntlm-auth.trusted-uris", BaseConfiguration.Host ?? string.Empty);
 
@@ -184,8 +191,44 @@ namespace Objectivity.Test.Automation.Common
                 options.AddUserProfilePreference("download.default_directory", FilesHelper.GetFolder(BaseConfiguration.DownloadFolder));
                 options.AddUserProfilePreference("download.prompt_for_download", false);
 
+                // set browser proxy for chrome
+                if (!String.IsNullOrEmpty(BaseConfiguration.Proxy))
+                {
+                    options.Proxy = this.CurrentProxy();
+                }
+                
                 return options;
             }
+        }
+
+        private InternetExplorerOptions InternetExplorerProfile
+        {
+            get
+            {
+                var options = new InternetExplorerOptions
+                {
+                    EnsureCleanSession = true,
+                    IgnoreZoomLevel = true,
+                };
+
+                // set browser proxy for IE
+                if (!String.IsNullOrEmpty(BaseConfiguration.Proxy))
+                {
+                    options.Proxy = this.CurrentProxy();
+                }
+
+                return options;
+            }
+        }
+
+        private Proxy CurrentProxy()
+        {
+            Proxy proxy = new Proxy();
+            proxy.HttpProxy = BaseConfiguration.Proxy;
+            proxy.FtpProxy = BaseConfiguration.Proxy;
+            proxy.SslProxy = BaseConfiguration.Proxy;
+            proxy.SocksProxy = BaseConfiguration.Proxy;
+            return proxy;
         }
 
         /// <summary>
@@ -208,12 +251,7 @@ namespace Objectivity.Test.Automation.Common
                     chosenDriver = new FirefoxDriver(firefoxBinary, profile);
                     break;
                 case BrowserType.InternetExplorer:
-                    var options = new InternetExplorerOptions
-                    {
-                        EnsureCleanSession = true,
-                        IgnoreZoomLevel = true,
-                    };
-                    chosenDriver = new InternetExplorerDriver(options);
+                    chosenDriver = new InternetExplorerDriver(this.InternetExplorerProfile);
                     break;
                 case BrowserType.Chrome:
                     chosenDriver = new ChromeDriver(this.ChromeProfile);
