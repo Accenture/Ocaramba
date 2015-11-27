@@ -34,16 +34,16 @@ namespace Objectivity.Test.Automation.Common.WebElements.Kendo
     using OpenQA.Selenium.Remote;
 
     /// <summary>
-    /// Kendo Tree View element
+    ///     Kendo Tree View element
     /// </summary>
     public class KendoTreeView : RemoteWebElement
     {
-        private readonly IWebElement webElement;
-
         private readonly string kendoTreeView;
 
+        private readonly IWebElement webElement;
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="KendoTreeView"/> class.
+        ///     Initializes a new instance of the <see cref="KendoTreeView" /> class.
         /// </summary>
         /// <param name="webElement">The webElement</param>
         public KendoTreeView(IWebElement webElement)
@@ -55,7 +55,7 @@ namespace Objectivity.Test.Automation.Common.WebElements.Kendo
         }
 
         /// <summary>
-        /// Gets the driver.
+        ///     Gets the driver.
         /// </summary>
         public IWebDriver Driver
         {
@@ -66,7 +66,26 @@ namespace Objectivity.Test.Automation.Common.WebElements.Kendo
         }
 
         /// <summary>
-        /// The expand.
+        ///     Returns selected webElement or null
+        /// </summary>
+        public IWebElement SelectedOption
+        {
+            get
+            {
+                var element =
+                    (IWebElement)
+                    this.Driver.JavaScripts()
+                        .ExecuteScript(
+                            string.Format(
+                                CultureInfo.InvariantCulture,
+                                "var treeView = {0}; return treeView.select().toArray()[0];",
+                                this.kendoTreeView));
+                return element;
+            }
+        }
+
+        /// <summary>
+        /// Expands collapsed nodes.
         /// </summary>
         public void Expand()
         {
@@ -76,14 +95,26 @@ namespace Objectivity.Test.Automation.Common.WebElements.Kendo
                         CultureInfo.InvariantCulture,
                         "var treeView = {0}.expand('.k-item'); ",
                         this.kendoTreeView));
-            ////this.Driver.WaitForSourceChanged(1);
         }
 
         /// <summary>
-        /// The select by text.
+        /// Collapses nodes.
+        /// </summary>
+        public void Collapse()
+        {
+            this.Driver.JavaScripts()
+                .ExecuteScript(
+                    string.Format(
+                        CultureInfo.InvariantCulture,
+                        "var treeView = {0}.collapse('.k-item'); ",
+                        this.kendoTreeView));
+        }
+
+        /// <summary>
+        ///     The select by text.
         /// </summary>
         /// <param name="text">
-        /// The text.
+        ///     The text.
         /// </param>
         public void SelectByText(string text)
         {
@@ -93,7 +124,7 @@ namespace Objectivity.Test.Automation.Common.WebElements.Kendo
                         CultureInfo.InvariantCulture,
                         "var treeView = {0}; var element = treeView.findByText('{1}'); treeView.select(element); treeView.trigger('select',{{node:element}});",
                         this.kendoTreeView,
-                    text));
+                        text));
             ////this.Driver.WaitForSourceChanged(1);
         }
 
@@ -102,24 +133,22 @@ namespace Objectivity.Test.Automation.Common.WebElements.Kendo
         /// <returns>The found text.</returns>
         public Collection<string> FindByText(string text)
         {
-            object elements = this.Driver.JavaScripts()
-                .ExecuteScript(
-                    string.Format(
-                        CultureInfo.InvariantCulture,
-                        "var treeView = {0}; return treeView.findByText('{1}').toArray();",
-                        this.kendoTreeView,
-                        text));
+            var elements =
+                (ReadOnlyCollection<IWebElement>)this.Driver.JavaScripts()
+                    .ExecuteScript(
+                        string.Format(
+                            CultureInfo.InvariantCulture,
+                            "var treeView = {0}; return treeView.findByText('{1}').toArray();",
+                            this.kendoTreeView,
+                            text));
 
-            var webElements = elements as ReadOnlyCollection<IWebElement>;
-            if (webElements != null)
+            if (elements == null)
             {
-                return
-                    (Collection<string>)webElements.Select(
-                        element =>
-                        (string)this.Driver.JavaScripts().ExecuteScript("return arguments[0].textContent", element));
+                return new Collection<string>();
             }
 
-            return new Collection<string>();
+            var textItems = elements.Select(element => element.GetTextContent()).ToList();
+            return new Collection<string>(textItems);
         }
     }
 }

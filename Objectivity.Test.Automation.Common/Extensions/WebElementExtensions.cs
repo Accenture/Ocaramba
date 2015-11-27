@@ -87,5 +87,25 @@ namespace Objectivity.Test.Automation.Common.Extensions
 
             javascript.ExecuteScript("arguments[0].click();", webElement);
         }
+
+        /// <summary>
+        /// Returns the textual content of the specified node, and all its descendants regardless element is visible or not.
+        /// </summary>
+        /// <param name="webElement">The web element</param>
+        /// <returns>The attribute</returns>
+        /// <exception cref="ArgumentException">Element must wrap a web driver
+        /// or
+        /// Element must wrap a web driver that supports java script execution</exception>
+        public static string GetTextContent(this IWebElement webElement)
+        {
+            var javascript = webElement.ToDriver() as IJavaScriptExecutor;
+            if (javascript == null)
+            {
+                throw new ArgumentException("Element must wrap a web driver that supports javascript execution");
+            }
+
+            var textContent = (string)javascript.ExecuteScript("return arguments[0].textContent", webElement);
+            return textContent;
+        }
     }
 }

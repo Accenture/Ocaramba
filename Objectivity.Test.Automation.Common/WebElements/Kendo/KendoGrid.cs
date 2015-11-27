@@ -157,7 +157,7 @@ namespace Objectivity.Test.Automation.Common.WebElements.Kendo
         /// <exception cref="NotFoundException">
         /// When row with text was not found in specific time
         /// </exception>
-        public IWebElement SearchRowWithText(string text, int timeoutInSeconds)
+        public IWebElement SearchRowWithText(string text, double timeoutInSeconds)
         {
             try
             {

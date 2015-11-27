@@ -26,6 +26,7 @@ namespace Objectivity.Test.Automation.Common.WebElements.Kendo
 {
     using System.Collections.ObjectModel;
     using System.Globalization;
+    using System.Linq;
 
     using Objectivity.Test.Automation.Common.Extensions;
     using Objectivity.Test.Automation.Common.Types;
@@ -34,19 +35,23 @@ namespace Objectivity.Test.Automation.Common.WebElements.Kendo
     using OpenQA.Selenium.Remote;
 
     /// <summary>
-    /// Kendo Select element
+    ///     Kendo Select element
     /// </summary>
     public abstract class KendoSelect : RemoteWebElement
     {
+        /// <summary>
+        /// The element selector.
+        /// </summary>
+        protected readonly string ElementCssSelector;
+
+        private readonly ElementLocator kendoSelect = new ElementLocator(
+            Locator.XPath,
+            "./ancestor-or-self::span[contains(@class, 'k-widget')]//input[@id]");
+
         private readonly IWebElement webElement;
 
-        private readonly string elementCssSelector;
-
-        private ElementLocator 
-            kendoSelect = new ElementLocator(Locator.XPath, "./ancestor-or-self::span[contains(@class, 'k-widget')]//input[@id]");
-
         /// <summary>
-        /// Initializes a new instance of the <see cref="KendoSelect"/> class.
+        ///     Initializes a new instance of the <see cref="KendoSelect" /> class.
         /// </summary>
         /// <param name="webElement">The webElement</param>
         protected KendoSelect(IWebElement webElement)
@@ -54,11 +59,11 @@ namespace Objectivity.Test.Automation.Common.WebElements.Kendo
         {
             this.webElement = webElement;
             var id = this.webElement.GetElement(this.kendoSelect, e => e.Displayed == false).GetAttribute("id");
-            this.elementCssSelector = string.Format(CultureInfo.InvariantCulture, "#{0}", id);
+            this.ElementCssSelector = string.Format(CultureInfo.InvariantCulture, "#{0}", id);
         }
 
         /// <summary>
-        /// Gets the driver.
+        ///     Gets the driver.
         /// </summary>
         public IWebDriver Driver
         {
@@ -74,16 +79,17 @@ namespace Objectivity.Test.Automation.Common.WebElements.Kendo
         {
             get
             {
-                object elements = this.Driver.JavaScripts()
-                .ExecuteScript(
-                    string.Format(
-                        CultureInfo.InvariantCulture,
-                        "return $('{0}').data('{1}').ul.toArray();",
-                        this.elementCssSelector,
-                        this.SelectType));
+                var element =
+                    (IWebElement)
+                    this.Driver.JavaScripts()
+                        .ExecuteScript(
+                            string.Format(
+                                CultureInfo.InvariantCulture,
+                                "return $('{0}').data('{1}').ul.toArray()[0];",
+                                this.ElementCssSelector,
+                                this.SelectType));
 
-                var webElements = elements as ReadOnlyCollection<IWebElement>;
-                return webElements != null ? webElements[0] : null;
+                return element;
             }
         }
 
@@ -92,37 +98,23 @@ namespace Objectivity.Test.Automation.Common.WebElements.Kendo
         protected abstract string SelectType { get; }
 
         /// <summary>
-        /// Gets the options.
+        ///     Gets the options.
         /// </summary>
         public Collection<string> Options
         {
             get
             {
-                var count =
-                (long)
-                this.Driver.JavaScripts()
-                    .ExecuteScript(
-                        string.Format(
-                            CultureInfo.InvariantCulture,
-                            "return $('{0}').data('{1}').dataSource.data().length;",
-                            this.elementCssSelector,
-                            this.SelectType));
-                var options = new Collection<string>();
-                for (var i = 0; i < count; i++)
-                {
-                    options.Add(
-                        (string)
-                        this.Driver.JavaScripts()
-                            .ExecuteScript(
-                                string.Format(
-                                    CultureInfo.InvariantCulture,
-                                    "return $('{0}').data('{1}').ul.children().eq({2}).text();",
-                                    this.elementCssSelector,
-                                    this.SelectType,
-                                    i)));
-                }
-
-                return options;
+                var elements =
+                    (ReadOnlyCollection<IWebElement>)
+                    this.Driver.JavaScripts()
+                        .ExecuteScript(
+                            string.Format(
+                                CultureInfo.InvariantCulture,
+                                "return $('{0}').data('{1}').ul.children().toArray();",
+                                this.ElementCssSelector,
+                                this.SelectType));
+                var options = elements.Select(element => element.GetTextContent()).ToList();
+                return new Collection<string>(options);
             }
         }
 
@@ -139,7 +131,7 @@ namespace Objectivity.Test.Automation.Common.WebElements.Kendo
                             string.Format(
                                 CultureInfo.InvariantCulture,
                                 "return $('{0}').data('{1}').text();",
-                                this.elementCssSelector,
+                                this.ElementCssSelector,
                                 this.SelectType));
                 return option;
             }
@@ -149,13 +141,14 @@ namespace Objectivity.Test.Automation.Common.WebElements.Kendo
         /// <param name="text">The text.</param>
         public void SelectByText(string text)
         {
-            this.Driver.JavaScripts().ExecuteScript(
-                string.Format(
-                    CultureInfo.InvariantCulture,
-                    "$('{0}').data('{1}').select(function(dataItem) {{return dataItem.text === '{2}';}});",
-                    this.elementCssSelector,
-                    this.SelectType,
-                    text));
+            this.Driver.JavaScripts()
+                .ExecuteScript(
+                    string.Format(
+                        CultureInfo.InvariantCulture,
+                        "$('{0}').data('{1}').select(function(dataItem) {{return dataItem.text === '{2}';}});",
+                        this.ElementCssSelector,
+                        this.SelectType,
+                        text));
         }
 
         /// <summary>Closes this object.</summary>
@@ -166,7 +159,7 @@ namespace Objectivity.Test.Automation.Common.WebElements.Kendo
                     string.Format(
                         CultureInfo.InvariantCulture,
                         "$('{0}').data('{1}').close();",
-                        this.elementCssSelector,
+                        this.ElementCssSelector,
                         this.SelectType));
         }
 
@@ -178,7 +171,7 @@ namespace Objectivity.Test.Automation.Common.WebElements.Kendo
                     string.Format(
                         CultureInfo.InvariantCulture,
                         "$('{0}').data('{1}').open();",
-                        this.elementCssSelector,
+                        this.ElementCssSelector,
                         this.SelectType));
         }
     }
