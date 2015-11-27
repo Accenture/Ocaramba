@@ -157,7 +157,7 @@ namespace Objectivity.Test.Automation.Common
                 var profile = new FirefoxProfile();
 
                 // set browser proxy for firefox
-                if (!String.IsNullOrEmpty(BaseConfiguration.Proxy))
+                if (!string.IsNullOrEmpty(BaseConfiguration.Proxy))
                 {
                     profile.SetProxyPreferences(this.CurrentProxy());
                 }
@@ -192,7 +192,7 @@ namespace Objectivity.Test.Automation.Common
                 options.AddUserProfilePreference("download.prompt_for_download", false);
 
                 // set browser proxy for chrome
-                if (!String.IsNullOrEmpty(BaseConfiguration.Proxy))
+                if (!string.IsNullOrEmpty(BaseConfiguration.Proxy))
                 {
                     options.Proxy = this.CurrentProxy();
                 }
@@ -212,7 +212,7 @@ namespace Objectivity.Test.Automation.Common
                 };
 
                 // set browser proxy for IE
-                if (!String.IsNullOrEmpty(BaseConfiguration.Proxy))
+                if (!string.IsNullOrEmpty(BaseConfiguration.Proxy))
                 {
                     options.Proxy = this.CurrentProxy();
                 }
