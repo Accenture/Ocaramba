@@ -86,6 +86,7 @@
     <Compile Include="ProjectTestBase.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Tests\DownloadFilesTests.cs" />
     <Compile Include="Tests\KendoTests\KendoComboBoxTests.cs" />
     <Compile Include="Tests\KendoTests\KendoDropDownListTests.cs" />
     <Compile Include="Tests\KendoTests\KendoGridTests.cs" />
