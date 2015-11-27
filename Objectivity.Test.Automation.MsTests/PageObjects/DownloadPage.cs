@@ -22,7 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-namespace Objectivity.Test.Automation.NunitTests.PageObjects
+namespace Objectivity.Test.Automation.MsTests.PageObjects
 {
     using System;
     using System.Globalization;
@@ -35,7 +35,7 @@ namespace Objectivity.Test.Automation.NunitTests.PageObjects
     using Objectivity.Test.Automation.Common.Helpers;
     using Objectivity.Test.Automation.Common.Types;
 
-    public class InternetDownloadPage : ProjectPageBase
+    public class DownloadPage : ProjectPageBase
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
@@ -45,27 +45,47 @@ namespace Objectivity.Test.Automation.NunitTests.PageObjects
         private readonly ElementLocator downloadPageHeader = new ElementLocator(Locator.XPath, "//h3[.='File Downloader']"),
                                         fileLink = new ElementLocator(Locator.CssSelector, "a[href='download/{0}']");
 
-        public InternetDownloadPage(DriverContext driverContext)
+        public DownloadPage(DriverContext driverContext)
             : base(driverContext)
         {
             Logger.Info("Waiting for File Download page to open");
             this.Driver.IsElementPresent(this.downloadPageHeader, BaseConfiguration.ShortTimeout);
         }
 
-        public InternetDownloadPage SaveFile(string fileName)
+        public DownloadPage SaveFile(string fileName)
         {
-            this.Driver.GetElement(this.fileLink.Evaluate("some-file.txt")).Click();
-            FilesHelper.WaitForFile(this.Driver, fileName, BaseConfiguration.DownloadFolder);
+            if (BaseConfiguration.TestBrowser == DriverContext.BrowserType.Firefox
+                || BaseConfiguration.TestBrowser == DriverContext.BrowserType.Chrome)
+            {
+                this.Driver.GetElement(this.fileLink.Evaluate("some-file.txt")).Click();
+                FilesHelper.WaitForFile(this.Driver, fileName, BaseConfiguration.DownloadFolder);
+            }
+            else
+            {
+                throw new NotSupportedException(
+                        string.Format(CultureInfo.CurrentCulture, "Downloading files in browser {0} is not supported", BaseConfiguration.TestBrowser));
+            }
+
             return this;
         }
 
-        public InternetDownloadPage SaveFile()
+        public DownloadPage SaveFile()
         {
-            var filesNumber = FilesHelper.CountFiles(BaseConfiguration.DownloadFolder, FilesHelper.FileType.Txt);
-            this.Driver.GetElement(this.fileLink.Evaluate("some-file.txt")).Click();
-            FilesHelper.WaitForFile(FilesHelper.FileType.Txt, this.Driver,filesNumber, BaseConfiguration.DownloadFolder);
-            FileInfo file = FilesHelper.GetLastFile(BaseConfiguration.DownloadFolder, FilesHelper.FileType.Txt);
-            FilesHelper.RenameFile(file.Name, "new_name_of_file", BaseConfiguration.DownloadFolder, FilesHelper.FileType.Txt);
+            if (BaseConfiguration.TestBrowser == DriverContext.BrowserType.Firefox
+                || BaseConfiguration.TestBrowser == DriverContext.BrowserType.Chrome)
+            {
+                var filesNumber = FilesHelper.CountFiles(BaseConfiguration.DownloadFolder, FilesHelper.FileType.Txt);
+                this.Driver.GetElement(this.fileLink.Evaluate("some-file.txt")).Click();
+                FilesHelper.WaitForFile(FilesHelper.FileType.Txt, this.Driver, filesNumber, BaseConfiguration.DownloadFolder);
+                FileInfo file = FilesHelper.GetLastFile(BaseConfiguration.DownloadFolder, FilesHelper.FileType.Txt);
+                FilesHelper.RenameFile(file.Name, "new_name_of_file", BaseConfiguration.DownloadFolder, FilesHelper.FileType.Txt);
+            }
+            else
+            {
+                throw new NotSupportedException(
+                        string.Format(CultureInfo.CurrentCulture, "Downloading files in browser {0} is not supported", BaseConfiguration.TestBrowser));
+            }
+
             return this;
         }
     }

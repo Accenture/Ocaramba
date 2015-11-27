@@ -72,6 +72,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PageObjects\DownloadPage.cs" />
+    <Compile Include="PageObjects\InternetPage.cs" />
     <Compile Include="PageObjects\KendoComboBoxPage.cs" />
     <Compile Include="PageObjects\KendoDropDownListPage.cs" />
     <Compile Include="PageObjects\KendoGridPage.cs" />
@@ -84,6 +86,7 @@
     <Compile Include="ProjectTestBase.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Tests\DownloadFilesTests.cs" />
     <Compile Include="Tests\KendoTests\KendoComboBoxTests.cs" />
     <Compile Include="Tests\KendoTests\KendoDropDownListTests.cs" />
     <Compile Include="Tests\KendoTests\KendoGridTests.cs" />

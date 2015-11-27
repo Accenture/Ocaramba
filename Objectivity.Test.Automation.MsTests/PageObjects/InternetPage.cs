@@ -22,7 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-namespace Objectivity.Test.Automation.NunitTests.PageObjects
+namespace Objectivity.Test.Automation.MsTests.PageObjects
 {
     using System;
     using System.Globalization;
@@ -32,6 +32,7 @@ namespace Objectivity.Test.Automation.NunitTests.PageObjects
     using Objectivity.Test.Automation.Common;
     using Objectivity.Test.Automation.Common.Extensions;
     using Objectivity.Test.Automation.Common.Types;
+    using Objectivity.Test.Automation.MsTests;
 
     public class InternetPage : ProjectPageBase
     {
@@ -40,11 +41,9 @@ namespace Objectivity.Test.Automation.NunitTests.PageObjects
         /// <summary>
         /// Locators for elements
         /// </summary>
-        private readonly ElementLocator
-            javaScriptAlertsLinkLocator = new ElementLocator(Locator.CssSelector, "a[href='/javascript_alerts']"),
-            fileDownload = new ElementLocator(Locator.LinkText, "File Download");
+        private readonly ElementLocator fileDownload = new ElementLocator(Locator.LinkText, "File Download");
 
-        public InternetPage(DriverContext driverContext): base(driverContext)
+        public InternetPage(DriverContext driverContext) : base(driverContext)
         {
         }
 
@@ -59,19 +58,11 @@ namespace Objectivity.Test.Automation.NunitTests.PageObjects
             return this;
         }
 
-        public JavaScriptAlertsPage GoToJavaScriptAlerts()
-        {
-            this.Driver.GetElement(this.javaScriptAlertsLinkLocator).Click();
-            return new JavaScriptAlertsPage(this.DriverContext);
-        }
-
-
         public DownloadPage GoToFileDownloader()
         {
             this.Driver.GetElement(this.fileDownload).Click();
             return new DownloadPage(this.DriverContext);
         }
-
 
         private string GetUrlValue()
         {

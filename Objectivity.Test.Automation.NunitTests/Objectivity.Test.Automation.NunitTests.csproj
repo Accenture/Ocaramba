@@ -74,7 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataDriven\TestData.cs" />
-    <Compile Include="PageObjects\InternetDownloadPage.cs" />
+    <Compile Include="PageObjects\DownloadPage.cs" />
     <Compile Include="PageObjects\InternetPage.cs" />
     <Compile Include="PageObjects\JavaScriptAlertsPage.cs" />
     <Compile Include="PageObjects\TechnologiesBusinessPage.cs" />
@@ -87,11 +87,11 @@
     </Compile>
     <Compile Include="CustomGrid.cs" />
     <Compile Include="Tests\ActionsTests.cs" />
+    <Compile Include="Tests\DownloadFilesTests.cs" />
     <Compile Include="Tests\JavaScriptAlertsTests.cs" />
     <Compile Include="Tests\PerformanceTests.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Tests\InternetSmokeTests.cs" />
     <Compile Include="Tests\SmokeTests.cs" />
   </ItemGroup>
   <ItemGroup>
