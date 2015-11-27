@@ -77,6 +77,14 @@ namespace Objectivity.Test.Automation.Common
         }
 
         /// <summary>
+        /// Gets the browser proxy.
+        /// </summary>
+        public static string Proxy
+        {
+            get { return ConfigurationManager.AppSettings["proxy"]; }
+        }
+
+        /// <summary>
         /// Gets the username.
         /// </summary>
         public static string Username

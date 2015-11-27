@@ -82,7 +82,6 @@
     <Compile Include="ProjectTestBase.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Tests\DownloadFilesTests.cs" />
     <Compile Include="Tests\PerformanceTests.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -55,14 +55,6 @@ namespace Objectivity.Test.Automation.MsTests.Tests
             StopPerfromanceMeasure();
         }
 
-        [TestMethod]
-        public void OpenHomePage()
-        {
-            this.LogTest.Info("I go to HomePage");
-            var loginPage = new HomePage(this.DriverContext);
-            loginPage.OpenHomePageAndMeasureTime();
-        }
-
         [DeploymentItem("Objectivity.Test.Automation.MsTests\\DDT.xml"),
             DeploymentItem("Objectivity.Test.Automation.MsTests\\IEDriverServer.exe"),
             DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML",
