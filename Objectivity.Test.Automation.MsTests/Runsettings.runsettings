@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <RunSettings>
-<MSTest>
-     <SettingsFile>TestSettings.testsettings</SettingsFile>
- </MSTest>
+	<RunConfiguration>
+		<ResultsDirectory>.\Objectivity.Test.Automation.MsTests</ResultsDirectory>
+	 </RunConfiguration>
 </RunSettings>
