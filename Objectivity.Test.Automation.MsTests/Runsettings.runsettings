@@ -3,4 +3,8 @@
 	<RunConfiguration>
 		<ResultsDirectory>.\Objectivity.Test.Automation.MsTests</ResultsDirectory>
 	 </RunConfiguration>
+<!-- MSTest adapter -->
+  <MSTest>
+    <SettingsFile>..\..\TestSettings.testsettings</SettingsFile>
+  </MSTest>
 </RunSettings>
