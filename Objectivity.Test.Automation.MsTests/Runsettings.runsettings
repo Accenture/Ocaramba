@@ -5,6 +5,6 @@
 	 </RunConfiguration>
 <!-- MSTest adapter -->
   <MSTest>
-    <SettingsFile>Objectivity.Test.Automation.MsTests\TestSettings.testsettings</SettingsFile>
+    <SettingsFile>TestSettings.testsettings</SettingsFile>
   </MSTest>
 </RunSettings>
