@@ -29,8 +29,6 @@ namespace Objectivity.Test.Automation.Common
 
     using NLog;
 
-    using NUnit.Framework;
-
     using Objectivity.Test.Automation.Common.Types;
 
     /// <summary>
@@ -76,7 +74,7 @@ namespace Objectivity.Test.Automation.Common
             {
                 myAssert();
             }
-            catch (AssertionException e)
+            catch (Exception e)
             {
                 if (enableScreenShot)
                 {

@@ -1,17 +1,23 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Objectivity.Test.Automation.Features", "Objectivity.Test.Automation.Features\Objectivity.Test.Automation.Features.csproj", "{B97FEA9E-C131-4850-BC6D-563F60EE41FA}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Objectivity.Test.Automation.MsTests", "Objectivity.Test.Automation.MsTests\Objectivity.Test.Automation.MsTests.csproj", "{00D2DBBC-8C05-45B7-956E-9F01DEB9BACA}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Objectivity.Test.Automation.NunitTests", "Objectivity.Test.Automation.NunitTests\Objectivity.Test.Automation.NunitTests.csproj", "{74F9B9A8-0055-4C13-B3C9-FACED546CB43}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Objectivity.Test.Automation.Common", "Objectivity.Test.Automation.Common\Objectivity.Test.Automation.Common.csproj", "{46FA4EDC-A114-4E8F-A545-996F99E31EA8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{AF2EBD4E-C7A9-4151-A868-02C60EEA8628}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Objectivity.Test.Automation.NUnit", "Objectivity.Test.Automation.NUnit\Objectivity.Test.Automation.NUnit.csproj", "{74F9B9A8-0055-4C13-B3C9-FACED546CB43}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Objectivity.Test.Automation.NUnit.Tests", "Objectivity.Test.Automation.NUnit.Tests\Objectivity.Test.Automation.NUnit.Tests.csproj", "{36BF49CC-1EBF-4803-A3FF-72FD1D7E53E4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Objectivity.Test.Automation.MsTest", "Objectivity.Test.Automation.MsTest\Objectivity.Test.Automation.MsTest.csproj", "{00D2DBBC-8C05-45B7-956E-9F01DEB9BACA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Objectivity.Test.Automation.MsTest.Tests", "Objectivity.Test.Automation.MsTest.Tests\Objectivity.Test.Automation.MsTest.Tests.csproj", "{073865F8-4130-4EAC-9B01-52CAEB8A80D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Objectivity.Test.Automation.Features.Tests", "Objectivity.Test.Automation.Features.Tests\Objectivity.Test.Automation.Features.Tests.csproj", "{68014747-221C-415D-A9FD-080C6B0B8230}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,18 +29,30 @@ Global
 		{B97FEA9E-C131-4850-BC6D-563F60EE41FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B97FEA9E-C131-4850-BC6D-563F60EE41FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B97FEA9E-C131-4850-BC6D-563F60EE41FA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{00D2DBBC-8C05-45B7-956E-9F01DEB9BACA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{00D2DBBC-8C05-45B7-956E-9F01DEB9BACA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{00D2DBBC-8C05-45B7-956E-9F01DEB9BACA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{00D2DBBC-8C05-45B7-956E-9F01DEB9BACA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{74F9B9A8-0055-4C13-B3C9-FACED546CB43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{74F9B9A8-0055-4C13-B3C9-FACED546CB43}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{74F9B9A8-0055-4C13-B3C9-FACED546CB43}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{74F9B9A8-0055-4C13-B3C9-FACED546CB43}.Release|Any CPU.Build.0 = Release|Any CPU
 		{46FA4EDC-A114-4E8F-A545-996F99E31EA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{46FA4EDC-A114-4E8F-A545-996F99E31EA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46FA4EDC-A114-4E8F-A545-996F99E31EA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{46FA4EDC-A114-4E8F-A545-996F99E31EA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74F9B9A8-0055-4C13-B3C9-FACED546CB43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74F9B9A8-0055-4C13-B3C9-FACED546CB43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74F9B9A8-0055-4C13-B3C9-FACED546CB43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74F9B9A8-0055-4C13-B3C9-FACED546CB43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36BF49CC-1EBF-4803-A3FF-72FD1D7E53E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36BF49CC-1EBF-4803-A3FF-72FD1D7E53E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36BF49CC-1EBF-4803-A3FF-72FD1D7E53E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36BF49CC-1EBF-4803-A3FF-72FD1D7E53E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00D2DBBC-8C05-45B7-956E-9F01DEB9BACA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00D2DBBC-8C05-45B7-956E-9F01DEB9BACA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00D2DBBC-8C05-45B7-956E-9F01DEB9BACA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00D2DBBC-8C05-45B7-956E-9F01DEB9BACA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{073865F8-4130-4EAC-9B01-52CAEB8A80D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{073865F8-4130-4EAC-9B01-52CAEB8A80D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{073865F8-4130-4EAC-9B01-52CAEB8A80D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{073865F8-4130-4EAC-9B01-52CAEB8A80D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68014747-221C-415D-A9FD-080C6B0B8230}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68014747-221C-415D-A9FD-080C6B0B8230}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68014747-221C-415D-A9FD-080C6B0B8230}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68014747-221C-415D-A9FD-080C6B0B8230}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
