@@ -5,9 +5,9 @@
 	 </RunConfiguration>
 <!-- MSTest adapter -->
   <MSTest>
+    <SettingsFile>.\Testsettings.testsettings</SettingsFile>
     <CaptureTraceOutput>false</CaptureTraceOutput>
     <DeleteDeploymentDirectoryAfterTestRunIsComplete>False</DeleteDeploymentDirectoryAfterTestRunIsComplete>
     <DeploymentEnabled>False</DeploymentEnabled>
-    <SettingsFile>Testsettings.testsettings</SettingsFile>
   </MSTest>
 </RunSettings>
