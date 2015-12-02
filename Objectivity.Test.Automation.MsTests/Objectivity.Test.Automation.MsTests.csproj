@@ -78,9 +78,6 @@
     <Compile Include="PageObjects\KendoDropDownListPage.cs" />
     <Compile Include="PageObjects\KendoGridPage.cs" />
     <Compile Include="PageObjects\KendoTreeViewPage.cs" />
-    <Compile Include="PageObjects\TechnologiesBusinessPage.cs" />
-    <Compile Include="PageObjects\SearchResultsPage.cs" />
-    <Compile Include="PageObjects\HomePage.cs" />
     <Compile Include="ProjectPageBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProjectTestBase.cs">
@@ -91,9 +88,6 @@
     <Compile Include="Tests\KendoTests\KendoDropDownListTests.cs" />
     <Compile Include="Tests\KendoTests\KendoGridTests.cs" />
     <Compile Include="Tests\KendoTests\KendoTreeViewTests.cs" />
-    <Compile Include="Tests\PerformanceTests.cs">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
