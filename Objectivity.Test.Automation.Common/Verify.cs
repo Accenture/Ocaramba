@@ -68,6 +68,7 @@ namespace Objectivity.Test.Automation.Common
         /// <param name="enableScreenShot">
         /// Enabling screenshot
         /// </param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "removed ref to unit test")]
         public static void That(DriverContext driverContext, Action myAssert, bool enableScreenShot)
         {
             try
