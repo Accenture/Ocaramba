@@ -27,6 +27,7 @@ namespace Objectivity.Test.Automation.MsTests
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using Objectivity.Test.Automation.Common;
+    using Objectivity.Test.Automation.MsTest;
 
     /// <summary>
     /// The base class for all tests

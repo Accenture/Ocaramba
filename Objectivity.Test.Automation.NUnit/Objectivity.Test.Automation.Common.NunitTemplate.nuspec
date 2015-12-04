@@ -1,26 +1,22 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>Objectivity.Test.Automation.Common.SpecFlowTemplate</id>
+    <id>Objectivity.Test.Automation.Common.NUnit</id>
     <version>1.0.0</version>
-    <title>Objectivity.Test.Automation.Common.SpecFlowTemplate</title>
+    <title>Objectivity.Test.Automation.Common.NUnit</title>
     <authors>Objectivity Bespoke Software Specialists</authors>
     <owners>Objectivity Bespoke Software Specialists</owners>
     <licenseUrl>https://github.com/ObjectivityBSS/Test.Automation/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/ObjectivityBSS/Test.Automation</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Template of the framework to automate tests using Selenium WebDriver</description>
+    <description>Framework to automate tests using Selenium WebDriver</description>
     <!--<releaseNotes>Summary of changes made in this release of the package.</releaseNotes>-->
     <copyright>Copyright 2015</copyright>
     <tags>selenium webdriver testautomation tests</tags>
-	<dependencies>
-      <dependency id="Objectivity.Test.Automation.Common" version="2.0.28" />
-	  <dependency id="SpecFlow" version="1.9.0" />
-    </dependencies> 
   </metadata>
   <files>
-	<file src="SpecFlow\ProjectPageBase.cs" target="content" />
-	<file src="SpecFlow\ProjectTestBase.cs" target="content" />
-	<file src="..\Objectivity.Test.Automation.Features\app.config" target="content" />
+	<file src="ProjectPageBase.cs" target="content" />
+	<file src="ProjectTestBase.cs" target="content" />
+	<file src="..\Objectivity.Test.Automation.Nunit.Tests\app.config" target="content" />
   </files>
 </package>

@@ -29,6 +29,7 @@ namespace Objectivity.Test.Automation.MsTest.Tests.Tests.KendoTests
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using Objectivity.Test.Automation.MsTest.Tests.PageObjects;
+    using Objectivity.Test.Automation.MsTests;
 
     [TestClass]
     public class KendoDropDownListTests : ProjectTestBase

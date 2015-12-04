@@ -14,7 +14,4 @@
     <copyright>Copyright 2015</copyright>
     <tags>selenium webdriver testautomation tests</tags>
   </metadata>
-  <files>
-	<file src="App.config" target="content" />
-  </files>
 </package>

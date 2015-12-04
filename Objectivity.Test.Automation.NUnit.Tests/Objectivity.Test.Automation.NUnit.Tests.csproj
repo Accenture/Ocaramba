@@ -81,6 +81,7 @@
     <Compile Include="PageObjects\SearchResultsPage.cs" />
     <Compile Include="PageObjects\HomePage.cs" />
     <Compile Include="ProjectPageBase.cs" />
+    <Compile Include="ProjectTestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CustomGrid.cs" />
     <Compile Include="Tests\ActionsTests.cs" />

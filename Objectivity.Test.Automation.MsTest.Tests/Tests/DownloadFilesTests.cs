@@ -27,6 +27,7 @@ namespace Objectivity.Test.Automation.MsTest.Tests.Tests
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using Objectivity.Test.Automation.MsTest.Tests.PageObjects;
+    using Objectivity.Test.Automation.MsTests;
 
     /// <summary>
     /// Tests to test framework

@@ -29,13 +29,6 @@ namespace Objectivity.Test.Automation.Features
 
     using OpenQA.Selenium;
 
-    public enum PageTitles
-    {
-        HomePage,
-        SearchResultsPage,
-        TechnologiesBusinessPage
-    }
-
     public class ProjectPageBase
     {
         protected ProjectPageBase(DriverContext driverContext)
@@ -47,14 +40,5 @@ namespace Objectivity.Test.Automation.Features
         public DriverContext DriverContext { get; set; }
 
         public IWebDriver Driver { get; set; }
-
-        /// <summary>
-        /// Returns expected and actual page titles
-        /// </summary>
-        /// <param name="expectedPageTitle">Name of the page.</param>
-        public bool IsPageTitle(string expectedPageTitle)
-        {
-            return this.Driver.IsPageTitle(expectedPageTitle, BaseConfiguration.MediumTimeout);
-        }
     }
 }

@@ -22,11 +22,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-namespace Objectivity.Test.Automation.NunitTests
+namespace Objectivity.Test.Automation.NUnit.Tests
 {
-    using NUnit.Framework;
+    using global::NUnit.Framework;
 
-    using Objectivity.Test.Automation.Common;
+    using Objectivity.Test.Automation.NUnit;
 
     /// <summary>
     /// The base class for all tests

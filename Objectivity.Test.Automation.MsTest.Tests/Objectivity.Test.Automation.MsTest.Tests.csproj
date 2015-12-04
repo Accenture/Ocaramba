@@ -82,6 +82,7 @@
     <Compile Include="PageObjects\SearchResultsPage.cs" />
     <Compile Include="PageObjects\HomePage.cs" />
     <Compile Include="ProjectPageBase.cs" />
+    <Compile Include="ProjectTestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\DownloadFilesTests.cs" />
     <Compile Include="Tests\KendoTests\KendoComboBoxTests.cs" />
