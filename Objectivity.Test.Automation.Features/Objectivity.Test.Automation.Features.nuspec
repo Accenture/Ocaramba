@@ -9,12 +9,12 @@
     <licenseUrl>https://github.com/ObjectivityBSS/Test.Automation/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/ObjectivityBSS/Test.Automation</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Template of the framework to automate tests using Selenium WebDriver</description>
+    <description>Template of the framework to automate tests using Objectivity.Test.Automation.Common with Features</description>
     <!--<releaseNotes>Summary of changes made in this release of the package.</releaseNotes>-->
     <copyright>Copyright 2015</copyright>
-    <tags>selenium webdriver testautomation tests</tags>
+    <tags>selenium webdriver testautomation tests Objectivity.Test.Automation.Common template</tags>
     <dependencies>
-	  <dependency id="NUnit" version="2.6.4" />
+	  <dependency id="Objectivity.Test.Automation.Common" version="2.0.30" />
     </dependencies> 
   </metadata>
   <files>
