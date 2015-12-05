@@ -31,13 +31,6 @@ namespace Objectivity.Test.Automation.NunitTests
 
     using OpenQA.Selenium;
 
-    public enum PageTitles
-    {
-        HomePage,
-        SearchResultsPage,
-        TechnologiesBusinessPage
-    }
-
     public class ProjectPageBase
     {
         public IWebDriver Driver { get; set; }

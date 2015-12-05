@@ -31,13 +31,6 @@ namespace Objectivity.Test.Automation.MsTests
 
     using OpenQA.Selenium;
 
-    public enum PageTitles
-    {
-        HomePage,
-        SearchResultsPage,
-        TechnologiesBusinessPage
-    }
-
     public class ProjectPageBase
     {
         public ProjectPageBase(DriverContext driverContext)
