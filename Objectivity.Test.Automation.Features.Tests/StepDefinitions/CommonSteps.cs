@@ -24,7 +24,7 @@ SOFTWARE.
 
 namespace Objectivity.Test.Automation.Features.Tests.StepDefinitions
 {
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     using Objectivity.Test.Automation.Common;
     using Objectivity.Test.Automation.Features.Tests.PageObjects;
