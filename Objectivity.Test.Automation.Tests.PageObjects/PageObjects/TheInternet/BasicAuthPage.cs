@@ -54,12 +54,12 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
         }
 
 
-        public string GetcongratulationsInfo
+        public string GetCongratulationsInfo
         {
             get
             {
                 var text = this.Driver.GetElement(this.congratulationsInfo).Text;
-                Logger.Info("Text from page '{0}'", text);
+                Logger.Info(CultureInfo.CurrentCulture, "Text from page '{0}'", text);
                 return text;
             }
         }
