@@ -1,7 +1,5 @@
 ﻿namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 {
-    using System;
-
     using NLog;
 
     using Objectivity.Test.Automation.Common;
