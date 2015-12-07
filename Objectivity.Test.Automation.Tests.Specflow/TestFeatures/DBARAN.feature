@@ -5,8 +5,8 @@ Scenario Outline: Key Presses Test
 	And I navigate to "/key_presses" link
 	When I press <key>
 	Then Valid <message> is displayed
-
-	Examples: 
+	
+		Examples: 
 	| key | message |
 	|"ESC"|"ESCAPE"|
 	|"F2"| "F2"|
