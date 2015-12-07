@@ -109,6 +109,12 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             return new CheckboxesPage(this.DriverContext);
         }
 
+        public ContextMenuPage GoToContextMenuPage()
+        {
+            Driver.GetElement(linkLocator.Evaluate("context_menu")).Click();
+            return new ContextMenuPage(DriverContext);
+        }
+
         public FormAuthenticationPage GoToFormAuthenticationPage()
         {
             this.Driver.GetElement(this.linkLocator.Evaluate("login")).Click();
@@ -138,5 +144,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
                 BaseConfiguration.Host,
                 BaseConfiguration.Url);
         }
+
+
     }
 }
