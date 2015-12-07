@@ -46,10 +46,9 @@ namespace Objectivity.Test.Automation.Tests.Specflow.StepDefinitions
         }
 
         [Given(@"I navigate to ""(.*)"" link")]
-        public void GivenINavigateToLink(string nameOfTheLink)
+        public void GivenINavigateToLink(string nameOfThePage)
         {
-            ScenarioContext.Current.Pending();
+            new InternetPage(this.driverContext).GoToPage(nameOfThePage);
         }
-
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Objectivity.Test.Automation.Common;
+using Objectivity.Test.Automation.Common.Extensions;
 
 namespace Objectivity.Test.Automation.Tests.Specflow.StepDefinitions
 {
@@ -25,6 +26,5 @@ namespace Objectivity.Test.Automation.Tests.Specflow.StepDefinitions
         {
             ScenarioContext.Current.Pending();
         }
-
     }
 }
