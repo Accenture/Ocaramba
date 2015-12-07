@@ -70,6 +70,7 @@
   <ItemGroup>
     <Compile Include="CustomGrid.cs" />
     <Compile Include="PageObjects\TheInternet\DownloadPage.cs" />
+    <Compile Include="PageObjects\TheInternet\AbTestingPage.cs" />
     <Compile Include="PageObjects\TheInternet\InternetPage.cs" />
     <Compile Include="PageObjects\Kendo\KendoComboBoxPage.cs" />
     <Compile Include="PageObjects\Kendo\KendoDropDownListPage.cs" />
