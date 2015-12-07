@@ -43,7 +43,9 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
         /// </summary>
         private readonly ElementLocator
             javaScriptAlertsLinkLocator = new ElementLocator(Locator.CssSelector, "a[href='/javascript_alerts']"),
-            fileDownload = new ElementLocator(Locator.LinkText, "File Download");
+            fileDownload = new ElementLocator(Locator.LinkText, "File Download"),
+            multipleWindowLink = new ElementLocator(Locator.CssSelector, "a[href='/windows']");
+            
 
         public InternetPage(DriverContext driverContext) : base(driverContext)
         {
@@ -73,6 +75,12 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             return new DownloadPage(this.DriverContext);
         }
 
+        public MultipleWindowsPage GoToMultipleWindowsPage()
+        {
+             this.Driver.GetElement(this.multipleWindowLink).Click();
+             return new MultipleWindowsPage(this.DriverContext);
+        }
+
         private string GetUrlValue()
         {
             return string.Format(
@@ -82,5 +90,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
                 BaseConfiguration.Host,
                 BaseConfiguration.Url);
         }
+
+
     }
 }
