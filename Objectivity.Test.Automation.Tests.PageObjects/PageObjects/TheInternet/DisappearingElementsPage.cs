@@ -28,7 +28,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
     using Objectivity.Test.Automation.Common.Extensions;
     using Objectivity.Test.Automation.Common.Types;
 
-    public class DisappearingElements : ProjectPageBase
+    public class DisappearingElementsPage : ProjectPageBase
     {
         /// <summary>
         /// Locators for elements
@@ -36,7 +36,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
          private readonly ElementLocator
             menuLink = new ElementLocator(Locator.XPath, "//li/a[text()='{0}']");
 
-        public DisappearingElements(DriverContext driverContext) : base(driverContext)
+        public DisappearingElementsPage(DriverContext driverContext) : base(driverContext)
         {
         }
 
@@ -46,6 +46,16 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             this.Driver.WaitUntilElementIsNoLongerFound(
                 this.menuLink.Evaluate(linkText),
                 BaseConfiguration.ShortTimeout);
+        }
+
+        public int GetLinkTitleXPosition(string linkText)
+        {
+            return this.Driver.GetElement(this.menuLink.Evaluate(linkText), e => e.Displayed == true).Location.X;
+        }
+
+        public int GetLinkTitleYPosition(string linkText)
+        {
+            return this.Driver.GetElement(this.menuLink.Evaluate(linkText), BaseConfiguration.MediumTimeout, e => e.Displayed == true).Location.Y;
         }
     }
 }
