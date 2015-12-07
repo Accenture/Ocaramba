@@ -115,6 +115,12 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             return new FormAuthenticationPage(this.DriverContext);
         }
 
+        public ForgotPasswordPage GoToForgotPasswordPage()
+        {
+            this.Driver.GetElement(this.linkLocator.Evaluate("forgot_password")).Click();
+            return new ForgotPasswordPage(this.DriverContext);
+        }
+
         private string GetUrlValue()
         {
             return string.Format(

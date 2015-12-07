@@ -65,6 +65,19 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
                 () => Assert.AreEqual(parameters["message"], formFormAuthentication.GetMessage));
 
         }
+        [Test]
+        public void ForgotPasswordTest()
+        {
+            new InternetPage(this.DriverContext)
+                .OpenHomePage()
+                .GoToForgotPasswordPage();
+
+            var forgotPassword = new ForgotPasswordPage(this.DriverContext);
+
+            Verify.That(this.DriverContext,
+                () => Assert.AreEqual(5+7+2+2, forgotPassword.EnterEmail(5, 7, 2)),
+                () => Assert.AreEqual("Your e-mail's been sent!", forgotPassword.ClickRetrievePassword));
+        }
 
 
     }
