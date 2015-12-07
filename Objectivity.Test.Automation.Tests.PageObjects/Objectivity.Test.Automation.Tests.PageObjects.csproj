@@ -85,6 +85,7 @@
     <Compile Include="PageObjects\TheInternet\MultipleWindowsPage.cs" />
     <Compile Include="PageObjects\TheInternet\NestedFramesPage.cs" />
     <Compile Include="PageObjects\TheInternet\NewWindowPage.cs" />
+    <Compile Include="PageObjects\TheInternet\StatusCodesPage.cs" />
     <Compile Include="ProjectPageBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
