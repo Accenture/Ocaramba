@@ -70,10 +70,11 @@
     <Compile Include="ProjectTestBase.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Tests\jraczek.cs" />
     <Compile Include="Tests\DownloadFilesTests.cs" />
     <Compile Include="Tests\JavaScriptAlertsTests.cs" />
+<Compile Include="Tests\jraczek.cs" />
     <Compile Include="Tests\Tbien.cs" />
+    <Compile Include="Tests\MBahr.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
