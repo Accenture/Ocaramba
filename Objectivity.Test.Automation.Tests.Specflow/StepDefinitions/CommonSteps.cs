@@ -50,5 +50,12 @@ namespace Objectivity.Test.Automation.Tests.Specflow.StepDefinitions
         {
             new InternetPage(this.driverContext).GoToPage(nameOfThePage);
         }
+
+        [Given(@"I have dropdown page")]
+        public void GivenIHaveDropdownPage()
+        {
+            var page = new DropdownPage(this.driverContext);
+            ScenarioContext.Current.Set(page, "DropdownPage");
+        }
     }
 }
