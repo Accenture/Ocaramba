@@ -72,6 +72,8 @@
     </Compile>
     <Compile Include="Tests\DownloadFilesTests.cs" />
     <Compile Include="Tests\JavaScriptAlertsTests.cs" />
+<Compile Include="Tests\jraczek.cs" />
+    <Compile Include="Tests\Tbien.cs" />
     <Compile Include="Tests\MBahr.cs" />
   </ItemGroup>
   <ItemGroup>

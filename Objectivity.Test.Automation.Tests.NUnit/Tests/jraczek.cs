@@ -26,6 +26,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
 {
     using global::NUnit.Framework;
 
+    using Objectivity.Test.Automation.Common;
     using Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet;
 
     /// <summary>
@@ -35,21 +36,15 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
     public class jraczek : ProjectTestBase
     {
         [Test]
-        public void DownloadFileByNameTest()
+        public void BasicAuthTest()
         {
-            new InternetPage(this.DriverContext)
-                .OpenHomePage()
-                .GoToFileDownloader()
-                .SaveFile("some-file.txt");
+            var basicAuthPage =  new InternetPage(this.DriverContext)
+                .OpenHomePageWithUserCredentials()
+                .GoToBasicAuthPage();
+
+            Verify.That(this.DriverContext, 
+                () => Assert.AreEqual("Congratulations! You must have the proper credentials.", basicAuthPage.GetCongratulationsInfo));
         }
 
-        [Test]
-        public void DownloadFileByCountTest()
-        {
-            new InternetPage(this.DriverContext)
-                .OpenHomePage()
-                .GoToFileDownloader()
-                .SaveFile();
-        }
     }
 }

@@ -22,6 +22,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+using OpenQA.Selenium;
+
 namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 {
     using System;
@@ -59,6 +61,14 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             return this;
         }
 
+        public InternetPage OpenHomePageWithUserCredentials()
+        {
+            var url = this.GetUrlValueWithUserCredentials();
+            this.Driver.NavigateTo(new Uri(url));
+            Logger.Info(CultureInfo.CurrentCulture, "Opening page {0}", url);
+            return this;
+        }
+
         public JavaScriptAlertsPage GoToJavaScriptAlerts()
         {
             this.Driver.GetElement(this.linkLocator.Evaluate("javascript_alerts")).Click();
@@ -76,12 +86,58 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             return new DownloadPage(this.DriverContext);
         }
 
+        public MultipleWindowsPage GoToMultipleWindowsPage()
+        {
+             this.Driver.GetElement(this.linkLocator.Evaluate("windows")).Click();
+             return new MultipleWindowsPage(this.DriverContext);
+        }
+
+        public void PressDownKey(string key)
+        {
+            switch (key.ToLower(CultureInfo.InvariantCulture))
+            {
+                case "esc":
+                    this.Driver.Actions().KeyDown(Keys.Escape);
+                    break;
+                case "f2":
+                    this.Driver.Actions().KeyDown(Keys.F2);
+                    break;
+                case "1":
+                    this.Driver.Actions().KeyDown(Keys.NumberPad1);
+                    break;
+                case "tab":
+                    this.Driver.Actions().KeyDown(Keys.Tab);
+                    break;
+            }
+            this.Driver.Actions().KeyDown(Keys.Escape);
+        }
+
+        public BasicAuthPage GoToBasicAuthPage()
+        {
+            this.Driver.GetElement(this.linkLocator.Evaluate("basic_auth")).Click();
+            return new BasicAuthPage(this.DriverContext);
+        }
+
         private string GetUrlValue()
         {
             return string.Format(
                 CultureInfo.CurrentCulture,
                 "{0}://{1}{2}",
                 BaseConfiguration.Protocol,
+                BaseConfiguration.Host,
+                BaseConfiguration.Url);
+        }
+
+
+
+        private string GetUrlValueWithUserCredentials()
+        {
+            return string.Format(
+                CultureInfo.CurrentCulture,
+                "{0}://{1}:{2}@{3}{4}",
+                BaseConfiguration.Protocol,
+                BaseConfiguration.Username,
+                BaseConfiguration.Password,
                 BaseConfiguration.Host,
                 BaseConfiguration.Url);
         }

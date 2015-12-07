@@ -44,5 +44,11 @@ namespace Objectivity.Test.Automation.Tests.Specflow.StepDefinitions
         {
             new InternetPage(this.driverContext).OpenHomePage();
         }
+
+        [Given(@"I navigate to ""(.*)"" link")]
+        public void GivenINavigateToLink(string nameOfThePage)
+        {
+            new InternetPage(this.driverContext).GoToPage(nameOfThePage);
+        }
     }
 }

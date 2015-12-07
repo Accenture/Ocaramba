@@ -42,5 +42,18 @@ namespace Objectivity.Test.Automation.Tests.MSTest.Tests
             Verify.That(this.DriverContext, () => Assert.IsFalse(false), enableScreenShot: true);
             Verify.That(this.DriverContext, () => Assert.IsTrue(true));
         }
+
+        [TestMethod]
+        public void ToByTest()
+        {
+            string expectedDescription = @"Also known as split testing. This is a way in which businesses are able to simultaneously test and learn different versions of a page to see which text and/or functionality works best towards a desired outcome (e.g. a user action such as a click-through).";
+
+            new InternetPage(this.DriverContext)
+                .OpenHomePage()
+                .GoToPage("abtest");
+
+            var abeTestingPage = new AbTestingPage(this.DriverContext);
+            Assert.AreEqual(expectedDescription, abeTestingPage.GetDescription);
+        }
     }
 }

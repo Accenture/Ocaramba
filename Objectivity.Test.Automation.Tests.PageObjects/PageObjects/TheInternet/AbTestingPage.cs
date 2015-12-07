@@ -27,6 +27,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
     using NLog;
 
     using Objectivity.Test.Automation.Common;
+    using Objectivity.Test.Automation.Common.Extensions;
     using Objectivity.Test.Automation.Common.Types;
     using Objectivity.Test.Automation.Tests.PageObjects;
 
@@ -35,11 +36,19 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
         /// <summary>
         /// Locators for elements
         /// </summary>
-        /// private readonly ElementLocator
-            /// contentText = new ElementLocator(Locator.CssSelector, ".example > p");
+         private readonly ElementLocator
+            contentText = new ElementLocator(Locator.CssSelector, ".example > p");
 
         public AbTestingPage(DriverContext driverContext) : base(driverContext)
         {
+        }
+
+        public string GetDescription
+        {
+            get
+            {
+                return this.Driver.FindElement(this.contentText.ToBy()).Text;
+            }
         }
     }
 }

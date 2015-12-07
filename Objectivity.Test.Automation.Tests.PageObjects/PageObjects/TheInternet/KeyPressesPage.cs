@@ -24,45 +24,43 @@ SOFTWARE.
 
 namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 {
-    using System;
     using System.Globalization;
-    using System.IO;
-
     using NLog;
-
     using Objectivity.Test.Automation.Common;
     using Objectivity.Test.Automation.Common.Extensions;
-    using Objectivity.Test.Automation.Common.Helpers;
     using Objectivity.Test.Automation.Common.Types;
-    using Objectivity.Test.Automation.Tests.PageObjects;
+    using OpenQA.Selenium;
 
-    public class BasicAuthPage : ProjectPageBase
+    public class KeyPressesPage : ProjectPageBase
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-        /// <summary>
-        /// Locators for elements
-        /// </summary>
-        private readonly ElementLocator downloadPageHeader = new ElementLocator(Locator.XPath, "//h3[.='Basic Auth']"),
-                                        congratulationsInfo = new ElementLocator(Locator.CssSelector, ".example>p");
+        private readonly ElementLocator keyPressesPageHeader = new ElementLocator(Locator.XPath, "//h3[.='File Downloader']");
 
-        public BasicAuthPage(DriverContext driverContext)
-            : base(driverContext)
+        public void PressDownKey(string key)
         {
-            Logger.Info("Waiting for File Download page to open");
-            this.Driver.IsElementPresent(this.downloadPageHeader, BaseConfiguration.ShortTimeout);
-        }
-
-
-        public string GetCongratulationsInfo
-        {
-            get
+            switch (key.ToLower(CultureInfo.InvariantCulture))
             {
-                var text = this.Driver.GetElement(this.congratulationsInfo).Text;
-                Logger.Info(CultureInfo.CurrentCulture, "Text from page '{0}'", text);
-                return text;
+                case "esc":
+                    this.Driver.Actions().KeyDown(Keys.Escape);
+                    break;
+                case "f2":
+                    this.Driver.Actions().KeyDown(Keys.F2);
+                    break;
+                case "1":
+                    this.Driver.Actions().KeyDown(Keys.NumberPad1);
+                    break;
+                case "tab":
+                    this.Driver.Actions().KeyDown(Keys.Tab);
+                    break;
             }
+            this.Driver.Actions().KeyDown(Keys.Escape);
         }
 
+        public KeyPressesPage(DriverContext driverContext) : base(driverContext)
+        {
+            Logger.Info("Waiting for Key Process page to open");
+            this.Driver.IsElementPresent(this.keyPressesPageHeader, BaseConfiguration.ShortTimeout);
+        }
     }
 }

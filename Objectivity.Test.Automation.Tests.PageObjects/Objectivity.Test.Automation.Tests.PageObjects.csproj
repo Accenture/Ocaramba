@@ -78,6 +78,9 @@
     <Compile Include="PageObjects\Kendo\KendoGridPage.cs" />
     <Compile Include="PageObjects\Kendo\KendoTreeViewPage.cs" />
     <Compile Include="PageObjects\TheInternet\JavaScriptAlertsPage.cs" />
+    <Compile Include="PageObjects\TheInternet\KeyPressesPage.cs" />
+    <Compile Include="PageObjects\TheInternet\MultipleWindowsPage.cs" />
+    <Compile Include="PageObjects\TheInternet\NewWindowPage.cs" />
     <Compile Include="ProjectPageBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
