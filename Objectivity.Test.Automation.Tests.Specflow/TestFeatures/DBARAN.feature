@@ -2,7 +2,7 @@
 
 Scenario Outline: Key Presses Test
 	Given I log on and default page is opened
-	And I navigate to "Key Presses" link
+	And I navigate to "/key_presses" link
 	When I press <key>
 	Then Valid <message> is displayed
 
