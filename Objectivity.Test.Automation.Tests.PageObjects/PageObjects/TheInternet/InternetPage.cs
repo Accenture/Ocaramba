@@ -61,6 +61,14 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             return this;
         }
 
+        public InternetPage OpenHomePageWithUserCredentials()
+        {
+            var url = this.GetUrlValueWithUserCredentials();
+            this.Driver.NavigateTo(new Uri(url));
+            Logger.Info(CultureInfo.CurrentCulture, "Opening page {0}", url);
+            return this;
+        }
+
         public JavaScriptAlertsPage GoToJavaScriptAlerts()
         {
             this.Driver.GetElement(this.linkLocator.Evaluate("javascript_alerts")).Click();
@@ -104,6 +112,12 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             this.Driver.Actions().KeyDown(Keys.Escape);
         }
 
+        public BasicAuthPage GoToBasicAuthPage()
+        {
+            this.Driver.GetElement(this.linkLocator.Evaluate("basic_auth")).Click();
+            return new BasicAuthPage(this.DriverContext);
+        }
+
         private string GetUrlValue()
         {
             return string.Format(
@@ -115,5 +129,17 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
         }
 
 
+
+        private string GetUrlValueWithUserCredentials()
+        {
+            return string.Format(
+                CultureInfo.CurrentCulture,
+                "{0}://{1}:{2}@{3}{4}",
+                BaseConfiguration.Protocol,
+                BaseConfiguration.Username,
+                BaseConfiguration.Password,
+                BaseConfiguration.Host,
+                BaseConfiguration.Url);
+        }
     }
 }

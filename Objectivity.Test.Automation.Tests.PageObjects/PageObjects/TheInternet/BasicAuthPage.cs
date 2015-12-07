@@ -43,7 +43,8 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
         /// <summary>
         /// Locators for elements
         /// </summary>
-        private readonly ElementLocator downloadPageHeader = new ElementLocator(Locator.XPath, "//h3[.='File Downloader']");
+        private readonly ElementLocator downloadPageHeader = new ElementLocator(Locator.XPath, "//h3[.='Basic Auth']"),
+                                        congratulationsInfo = new ElementLocator(Locator.CssSelector, ".example>p");
 
         public BasicAuthPage(DriverContext driverContext)
             : base(driverContext)
@@ -52,6 +53,16 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             this.Driver.IsElementPresent(this.downloadPageHeader, BaseConfiguration.ShortTimeout);
         }
 
-      
+
+        public string GetcongratulationsInfo
+        {
+            get
+            {
+                var text = this.Driver.GetElement(this.congratulationsInfo).Text;
+                Logger.Info("Text from page '{0}'", text);
+                return text;
+            }
+        }
+
     }
 }
