@@ -69,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomGrid.cs" />
+    <Compile Include="PageObjects\TheInternet\BasicAuthPage.cs" />
     <Compile Include="PageObjects\TheInternet\DownloadPage.cs" />
     <Compile Include="PageObjects\TheInternet\AbTestingPage.cs" />
     <Compile Include="PageObjects\TheInternet\InternetPage.cs" />

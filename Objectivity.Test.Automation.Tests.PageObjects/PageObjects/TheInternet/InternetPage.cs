@@ -65,6 +65,10 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             return new JavaScriptAlertsPage(this.DriverContext);
         }
 
+        public void GoToPage(string page)
+        {
+            this.Driver.GetElement(this.linkLocator.Evaluate(page)).Click();
+        }
 
         public DownloadPage GoToFileDownloader()
         {
