@@ -26,7 +26,6 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 {
     using System;
     using System.Globalization;
-    using System.IO;
 
     using NLog;
 
@@ -36,53 +35,38 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
     using Objectivity.Test.Automation.Common.Types;
     using Objectivity.Test.Automation.Tests.PageObjects;
 
-    public class ForgotPasswordPage : ProjectPageBase
+    public class SecureFileDownloadPage : ProjectPageBase
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
         /// Locators for elements
         /// </summary>
-        private readonly ElementLocator pageHeader = new ElementLocator(Locator.XPath, "//h3[.='Forgot Password']"),
-                                        emailTextBox = new ElementLocator(Locator.Id, "email"),
-                                        emailLabel = new ElementLocator(Locator.XPath, "//input[@id='email']/preceding-sibling::label"),
-                                        retrievePassword = new ElementLocator(Locator.Id, "form_submit"),
-                                        message = new ElementLocator(Locator.Id, "content");
+        private readonly ElementLocator downloadPageHeader = new ElementLocator(Locator.XPath, "//h3[.='Secure File Downloader']"),
+                                        fileLink = new ElementLocator(Locator.CssSelector, "a[href='download_secure/{0}']");
 
-        public ForgotPasswordPage(DriverContext driverContext)
+        public SecureFileDownloadPage(DriverContext driverContext)
             : base(driverContext)
         {
-            Logger.Info("Waiting for page to open");
-            this.Driver.IsElementPresent(this.pageHeader, BaseConfiguration.ShortTimeout);
+            Logger.Info("Waiting for File Download page to open");
+            this.Driver.IsElementPresent(this.downloadPageHeader, BaseConfiguration.ShortTimeout);
         }
 
-
-        public string GetEmailLabel
+        public SecureFileDownloadPage SaveFile(string fileName)
         {
-            get
+            if (BaseConfiguration.TestBrowser == DriverContext.BrowserType.Firefox
+                || BaseConfiguration.TestBrowser == DriverContext.BrowserType.Chrome)
             {
-                var text = this.Driver.GetElement(this.emailLabel).Text;
-                Logger.Info(CultureInfo.CurrentCulture, "Email label '{0}'", text);
-                return text;
+            this.Driver.GetElement(this.fileLink.Evaluate("some-file.txt")).Click();
+            FilesHelper.WaitForFile(this.Driver, 5, fileName, BaseConfiguration.DownloadFolder);
             }
-        }
-
-        public int EnterEmail(int name, int server, int country)
-        {
-            var email = string.Format(CultureInfo.CurrentCulture, "{0}{1}{2}{3}{4}", NameHelper.RandomName(name), "@", NameHelper.RandomName(server), ".", NameHelper.RandomName(country));
-            this.Driver.GetElement(this.emailTextBox).SendKeys(email);
-            return email.Length;
-        }
-
-        public string ClickRetrievePassword 
-        {
-            get
+            else
             {
-                this.Driver.GetElement(this.retrievePassword).Click();
-                var text = this.Driver.GetElement(this.message).Text.Trim();
-                Logger.Info(CultureInfo.CurrentCulture, "Message '{0}'", text);
-                return text;
+                throw new NotSupportedException(
+                        string.Format(CultureInfo.CurrentCulture, "Downloading files in browser {0} is not supported", BaseConfiguration.TestBrowser));
             }
+
+            return this;
         }
     }
 }

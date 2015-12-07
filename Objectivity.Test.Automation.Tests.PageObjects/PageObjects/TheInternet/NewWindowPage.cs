@@ -17,12 +17,14 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
         {
         }
 
-        public string NewWindowH3Text
+        public bool IsNewWindowH3TextVisible(string text)
         {
-            get
-            {
-                return Driver.GetElement(newWindowPageLocator).Text;
-            }          
+            return Driver.GetElement(newWindowPageLocator).IsElementTextEqualsToExpected(text);
+        }
+
+        public bool IsPageTile(string title)
+        {
+            return Driver.IsPageTitle(title, 2);
         }
     }
 }

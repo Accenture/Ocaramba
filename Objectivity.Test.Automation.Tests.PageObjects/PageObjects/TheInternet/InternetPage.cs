@@ -98,6 +98,54 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             return new BasicAuthPage(this.DriverContext);
         }
 
+        public NestedFramesPage GoToNestedFramesPage()
+        {
+            Driver.GetElement(linkLocator.Evaluate("nested_frames")).Click();
+            return new NestedFramesPage(DriverContext);
+        }
+        public CheckboxesPage GoToCheckboxesPage()
+        {
+            this.Driver.GetElement(this.linkLocator.Evaluate("checkboxes")).Click();
+            return new CheckboxesPage(this.DriverContext);
+        }
+
+        public ContextMenuPage GoToContextMenuPage()
+        {
+            Driver.GetElement(linkLocator.Evaluate("context_menu")).Click();
+            return new ContextMenuPage(DriverContext);
+        }
+
+        public FormAuthenticationPage GoToFormAuthenticationPage()
+        {
+            this.Driver.GetElement(this.linkLocator.Evaluate("login")).Click();
+            return new FormAuthenticationPage(this.DriverContext);
+        }
+
+        public SecureFileDownloadPage GoToSecureFileDownloadPage()
+        {
+            this.Driver.GetElement(this.linkLocator.Evaluate("download_secure")).Click();
+            return new SecureFileDownloadPage(this.DriverContext);
+        }
+
+
+        public StatusCodesPage GoToStatusCodesPage()
+        {
+            this.Driver.GetElement(this.linkLocator.Evaluate("status_codes")).Click();
+            return new StatusCodesPage(this.DriverContext);
+        }
+
+        public ForgotPasswordPage GoToForgotPasswordPage()
+        {
+            this.Driver.GetElement(this.linkLocator.Evaluate("forgot_password")).Click();
+            return new ForgotPasswordPage(this.DriverContext);
+        }
+
+        public FloatingMenuPage GoToFloatingMenu()
+        {
+            this.Driver.GetElement(this.linkLocator.Evaluate("floating_menu")).Click();
+            return new FloatingMenuPage(this.DriverContext);
+        }
+
         private string GetUrlValue()
         {
             return string.Format(
@@ -120,6 +168,8 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
                 BaseConfiguration.Password,
                 BaseConfiguration.Host,
                 BaseConfiguration.Url);
-        }
+    }
+
+
     }
 }

@@ -36,20 +36,17 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
     using Objectivity.Test.Automation.Common.Types;
     using Objectivity.Test.Automation.Tests.PageObjects;
 
-    public class ForgotPasswordPage : ProjectPageBase
+    public class BasicAuthPage : ProjectPageBase
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
         /// Locators for elements
         /// </summary>
-        private readonly ElementLocator pageHeader = new ElementLocator(Locator.XPath, "//h3[.='Forgot Password']"),
-                                        emailTextBox = new ElementLocator(Locator.Id, "email"),
-                                        emailLabel = new ElementLocator(Locator.XPath, "//input[@id='email']/preceding-sibling::label"),
-                                        retrievePassword = new ElementLocator(Locator.Id, "form_submit"),
-                                        message = new ElementLocator(Locator.Id, "content");
+        private readonly ElementLocator pageHeader = new ElementLocator(Locator.XPath, "//h3[.='Basic Auth']"),
+                                        congratulationsInfo = new ElementLocator(Locator.CssSelector, ".example>p");
 
-        public ForgotPasswordPage(DriverContext driverContext)
+        public BasicAuthPage(DriverContext driverContext)
             : base(driverContext)
         {
             Logger.Info("Waiting for page to open");
@@ -57,32 +54,15 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
         }
 
 
-        public string GetEmailLabel
+        public string GetCongratulationsInfo
         {
             get
             {
-                var text = this.Driver.GetElement(this.emailLabel).Text;
-                Logger.Info(CultureInfo.CurrentCulture, "Email label '{0}'", text);
+                var text = this.Driver.GetElement(this.congratulationsInfo).Text;
+                Logger.Info(CultureInfo.CurrentCulture, "Text from page '{0}'", text);
                 return text;
             }
         }
 
-        public int EnterEmail(int name, int server, int country)
-        {
-            var email = string.Format(CultureInfo.CurrentCulture, "{0}{1}{2}{3}{4}", NameHelper.RandomName(name), "@", NameHelper.RandomName(server), ".", NameHelper.RandomName(country));
-            this.Driver.GetElement(this.emailTextBox).SendKeys(email);
-            return email.Length;
-        }
-
-        public string ClickRetrievePassword 
-        {
-            get
-            {
-                this.Driver.GetElement(this.retrievePassword).Click();
-                var text = this.Driver.GetElement(this.message).Text.Trim();
-                Logger.Info(CultureInfo.CurrentCulture, "Message '{0}'", text);
-                return text;
-            }
-        }
     }
 }

@@ -37,9 +37,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.Kendo
         /// <summary>
         ///     Locators for elements
         /// </summary>
-        private readonly ElementLocator tshirtFabricComboBoxLocator = new ElementLocator(
-            Locator.CssSelector,
-            "input[aria-owns=fabric_listbox]");
+        private readonly ElementLocator tshirtFabricComboBoxLocator = new ElementLocator(Locator.CssSelector,"input[aria-owns=fabric_listbox]");
 
         private readonly Uri url = new Uri("http://demos.telerik.com/jsp-ui/combobox/index");
 
@@ -76,6 +74,23 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.Kendo
         {
             this.Driver.NavigateTo(this.url);
             return this;
+        }
+
+        public void OpenFabricComboBox()
+        {
+           this.FabricKendoComboBox.Open();          
+        }
+
+        public void CloseFabricComboBox()
+        {
+            this.FabricKendoComboBox.Close();
+        }
+
+        public bool IsFabricComboBoxExpanded()
+        {
+            var combobox = this.Driver.GetElement(this.tshirtFabricComboBoxLocator);
+            var attribute = combobox.GetAttribute("aria-expanded");
+            return bool.Parse(attribute);
         }
     }
 }

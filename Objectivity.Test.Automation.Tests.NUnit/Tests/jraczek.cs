@@ -24,9 +24,12 @@ SOFTWARE.
 
 namespace Objectivity.Test.Automation.Tests.NUnit.Tests
 {
+    using System.Collections.Generic;
+
     using global::NUnit.Framework;
 
     using Objectivity.Test.Automation.Common;
+    using Objectivity.Test.Automation.Tests.NUnit.DataDriven;
     using Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet;
 
     /// <summary>
@@ -43,7 +46,46 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
                 .GoToBasicAuthPage();
 
             Verify.That(this.DriverContext, 
-                () => Assert.AreEqual("Congratulations! You must have the proper credentials.", basicAuthPage.GetcongratulationsInfo));
+                () => Assert.AreEqual("Congratulations! You must have the proper credentials.", basicAuthPage.GetCongratulationsInfo));
+        }
+
+        [Test]
+        [TestCaseSource(typeof(TestData), "Credentials")]
+        public void FormAuthenticationPageTest(IDictionary<string, string> parameters)
+        {
+            new InternetPage(this.DriverContext)
+                .OpenHomePage()
+                .GoToFormAuthenticationPage();
+
+            var formFormAuthentication = new FormAuthenticationPage(this.DriverContext);
+            formFormAuthentication.EnterUserName(parameters["user"]);
+            formFormAuthentication.EnterPassword(parameters["password"]);
+            formFormAuthentication.LogOn();
+            Verify.That(this.DriverContext,
+                () => Assert.AreEqual(parameters["message"], formFormAuthentication.GetMessage));
+
+        }
+        [Test]
+        public void ForgotPasswordTest()
+        {
+            new InternetPage(this.DriverContext)
+                .OpenHomePage()
+                .GoToForgotPasswordPage();
+
+            var forgotPassword = new ForgotPasswordPage(this.DriverContext);
+
+            Verify.That(this.DriverContext,
+                () => Assert.AreEqual(5+7+2+2, forgotPassword.EnterEmail(5, 7, 2)),
+                () => Assert.AreEqual("Your e-mail's been sent!", forgotPassword.ClickRetrievePassword));
+        }
+
+        [Test]
+        public void SecureDownloadFileByNameTest()
+        {
+            new InternetPage(this.DriverContext)
+                .OpenHomePageWithUserCredentials()
+                .GoToSecureFileDownloadPage()
+                .SaveFile("some-file.txt");
         }
 
     }

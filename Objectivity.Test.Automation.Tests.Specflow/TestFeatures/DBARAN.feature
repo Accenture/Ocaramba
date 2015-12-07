@@ -6,8 +6,8 @@ Scenario Outline: Key Presses Test
 	#And I have page key page initialized
 	When I press <key>
 	Then Valid <message> is displayed
-
-	Examples: 
+	
+		Examples: 
 	| key | message |
 	|"ESC"|"ESCAPE"|
 	|"F2"| "F2"|

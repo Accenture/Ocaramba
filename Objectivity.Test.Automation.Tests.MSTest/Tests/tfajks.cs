@@ -42,5 +42,79 @@ namespace Objectivity.Test.Automation.Tests.MSTest.Tests
             Verify.That(this.DriverContext, () => Assert.IsFalse(false), enableScreenShot: true);
             Verify.That(this.DriverContext, () => Assert.IsTrue(true));
         }
+
+        [TestMethod]
+        public void ToByTest()
+        {
+            string expectedDescription = @"Also known as split testing. This is a way in which businesses are able to simultaneously test and learn different versions of a page to see which text and/or functionality works best towards a desired outcome (e.g. a user action such as a click-through).";
+
+            new InternetPage(this.DriverContext)
+                .OpenHomePage()
+                .GoToPage("abtest");
+
+            var abeTestingPage = new AbTestingPage(this.DriverContext);
+            Assert.AreEqual(expectedDescription, abeTestingPage.GetDescriptionUsingBy);
+        }
+
+        [TestMethod]
+        public void GetElementTest()
+        {
+            string expectedDescription = @"Also known as split testing. This is a way in which businesses are able to simultaneously test and learn different versions of a page to see which text and/or functionality works best towards a desired outcome (e.g. a user action such as a click-through).";
+
+            new InternetPage(this.DriverContext)
+                .OpenHomePage()
+                .GoToPage("abtest");
+
+            var abeTestingPage = new AbTestingPage(this.DriverContext);
+            Assert.AreEqual(expectedDescription, abeTestingPage.GetDescription);
+        }
+
+        [TestMethod]
+        public void GetElementTestWithCustomTimeoutTest()
+        {
+            string expectedDescription = @"Also known as split testing. This is a way in which businesses are able to simultaneously test and learn different versions of a page to see which text and/or functionality works best towards a desired outcome (e.g. a user action such as a click-through).";
+
+            new InternetPage(this.DriverContext)
+                .OpenHomePage()
+                .GoToPage("abtest");
+
+            var abeTestingPage = new AbTestingPage(this.DriverContext);
+            Assert.AreEqual(expectedDescription, abeTestingPage.GetDescriptionWithCustomTimeout);
+        }
+
+        [TestMethod]
+        public void WaitElementDissapearsTest()
+        {
+           new InternetPage(this.DriverContext)
+                .OpenHomePage()
+                .GoToPage("disappearing_elements");
+
+            var disappearingElements = new DisappearingElementsPage(this.DriverContext);
+            disappearingElements.RefreshAndWaitLinkNotVisible("NotExistingLink");
+        }
+
+        [TestMethod]
+        public void GetElementWithCustomConditionTest()
+        {
+            new InternetPage(this.DriverContext)
+                 .OpenHomePage()
+                 .GoToPage("disappearing_elements");
+
+            var disappearingElementsPage = new DisappearingElementsPage(this.DriverContext);
+            var currentTagName = disappearingElementsPage.GetLinkTitleTagName("Home");
+            Assert.AreEqual("a", currentTagName);
+        }
+
+        [TestMethod]
+        public void GetElementWithCustomTimeoutAndConditionTest()
+        {
+            new InternetPage(this.DriverContext)
+                 .OpenHomePage()
+                 .GoToPage("disappearing_elements");
+
+            var disappearingElementsPage = new DisappearingElementsPage(this.DriverContext);
+            var currentIsSelected = disappearingElementsPage.IsLinkSelected("Home");
+            Assert.AreEqual(false, currentIsSelected);
+        }
     }
 }

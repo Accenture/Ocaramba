@@ -24,47 +24,38 @@ SOFTWARE.
 
 namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 {
-    using NLog;
-
     using Objectivity.Test.Automation.Common;
     using Objectivity.Test.Automation.Common.Extensions;
     using Objectivity.Test.Automation.Common.Types;
-    using Objectivity.Test.Automation.Tests.PageObjects;
 
-    public class AbTestingPage : ProjectPageBase
+    public class DisappearingElementsPage : ProjectPageBase
     {
         /// <summary>
         /// Locators for elements
         /// </summary>
          private readonly ElementLocator
-            contentText = new ElementLocator(Locator.CssSelector, ".example > p");
+            menuLink = new ElementLocator(Locator.XPath, "//li/a[text()='{0}']");
 
-        public AbTestingPage(DriverContext driverContext) : base(driverContext)
+        public DisappearingElementsPage(DriverContext driverContext) : base(driverContext)
         {
         }
 
-        public string GetDescriptionUsingBy
+        public void RefreshAndWaitLinkNotVisible(string linkText)
         {
-            get
-            {
-                return this.Driver.FindElement(this.contentText.ToBy()).Text;
-            }
+            this.Driver.Navigate().Refresh();
+            this.Driver.WaitUntilElementIsNoLongerFound(
+                this.menuLink.Evaluate(linkText),
+                BaseConfiguration.ShortTimeout);
         }
 
-        public string GetDescription
+        public string GetLinkTitleTagName(string linkText)
         {
-            get
-            {
-                return this.Driver.GetElement(this.contentText).Text;
-            }
+            return this.Driver.GetElement(this.menuLink.Evaluate(linkText), e => e.Displayed == true).TagName;
         }
 
-        public string GetDescriptionWithCustomTimeout
+        public bool IsLinkSelected(string linkText)
         {
-            get
-            {
-                return this.Driver.GetElement(this.contentText, BaseConfiguration.MediumTimeout).Text;
-            }
+            return this.Driver.GetElement(this.menuLink.Evaluate(linkText), BaseConfiguration.MediumTimeout, e => e.Displayed == true).Selected;
         }
     }
 }

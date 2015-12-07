@@ -36,53 +36,54 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
     using Objectivity.Test.Automation.Common.Types;
     using Objectivity.Test.Automation.Tests.PageObjects;
 
-    public class ForgotPasswordPage : ProjectPageBase
+    public class FormAuthenticationPage : ProjectPageBase
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
         /// Locators for elements
         /// </summary>
-        private readonly ElementLocator pageHeader = new ElementLocator(Locator.XPath, "//h3[.='Forgot Password']"),
-                                        emailTextBox = new ElementLocator(Locator.Id, "email"),
-                                        emailLabel = new ElementLocator(Locator.XPath, "//input[@id='email']/preceding-sibling::label"),
-                                        retrievePassword = new ElementLocator(Locator.Id, "form_submit"),
-                                        message = new ElementLocator(Locator.Id, "content");
+        private readonly ElementLocator pageHeader = new ElementLocator(Locator.XPath, "//h3[.='Login Page']"),
+                                        userNameForm = new ElementLocator(Locator.Id, "username"),
+                                        passwordForm = new ElementLocator(Locator.Id, "password"),
+                                        loginButton = new ElementLocator(Locator.CssSelector, ".radius"),
+                                        message = new ElementLocator(Locator.XPath, "//div[@id='flash']");
 
-        public ForgotPasswordPage(DriverContext driverContext)
+        public FormAuthenticationPage(DriverContext driverContext)
             : base(driverContext)
         {
             Logger.Info("Waiting for page to open");
             this.Driver.IsElementPresent(this.pageHeader, BaseConfiguration.ShortTimeout);
         }
 
-
-        public string GetEmailLabel
+        public string GetMessage 
         {
             get
             {
-                var text = this.Driver.GetElement(this.emailLabel).Text;
-                Logger.Info(CultureInfo.CurrentCulture, "Email label '{0}'", text);
-                return text;
-            }
-        }
-
-        public int EnterEmail(int name, int server, int country)
-        {
-            var email = string.Format(CultureInfo.CurrentCulture, "{0}{1}{2}{3}{4}", NameHelper.RandomName(name), "@", NameHelper.RandomName(server), ".", NameHelper.RandomName(country));
-            this.Driver.GetElement(this.emailTextBox).SendKeys(email);
-            return email.Length;
-        }
-
-        public string ClickRetrievePassword 
-        {
-            get
-            {
-                this.Driver.GetElement(this.retrievePassword).Click();
-                var text = this.Driver.GetElement(this.message).Text.Trim();
+                var text = this.Driver.GetElement(this.message).Text;
+                text = text.Replace("\r\n×", "");
                 Logger.Info(CultureInfo.CurrentCulture, "Message '{0}'", text);
                 return text;
             }
         }
+
+        public void EnterPassword(string password)
+        {
+            Logger.Info(CultureInfo.CurrentCulture, "Password '{0}'", password);
+            this.Driver.GetElement(this.passwordForm).SendKeys(password);
+        }
+
+        public void EnterUserName(string userName)
+        {
+            Logger.Info(CultureInfo.CurrentCulture, "User name '{0}'", userName);
+            this.Driver.GetElement(this.userNameForm).SendKeys(userName);
+        }
+
+        public void LogOn()
+        {
+            Logger.Info(CultureInfo.CurrentCulture, "Click on Login Button");
+            this.Driver.GetElement(this.loginButton).Click();
+        }
+
     }
 }
