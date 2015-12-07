@@ -43,6 +43,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
         /// </summary>
         private readonly ElementLocator
             javaScriptAlertsLinkLocator = new ElementLocator(Locator.CssSelector, "a[href='/javascript_alerts']"),
+            floatingMenuLocator = new ElementLocator(Locator.CssSelector, "a[href='/floating_menu']"),
             fileDownload = new ElementLocator(Locator.LinkText, "File Download");
 
         public InternetPage(DriverContext driverContext) : base(driverContext)
@@ -71,6 +72,12 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
         {
             this.Driver.GetElement(this.fileDownload).Click();
             return new DownloadPage(this.DriverContext);
+        }
+
+        public FloatingMenuPage GoToFloatingMenu()
+        {
+            this.Driver.GetElement(this.floatingMenuLocator).Click();
+            return new FloatingMenuPage(this.DriverContext);
         }
 
         private string GetUrlValue()

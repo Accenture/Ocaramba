@@ -62,6 +62,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="WebDriver, Version=2.47.0.0, Culture=neutral, PublicKeyToken=null" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="Tests\KendoTests\KendoDropDownListTests.cs" />
     <Compile Include="Tests\KendoTests\KendoGridTests.cs" />
     <Compile Include="Tests\KendoTests\KendoTreeViewTests.cs" />
+    <Compile Include="Tests\rszkudlarek.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
