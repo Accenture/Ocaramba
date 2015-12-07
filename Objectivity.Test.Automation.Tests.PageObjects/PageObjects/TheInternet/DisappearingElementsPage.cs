@@ -45,17 +45,17 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             this.Driver.Navigate().Refresh();
             this.Driver.WaitUntilElementIsNoLongerFound(
                 this.menuLink.Evaluate(linkText),
-                BaseConfiguration.ShortTimeout);
+                BaseConfiguration.MediumTimeout);
         }
 
-        public int GetLinkTitleXPosition(string linkText)
+        public string GetLinkTitleTagName(string linkText)
         {
-            return this.Driver.GetElement(this.menuLink.Evaluate(linkText), e => e.Displayed == true).Location.X;
+            return this.Driver.GetElement(this.menuLink.Evaluate(linkText), e => e.Displayed == true).TagName;
         }
 
-        public int GetLinkTitleYPosition(string linkText)
+        public bool IsLinkSelected(string linkText)
         {
-            return this.Driver.GetElement(this.menuLink.Evaluate(linkText), BaseConfiguration.MediumTimeout, e => e.Displayed == true).Location.Y;
+            return this.Driver.GetElement(this.menuLink.Evaluate(linkText), BaseConfiguration.MediumTimeout, e => e.Displayed == true).Selected;
         }
     }
 }

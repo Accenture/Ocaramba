@@ -101,8 +101,8 @@ namespace Objectivity.Test.Automation.Tests.MSTest.Tests
                  .GoToPage("disappearing_elements");
 
             var disappearingElementsPage = new DisappearingElementsPage(this.DriverContext);
-            var currentHorizontalPosition = disappearingElementsPage.GetLinkTitleXPosition("Home");
-            Assert.AreEqual(314, currentHorizontalPosition);
+            var currentTagName = disappearingElementsPage.GetLinkTitleTagName("Home");
+            Assert.AreEqual("a", currentTagName);
         }
 
         [TestMethod]
@@ -113,8 +113,8 @@ namespace Objectivity.Test.Automation.Tests.MSTest.Tests
                  .GoToPage("disappearing_elements");
 
             var disappearingElementsPage = new DisappearingElementsPage(this.DriverContext);
-            var currentVerticalPosition = disappearingElementsPage.GetLinkTitleYPosition("Home");
-            Assert.AreEqual(155, currentVerticalPosition);
+            var currentIsSelected = disappearingElementsPage.IsLinkSelected("Home");
+            Assert.AreEqual(false, currentIsSelected);
         }
     }
 }
