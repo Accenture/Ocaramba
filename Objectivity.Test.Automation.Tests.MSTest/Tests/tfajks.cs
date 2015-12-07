@@ -89,8 +89,32 @@ namespace Objectivity.Test.Automation.Tests.MSTest.Tests
                 .OpenHomePage()
                 .GoToPage("disappearing_elements");
 
-            var disappearingElements = new DisappearingElements(this.DriverContext);
+            var disappearingElements = new DisappearingElementsPage(this.DriverContext);
             disappearingElements.RefreshAndWaitLinkNotVisible("Gallery");
+        }
+
+        [TestMethod]
+        public void GetElementWithCustomConditionTest()
+        {
+            new InternetPage(this.DriverContext)
+                 .OpenHomePage()
+                 .GoToPage("disappearing_elements");
+
+            var disappearingElementsPage = new DisappearingElementsPage(this.DriverContext);
+            var currentHorizontalPosition = disappearingElementsPage.GetLinkTitleXPosition("Home");
+            Assert.AreEqual(314, currentHorizontalPosition);
+        }
+
+        [TestMethod]
+        public void GetElementWithCustomTimeoutAndConditionTest()
+        {
+            new InternetPage(this.DriverContext)
+                 .OpenHomePage()
+                 .GoToPage("disappearing_elements");
+
+            var disappearingElementsPage = new DisappearingElementsPage(this.DriverContext);
+            var currentVerticalPosition = disappearingElementsPage.GetLinkTitleYPosition("Home");
+            Assert.AreEqual(155, currentVerticalPosition);
         }
     }
 }
