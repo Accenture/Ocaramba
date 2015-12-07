@@ -21,5 +21,10 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
         {
             return Driver.GetElement(newWindowPageLocator).IsElementTextEqualsToExpected(text);
         }
+
+        public bool IsPageTile(string title)
+        {
+            return Driver.IsPageTitle(title, 2);
+        }
     }
 }

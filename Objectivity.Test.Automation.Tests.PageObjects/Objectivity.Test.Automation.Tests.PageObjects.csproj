@@ -69,8 +69,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomGrid.cs" />
+    <Compile Include="PageObjects\TheInternet\DisappearingElementsPage.cs" />
     <Compile Include="PageObjects\TheInternet\FormAuthenticationPage.cs" />
     <Compile Include="PageObjects\TheInternet\BasicAuthPage.cs" />
+    <Compile Include="PageObjects\TheInternet\CheckboxesPage.cs" />
     <Compile Include="PageObjects\TheInternet\DownloadPage.cs" />
     <Compile Include="PageObjects\TheInternet\AbTestingPage.cs" />
     <Compile Include="PageObjects\TheInternet\InternetPage.cs" />
@@ -81,6 +83,7 @@
     <Compile Include="PageObjects\TheInternet\JavaScriptAlertsPage.cs" />
     <Compile Include="PageObjects\TheInternet\KeyPressesPage.cs" />
     <Compile Include="PageObjects\TheInternet\MultipleWindowsPage.cs" />
+    <Compile Include="PageObjects\TheInternet\NestedFramesPage.cs" />
     <Compile Include="PageObjects\TheInternet\NewWindowPage.cs" />
     <Compile Include="ProjectPageBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

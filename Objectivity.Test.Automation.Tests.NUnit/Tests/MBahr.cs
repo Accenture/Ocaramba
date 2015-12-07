@@ -24,7 +24,10 @@ SOFTWARE.
 
 using NUnit.Framework;
 using Objectivity.Test.Automation.Common;
+using Objectivity.Test.Automation.Common.Extensions;
+using Objectivity.Test.Automation.Common.Types;
 using Objectivity.Test.Automation.Tests.PageObjects.PageObjects.Kendo;
+using OpenQA.Selenium;
 
 namespace Objectivity.Test.Automation.Tests.NUnit.Tests
 {
@@ -42,6 +45,34 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
             homePage.CloseFabricComboBox();
             Assert.IsFalse(homePage.IsFabricComboBoxExpanded());
         }
+
+        [Test]
+        public void KendoOpenCloseDropDownListTest()
+        {
+            var homePage = new KendoDropDownListPage(this.DriverContext);
+            homePage.Open();
+
+            homePage.OpenColorDropDownList();
+            Assert.IsTrue(homePage.IsColorDropDownListExpanded());
+
+            homePage.CloseColorDropDownList();
+            Assert.IsFalse(homePage.IsColorDropDownListExpanded());
+        }
+
+        [Test]
+        public void KendoUnorderedDropDownListTest()
+        {
+            var numberExpected = 3;
+            var homePage = new KendoDropDownListPage(this.DriverContext);
+            homePage.Open();
+
+            var number = homePage.GetNumberOfOptions(homePage.GetWebElementColorListBox);
+            Assert.AreEqual(numberExpected, number);
+        }
+
+
+
+
     }
 }
 
