@@ -68,6 +68,16 @@ namespace Objectivity.Test.Automation.Common.WebElements
         public void DismissJavaScriptAlert()
         {
             this.webDriver.SwitchTo().Alert().Dismiss();
+            this.webDriver.SwitchTo().DefaultContent();
+        }
+
+        /// <summary>
+        /// Method sends text to Java Script Alert
+        /// </summary>
+        /// <param name="text">Text to be sent</param>
+        public void SendTextToJavaScript(string text)
+        {
+             webDriver.SwitchTo().Alert().SendKeys(text);
         }
     }
 }

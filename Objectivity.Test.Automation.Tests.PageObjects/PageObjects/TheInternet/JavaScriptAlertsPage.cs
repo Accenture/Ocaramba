@@ -22,6 +22,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+using Objectivity.Test.Automation.Common.WebElements;
+
 namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 {
     using Objectivity.Test.Automation.Common;
@@ -69,17 +71,17 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 
         public void AcceptAlert()
         {
-            this.Driver.SwitchTo().Alert().Accept();
+            new JavaScriptAlert(Driver).ConfirmJavaScriptAlert();
         }
 
         public void DismissAlert()
         {
-            this.Driver.SwitchTo().Alert().Dismiss();
+            new JavaScriptAlert(Driver).DismissJavaScriptAlert();
         }
 
         public void TypeTextOnAlert(string text)
         {
-            this.Driver.SwitchTo().Alert().SendKeys(text);
+            new JavaScriptAlert(Driver).SendTextToJavaScript(text);
         }
     }
 }
