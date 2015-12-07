@@ -22,6 +22,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+using OpenQA.Selenium;
+
 namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 {
     using System;
@@ -71,6 +73,26 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
         {
             this.Driver.GetElement(this.fileDownload).Click();
             return new DownloadPage(this.DriverContext);
+        }
+
+        public void PressDownKey(string key)
+        {
+            switch (key.ToLower())
+            {
+                case "esc":
+                    this.Driver.Actions().KeyDown(Keys.Escape);
+                    break;
+                case "f2":
+                    this.Driver.Actions().KeyDown(Keys.F2);
+                    break;
+                case "1":
+                    this.Driver.Actions().KeyDown(Keys.NumberPad1);
+                    break;
+                case "tab":
+                    this.Driver.Actions().KeyDown(Keys.Tab);
+                    break;
+            }
+            this.Driver.Actions().KeyDown(Keys.Escape);
         }
 
         private string GetUrlValue()
