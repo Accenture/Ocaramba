@@ -43,7 +43,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
                 .GoToBasicAuthPage();
 
             Verify.That(this.DriverContext, 
-                () => Assert.AreEqual("Congratulations! You must have the proper credentials.", basicAuthPage.GetcongratulationsInfo));
+                () => Assert.AreEqual("Congratulations! You must have the proper credentials.", basicAuthPage.GetCongratulationsInfo));
         }
 
     }

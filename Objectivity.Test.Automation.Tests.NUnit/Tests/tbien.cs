@@ -12,7 +12,8 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
                 .OpenHomePage()
                 .GoToMultipleWindowsPage()
                 .OpenNewWindowPage();
-            Assert.AreEqual("New Window", newWindowPage.NewWindowH3Text);
+
+            Assert.True(newWindowPage.IsNewWindowH3TextVisible("New Window"), "text is not equal to {0}", "New Window");
         }
     }
 }
