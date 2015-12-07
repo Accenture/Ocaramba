@@ -118,6 +118,12 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             return new BasicAuthPage(this.DriverContext);
         }
 
+        public CheckboxesPage GoToCheckboxesPage()
+        {
+            this.Driver.GetElement(this.linkLocator.Evaluate("checkboxes")).Click();
+            return new CheckboxesPage(this.DriverContext);
+        }
+
         private string GetUrlValue()
         {
             return string.Format(
