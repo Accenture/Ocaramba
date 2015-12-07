@@ -43,11 +43,27 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
         {
         }
 
-        public string GetDescription
+        public string GetDescriptionUsingBy
         {
             get
             {
                 return this.Driver.FindElement(this.contentText.ToBy()).Text;
+            }
+        }
+
+        public string GetDescription
+        {
+            get
+            {
+                return this.Driver.GetElement(this.contentText).Text;
+            }
+        }
+
+        public string GetDescriptionWithCustomTimeout
+        {
+            get
+            {
+                return this.Driver.GetElement(this.contentText, BaseConfiguration.MediumTimeout).Text;
             }
         }
     }
