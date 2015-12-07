@@ -58,6 +58,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
                 Assert.AreEqual("You selected a context menu", contextMenuPage.JavaScriptText);
 
                 contextMenuPage.ConfirmJavaScript();
+                Assert.True(contextMenuPage.IsH3ElementEqualsToExpected("Context Menu"));
             }
         }
 

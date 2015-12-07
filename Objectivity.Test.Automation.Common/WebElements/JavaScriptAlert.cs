@@ -36,6 +36,11 @@ namespace Objectivity.Test.Automation.Common.WebElements
         /// </summary>
         private readonly IWebDriver webDriver;
 
+        public string JavaScriptText
+        {
+            get { return webDriver.SwitchTo().Alert().Text; }
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="JavaScriptAlert"/> class.
         /// </summary>

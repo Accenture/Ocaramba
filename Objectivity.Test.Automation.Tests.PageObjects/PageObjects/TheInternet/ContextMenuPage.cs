@@ -14,8 +14,13 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
     public class ContextMenuPage : ProjectPageBase
     {
         private readonly ElementLocator
-            hotSpot = new ElementLocator(Locator.CssSelector, "#hot-spot");
+            hotSpot = new ElementLocator(Locator.CssSelector, "#hot-spot"),
+            h3Element = new ElementLocator(Locator.CssSelector, "h3");
 
+        public string JavaScriptText 
+        {
+            get { return new JavaScriptAlert(Driver).JavaScriptText; }
+        }
 
         public ContextMenuPage(DriverContext driverContext) : base(driverContext)
         {
@@ -35,15 +40,16 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             return this;
         }
 
-        public string JavaScriptText
-        {
-            get { return Driver.SwitchTo().Alert().Text; }
-        }
-
         public ContextMenuPage ConfirmJavaScript()
         {
-            Driver.SwitchTo().Alert().Accept();
+            new JavaScriptAlert(Driver).ConfirmJavaScriptAlert();
             return this;
         }
+
+        public bool IsH3ElementEqualsToExpected(string text)
+        {
+            return Driver.GetElement(h3Element).IsElementTextEqualsToExpected(text);
+        }
+
     }
 }
