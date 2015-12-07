@@ -133,6 +133,12 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             return new ForgotPasswordPage(this.DriverContext);
         }
 
+        public FloatingMenuPage GoToFloatingMenu()
+        {
+            this.Driver.GetElement(this.linkLocator.Evaluate("floating_menu")).Click();
+            return new FloatingMenuPage(this.DriverContext);
+        }
+
         private string GetUrlValue()
         {
             return string.Format(
@@ -155,7 +161,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
                 BaseConfiguration.Password,
                 BaseConfiguration.Host,
                 BaseConfiguration.Url);
-        }
+    }
 
 
     }

@@ -79,6 +79,7 @@
     <Compile Include="Tests\KendoTests\KendoDropDownListTests.cs" />
     <Compile Include="Tests\KendoTests\KendoGridTests.cs" />
     <Compile Include="Tests\KendoTests\KendoTreeViewTests.cs" />
+    <Compile Include="Tests\rszkudlarek.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
