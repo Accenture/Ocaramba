@@ -37,20 +37,20 @@ namespace Objectivity.Test.Automation.Common.WebElements
         private readonly IWebDriver webDriver;
 
         /// <summary>
-        /// get Java script popup text
-        /// </summary>
-        public string JavaScriptText
-        {
-            get { return webDriver.SwitchTo().Alert().Text; }
-        }
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="JavaScriptAlert"/> class.
         /// </summary>
         /// <param name="webDriver">The web driver.</param>
         public JavaScriptAlert(IWebDriver webDriver)
         {
             this.webDriver = webDriver;
+        }
+
+        /// <summary>
+        /// Get Java script popup text
+        /// </summary>
+        public string JavaScriptText
+        {
+            get { return webDriver.SwitchTo().Alert().Text; }
         }
 
         /// <summary>
