@@ -69,12 +69,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomGrid.cs" />
+    <Compile Include="PageObjects\TheInternet\ContextMenuPage.cs" />
     <Compile Include="PageObjects\TheInternet\DisappearingElementsPage.cs" />
     <Compile Include="PageObjects\TheInternet\FormAuthenticationPage.cs" />
     <Compile Include="PageObjects\TheInternet\BasicAuthPage.cs" />
     <Compile Include="PageObjects\TheInternet\CheckboxesPage.cs" />
     <Compile Include="PageObjects\TheInternet\DownloadPage.cs" />
     <Compile Include="PageObjects\TheInternet\AbTestingPage.cs" />
+    <Compile Include="PageObjects\TheInternet\DropdownPage.cs" />
     <Compile Include="PageObjects\TheInternet\InternetPage.cs" />
     <Compile Include="PageObjects\Kendo\KendoComboBoxPage.cs" />
     <Compile Include="PageObjects\Kendo\KendoDropDownListPage.cs" />
@@ -85,6 +87,7 @@
     <Compile Include="PageObjects\TheInternet\MultipleWindowsPage.cs" />
     <Compile Include="PageObjects\TheInternet\NestedFramesPage.cs" />
     <Compile Include="PageObjects\TheInternet\NewWindowPage.cs" />
+    <Compile Include="PageObjects\TheInternet\StatusCodesPage.cs" />
     <Compile Include="ProjectPageBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

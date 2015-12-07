@@ -47,7 +47,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
                                         userNameForm = new ElementLocator(Locator.Id, "username"),
                                         passwordForm = new ElementLocator(Locator.Id, "password"),
                                         loginButton = new ElementLocator(Locator.CssSelector, ".radius"),
-                                        errorMessage = new ElementLocator(Locator.XPath, "//div[@id='flash']");
+                                        message = new ElementLocator(Locator.XPath, "//div[@id='flash']");
 
         public FormAuthenticationPage(DriverContext driverContext)
             : base(driverContext)
@@ -56,13 +56,13 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             this.Driver.IsElementPresent(this.pageHeader, BaseConfiguration.ShortTimeout);
         }
 
-        public string GetErrorMessage 
+        public string GetMessage 
         {
             get
             {
-                var text = this.Driver.GetElement(this.errorMessage).Text;
-                text = text.Remove(25, 3);
-                Logger.Info(CultureInfo.CurrentCulture, "Error Message '{0}'", text);
+                var text = this.Driver.GetElement(this.message).Text;
+                text = text.Replace("\r\n×", "");
+                Logger.Info(CultureInfo.CurrentCulture, "Message '{0}'", text);
                 return text;
             }
         }

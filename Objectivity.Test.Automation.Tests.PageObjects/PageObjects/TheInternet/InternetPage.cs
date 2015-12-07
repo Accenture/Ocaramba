@@ -109,10 +109,22 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             return new CheckboxesPage(this.DriverContext);
         }
 
+        public ContextMenuPage GoToContextMenuPage()
+        {
+            Driver.GetElement(linkLocator.Evaluate("context_menu")).Click();
+            return new ContextMenuPage(DriverContext);
+        }
+
         public FormAuthenticationPage GoToFormAuthenticationPage()
         {
             this.Driver.GetElement(this.linkLocator.Evaluate("login")).Click();
             return new FormAuthenticationPage(this.DriverContext);
+        }
+
+        public StatusCodesPage GoToStatusCodesPage()
+        {
+            this.Driver.GetElement(this.linkLocator.Evaluate("status_codes")).Click();
+            return new StatusCodesPage(this.DriverContext);
         }
 
         private string GetUrlValue()
@@ -138,5 +150,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
                 BaseConfiguration.Host,
                 BaseConfiguration.Url);
         }
+
+
     }
 }
