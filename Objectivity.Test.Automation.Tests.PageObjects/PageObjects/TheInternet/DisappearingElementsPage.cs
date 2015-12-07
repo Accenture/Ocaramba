@@ -22,40 +22,40 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-namespace Objectivity.Test.Automation.Tests.Specflow.StepDefinitions
+namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 {
     using Objectivity.Test.Automation.Common;
-    using Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet;
+    using Objectivity.Test.Automation.Common.Extensions;
+    using Objectivity.Test.Automation.Common.Types;
 
-    using TechTalk.SpecFlow;
-
-    [Binding]
-    public class CommonSteps
+    public class DisappearingElementsPage : ProjectPageBase
     {
-        private readonly DriverContext driverContext;
+        /// <summary>
+        /// Locators for elements
+        /// </summary>
+         private readonly ElementLocator
+            menuLink = new ElementLocator(Locator.XPath, "//li/a[text()='{0}']");
 
-        public CommonSteps()
+        public DisappearingElementsPage(DriverContext driverContext) : base(driverContext)
         {
-            this.driverContext = ScenarioContext.Current["DriverContext"] as DriverContext;
         }
 
-        [Given(@"I log on and default page is opened")]
-        public void GivenILogOnAndDefaultPageIsOpened()
+        public void RefreshAndWaitLinkNotVisible(string linkText)
         {
-            new InternetPage(this.driverContext).OpenHomePage();
+            this.Driver.Navigate().Refresh();
+            this.Driver.WaitUntilElementIsNoLongerFound(
+                this.menuLink.Evaluate(linkText),
+                BaseConfiguration.MediumTimeout);
         }
 
-        [Given(@"I navigate to ""(.*)"" link")]
-        public void GivenINavigateToLink(string nameOfThePage)
+        public string GetLinkTitleTagName(string linkText)
         {
-            new InternetPage(this.driverContext).GoToPage(nameOfThePage);
+            return this.Driver.GetElement(this.menuLink.Evaluate(linkText), e => e.Displayed == true).TagName;
         }
 
-        [Given(@"I have dropdown page")]
-        public void GivenIHaveDropdownPage()
+        public bool IsLinkSelected(string linkText)
         {
-            var page = new DropdownPage(this.driverContext);
-            ScenarioContext.Current.Set(page, "DropdownPage");
+            return this.Driver.GetElement(this.menuLink.Evaluate(linkText), BaseConfiguration.MediumTimeout, e => e.Displayed == true).Selected;
         }
     }
 }

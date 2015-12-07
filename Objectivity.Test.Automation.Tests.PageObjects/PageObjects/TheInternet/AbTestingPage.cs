@@ -22,40 +22,49 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-namespace Objectivity.Test.Automation.Tests.Specflow.StepDefinitions
+namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 {
+    using NLog;
+
     using Objectivity.Test.Automation.Common;
-    using Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet;
+    using Objectivity.Test.Automation.Common.Extensions;
+    using Objectivity.Test.Automation.Common.Types;
+    using Objectivity.Test.Automation.Tests.PageObjects;
 
-    using TechTalk.SpecFlow;
-
-    [Binding]
-    public class CommonSteps
+    public class AbTestingPage : ProjectPageBase
     {
-        private readonly DriverContext driverContext;
+        /// <summary>
+        /// Locators for elements
+        /// </summary>
+         private readonly ElementLocator
+            contentText = new ElementLocator(Locator.CssSelector, ".example > p");
 
-        public CommonSteps()
+        public AbTestingPage(DriverContext driverContext) : base(driverContext)
         {
-            this.driverContext = ScenarioContext.Current["DriverContext"] as DriverContext;
         }
 
-        [Given(@"I log on and default page is opened")]
-        public void GivenILogOnAndDefaultPageIsOpened()
+        public string GetDescriptionUsingBy
         {
-            new InternetPage(this.driverContext).OpenHomePage();
+            get
+            {
+                return this.Driver.FindElement(this.contentText.ToBy()).Text;
+            }
         }
 
-        [Given(@"I navigate to ""(.*)"" link")]
-        public void GivenINavigateToLink(string nameOfThePage)
+        public string GetDescription
         {
-            new InternetPage(this.driverContext).GoToPage(nameOfThePage);
+            get
+            {
+                return this.Driver.GetElement(this.contentText).Text;
+            }
         }
 
-        [Given(@"I have dropdown page")]
-        public void GivenIHaveDropdownPage()
+        public string GetDescriptionWithCustomTimeout
         {
-            var page = new DropdownPage(this.driverContext);
-            ScenarioContext.Current.Set(page, "DropdownPage");
+            get
+            {
+                return this.Driver.GetElement(this.contentText, BaseConfiguration.MediumTimeout).Text;
+            }
         }
     }
 }

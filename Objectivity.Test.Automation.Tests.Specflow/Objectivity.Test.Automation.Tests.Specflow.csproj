@@ -72,10 +72,22 @@
     <Compile Include="ProjectTestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StepDefinitions\CommonSteps.cs" />
+    <Compile Include="StepDefinitions\DBARAN.cs" />
+    <Compile Include="StepDefinitions\MNOWIK.cs" />
+    <Compile Include="TestFeatures\MNowik.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MNowik.feature</DependentUpon>
+    </Compile>
     <Compile Include="TestFeatures\SmokeTests.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SmokeTests.feature</DependentUpon>
+    </Compile>
+    <Compile Include="TestFeatures\DBARAN.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DBARAN.feature</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -83,6 +95,14 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+    <None Include="TestFeatures\DBARAN.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>DBARAN.feature.cs</LastGenOutput>
+    </None>
+    <None Include="TestFeatures\MNowik.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>MNowik.feature.cs</LastGenOutput>
+    </None>
     <None Include="TestFeatures\SmokeTests.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>SmokeTests.feature.cs</LastGenOutput>

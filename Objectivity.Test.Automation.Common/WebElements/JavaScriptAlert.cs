@@ -46,6 +46,14 @@ namespace Objectivity.Test.Automation.Common.WebElements
         }
 
         /// <summary>
+        /// Get Java script popup text
+        /// </summary>
+        public string JavaScriptText
+        {
+            get { return webDriver.SwitchTo().Alert().Text; }
+        }
+
+        /// <summary>
         /// Confirms the java script alert popup.
         /// </summary>
         public void ConfirmJavaScriptAlert()

@@ -22,6 +22,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+using System.ComponentModel;
+
 namespace Objectivity.Test.Automation.Tests.NUnit.Tests
 {
     using global::NUnit.Framework;

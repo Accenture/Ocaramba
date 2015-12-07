@@ -22,6 +22,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+using OpenQA.Selenium;
+
 namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 {
     using System;
@@ -42,9 +44,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
         /// Locators for elements
         /// </summary>
         private readonly ElementLocator
-            javaScriptAlertsLinkLocator = new ElementLocator(Locator.CssSelector, "a[href='/javascript_alerts']"),
-            floatingMenuLocator = new ElementLocator(Locator.CssSelector, "a[href='/floating_menu']"),
-            fileDownload = new ElementLocator(Locator.LinkText, "File Download");
+            linkLocator = new ElementLocator(Locator.CssSelector, "a[href='/{0}']");
 
         public InternetPage(DriverContext driverContext) : base(driverContext)
         {
@@ -61,22 +61,81 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             return this;
         }
 
+        public InternetPage OpenHomePageWithUserCredentials()
+        {
+            var url = this.GetUrlValueWithUserCredentials();
+            this.Driver.NavigateTo(new Uri(url));
+            Logger.Info(CultureInfo.CurrentCulture, "Opening page {0}", url);
+            return this;
+        }
+
         public JavaScriptAlertsPage GoToJavaScriptAlerts()
         {
-            this.Driver.GetElement(this.javaScriptAlertsLinkLocator).Click();
+            this.Driver.GetElement(this.linkLocator.Evaluate("javascript_alerts")).Click();
             return new JavaScriptAlertsPage(this.DriverContext);
         }
 
+        public void GoToPage(string page)
+        {
+            this.Driver.GetElement(this.linkLocator.Evaluate(page)).Click();
+        }
 
         public DownloadPage GoToFileDownloader()
         {
-            this.Driver.GetElement(this.fileDownload).Click();
+            this.Driver.GetElement(this.linkLocator.Evaluate("download")).Click();
             return new DownloadPage(this.DriverContext);
+        }
+
+        public MultipleWindowsPage GoToMultipleWindowsPage()
+        {
+             this.Driver.GetElement(this.linkLocator.Evaluate("windows")).Click();
+             return new MultipleWindowsPage(this.DriverContext);
+        }
+
+        public BasicAuthPage GoToBasicAuthPage()
+        {
+            this.Driver.GetElement(this.linkLocator.Evaluate("basic_auth")).Click();
+            return new BasicAuthPage(this.DriverContext);
+        }
+
+        public NestedFramesPage GoToNestedFramesPage()
+        {
+            Driver.GetElement(linkLocator.Evaluate("nested_frames")).Click();
+            return new NestedFramesPage(DriverContext);
+        }
+        public CheckboxesPage GoToCheckboxesPage()
+        {
+            this.Driver.GetElement(this.linkLocator.Evaluate("checkboxes")).Click();
+            return new CheckboxesPage(this.DriverContext);
+        }
+
+        public ContextMenuPage GoToContextMenuPage()
+        {
+            Driver.GetElement(linkLocator.Evaluate("context_menu")).Click();
+            return new ContextMenuPage(DriverContext);
+        }
+
+        public FormAuthenticationPage GoToFormAuthenticationPage()
+        {
+            this.Driver.GetElement(this.linkLocator.Evaluate("login")).Click();
+            return new FormAuthenticationPage(this.DriverContext);
+        }
+
+        public StatusCodesPage GoToStatusCodesPage()
+        {
+            this.Driver.GetElement(this.linkLocator.Evaluate("status_codes")).Click();
+            return new StatusCodesPage(this.DriverContext);
+        }
+
+        public ForgotPasswordPage GoToForgotPasswordPage()
+        {
+            this.Driver.GetElement(this.linkLocator.Evaluate("forgot_password")).Click();
+            return new ForgotPasswordPage(this.DriverContext);
         }
 
         public FloatingMenuPage GoToFloatingMenu()
         {
-            this.Driver.GetElement(this.floatingMenuLocator).Click();
+            this.Driver.GetElement(this.linkLocator.Evaluate("floating_menu")).Click();
             return new FloatingMenuPage(this.DriverContext);
         }
 
@@ -89,5 +148,21 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
                 BaseConfiguration.Host,
                 BaseConfiguration.Url);
         }
+
+
+
+        private string GetUrlValueWithUserCredentials()
+        {
+            return string.Format(
+                CultureInfo.CurrentCulture,
+                "{0}://{1}:{2}@{3}{4}",
+                BaseConfiguration.Protocol,
+                BaseConfiguration.Username,
+                BaseConfiguration.Password,
+                BaseConfiguration.Host,
+                BaseConfiguration.Url);
+    }
+
+
     }
 }

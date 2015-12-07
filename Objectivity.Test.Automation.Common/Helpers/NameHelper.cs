@@ -39,7 +39,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// <returns>Random name</returns>
         public static string RandomName(int length)
         {
-            const string Chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ.' -";
+            const string Chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
             var randomString = new StringBuilder();
             var random = new Random();
