@@ -33,14 +33,9 @@ namespace Objectivity.Test.Automation.Tests.NUnit.DataDriven
     /// </summary>
     public class TestData : DataDrivenHelper
     {
-        public IEnumerable CorrectCredentials
+        public IEnumerable Credentials
         {
-            get { return this.ReadDataDriveFile("correct_credential", new[] { "user" }, "password"); }
-        }
-
-        public IEnumerable InCorrectCredentials
-        {
-            get { return this.ReadDataDriveFile("incorrect_credential", new[] { "user" }, "password"); }
+            get { return this.ReadDataDriveFile("credential", new[] { "user", "password" }, "credential"); }
         }
     }
 }

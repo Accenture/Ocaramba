@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <tests>
-  <correct_credential user="tomsmith" password="SuperSecretPassword!"/>
-  <incorrect_credential user="wronguser" password="wrongpassword"/>
+  <credential user="tomsmith" password="SuperSecretPassword!" message="You logged into a secure area!"/>
+  <credential user="wronguser" password="wrongpassword" message="Your username is invalid!"/>
 </tests>

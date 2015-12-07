@@ -50,7 +50,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
         }
 
         [Test]
-        [TestCaseSource(typeof(TestData), "InCorrectCredentials")]
+        [TestCaseSource(typeof(TestData), "Credentials")]
         public void FormAuthenticationPageTest(IDictionary<string, string> parameters)
         {
             new InternetPage(this.DriverContext)
@@ -62,8 +62,10 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
             formFormAuthentication.EnterPassword(parameters["password"]);
             formFormAuthentication.LogOn();
             Verify.That(this.DriverContext,
-                () => Assert.AreEqual("Your username is invalid!", formFormAuthentication.GetErrorMessage));
+                () => Assert.AreEqual(parameters["message"], formFormAuthentication.GetMessage));
 
         }
+
+
     }
 }
