@@ -45,7 +45,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             this.Driver.Navigate().Refresh();
             this.Driver.WaitUntilElementIsNoLongerFound(
                 this.menuLink.Evaluate(linkText),
-                BaseConfiguration.MediumTimeout);
+                BaseConfiguration.ShortTimeout);
         }
 
         public string GetLinkTitleTagName(string linkText)

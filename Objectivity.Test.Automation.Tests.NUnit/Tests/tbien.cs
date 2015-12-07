@@ -47,6 +47,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
         [Test]
         public void ContextMenuTest()
         {
+            const string h3Value = "Context Menu";
             var browser = BaseConfiguration.TestBrowser;
             if (browser.Equals(DriverContext.BrowserType.Firefox))
             {
@@ -56,9 +57,9 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
                     .SelectTheInternetOptionFromContextMenu();
 
                 Assert.AreEqual("You selected a context menu", contextMenuPage.JavaScriptText);
-
-                contextMenuPage.ConfirmJavaScript();
-                Assert.True(contextMenuPage.IsH3ElementEqualsToExpected("Context Menu"));
+                Assert.True(contextMenuPage
+                    .ConfirmJavaScript()
+                    .IsH3ElementEqualsToExpected(h3Value), "h3 element is not equal to expected {0}", h3Value);
             }
         }
 

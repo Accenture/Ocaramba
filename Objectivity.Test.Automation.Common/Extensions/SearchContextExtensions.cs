@@ -287,7 +287,7 @@ namespace Objectivity.Test.Automation.Common.Extensions
                 }
             }
 
-            return wrappedElement.WrappedDriver;
+            return wrappedElement != null ? wrappedElement.WrappedDriver : (IWebDriver)webElement;
         }
 
         /// <summary>

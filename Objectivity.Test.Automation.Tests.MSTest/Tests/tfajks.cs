@@ -90,7 +90,7 @@ namespace Objectivity.Test.Automation.Tests.MSTest.Tests
                 .GoToPage("disappearing_elements");
 
             var disappearingElements = new DisappearingElementsPage(this.DriverContext);
-            disappearingElements.RefreshAndWaitLinkNotVisible("Gallery");
+            disappearingElements.RefreshAndWaitLinkNotVisible("NotExistingLink");
         }
 
         [TestMethod]
