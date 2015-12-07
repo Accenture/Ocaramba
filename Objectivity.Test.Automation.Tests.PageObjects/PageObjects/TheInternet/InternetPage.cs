@@ -44,8 +44,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
         /// Locators for elements
         /// </summary>
         private readonly ElementLocator
-            javaScriptAlertsLinkLocator = new ElementLocator(Locator.CssSelector, "a[href='/javascript_alerts']"),
-            fileDownload = new ElementLocator(Locator.LinkText, "File Download");
+            linkLocator = new ElementLocator(Locator.CssSelector, "a[href='/{0}']");
 
         public InternetPage(DriverContext driverContext) : base(driverContext)
         {
@@ -64,14 +63,18 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 
         public JavaScriptAlertsPage GoToJavaScriptAlerts()
         {
-            this.Driver.GetElement(this.javaScriptAlertsLinkLocator).Click();
+            this.Driver.GetElement(this.linkLocator.Evaluate("javascript_alerts")).Click();
             return new JavaScriptAlertsPage(this.DriverContext);
         }
 
+        public void GoToPage(string page)
+        {
+            this.Driver.GetElement(this.linkLocator.Evaluate(page)).Click();
+        }
 
         public DownloadPage GoToFileDownloader()
         {
-            this.Driver.GetElement(this.fileDownload).Click();
+            this.Driver.GetElement(this.linkLocator.Evaluate("download")).Click();
             return new DownloadPage(this.DriverContext);
         }
 
