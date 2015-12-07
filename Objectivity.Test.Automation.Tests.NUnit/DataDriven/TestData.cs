@@ -33,14 +33,9 @@ namespace Objectivity.Test.Automation.Tests.NUnit.DataDriven
     /// </summary>
     public class TestData : DataDrivenHelper
     {
-        public IEnumerable WordsToSearch
+        public IEnumerable Credentials
         {
-            get { return this.ReadDataDriveFile("wordstosearch"); }
-        }
-
-        public IEnumerable WordsToSearchSetTestName
-        {
-            get { return this.ReadDataDriveFile("wordstosearch", new[] { "word" }, "words_to_search"); }
+            get { return this.ReadDataDriveFile("credential", new[] { "user", "password" }, "credential"); }
         }
     }
 }

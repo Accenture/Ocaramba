@@ -63,6 +63,10 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
+    <Reference Include="WebDriver, Version=2.47.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Selenium.WebDriver.2.47.0\lib\net40\WebDriver.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataDriven\TestData.cs" />
@@ -72,7 +76,7 @@
     </Compile>
     <Compile Include="Tests\DownloadFilesTests.cs" />
     <Compile Include="Tests\JavaScriptAlertsTests.cs" />
-<Compile Include="Tests\jraczek.cs" />
+    <Compile Include="Tests\jraczek.cs" />
     <Compile Include="Tests\Tbien.cs" />
     <Compile Include="Tests\MBahr.cs" />
   </ItemGroup>

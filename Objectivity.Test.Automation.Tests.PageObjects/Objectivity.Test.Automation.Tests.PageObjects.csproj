@@ -71,6 +71,7 @@
     <Compile Include="CustomGrid.cs" />
     <Compile Include="PageObjects\TheInternet\ContextMenuPage.cs" />
     <Compile Include="PageObjects\TheInternet\DisappearingElementsPage.cs" />
+    <Compile Include="PageObjects\TheInternet\FormAuthenticationPage.cs" />
     <Compile Include="PageObjects\TheInternet\BasicAuthPage.cs" />
     <Compile Include="PageObjects\TheInternet\CheckboxesPage.cs" />
     <Compile Include="PageObjects\TheInternet\DownloadPage.cs" />
