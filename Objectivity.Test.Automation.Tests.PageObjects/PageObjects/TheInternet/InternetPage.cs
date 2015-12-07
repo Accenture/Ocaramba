@@ -22,6 +22,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+using OpenQA.Selenium;
+
 namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 {
     using System;
@@ -84,6 +86,32 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             return new DownloadPage(this.DriverContext);
         }
 
+        public MultipleWindowsPage GoToMultipleWindowsPage()
+        {
+             this.Driver.GetElement(this.linkLocator.Evaluate("windows")).Click();
+             return new MultipleWindowsPage(this.DriverContext);
+        }
+
+        public void PressDownKey(string key)
+        {
+            switch (key.ToLower(CultureInfo.InvariantCulture))
+            {
+                case "esc":
+                    this.Driver.Actions().KeyDown(Keys.Escape);
+                    break;
+                case "f2":
+                    this.Driver.Actions().KeyDown(Keys.F2);
+                    break;
+                case "1":
+                    this.Driver.Actions().KeyDown(Keys.NumberPad1);
+                    break;
+                case "tab":
+                    this.Driver.Actions().KeyDown(Keys.Tab);
+                    break;
+            }
+            this.Driver.Actions().KeyDown(Keys.Escape);
+        }
+
         public BasicAuthPage GoToBasicAuthPage()
         {
             this.Driver.GetElement(this.linkLocator.Evaluate("basic_auth")).Click();
@@ -99,6 +127,8 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
                 BaseConfiguration.Host,
                 BaseConfiguration.Url);
         }
+
+
 
         private string GetUrlValueWithUserCredentials()
         {
