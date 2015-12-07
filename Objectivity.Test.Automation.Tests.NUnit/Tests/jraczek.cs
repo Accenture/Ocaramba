@@ -75,7 +75,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
             var forgotPassword = new ForgotPasswordPage(this.DriverContext);
 
             Verify.That(this.DriverContext,
-                () => Assert.AreEqual(5+7+2+2, forgotPassword.EnterEmail(5, 7, 2)),
+                () => Assert.AreEqual(5+7+2, forgotPassword.EnterEmail(5, 7, 2)),
                 () => Assert.AreEqual("Your e-mail's been sent!", forgotPassword.ClickRetrievePassword));
         }
 
