@@ -1,5 +1,6 @@
 ﻿using Objectivity.Test.Automation.Common;
 using Objectivity.Test.Automation.Common.Extensions;
+using Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet;
 
 namespace Objectivity.Test.Automation.Tests.Specflow.StepDefinitions
 {
@@ -16,15 +17,16 @@ namespace Objectivity.Test.Automation.Tests.Specflow.StepDefinitions
         }
 
         [When(@"I press ""(.*)""")]
-        public void WhenIPress(string keybord)
+        public void WhenIPress(string key)
         {
-            ScenarioContext.Current.Pending();
+            new KeyPressesPage(driverContext).PressDownKey(key);
         }
 
-        [Then(@"Valid ""(.*)"" is displayed")]
-        public void ThenValidIsDisplayed(string p0)
-        {
-            ScenarioContext.Current.Pending();
-        }
+        // [Then(@"Valid ""(.*)"" is displayed")]
+        // public void ThenValidIsDisplayed(string validText)
+        // {
+
+        // ScenarioContext.Current.Pending();
+        // }
     }
 }
