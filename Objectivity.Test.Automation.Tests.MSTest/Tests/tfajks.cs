@@ -70,7 +70,7 @@ namespace Objectivity.Test.Automation.Tests.MSTest.Tests
         }
 
         [TestMethod]
-        public void GetElementTestWithCustomTimeout()
+        public void GetElementTestWithCustomTimeoutTest()
         {
             string expectedDescription = @"Also known as split testing. This is a way in which businesses are able to simultaneously test and learn different versions of a page to see which text and/or functionality works best towards a desired outcome (e.g. a user action such as a click-through).";
 
@@ -80,6 +80,17 @@ namespace Objectivity.Test.Automation.Tests.MSTest.Tests
 
             var abeTestingPage = new AbTestingPage(this.DriverContext);
             Assert.AreEqual(expectedDescription, abeTestingPage.GetDescriptionWithCustomTimeout);
+        }
+
+        [TestMethod]
+        public void WaitElementDissapearsTest()
+        {
+           new InternetPage(this.DriverContext)
+                .OpenHomePage()
+                .GoToPage("disappearing_elements");
+
+            var disappearingElements = new DisappearingElements(this.DriverContext);
+            disappearingElements.RefreshAndWaitLinkNotVisible("Gallery");
         }
     }
 }
