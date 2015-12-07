@@ -121,6 +121,13 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             return new FormAuthenticationPage(this.DriverContext);
         }
 
+        public SecureFileDownloadPage GoToSecureFileDownloadPage()
+        {
+            this.Driver.GetElement(this.linkLocator.Evaluate("download_secure")).Click();
+            return new SecureFileDownloadPage(this.DriverContext);
+        }
+
+
         public StatusCodesPage GoToStatusCodesPage()
         {
             this.Driver.GetElement(this.linkLocator.Evaluate("status_codes")).Click();

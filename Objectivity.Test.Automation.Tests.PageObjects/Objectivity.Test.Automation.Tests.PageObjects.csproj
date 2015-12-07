@@ -69,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomGrid.cs" />
+    <Compile Include="PageObjects\TheInternet\SecureFileDownloadPage.cs" />
     <Compile Include="PageObjects\TheInternet\ContextMenuPage.cs" />
     <Compile Include="PageObjects\TheInternet\ForgotPasswordPage.cs" />
     <Compile Include="PageObjects\TheInternet\DisappearingElementsPage.cs" />
