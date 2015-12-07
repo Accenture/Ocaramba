@@ -22,6 +22,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+using OpenQA.Selenium;
+
 namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.Kendo
 {
     using System;
@@ -101,6 +103,20 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.Kendo
             var element = this.Driver.GetElement(this.capColorKendoDropDownListLocator);
             var attribute = element.GetAttribute("aria-expanded");
             return bool.Parse(attribute);
+        }
+
+        public IWebElement GetWebElementColorListBox
+        {
+            get
+            {
+                return this.CapColorKendoDropDownList.UnorderedList;
+            }
+            
+        }
+
+        public int GetNumberOfOptions(IWebElement webElement)
+        {
+            return webElement.FindElements(By.TagName("li")).Count;
         }
     }
 }
