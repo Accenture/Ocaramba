@@ -36,6 +36,9 @@ namespace Objectivity.Test.Automation.Common.WebElements
         /// </summary>
         private readonly IWebDriver webDriver;
 
+        /// <summary>
+        /// get Java script popup text
+        /// </summary>
         public string JavaScriptText
         {
             get { return webDriver.SwitchTo().Alert().Text; }
