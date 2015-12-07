@@ -88,5 +88,17 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
                 .SaveFile("some-file.txt");
         }
 
+        [Test]
+        public void CountLinksAtShiftingContentTest()
+        {
+            new InternetPage(this.DriverContext)
+                .OpenHomePage()
+                .GoToShiftingContentPage();
+
+            var links = new ShiftingContentPage(this.DriverContext);
+            Verify.That(this.DriverContext,
+                () => Assert.AreEqual(3, links.CountLinks()));
+        }
+
     }
 }

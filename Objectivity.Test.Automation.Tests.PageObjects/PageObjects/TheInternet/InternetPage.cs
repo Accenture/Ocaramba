@@ -127,6 +127,11 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             return new SecureFileDownloadPage(this.DriverContext);
         }
 
+        public ShiftingContentPage GoToShiftingContentPage()
+        {
+            this.Driver.GetElement(this.linkLocator.Evaluate("shifting_content")).Click();
+            return new ShiftingContentPage(this.DriverContext);
+        }
 
         public StatusCodesPage GoToStatusCodesPage()
         {
