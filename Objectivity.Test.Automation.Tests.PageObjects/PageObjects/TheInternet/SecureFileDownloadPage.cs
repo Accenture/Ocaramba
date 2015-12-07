@@ -26,6 +26,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 {
     using System;
     using System.Globalization;
+    using System.IO;
 
     using NLog;
 
@@ -59,6 +60,9 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             {
             this.Driver.GetElement(this.fileLink.Evaluate("some-file.txt")).Click();
             FilesHelper.WaitForFile(this.Driver, 5, fileName, BaseConfiguration.DownloadFolder);
+            FileInfo file = FilesHelper.GetLastFile(BaseConfiguration.DownloadFolder, FilesHelper.FileType.Txt);
+            FilesHelper.RenameFile(file.Name, "secure_file", BaseConfiguration.DownloadFolder, FilesHelper.FileType.Txt);
+            
             }
             else
             {
