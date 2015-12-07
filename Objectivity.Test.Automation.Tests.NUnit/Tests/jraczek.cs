@@ -24,9 +24,12 @@ SOFTWARE.
 
 namespace Objectivity.Test.Automation.Tests.NUnit.Tests
 {
+    using System.Collections.Generic;
+
     using global::NUnit.Framework;
 
     using Objectivity.Test.Automation.Common;
+    using Objectivity.Test.Automation.Tests.NUnit.DataDriven;
     using Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet;
 
     /// <summary>
@@ -46,5 +49,21 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
                 () => Assert.AreEqual("Congratulations! You must have the proper credentials.", basicAuthPage.GetCongratulationsInfo));
         }
 
+        [Test]
+        [TestCaseSource(typeof(TestData), "InCorrectCredentials")]
+        public void FormAuthenticationPageTest(IDictionary<string, string> parameters)
+        {
+            new InternetPage(this.DriverContext)
+                .OpenHomePage()
+                .GoToFormAuthenticationPage();
+
+            var formFormAuthentication = new FormAuthenticationPage(this.DriverContext);
+            formFormAuthentication.EnterUserName(parameters["user"]);
+            formFormAuthentication.EnterPassword(parameters["password"]);
+            formFormAuthentication.LogOn();
+            Verify.That(this.DriverContext,
+                () => Assert.AreEqual("Your username is invalid!", formFormAuthentication.GetErrorMessage));
+
+        }
     }
 }

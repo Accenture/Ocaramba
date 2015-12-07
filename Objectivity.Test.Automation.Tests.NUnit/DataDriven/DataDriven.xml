@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <tests>
-  <wordstosearch word="objectivity" expected_title="objectivity - MSDN Search"/>
-  <wordstosearch word="visual studio" expected_title="visual studio - MSDN Search"/>
+  <correct_credential user="tomsmith" password="SuperSecretPassword!"/>
+  <incorrect_credential user="wronguser" password="wrongpassword"/>
 </tests>

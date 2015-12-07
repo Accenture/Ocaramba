@@ -118,6 +118,12 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             return new BasicAuthPage(this.DriverContext);
         }
 
+        public FormAuthenticationPage GoToFormAuthenticationPage()
+        {
+            this.Driver.GetElement(this.linkLocator.Evaluate("login")).Click();
+            return new FormAuthenticationPage(this.DriverContext);
+        }
+
         private string GetUrlValue()
         {
             return string.Format(

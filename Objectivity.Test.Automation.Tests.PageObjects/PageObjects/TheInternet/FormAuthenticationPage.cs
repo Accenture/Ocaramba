@@ -36,32 +36,53 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
     using Objectivity.Test.Automation.Common.Types;
     using Objectivity.Test.Automation.Tests.PageObjects;
 
-    public class BasicAuthPage : ProjectPageBase
+    public class FormAuthenticationPage : ProjectPageBase
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
         /// Locators for elements
         /// </summary>
-        private readonly ElementLocator pageHeader = new ElementLocator(Locator.XPath, "//h3[.='Basic Auth']"),
-                                        congratulationsInfo = new ElementLocator(Locator.CssSelector, ".example>p");
+        private readonly ElementLocator pageHeader = new ElementLocator(Locator.XPath, "//h3[.='Login Page']"),
+                                        userNameForm = new ElementLocator(Locator.Id, "username"),
+                                        passwordForm = new ElementLocator(Locator.Id, "password"),
+                                        loginButton = new ElementLocator(Locator.CssSelector, ".radius"),
+                                        errorMessage = new ElementLocator(Locator.XPath, "//div[@id='flash']");
 
-        public BasicAuthPage(DriverContext driverContext)
+        public FormAuthenticationPage(DriverContext driverContext)
             : base(driverContext)
         {
             Logger.Info("Waiting for page to open");
             this.Driver.IsElementPresent(this.pageHeader, BaseConfiguration.ShortTimeout);
         }
 
-
-        public string GetCongratulationsInfo
+        public string GetErrorMessage 
         {
             get
             {
-                var text = this.Driver.GetElement(this.congratulationsInfo).Text;
-                Logger.Info(CultureInfo.CurrentCulture, "Text from page '{0}'", text);
+                var text = this.Driver.GetElement(this.errorMessage).Text;
+                text = text.Remove(25, 3);
+                Logger.Info(CultureInfo.CurrentCulture, "Error Message '{0}'", text);
                 return text;
             }
+        }
+
+        public void EnterPassword(string password)
+        {
+            Logger.Info(CultureInfo.CurrentCulture, "Password '{0}'", password);
+            this.Driver.GetElement(this.passwordForm).SendKeys(password);
+        }
+
+        public void EnterUserName(string userName)
+        {
+            Logger.Info(CultureInfo.CurrentCulture, "User name '{0}'", userName);
+            this.Driver.GetElement(this.userNameForm).SendKeys(userName);
+        }
+
+        public void LogOn()
+        {
+            Logger.Info(CultureInfo.CurrentCulture, "Click on Login Button");
+            this.Driver.GetElement(this.loginButton).Click();
         }
 
     }
