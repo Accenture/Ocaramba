@@ -79,6 +79,14 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
                 () => Assert.AreEqual("Your e-mail's been sent!", forgotPassword.ClickRetrievePassword));
         }
 
+        [Test]
+        public void SecureDownloadFileByNameTest()
+        {
+            new InternetPage(this.DriverContext)
+                .OpenHomePageWithUserCredentials()
+                .GoToSecureFileDownloadPage()
+                .SaveFile("some-file.txt");
+        }
 
     }
 }
