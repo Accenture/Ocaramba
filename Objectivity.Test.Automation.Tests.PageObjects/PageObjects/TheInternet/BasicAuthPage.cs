@@ -59,7 +59,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             get
             {
                 var text = this.Driver.GetElement(this.congratulationsInfo).Text;
-                Logger.Info("Text from page '{0}'", text);
+                Logger.Info("Text from page '{0}'", text, CultureInfo.InvariantCulture);
                 return text;
             }
         }

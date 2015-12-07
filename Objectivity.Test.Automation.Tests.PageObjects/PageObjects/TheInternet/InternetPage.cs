@@ -92,26 +92,6 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
              return new MultipleWindowsPage(this.DriverContext);
         }
 
-        public void PressDownKey(string key)
-        {
-            switch (key.ToLower(CultureInfo.InvariantCulture))
-            {
-                case "esc":
-                    this.Driver.Actions().KeyDown(Keys.Escape);
-                    break;
-                case "f2":
-                    this.Driver.Actions().KeyDown(Keys.F2);
-                    break;
-                case "1":
-                    this.Driver.Actions().KeyDown(Keys.NumberPad1);
-                    break;
-                case "tab":
-                    this.Driver.Actions().KeyDown(Keys.Tab);
-                    break;
-            }
-            this.Driver.Actions().KeyDown(Keys.Escape);
-        }
-
         public BasicAuthPage GoToBasicAuthPage()
         {
             this.Driver.GetElement(this.linkLocator.Evaluate("basic_auth")).Click();

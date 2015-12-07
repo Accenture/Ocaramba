@@ -42,7 +42,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             switch (key.ToLower(CultureInfo.InvariantCulture))
             {
                 case "esc":
-                    this.Driver.Actions().KeyDown(Keys.Escape);
+                    this.Driver.Actions().KeyDown(Keys.Escape).KeyUp(Keys.Escape).Perform();
                     break;
                 case "f2":
                     this.Driver.Actions().KeyDown(Keys.F2);

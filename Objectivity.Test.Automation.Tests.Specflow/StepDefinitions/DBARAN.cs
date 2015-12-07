@@ -22,6 +22,12 @@ namespace Objectivity.Test.Automation.Tests.Specflow.StepDefinitions
             new KeyPressesPage(driverContext).PressDownKey(key);
         }
 
+        [Given(@"I have page key page initialized")]
+        public void GivenIHavePageKeyPageInitialized()
+        {
+            ScenarioContext.Current.Pending();
+        }
+
         // [Then(@"Valid ""(.*)"" is displayed")]
         // public void ThenValidIsDisplayed(string validText)
         // {
