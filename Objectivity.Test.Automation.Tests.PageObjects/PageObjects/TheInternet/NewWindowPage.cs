@@ -25,7 +25,6 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
         public bool IsPageTile(string title)
         {
             return Driver.IsPageTitle(title, 2);
-
         }
     }
 }

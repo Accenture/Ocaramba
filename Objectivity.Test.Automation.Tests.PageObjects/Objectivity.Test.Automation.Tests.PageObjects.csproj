@@ -80,6 +80,7 @@
     <Compile Include="PageObjects\TheInternet\JavaScriptAlertsPage.cs" />
     <Compile Include="PageObjects\TheInternet\KeyPressesPage.cs" />
     <Compile Include="PageObjects\TheInternet\MultipleWindowsPage.cs" />
+    <Compile Include="PageObjects\TheInternet\NestedFramesPage.cs" />
     <Compile Include="PageObjects\TheInternet\NewWindowPage.cs" />
     <Compile Include="ProjectPageBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

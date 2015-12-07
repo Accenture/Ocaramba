@@ -12,9 +12,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
     {
         private readonly ElementLocator
     clickHerePageLocator = new ElementLocator(Locator.CssSelector, "a[href='/windows/new']");
-
-
-        
+   
         public MultipleWindowsPage(DriverContext driverContext) : base(driverContext)
         {
         }
