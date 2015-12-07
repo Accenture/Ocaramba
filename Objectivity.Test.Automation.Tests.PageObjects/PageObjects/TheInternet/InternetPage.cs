@@ -103,6 +103,11 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             Driver.GetElement(linkLocator.Evaluate("nested_frames")).Click();
             return new NestedFramesPage(DriverContext);
         }
+        public CheckboxesPage GoToCheckboxesPage()
+        {
+            this.Driver.GetElement(this.linkLocator.Evaluate("checkboxes")).Click();
+            return new CheckboxesPage(this.DriverContext);
+        }
 
         private string GetUrlValue()
         {

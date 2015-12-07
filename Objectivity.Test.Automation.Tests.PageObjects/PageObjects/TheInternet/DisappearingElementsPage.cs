@@ -22,40 +22,30 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-using NUnit.Framework;
-using Objectivity.Test.Automation.Common;
-using Objectivity.Test.Automation.Tests.PageObjects.PageObjects.Kendo;
-
-namespace Objectivity.Test.Automation.Tests.NUnit.Tests
+namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 {
-    public class MBahr : ProjectTestBase
+    using Objectivity.Test.Automation.Common;
+    using Objectivity.Test.Automation.Common.Extensions;
+    using Objectivity.Test.Automation.Common.Types;
+
+    public class DisappearingElements : ProjectPageBase
     {
-        [Test]
-        public void KendoOpenCloseComboboxTest()
+        /// <summary>
+        /// Locators for elements
+        /// </summary>
+         private readonly ElementLocator
+            menuLink = new ElementLocator(Locator.XPath, "//li/a[text()='{0}']");
+
+        public DisappearingElements(DriverContext driverContext) : base(driverContext)
         {
-            var homePage = new KendoComboBoxPage(this.DriverContext);
-            homePage.Open();
-
-            homePage.OpenFabricComboBox();           
-            Assert.IsTrue(homePage.IsFabricComboBoxExpanded());
-
-            homePage.CloseFabricComboBox();
-            Assert.IsFalse(homePage.IsFabricComboBoxExpanded());
         }
 
-        [Test]
-        public void KendoOpenCloseDropDownListTest()
+        public void RefreshAndWaitLinkNotVisible(string linkText)
         {
-            var homePage = new KendoDropDownListPage(this.DriverContext);
-            homePage.Open();
-
-            homePage.OpenColorDropDownList();
-            Assert.IsTrue(homePage.IsColorDropDownListExpanded());
-
-            homePage.CloseColorDropDownList();
-            Assert.IsFalse(homePage.IsColorDropDownListExpanded());
+            this.Driver.Navigate().Refresh();
+            this.Driver.WaitUntilElementIsNoLongerFound(
+                this.menuLink.Evaluate(linkText),
+                BaseConfiguration.ShortTimeout);
         }
-
     }
 }
-
