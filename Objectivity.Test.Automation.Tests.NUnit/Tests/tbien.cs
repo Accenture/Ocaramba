@@ -1,5 +1,9 @@
-﻿using NUnit.Framework;
+﻿using System.Threading;
+
+using NUnit.Framework;
 using Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet;
+using System.Configuration;
+using Objectivity.Test.Automation.Common;
 
 namespace Objectivity.Test.Automation.Tests.NUnit.Tests
 {
@@ -39,5 +43,23 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
             nestedFramesPage.ReturnToDefaultContent().SwitchToFrame("frame-bottom");
             Assert.AreEqual("BOTTOM", nestedFramesPage.BottomBody);
         }
+
+        [Test]
+        public void ContextMenuTest()
+        {
+            var browser = BaseConfiguration.TestBrowser;
+            if (browser.Equals(DriverContext.BrowserType.Firefox))
+            {
+                var contextMenuPage = new InternetPage(DriverContext)
+                    .OpenHomePage()
+                    .GoToContextMenuPage()
+                    .SelectTheInternetOptionFromContextMenu();
+
+                Assert.AreEqual("You selected a context menu", contextMenuPage.JavaScriptText);
+
+                contextMenuPage.ConfirmJavaScript();
+            }
+        }
+
     }
 }
