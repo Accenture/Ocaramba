@@ -85,5 +85,22 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.Kendo
             this.Driver.NavigateTo(this.url);
             return this;
         }
+
+        public void OpenColorDropDownList()
+        {
+            this.CapColorKendoDropDownList.Open();
+        }
+
+        public void CloseColorDropDownList()
+        {
+            this.CapColorKendoDropDownList.Close();
+        }
+
+        public bool IsColorDropDownListExpanded()
+        {
+            var element = this.Driver.GetElement(this.capColorKendoDropDownListLocator);
+            var attribute = element.GetAttribute("aria-expanded");
+            return bool.Parse(attribute);
+        }
     }
 }

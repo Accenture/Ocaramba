@@ -42,6 +42,20 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
             homePage.CloseFabricComboBox();
             Assert.IsFalse(homePage.IsFabricComboBoxExpanded());
         }
+
+        [Test]
+        public void KendoOpenCloseDropDownListTest()
+        {
+            var homePage = new KendoDropDownListPage(this.DriverContext);
+            homePage.Open();
+
+            homePage.OpenColorDropDownList();
+            Assert.IsTrue(homePage.IsColorDropDownListExpanded());
+
+            homePage.CloseColorDropDownList();
+            Assert.IsFalse(homePage.IsColorDropDownListExpanded());
+        }
+
     }
 }
 
