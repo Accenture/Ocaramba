@@ -23,5 +23,16 @@
 
             Assert.IsTrue(checkboxes.IsCheckmarkOneTicked, "Checkbox1 is unticked!");
         }
+
+        [TestMethod]
+        public void UnTickCheckboxTest()
+        {
+            var checkboxes = new InternetPage(this.DriverContext)
+                .OpenHomePage()
+                .GoToCheckboxesPage()
+                .UnTickCheckboxTwo();
+
+            Assert.IsFalse(checkboxes.IsCheckmarkTwoTicked, "Checkbox2 is ticked!");
+        }
     }
 }
