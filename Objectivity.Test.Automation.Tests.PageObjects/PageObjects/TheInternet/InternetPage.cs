@@ -121,6 +121,18 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             return new FormAuthenticationPage(this.DriverContext);
         }
 
+        public SecureFileDownloadPage GoToSecureFileDownloadPage()
+        {
+            this.Driver.GetElement(this.linkLocator.Evaluate("download_secure")).Click();
+            return new SecureFileDownloadPage(this.DriverContext);
+        }
+
+        public ShiftingContentPage GoToShiftingContentPage()
+        {
+            this.Driver.GetElement(this.linkLocator.Evaluate("shifting_content")).Click();
+            return new ShiftingContentPage(this.DriverContext);
+        }
+
         public HoversPage GoToHoversPage()
         {
             this.Driver.GetElement(this.linkLocator.Evaluate("hovers")).Click();
@@ -131,6 +143,18 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
         {
             this.Driver.GetElement(this.linkLocator.Evaluate("status_codes")).Click();
             return new StatusCodesPage(this.DriverContext);
+        }
+
+        public ForgotPasswordPage GoToForgotPasswordPage()
+        {
+            this.Driver.GetElement(this.linkLocator.Evaluate("forgot_password")).Click();
+            return new ForgotPasswordPage(this.DriverContext);
+        }
+
+        public FloatingMenuPage GoToFloatingMenu()
+        {
+            this.Driver.GetElement(this.linkLocator.Evaluate("floating_menu")).Click();
+            return new FloatingMenuPage(this.DriverContext);
         }
 
         private string GetUrlValue()
@@ -155,7 +179,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
                 BaseConfiguration.Password,
                 BaseConfiguration.Host,
                 BaseConfiguration.Url);
-        }
+    }
 
 
     }

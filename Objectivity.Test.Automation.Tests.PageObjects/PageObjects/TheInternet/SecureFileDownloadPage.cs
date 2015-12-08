@@ -36,52 +36,36 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
     using Objectivity.Test.Automation.Common.Types;
     using Objectivity.Test.Automation.Tests.PageObjects;
 
-    public class DownloadPage : ProjectPageBase
+    public class SecureFileDownloadPage : ProjectPageBase
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
         /// Locators for elements
         /// </summary>
-        private readonly ElementLocator downloadPageHeader = new ElementLocator(Locator.XPath, "//h3[.='File Downloader']"),
-                                        fileLink = new ElementLocator(Locator.CssSelector, "a[href='download/{0}']");
+        private readonly ElementLocator downloadPageHeader = new ElementLocator(Locator.XPath, "//h3[.='Secure File Downloader']"),
+                                        fileLink = new ElementLocator(Locator.CssSelector, "a[href='download_secure/{0}']");
 
-        public DownloadPage(DriverContext driverContext)
+        public SecureFileDownloadPage(DriverContext driverContext)
             : base(driverContext)
         {
             Logger.Info("Waiting for File Download page to open");
             this.Driver.IsElementPresent(this.downloadPageHeader, BaseConfiguration.ShortTimeout);
         }
 
-        public DownloadPage SaveFile(string fileName)
+        public SecureFileDownloadPage SaveFile(string fileName)
         {
             if (BaseConfiguration.TestBrowser == DriverContext.BrowserType.Firefox
                 || BaseConfiguration.TestBrowser == DriverContext.BrowserType.Chrome)
             {
-                this.Driver.GetElement(this.fileLink.Evaluate("some-file.txt")).Click();
-                FilesHelper.WaitForFile(this.Driver, fileName, BaseConfiguration.DownloadFolder);
+            this.Driver.GetElement(this.fileLink.Evaluate("some-file.txt")).Click();
+            FilesHelper.WaitForFile(this.Driver, 5, fileName, BaseConfiguration.DownloadFolder);
+            FileInfo file = FilesHelper.GetLastFile(BaseConfiguration.DownloadFolder, FilesHelper.FileType.Txt);
+            FilesHelper.RenameFile(file.Name, "secure_file", BaseConfiguration.DownloadFolder, FilesHelper.FileType.Txt);
+            
             }
             else
             {
-               Logger.Info(CultureInfo.CurrentCulture, "Downloading files in browser {0} is not supported", BaseConfiguration.TestBrowser);
-            }
-
-            return this;
-        }
-
-        public DownloadPage SaveFile()
-        {
-           if (BaseConfiguration.TestBrowser == DriverContext.BrowserType.Firefox
-                || BaseConfiguration.TestBrowser == DriverContext.BrowserType.Chrome)
-            {
-                var filesNumber = FilesHelper.CountFiles(BaseConfiguration.DownloadFolder, FilesHelper.FileType.Txt);
-                this.Driver.GetElement(this.fileLink.Evaluate("some-file.txt")).Click();
-                FilesHelper.WaitForFile(FilesHelper.FileType.Txt, this.Driver, filesNumber, BaseConfiguration.DownloadFolder);
-                FileInfo file = FilesHelper.GetLastFile(BaseConfiguration.DownloadFolder, FilesHelper.FileType.Txt);
-                FilesHelper.RenameFile(file.Name, "new_name_of_file", BaseConfiguration.DownloadFolder, FilesHelper.FileType.Txt);
-            }
-            else
-            {  
                 Logger.Info(CultureInfo.CurrentCulture, "Downloading files in browser {0} is not supported", BaseConfiguration.TestBrowser);
             }
 

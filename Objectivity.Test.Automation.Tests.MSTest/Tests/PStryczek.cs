@@ -1,5 +1,6 @@
 ﻿namespace Objectivity.Test.Automation.Tests.MSTest.Tests
 {
+    using System;
     using System.Diagnostics.CodeAnalysis;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -54,6 +55,17 @@
             var statusCodes = new StatusCodesPage(this.DriverContext);
 
             Assert.IsTrue(statusCodes.IsStatusCodesPageDisplayed(), "Status codes page is not displayed.");
+        }
+
+        [TestMethod]
+        public void JavaScriptClickTest()
+        {
+            HTTPCode200Page httpCode200 = new InternetPage(this.DriverContext)
+               .OpenHomePage()
+               .GoToStatusCodesPage()
+               .Click200();
+
+            Assert.IsTrue(httpCode200.IsHTTPCode200PageIsDisplayed(), "Code 200 was not clicked or page is not displayed.");
         }
     }
 }

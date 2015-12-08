@@ -230,9 +230,9 @@ namespace Objectivity.Test.Automation.Common.Extensions
         /// <param name="webDriver">The web driver.</param>
         /// <param name="locator">The locator.</param>
         public static void ScrollIntoMiddle(this IWebDriver webDriver, ElementLocator locator)
-        {
+        {         
             var js = (IJavaScriptExecutor)webDriver;
-            var element = webDriver.GetElement(locator);
+            var element = webDriver.ToDriver().GetElement(locator);
 
             if (webDriver != null)
             {

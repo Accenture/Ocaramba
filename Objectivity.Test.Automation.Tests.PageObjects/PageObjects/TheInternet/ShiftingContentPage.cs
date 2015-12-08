@@ -24,43 +24,41 @@ SOFTWARE.
 
 namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 {
+    using System;
     using System.Globalization;
+    using System.IO;
+
     using NLog;
+
     using Objectivity.Test.Automation.Common;
     using Objectivity.Test.Automation.Common.Extensions;
+    using Objectivity.Test.Automation.Common.Helpers;
     using Objectivity.Test.Automation.Common.Types;
-    using OpenQA.Selenium;
+    using Objectivity.Test.Automation.Tests.PageObjects;
 
-    public class KeyPressesPage : ProjectPageBase
+    public class ShiftingContentPage : ProjectPageBase
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-        private readonly ElementLocator keyPressesPageHeader = new ElementLocator(Locator.XPath, "//h3[.='File Downloader']");
+        /// <summary>
+        /// Locators for elements
+        /// </summary>
+        private readonly ElementLocator pageHeader = new ElementLocator(Locator.XPath, "//h3[.='Shifting Content']"),
+                                        links = new ElementLocator(Locator.CssSelector, ".example>a");
 
-        public void PressDownKey(string key)
+
+        public ShiftingContentPage(DriverContext driverContext)
+            : base(driverContext)
         {
-            switch (key.ToLower(CultureInfo.InvariantCulture))
-            {
-                case "esc":
-                    this.Driver.Actions().KeyDown(Keys.Escape).KeyUp(Keys.Escape).Perform();
-                    break;
-                case "f2":
-                    this.Driver.Actions().KeyDown(Keys.F2);
-                    break;
-                case "1":
-                    this.Driver.Actions().KeyDown(Keys.NumberPad1);
-                    break;
-                case "tab":
-                    this.Driver.Actions().KeyDown(Keys.Tab);
-                    break;
-            }
-            this.Driver.Actions().KeyDown(Keys.Escape);
+            Logger.Info("Waiting for page to open");
+            this.Driver.IsElementPresent(this.pageHeader, BaseConfiguration.ShortTimeout);
         }
 
-        public KeyPressesPage(DriverContext driverContext) : base(driverContext)
+        public int CountLinks()
         {
-            Logger.Info("Waiting for Key Process page to open");
-            this.Driver.IsElementPresent(this.keyPressesPageHeader, BaseConfiguration.ShortTimeout);
+            var count = this.Driver.GetElements(this.links).Count;
+            Logger.Info(CultureInfo.CurrentCulture, "Number of links on page '{0}'", count);
+            return count;
         }
     }
 }

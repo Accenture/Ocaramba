@@ -22,44 +22,39 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+using Objectivity.Test.Automation.Common;
+using Objectivity.Test.Automation.Common.Extensions;
+using Objectivity.Test.Automation.Common.Helpers;
+using Objectivity.Test.Automation.Common.Types;
+using NLog;
+
 namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 {
-    using System.Globalization;
-
-    using NLog;
-
-    using Objectivity.Test.Automation.Common;
-    using Objectivity.Test.Automation.Common.Extensions;
-    using Objectivity.Test.Automation.Common.Types;
-    using Objectivity.Test.Automation.Tests.PageObjects;
-
-    public class BasicAuthPage : ProjectPageBase
+    public class FloatingMenuPage : ProjectPageBase
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-        /// <summary>
-        /// Locators for elements
-        /// </summary>
-        private readonly ElementLocator pageHeader = new ElementLocator(Locator.XPath, "//h3[.='Basic Auth']"),
-                                        congratulationsInfo = new ElementLocator(Locator.CssSelector, ".example>p");
+        private readonly ElementLocator floatingMenuPageText = new ElementLocator(
+            Locator.CssSelector,
+            "div.scroll");
 
-        public BasicAuthPage(DriverContext driverContext)
+        private readonly ElementLocator floatingHomeButton = new ElementLocator(
+            Locator.CssSelector,
+            "a[href='#home']");
+
+        public FloatingMenuPage(DriverContext driverContext)
             : base(driverContext)
         {
-            Logger.Info("Waiting for page to open");
-            this.Driver.IsElementPresent(this.pageHeader, BaseConfiguration.ShortTimeout);
+            Logger.Info("Waiting for File Download page to open");
+           // this.Driver.IsElementPresent(this.floatingMenuPageText, BaseConfiguration.ShortTimeout);
         }
 
-
-        public string GetCongratulationsInfo
+        public FloatingMenuPage ClickFloatingMenuButton()
         {
-            get
-            {
-                var text = this.Driver.GetElement(this.congratulationsInfo).Text;
-                Logger.Info(CultureInfo.CurrentCulture, "Text from page '{0}'", text);
-                return text;
-            }
-        }
+           this.Driver.ScrollIntoMiddle(floatingMenuPageText);
+            this.Driver.GetElement(floatingHomeButton).Click();        
 
+            return this;
+        }
     }
 }

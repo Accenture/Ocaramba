@@ -69,10 +69,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomGrid.cs" />
+    <Compile Include="PageObjects\TheInternet\HttpCode200Page.cs" />
+    <Compile Include="PageObjects\TheInternet\ShiftingContentPage.cs" />
+    <Compile Include="PageObjects\TheInternet\SecureFileDownloadPage.cs" />
     <Compile Include="PageObjects\TheInternet\ContextMenuPage.cs" />
+    <Compile Include="PageObjects\TheInternet\BasicAuthPage.cs" />
     <Compile Include="PageObjects\TheInternet\DisappearingElementsPage.cs" />
     <Compile Include="PageObjects\TheInternet\FormAuthenticationPage.cs" />
-    <Compile Include="PageObjects\TheInternet\BasicAuthPage.cs" />
+    <Compile Include="PageObjects\TheInternet\ForgotPasswordPage.cs" />
     <Compile Include="PageObjects\TheInternet\CheckboxesPage.cs" />
     <Compile Include="PageObjects\TheInternet\DownloadPage.cs" />
     <Compile Include="PageObjects\TheInternet\AbTestingPage.cs" />
@@ -84,6 +88,7 @@
     <Compile Include="PageObjects\Kendo\KendoGridPage.cs" />
     <Compile Include="PageObjects\Kendo\KendoTreeViewPage.cs" />
     <Compile Include="PageObjects\TheInternet\JavaScriptAlertsPage.cs" />
+    <Compile Include="PageObjects\TheInternet\FloatingMenuPage.cs" />
     <Compile Include="PageObjects\TheInternet\KeyPressesPage.cs" />
     <Compile Include="PageObjects\TheInternet\MultipleWindowsPage.cs" />
     <Compile Include="PageObjects\TheInternet\NestedFramesPage.cs" />

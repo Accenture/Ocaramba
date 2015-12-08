@@ -14,7 +14,8 @@
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         private readonly ElementLocator
-            statusCodeHeader = new ElementLocator(Locator.XPath, "//h3[text()='Status Codes']");
+            statusCodeHeader = new ElementLocator(Locator.XPath, "//h3[text()='Status Codes']"),
+            code200 = new ElementLocator(Locator.CssSelector, "a[href='status_codes/200']");
 
         public StatusCodesPage(DriverContext driverContext)
             : base(driverContext)
@@ -30,6 +31,12 @@
         public bool IsTextExistedInPageSource(string text)
         {
             return this.Driver.PageSourceContainsCase(text, BaseConfiguration.MediumTimeout, false);
+        }
+
+        public HTTPCode200Page Click200()
+        {
+            this.Driver.GetElement(this.code200).JavaScriptClick();
+            return new HTTPCode200Page(this.DriverContext);
         }
     }
 }
