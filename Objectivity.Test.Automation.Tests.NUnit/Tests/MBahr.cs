@@ -27,6 +27,7 @@ using Objectivity.Test.Automation.Common;
 using Objectivity.Test.Automation.Common.Extensions;
 using Objectivity.Test.Automation.Common.Types;
 using Objectivity.Test.Automation.Tests.PageObjects.PageObjects.Kendo;
+using Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet;
 using OpenQA.Selenium;
 
 namespace Objectivity.Test.Automation.Tests.NUnit.Tests
@@ -70,9 +71,32 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
             Assert.AreEqual(numberExpected, number);
         }
 
+        [Test]
+        public void HoversTest()
+        {
+            var expected = new string[3] { "name: user1", "name: user2", "name: user3" };
 
+            var homePage = new InternetPage(this.DriverContext)
+                .OpenHomePageWithUserCredentials()
+                .GoToHoversPage();
 
+            homePage.MouseHoverAt(1);
+            var text1 = homePage.GetHoverText(1);
+            LogTest.Info(text1);
 
+            homePage.MouseHoverAt(2);
+            var text2 = homePage.GetHoverText(2);
+            LogTest.Info(text2);
+
+            homePage.MouseHoverAt(3);
+            var text3 = homePage.GetHoverText(3);
+            LogTest.Info(text3);
+
+            Assert.AreEqual(expected[0], text1);
+            Assert.AreEqual(expected[1], text2);
+            Assert.AreEqual(expected[2], text3);
+
+        }
     }
 }
 

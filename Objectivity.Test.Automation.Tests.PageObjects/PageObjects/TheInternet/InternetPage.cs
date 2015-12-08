@@ -121,6 +121,12 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             return new FormAuthenticationPage(this.DriverContext);
         }
 
+        public HoversPage GoToHoversPage()
+        {
+            this.Driver.GetElement(this.linkLocator.Evaluate("hovers")).Click();
+            return new HoversPage(this.DriverContext);
+        }
+
         public StatusCodesPage GoToStatusCodesPage()
         {
             this.Driver.GetElement(this.linkLocator.Evaluate("status_codes")).Click();
