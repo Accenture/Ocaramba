@@ -80,22 +80,31 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
                 .OpenHomePageWithUserCredentials()
                 .GoToHoversPage();
 
+            var text1before = homePage.GetHoverText(1);
+            LogTest.Info("Text before: '{0}'", text1before);
             homePage.MouseHoverAt(1);
-            var text1 = homePage.GetHoverText(1);
-            LogTest.Info(text1);
+            var text1after = homePage.GetHoverText(1);
+            LogTest.Info("Text after: '{0}'", text1after);
 
+            var text2before = homePage.GetHoverText(2);
+            LogTest.Info("Text before: '{0}'", text2before);
             homePage.MouseHoverAt(2);
-            var text2 = homePage.GetHoverText(2);
-            LogTest.Info(text2);
+            var text2after = homePage.GetHoverText(2);
+            LogTest.Info("Text after: '{0}'", text2after);
 
+            var text3before = homePage.GetHoverText(3);
+            LogTest.Info("Text before: '{0}'", text3before);
             homePage.MouseHoverAt(3);
-            var text3 = homePage.GetHoverText(3);
-            LogTest.Info(text3);
+            var text3after = homePage.GetHoverText(3);
+            LogTest.Info("Text after: '{0}'", text3after);
 
-            Assert.AreEqual(expected[0], text1);
-            Assert.AreEqual(expected[1], text2);
-            Assert.AreEqual(expected[2], text3);
+            Assert.AreEqual(string.Empty, text1before);
+            Assert.AreEqual(string.Empty, text2before);
+            Assert.AreEqual(string.Empty, text3before);
 
+            Assert.AreEqual(expected[0], text1after);
+            Assert.AreEqual(expected[1], text2after);
+            Assert.AreEqual(expected[2], text3after);
         }
     }
 }

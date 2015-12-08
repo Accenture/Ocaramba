@@ -39,12 +39,13 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 
         public void MouseHoverAt(int nr)
         {
-            Driver.Actions().MoveToElement(Driver.FindElement(By.XPath("(.//*[@id='content']/div/div)["+ nr +"]/img"))).Build().Perform();
+            Driver.Actions().MoveToElement(Driver.FindElement(By.XPath("(.//*[@id='content']/div/div)[" + nr + "]/img"))).Build().Perform();
         }
 
         public string GetHoverText(int nr)
         {
-            return Driver.GetElement(new ElementLocator(Locator.XPath, ".//*[@id='content']/div/div[" + nr + "]/div/h5")).Text;
+            var webElement = Driver.FindElement(By.XPath(".//*[@id='content']/div/div[" + nr  + "]/div/h5"));
+            return webElement.Text;
         }
     }
 }
