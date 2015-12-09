@@ -8,6 +8,6 @@ StyleCop.Cache
 *.GhostDoc.xml
 TestFramework.sln.DotSettings.user
 
-/Objectivity.Test.Automation.Features/TestFeatures/*.feature.cs
+/Objectivity.Test.Automation.Tests.Features/TestFeatures/*.feature.cs
 *.user
 LastBuild.log

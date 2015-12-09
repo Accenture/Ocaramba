@@ -25,7 +25,6 @@ SOFTWARE.
 namespace Objectivity.Test.Automation.Features
 {
     using NUnit.Framework;
-
     using Objectivity.Test.Automation.Common;
     using Objectivity.Test.Automation.Common.Helpers;
     using Objectivity.Test.Automation.Common.Logger;

@@ -46,6 +46,14 @@ namespace Objectivity.Test.Automation.Common.WebElements
         }
 
         /// <summary>
+        /// Get Java script popup text
+        /// </summary>
+        public string JavaScriptText
+        {
+            get { return webDriver.SwitchTo().Alert().Text; }
+        }
+
+        /// <summary>
         /// Confirms the java script alert popup.
         /// </summary>
         public void ConfirmJavaScriptAlert()
@@ -60,6 +68,16 @@ namespace Objectivity.Test.Automation.Common.WebElements
         public void DismissJavaScriptAlert()
         {
             this.webDriver.SwitchTo().Alert().Dismiss();
+            this.webDriver.SwitchTo().DefaultContent();
+        }
+
+        /// <summary>
+        /// Method sends text to Java Script Alert
+        /// </summary>
+        /// <param name="text">Text to be sent</param>
+        public void SendTextToJavaScript(string text)
+        {
+             webDriver.SwitchTo().Alert().SendKeys(text);
         }
     }
 }

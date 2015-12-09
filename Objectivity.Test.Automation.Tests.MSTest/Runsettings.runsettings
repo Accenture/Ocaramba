@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RunSettings>
+	<RunConfiguration>
+		<ResultsDirectory>.\</ResultsDirectory>
+	 </RunConfiguration>
+<!-- MSTest adapter -->
+  <MSTest>
+    <CaptureTraceOutput>false</CaptureTraceOutput>
+    <DeleteDeploymentDirectoryAfterTestRunIsComplete>False</DeleteDeploymentDirectoryAfterTestRunIsComplete>
+    <DeploymentEnabled>False</DeploymentEnabled>
+    <SettingsFile>.\Testsettings.testsettings</SettingsFile>
+  </MSTest>
+</RunSettings>

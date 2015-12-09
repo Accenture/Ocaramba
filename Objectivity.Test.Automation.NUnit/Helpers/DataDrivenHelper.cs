@@ -22,7 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-namespace Objectivity.Test.Automation.NUnit.NUnit
+namespace Objectivity.Test.Automation.NUnit.Helpers
 {
     using System;
     using System.Collections.Generic;
@@ -31,9 +31,8 @@ namespace Objectivity.Test.Automation.NUnit.NUnit
     using System.Runtime.InteropServices;
     using System.Xml.Linq;
 
-    using global::NUnit.Framework;
-
     using Objectivity.Test.Automation.Common;
+    using global::NUnit.Framework;
 
     /// <summary>
     /// DataDriven methods for NUnit test framework
