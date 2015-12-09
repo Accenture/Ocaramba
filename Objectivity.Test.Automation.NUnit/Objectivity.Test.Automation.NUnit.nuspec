@@ -14,9 +14,11 @@
     <copyright>Copyright 2015</copyright>
     <tags>selenium webdriver testautomation tests Objectivity.Test.Automation.Common</tags>
 	<dependencies>
-	  <dependency id="Objectivity.Test.Automation.Common"/>  
 	  <dependency id="NUnit" version="2.6.4" />
     </dependencies> 
+	<references>
+	<reference file="Objectivity.Test.Automation.Common.dll" />
+	</references>
   </metadata>
   <files>
 	<file src="..\Objectivity.Test.Automation.Tests.NUnit\ProjectTestBase.cs" target="content" />
