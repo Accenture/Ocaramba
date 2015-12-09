@@ -24,19 +24,9 @@ SOFTWARE.
 
 namespace Objectivity.Test.Automation.Tests.PageObjects
 {
-    using System.Collections.Generic;
-
     using Objectivity.Test.Automation.Common;
-    using Objectivity.Test.Automation.Common.Extensions;
 
     using OpenQA.Selenium;
-
-    public enum PageTitles
-    {
-        HomePage,
-        SearchResultsPage,
-        TechnologiesBusinessPage
-    }
 
     public class ProjectPageBase
     {
