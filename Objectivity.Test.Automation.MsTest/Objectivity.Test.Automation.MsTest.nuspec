@@ -14,13 +14,13 @@
     <copyright>Copyright 2015</copyright>
     <tags>selenium webdriver testautomation tests Objectivity.Test.Automation.Common template</tags>
 	<dependencies>
-	  <dependency id="Objectivity.Test.Automation.Common" version="2.0.30" />
+	  <dependency id="Objectivity.Test.Automation.Common"/>
     </dependencies> 
   </metadata>
   <files>
-	<file src="ProjectPageBase.cs" target="content" />
-	<file src="ProjectTestBase.cs" target="content" />
-	<file src="..\Objectivity.Test.Automation.MsTest.Tests\app.config" target="content" />
+	<file src="..\Objectivity.Test.Automation.Tests.MSTest\ProjectTestBase.cs" target="content" />
+	<file src="..\Objectivity.Test.Automation.Tests.MSTest\App.config" target="content" />
+	<file src="..\Objectivity.Test.Automation.Tests.PageObjects\ProjectPageBase.cs" target="content" />
 	<file src="Runsettings.runsettings" target="content" />
 	<file src="Testsettings.testsettings" target="content" />
   </files>
