@@ -16,13 +16,11 @@
 	<dependencies>
 	  <dependency id="NUnit" version="2.6.4" />
     </dependencies> 
-	<references>
-	<reference file="Objectivity.Test.Automation.Common.dll" />
-	</references>
   </metadata>
   <files>
 	<file src="..\Objectivity.Test.Automation.Tests.NUnit\ProjectTestBase.cs" target="content" />
 	<file src="..\Objectivity.Test.Automation.Tests.NUnit\App.config" target="content" />
 	<file src="..\Objectivity.Test.Automation.Tests.PageObjects\ProjectPageBase.cs" target="content" />
+	<file src="\bin\Release\Objectivity.Test.Automation.Common.dll" target="lib\net40" />
   </files>
 </package>
