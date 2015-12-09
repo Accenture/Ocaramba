@@ -22,8 +22,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-using OpenQA.Selenium;
-
 namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 {
     using System;
@@ -57,6 +55,17 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
         {
             var url = this.GetUrlValue();
             this.Driver.NavigateTo(new Uri(url));
+            Logger.Info(CultureInfo.CurrentCulture, "Opening page {0}", url);
+            return this;
+        }
+
+        /// <summary>
+        /// Methods for this HomePage
+        /// </summary>
+        public InternetPage OpenHomePageAndMeasureTime()
+        {
+            var url = this.GetUrlValue();
+            this.Driver.NavigateToAndMeasureTime(new Uri(url), waitForAjax: true);
             Logger.Info(CultureInfo.CurrentCulture, "Opening page {0}", url);
             return this;
         }
@@ -100,8 +109,8 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 
         public NestedFramesPage GoToNestedFramesPage()
         {
-            Driver.GetElement(linkLocator.Evaluate("nested_frames")).Click();
-            return new NestedFramesPage(DriverContext);
+            this.Driver.GetElement(this.linkLocator.Evaluate("nested_frames")).Click();
+            return new NestedFramesPage(this.DriverContext);
         }
         public CheckboxesPage GoToCheckboxesPage()
         {
@@ -111,8 +120,8 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 
         public ContextMenuPage GoToContextMenuPage()
         {
-            Driver.GetElement(linkLocator.Evaluate("context_menu")).Click();
-            return new ContextMenuPage(DriverContext);
+            this.Driver.GetElement(this.linkLocator.Evaluate("context_menu")).Click();
+            return new ContextMenuPage(this.DriverContext);
         }
 
         public FormAuthenticationPage GoToFormAuthenticationPage()

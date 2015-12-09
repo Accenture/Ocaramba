@@ -22,8 +22,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-using System.ComponentModel;
-
 namespace Objectivity.Test.Automation.Tests.NUnit.Tests
 {
     using global::NUnit.Framework;
@@ -52,6 +50,15 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
                 .OpenHomePage()
                 .GoToFileDownloader()
                 .SaveFile();
+        }
+
+        [Test]
+        public void SecureDownloadFileByNameTest()
+        {
+            new InternetPage(this.DriverContext)
+                .OpenHomePageWithUserCredentials()
+                .GoToSecureFileDownloadPage()
+                .SaveFile("some-file.txt");
         }
     }
 }
