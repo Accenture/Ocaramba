@@ -40,16 +40,6 @@ namespace Objectivity.Test.Automation.Tests.PageObjects
 
     public class ProjectPageBase
     {
-        /// <summary>
-        /// The page title dictionary
-        /// </summary>
-        private readonly Dictionary<string, string> pageTitleDictionary = new Dictionary<string, string>
-        {
-            { "Home", "MSDN-the microsoft developer network" },
-            { "Search Results", "objectivity - MSDN Search" },
-            { "Technologies Business", "Business and Enterprise Application Development" }
-        };
-
         public ProjectPageBase(DriverContext driverContext)
         {
             this.DriverContext = driverContext;
@@ -59,15 +49,5 @@ namespace Objectivity.Test.Automation.Tests.PageObjects
         protected IWebDriver Driver { get; set; }
 
         protected DriverContext DriverContext { get; set; }
-
-        public bool IsPageTitle(string expectedPageTitle)
-        {
-            return this.Driver.IsPageTitle(expectedPageTitle, BaseConfiguration.MediumTimeout);
-        }
-
-        public string GetPageTitle(string pageName)
-        {
-            return this.pageTitleDictionary[pageName];
-        }
     }
 }
