@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<tests>
-  <wordstosearch word="objectivity" expected_title="objectivity - MSDN Search"/>
-  <wordstosearch word="visual studio" expected_title="visual studio - MSDN Search"/>
-</tests>
