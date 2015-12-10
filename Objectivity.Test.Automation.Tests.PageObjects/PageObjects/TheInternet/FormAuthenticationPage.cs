@@ -41,9 +41,9 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
         /// Locators for elements
         /// </summary>
         private readonly ElementLocator pageHeader = new ElementLocator(Locator.XPath, "//h3[.='Login Page']"),
-                                        userNameForm = new ElementLocator(Locator.Id, "username"),
-                                        passwordForm = new ElementLocator(Locator.Id, "password"),
-                                        loginButton = new ElementLocator(Locator.CssSelector, ".radius"),
+                                        userNameForm = new ElementLocator(Locator.XPath, "//label[.='Username']/following-sibling::input"),
+                                        passwordForm = new ElementLocator(Locator.XPath, "//label[.='Password']/following-sibling::input"),
+                                        loginButton = new ElementLocator(Locator.XPath, "//button/i[contains(text(),'Login')]"),
                                         message = new ElementLocator(Locator.XPath, "//div[@id='flash']");
 
         public FormAuthenticationPage(DriverContext driverContext)
