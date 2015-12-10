@@ -14,7 +14,7 @@
     <copyright>Copyright 2015</copyright>
     <tags>selenium webdriver testautomation tests Objectivity.Test.Automation.Common</tags>
 	<dependencies>
-	  <dependency id="NUnit" version="2.6.4" />
+	  <dependency id="NUnit" version="3.0.1" />
     </dependencies> 
   </metadata>
   <files>

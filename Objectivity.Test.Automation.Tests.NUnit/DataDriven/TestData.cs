@@ -31,11 +31,11 @@ namespace Objectivity.Test.Automation.Tests.NUnit.DataDriven
     /// <summary>
     /// DataDriven methods for NUnit test framework
     /// </summary>
-    public class TestData : DataDrivenHelper
+    public static class TestData 
     {
-        public IEnumerable Credentials
+        public static IEnumerable Credentials
         {
-            get { return this.ReadDataDriveFile("credential", new[] { "user", "password" }, "credential"); }
+            get { return DataDrivenHelper.ReadDataDriveFile("credential", new[] { "user", "password" }, "credential"); }
         }
     }
 }

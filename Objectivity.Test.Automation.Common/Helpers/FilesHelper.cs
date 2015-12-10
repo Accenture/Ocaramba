@@ -93,9 +93,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
                 if (BaseConfiguration.UseCurrentDirectory)
                 {
                     return
-                        Path.Combine(
-                            Environment.CurrentDirectory + Path.DirectorySeparatorChar
-                            + folder);
+                        AppDomain.CurrentDomain.BaseDirectory + folder;
                 }
 
                 return folder;

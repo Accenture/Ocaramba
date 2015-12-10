@@ -37,9 +37,9 @@ namespace Objectivity.Test.Automation.NUnit.Helpers
     /// <summary>
     /// DataDriven methods for NUnit test framework
     /// </summary>
-    public class DataDrivenHelper
+    public static class DataDrivenHelper
     {
-        private static readonly string Path = BaseConfiguration.DataDrivenFile;
+        private static readonly string Path = AppDomain.CurrentDomain.BaseDirectory + System.IO.Path.DirectorySeparatorChar + BaseConfiguration.DataDrivenFile;
 
         /// <summary>
         /// Reads the data drive file and set test name.
@@ -48,7 +48,7 @@ namespace Objectivity.Test.Automation.NUnit.Helpers
         /// <param name="diffParam">The difference parameter, will be used in test case name.</param>
         /// <param name="testName">Name of the test.</param>
         /// <returns></returns>
-        protected IEnumerable<TestCaseData> ReadDataDriveFile(string testData, string[] diffParam, [Optional] string testName)
+        public static IEnumerable<TestCaseData> ReadDataDriveFile(string testData, string[] diffParam, [Optional] string testName)
         {
             var doc = XDocument.Load(Path);
 
@@ -94,7 +94,7 @@ namespace Objectivity.Test.Automation.NUnit.Helpers
         /// </summary>
         /// <param name="testData">The test data.</param>
         /// <returns></returns>
-        protected IEnumerable<TestCaseData> ReadDataDriveFile(string testData)
+        public static IEnumerable<TestCaseData> ReadDataDriveFile(string testData)
         {
             var doc = XDocument.Load(Path);
             if (!doc.Descendants(testData).Any())
