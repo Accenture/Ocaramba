@@ -24,6 +24,7 @@ SOFTWARE.
 
 namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 {
+    using System;
     using System.Globalization;
 
     using NLog;
@@ -44,7 +45,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
                                         userNameForm = new ElementLocator(Locator.XPath, "//label[.='Username']/following-sibling::input"),
                                         passwordForm = new ElementLocator(Locator.XPath, "//label[.='Password']/following-sibling::input"),
                                         loginButton = new ElementLocator(Locator.XPath, "//button/i[contains(text(),'Login')]"),
-                                        message = new ElementLocator(Locator.XPath, "//div[@id='flash']");
+                                        message = new ElementLocator(Locator.XPath, "//a[@class='close']/..");
 
         public FormAuthenticationPage(DriverContext driverContext)
             : base(driverContext)
@@ -58,7 +59,8 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             get
             {
                 var text = this.Driver.GetElement(this.message).Text;
-                text = text.Replace("\r\n×", "");
+                var index = text.IndexOf("!", StringComparison.Ordinal);
+                text = text.Remove(index+1);
                 Logger.Info(CultureInfo.CurrentCulture, "Message '{0}'", text);
                 return text;
             }
