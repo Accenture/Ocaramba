@@ -58,7 +58,8 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
         {
             get
             {
-                var text = this.Driver.GetElement(this.message).Text;
+                Logger.Info("Try to get nessage");
+                var text = this.Driver.GetElement(this.message, BaseConfiguration.ShortTimeout).Text;
                 var index = text.IndexOf("!", StringComparison.Ordinal);
                 text = text.Remove(index+1);
                 Logger.Info(CultureInfo.CurrentCulture, "Message '{0}'", text);
