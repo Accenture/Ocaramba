@@ -44,7 +44,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
         private readonly ElementLocator pageHeader = new ElementLocator(Locator.XPath, "//h3[.='Login Page']"),
                                         userNameForm = new ElementLocator(Locator.XPath, "//label[.='Username']/following-sibling::input"),
                                         passwordForm = new ElementLocator(Locator.XPath, "//label[.='Password']/following-sibling::input"),
-                                        loginButton = new ElementLocator(Locator.XPath, "//i[contains(text(),'Login')]/.."),
+                                        loginButton = new ElementLocator(Locator.XPath, "//form[@id='login']/button"),
                                         message = new ElementLocator(Locator.XPath, "//a[@class='close']/..");
 
         public FormAuthenticationPage(DriverContext driverContext)
@@ -71,6 +71,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
         {
             Logger.Info(CultureInfo.CurrentCulture, "Password '{0}'", password);
             this.Driver.GetElement(this.passwordForm).SendKeys(password);
+            this.Driver.WaitForAjax();
         }
 
         public void EnterUserName(string userName)
