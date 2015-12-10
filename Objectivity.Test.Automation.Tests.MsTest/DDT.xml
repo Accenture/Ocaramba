@@ -3,12 +3,14 @@
   <Links>
     <number>5</number>
   </Links>
-  <WordsToSearch>
-    <word>objectivity</word>
-    <expected_title>objectivity - MSDN Search</expected_title>
-  </WordsToSearch>
-  <WordsToSearch>
-    <word>visual studio</word>
-    <expected_title>visual studio - MSDN Search</expected_title>
-  </WordsToSearch>
+  <credential>
+    <user>tomsmith</user>
+    <password>SuperSecretPassword!</password>
+    <message>You logged into a secure area!</message>
+  </credential>
+  <credential>
+    <user>wronguser</user>
+    <password>wrongpassword</password>
+    <message>Your username is invalid!</message>
+  </credential>
 </Rows>
