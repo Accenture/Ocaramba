@@ -24,7 +24,6 @@ SOFTWARE.
 
 using Objectivity.Test.Automation.Common;
 using Objectivity.Test.Automation.Common.Extensions;
-using Objectivity.Test.Automation.Common.Helpers;
 using Objectivity.Test.Automation.Common.Types;
 using NLog;
 
@@ -51,8 +50,8 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 
         public FloatingMenuPage ClickFloatingMenuButton()
         {
-           this.Driver.ScrollIntoMiddle(floatingMenuPageText);
-            this.Driver.GetElement(floatingHomeButton).Click();        
+           this.Driver.ScrollIntoMiddle(this.floatingMenuPageText);
+            this.Driver.GetElement(this.floatingHomeButton).Click();        
 
             return this;
         }

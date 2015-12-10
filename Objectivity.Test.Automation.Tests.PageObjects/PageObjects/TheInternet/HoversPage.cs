@@ -22,12 +22,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-using System;
 using Objectivity.Test.Automation.Common;
 using Objectivity.Test.Automation.Common.Extensions;
-using Objectivity.Test.Automation.Common.Types;
+
 using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
 
 namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 {
@@ -39,12 +37,12 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 
         public void MouseHoverAt(int nr)
         {
-            Driver.Actions().MoveToElement(Driver.FindElement(By.XPath("(.//*[@id='content']/div/div)[" + nr + "]/img"))).Build().Perform();
+            this.Driver.Actions().MoveToElement(this.Driver.FindElement(By.XPath("(.//*[@id='content']/div/div)[" + nr + "]/img"))).Build().Perform();
         }
 
         public string GetHoverText(int nr)
         {
-            var webElement = Driver.FindElement(By.XPath(".//*[@id='content']/div/div[" + nr  + "]/div/h5"));
+            var webElement = this.Driver.FindElement(By.XPath(".//*[@id='content']/div/div[" + nr  + "]/div/h5"));
             return webElement.Text;
         }
     }

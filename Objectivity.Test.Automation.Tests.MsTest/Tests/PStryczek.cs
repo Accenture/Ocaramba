@@ -51,7 +51,7 @@
         [TestMethod]
         public void NavigateToUrlTest()
         {
-            this.DriverContext.Driver.NavigateTo(new System.Uri("http://the-internet.herokuapp.com/status_codes"));
+            this.DriverContext.Driver.NavigateTo(new Uri("http://the-internet.herokuapp.com/status_codes"));
             var statusCodes = new StatusCodesPage(this.DriverContext);
 
             Assert.IsTrue(statusCodes.IsStatusCodesPageDisplayed(), "Status codes page is not displayed.");

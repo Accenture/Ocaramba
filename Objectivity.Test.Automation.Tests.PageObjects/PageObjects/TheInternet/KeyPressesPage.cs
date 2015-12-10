@@ -45,7 +45,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
         {
             get
             {
-                return Driver.GetElement(resultTextLocator).Text;
+                return this.Driver.GetElement(this.resultTextLocator).Text;
             }
         }
 
@@ -53,7 +53,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
         {
             get
             {
-                return Driver.IsElementPresent(resultTextLocator, BaseConfiguration.ShortTimeout);
+                return this.Driver.IsElementPresent(this.resultTextLocator, BaseConfiguration.ShortTimeout);
             }
         }
 

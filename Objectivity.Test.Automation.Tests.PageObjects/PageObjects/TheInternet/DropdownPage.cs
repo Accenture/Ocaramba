@@ -22,7 +22,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-using System;
 using Objectivity.Test.Automation.Common;
 using Objectivity.Test.Automation.Common.Extensions;
 using Objectivity.Test.Automation.Common.Types;
@@ -45,7 +44,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
         {
             get
             {
-                var element = Driver.GetElement(dropDownLocator);
+                var element = this.Driver.GetElement(this.dropDownLocator);
                 var select = new SelectElement(element);
                 return select.SelectedOption.Text;
             }
@@ -54,7 +53,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
         public bool IsOptionWithTextPresent(string optionText)
         {
             var isPresent = false;
-            var element = Driver.GetElement(dropDownLocator);
+            var element = this.Driver.GetElement(this.dropDownLocator);
             var select = new SelectElement(element);
             foreach (var option in select.Options)
             {
@@ -69,13 +68,13 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 
         public void SelectByIndex(int index)
         {
-            Select select = Driver.GetElement<Select>(dropDownLocator, 300);
+            Select select = this.Driver.GetElement<Select>(this.dropDownLocator, 300);
             select.SelectByIndex(index, 300);
         }
 
         public void SelectByText(string text)
         {
-            Select select = Driver.GetElement<Select>(dropDownLocator);
+            Select select = this.Driver.GetElement<Select>(this.dropDownLocator);
 
             if (select.IsSelectOptionAvailable(text) == false)
             {

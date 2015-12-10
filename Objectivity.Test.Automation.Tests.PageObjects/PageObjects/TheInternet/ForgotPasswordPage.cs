@@ -24,9 +24,7 @@ SOFTWARE.
 
 namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 {
-    using System;
     using System.Globalization;
-    using System.IO;
 
     using NLog;
 

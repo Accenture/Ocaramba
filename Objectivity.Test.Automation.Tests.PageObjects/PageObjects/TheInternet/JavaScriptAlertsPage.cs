@@ -71,17 +71,17 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 
         public void AcceptAlert()
         {
-            new JavaScriptAlert(Driver).ConfirmJavaScriptAlert();
+            new JavaScriptAlert(this.Driver).ConfirmJavaScriptAlert();
         }
 
         public void DismissAlert()
         {
-            new JavaScriptAlert(Driver).DismissJavaScriptAlert();
+            new JavaScriptAlert(this.Driver).DismissJavaScriptAlert();
         }
 
         public void TypeTextOnAlert(string text)
         {
-            new JavaScriptAlert(Driver).SendTextToJavaScript(text);
+            new JavaScriptAlert(this.Driver).SendTextToJavaScript(text);
         }
     }
 }

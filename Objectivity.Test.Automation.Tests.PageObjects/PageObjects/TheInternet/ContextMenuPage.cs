@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Objectivity.Test.Automation.Common;
+﻿using Objectivity.Test.Automation.Common;
 using Objectivity.Test.Automation.Common.Extensions;
 using Objectivity.Test.Automation.Common.Types;
 using Objectivity.Test.Automation.Common.WebElements;
@@ -19,7 +15,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 
         public string JavaScriptText 
         {
-            get { return new JavaScriptAlert(Driver).JavaScriptText; }
+            get { return new JavaScriptAlert(this.Driver).JavaScriptText; }
         }
 
         public ContextMenuPage(DriverContext driverContext) : base(driverContext)
@@ -28,8 +24,8 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 
         public ContextMenuPage SelectTheInternetOptionFromContextMenu()
         {
-            new Actions(Driver)
-                .ContextClick(Driver.GetElement(hotSpot))
+            new Actions(this.Driver)
+                .ContextClick(this.Driver.GetElement(this.hotSpot))
                 .SendKeys(Keys.ArrowDown)
                 .SendKeys(Keys.ArrowDown)
                 .SendKeys(Keys.ArrowDown)
@@ -42,13 +38,13 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 
         public ContextMenuPage ConfirmJavaScript()
         {
-            new JavaScriptAlert(Driver).ConfirmJavaScriptAlert();
+            new JavaScriptAlert(this.Driver).ConfirmJavaScriptAlert();
             return this;
         }
 
         public bool IsH3ElementEqualsToExpected(string text)
         {
-            return Driver.GetElement(h3Element).IsElementTextEqualsToExpected(text);
+            return this.Driver.GetElement(this.h3Element).IsElementTextEqualsToExpected(text);
         }
 
     }

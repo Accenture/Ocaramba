@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Objectivity.Test.Automation.Common;
+﻿using Objectivity.Test.Automation.Common;
 using Objectivity.Test.Automation.Common.Extensions;
 using Objectivity.Test.Automation.Common.Types;
 
@@ -19,12 +15,12 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 
         public bool IsNewWindowH3TextVisible(string text)
         {
-            return Driver.GetElement(newWindowPageLocator).IsElementTextEqualsToExpected(text);
+            return this.Driver.GetElement(this.newWindowPageLocator).IsElementTextEqualsToExpected(text);
         }
 
         public bool IsPageTile(string title)
         {
-            return Driver.IsPageTitle(title, 2);
+            return this.Driver.IsPageTitle(title, 2);
         }
     }
 }

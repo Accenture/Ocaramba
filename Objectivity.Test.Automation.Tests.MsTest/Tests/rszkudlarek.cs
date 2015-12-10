@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Objectivity.Test.Automation.Tests.MSTest.Tests
 {
@@ -19,7 +16,7 @@ namespace Objectivity.Test.Automation.Tests.MSTest.Tests
                 .OpenHomePage()
                 .GoToFloatingMenu()
                 .ClickFloatingMenuButton();
-            Assert.IsTrue(DriverContext.Driver.Url.EndsWith("#home", StringComparison.CurrentCulture), "URL does not end with #home - probably 'Home' floating menu button was not clicked properly");
+            Assert.IsTrue(this.DriverContext.Driver.Url.EndsWith("#home", StringComparison.CurrentCulture), "URL does not end with #home - probably 'Home' floating menu button was not clicked properly");
         }
     }
 }

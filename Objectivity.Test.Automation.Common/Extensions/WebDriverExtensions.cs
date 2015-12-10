@@ -28,7 +28,6 @@ namespace Objectivity.Test.Automation.Common.Extensions
 {
     using System;
     using System.Globalization;
-    using System.Runtime.CompilerServices;
 
     using NLog;
 
@@ -36,7 +35,6 @@ namespace Objectivity.Test.Automation.Common.Extensions
     using Objectivity.Test.Automation.Common.WebElements;
 
     using OpenQA.Selenium;
-    using OpenQA.Selenium.IE;
     using OpenQA.Selenium.Interactions;
     using OpenQA.Selenium.Support.UI;
 

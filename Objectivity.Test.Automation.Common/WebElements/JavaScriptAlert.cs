@@ -50,7 +50,7 @@ namespace Objectivity.Test.Automation.Common.WebElements
         /// </summary>
         public string JavaScriptText
         {
-            get { return webDriver.SwitchTo().Alert().Text; }
+            get { return this.webDriver.SwitchTo().Alert().Text; }
         }
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace Objectivity.Test.Automation.Common.WebElements
         /// <param name="text">Text to be sent</param>
         public void SendTextToJavaScript(string text)
         {
-             webDriver.SwitchTo().Alert().SendKeys(text);
+            this.webDriver.SwitchTo().Alert().SendKeys(text);
         }
     }
 }
