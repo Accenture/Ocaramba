@@ -32,6 +32,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
     /// Tests to test framework
     /// </summary>
     [TestFixture, Category("herokuapp")]
+    [Parallelizable(ParallelScope.Fixtures)]
     public class DownloadFilesTests : ProjectTestBase
     {
         [Test]
