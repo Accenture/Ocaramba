@@ -26,6 +26,7 @@ namespace Objectivity.Test.Automation.Common
 {
     using System;
     using System.Collections.ObjectModel;
+    using System.Collections.Specialized;
     using System.Configuration;
     using System.Diagnostics.CodeAnalysis;
     using System.Drawing.Imaging;
@@ -156,6 +157,7 @@ namespace Objectivity.Test.Automation.Common
             {
                 var profile = new FirefoxProfile();
 
+                // predefined preferences
                 // set browser proxy for firefox
                 if (!string.IsNullOrEmpty(BaseConfiguration.Proxy))
                 {
@@ -164,6 +166,10 @@ namespace Objectivity.Test.Automation.Common
 
                 profile.SetPreference("toolkit.startup.max_resumed_crashes", "999999");
                 profile.SetPreference("network.automatic-ntlm-auth.trusted-uris", BaseConfiguration.Host ?? string.Empty);
+
+                // retrieving settings from config file
+                var firefoxPreferences = ConfigurationManager.GetSection("FirefoxPreferences") as NameValueCollection;
+                var firefoxExtensions = ConfigurationManager.GetSection("FirefoxExtensions") as NameValueCollection;
 
                 // preference for downloading files
                 profile.SetPreference("browser.download.dir", FilesHelper.GetFolder(BaseConfiguration.DownloadFolder));
@@ -177,6 +183,51 @@ namespace Objectivity.Test.Automation.Common
                 // disable Adobe Acrobat PDF preview plugin
                 profile.SetPreference("plugin.scan.Acrobat", "99.0");
                 profile.SetPreference("plugin.scan.plid.all", false);
+
+                // custom preferences
+                // if there are any settings
+                if (firefoxPreferences != null)
+                {
+                    // loop through all of them
+                    for (var i = 0; i < firefoxPreferences.Count; i++)
+                    {
+                        // and verify all of them
+                        switch (firefoxPreferences[i])
+                        {
+                            // if current settings value is "true"
+                            case "true":
+                                profile.SetPreference(firefoxPreferences.GetKey(i), true);
+                                break;
+
+                            // if "false"
+                            case "false":
+                                profile.SetPreference(firefoxPreferences.GetKey(i), false);
+                                break;
+
+                            // otherwise
+                            default:
+                                int temp;
+
+                                // an attempt to parse current settings value to an integer. Method TryParse returns True if the attempt is successful (the string is integer) or return False (if the string is just a string and cannot be cast to a number)
+                                if (int.TryParse(firefoxPreferences.Get(i), out temp))
+                                {
+                                    profile.SetPreference(firefoxPreferences.GetKey(i), temp);
+                                }
+                                else profile.SetPreference(firefoxPreferences.GetKey(i), firefoxPreferences[i]);
+                                break;
+                        }
+                    }
+                }
+
+                // if there are any extensions
+                if (firefoxExtensions != null)
+                {
+                    // loop through all of them
+                    for (var i = 0; i < firefoxExtensions.Count; i++)
+                    {
+                        profile.AddExtension(firefoxExtensions.GetKey(i));
+                    }
+                }
 
                 return profile;
             }
