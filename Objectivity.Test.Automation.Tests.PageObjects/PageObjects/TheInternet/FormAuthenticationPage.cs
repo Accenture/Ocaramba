@@ -83,7 +83,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
         public void LogOn()
         {
             Logger.Info(CultureInfo.CurrentCulture, "Click on Login Button");
-            this.Driver.GetElement(this.loginButton).Click();
+            this.Driver.GetElement(this.loginButton).JavaScriptClick();
         }
 
     }
