@@ -30,6 +30,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
     using System.Globalization;
     using System.IO;
     using System.Linq;
+    using System.Reflection;
     using System.Threading;
 
     using NLog;
@@ -93,7 +94,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
                 if (BaseConfiguration.UseCurrentDirectory)
                 {
                     return
-                        AppDomain.CurrentDomain.BaseDirectory + folder;
+                        System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + folder;
                 }
 
                 return folder;

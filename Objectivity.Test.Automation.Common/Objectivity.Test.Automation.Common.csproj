@@ -70,7 +70,6 @@
     <Compile Include="Helpers\SqlHelper.cs" />
     <Compile Include="WebElements\JavaScriptAlert.cs" />
     <Compile Include="Logger\TestLogger.cs" />
-    <Compile Include="Logger\MyEventFiringWebDriver.cs" />
     <Compile Include="Types\ErrorDetail.cs" />
     <Compile Include="WebElements\Kendo\KendoComboBox.cs" />
     <Compile Include="WebElements\Kendo\KendoDropDownList.cs" />

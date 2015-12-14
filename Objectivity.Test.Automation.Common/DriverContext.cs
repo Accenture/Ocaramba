@@ -33,6 +33,7 @@ namespace Objectivity.Test.Automation.Common
     using System.Globalization;
     using System.IO;
     using System.Linq;
+    using System.Reflection;
 
     using Objectivity.Test.Automation.Common.Helpers;
     using Objectivity.Test.Automation.Common.Logger;
@@ -289,31 +290,28 @@ namespace Objectivity.Test.Automation.Common
         [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "Driver disposed later in stop method")]
         public void Start()
         {
-            IWebDriver chosenDriver;
-
             switch (BaseConfiguration.TestBrowser)
             {
                 case BrowserType.Firefox:
-                    chosenDriver = new FirefoxDriver(this.FirefoxProfile);
+                    this.driver = new FirefoxDriver(this.FirefoxProfile);
                     break;
                 case BrowserType.FirefoxPortable:
                     var profile = this.FirefoxProfile;
                     var firefoxBinary = new FirefoxBinary(BaseConfiguration.FirefoxPath);
-                    chosenDriver = new FirefoxDriver(firefoxBinary, profile);
+                    this.driver = new FirefoxDriver(firefoxBinary, profile);
                     break;
                 case BrowserType.InternetExplorer:
-                    chosenDriver = new InternetExplorerDriver(this.InternetExplorerProfile);
+                    this.driver = new InternetExplorerDriver(this.InternetExplorerProfile);
                     break;
                 case BrowserType.Chrome:
-                    chosenDriver = new ChromeDriver(this.ChromeProfile);
+                    this.driver = new ChromeDriver(this.ChromeProfile);
                     break;
                 default:
                     throw new NotSupportedException(
                         string.Format(CultureInfo.CurrentCulture, "Driver {0} is not supported", BaseConfiguration.TestBrowser));
             }
 
-            chosenDriver.Manage().Window.Maximize();
-            this.driver = new MyEventFiringWebDriver(chosenDriver);
+            this.driver.Manage().Window.Maximize();
         }
 
         /// <summary>
@@ -353,7 +351,7 @@ namespace Objectivity.Test.Automation.Common
         {
             var fileName = string.Format(CultureInfo.CurrentCulture, "{0}_{1}.png", title, errorDetail.DateTime.ToString("yyyy-MM-dd HH-mm-ss-fff", CultureInfo.CurrentCulture));
             var correctFileName = Path.GetInvalidFileNameChars().Aggregate(fileName, (current, c) => current.Replace(c.ToString(CultureInfo.CurrentCulture), string.Empty));
-            var filePath = Path.Combine(Environment.CurrentDirectory, folder, correctFileName);
+            var filePath = Path.Combine(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), folder, correctFileName);
 
             errorDetail.Screenshot.SaveAsFile(filePath, ImageFormat.Png);
 
@@ -367,7 +365,7 @@ namespace Objectivity.Test.Automation.Common
         /// <param name="fileName">Name of the file.</param>
         public void SavePageSource(string testFolder, string fileName)
         {
-            var path = Path.Combine(Environment.CurrentDirectory, testFolder, string.Format(CultureInfo.CurrentCulture, "{0}{1}", fileName, ".html"));
+            var path = Path.Combine(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), testFolder, string.Format(CultureInfo.CurrentCulture, "{0}{1}", fileName, ".html"));
             if (File.Exists(path))
             {
                 File.Delete(path);

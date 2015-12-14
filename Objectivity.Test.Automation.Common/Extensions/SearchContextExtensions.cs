@@ -270,24 +270,16 @@ namespace Objectivity.Test.Automation.Common.Extensions
         /// </summary>
         /// <param name="webElement">The web element.</param>
         /// <returns>Driver from element</returns>
-        /// <exception cref="System.ArgumentException">Element must wrap a web driver;webElement</exception>
+        /// <exception cref="System.ArgumentException">Element must wrap a web driver</exception>
         public static IWebDriver ToDriver(this ISearchContext webElement)
         {
             var wrappedElement = webElement as IWrapsDriver;
             if (wrappedElement == null)
             {
-                FieldInfo fieldInfo = webElement.GetType().GetField("underlyingElement", BindingFlags.NonPublic | BindingFlags.Instance);
-                if (fieldInfo != null)
-                {
-                    wrappedElement = fieldInfo.GetValue(webElement) as IWrapsDriver;
-                    if (wrappedElement == null)
-                    {
-                        return (IWebDriver)webElement;
-                    }
-                }
+                return (IWebDriver)webElement;
             }
 
-            return (IWebDriver)(wrappedElement != null ? wrappedElement.WrappedDriver : webElement);
+            return wrappedElement.WrappedDriver;
         }
 
         /// <summary>
