@@ -12,7 +12,7 @@
     <description>Template of framework to automate tests using Objectivity.Test.Automation.Common with MsTest</description>
     <!--<releaseNotes>Summary of changes made in this release of the package.</releaseNotes>-->
     <copyright>Copyright 2015</copyright>
-    <tags>selenium webdriver testautomation tests Objectivity.Test.Automation.Common template</tags>
+    <tags>selenium webdriver testautomation tests mstest Objectivity.Test.Automation.Common template</tags>
 	<dependencies>
     </dependencies> 
 	</metadata>
