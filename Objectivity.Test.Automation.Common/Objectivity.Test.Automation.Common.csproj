@@ -90,6 +90,9 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Nuspecs\Objectivity.Test.Automation.Features.nuspec" />
+    <None Include="Nuspecs\Objectivity.Test.Automation.MsTest.nuspec" />
+    <None Include="Nuspecs\Objectivity.Test.Automation.NUnit.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
