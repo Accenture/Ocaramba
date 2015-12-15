@@ -18,8 +18,8 @@
     </dependencies> 
   </metadata>
   <files>
-	<file src="..\..\..\Objectivity.Test.Automation.Tests.NUnit\ProjectTestBase.cs" target="content\new" />
-	<file src="..\..\..\Objectivity.Test.Automation.Tests.NUnit\App.config" target="content\new" />
-	<file src="..\..\..\Objectivity.Test.Automation.Tests.PageObjects\ProjectPageBase.cs" target="content\new" />
+	<file src="..\Objectivity.Test.Automation.Tests.NUnit\ProjectTestBase.cs" target="content\new" />
+	<file src="..\Objectivity.Test.Automation.Tests.NUnit\App.config" target="content\new" />
+	<file src="..\Objectivity.Test.Automation.Tests.PageObjects\ProjectPageBase.cs" target="content\new" />
   </files>
 </package>
