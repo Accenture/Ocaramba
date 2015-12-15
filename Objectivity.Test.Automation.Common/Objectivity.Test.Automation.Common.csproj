@@ -58,6 +58,8 @@
   <ItemGroup>
     <Compile Include="BaseConfiguration.cs" />
     <Compile Include="DriverContext.cs" />
+    <Compile Include="Logger\MyEventFiringWebDriver.cs" />
+    <Compile Include="Logger\TestLogger.cs" />
     <Compile Include="TestBase.cs" />
     <Compile Include="Verify.cs" />
     <Compile Include="WebElements\Checkbox.cs" />

@@ -88,7 +88,7 @@ namespace Objectivity.Test.Automation.Common.Logger
         /// <returns>Folder name</returns>
         private string TestFolderPattern(string testName)
         {
-            var testFolder = BaseConfiguration.TestFolder;
+            var testFolder = BaseConfiguration.TestOutput;
             if (string.IsNullOrEmpty(testFolder))
             {
                 return string.Empty;
