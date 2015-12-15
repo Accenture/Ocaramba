@@ -111,11 +111,7 @@
       <Private>True</Private>
     </Reference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include=".nuspec\Features\" />
-    <Folder Include=".nuspec\MsTest\" />
-    <Folder Include=".nuspec\Nunit\" />
-  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
