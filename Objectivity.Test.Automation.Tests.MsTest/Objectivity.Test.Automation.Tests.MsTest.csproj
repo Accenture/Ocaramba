@@ -100,10 +100,6 @@
       <Project>{46fa4edc-a114-4e8f-a545-996f99e31ea8}</Project>
       <Name>Objectivity.Test.Automation.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Objectivity.Test.Automation.MsTest\Objectivity.Test.Automation.MsTest.csproj">
-      <Project>{82b32c60-412e-4856-8066-c97c640a3549}</Project>
-      <Name>Objectivity.Test.Automation.MsTest</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Objectivity.Test.Automation.Tests.PageObjects\Objectivity.Test.Automation.Tests.PageObjects.csproj">
       <Project>{1ea997e6-b873-469f-8685-17f73ebb0b92}</Project>
       <Name>Objectivity.Test.Automation.Tests.PageObjects</Name>

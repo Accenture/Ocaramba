@@ -36,7 +36,6 @@ namespace Objectivity.Test.Automation.Common
     using System.Reflection;
 
     using Objectivity.Test.Automation.Common.Helpers;
-    using Objectivity.Test.Automation.Common.Logger;
     using Objectivity.Test.Automation.Common.Types;
 
     using OpenQA.Selenium;
@@ -59,8 +58,6 @@ namespace Objectivity.Test.Automation.Common
         /// The handle to driver.
         /// </value>
         private IWebDriver driver;
-
-        private TestLogger logTest;
 
         /// <summary>
         /// Supported browsers
@@ -115,22 +112,6 @@ namespace Objectivity.Test.Automation.Common
         public bool IsTestFailed { get; set; }
 
         /// <summary>
-        /// Test logger
-        /// </summary>
-        public TestLogger LogTest
-        {
-            get
-            {
-                return this.logTest ?? (this.logTest = new TestLogger(this.TestFolder, this.TestTitle));
-            }
-
-            set
-            {
-                this.logTest = value;
-            }
-        }
-
-        /// <summary>
         /// Driver Handle
         /// </summary>
         public IWebDriver Driver
@@ -173,7 +154,7 @@ namespace Objectivity.Test.Automation.Common
                 var firefoxExtensions = ConfigurationManager.GetSection("FirefoxExtensions") as NameValueCollection;
 
                 // preference for downloading files
-                profile.SetPreference("browser.download.dir", FilesHelper.GetFolder(BaseConfiguration.DownloadFolder));
+                profile.SetPreference("browser.download.dir", FilesHelper.GetFolder(BaseConfiguration.TestOutput));
                 profile.SetPreference("browser.download.folderList", 2);
                 profile.SetPreference("browser.download.managershowWhenStarting", false);
                 profile.SetPreference("browser.helperApps.neverAsk.saveToDisk", "application/vnd.ms-excel, application/x-msexcel, application/pdf, text/csv, text/html, application/octet-stream");
@@ -240,7 +221,7 @@ namespace Objectivity.Test.Automation.Common
             {
                 ChromeOptions options = new ChromeOptions();
                 options.AddUserProfilePreference("profile.default_content_settings.popups", 0);
-                options.AddUserProfilePreference("download.default_directory", FilesHelper.GetFolder(BaseConfiguration.DownloadFolder));
+                options.AddUserProfilePreference("download.default_directory", FilesHelper.GetFolder(BaseConfiguration.TestOutput));
                 options.AddUserProfilePreference("download.prompt_for_download", false);
 
                 // set browser proxy for chrome
@@ -383,26 +364,14 @@ namespace Objectivity.Test.Automation.Common
         {
             if (BaseConfiguration.FullDesktopScreenShotEnabled)
             {
-                if (ConfigurationManager.AppSettings.AllKeys.Contains("TestFolder"))
-                {
-                    TakeScreenShot.Save(TakeScreenShot.DoIt(), ImageFormat.Png, this.LogTest.TestFolder, this.TestTitle);
-                }
-                else
-                {
-                    TakeScreenShot.Save(TakeScreenShot.DoIt(), ImageFormat.Png, BaseConfiguration.ScreenShotFolder, this.TestTitle);
-                }
+                FilesHelper.CreateFolder(BaseConfiguration.TestOutput);
+                TakeScreenShot.Save(TakeScreenShot.DoIt(), ImageFormat.Png, FilesHelper.GetFolder(BaseConfiguration.TestOutput), this.TestTitle);
             }
 
             if (BaseConfiguration.SeleniumScreenShotEnabled)
             {
-                if (ConfigurationManager.AppSettings.AllKeys.Contains("TestFolder"))
-                {
-                    this.SaveScreenshot(new ErrorDetail(this.TakeScreenshot(), DateTime.Now, null), this.LogTest.TestFolder, this.TestTitle);
-                }
-                else
-                {
-                    this.SaveScreenshot(new ErrorDetail(this.TakeScreenshot(), DateTime.Now, null), BaseConfiguration.ScreenShotFolder, this.TestTitle);
-                }
+                FilesHelper.CreateFolder(BaseConfiguration.TestOutput);
+                this.SaveScreenshot(new ErrorDetail(this.TakeScreenshot(), DateTime.Now, null), FilesHelper.GetFolder(BaseConfiguration.TestOutput), this.TestTitle);
             }
         }  
     }

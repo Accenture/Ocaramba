@@ -128,7 +128,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// <param name="folder">The directory.</param>
         public static void CreateFolder(string folder)
         {
-            if (!Directory.Exists(GetFolder(folder)))
+            if (!string.IsNullOrEmpty(folder) && !Directory.Exists(GetFolder(folder)))
             {
                 Directory.CreateDirectory(GetFolder(folder));
             }

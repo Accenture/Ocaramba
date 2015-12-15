@@ -25,8 +25,11 @@ SOFTWARE.
 namespace Objectivity.Test.Automation.Tests.NUnit.Tests
 {
     using System.Collections.Generic;
+    using System.Globalization;
 
     using global::NUnit.Framework;
+
+    using NLog;
 
     using Objectivity.Test.Automation.Common;
     using Objectivity.Test.Automation.Tests.NUnit.DataDriven;
@@ -35,6 +38,8 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
     [Parallelizable(ParallelScope.Fixtures)]
     public class HerokuappTests : ProjectTestBase
     {
+
+        private static readonly Logger Logger = LogManager.GetLogger("Test");
 
         [Test]
         public void BasicAuthTest()
@@ -152,22 +157,22 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
                 .GoToHoversPage();
 
             var text1Before = homePage.GetHoverText(1);
-            this.LogTest.Info("Text before: '{0}'", text1Before);
+            Logger.Info(CultureInfo.CurrentCulture, "Text before: '{0}'", text1Before);
             homePage.MouseHoverAt(1);
             var text1After = homePage.GetHoverText(1);
-            this.LogTest.Info("Text after: '{0}'", text1After);
+            Logger.Info(CultureInfo.CurrentCulture, "Text after: '{0}'", text1After);
 
             var text2Before = homePage.GetHoverText(2);
-            this.LogTest.Info("Text before: '{0}'", text2Before);
+            Logger.Info(CultureInfo.CurrentCulture, "Text before: '{0}'", text2Before);
             homePage.MouseHoverAt(2);
             var text2After = homePage.GetHoverText(2);
-            this.LogTest.Info("Text after: '{0}'", text2After);
+            Logger.Info(CultureInfo.CurrentCulture, "Text after: '{0}'", text2After);
 
             var text3Before = homePage.GetHoverText(3);
-            this.LogTest.Info("Text before: '{0}'", text3Before);
+            Logger.Info(CultureInfo.CurrentCulture, "Text before: '{0}'", text3Before);
             homePage.MouseHoverAt(3);
             var text3After = homePage.GetHoverText(3);
-            this.LogTest.Info("Text after: '{0}'", text3After);
+            Logger.Info(CultureInfo.CurrentCulture, "Text after: '{0}'", text3After);
 
             Assert.AreEqual(string.Empty, text1Before);
             Assert.AreEqual(string.Empty, text2Before);

@@ -24,7 +24,10 @@ SOFTWARE.
 
 namespace Objectivity.Test.Automation.Tests.Features
 {
-    using Objectivity.Test.Automation.Features;
+    using NUnit.Framework;
+
+    using Objectivity.Test.Automation.Common;
+
     using TechTalk.SpecFlow;
 
     /// <summary>
@@ -33,6 +36,19 @@ namespace Objectivity.Test.Automation.Tests.Features
     [Binding]
     public class ProjectTestBase : TestBase
     {
+        private readonly DriverContext driverContext = new DriverContext();
+
+        /// <summary>
+        /// The browser manager
+        /// </summary>
+        protected DriverContext DriverContext
+        {
+            get
+            {
+                return this.driverContext;
+            }
+        }
+
         /// <summary>
         /// Before the class.
         /// </summary>
@@ -58,7 +74,6 @@ namespace Objectivity.Test.Automation.Tests.Features
         public void BeforeTest()
         {
             this.DriverContext.TestTitle = ScenarioContext.Current.ScenarioInfo.Title;
-            this.DriverContext.LogTest.LogTestStarting();
             this.DriverContext.Start();
             ScenarioContext.Current["DriverContext"] = this.DriverContext;
         }
@@ -70,10 +85,12 @@ namespace Objectivity.Test.Automation.Tests.Features
         public void AfterTest()
         {
             this.DriverContext.IsTestFailed = ScenarioContext.Current.TestError != null;
-            this.SaveTestDetailsIfTestFailed();
+            this.SaveTestDetailsIfTestFailed(this.driverContext);
             this.DriverContext.Stop();
-            this.FailTestIfVerifyFailed();
-            this.DriverContext.LogTest.LogTestEnding();
+            if (this.IsVerifyFailed(this.driverContext))
+            {
+                Assert.Fail();
+            }
         }
     }
 }

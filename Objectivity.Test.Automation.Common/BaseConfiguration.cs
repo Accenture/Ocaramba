@@ -192,49 +192,21 @@ namespace Objectivity.Test.Automation.Common
         }
 
         /// <summary>
-        /// Gets the test folder.
-        /// </summary>
-        /// <value>
-        /// The test folder.
-        /// </value>
-        public static string TestFolder
-        {
-            get
-            {
-                return ConfigurationManager.AppSettings["TestFolder"];
-            }
-        }
-
-        /// <summary>
-        /// Gets the test folder.
-        /// </summary>
-        /// <value>
-        /// The test folder.
-        /// </value>
-        public static string ScreenShotFolder
-        {
-            get
-            {
-                return string.IsNullOrEmpty(ConfigurationManager.AppSettings["ScreenShotFolder"]) ? string.Empty : ConfigurationManager.AppSettings["ScreenShotFolder"];
-            }
-        }
-
-        /// <summary>
         /// Gets the download folder.
         /// </summary>
         /// <value>
         /// The download folder.
         /// </value>
-        public static string DownloadFolder
+        public static string TestOutput
         {
             get
             {
-                return string.IsNullOrEmpty(ConfigurationManager.AppSettings["DownloadFolder"]) ? string.Empty : ConfigurationManager.AppSettings["DownloadFolder"];
+                return string.IsNullOrEmpty(ConfigurationManager.AppSettings["TestOutput"]) ? string.Empty : ConfigurationManager.AppSettings["TestOutput"];
             }
         }
 
         /// <summary>
-        /// Use CurrentDirectory and DownloadFolder as download path.
+        /// Use CurrentDirectory and TestOutput as download path.
         /// </summary>
         public static bool UseCurrentDirectory
         {

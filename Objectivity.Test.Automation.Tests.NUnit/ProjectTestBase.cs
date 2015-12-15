@@ -27,13 +27,26 @@ namespace Objectivity.Test.Automation.Tests.NUnit
     using global::NUnit.Framework;
     using global::NUnit.Framework.Interfaces;
 
-    using Objectivity.Test.Automation.NUnit;
+    using Objectivity.Test.Automation.Common;
 
     /// <summary>
     /// The base class for all tests
     /// </summary>
     public class ProjectTestBase : TestBase
     {
+        private readonly DriverContext driverContext = new DriverContext();
+
+        /// <summary>
+        /// The browser manager
+        /// </summary>
+        protected DriverContext DriverContext
+        {
+            get
+            {
+                return this.driverContext;
+            }
+        }
+
         /// <summary>
         /// Before the class.
         /// </summary>
@@ -59,7 +72,6 @@ namespace Objectivity.Test.Automation.Tests.NUnit
         public void BeforeTest()
         {
             this.DriverContext.TestTitle = TestContext.CurrentContext.Test.Name;
-            this.LogTest.LogTestStarting();
             this.DriverContext.Start();
         }
 
@@ -70,11 +82,12 @@ namespace Objectivity.Test.Automation.Tests.NUnit
         public void AfterTest()
         {
             this.DriverContext.IsTestFailed = TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed;
-            this.SaveTestDetailsIfTestFailed();
+            this.SaveTestDetailsIfTestFailed(this.driverContext);
             this.DriverContext.Stop();
-            this.FailTestIfVerifyFailed();
-            this.LogTest.LogTestEnding();
-            this.LogTest = null;
+            if (this.IsVerifyFailed(this.driverContext))
+            {
+                Assert.Fail();
+            }
         }
     }
 }

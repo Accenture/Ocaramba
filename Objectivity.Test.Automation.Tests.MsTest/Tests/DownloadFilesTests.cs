@@ -22,7 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-namespace Objectivity.Test.Automation.Tests.MSTest.Tests
+namespace Objectivity.Test.Automation.Tests.MsTest.Tests
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
