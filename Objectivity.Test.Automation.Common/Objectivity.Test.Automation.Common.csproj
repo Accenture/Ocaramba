@@ -90,9 +90,6 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Nuspecs\Objectivity.Test.Automation.Features.nuspec" />
-    <None Include="Nuspecs\Objectivity.Test.Automation.MsTest.nuspec" />
-    <None Include="Nuspecs\Objectivity.Test.Automation.NUnit.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -114,7 +111,11 @@
       <Private>True</Private>
     </Reference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include=".nuspec\Features\" />
+    <Folder Include=".nuspec\MsTest\" />
+    <Folder Include=".nuspec\Nunit\" />
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
