@@ -36,6 +36,7 @@ namespace Objectivity.Test.Automation.Common
     using System.Reflection;
 
     using Objectivity.Test.Automation.Common.Helpers;
+    using Objectivity.Test.Automation.Common.Logger;
     using Objectivity.Test.Automation.Common.Types;
 
     using OpenQA.Selenium;
@@ -58,6 +59,8 @@ namespace Objectivity.Test.Automation.Common
         /// The handle to driver.
         /// </value>
         private IWebDriver driver;
+
+        private TestLogger logTest;
 
         /// <summary>
         /// Supported browsers
@@ -110,6 +113,22 @@ namespace Objectivity.Test.Automation.Common
         ///   <c>true</c> if [test failed]; otherwise, <c>false</c>.
         /// </value>
         public bool IsTestFailed { get; set; }
+
+        /// <summary>
+        /// Test logger
+        /// </summary>
+        public TestLogger LogTest 
+        {
+            get
+            {
+                return this.logTest ?? (this.logTest = new TestLogger());
+            }
+
+            set
+            {
+                this.logTest = value;
+            }
+        }
 
         /// <summary>
         /// Driver Handle

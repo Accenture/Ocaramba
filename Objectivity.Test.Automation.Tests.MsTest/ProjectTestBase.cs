@@ -27,6 +27,7 @@ namespace Objectivity.Test.Automation.Tests.MsTest
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using Objectivity.Test.Automation.Common;
+    using Objectivity.Test.Automation.Common.Logger;
 
     /// <summary>
     /// The base class for all tests
@@ -35,6 +36,22 @@ namespace Objectivity.Test.Automation.Tests.MsTest
     public class ProjectTestBase : TestBase
     {
         private readonly DriverContext driverContext = new DriverContext();
+
+        /// <summary>
+        /// Logger instance for driver
+        /// </summary>
+        public TestLogger LogTest
+        {
+            get
+            {
+                return this.DriverContext.LogTest;
+            }
+
+            set
+            {
+                this.DriverContext.LogTest = value;
+            }
+        }
 
         /// <summary>
         /// The browser manager
@@ -62,6 +79,7 @@ namespace Objectivity.Test.Automation.Tests.MsTest
         public void BeforeTest()
         {
             this.DriverContext.TestTitle = this.TestContext.TestName;
+            this.LogTest.LogTestStarting(this.driverContext);
             this.DriverContext.Start();
         }
 
@@ -74,6 +92,7 @@ namespace Objectivity.Test.Automation.Tests.MsTest
             this.DriverContext.IsTestFailed = this.TestContext.CurrentTestOutcome == UnitTestOutcome.Failed;
             this.SaveTestDetailsIfTestFailed(this.driverContext);
             this.DriverContext.Stop();
+            this.LogTest.LogTestEnding(this.driverContext);
             if (this.IsVerifyFailed(this.driverContext))
             {
                 Assert.Fail();

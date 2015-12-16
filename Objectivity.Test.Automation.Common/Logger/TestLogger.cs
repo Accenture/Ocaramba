@@ -28,7 +28,6 @@ namespace Objectivity.Test.Automation.Common.Logger
     using System.Globalization;
 
     using NLog;
-    using NLog.Targets;
 
     /// <summary>
     /// Class for test logger
@@ -46,88 +45,24 @@ namespace Objectivity.Test.Automation.Common.Logger
         private DateTime startTestTime;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TestLogger"/> class.
-        /// </summary>
-        /// <param name="testFolder">Name of the folder</param>
-        /// <param name="testName">Name of the test.</param>
-        public TestLogger(string testFolder, string testName)
-        {
-            this.TestName = testName;        
-            if (string.IsNullOrEmpty(testFolder))
-            {
-                this.TestFolder = this.TestFolderPattern(testName);
-            }
-            else
-            {
-                this.TestFolder = testFolder;
-            }
-
-            this.SetLogFileLocalization(this.TestFolder, testName);
-        }
-
-        /// <summary>
-        /// Gets the test folder.
-        /// </summary>
-        /// <value>
-        /// The test folder.
-        /// </value>
-        public string TestFolder { get; set; }
-
-        /// <summary>
-        /// Gets the name of the test.
-        /// </summary>
-        /// <value>
-        /// The name of the test.
-        /// </value>
-        private string TestName { get; set; }
-
-        /// <summary>
-        /// Tests the folder pattern.
-        /// </summary>
-        /// <param name="testName">Name of the test.</param>
-        /// <returns>Folder name</returns>
-        private string TestFolderPattern(string testName)
-        {
-            var testFolder = BaseConfiguration.TestOutput;
-            if (string.IsNullOrEmpty(testFolder))
-            {
-                return string.Empty;
-            }
-
-            return string.Format(CultureInfo.CurrentCulture, "{0}\\{1}_{2}", testFolder, DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss", CultureInfo.CurrentCulture), testName);
-        }
-
-        /// <summary>
-        /// Sets the log file localization.
-        /// </summary>
-        private void SetLogFileLocalization(string folder, string logName)
-        {
-            var pattern = string.IsNullOrEmpty(folder) ? "{1}.log" : "{0}\\{1}.log";
-            FileTarget target = LogManager.Configuration.FindTargetByName("logfile") as FileTarget;
-            var logfile = string.Format(CultureInfo.CurrentCulture, pattern, folder, logName);
-            target.FileName = logfile;
-        }
-
-        /// <summary>
         /// Logs the test starting.
         /// </summary>
-        public void LogTestStarting()
+        public void LogTestStarting(DriverContext driverContext)
         {
             this.startTestTime = DateTime.Now;
-            this.Info("START: {0} starts at {1}", this.TestName, this.startTestTime);
+            this.Info("START: {0} starts at {1}", driverContext.TestTitle, this.startTestTime);
         }
 
         /// <summary>
         /// Logs the test ending.
         /// </summary>
-        public void LogTestEnding()
+        public void LogTestEnding(DriverContext driverContext)
         {
             var endTestTime = DateTime.Now;
             var timeInSec = (endTestTime - this.startTestTime).TotalMilliseconds / 1000d;
-            this.Info("END: {0} ends at {1} after {2} sec.", this.TestName, endTestTime, timeInSec.ToString("##,###", CultureInfo.CurrentCulture));
+            this.Info("END: {0} ends at {1} after {2} sec.", driverContext.TestTitle, endTestTime, timeInSec.ToString("##,###", CultureInfo.CurrentCulture));
         }
 
-        /// TODO: does it required?
         /// <summary>
         /// Information the specified message.
         /// </summary>
@@ -138,7 +73,6 @@ namespace Objectivity.Test.Automation.Common.Logger
             this.log.Info(CultureInfo.CurrentCulture, message, args);
         }
 
-        /// TODO: does it required?
         /// <summary>
         /// Warns the specified message.
         /// </summary>
@@ -149,7 +83,6 @@ namespace Objectivity.Test.Automation.Common.Logger
             this.log.Warn(CultureInfo.CurrentCulture, message, args);
         }
 
-        /// TODO: does it required?
         /// <summary>
         /// Errors the specified message.
         /// </summary>

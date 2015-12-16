@@ -28,6 +28,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit
     using global::NUnit.Framework.Interfaces;
 
     using Objectivity.Test.Automation.Common;
+    using Objectivity.Test.Automation.Common.Logger;
 
     /// <summary>
     /// The base class for all tests
@@ -44,6 +45,22 @@ namespace Objectivity.Test.Automation.Tests.NUnit
             get
             {
                 return this.driverContext;
+            }
+        }
+
+        /// <summary>
+        /// Logger instance for driver
+        /// </summary>
+        public TestLogger LogTest
+        {
+            get
+            {
+                return this.DriverContext.LogTest;
+            }
+
+            set
+            {
+                this.DriverContext.LogTest = value;
             }
         }
 
@@ -72,6 +89,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit
         public void BeforeTest()
         {
             this.DriverContext.TestTitle = TestContext.CurrentContext.Test.Name;
+            this.LogTest.LogTestStarting(this.driverContext);
             this.DriverContext.Start();
         }
 
@@ -84,6 +102,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit
             this.DriverContext.IsTestFailed = TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed;
             this.SaveTestDetailsIfTestFailed(this.driverContext);
             this.DriverContext.Stop();
+            this.LogTest.LogTestEnding(this.driverContext);
             if (this.IsVerifyFailed(this.driverContext))
             {
                 Assert.Fail();

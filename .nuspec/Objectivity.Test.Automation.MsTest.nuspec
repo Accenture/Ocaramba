@@ -17,10 +17,10 @@
     </dependencies> 
 	</metadata>
   <files>
-	<file src="..\Objectivity.Test.Automation.Tests.MSTest\ProjectTestBase.cs" target="content\new" />
-	<file src="..\Objectivity.Test.Automation.Tests.MSTest\App.config" target="content\new" />
-	<file src="..\Objectivity.Test.Automation.Tests.PageObjects\ProjectPageBase.cs" target="content\new" />
-	<file src="..\Objectivity.Test.Automation.Tests.MSTest\Runsettings.runsettings" target="content\new" />
-	<file src="..\Objectivity.Test.Automation.Tests.MSTest\Testsettings.testsettings" target="content\new" />
+	<file src="..\Objectivity.Test.Automation.Tests.MSTest\ProjectTestBase.cs" target="content" />
+	<file src="..\Objectivity.Test.Automation.Tests.MSTest\App.config" target="content" />
+	<file src="..\Objectivity.Test.Automation.Tests.PageObjects\ProjectPageBase.cs" target="content" />
+	<file src="..\Objectivity.Test.Automation.Tests.MSTest\Runsettings.runsettings" target="content" />
+	<file src="..\Objectivity.Test.Automation.Tests.MSTest\Testsettings.testsettings" target="content" />
   </files>
 </package>
