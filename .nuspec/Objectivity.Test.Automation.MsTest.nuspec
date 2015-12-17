@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Objectivity.Test.Automation.Common.MsTest</id>
+    <version>1.0.0</version>
+    <title>Objectivity.Test.Automation.Common.MsTest</title>
+    <authors>Objectivity Bespoke Software Specialists</authors>
+    <owners>Objectivity Bespoke Software Specialists</owners>
+    <licenseUrl>https://github.com/ObjectivityBSS/Test.Automation/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/ObjectivityBSS/Test.Automation</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Template of framework to automate tests using Objectivity.Test.Automation.Common with MsTest</description>
+    <!--<releaseNotes>Summary of changes made in this release of the package.</releaseNotes>-->
+    <copyright>Copyright 2015</copyright>
+    <tags>selenium webdriver testautomation tests mstest Objectivity.Test.Automation.Common template</tags>
+	<dependencies>
+    </dependencies> 
+	</metadata>
+  <files>
+	<file src="..\Objectivity.Test.Automation.Tests.MSTest\ProjectTestBase.cs" target="content" />
+	<file src="..\Objectivity.Test.Automation.Tests.MSTest\App.config" target="content" />
+	<file src="..\Objectivity.Test.Automation.Tests.PageObjects\ProjectPageBase.cs" target="content" />
+	<file src="..\Objectivity.Test.Automation.Tests.MSTest\Runsettings.runsettings" target="content" />
+	<file src="..\Objectivity.Test.Automation.Tests.MSTest\Testsettings.testsettings" target="content" />
+  </files>
+</package>

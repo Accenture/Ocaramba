@@ -27,6 +27,8 @@ namespace Objectivity.Test.Automation.Common
     using System;
     using System.Configuration;
     using System.Globalization;
+    using System.IO;
+    using System.Reflection;
 
     /// <summary>
     /// SeleniumConfiguration that consume app.config file
@@ -192,49 +194,44 @@ namespace Objectivity.Test.Automation.Common
         }
 
         /// <summary>
-        /// Gets the test folder.
-        /// </summary>
-        /// <value>
-        /// The test folder.
-        /// </value>
-        public static string TestFolder
-        {
-            get
-            {
-                return ConfigurationManager.AppSettings["TestFolder"];
-            }
-        }
-
-        /// <summary>
-        /// Gets the test folder.
-        /// </summary>
-        /// <value>
-        /// The test folder.
-        /// </value>
-        public static string ScreenShotFolder
-        {
-            get
-            {
-                return string.IsNullOrEmpty(ConfigurationManager.AppSettings["ScreenShotFolder"]) ? string.Empty : ConfigurationManager.AppSettings["ScreenShotFolder"];
-            }
-        }
-
-        /// <summary>
         /// Gets the download folder.
         /// </summary>
         /// <value>
         /// The download folder.
         /// </value>
-        public static string DownloadFolder
+        public static string TestOutput
         {
             get
             {
-                return string.IsNullOrEmpty(ConfigurationManager.AppSettings["DownloadFolder"]) ? string.Empty : ConfigurationManager.AppSettings["DownloadFolder"];
+                string folder;
+
+                if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["TestOutput"]))
+                {
+                    folder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                }
+                else
+                {
+                    if (UseCurrentDirectory)
+                    {
+                        folder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + ConfigurationManager.AppSettings["TestOutput"];
+                    }
+                    else
+                    {
+                        folder = ConfigurationManager.AppSettings["TestOutput"];
+                    }
+
+                    if (!Directory.Exists(folder))
+                    {
+                        Directory.CreateDirectory(folder);
+                    }
+                }
+
+                return folder;
             }
         }
 
         /// <summary>
-        /// Use CurrentDirectory and DownloadFolder as download path.
+        /// Use CurrentDirectory and TestOutput as download path.
         /// </summary>
         public static bool UseCurrentDirectory
         {

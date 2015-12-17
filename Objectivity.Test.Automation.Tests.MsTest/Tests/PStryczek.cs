@@ -1,4 +1,4 @@
-﻿namespace Objectivity.Test.Automation.Tests.MSTest.Tests
+﻿namespace Objectivity.Test.Automation.Tests.MsTest.Tests
 {
     using System;
     using System.Diagnostics.CodeAnalysis;

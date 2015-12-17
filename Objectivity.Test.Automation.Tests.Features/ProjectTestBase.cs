@@ -24,7 +24,11 @@ SOFTWARE.
 
 namespace Objectivity.Test.Automation.Tests.Features
 {
-    using Objectivity.Test.Automation.Features;
+    using NUnit.Framework;
+
+    using Objectivity.Test.Automation.Common;
+    using Objectivity.Test.Automation.Common.Logger;
+
     using TechTalk.SpecFlow;
 
     /// <summary>
@@ -33,6 +37,35 @@ namespace Objectivity.Test.Automation.Tests.Features
     [Binding]
     public class ProjectTestBase : TestBase
     {
+        private readonly DriverContext driverContext = new DriverContext();
+
+        /// <summary>
+        /// Logger instance for driver
+        /// </summary>
+        public TestLogger LogTest
+        {
+            get
+            {
+                return this.DriverContext.LogTest;
+            }
+
+            set
+            {
+                this.DriverContext.LogTest = value;
+            }
+        }
+
+        /// <summary>
+        /// The browser manager
+        /// </summary>
+        protected DriverContext DriverContext
+        {
+            get
+            {
+                return this.driverContext;
+            }
+        }
+
         /// <summary>
         /// Before the class.
         /// </summary>
@@ -58,7 +91,7 @@ namespace Objectivity.Test.Automation.Tests.Features
         public void BeforeTest()
         {
             this.DriverContext.TestTitle = ScenarioContext.Current.ScenarioInfo.Title;
-            this.DriverContext.LogTest.LogTestStarting();
+            this.LogTest.LogTestStarting(this.driverContext);
             this.DriverContext.Start();
             ScenarioContext.Current["DriverContext"] = this.DriverContext;
         }
@@ -70,10 +103,13 @@ namespace Objectivity.Test.Automation.Tests.Features
         public void AfterTest()
         {
             this.DriverContext.IsTestFailed = ScenarioContext.Current.TestError != null;
-            this.SaveTestDetailsIfTestFailed();
+            this.SaveTestDetailsIfTestFailed(this.driverContext);
             this.DriverContext.Stop();
-            this.FailTestIfVerifyFailed();
-            this.DriverContext.LogTest.LogTestEnding();
+            this.LogTest.LogTestEnding(this.driverContext);
+            if (this.IsVerifyFailed(this.driverContext))
+            {
+                Assert.Fail();
+            }
         }
     }
 }

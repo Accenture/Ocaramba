@@ -58,6 +58,9 @@
   <ItemGroup>
     <Compile Include="BaseConfiguration.cs" />
     <Compile Include="DriverContext.cs" />
+    <Compile Include="Logger\MyEventFiringWebDriver.cs" />
+    <Compile Include="Logger\TestLogger.cs" />
+    <Compile Include="TestBase.cs" />
     <Compile Include="Verify.cs" />
     <Compile Include="WebElements\Checkbox.cs" />
     <Compile Include="Extensions\LocatorExtensions.cs" />
@@ -69,8 +72,6 @@
     <Compile Include="Helpers\PerformanceHelper.cs" />
     <Compile Include="Helpers\SqlHelper.cs" />
     <Compile Include="WebElements\JavaScriptAlert.cs" />
-    <Compile Include="Logger\TestLogger.cs" />
-    <Compile Include="Logger\MyEventFiringWebDriver.cs" />
     <Compile Include="Types\ErrorDetail.cs" />
     <Compile Include="WebElements\Kendo\KendoComboBox.cs" />
     <Compile Include="WebElements\Kendo\KendoDropDownList.cs" />

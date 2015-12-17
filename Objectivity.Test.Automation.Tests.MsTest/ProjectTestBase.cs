@@ -22,11 +22,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-namespace Objectivity.Test.Automation.Tests.MSTest
+namespace Objectivity.Test.Automation.Tests.MsTest
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    using Objectivity.Test.Automation.MsTest;
+    using Objectivity.Test.Automation.Common;
+    using Objectivity.Test.Automation.Common.Logger;
 
     /// <summary>
     /// The base class for all tests
@@ -34,6 +35,35 @@ namespace Objectivity.Test.Automation.Tests.MSTest
     [TestClass]
     public class ProjectTestBase : TestBase
     {
+        private readonly DriverContext driverContext = new DriverContext();
+
+        /// <summary>
+        /// Logger instance for driver
+        /// </summary>
+        public TestLogger LogTest
+        {
+            get
+            {
+                return this.DriverContext.LogTest;
+            }
+
+            set
+            {
+                this.DriverContext.LogTest = value;
+            }
+        }
+
+        /// <summary>
+        /// The browser manager
+        /// </summary>
+        protected DriverContext DriverContext
+        {
+            get
+            {
+                return this.driverContext;
+            }
+        }
+
         /// <summary>
         /// Gets or sets the microsoft test context.
         /// </summary>
@@ -49,7 +79,7 @@ namespace Objectivity.Test.Automation.Tests.MSTest
         public void BeforeTest()
         {
             this.DriverContext.TestTitle = this.TestContext.TestName;
-            this.DriverContext.LogTest.LogTestStarting();
+            this.LogTest.LogTestStarting(this.driverContext);
             this.DriverContext.Start();
         }
 
@@ -60,10 +90,13 @@ namespace Objectivity.Test.Automation.Tests.MSTest
         public void AfterTest()
         {
             this.DriverContext.IsTestFailed = this.TestContext.CurrentTestOutcome == UnitTestOutcome.Failed;
-            this.SaveTestDetailsIfTestFailed();
+            this.SaveTestDetailsIfTestFailed(this.driverContext);
             this.DriverContext.Stop();
-            this.FailTestIfVerifyFailed();
-            this.DriverContext.LogTest.LogTestEnding();
+            this.LogTest.LogTestEnding(this.driverContext);
+            if (this.IsVerifyFailed(this.driverContext))
+            {
+                Assert.Fail();
+            }
         }
     }
 }

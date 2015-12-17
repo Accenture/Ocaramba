@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace Objectivity.Test.Automation.Tests.MSTest.Tests
+﻿namespace Objectivity.Test.Automation.Tests.MsTest.Tests
 {
-    using System.Globalization;
+    using System;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
