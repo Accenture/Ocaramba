@@ -25,7 +25,10 @@ SOFTWARE.
 namespace Objectivity.Test.Automation.Tests.NUnit.DataDriven
 {
     using System.Collections;
+    using System.IO;
+    using System.Reflection;
 
+    using Objectivity.Test.Automation.Common;
     using Objectivity.Test.Automation.NUnit.Helpers;
 
     /// <summary>
@@ -33,9 +36,22 @@ namespace Objectivity.Test.Automation.Tests.NUnit.DataDriven
     /// </summary>
     public static class TestData 
     {
+        /// <summary>
+        /// Get current folder of Assembly
+        /// </summary>
+        /// <returns>Path to Folder</returns>
+        public static string GetFolder
+        {
+            get
+            {
+                return Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + BaseConfiguration.DataDrivenFile;
+            }
+
+        }
+
         public static IEnumerable Credentials
         {
-            get { return DataDrivenHelper.ReadDataDriveFile("credential", new[] { "user", "password" }, "credential"); }
+            get { return DataDrivenHelper.ReadDataDriveFile(GetFolder, "credential", new[] { "user", "password" }, "credential"); }
         }
     }
 }

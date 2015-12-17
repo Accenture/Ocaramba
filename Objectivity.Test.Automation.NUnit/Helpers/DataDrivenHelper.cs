@@ -28,11 +28,9 @@ namespace Objectivity.Test.Automation.NUnit.Helpers
     using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
-    using System.Reflection;
     using System.Runtime.InteropServices;
     using System.Xml.Linq;
 
-    using Objectivity.Test.Automation.Common;
     using global::NUnit.Framework;
 
     /// <summary>
@@ -40,22 +38,21 @@ namespace Objectivity.Test.Automation.NUnit.Helpers
     /// </summary>
     public static class DataDrivenHelper
     {
-        private static readonly string Path = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + BaseConfiguration.DataDrivenFile;
-
         /// <summary>
         /// Reads the data drive file and set test name.
         /// </summary>
+        /// <param name="folder">Path to folder with DataDriveFile</param>
         /// <param name="testData">Name of the child element in xml file.</param>
         /// <param name="diffParam">The difference parameter, will be used in test case name.</param>
         /// <param name="testName">Name of the test.</param>
         /// <returns></returns>
-        public static IEnumerable<TestCaseData> ReadDataDriveFile(string testData, string[] diffParam, [Optional] string testName)
+        public static IEnumerable<TestCaseData> ReadDataDriveFile(string folder, string testData, string[] diffParam, [Optional] string testName)
         {
-            var doc = XDocument.Load(Path);
+            var doc = XDocument.Load(folder);
 
             if (!doc.Descendants(testData).Any())
             {
-                throw new Exception(string.Format(" Exception while reading Data Driven file\n row '{0}' not found \n in file '{1}'", testData, Path));
+                throw new Exception(string.Format(" Exception while reading Data Driven file\n row '{0}' not found \n in file '{1}'", testData, folder));
             }
 
             foreach (XElement element in doc.Descendants(testData))
@@ -79,7 +76,7 @@ namespace Objectivity.Test.Automation.NUnit.Helpers
                         }
                         else
                         {
-                            throw new Exception(string.Format(" Exception while reading Data Driven file\n test data '{0}' \n test name '{1}' \n searched key '{2}' not found in row \n '{3}'  \n in file '{4}'", testData, testName, p, element, Path));
+                            throw new Exception(string.Format(" Exception while reading Data Driven file\n test data '{0}' \n test name '{1}' \n searched key '{2}' not found in row \n '{3}'  \n in file '{4}'", testData, testName, p, element, folder));
                         }
                     }
                 }
@@ -95,12 +92,12 @@ namespace Objectivity.Test.Automation.NUnit.Helpers
         /// </summary>
         /// <param name="testData">The test data.</param>
         /// <returns></returns>
-        public static IEnumerable<TestCaseData> ReadDataDriveFile(string testData)
+        public static IEnumerable<TestCaseData> ReadDataDriveFile(string folder, string testData)
         {
-            var doc = XDocument.Load(Path);
+            var doc = XDocument.Load(folder);
             if (!doc.Descendants(testData).Any())
             {
-                throw new KeyNotFoundException(string.Format(CultureInfo.CurrentCulture, "Exception while reading Data Driven file\n row '{0}' not found \n in file '{1}'", testData, Path));
+                throw new KeyNotFoundException(string.Format(CultureInfo.CurrentCulture, "Exception while reading Data Driven file\n row '{0}' not found \n in file '{1}'", testData, folder));
             }
 
             return doc.Descendants(testData).Select(element => element.Attributes().ToDictionary(k => k.Name.ToString(), v => v.Value)).Select(testParams => new TestCaseData(testParams));
