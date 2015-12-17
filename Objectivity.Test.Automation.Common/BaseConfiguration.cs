@@ -27,6 +27,8 @@ namespace Objectivity.Test.Automation.Common
     using System;
     using System.Configuration;
     using System.Globalization;
+    using System.IO;
+    using System.Reflection;
 
     /// <summary>
     /// SeleniumConfiguration that consume app.config file
@@ -201,7 +203,30 @@ namespace Objectivity.Test.Automation.Common
         {
             get
             {
-                return string.IsNullOrEmpty(ConfigurationManager.AppSettings["TestOutput"]) ? string.Empty : ConfigurationManager.AppSettings["TestOutput"];
+                string folder;
+
+                if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["TestOutput"]))
+                {
+                    folder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                }
+                else
+                {
+                    if (UseCurrentDirectory)
+                    {
+                        folder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + ConfigurationManager.AppSettings["TestOutput"];
+                    }
+                    else
+                    {
+                        folder = ConfigurationManager.AppSettings["TestOutput"];
+                    }
+
+                    if (!Directory.Exists(folder))
+                    {
+                        Directory.CreateDirectory(folder);
+                    }
+                }
+
+                return folder;
             }
         }
 

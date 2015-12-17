@@ -28,6 +28,7 @@ namespace Objectivity.Test.Automation.NUnit.Helpers
     using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
+    using System.Reflection;
     using System.Runtime.InteropServices;
     using System.Xml.Linq;
 
@@ -39,7 +40,7 @@ namespace Objectivity.Test.Automation.NUnit.Helpers
     /// </summary>
     public static class DataDrivenHelper
     {
-        private static readonly string Path = AppDomain.CurrentDomain.BaseDirectory + System.IO.Path.DirectorySeparatorChar + BaseConfiguration.DataDrivenFile;
+        private static readonly string Path = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + BaseConfiguration.DataDrivenFile;
 
         /// <summary>
         /// Reads the data drive file and set test name.

@@ -69,8 +69,7 @@ namespace Objectivity.Test.Automation.Common
         {
             if (BaseConfiguration.GetPageSourceEnabled)
             {
-                FilesHelper.CreateFolder(BaseConfiguration.TestOutput);
-                driverContext.SavePageSource(FilesHelper.GetFolder(BaseConfiguration.TestOutput), driverContext.TestTitle);
+                driverContext.SavePageSource(BaseConfiguration.TestOutput, driverContext.TestTitle);
             }
         }
 

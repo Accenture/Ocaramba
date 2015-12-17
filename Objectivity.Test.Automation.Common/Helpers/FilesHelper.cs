@@ -30,7 +30,6 @@ namespace Objectivity.Test.Automation.Common.Helpers
     using System.Globalization;
     using System.IO;
     using System.Linq;
-    using System.Reflection;
     using System.Threading;
 
     using NLog;
@@ -84,23 +83,6 @@ namespace Objectivity.Test.Automation.Common.Helpers
         }
 
         /// <summary>
-        /// Gets the full path of folder.
-        /// </summary>
-        /// <param name="folder">The folder.</param>
-        /// <returns></returns>
-        /// <value>Download folder path</value>
-        public static string GetFolder(string folder)
-        {
-                if (BaseConfiguration.UseCurrentDirectory)
-                {
-                    return
-                        System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + folder;
-                }
-
-                return folder;
-        }
-
-        /// <summary>
         /// Returns the file extension.
         /// </summary>
         /// <param name="type">The type.</param>
@@ -123,18 +105,6 @@ namespace Objectivity.Test.Automation.Common.Helpers
         }
 
         /// <summary>
-        /// Creates the folder if not exists.
-        /// </summary>
-        /// <param name="folder">The directory.</param>
-        public static void CreateFolder(string folder)
-        {
-            if (!string.IsNullOrEmpty(folder) && !Directory.Exists(GetFolder(folder)))
-            {
-                Directory.CreateDirectory(GetFolder(folder));
-            }
-        }
-
-        /// <summary>
         /// Gets the files of given type, use postfixFilesName in search pattern.
         /// </summary>
         /// <param name="folder">The folder.</param>
@@ -144,9 +114,8 @@ namespace Objectivity.Test.Automation.Common.Helpers
         public static ICollection<FileInfo> GetFilesOfGivenType(string folder, FileType type, string postfixFilesName)
         {
             Logger.Debug("Get Files '{0}' from '{1}', postfixFilesName '{2}'", type, folder, postfixFilesName);
-            CreateFolder(folder);
             ICollection<FileInfo> files =
-                new DirectoryInfo(GetFolder(folder))
+                new DirectoryInfo(folder)
                     .GetFiles("*" + postfixFilesName + ReturnFileExtension(type)).OrderBy(f => f.Name).ToList();
 
             return files;
@@ -160,10 +129,9 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// <returns>FileInfo of file</returns>
         public static FileInfo GetFileByName(string folder, string fileName)
         {
-            Logger.Debug("Get File '{0}' from '{1}'", fileName, GetFolder(folder));
-            CreateFolder(folder);
+            Logger.Debug("Get File '{0}' from '{1}'", fileName, folder);
             FileInfo file =
-                new DirectoryInfo(GetFolder(folder))
+                new DirectoryInfo(folder)
                     .GetFiles(fileName).First();
 
             return file;
@@ -204,8 +172,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
         public static FileInfo GetLastFile(string folder, FileType type)
         {
             Logger.Debug("Get Last File");
-            CreateFolder(folder);
-            var lastFile = new DirectoryInfo(GetFolder(folder)).GetFiles()
+            var lastFile = new DirectoryInfo(folder).GetFiles()
                 .Where(f => f.Extension == ReturnFileExtension(type).Replace("?", string.Empty))
                 .OrderByDescending(f => f.CreationTime)
                 .First();
@@ -224,7 +191,6 @@ namespace Objectivity.Test.Automation.Common.Helpers
         public static void WaitForFile(FileType type, IWebDriver driver, double waitTime, int filesNumber, string folder)
         {
             Logger.Debug("Wait for file: {0}", type);
-            CreateFolder(folder);
             IWait<IWebDriver> wait = new WebDriverWait(
                     driver,
                     TimeSpan.FromSeconds(waitTime));
@@ -258,13 +224,12 @@ namespace Objectivity.Test.Automation.Common.Helpers
         public static void WaitForFile(IWebDriver driver, double waitTime, string filesName, string folder)
         {
             Logger.Debug(CultureInfo.CurrentCulture, "Wait for file: {0}", filesName);
-            CreateFolder(folder);
             IWait<IWebDriver> wait = new WebDriverWait(
                     driver,
                     TimeSpan.FromSeconds(waitTime));
 
-            wait.Message = string.Format(CultureInfo.CurrentCulture, "Waiting for file {0} in folder {1}", filesName, GetFolder(folder));
-            wait.Until(x => File.Exists(GetFolder(folder) + Separator + filesName));
+            wait.Message = string.Format(CultureInfo.CurrentCulture, "Waiting for file {0} in folder {1}", filesName, folder);
+            wait.Until(x => File.Exists(folder + Separator + filesName));
 
             Logger.Debug("File exists, checking if size of last file > 0 bytes");
             wait.Message = string.Format(CultureInfo.CurrentCulture, "Checking if size of file {0} > 0 bytes", filesName);
@@ -291,8 +256,6 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// <param name="type">The type of file.</param>
         public static void RenameFile(string oldName, string newName, string subFolder, FileType type)
         {
-            CreateFolder(subFolder);
-            string folder = GetFolder(subFolder);
             newName = newName + ReturnFileExtension(type).Replace("?", string.Empty);
 
             Logger.Debug(CultureInfo.CurrentCulture, "new file name: {0}", newName);
@@ -306,7 +269,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
                              '\u0022';
             ProcessStartInfo cmdsi = new ProcessStartInfo("cmd.exe")
                                          {
-                                             WorkingDirectory = folder,
+                                             WorkingDirectory = subFolder,
                                              Arguments = command
                                          };
             Thread.Sleep(1000);

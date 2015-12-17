@@ -33,7 +33,6 @@ namespace Objectivity.Test.Automation.Common
     using System.Globalization;
     using System.IO;
     using System.Linq;
-    using System.Reflection;
 
     using Objectivity.Test.Automation.Common.Helpers;
     using Objectivity.Test.Automation.Common.Logger;
@@ -173,7 +172,7 @@ namespace Objectivity.Test.Automation.Common
                 var firefoxExtensions = ConfigurationManager.GetSection("FirefoxExtensions") as NameValueCollection;
 
                 // preference for downloading files
-                profile.SetPreference("browser.download.dir", FilesHelper.GetFolder(BaseConfiguration.TestOutput));
+                profile.SetPreference("browser.download.dir", BaseConfiguration.TestOutput);
                 profile.SetPreference("browser.download.folderList", 2);
                 profile.SetPreference("browser.download.managershowWhenStarting", false);
                 profile.SetPreference("browser.helperApps.neverAsk.saveToDisk", "application/vnd.ms-excel, application/x-msexcel, application/pdf, text/csv, text/html, application/octet-stream");
@@ -240,7 +239,7 @@ namespace Objectivity.Test.Automation.Common
             {
                 ChromeOptions options = new ChromeOptions();
                 options.AddUserProfilePreference("profile.default_content_settings.popups", 0);
-                options.AddUserProfilePreference("download.default_directory", FilesHelper.GetFolder(BaseConfiguration.TestOutput));
+                options.AddUserProfilePreference("download.default_directory", BaseConfiguration.TestOutput);
                 options.AddUserProfilePreference("download.prompt_for_download", false);
 
                 // set browser proxy for chrome
@@ -351,7 +350,7 @@ namespace Objectivity.Test.Automation.Common
         {
             var fileName = string.Format(CultureInfo.CurrentCulture, "{0}_{1}.png", title, errorDetail.DateTime.ToString("yyyy-MM-dd HH-mm-ss-fff", CultureInfo.CurrentCulture));
             var correctFileName = Path.GetInvalidFileNameChars().Aggregate(fileName, (current, c) => current.Replace(c.ToString(CultureInfo.CurrentCulture), string.Empty));
-            var filePath = Path.Combine(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), folder, correctFileName);
+            var filePath = Path.Combine(folder, correctFileName);
 
             errorDetail.Screenshot.SaveAsFile(filePath, ImageFormat.Png);
 
@@ -365,7 +364,7 @@ namespace Objectivity.Test.Automation.Common
         /// <param name="fileName">Name of the file.</param>
         public void SavePageSource(string testFolder, string fileName)
         {
-            var path = Path.Combine(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), testFolder, string.Format(CultureInfo.CurrentCulture, "{0}{1}", fileName, ".html"));
+            var path = Path.Combine(testFolder, string.Format(CultureInfo.CurrentCulture, "{0}{1}", fileName, ".html"));
             if (File.Exists(path))
             {
                 File.Delete(path);
@@ -383,14 +382,12 @@ namespace Objectivity.Test.Automation.Common
         {
             if (BaseConfiguration.FullDesktopScreenShotEnabled)
             {
-                FilesHelper.CreateFolder(BaseConfiguration.TestOutput);
-                TakeScreenShot.Save(TakeScreenShot.DoIt(), ImageFormat.Png, FilesHelper.GetFolder(BaseConfiguration.TestOutput), this.TestTitle);
+                TakeScreenShot.Save(TakeScreenShot.DoIt(), ImageFormat.Png, BaseConfiguration.TestOutput, this.TestTitle);
             }
 
             if (BaseConfiguration.SeleniumScreenShotEnabled)
             {
-                FilesHelper.CreateFolder(BaseConfiguration.TestOutput);
-                this.SaveScreenshot(new ErrorDetail(this.TakeScreenshot(), DateTime.Now, null), FilesHelper.GetFolder(BaseConfiguration.TestOutput), this.TestTitle);
+                this.SaveScreenshot(new ErrorDetail(this.TakeScreenshot(), DateTime.Now, null), BaseConfiguration.TestOutput, this.TestTitle);
             }
         }  
     }
