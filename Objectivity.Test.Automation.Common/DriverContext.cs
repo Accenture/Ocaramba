@@ -101,9 +101,19 @@ namespace Objectivity.Test.Automation.Common
         public string TestTitle { get; set; }
 
         /// <summary>
-        /// Gets Folder name
+        /// Gets Sets Folder name for ScreenShot
         /// </summary>
-        public string TestFolder { get; set; }
+        public string ScreenShotFolder { get; set; }
+
+        /// <summary>
+        /// Gets Sets Folder name for Download
+        /// </summary>
+        public string DownloadFolder { get; set; }
+
+        /// <summary>
+        /// Gets Sets Folder name for PageSource
+        /// </summary>
+        public string PageSourceFolder { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether [test failed].
@@ -172,7 +182,7 @@ namespace Objectivity.Test.Automation.Common
                 var firefoxExtensions = ConfigurationManager.GetSection("FirefoxExtensions") as NameValueCollection;
 
                 // preference for downloading files
-                profile.SetPreference("browser.download.dir", BaseConfiguration.TestOutput);
+                profile.SetPreference("browser.download.dir", this.DownloadFolder);
                 profile.SetPreference("browser.download.folderList", 2);
                 profile.SetPreference("browser.download.managershowWhenStarting", false);
                 profile.SetPreference("browser.helperApps.neverAsk.saveToDisk", "application/vnd.ms-excel, application/x-msexcel, application/pdf, text/csv, text/html, application/octet-stream");
@@ -239,7 +249,7 @@ namespace Objectivity.Test.Automation.Common
             {
                 ChromeOptions options = new ChromeOptions();
                 options.AddUserProfilePreference("profile.default_content_settings.popups", 0);
-                options.AddUserProfilePreference("download.default_directory", BaseConfiguration.TestOutput);
+                options.AddUserProfilePreference("download.default_directory", this.DownloadFolder);
                 options.AddUserProfilePreference("download.prompt_for_download", false);
 
                 // set browser proxy for chrome
@@ -360,11 +370,10 @@ namespace Objectivity.Test.Automation.Common
         /// <summary>
         /// Saves the page source.
         /// </summary>
-        /// <param name="testFolder">The test folder.</param>
         /// <param name="fileName">Name of the file.</param>
-        public void SavePageSource(string testFolder, string fileName)
+        public void SavePageSource(string fileName)
         {
-            var path = Path.Combine(testFolder, string.Format(CultureInfo.CurrentCulture, "{0}{1}", fileName, ".html"));
+            var path = Path.Combine(this.PageSourceFolder, string.Format(CultureInfo.CurrentCulture, "{0}{1}", fileName, ".html"));
             if (File.Exists(path))
             {
                 File.Delete(path);
@@ -382,12 +391,12 @@ namespace Objectivity.Test.Automation.Common
         {
             if (BaseConfiguration.FullDesktopScreenShotEnabled)
             {
-                TakeScreenShot.Save(TakeScreenShot.DoIt(), ImageFormat.Png, BaseConfiguration.TestOutput, this.TestTitle);
+                TakeScreenShot.Save(TakeScreenShot.DoIt(), ImageFormat.Png, this.ScreenShotFolder, this.TestTitle);
             }
 
             if (BaseConfiguration.SeleniumScreenShotEnabled)
             {
-                this.SaveScreenshot(new ErrorDetail(this.TakeScreenshot(), DateTime.Now, null), BaseConfiguration.TestOutput, this.TestTitle);
+                this.SaveScreenshot(new ErrorDetail(this.TakeScreenshot(), DateTime.Now, null), this.ScreenShotFolder, this.TestTitle);
             }
         }  
     }

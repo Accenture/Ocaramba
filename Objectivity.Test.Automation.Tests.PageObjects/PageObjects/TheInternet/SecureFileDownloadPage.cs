@@ -58,9 +58,9 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
                 || BaseConfiguration.TestBrowser == DriverContext.BrowserType.Chrome)
             {
             this.Driver.GetElement(this.fileLink.Evaluate("some-file.txt")).Click();
-            FilesHelper.WaitForFile(this.Driver, 5, fileName, BaseConfiguration.TestOutput);
-            FileInfo file = FilesHelper.GetLastFile(BaseConfiguration.TestOutput, FilesHelper.FileType.Txt);
-            FilesHelper.RenameFile(file.Name, "secure_file", BaseConfiguration.TestOutput, FilesHelper.FileType.Txt);
+            FilesHelper.WaitForFile(this.Driver, 5, fileName, this.DriverContext.DownloadFolder);
+            FileInfo file = FilesHelper.GetLastFile(this.DriverContext.DownloadFolder, FilesHelper.FileType.Txt);
+            FilesHelper.RenameFile(file.Name, "secure_file", this.DriverContext.DownloadFolder, FilesHelper.FileType.Txt);
             
             }
             else

@@ -69,7 +69,7 @@ namespace Objectivity.Test.Automation.Common
         {
             if (BaseConfiguration.GetPageSourceEnabled)
             {
-                driverContext.SavePageSource(BaseConfiguration.TestOutput, driverContext.TestTitle);
+                driverContext.SavePageSource(driverContext.TestTitle);
             }
         }
 

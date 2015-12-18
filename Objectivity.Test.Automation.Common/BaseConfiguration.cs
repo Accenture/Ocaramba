@@ -194,43 +194,6 @@ namespace Objectivity.Test.Automation.Common
         }
 
         /// <summary>
-        /// Gets the download folder.
-        /// </summary>
-        /// <value>
-        /// The download folder.
-        /// </value>
-        public static string TestOutput
-        {
-            get
-            {
-                string folder;
-
-                if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["TestOutput"]))
-                {
-                    folder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-                }
-                else
-                {
-                    if (UseCurrentDirectory)
-                    {
-                        folder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + ConfigurationManager.AppSettings["TestOutput"];
-                    }
-                    else
-                    {
-                        folder = ConfigurationManager.AppSettings["TestOutput"];
-                    }
-
-                    if (!Directory.Exists(folder))
-                    {
-                        Directory.CreateDirectory(folder);
-                    }
-                }
-
-                return folder;
-            }
-        }
-
-        /// <summary>
         /// Use CurrentDirectory and TestOutput as download path.
         /// </summary>
         public static bool UseCurrentDirectory

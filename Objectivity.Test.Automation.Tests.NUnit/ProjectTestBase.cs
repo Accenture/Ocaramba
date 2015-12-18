@@ -24,8 +24,13 @@ SOFTWARE.
 
 namespace Objectivity.Test.Automation.Tests.NUnit
 {
+    using System.IO;
+    using System.Reflection;
+
     using global::NUnit.Framework;
     using global::NUnit.Framework.Interfaces;
+
+    using System.Configuration;
 
     using Objectivity.Test.Automation.Common;
     using Objectivity.Test.Automation.Common.Logger;
@@ -36,6 +41,16 @@ namespace Objectivity.Test.Automation.Tests.NUnit
     public class ProjectTestBase : TestBase
     {
         private readonly DriverContext driverContext = new DriverContext();
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ProjectTestBase"/> class.
+        /// </summary>
+        public ProjectTestBase()
+        {
+            this.driverContext.DownloadFolder = this.GetFolder(ConfigurationManager.AppSettings["TestOutput"]);
+            this.driverContext.ScreenShotFolder = this.GetFolder(ConfigurationManager.AppSettings["TestOutput"]);
+            this.driverContext.PageSourceFolder = this.GetFolder(ConfigurationManager.AppSettings["TestOutput"]);
+        }
 
         /// <summary>
         /// The browser manager
@@ -108,5 +123,39 @@ namespace Objectivity.Test.Automation.Tests.NUnit
                 Assert.Fail();
             }
         }
+
+        /// <summary>
+        /// Gets the folder from app.config as value of given key.
+        /// </summary>
+        /// <param name="appConfigValue">The application configuration value.</param>
+        /// <returns></returns>
+        private string GetFolder(string appConfigValue)
+        {
+                string folder;
+
+                if (string.IsNullOrEmpty(appConfigValue))
+                {
+                    folder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                }
+                else
+                {
+                    if (BaseConfiguration.UseCurrentDirectory)
+                    {
+                        folder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + appConfigValue;
+                    }
+                    else
+                    {
+                        folder = appConfigValue;
+                    }
+
+                    if (!Directory.Exists(folder))
+                    {
+                        Directory.CreateDirectory(folder);
+                    }
+                }
+
+                return folder;
+        }
+
     }
 }
