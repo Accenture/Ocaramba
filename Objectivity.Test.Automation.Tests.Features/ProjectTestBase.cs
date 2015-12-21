@@ -24,12 +24,7 @@ SOFTWARE.
 
 namespace Objectivity.Test.Automation.Tests.Features
 {
-    using System.Configuration;
-    using System.IO;
-    using System.Reflection;
-
     using NUnit.Framework;
-
     using Objectivity.Test.Automation.Common;
     using Objectivity.Test.Automation.Common.Logger;
 
@@ -48,9 +43,9 @@ namespace Objectivity.Test.Automation.Tests.Features
         /// </summary>
         public ProjectTestBase()
         {
-            this.driverContext.DownloadFolder = this.GetFolder(ConfigurationManager.AppSettings["TestOutput"]);
-            this.driverContext.ScreenShotFolder = this.GetFolder(ConfigurationManager.AppSettings["TestOutput"]);
-            this.driverContext.PageSourceFolder = this.GetFolder(ConfigurationManager.AppSettings["TestOutput"]);
+            this.driverContext.DownloadFolder = ProjectBaseConfiguration.DownloadFolder;
+            this.driverContext.ScreenShotFolder = ProjectBaseConfiguration.ScreenShotFolder;
+            this.driverContext.PageSourceFolder = ProjectBaseConfiguration.PageSourceFolder;
         }
 
         /// <summary>
@@ -124,39 +119,6 @@ namespace Objectivity.Test.Automation.Tests.Features
             {
                 Assert.Fail();
             }
-        }
-
-        /// <summary>
-        /// Gets the folder from app.config as value of given key.
-        /// </summary>
-        /// <param name="appConfigValue">The application configuration value.</param>
-        /// <returns></returns>
-        private string GetFolder(string appConfigValue)
-        {
-            string folder;
-
-            if (string.IsNullOrEmpty(appConfigValue))
-            {
-                folder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            }
-            else
-            {
-                if (BaseConfiguration.UseCurrentDirectory)
-                {
-                    folder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + appConfigValue;
-                }
-                else
-                {
-                    folder = appConfigValue;
-                }
-
-                if (!Directory.Exists(folder))
-                {
-                    Directory.CreateDirectory(folder);
-                }
-            }
-
-            return folder;
         }
     }
 }

@@ -22,5 +22,7 @@
 	<file src="..\Objectivity.Test.Automation.Tests.PageObjects\ProjectPageBase.cs" target="content" />
 	<file src="..\Objectivity.Test.Automation.Tests.MSTest\Runsettings.runsettings" target="content" />
 	<file src="..\Objectivity.Test.Automation.Tests.MSTest\Testsettings.testsettings" target="content" />
+    <file src="..\Objectivity.Test.Automation.Tests.MSTest\ProjectBaseConfiguration.cs" target="content" />
+	<file src="..\Objectivity.Test.Automation.Tests.MSTest\ProjectBaseConfiguration.cs" target="content" />
   </files>
 </package>

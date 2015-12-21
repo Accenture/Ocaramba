@@ -22,7 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-namespace Objectivity.Test.Automation.NUnit.Helpers
+namespace Objectivity.Test.Automation.Tests.NUnit.Helpers
 {
     using System;
     using System.Collections.Generic;
@@ -90,6 +90,7 @@ namespace Objectivity.Test.Automation.NUnit.Helpers
         /// <summary>
         /// Reads the data drive file without setting test name.
         /// </summary>
+        /// <param name="folder">Path to folder with DataDriven file</param>
         /// <param name="testData">The test data.</param>
         /// <returns></returns>
         public static IEnumerable<TestCaseData> ReadDataDriveFile(string folder, string testData)

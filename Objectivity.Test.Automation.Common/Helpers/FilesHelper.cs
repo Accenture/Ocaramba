@@ -79,7 +79,12 @@ namespace Objectivity.Test.Automation.Common.Helpers
             /// <summary>
             /// Text files
             /// </summary>
-            Txt = 4
+            Txt = 4,
+
+            /// <summary>
+            /// Open office XML files
+            /// </summary>
+            OoXml = 5
         }
 
         /// <summary>
@@ -94,11 +99,13 @@ namespace Objectivity.Test.Automation.Common.Helpers
                 case FileType.Pdf:
                     return ".pdf";
                 case FileType.Excel:
-                    return ".xls?";
+                    return ".xls";
                 case FileType.Csv:
                     return ".csv";
                 case FileType.Txt:
                     return ".txt";
+                case FileType.OoXml:
+                    return ".xlsx";
                 default:
                     return "none";
             }
@@ -256,7 +263,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// <param name="type">The type of file.</param>
         public static void RenameFile(string oldName, string newName, string subFolder, FileType type)
         {
-            newName = newName + ReturnFileExtension(type).Replace("?", string.Empty);
+            newName = newName + ReturnFileExtension(type);
 
             Logger.Debug(CultureInfo.CurrentCulture, "new file name: {0}", newName);
             if (File.Exists(newName))

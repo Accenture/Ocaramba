@@ -27,8 +27,6 @@ namespace Objectivity.Test.Automation.Common
     using System;
     using System.Configuration;
     using System.Globalization;
-    using System.IO;
-    using System.Reflection;
 
     /// <summary>
     /// SeleniumConfiguration that consume app.config file

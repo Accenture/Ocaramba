@@ -29,7 +29,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit.DataDriven
     using System.Reflection;
 
     using Objectivity.Test.Automation.Common;
-    using Objectivity.Test.Automation.NUnit.Helpers;
+    using Objectivity.Test.Automation.Tests.NUnit.Helpers;
 
     /// <summary>
     /// DataDriven methods for NUnit test framework

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Objectivity.Test.Automation.Common", "Objectivity.Test.Automation.Common\Objectivity.Test.Automation.Common.csproj", "{46FA4EDC-A114-4E8F-A545-996F99E31EA8}"
 EndProject
@@ -10,12 +10,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Objectivity.Test.Automation.Tests.NUnit", "Objectivity.Test.Automation.Tests.NUnit\Objectivity.Test.Automation.Tests.NUnit.csproj", "{74F9B9A8-0055-4C13-B3C9-FACED546CB43}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Objectivity.Test.Automation.Tests.PageObjects", "Objectivity.Test.Automation.Tests.PageObjects\Objectivity.Test.Automation.Tests.PageObjects.csproj", "{1EA997E6-B873-469F-8685-17F73EBB0B92}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Objectivity.Test.Automation.MsTest", "Objectivity.Test.Automation.MsTest\Objectivity.Test.Automation.MsTest.csproj", "{82B32C60-412E-4856-8066-C97C640A3549}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Objectivity.Test.Automation.NUnit", "Objectivity.Test.Automation.NUnit\Objectivity.Test.Automation.NUnit.csproj", "{4CEF951D-49F7-4111-ACAE-4BA858CB7047}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Objectivity.Test.Automation.Features", "Objectivity.Test.Automation.Features\Objectivity.Test.Automation.Features.csproj", "{B97FEA9E-C131-4850-BC6D-563F60EE41FA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Objectivity.Test.Automation.Tests.Features", "Objectivity.Test.Automation.Tests.Features\Objectivity.Test.Automation.Tests.Features.csproj", "{656133FB-60B2-4124-9CE2-418DB4281D45}"
 EndProject
@@ -39,18 +33,6 @@ Global
 		{1EA997E6-B873-469F-8685-17F73EBB0B92}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1EA997E6-B873-469F-8685-17F73EBB0B92}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1EA997E6-B873-469F-8685-17F73EBB0B92}.Release|Any CPU.Build.0 = Release|Any CPU
-		{82B32C60-412E-4856-8066-C97C640A3549}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{82B32C60-412E-4856-8066-C97C640A3549}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{82B32C60-412E-4856-8066-C97C640A3549}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{82B32C60-412E-4856-8066-C97C640A3549}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4CEF951D-49F7-4111-ACAE-4BA858CB7047}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4CEF951D-49F7-4111-ACAE-4BA858CB7047}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4CEF951D-49F7-4111-ACAE-4BA858CB7047}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4CEF951D-49F7-4111-ACAE-4BA858CB7047}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B97FEA9E-C131-4850-BC6D-563F60EE41FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B97FEA9E-C131-4850-BC6D-563F60EE41FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B97FEA9E-C131-4850-BC6D-563F60EE41FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B97FEA9E-C131-4850-BC6D-563F60EE41FA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{656133FB-60B2-4124-9CE2-418DB4281D45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{656133FB-60B2-4124-9CE2-418DB4281D45}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{656133FB-60B2-4124-9CE2-418DB4281D45}.Release|Any CPU.ActiveCfg = Release|Any CPU
