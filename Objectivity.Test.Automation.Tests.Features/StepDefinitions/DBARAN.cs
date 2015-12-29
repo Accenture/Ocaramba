@@ -1,5 +1,6 @@
 ﻿namespace Objectivity.Test.Automation.Tests.Features.StepDefinitions
 {
+    using System;
     using System.Globalization;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -13,10 +14,14 @@
     public class DBARAN
     {
         private readonly DriverContext driverContext;
+        private readonly ScenarioContext scenarioContext;
 
-        public DBARAN()
+        public DBARAN(ScenarioContext scenarioContext)
         {
-            this.driverContext = ScenarioContext.Current["DriverContext"] as DriverContext;
+            if (scenarioContext == null) throw new ArgumentNullException("scenarioContext");
+            this.scenarioContext = scenarioContext;
+
+            this.driverContext = this.scenarioContext["DriverContext"] as DriverContext;
         }
 
         [When(@"I press ""(.*)""")]

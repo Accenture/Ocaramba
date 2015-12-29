@@ -24,6 +24,8 @@ SOFTWARE.
 
 namespace Objectivity.Test.Automation.Tests.Features.StepDefinitions
 {
+    using System;
+
     using Objectivity.Test.Automation.Common;
     using Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet;
     using TechTalk.SpecFlow;
@@ -32,10 +34,14 @@ namespace Objectivity.Test.Automation.Tests.Features.StepDefinitions
     public class CommonSteps
     {
         private readonly DriverContext driverContext;
+        private readonly ScenarioContext scenarioContext;
 
-        public CommonSteps()
+        public CommonSteps(ScenarioContext scenarioContext)
         {
-            this.driverContext = ScenarioContext.Current["DriverContext"] as DriverContext;
+            if (scenarioContext == null) throw new ArgumentNullException("scenarioContext");
+            this.scenarioContext = scenarioContext;
+
+            this.driverContext = this.scenarioContext["DriverContext"] as DriverContext;
         }
 
         [Given(@"I log on and default page is opened")]
@@ -54,7 +60,7 @@ namespace Objectivity.Test.Automation.Tests.Features.StepDefinitions
         public void GivenIHaveDropdownPage()
         {
             var page = new DropdownPage(this.driverContext);
-            ScenarioContext.Current.Set(page, "DropdownPage");
+            this.scenarioContext.Set(page, "DropdownPage");
         }
     }
 }

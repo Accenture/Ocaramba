@@ -24,6 +24,8 @@ SOFTWARE.
 
 namespace Objectivity.Test.Automation.Tests.Features
 {
+    using System;
+
     using NUnit.Framework;
     using Objectivity.Test.Automation.Common;
     using Objectivity.Test.Automation.Common.Logger;
@@ -36,16 +38,21 @@ namespace Objectivity.Test.Automation.Tests.Features
     [Binding]
     public class ProjectTestBase : TestBase
     {
+        private readonly ScenarioContext scenarioContext;
         private readonly DriverContext driverContext = new DriverContext();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ProjectTestBase"/> class.
         /// </summary>
-        public ProjectTestBase()
+        public ProjectTestBase(ScenarioContext scenarioContext)
         {
+            if (scenarioContext == null) throw new ArgumentNullException("scenarioContext");
+            this.scenarioContext = scenarioContext;
+
             this.driverContext.DownloadFolder = ProjectBaseConfiguration.DownloadFolder;
             this.driverContext.ScreenShotFolder = ProjectBaseConfiguration.ScreenShotFolder;
             this.driverContext.PageSourceFolder = ProjectBaseConfiguration.PageSourceFolder;
+
         }
 
         /// <summary>
@@ -99,10 +106,10 @@ namespace Objectivity.Test.Automation.Tests.Features
         [Before]
         public void BeforeTest()
         {
-            this.DriverContext.TestTitle = ScenarioContext.Current.ScenarioInfo.Title;
+            this.DriverContext.TestTitle = this.scenarioContext.ScenarioInfo.Title;
             this.LogTest.LogTestStarting(this.driverContext);
             this.DriverContext.Start();
-            ScenarioContext.Current["DriverContext"] = this.DriverContext;
+            this.scenarioContext["DriverContext"] = this.DriverContext;
         }
 
         /// <summary>
@@ -111,7 +118,7 @@ namespace Objectivity.Test.Automation.Tests.Features
         [After]
         public void AfterTest()
         {
-            this.DriverContext.IsTestFailed = ScenarioContext.Current.TestError != null;
+            this.DriverContext.IsTestFailed = this.scenarioContext.TestError != null;
             this.SaveTestDetailsIfTestFailed(this.driverContext);
             this.DriverContext.Stop();
             this.LogTest.LogTestEnding(this.driverContext);
