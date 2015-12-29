@@ -114,16 +114,7 @@
   <ItemGroup>
     <Folder Include="PageObjects\" />
   </ItemGroup>
-  <ItemGroup>
-    <CommonFiles Include="..\packages\NUnit.Console.3.0.1\*.*\**" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PrepareForRunDependsOn>$(PrepareForRunDependsOn);CopyCommonFiles</PrepareForRunDependsOn>
-  </PropertyGroup>
-  <Target Name="CopyCommonFiles">
-    <Copy SourceFiles="@(CommonFiles)" DestinationFolder="$(OutDir)\%(RecursiveDir)" SkipUnchangedFiles="true" />
-  </Target>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
