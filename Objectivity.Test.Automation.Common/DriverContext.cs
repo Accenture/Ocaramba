@@ -368,7 +368,7 @@ namespace Objectivity.Test.Automation.Common
 
             errorDetail.Screenshot.SaveAsFile(filePath, ImageFormat.Png);
 
-            Logger.Error("Test failed: screenshot saved to {0}.", filePath);
+            Logger.Error(CultureInfo.CurrentCulture, "Test failed: screenshot saved to {0}.", filePath);
         }
 
         /// <summary>
