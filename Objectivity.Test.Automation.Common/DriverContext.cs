@@ -34,6 +34,8 @@ namespace Objectivity.Test.Automation.Common
     using System.IO;
     using System.Linq;
 
+    using NLog;
+
     using Objectivity.Test.Automation.Common.Helpers;
     using Objectivity.Test.Automation.Common.Logger;
     using Objectivity.Test.Automation.Common.Types;
@@ -49,6 +51,8 @@ namespace Objectivity.Test.Automation.Common
     [SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable", Justification = "Driver is disposed on test end")]
     public class DriverContext
     {
+        private static readonly NLog.Logger Logger = LogManager.GetLogger("DRIVER");
+
         private readonly Collection<ErrorDetail> verifyMessages = new Collection<ErrorDetail>();
 
         /// <summary>
@@ -344,7 +348,7 @@ namespace Objectivity.Test.Automation.Common
             }
             catch (NullReferenceException)
             {
-                Console.Error.WriteLine("Test failed but was unable to get screenshot.");
+                Logger.Error("Test failed but was unable to get screenshot.");
             }
 
             return null;
@@ -364,7 +368,7 @@ namespace Objectivity.Test.Automation.Common
 
             errorDetail.Screenshot.SaveAsFile(filePath, ImageFormat.Png);
 
-            Console.Error.WriteLine("Test failed: screenshot saved to {0}.", filePath);
+            Logger.Error("Test failed: screenshot saved to {0}.", filePath);
         }
 
         /// <summary>

@@ -27,7 +27,10 @@ namespace Objectivity.Test.Automation.Common.Helpers
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Globalization;
     using System.Linq;
+
+    using NLog;
 
     using Objectivity.Test.Automation.Common.Types;
 
@@ -36,6 +39,8 @@ namespace Objectivity.Test.Automation.Common.Helpers
     /// </summary>
     public class PerformanceHelper
     {
+        private static readonly Logger Logger = LogManager.GetLogger("DRIVER");
+
         /// <summary>
         /// The timer
         /// </summary>
@@ -90,7 +95,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
             this.MeasuredTime = this.timer.ElapsedMilliseconds;
             savedTimes.SetDuration(this.MeasuredTime);
 
-            Console.WriteLine("Load Time " + this.MeasuredTime);
+            Logger.Info(CultureInfo.CurrentCulture, "Load Time {0}", this.MeasuredTime);
 
             this.loadTimeList.Add(savedTimes);
         }

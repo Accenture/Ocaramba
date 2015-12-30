@@ -37,7 +37,7 @@ namespace Objectivity.Test.Automation.Common.Logger
         /// <summary>
         /// The logger
         /// </summary>
-        private readonly Logger log = LogManager.GetLogger("TEST");
+        private readonly Logger log = LogManager.GetCurrentClassLogger();
 
         /// <summary>
         /// The start test time

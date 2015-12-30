@@ -25,7 +25,10 @@ SOFTWARE.
 namespace Objectivity.Test.Automation.Common.WebElements
 {
     using System;
+    using System.Globalization;
     using System.Linq;
+
+    using NLog;
 
     using Objectivity.Test.Automation.Common.Extensions;
 
@@ -38,6 +41,8 @@ namespace Objectivity.Test.Automation.Common.WebElements
     /// </summary>
     public class Select : RemoteWebElement
     {
+        private static readonly Logger Logger = LogManager.GetLogger("DRIVER");
+
         /// <summary>
         /// The web element
         /// </summary>
@@ -69,8 +74,8 @@ namespace Objectivity.Test.Automation.Common.WebElements
             }
             catch (NoSuchElementException e)
             {
-                Console.WriteLine("unable to select given label: " + selectValue);
-                Console.WriteLine(e.Message);
+                Logger.Error(CultureInfo.CurrentCulture, "unable to select given label: {0}", selectValue);
+                Logger.Error(e.Message);
             }
         }
 
@@ -91,8 +96,8 @@ namespace Objectivity.Test.Automation.Common.WebElements
             }
             catch (NoSuchElementException e)
             {
-                Console.WriteLine("unable to select given label: " + selectValue);
-                Console.WriteLine(e.Message);
+                Logger.Error(CultureInfo.CurrentCulture, "unable to select given label: {0}", selectValue);
+                Logger.Error(e.Message);
             }
         }
 
@@ -111,8 +116,8 @@ namespace Objectivity.Test.Automation.Common.WebElements
             }
             catch (NoSuchElementException e)
             {
-                Console.WriteLine("unable to select given index: " + index);
-                Console.WriteLine(e.Message);
+                Logger.Error(CultureInfo.CurrentCulture, "unable to select given index: {0}", index);
+                Logger.Error(e.Message);
             }
         }
 
@@ -135,8 +140,8 @@ namespace Objectivity.Test.Automation.Common.WebElements
             }
             catch (NoSuchElementException e)
             {
-                Console.WriteLine("unable to select given index: " + index);
-                Console.WriteLine(e.Message);
+                Logger.Error(CultureInfo.CurrentCulture, "unable to select given index: {0}", index);
+                Logger.Error(e.Message);
             }
         }
 
@@ -193,8 +198,8 @@ namespace Objectivity.Test.Automation.Common.WebElements
             }
             catch (NoSuchElementException e)
             {
-                Console.WriteLine("Select is not populated by options" + selectElement);
-                Console.WriteLine(e.Message);
+                Logger.Error(CultureInfo.CurrentCulture, "unable to select given index: {0}", selectElement);
+                Logger.Error(e.Message);
             }
 
             return this.webElement;
