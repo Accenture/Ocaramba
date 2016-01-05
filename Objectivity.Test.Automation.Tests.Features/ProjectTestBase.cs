@@ -48,11 +48,6 @@ namespace Objectivity.Test.Automation.Tests.Features
         {
             if (scenarioContext == null) throw new ArgumentNullException("scenarioContext");
             this.scenarioContext = scenarioContext;
-
-            this.driverContext.DownloadFolder = ProjectBaseConfiguration.DownloadFolder;
-            this.driverContext.ScreenShotFolder = ProjectBaseConfiguration.ScreenShotFolder;
-            this.driverContext.PageSourceFolder = ProjectBaseConfiguration.PageSourceFolder;
-
         }
 
         /// <summary>
@@ -106,6 +101,7 @@ namespace Objectivity.Test.Automation.Tests.Features
         [Before]
         public void BeforeTest()
         {
+            this.DriverContext.CurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
             this.DriverContext.TestTitle = this.scenarioContext.ScenarioInfo.Title;
             this.LogTest.LogTestStarting(this.driverContext);
             this.DriverContext.Start();

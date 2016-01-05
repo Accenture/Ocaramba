@@ -107,17 +107,35 @@ namespace Objectivity.Test.Automation.Common
         /// <summary>
         /// Gets Sets Folder name for ScreenShot
         /// </summary>
-        public string ScreenShotFolder { get; set; }
+        public string ScreenShotFolder
+        {
+            get
+            {
+                return this.GetFolder(BaseConfiguration.ScreenShotFolder);
+            }
+        }
 
         /// <summary>
         /// Gets Sets Folder name for Download
         /// </summary>
-        public string DownloadFolder { get; set; }
+        public string DownloadFolder
+        {
+            get
+            {
+                return this.GetFolder(BaseConfiguration.DownloadFolder);
+            }
+        }
 
         /// <summary>
         /// Gets Sets Folder name for PageSource
         /// </summary>
-        public string PageSourceFolder { get; set; }
+        public string PageSourceFolder
+        {
+            get
+            {
+                return this.GetFolder(BaseConfiguration.PageSourceFolder);
+            }
+        }
 
         /// <summary>
         /// Gets or sets a value indicating whether [test failed].
@@ -286,6 +304,8 @@ namespace Objectivity.Test.Automation.Common
             }
         }
 
+        public string CurrentDirectory { get; set; }
+
         private Proxy CurrentProxy()
         {
             Proxy proxy = new Proxy();
@@ -402,6 +422,39 @@ namespace Objectivity.Test.Automation.Common
             {
                 this.SaveScreenshot(new ErrorDetail(this.TakeScreenshot(), DateTime.Now, null), this.ScreenShotFolder, this.TestTitle);
             }
-        }  
+        }
+
+        /// <summary>
+        /// Gets the folder from app.config as value of given key.
+        /// </summary>
+        /// <param name="appConfigValue">The application configuration value.</param>
+        /// <returns></returns>
+        private string GetFolder(string appConfigValue)
+        {
+            string folder;
+
+            if (string.IsNullOrEmpty(appConfigValue))
+            {
+                folder = this.CurrentDirectory;
+            }
+            else
+            {
+                if (BaseConfiguration.UseCurrentDirectory)
+                {
+                    folder = this.CurrentDirectory + appConfigValue;
+                }
+                else
+                {
+                    folder = appConfigValue;
+                }
+
+                if (!Directory.Exists(folder))
+                {
+                    Directory.CreateDirectory(folder);
+                }
+            }
+
+            return folder;
+        }
     }
 }

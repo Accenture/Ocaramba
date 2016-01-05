@@ -24,6 +24,8 @@ SOFTWARE.
 
 namespace Objectivity.Test.Automation.Tests.MsTest
 {
+    using System;
+
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using Objectivity.Test.Automation.Common;
@@ -42,9 +44,6 @@ namespace Objectivity.Test.Automation.Tests.MsTest
         /// </summary>
         public ProjectTestBase()
         {
-            this.driverContext.DownloadFolder = ProjectBaseConfiguration.DownloadFolder;
-            this.driverContext.ScreenShotFolder = ProjectBaseConfiguration.ScreenShotFolder;
-            this.driverContext.PageSourceFolder = ProjectBaseConfiguration.PageSourceFolder;
         }
 
         /// <summary>
@@ -88,6 +87,7 @@ namespace Objectivity.Test.Automation.Tests.MsTest
         [TestInitialize]
         public void BeforeTest()
         {
+            this.DriverContext.CurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
             this.DriverContext.TestTitle = this.TestContext.TestName;
             this.LogTest.LogTestStarting(this.driverContext);
             this.DriverContext.Start();

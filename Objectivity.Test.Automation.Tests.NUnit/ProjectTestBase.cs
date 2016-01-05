@@ -42,9 +42,6 @@ namespace Objectivity.Test.Automation.Tests.NUnit
         /// </summary>
         public ProjectTestBase()
         {
-            this.driverContext.DownloadFolder = ProjectBaseConfiguration.DownloadFolder;
-            this.driverContext.ScreenShotFolder = ProjectBaseConfiguration.ScreenShotFolder;
-            this.driverContext.PageSourceFolder = ProjectBaseConfiguration.PageSourceFolder;
         }
 
         /// <summary>
@@ -98,6 +95,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit
         [SetUp]
         public void BeforeTest()
         {
+            this.DriverContext.CurrentDirectory = TestContext.CurrentContext.TestDirectory;
             this.DriverContext.TestTitle = TestContext.CurrentContext.Test.Name;
             this.LogTest.LogTestStarting(this.driverContext);
             this.DriverContext.Start();

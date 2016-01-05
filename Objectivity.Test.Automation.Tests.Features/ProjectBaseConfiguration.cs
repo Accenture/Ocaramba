@@ -24,60 +24,7 @@ SOFTWARE.
 
 namespace Objectivity.Test.Automation.Tests.Features
 {
-    using System.Configuration;
-    using System.IO;
-    using System.Reflection;
-
-    using Objectivity.Test.Automation.Common;
-
     public static class ProjectBaseConfiguration
     {
-        public static string DownloadFolder
-        {
-            get { return GetFolder(ConfigurationManager.AppSettings["TestOutput"]); }
-        }
-
-        public static string ScreenShotFolder
-        {
-            get { return GetFolder(ConfigurationManager.AppSettings["TestOutput"]); }
-        }
-
-        public static string PageSourceFolder
-        {
-            get { return GetFolder(ConfigurationManager.AppSettings["TestOutput"]); }
-        }
-
-        /// <summary>
-        /// Gets the folder from app.config as value of given key.
-        /// </summary>
-        /// <param name="appConfigValue">The application configuration value.</param>
-        /// <returns></returns>
-        private static string GetFolder(string appConfigValue)
-        {
-            string folder;
-
-            if (string.IsNullOrEmpty(appConfigValue))
-            {
-                folder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            }
-            else
-            {
-                if (BaseConfiguration.UseCurrentDirectory)
-                {
-                    folder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + appConfigValue;
-                }
-                else
-                {
-                    folder = appConfigValue;
-                }
-
-                if (!Directory.Exists(folder))
-                {
-                    Directory.CreateDirectory(folder);
-                }
-            }
-
-            return folder;
-        }
     }
 }
