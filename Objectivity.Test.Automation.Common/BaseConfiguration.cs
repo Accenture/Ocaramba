@@ -27,6 +27,8 @@ namespace Objectivity.Test.Automation.Common
     using System;
     using System.Configuration;
     using System.Globalization;
+    using System.IO;
+    using System.Reflection;
 
     /// <summary>
     /// SeleniumConfiguration that consume app.config file
@@ -236,25 +238,16 @@ namespace Objectivity.Test.Automation.Common
             }
         }
 
-        /// <summary>
-        /// Path where files are downloaded
-        /// </summary>
         public static string DownloadFolder
         {
             get { return ConfigurationManager.AppSettings["DownloadFolder"]; }
         }
 
-        /// <summary>
-        /// Path where screenshots are saved
-        /// </summary>
         public static string ScreenShotFolder
         {
             get { return ConfigurationManager.AppSettings["ScreenShotFolder"]; }
         }
 
-        /// <summary>
-        /// Path where page source are saved
-        /// </summary>
         public static string PageSourceFolder
         {
             get { return ConfigurationManager.AppSettings["PageSourceFolder"]; }

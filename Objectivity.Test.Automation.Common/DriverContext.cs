@@ -304,9 +304,6 @@ namespace Objectivity.Test.Automation.Common
             }
         }
 
-        /// <summary>
-        /// Directory where assembly files are located
-        /// </summary>
         public string CurrentDirectory { get; set; }
 
         private Proxy CurrentProxy()
