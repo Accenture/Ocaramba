@@ -1,0 +1,140 @@
+Generated File. Do not edit.
+
+[HEADER]
+Version|0.17|$
+Arch|x86-msvc|$
+
+[PLUGINS]
+nppdf32.dll|$
+C:\Program Files (x86)\Adobe\Reader 10.0\Reader\browser\nppdf32.dll|$
+10.1.13.16|$
+1417629980000|0|0|0|$
+Adobe PDF Plug-In For Firefox and Netscape 10.1.13|$
+Adobe Acrobat|$
+7
+0|application/pdf|Acrobat Portable Document Format|pdf|$
+1|application/vnd.adobe.pdfxml|Adobe PDF in XML Format|pdfxml|$
+2|application/vnd.adobe.x-mars|Adobe PDF in XML Format|mars|$
+3|application/vnd.fdf|Acrobat Forms Data Format|fdf|$
+4|application/vnd.adobe.xfdf|XML Version of Acrobat Forms Data Format|xfdf|$
+5|application/vnd.adobe.xdp+xml| Acrobat XML Data Package|xdp|$
+6|application/vnd.adobe.xfd+xml|Adobe FormFlow99 Data File|xfd|$
+nptcSafariBrowserAgent100.dll|$
+C:\Program Files (x86)\Common Files\SmartBear\tcSafariSupport\10.0\nptcSafariBrowserAgent100.dll|$
+10.50.2702.7|$
+1416853870000|0|0|0|$
+TestComplete Safari Browser Agent|$
+SmartBear Safari Extension|$
+2
+0|application/x-testcomplete10-0-safari-browser-page-agent|||$
+1|application/x-testcomplete10-0-safari-browser-global-page-agent|||$
+nptcOperaBrowserAgent.dll|$
+C:\Program Files (x86)\Common Files\SmartBear\OperaSupport\wuid-54806164-73D5-4056-B26E-5467D3B99D96\nptcOperaBrowserAgent.dll|$
+10.50.2702.7|$
+1416853870000|0|0|0|$
+TestComplete Opera browser agent|$
+SmartBear Opera Browser Extension|$
+1
+0|application/x-testcomplete-opera-browser-agent-10.0|||$
+nptcOperaTabsAgent.dll|$
+C:\Program Files (x86)\Common Files\SmartBear\OperaSupport\wuid-54806164-73D5-4056-B26E-5467D3B99D96\nptcOperaTabsAgent.dll|$
+10.50.2702.7|$
+1416853870000|0|0|0|$
+TestComplete Opera tabs agent|$
+SmartBear Opera Tabs Extension|$
+1
+0|application/x-testcomplete-opera-tabs-agent-10.0|||$
+nptcCrOperaBrowserAgent.dll|$
+C:\Program Files (x86)\Common Files\SmartBear\OperaSupport\hcbinkdiniifhfhhhljakmceelolkejk\nptcCrOperaBrowserAgent.dll|$
+10.50.2702.7|$
+1416853870000|0|0|0|$
+TestComplete Chromium Opera Browser Agent|$
+SmartBear TestComplete 10|$
+1
+0|application/x-testcomplete10-0-ch-opera-browser-agent|||$
+nptcCrOperaTabsAgent.dll|$
+C:\Program Files (x86)\Common Files\SmartBear\OperaSupport\hcbinkdiniifhfhhhljakmceelolkejk\nptcCrOperaTabsAgent.dll|$
+10.50.2702.7|$
+1416853870000|0|0|0|$
+TestComplete Chromium Opera Tabs Agent|$
+SmartBear TestComplete 10|$
+1
+0|application/x-testcomplete10-0-ch-opera-tabs-agent|||$
+nppdf32.dll|$
+C:\Program Files (x86)\Adobe\Reader 10.0\Reader\AIR\nppdf32.dll|$
+10.1.13.16|$
+1417629984000|0|0|0|$
+Adobe PDF Plug-In For Firefox and Netscape 10.1.13|$
+Adobe Acrobat|$
+7
+0|application/pdf|Acrobat Portable Document Format|pdf|$
+1|application/vnd.adobe.pdfxml|Adobe PDF in XML Format|pdfxml|$
+2|application/vnd.adobe.x-mars|Adobe PDF in XML Format|mars|$
+3|application/vnd.fdf|Acrobat Forms Data Format|fdf|$
+4|application/vnd.adobe.xfdf|XML Version of Acrobat Forms Data Format|xfdf|$
+5|application/vnd.adobe.xdp+xml| Acrobat XML Data Package|xdp|$
+6|application/vnd.adobe.xfd+xml|Adobe FormFlow99 Data File|xfd|$
+npGoogleUpdate3.dll|$
+C:\Program Files (x86)\Google\Update\1.3.29.1\npGoogleUpdate3.dll|$
+1.3.29.1|$
+1449567358750|0|0|0|$
+Google Update|$
+Google Update|$
+2
+0|application/x-vnd.google.update3webcontrol.3|||$
+1|application/x-vnd.google.oneclickctrl.9|||$
+NPSPWRAP.DLL|$
+C:\Program Files (x86)\Microsoft Office\root\Office16\NPSPWRAP.DLL|$
+16.0.6001.1043|$
+1447935105681|0|0|0|$
+The plugin allows you to have a better experience with Microsoft SharePoint|$
+Microsoft Office 2016|$
+2
+0|application/x-sharepoint|SharePoint Plug-in for Firefox||$
+1|application/x-sharepoint-uc|||$
+npctrl.dll|$
+c:\Program Files (x86)\Microsoft Silverlight\5.1.40728.0\npctrl.dll|$
+5.1.40728.0|$
+1438040874000|0|0|0|$
+5.1.40728.0|$
+Silverlight Plug-In|$
+2
+0|application/x-silverlight|npctrl|scr|$
+1|application/x-silverlight-2|||$
+npMeetingJoinPluginOC.dll|$
+C:\Program Files (x86)\Microsoft Office\root\VFS\ProgramFilesX86\Mozilla Firefox\plugins\npMeetingJoinPluginOC.dll|$
+16.0.6001.1043|$
+1447935278808|0|0|0|$
+The plugin allows you to have a better experience with Microsoft Lync|$
+Microsoft Office 2016|$
+1
+0|application/vnd.microsoft.communicator.ocsmeeting|Lync Plug-in for Firefox||$
+NPSWF32_20_0_0_267.dll|$
+C:\Windows\SysWOW64\Macromed\Flash\NPSWF32_20_0_0_267.dll|$
+20.0.0.267|$
+1451377445376|0|0|0|$
+Shockwave Flash 20.0 r0|$
+Shockwave Flash|$
+2
+0|application/x-shockwave-flash|Adobe Flash movie|swf|$
+1|application/futuresplash|FutureSplash movie|spl|$
+npappdetector.dll|$
+C:\Users\tfajks\AppData\Local\Citrix\Plugins\104\npappdetector.dll|$
+1.0.0.104|$
+1409578851656|0|0|0|$
+Citrix Online App Detector Plugin|$
+Citrix Online Web Deployment Plugin 1.0.0.104|$
+1
+0|application/x-col-application-detector|Citrix Online App Detector Plugin|colappdetector|$
+npatgpc.dll|$
+C:\Users\tfajks\AppData\Roaming\Mozilla\plugins\npatgpc.dll|$
+29.1340.2015.721|$
+1442480454030|0|0|0|$
+ActiveTouch General Plugin Container Version 105|$
+ActiveTouch General Plugin Container|$
+1
+0|application/x-atgpc-plugin|General Plugin Container File|gpc|$
+
+[INVALID]
+c:\Program Files (x86)\Microsoft Silverlight\5.1.40728.0\npctrlui.dll|$
+1438040874000|$

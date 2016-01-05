@@ -304,6 +304,9 @@ namespace Objectivity.Test.Automation.Common
             }
         }
 
+        /// <summary>
+        /// Directory where assembly files are located
+        /// </summary>
         public string CurrentDirectory { get; set; }
 
         private Proxy CurrentProxy()
@@ -330,7 +333,8 @@ namespace Objectivity.Test.Automation.Common
                     break;
                 case BrowserType.FirefoxPortable:
                     var profile = this.FirefoxProfile;
-                    var firefoxBinary = new FirefoxBinary(BaseConfiguration.FirefoxPath);
+                    var firefoxBinaryPath = this.CurrentDirectory + BaseConfiguration.FirefoxPath;
+                    var firefoxBinary = new FirefoxBinary(firefoxBinaryPath);
                     this.driver = new FirefoxDriver(firefoxBinary, profile);
                     break;
                 case BrowserType.InternetExplorer:
