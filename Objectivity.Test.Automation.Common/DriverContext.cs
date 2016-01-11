@@ -457,6 +457,7 @@ namespace Objectivity.Test.Automation.Common
                 }
             }
 
+            Logger.Trace(CultureInfo.CurrentCulture, "Folder '{0}'", folder);
             return folder;
         }
     }
