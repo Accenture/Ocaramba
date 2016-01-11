@@ -400,15 +400,18 @@ namespace Objectivity.Test.Automation.Common
         /// <param name="fileName">Name of the file.</param>
         public void SavePageSource(string fileName)
         {
-            var path = Path.Combine(this.PageSourceFolder, string.Format(CultureInfo.CurrentCulture, "{0}{1}", fileName, ".html"));
-            if (File.Exists(path))
+            if (BaseConfiguration.GetPageSourceEnabled)
             {
-                File.Delete(path);
-            }
+                var path = Path.Combine(this.PageSourceFolder, string.Format(CultureInfo.CurrentCulture, "{0}{1}", fileName, ".html"));
+                if (File.Exists(path))
+                {
+                    File.Delete(path);
+                }
 
-            var pageSource = this.driver.PageSource;
-            pageSource = pageSource.Replace("<head>", string.Format(CultureInfo.CurrentCulture, "<head><base href=\"http://{0}\" target=\"_blank\">", BaseConfiguration.Host));
-            File.WriteAllText(path, pageSource);
+                var pageSource = this.driver.PageSource;
+                pageSource = pageSource.Replace("<head>", string.Format(CultureInfo.CurrentCulture, "<head><base href=\"http://{0}\" target=\"_blank\">", BaseConfiguration.Host));
+                File.WriteAllText(path, pageSource);
+           }
         }
 
         /// <summary>

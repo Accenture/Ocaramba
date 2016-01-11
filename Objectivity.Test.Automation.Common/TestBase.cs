@@ -67,19 +67,16 @@ namespace Objectivity.Test.Automation.Common
         /// </param>
         public void SavePageSource(DriverContext driverContext)
         {
-            if (BaseConfiguration.GetPageSourceEnabled)
-            {
-                driverContext.SavePageSource(driverContext.TestTitle);
-            }
+              driverContext.SavePageSource(driverContext.TestTitle);
         }
 
         /// <summary>
-        /// Fail Test If Verify Failed
+        /// Fail Test If Verify Failed and clear verify messages
         /// </summary>
         /// <param name="driverContext">
         /// Driver context includes
         /// </param>
-        public bool IsVerifyFailed(DriverContext driverContext)
+        public bool IsVerifyFailedAndClearMessages(DriverContext driverContext)
         {
             if (!driverContext.VerifyMessages.Count.Equals(0) && !driverContext.IsTestFailed)
             {

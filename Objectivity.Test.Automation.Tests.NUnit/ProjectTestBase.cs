@@ -104,7 +104,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit
             this.SaveTestDetailsIfTestFailed(this.driverContext);
             this.DriverContext.Stop();
             this.LogTest.LogTestEnding(this.driverContext);
-            if (this.IsVerifyFailed(this.driverContext))
+            if (this.IsVerifyFailedAndClearMessages(this.driverContext))
             {
                 Assert.Fail();
             }
