@@ -29,6 +29,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Helpers
     using System.Globalization;
     using System.Linq;
     using System.Runtime.InteropServices;
+    using System.Text.RegularExpressions;
     using System.Xml.Linq;
 
     using global::NUnit.Framework;
@@ -71,7 +72,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Helpers
                         {
                             if (!string.IsNullOrEmpty(keyValue))
                             {
-                                testCaseName += "_" + keyValue.Replace(" ", "_").Replace(".", "_");
+                                testCaseName += "_" + Regex.Replace(keyValue, @"[.]+|\s+", "_");
                             }
                         }
                         else
