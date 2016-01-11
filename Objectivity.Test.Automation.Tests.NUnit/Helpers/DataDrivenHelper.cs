@@ -52,7 +52,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Helpers
 
             if (!doc.Descendants(testData).Any())
             {
-                throw new Exception(string.Format(" Exception while reading Data Driven file\n row '{0}' not found \n in file '{1}'", testData, folder));
+                throw new ArgumentNullException(string.Format(" Exception while reading Data Driven file\n row '{0}' not found \n in file '{1}'", testData, folder));
             }
 
             foreach (XElement element in doc.Descendants(testData))
@@ -76,7 +76,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Helpers
                         }
                         else
                         {
-                            throw new Exception(string.Format(" Exception while reading Data Driven file\n test data '{0}' \n test name '{1}' \n searched key '{2}' not found in row \n '{3}'  \n in file '{4}'", testData, testName, p, element, folder));
+                            throw new NullReferenceException(string.Format(" Exception while reading Data Driven file\n test data '{0}' \n test name '{1}' \n searched key '{2}' not found in row \n '{3}'  \n in file '{4}'", testData, testName, p, element, folder));
                         }
                     }
                 }
@@ -98,7 +98,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Helpers
             var doc = XDocument.Load(folder);
             if (!doc.Descendants(testData).Any())
             {
-                throw new KeyNotFoundException(string.Format(CultureInfo.CurrentCulture, "Exception while reading Data Driven file\n row '{0}' not found \n in file '{1}'", testData, folder));
+                throw new ArgumentNullException(string.Format(CultureInfo.CurrentCulture, "Exception while reading Data Driven file\n row '{0}' not found \n in file '{1}'", testData, folder));
             }
 
             return doc.Descendants(testData).Select(element => element.Attributes().ToDictionary(k => k.Name.ToString(), v => v.Value)).Select(testParams => new TestCaseData(testParams));
