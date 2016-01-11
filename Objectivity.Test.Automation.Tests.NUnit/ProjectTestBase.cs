@@ -38,13 +38,6 @@ namespace Objectivity.Test.Automation.Tests.NUnit
         private readonly DriverContext driverContext = new DriverContext();
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ProjectTestBase"/> class.
-        /// </summary>
-        public ProjectTestBase()
-        {
-        }
-
-        /// <summary>
         /// The browser manager
         /// </summary>
         protected DriverContext DriverContext

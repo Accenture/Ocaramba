@@ -40,13 +40,6 @@ namespace Objectivity.Test.Automation.Tests.MsTest
         private readonly DriverContext driverContext = new DriverContext();
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ProjectTestBase"/> class.
-        /// </summary>
-        public ProjectTestBase()
-        {
-        }
-
-        /// <summary>
         /// Logger instance for driver
         /// </summary>
         public TestLogger LogTest

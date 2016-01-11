@@ -238,16 +238,25 @@ namespace Objectivity.Test.Automation.Common
             }
         }
 
+        /// <summary>
+        /// Gets the Download Folder path
+        /// </summary>
         public static string DownloadFolder
         {
             get { return ConfigurationManager.AppSettings["DownloadFolder"]; }
         }
 
+        /// <summary>
+        /// Gets the Screen Shot Folder path
+        /// </summary>
         public static string ScreenShotFolder
         {
             get { return ConfigurationManager.AppSettings["ScreenShotFolder"]; }
         }
 
+        /// <summary>
+        /// Gets the Page Source Folder path
+        /// </summary>
         public static string PageSourceFolder
         {
             get { return ConfigurationManager.AppSettings["PageSourceFolder"]; }
