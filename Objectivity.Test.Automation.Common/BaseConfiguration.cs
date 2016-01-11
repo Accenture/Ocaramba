@@ -27,8 +27,6 @@ namespace Objectivity.Test.Automation.Common
     using System;
     using System.Configuration;
     using System.Globalization;
-    using System.IO;
-    using System.Reflection;
 
     /// <summary>
     /// SeleniumConfiguration that consume app.config file
@@ -194,7 +192,7 @@ namespace Objectivity.Test.Automation.Common
         }
 
         /// <summary>
-        /// Use CurrentDirectory and TestOutput as download path.
+        /// Use CurrentDirectory for path where assembly files are located.
         /// </summary>
         public static bool UseCurrentDirectory
         {
