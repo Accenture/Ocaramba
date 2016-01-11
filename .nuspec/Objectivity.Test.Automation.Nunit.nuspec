@@ -22,6 +22,5 @@
 	<file src="..\Objectivity.Test.Automation.Tests.NUnit\App.config" target="content" />
 	<file src="..\Objectivity.Test.Automation.Tests.PageObjects\ProjectPageBase.cs" target="content" />
 	<file src="..\Objectivity.Test.Automation.Tests.NUnit\Helpers\DataDrivenHelper.cs" target="content\Support" />
-	<file src="..\Objectivity.Test.Automation.Tests.NUnit\ProjectBaseConfiguration.cs" target="content" />
   </files>
 </package>

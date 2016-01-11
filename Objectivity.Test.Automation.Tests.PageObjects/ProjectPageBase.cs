@@ -28,7 +28,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects
 
     using OpenQA.Selenium;
 
-    public class ProjectPageBase
+    public partial class ProjectPageBase
     {
         public ProjectPageBase(DriverContext driverContext)
         {
