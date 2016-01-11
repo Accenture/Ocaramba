@@ -28,7 +28,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
     /// <summary>
     /// Tests to test framework
     /// </summary>
-    public class PerformanceTests : ProjectTestBase
+    public class PerformanceTestsNUnit : ProjectTestBase
     {
         [Test, Repeat(3)]
         public void HerokuappTests()

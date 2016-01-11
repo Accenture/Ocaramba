@@ -78,10 +78,10 @@
     <Compile Include="ProjectTestBase.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Tests\DownloadFilesTests.cs" />
-    <Compile Include="Tests\HerokuappTests.cs" />
-    <Compile Include="Tests\JavaScriptAlertsTests.cs" />
-    <Compile Include="Tests\PerformanceTests.cs" />
+    <Compile Include="Tests\DownloadFilesTestsNUnit.cs" />
+    <Compile Include="Tests\HerokuappTestsNUnit.cs" />
+    <Compile Include="Tests\JavaScriptAlertsTestsNUnit.cs" />
+    <Compile Include="Tests\PerformanceTestsNUnit.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

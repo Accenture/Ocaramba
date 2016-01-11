@@ -33,7 +33,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
     using Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet;
 
     [Parallelizable(ParallelScope.Fixtures)]
-    public class HerokuappTests : ProjectTestBase
+    public class HerokuappTestsNUnit : ProjectTestBase
     {
 
         [Test]

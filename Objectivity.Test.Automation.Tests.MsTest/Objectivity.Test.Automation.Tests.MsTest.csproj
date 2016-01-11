@@ -73,14 +73,12 @@
     <Compile Include="ProjectTestBase.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Tests\PStryczek.cs" />
-    <Compile Include="Tests\tfajks.cs" />
-    <Compile Include="Tests\DownloadFilesTests.cs" />
+    <Compile Include="Tests\HerokuappTestsMsTest.cs" />
+    <Compile Include="Tests\DownloadFilesTestsMsTest.cs" />
     <Compile Include="Tests\KendoTests\KendoComboBoxTests.cs" />
     <Compile Include="Tests\KendoTests\KendoDropDownListTests.cs" />
     <Compile Include="Tests\KendoTests\KendoGridTests.cs" />
     <Compile Include="Tests\KendoTests\KendoTreeViewTests.cs" />
-    <Compile Include="Tests\rszkudlarek.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
