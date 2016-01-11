@@ -51,11 +51,11 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             this.Driver.IsElementPresent(this.pageHeader, BaseConfiguration.ShortTimeout);
         }
 
-        public int CountLinks()
+        public string CountLinks()
         {
             var count = this.Driver.GetElements(this.links).Count;
             Logger.Info(CultureInfo.CurrentCulture, "Number of links on page '{0}'", count);
-            return count;
+            return count.ToString(CultureInfo.CurrentCulture);
         }
     }
 }

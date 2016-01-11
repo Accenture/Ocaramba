@@ -2,4 +2,5 @@
 <tests>
   <credential user="tomsmith" password="SuperSecretPassword!" message="You logged into a secure area!"/>
   <credential user="wronguser" password="wrongpassword" message="Your username is invalid!"/>
+  <links number="3"/>
 </tests>
