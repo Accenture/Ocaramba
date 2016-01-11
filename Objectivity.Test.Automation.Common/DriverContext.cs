@@ -330,8 +330,7 @@ namespace Objectivity.Test.Automation.Common
                     break;
                 case BrowserType.FirefoxPortable:
                     var profile = this.FirefoxProfile;
-                    var firefoxBinaryPath = this.CurrentDirectory + BaseConfiguration.FirefoxPath;
-                    var firefoxBinary = new FirefoxBinary(firefoxBinaryPath);
+                    var firefoxBinary = new FirefoxBinary(BaseConfiguration.FirefoxPath);
                     this.driver = new FirefoxDriver(firefoxBinary, profile);
                     break;
                 case BrowserType.InternetExplorer:
