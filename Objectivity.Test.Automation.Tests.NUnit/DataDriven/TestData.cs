@@ -53,5 +53,10 @@ namespace Objectivity.Test.Automation.Tests.NUnit.DataDriven
         {
             get { return DataDrivenHelper.ReadDataDriveFile(GetFolder, "credential", new[] { "user", "password" }, "credential"); }
         }
+
+        public static IEnumerable Links
+        {
+            get { return DataDrivenHelper.ReadDataDriveFile(GetFolder, "links", new[] { "number" }, "Count_links"); }
+        }
     }
 }
