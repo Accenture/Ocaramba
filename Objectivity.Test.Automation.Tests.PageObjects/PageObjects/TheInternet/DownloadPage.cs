@@ -59,7 +59,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             {
                 this.Driver.GetElement(this.fileLink.Evaluate(fileName)).Click();
                 FilesHelper.WaitForFileOfGivenName(this.Driver, fileName, this.DriverContext.DownloadFolder);
-                FilesHelper.RenameFile(this.Driver, BaseConfiguration.ShortTimeout, fileName, newName, this.DriverContext.DownloadFolder, FileType.Csv);
+                FilesHelper.RenameFile(this.Driver, fileName, newName, this.DriverContext.DownloadFolder, FileType.Csv);
             }
             else
             {
@@ -78,7 +78,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
                 this.Driver.GetElement(this.fileLink.Evaluate("some-file.txt")).Click();
                 FilesHelper.WaitForFileOfGivenType(FileType.Txt, this.Driver, filesNumber, this.DriverContext.DownloadFolder);
                 FileInfo file = FilesHelper.GetLastFile(this.DriverContext.DownloadFolder, FileType.Txt);
-                FilesHelper.RenameFile(this.Driver, BaseConfiguration.ShortTimeout, file.Name, newName, this.DriverContext.DownloadFolder, FileType.Txt);
+                FilesHelper.RenameFile(this.Driver, file.Name, newName, this.DriverContext.DownloadFolder, FileType.Txt);
             }
             else
             {  
