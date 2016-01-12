@@ -28,8 +28,6 @@ namespace Objectivity.Test.Automation.Tests.NUnit
     using System.IO;
     using System.Reflection;
 
-    using global::NUnit.Framework;
-
     using Objectivity.Test.Automation.Common;
 
     /// <summary>

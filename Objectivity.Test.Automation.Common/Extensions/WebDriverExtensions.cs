@@ -238,7 +238,7 @@ namespace Objectivity.Test.Automation.Common.Extensions
 
                 var hoverItem = (ILocatable)element;
                 var locationY = hoverItem.LocationOnScreenOnceScrolledIntoView.Y;
-                js.ExecuteScript(string.Format(CultureInfo.InvariantCulture, "javascript:window.scrollBy(0,{0})", locationY - (height / 2)));
+                js.ExecuteScript(string.Format(CultureInfo.InvariantCulture, "javascript:window.scrollBy(0,{0})", locationY - height / 2));
             }
         }
 

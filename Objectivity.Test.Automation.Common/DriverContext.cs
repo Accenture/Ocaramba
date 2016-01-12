@@ -311,11 +311,13 @@ namespace Objectivity.Test.Automation.Common
 
         private Proxy CurrentProxy()
         {
-            Proxy proxy = new Proxy();
-            proxy.HttpProxy = BaseConfiguration.Proxy;
-            proxy.FtpProxy = BaseConfiguration.Proxy;
-            proxy.SslProxy = BaseConfiguration.Proxy;
-            proxy.SocksProxy = BaseConfiguration.Proxy;
+            Proxy proxy = new Proxy
+                              {
+                                  HttpProxy = BaseConfiguration.Proxy,
+                                  FtpProxy = BaseConfiguration.Proxy,
+                                  SslProxy = BaseConfiguration.Proxy,
+                                  SocksProxy = BaseConfiguration.Proxy
+                              };
             return proxy;
         }
 

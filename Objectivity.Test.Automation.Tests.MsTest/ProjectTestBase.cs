@@ -80,7 +80,7 @@ namespace Objectivity.Test.Automation.Tests.MsTest
         [TestInitialize]
         public void BeforeTest()
         {
-            DriverContext.CurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            this.DriverContext.CurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
             this.DriverContext.TestTitle = this.TestContext.TestName;
             this.LogTest.LogTestStarting(this.driverContext);
             this.DriverContext.Start();
