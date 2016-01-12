@@ -18,9 +18,10 @@ It provides following features:
 - Measures average and 90 Percentile action times
 - DataDriven for NUnit and MSTest with examples 
 - Possibility to take full desktop screen shot
-- Logging (including selenium events)
+- Logging with NLog
 - Files downloading (Firefox, Chrome)
 - Ready for parallel tests execution
+- Possibility to send SQL or MDX queries
 
 Projects examples of using Test Framework :
 - Objectivity.Test.Automation.Tests.Features for Specflow

@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="BaseConfiguration.cs" />
     <Compile Include="DriverContext.cs" />
+    <Compile Include="Helpers\MdxHelper.cs" />
     <Compile Include="Logger\MyEventFiringWebDriver.cs" />
     <Compile Include="Logger\TestLogger.cs" />
     <Compile Include="TestBase.cs" />
@@ -95,6 +96,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.AnalysisServices.AdomdClient, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AnalysisServices.AdomdClient.12.0.2000.8\lib\net40\Microsoft.AnalysisServices.AdomdClient.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <HintPath>..\packages\NLog.4.1.2\lib\net40\NLog.dll</HintPath>
       <Private>True</Private>
