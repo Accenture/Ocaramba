@@ -24,7 +24,9 @@ SOFTWARE.
 
 namespace Objectivity.Test.Automation.Common.Helpers
 {
-
+    /// <summary>
+    /// Files type
+    /// </summary>
     public enum FileType
     {
         /// <summary>
@@ -96,17 +98,15 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// Hyper text markup language 
         /// </summary>
         Html = 13,
-		
-		/// <summary>
+
+        /// <summary>
         /// Microsoft PowerPoint Presentation
         /// </summary>
         Ppt = 14,
-		
-		/// <summary>
+
+        /// <summary>
         /// Office Open XML Presentation
         /// </summary>
         Pptx = 15
     }
-
-
 }

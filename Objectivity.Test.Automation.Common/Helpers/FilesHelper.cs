@@ -62,17 +62,17 @@ namespace Objectivity.Test.Automation.Common.Helpers
             {
                 case FileType.Pdf:
                     return ".pdf";
-                case FileType.Excel:
+                case FileType.Xls:
                     return ".xls";
                 case FileType.Csv:
                     return ".csv";
                 case FileType.Txt:
                     return ".txt";
-                case FileType.Word:
+                case FileType.Doc:
                     return ".doc";
-                case FileType.OoXml:
+                case FileType.Xlsx:
                     return ".xlsx";
-                case FileType.OoDoc:
+                case FileType.Docx:
                     return ".docx";
                 case FileType.Gif:
                     return ".gif";
@@ -86,7 +86,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
                     return ".xml";
                 case FileType.Html:
                     return ".html";
-                case FileType.PowerPoint:
+                case FileType.Ppt:
                     return ".ppt";
                 case FileType.Pptx:
                     return ".pptx";
