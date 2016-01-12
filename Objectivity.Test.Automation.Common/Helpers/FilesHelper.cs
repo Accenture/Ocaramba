@@ -323,7 +323,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
         }
 
         /// <summary>
-        /// Rename the file.
+        /// Rename the file and check if file was renamed with given timeout.
         /// </summary>
         /// <param name="driver">The driver.</param>
         /// <param name="waitTime">Timeout for checking if file was removed</param>
@@ -357,15 +357,14 @@ namespace Objectivity.Test.Automation.Common.Helpers
         }
 
         /// <summary>
-        /// Rename the file of given type.
+        /// Rename the file of given type and check if file was renamed with ShortTimeout.
         /// </summary>
         /// <param name="driver">The driver.</param>
-        /// <param name="waitTime">Timeout for checking if file was removed</param>
         /// <param name="oldName">The old name.</param>
         /// <param name="newName">The new name.</param>
         /// <param name="subFolder">The subFolder.</param>
         /// <param name="type">The type of file.</param>
-        public static void RenameFile(IWebDriver driver, double waitTime, string oldName, string newName, string subFolder, FileType type)
+        public static void RenameFile(IWebDriver driver, string oldName, string newName, string subFolder, FileType type)
         {
             newName = newName + ReturnFileExtension(type);
             RenameFile(driver, BaseConfiguration.ShortTimeout, oldName, newName, subFolder);
