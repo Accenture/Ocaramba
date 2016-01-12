@@ -111,7 +111,7 @@ namespace Objectivity.Test.Automation.Common
         {
             get
             {
-                return this.GetFolder(BaseConfiguration.ScreenShotFolder);
+                return GetFolder(BaseConfiguration.ScreenShotFolder, this.CurrentDirectory);
             }
         }
 
@@ -122,7 +122,7 @@ namespace Objectivity.Test.Automation.Common
         {
             get
             {
-                return this.GetFolder(BaseConfiguration.DownloadFolder);
+                return GetFolder(BaseConfiguration.DownloadFolder, this.CurrentDirectory);
             }
         }
 
@@ -133,7 +133,7 @@ namespace Objectivity.Test.Automation.Common
         {
             get
             {
-                return this.GetFolder(BaseConfiguration.PageSourceFolder);
+                return GetFolder(BaseConfiguration.PageSourceFolder, this.CurrentDirectory);
             }
         }
 
@@ -434,20 +434,21 @@ namespace Objectivity.Test.Automation.Common
         /// Gets the folder from app.config as value of given key.
         /// </summary>
         /// <param name="appConfigValue">The application configuration value.</param>
+        /// <param name="currentFolder">Directory where assembly files are located</param>
         /// <returns></returns>
-        private string GetFolder(string appConfigValue)
+        public static string GetFolder(string appConfigValue, string currentFolder)
         {
             string folder;
 
             if (string.IsNullOrEmpty(appConfigValue))
             {
-                folder = this.CurrentDirectory;
+                folder = currentFolder;
             }
             else
             {
                 if (BaseConfiguration.UseCurrentDirectory)
                 {
-                    folder = this.CurrentDirectory + appConfigValue;
+                    folder = currentFolder + appConfigValue;
                 }
                 else
                 {

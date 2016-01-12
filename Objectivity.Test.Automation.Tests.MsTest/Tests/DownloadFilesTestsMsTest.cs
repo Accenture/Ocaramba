@@ -40,7 +40,7 @@ namespace Objectivity.Test.Automation.Tests.MsTest.Tests
             new InternetPage(this.DriverContext)
                 .OpenHomePage()
                 .GoToFileDownloader()
-                .SaveFile("some-file.txt");
+                .SaveFile("new-file-name");
         }
 
         [TestMethod]
@@ -49,7 +49,7 @@ namespace Objectivity.Test.Automation.Tests.MsTest.Tests
             new InternetPage(this.DriverContext)
                 .OpenHomePage()
                 .GoToFileDownloader()
-                .SaveFile();
+                .SaveAnyFile();
         }
     }
 }

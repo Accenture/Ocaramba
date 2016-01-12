@@ -72,12 +72,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataDriven\CompareFiles.cs" />
+    <Compile Include="ProjectBaseConfiguration.cs" />
     <Compile Include="DataDriven\TestData.cs" />
     <Compile Include="Helpers\DataDrivenHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProjectTestBase.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Tests\CompareFilesTests.cs" />
     <Compile Include="Tests\DownloadFilesTestsNUnit.cs" />
     <Compile Include="Tests\HerokuappTestsNUnit.cs" />
     <Compile Include="Tests\JavaScriptAlertsTestsNUnit.cs" />

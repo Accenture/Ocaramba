@@ -52,15 +52,15 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             this.Driver.IsElementPresent(this.downloadPageHeader, BaseConfiguration.ShortTimeout);
         }
 
-        public SecureFileDownloadPage SaveFile(string fileName)
+        public SecureFileDownloadPage SaveFile(string fileName, string newName)
         {
             if (BaseConfiguration.TestBrowser == DriverContext.BrowserType.Firefox
                 || BaseConfiguration.TestBrowser == DriverContext.BrowserType.Chrome)
             {
-            this.Driver.GetElement(this.fileLink.Evaluate("some-file.txt")).Click();
-            FilesHelper.WaitForFile(this.Driver, 5, fileName, this.DriverContext.DownloadFolder);
-            FileInfo file = FilesHelper.GetLastFile(this.DriverContext.DownloadFolder, FilesHelper.FileType.Txt);
-            FilesHelper.RenameFile(file.Name, "secure_file", this.DriverContext.DownloadFolder, FilesHelper.FileType.Txt);
+            this.Driver.GetElement(this.fileLink.Evaluate(fileName)).Click();
+            FilesHelper.WaitForFileOfGivenName(this.Driver, 5, fileName, this.DriverContext.DownloadFolder);
+            FileInfo file = FilesHelper.GetLastFile(this.DriverContext.DownloadFolder, FileType.Txt);
+            FilesHelper.RenameFile(this.Driver, BaseConfiguration.ShortTimeout, file.Name, newName, this.DriverContext.DownloadFolder, FileType.Csv);
             
             }
             else

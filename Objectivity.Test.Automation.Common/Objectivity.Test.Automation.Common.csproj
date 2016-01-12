@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="BaseConfiguration.cs" />
     <Compile Include="DriverContext.cs" />
+    <Compile Include="Helpers\FileType.cs" />
     <Compile Include="Logger\MyEventFiringWebDriver.cs" />
     <Compile Include="Logger\TestLogger.cs" />
     <Compile Include="TestBase.cs" />

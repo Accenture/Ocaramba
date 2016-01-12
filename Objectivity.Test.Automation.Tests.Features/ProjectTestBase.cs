@@ -101,7 +101,7 @@ namespace Objectivity.Test.Automation.Tests.Features
         [Before]
         public void BeforeTest()
         {
-            this.DriverContext.CurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            DriverContext.CurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
             this.DriverContext.TestTitle = this.scenarioContext.ScenarioInfo.Title;
             this.LogTest.LogTestStarting(this.driverContext);
             this.DriverContext.Start();

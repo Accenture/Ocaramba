@@ -41,16 +41,25 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
             new InternetPage(this.DriverContext)
                 .OpenHomePage()
                 .GoToFileDownloader()
-                .SaveFile("some-file.txt");
+                .SaveFile("some-file.txt", "name_of_file_branch");
         }
 
         [Test]
-        public void DownloadFileByCountTest()
+        public void DownloadGivenTypeFileByCountTest()
         {
             new InternetPage(this.DriverContext)
                 .OpenHomePage()
                 .GoToFileDownloader()
-                .SaveFile();
+                .SaveFile("name_of_file_live");
+        }
+
+        [Test]
+        public void DownloadAnyFileByCountTest()
+        {
+            new InternetPage(this.DriverContext)
+                .OpenHomePage()
+                .GoToFileDownloader()
+                .SaveFile("name_of_file_branch");
         }
 
         [Test]
@@ -59,7 +68,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
             new InternetPage(this.DriverContext)
                 .OpenHomePageWithUserCredentials()
                 .GoToSecureFileDownloadPage()
-                .SaveFile("some-file.txt");
+                .SaveFile("some-file.txt", "name_of_file_live");
         }
     }
 }
