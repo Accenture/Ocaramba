@@ -52,13 +52,14 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             this.Driver.IsElementPresent(this.downloadPageHeader, BaseConfiguration.ShortTimeout);
         }
 
-        public DownloadPage SaveFile(string fileName)
+        public DownloadPage SaveFile(string fileName, string newName)
         {
             if (BaseConfiguration.TestBrowser == DriverContext.BrowserType.Firefox
                 || BaseConfiguration.TestBrowser == DriverContext.BrowserType.Chrome)
             {
-                this.Driver.GetElement(this.fileLink.Evaluate("some-file.txt")).Click();
-                FilesHelper.WaitForFile(this.Driver, fileName, this.DriverContext.DownloadFolder);
+                this.Driver.GetElement(this.fileLink.Evaluate(fileName)).Click();
+                FilesHelper.WaitForFileOfGivenName(this.Driver, fileName, this.DriverContext.DownloadFolder);
+                FilesHelper.RenameFile(this.Driver, fileName, newName, this.DriverContext.DownloadFolder, FileType.Csv);
             }
             else
             {
@@ -68,19 +69,38 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             return this;
         }
 
-        public DownloadPage SaveFile()
+        public DownloadPage SaveFile(string newName)
         {
            if (BaseConfiguration.TestBrowser == DriverContext.BrowserType.Firefox
                 || BaseConfiguration.TestBrowser == DriverContext.BrowserType.Chrome)
             {
-                var filesNumber = FilesHelper.CountFiles(this.DriverContext.DownloadFolder, FilesHelper.FileType.Txt);
+                var filesNumber = FilesHelper.CountFiles(this.DriverContext.DownloadFolder, FileType.Txt);
                 this.Driver.GetElement(this.fileLink.Evaluate("some-file.txt")).Click();
-                FilesHelper.WaitForFile(FilesHelper.FileType.Txt, this.Driver, filesNumber, this.DriverContext.DownloadFolder);
-                FileInfo file = FilesHelper.GetLastFile(this.DriverContext.DownloadFolder, FilesHelper.FileType.Txt);
-                FilesHelper.RenameFile(file.Name, "new_name_of_file", this.DriverContext.DownloadFolder, FilesHelper.FileType.Txt);
+                FilesHelper.WaitForFileOfGivenType(FileType.Txt, this.Driver, filesNumber, this.DriverContext.DownloadFolder);
+                FileInfo file = FilesHelper.GetLastFile(this.DriverContext.DownloadFolder, FileType.Txt);
+                FilesHelper.RenameFile(this.Driver, file.Name, newName, this.DriverContext.DownloadFolder, FileType.Txt);
             }
             else
             {  
+                Logger.Info(CultureInfo.CurrentCulture, "Downloading files in browser {0} is not supported", BaseConfiguration.TestBrowser);
+            }
+
+            return this;
+        }
+
+        public DownloadPage SaveAnyFile()
+        {
+            if (BaseConfiguration.TestBrowser == DriverContext.BrowserType.Firefox
+                 || BaseConfiguration.TestBrowser == DriverContext.BrowserType.Chrome)
+            {
+                var filesNumber = FilesHelper.CountFiles(this.DriverContext.DownloadFolder);
+                this.Driver.GetElement(this.fileLink.Evaluate("some-file.txt")).Click();
+                FilesHelper.WaitForFile(this.Driver, filesNumber, this.DriverContext.DownloadFolder);
+                FileInfo file = FilesHelper.GetLastFile(this.DriverContext.DownloadFolder);
+                FilesHelper.RenameFile(this.Driver, BaseConfiguration.ShortTimeout,file.Name, "name_of_file_branch.txt", this.DriverContext.DownloadFolder);
+            }
+            else
+            {
                 Logger.Info(CultureInfo.CurrentCulture, "Downloading files in browser {0} is not supported", BaseConfiguration.TestBrowser);
             }
 

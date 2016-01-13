@@ -136,20 +136,6 @@ namespace Objectivity.Test.Automation.Common
         }
 
         /// <summary>
-        /// Gets the data driven file.
-        /// </summary>
-        /// <value>
-        /// The data driven file.
-        /// </value>
-        public static string DataDrivenFile
-        {
-            get
-            {
-                return ConfigurationManager.AppSettings["DataDrivenFile"];
-            }
-        }
-
-        /// <summary>
         /// Enable full desktop screen shot. False by default.
         /// </summary>
         public static bool FullDesktopScreenShotEnabled
@@ -237,7 +223,7 @@ namespace Objectivity.Test.Automation.Common
         }
 
         /// <summary>
-        /// Gets the Download Folder path
+        /// Gets the download folder key value
         /// </summary>
         public static string DownloadFolder
         {
@@ -245,7 +231,7 @@ namespace Objectivity.Test.Automation.Common
         }
 
         /// <summary>
-        /// Gets the Screen Shot Folder path
+        /// Gets the screen shot folder key value
         /// </summary>
         public static string ScreenShotFolder
         {
@@ -253,7 +239,7 @@ namespace Objectivity.Test.Automation.Common
         }
 
         /// <summary>
-        /// Gets the Page Source Folder path
+        /// Gets the page source folder key value
         /// </summary>
         public static string PageSourceFolder
         {

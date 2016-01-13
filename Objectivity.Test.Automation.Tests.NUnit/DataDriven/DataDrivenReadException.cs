@@ -22,34 +22,22 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-namespace Objectivity.Test.Automation.Tests.MsTest.Tests
+namespace Objectivity.Test.Automation.Tests.NUnit.DataDriven
 {
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-    using Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet;
+    using System;
+    using System.Runtime.Serialization;
 
     /// <summary>
-    /// Tests to test framework
+    /// Exception to throw when problem with setting the test case name from parameters
     /// </summary>
-    [TestClass]
-    public class DownloadFilesTestsMsTest : ProjectTestBase
+    public class DataDrivenReadException : Exception
     {
-        [TestMethod]
-        public void DownloadFileByNameTest()
-        {
-            new InternetPage(this.DriverContext)
-                .OpenHomePage()
-                .GoToFileDownloader()
-                .SaveFile("new-file-name");
-        }
+        public DataDrivenReadException() { }
 
-        [TestMethod]
-        public void DownloadFileByCountTest()
-        {
-            new InternetPage(this.DriverContext)
-                .OpenHomePage()
-                .GoToFileDownloader()
-                .SaveAnyFile();
-        }
+        public DataDrivenReadException(string message) : base(message) { }
+
+        public DataDrivenReadException(string message, Exception innerException) : base(message, innerException) { }
+
+        protected DataDrivenReadException(SerializationInfo info, StreamingContext context) : base(info, context) { }
     }
 }

@@ -30,7 +30,6 @@ namespace Objectivity.Test.Automation.Common.Helpers
     using System.Drawing.Imaging;
     using System.Globalization;
     using System.IO;
-    using System.Reflection;
     using System.Windows.Forms;
 
     using NLog;
@@ -80,7 +79,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
         public static void Save(Bitmap bitmap, ImageFormat format, string folder, string title)
         {
             var fileName = string.Format(CultureInfo.CurrentCulture, "{0}_{1}.png", title, DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss-fff", CultureInfo.CurrentCulture));
-            var filePath = Path.Combine(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), folder, fileName);
+             var filePath = Path.Combine(folder, fileName);
 
             if (bitmap == null)
             {

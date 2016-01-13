@@ -111,7 +111,7 @@ namespace Objectivity.Test.Automation.Common
         {
             get
             {
-                return this.GetFolder(BaseConfiguration.ScreenShotFolder);
+                return FilesHelper.GetFolder(BaseConfiguration.ScreenShotFolder, this.CurrentDirectory);
             }
         }
 
@@ -122,7 +122,7 @@ namespace Objectivity.Test.Automation.Common
         {
             get
             {
-                return this.GetFolder(BaseConfiguration.DownloadFolder);
+                return FilesHelper.GetFolder(BaseConfiguration.DownloadFolder, this.CurrentDirectory);
             }
         }
 
@@ -133,7 +133,7 @@ namespace Objectivity.Test.Automation.Common
         {
             get
             {
-                return this.GetFolder(BaseConfiguration.PageSourceFolder);
+                return FilesHelper.GetFolder(BaseConfiguration.PageSourceFolder, this.CurrentDirectory);
             }
         }
 
@@ -311,11 +311,13 @@ namespace Objectivity.Test.Automation.Common
 
         private Proxy CurrentProxy()
         {
-            Proxy proxy = new Proxy();
-            proxy.HttpProxy = BaseConfiguration.Proxy;
-            proxy.FtpProxy = BaseConfiguration.Proxy;
-            proxy.SslProxy = BaseConfiguration.Proxy;
-            proxy.SocksProxy = BaseConfiguration.Proxy;
+            Proxy proxy = new Proxy
+                              {
+                                  HttpProxy = BaseConfiguration.Proxy,
+                                  FtpProxy = BaseConfiguration.Proxy,
+                                  SslProxy = BaseConfiguration.Proxy,
+                                  SocksProxy = BaseConfiguration.Proxy
+                              };
             return proxy;
         }
 
@@ -428,40 +430,6 @@ namespace Objectivity.Test.Automation.Common
             {
                 this.SaveScreenshot(new ErrorDetail(this.TakeScreenshot(), DateTime.Now, null), this.ScreenShotFolder, this.TestTitle);
             }
-        }
-
-        /// <summary>
-        /// Gets the folder from app.config as value of given key.
-        /// </summary>
-        /// <param name="appConfigValue">The application configuration value.</param>
-        /// <returns></returns>
-        private string GetFolder(string appConfigValue)
-        {
-            string folder;
-
-            if (string.IsNullOrEmpty(appConfigValue))
-            {
-                folder = this.CurrentDirectory;
-            }
-            else
-            {
-                if (BaseConfiguration.UseCurrentDirectory)
-                {
-                    folder = this.CurrentDirectory + appConfigValue;
-                }
-                else
-                {
-                    folder = appConfigValue;
-                }
-
-                if (!Directory.Exists(folder))
-                {
-                    Directory.CreateDirectory(folder);
-                }
-            }
-
-            Logger.Trace(CultureInfo.CurrentCulture, "Folder '{0}'", folder);
-            return folder;
         }
     }
 }

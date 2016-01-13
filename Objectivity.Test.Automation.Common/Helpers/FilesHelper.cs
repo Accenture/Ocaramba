@@ -52,42 +52,6 @@ namespace Objectivity.Test.Automation.Common.Helpers
         public static readonly char Separator = Path.DirectorySeparatorChar;
 
         /// <summary>
-        /// File type
-        /// </summary>
-        public enum FileType
-        {
-            /// <summary>
-            /// File type not implemented
-            /// </summary>
-            None = 0,
-
-            /// <summary>
-            /// Portable document format files
-            /// </summary>
-            Pdf = 1,
-
-            /// <summary>
-            /// Excel files
-            /// </summary>
-            Excel = 2,
-
-            /// <summary>
-            /// Comma-separated values files
-            /// </summary>
-            Csv = 3,
-
-            /// <summary>
-            /// Text files
-            /// </summary>
-            Txt = 4,
-
-            /// <summary>
-            /// Open office XML files
-            /// </summary>
-            OoXml = 5
-        }
-
-        /// <summary>
         /// Returns the file extension.
         /// </summary>
         /// <param name="type">The type.</param>
@@ -98,17 +62,48 @@ namespace Objectivity.Test.Automation.Common.Helpers
             {
                 case FileType.Pdf:
                     return ".pdf";
-                case FileType.Excel:
+                case FileType.Xls:
                     return ".xls";
                 case FileType.Csv:
                     return ".csv";
                 case FileType.Txt:
                     return ".txt";
-                case FileType.OoXml:
+                case FileType.Doc:
+                    return ".doc";
+                case FileType.Xlsx:
                     return ".xlsx";
+                case FileType.Docx:
+                    return ".docx";
+                case FileType.Gif:
+                    return ".gif";
+                case FileType.Jpg:
+                    return ".jpg";
+                case FileType.Bmp:
+                    return ".bmp";
+                case FileType.Png:
+                    return ".png";
+                case FileType.Xml:
+                    return ".xml";
+                case FileType.Html:
+                    return ".html";
+                case FileType.Ppt:
+                    return ".ppt";
+                case FileType.Pptx:
+                    return ".pptx";
                 default:
                     return "none";
             }
+        }
+
+        /// <summary>
+        /// Gets the files of given type.
+        /// </summary>
+        /// <param name="folder">The folder.</param>
+        /// <param name="type">The type.</param>
+        /// <returns>Collection of files</returns>
+        public static ICollection<FileInfo> GetFilesOfGivenType(string folder, FileType type)
+        {
+            return GetFilesOfGivenType(folder, type, string.Empty);
         }
 
         /// <summary>
@@ -129,6 +124,32 @@ namespace Objectivity.Test.Automation.Common.Helpers
         }
 
         /// <summary>
+        /// Gets all files from folder, use postfixFilesName in search pattern.
+        /// </summary>
+        /// <param name="folder">The folder.</param>
+        /// <param name="postfixFilesName">Postfix name of files for search pattern.</param>
+        /// <returns>Collection of files</returns>
+        public static ICollection<FileInfo> GetAllFiles(string folder, string postfixFilesName)
+        {
+            Logger.Debug("Get all files from '{0}', postfixFilesName '{1}'", folder, postfixFilesName);
+            ICollection<FileInfo> files =
+                new DirectoryInfo(folder)
+                    .GetFiles("*" + postfixFilesName).OrderBy(f => f.Name).ToList();
+
+            return files;
+        }
+
+        /// <summary>
+        /// Gets all files from folder, use postfixFilesName in search pattern.
+        /// </summary>
+        /// <param name="folder">The folder.</param>
+        /// <returns>Collection of files</returns>
+        public static ICollection<FileInfo> GetAllFiles(string folder)
+        {
+            return GetAllFiles(folder, string.Empty);
+        }
+
+        /// <summary>
         /// Get file by its name in given folder
         /// </summary>
         /// <param name="folder">The folder</param>
@@ -143,18 +164,6 @@ namespace Objectivity.Test.Automation.Common.Helpers
 
             return file;
         }
-
-        /// <summary>
-        /// Gets the files of given type.
-        /// </summary>
-        /// <param name="folder">The folder.</param>
-        /// <param name="type">The type.</param>
-        /// <returns>Collection of files</returns>
-        public static ICollection<FileInfo> GetFilesOfGivenType(string folder, FileType type)
-         {
-             string environment = string.Empty;
-             return GetFilesOfGivenType(folder, type, environment);
-         }
 
          /// <summary>
          /// Counts the files of given type.
@@ -171,6 +180,19 @@ namespace Objectivity.Test.Automation.Common.Helpers
         }
 
         /// <summary>
+        /// Counts the files.
+        /// </summary>
+        /// <param name="folder">The folder.</param>
+        /// <returns>Number of files in subfolder</returns>
+        public static int CountFiles(string folder)
+        {
+            Logger.Debug(CultureInfo.CurrentCulture, "Count all Files in '{0}'", folder);
+            var fileNumber = GetAllFiles(folder).Count;
+            Logger.Debug(CultureInfo.CurrentCulture, "Number of files in '{0}': {1}", folder, fileNumber);
+            return fileNumber;
+        }
+
+        /// <summary>
         /// Gets the last file of given type.
         /// </summary>
         /// <param name="folder">The folder.</param>
@@ -178,24 +200,38 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// <returns>Last file of given type</returns>
         public static FileInfo GetLastFile(string folder, FileType type)
         {
-            Logger.Debug("Get Last File");
-            var lastFile = new DirectoryInfo(folder).GetFiles()
-                .Where(f => f.Extension == ReturnFileExtension(type).Replace("?", string.Empty))
-                .OrderByDescending(f => f.CreationTime)
-                .First();
+            Logger.Debug(CultureInfo.CurrentCulture, "Get Last File of given type {0}", type);
+            var lastFile =
+                new DirectoryInfo(folder).GetFiles()
+                    .Where(f => f.Extension == ReturnFileExtension(type))
+                    .OrderByDescending(f => f.LastWriteTime);
             Logger.Trace("Last File: {0}", lastFile);
-            return lastFile;
+            return lastFile.First();
         }
 
         /// <summary>
-        /// Waits for file for given timeout till number of files increase in sub folder.
+        /// Gets the last file.
+        /// </summary>
+        /// <param name="folder">The folder.</param>
+        /// <returns>Last file of given type</returns>
+        public static FileInfo GetLastFile(string folder)
+        {
+            Logger.Debug("Get Last File");
+            var lastFile = new DirectoryInfo(folder).GetFiles()
+                .OrderByDescending(f => f.LastWriteTime);
+            Logger.Trace("Last File: {0}", lastFile);
+            return lastFile.First();
+        }
+
+        /// <summary>
+        /// Waits for file of given type for given timeout till number of files increase in sub folder.
         /// </summary>
         /// <param name="type">The type of file.</param>
         /// <param name="driver">The driver.</param>
         /// <param name="waitTime">Wait timeout</param>
         /// <param name="filesNumber">The initial files number.</param>
         /// <param name="folder">The folder.</param>
-        public static void WaitForFile(FileType type, IWebDriver driver, double waitTime, int filesNumber, string folder)
+        public static void WaitForFileOfGivenType(FileType type, IWebDriver driver, double waitTime, int filesNumber, string folder)
         {
             Logger.Debug("Wait for file: {0}", type);
             IWait<IWebDriver> wait = new WebDriverWait(
@@ -210,15 +246,15 @@ namespace Objectivity.Test.Automation.Common.Helpers
         }
 
         /// <summary>
-        /// Waits for file for LongTimeout till number of files increase in sub folder.
+        /// Waits for file of given type for LongTimeout till number of files increase in sub folder.
         /// </summary>
         /// <param name="type">The type.</param>
         /// <param name="driver">The driver.</param>
         /// <param name="filesNumber">The files number.</param>
         /// <param name="folder">The folder.</param>
-        public static void WaitForFile(FileType type, IWebDriver driver, int filesNumber, string folder)
+        public static void WaitForFileOfGivenType(FileType type, IWebDriver driver, int filesNumber, string folder)
         {
-            WaitForFile(type, driver, BaseConfiguration.LongTimeout, filesNumber, folder);
+            WaitForFileOfGivenType(type, driver, BaseConfiguration.LongTimeout, filesNumber, folder);
         }
 
         /// <summary>
@@ -228,7 +264,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// <param name="waitTime">Wait timeout</param>
         /// <param name="filesName">Name of the files.</param>
         /// <param name="folder">The folder.</param>
-        public static void WaitForFile(IWebDriver driver, double waitTime, string filesName, string folder)
+        public static void WaitForFileOfGivenName(IWebDriver driver, double waitTime, string filesName, string folder)
         {
             Logger.Debug(CultureInfo.CurrentCulture, "Wait for file: {0}", filesName);
             IWait<IWebDriver> wait = new WebDriverWait(
@@ -244,27 +280,58 @@ namespace Objectivity.Test.Automation.Common.Helpers
         }
 
         /// <summary>
-        /// Waits for file with given name with LongTimeout
+        /// Waits for file of given name with LongTimeout
         /// </summary>
         /// <param name="driver">The driver.</param>
         /// <param name="filesName">Name of the files.</param>
         /// <param name="folder">The folder.</param>
-        public static void WaitForFile(IWebDriver driver, string filesName, string folder)
+        public static void WaitForFileOfGivenName(IWebDriver driver, string filesName, string folder)
         {
-            WaitForFile(driver, BaseConfiguration.LongTimeout, filesName, folder);
+            WaitForFileOfGivenName(driver, BaseConfiguration.LongTimeout, filesName, folder);
         }
 
         /// <summary>
-        /// Rename the file.
+        /// Waits for file for given timeout till number of files increase in sub folder.
         /// </summary>
+        /// <param name="driver">The driver.</param>
+        /// <param name="waitTime">Wait timeout</param>
+        /// <param name="filesNumber">The initial files number.</param>
+        /// <param name="folder">The folder.</param>
+        public static void WaitForFile(IWebDriver driver, double waitTime, int filesNumber, string folder)
+        {
+            Logger.Debug("Wait for file");
+            IWait<IWebDriver> wait = new WebDriverWait(
+                    driver,
+                    TimeSpan.FromSeconds(waitTime));
+
+            wait.Message = string.Format(CultureInfo.CurrentCulture, "Waiting for file number to increase in {0}", folder);
+            wait.Until(x => CountFiles(folder) > filesNumber);
+            Logger.Debug("Number of files increased, checking if size of last file > 0 bytes");
+            wait.Message = "Checking if size of last file > 0 bytes";
+            wait.Until(x => GetLastFile(folder).Length > 0);
+        }
+
+        /// <summary>
+        /// Waits for file with LongTimeout till number of files increase in sub folder.
+        /// </summary>
+        /// <param name="driver">The driver.</param>
+        /// <param name="filesNumber">The initial files number.</param>
+        /// <param name="folder">The folder.</param>
+        public static void WaitForFile(IWebDriver driver, int filesNumber, string folder)
+        {
+            WaitForFile(driver, BaseConfiguration.LongTimeout, filesNumber, folder);
+        }
+
+        /// <summary>
+        /// Rename the file and check if file was renamed with given timeout.
+        /// </summary>
+        /// <param name="driver">The driver.</param>
+        /// <param name="waitTime">Timeout for checking if file was removed</param>
         /// <param name="oldName">The old name.</param>
         /// <param name="newName">The new name.</param>
         /// <param name="subFolder">The subFolder.</param>
-        /// <param name="type">The type of file.</param>
-        public static void RenameFile(string oldName, string newName, string subFolder, FileType type)
+        public static void RenameFile(IWebDriver driver, double waitTime, string oldName, string newName, string subFolder)
         {
-            newName = newName + ReturnFileExtension(type);
-
             Logger.Debug(CultureInfo.CurrentCulture, "new file name: {0}", newName);
             if (File.Exists(newName))
             {
@@ -280,7 +347,62 @@ namespace Objectivity.Test.Automation.Common.Helpers
                                              Arguments = command
                                          };
             Thread.Sleep(1000);
+            IWait<IWebDriver> wait = new WebDriverWait(
+                    driver,
+                    TimeSpan.FromSeconds(waitTime));
+
             Process.Start(cmdsi);
+            wait.Message = string.Format(CultureInfo.CurrentCulture, "Waiting till file will be renamed {0}", subFolder);
+            wait.Until(x => File.Exists(subFolder + Separator + newName));     
+        }
+
+        /// <summary>
+        /// Rename the file of given type and check if file was renamed with ShortTimeout.
+        /// </summary>
+        /// <param name="driver">The driver.</param>
+        /// <param name="oldName">The old name.</param>
+        /// <param name="newName">The new name.</param>
+        /// <param name="subFolder">The subFolder.</param>
+        /// <param name="type">The type of file.</param>
+        public static void RenameFile(IWebDriver driver, string oldName, string newName, string subFolder, FileType type)
+        {
+            newName = newName + ReturnFileExtension(type);
+            RenameFile(driver, BaseConfiguration.ShortTimeout, oldName, newName, subFolder);
+        }
+
+        /// <summary>
+        /// Gets the folder from app.config as value of given key.
+        /// </summary>
+        /// <param name="appConfigValue">The application configuration value.</param>
+        /// <param name="currentFolder">Directory where assembly files are located</param>
+        /// <returns></returns>
+        public static string GetFolder(string appConfigValue, string currentFolder)
+        {
+            string folder;
+
+            if (string.IsNullOrEmpty(appConfigValue))
+            {
+                folder = currentFolder;
+            }
+            else
+            {
+                if (BaseConfiguration.UseCurrentDirectory)
+                {
+                    folder = currentFolder + appConfigValue;
+                }
+                else
+                {
+                    folder = appConfigValue;
+                }
+
+                if (!Directory.Exists(folder))
+                {
+                    Directory.CreateDirectory(folder);
+                }
+            }
+
+            Logger.Trace(CultureInfo.CurrentCulture, "Folder '{0}'", folder);
+            return folder;
         }
     }
 }
