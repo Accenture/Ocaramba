@@ -26,8 +26,6 @@ namespace Objectivity.Test.Automation.Tests.NUnit.DataDriven
 {
     using System.Collections;
 
-    using Objectivity.Test.Automation.Tests.NUnit.Helpers;
-
     /// <summary>
     /// DataDriven methods for NUnit test framework
     /// </summary>

@@ -22,7 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-namespace Objectivity.Test.Automation.Tests.NUnit.Helpers
+namespace Objectivity.Test.Automation.Tests.NUnit.DataDriven
 {
     using System;
     using System.Collections.Generic;
