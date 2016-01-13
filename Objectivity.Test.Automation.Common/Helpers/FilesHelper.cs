@@ -204,9 +204,10 @@ namespace Objectivity.Test.Automation.Common.Helpers
             var lastFile =
                 new DirectoryInfo(folder).GetFiles()
                     .Where(f => f.Extension == ReturnFileExtension(type))
-                    .OrderByDescending(f => f.LastWriteTime);
+                    .OrderByDescending(f => f.LastWriteTime)
+                    .First();
             Logger.Trace("Last File: {0}", lastFile);
-            return lastFile.First();
+            return lastFile;
         }
 
         /// <summary>
@@ -218,9 +219,10 @@ namespace Objectivity.Test.Automation.Common.Helpers
         {
             Logger.Debug("Get Last File");
             var lastFile = new DirectoryInfo(folder).GetFiles()
-                .OrderByDescending(f => f.LastWriteTime);
+                .OrderByDescending(f => f.LastWriteTime)
+                .First();
             Logger.Trace("Last File: {0}", lastFile);
-            return lastFile.First();
+            return lastFile;
         }
 
         /// <summary>
