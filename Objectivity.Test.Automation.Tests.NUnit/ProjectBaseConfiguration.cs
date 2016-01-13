@@ -29,6 +29,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit
     using System.Reflection;
 
     using Objectivity.Test.Automation.Common;
+    using Objectivity.Test.Automation.Common.Helpers;
 
     /// <summary>
     /// SeleniumConfiguration that consume app.config file
@@ -60,7 +61,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit
         /// </summary>
         public static string DownloadFolderPath
         {
-            get { return DriverContext.GetFolder(ConfigurationManager.AppSettings["DownloadFolder"], CurrentDirectory); }
+            get { return FilesHelper.GetFolder(ConfigurationManager.AppSettings["DownloadFolder"], CurrentDirectory); }
         }
     }
 }

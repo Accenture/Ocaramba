@@ -369,5 +369,40 @@ namespace Objectivity.Test.Automation.Common.Helpers
             newName = newName + ReturnFileExtension(type);
             RenameFile(driver, BaseConfiguration.ShortTimeout, oldName, newName, subFolder);
         }
+
+        /// <summary>
+        /// Gets the folder from app.config as value of given key.
+        /// </summary>
+        /// <param name="appConfigValue">The application configuration value.</param>
+        /// <param name="currentFolder">Directory where assembly files are located</param>
+        /// <returns></returns>
+        public static string GetFolder(string appConfigValue, string currentFolder)
+        {
+            string folder;
+
+            if (string.IsNullOrEmpty(appConfigValue))
+            {
+                folder = currentFolder;
+            }
+            else
+            {
+                if (BaseConfiguration.UseCurrentDirectory)
+                {
+                    folder = currentFolder + appConfigValue;
+                }
+                else
+                {
+                    folder = appConfigValue;
+                }
+
+                if (!Directory.Exists(folder))
+                {
+                    Directory.CreateDirectory(folder);
+                }
+            }
+
+            Logger.Trace(CultureInfo.CurrentCulture, "Folder '{0}'", folder);
+            return folder;
+        }
     }
 }
