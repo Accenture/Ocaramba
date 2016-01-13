@@ -51,10 +51,10 @@ namespace Objectivity.Test.Automation.Tests.NUnit.DataDriven
         }
 
         /// <summary>
-        /// The get files.
+        /// Get files to compare.
         /// </summary>
         /// <returns>
-        /// The <see cref="IEnumerable"/>.
+        /// Pairs of files to compare <see cref="IEnumerable"/>.
         /// </returns>
         private static IEnumerable<TestCaseData> FindFiles(FileType type)
         {
