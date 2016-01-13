@@ -14,6 +14,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit.DataDriven
     using System.Collections;
     using System.Collections.Generic;
     using System.IO;
+    using System.Text.RegularExpressions;
 
     using global::NUnit.Framework;
 
@@ -58,31 +59,22 @@ namespace Objectivity.Test.Automation.Tests.NUnit.DataDriven
         private static IEnumerable<TestCaseData> FindFiles(FileType type)
         {
             Logger.Info("Get Files {0}:", type);
-            var liveFiles = FilesHelper.GetFilesOfGivenType(
-                ProjectBaseConfiguration.DownloadFolderPath,
-                type, 
-                "live");
+            var liveFiles = FilesHelper.GetFilesOfGivenType(ProjectBaseConfiguration.DownloadFolderPath, type, "live");
 
             if (liveFiles != null)
             {
                 foreach (FileInfo liveFile in liveFiles)
                 {
                     Logger.Trace("liveFile: {0}", liveFile);
-                    string fileName =
-                        liveFile.Name.Replace(
-                            "live",
-                            "branch");
-                    string fileNameShort =
-                        liveFile.Name.Replace(
-                            "_" + "live",
-                            string.Empty);
-                    fileNameShort =
-                        fileNameShort.Replace(
-                            "_" + "branch",
-                            string.Empty);
-                    TestCaseData data = new TestCaseData(liveFile.Name, fileName);
-                    data.SetName(fileNameShort.Replace(" ", "_").Replace(".", "_"));
-                    Logger.Trace("file Name Short: {0}", fileNameShort);
+
+                    var fileNameBranch = liveFile.Name.Replace( "live", "branch");
+                    var testCaseName = liveFile.Name.Replace("_" + "live", string.Empty);
+
+                    TestCaseData data = new TestCaseData(liveFile.Name, fileNameBranch);
+                    data.SetName(Regex.Replace(testCaseName, @"[.]+|\s+", "_"));
+ 
+                    Logger.Trace("file Name Short: {0}", testCaseName);
+
                     yield return data;
                 }
             }
