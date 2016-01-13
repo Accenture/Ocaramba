@@ -21,6 +21,7 @@
 	<file src="..\Objectivity.Test.Automation.Tests.NUnit\ProjectTestBase.cs" target="content" />
 	<file src="..\Objectivity.Test.Automation.Tests.NUnit\App.config" target="content" />
 	<file src="..\Objectivity.Test.Automation.Tests.PageObjects\ProjectPageBase.cs" target="content" />
-	<file src="..\Objectivity.Test.Automation.Tests.NUnit\Helpers\DataDrivenHelper.cs" target="content\Support" />
+	<file src="..\Objectivity.Test.Automation.Tests.NUnit\DataDriven\DataDrivenHelper.cs" target="content\DataDriven" />
+	<file src="..\Objectivity.Test.Automation.Tests.NUnit\DataDriven\DataDrivenReadException.cs" target="content\DataDriven" />
   </files>
 </package>

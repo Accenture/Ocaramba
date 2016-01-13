@@ -73,9 +73,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataDriven\CompareFiles.cs" />
+    <Compile Include="DataDriven\DataDrivenReadException.cs" />
     <Compile Include="ProjectBaseConfiguration.cs" />
     <Compile Include="DataDriven\TestData.cs" />
-    <Compile Include="Helpers\DataDrivenHelper.cs" />
+    <Compile Include="DataDriven\DataDrivenHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProjectTestBase.cs">
       <SubType>Code</SubType>

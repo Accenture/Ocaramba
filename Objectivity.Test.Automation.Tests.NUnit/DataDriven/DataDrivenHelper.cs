@@ -65,9 +65,9 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Helpers
                 {
                     testCaseName = TestCaseName(diffParam, testParams, testCaseName);
                 }
-                catch (NullReferenceException e)
+                catch (DataDrivenReadException e)
                 {
-                    throw new NullReferenceException(
+                    throw new DataDrivenReadException(
                         string.Format(
                             " Exception while reading Data Driven file\n test data '{0}' \n test name '{1}' \n searched key '{2}' not found in row \n '{3}'  \n in file '{4}'",
                             testData,
@@ -126,7 +126,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Helpers
                     }
                     else
                     {
-                        throw new NullReferenceException(p);
+                        throw new DataDrivenReadException(p);
                     }
                 }
             }
@@ -134,4 +134,6 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Helpers
         }
 
     }
+
+    
 }
