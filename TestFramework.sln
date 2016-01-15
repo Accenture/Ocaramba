@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Objectivity.Test.Automation
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Objectivity.Test.Automation.Tests.Specflow", "Objectivity.Test.Automation.Tests.Specflow\Objectivity.Test.Automation.Tests.Specflow.csproj", "{B97FEA9E-C131-4850-BC6D-563F60EE41FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Objectivity.Test.Automation.Tests.Xunit", "Objectivity.Test.Automation.Tests.Xunit\Objectivity.Test.Automation.Tests.Xunit.csproj", "{8DAC5471-0F43-42F2-8C98-8C0FF3C58A4B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Objectivity.Test.Automation.Tests.XUnit", "Objectivity.Test.Automation.Tests.Xunit\Objectivity.Test.Automation.Tests.XUnit.csproj", "{8DAC5471-0F43-42F2-8C98-8C0FF3C58A4B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

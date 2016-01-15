@@ -23,11 +23,8 @@ SOFTWARE.
 */
 
 using System;
-using System.Reflection;
-using Xunit.Abstractions;
-using Xunit.Sdk;
 
-namespace Objectivity.Test.Automation.Tests.Xunit
+namespace Objectivity.Test.Automation.Tests.XUnit
 {
     using global::Xunit;
 
