@@ -41,7 +41,7 @@ namespace Objectivity.Test.Automation.Tests.XUnit
         protected DriverContext DriverContext { get; } = new DriverContext();
 
         /// <summary>
-        /// Before the class.
+        /// Before the test.
         /// </summary>
         protected ProjectTestBase()
         {
@@ -49,7 +49,7 @@ namespace Objectivity.Test.Automation.Tests.XUnit
         }
 
         /// <summary>
-        /// After the class.
+        /// After the test.
         /// </summary>
         public void Dispose()
         {

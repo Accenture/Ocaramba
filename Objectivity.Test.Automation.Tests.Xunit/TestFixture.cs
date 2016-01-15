@@ -29,7 +29,8 @@ namespace Objectivity.Test.Automation.Tests.XUnit
     using Common;
 
     /// <summary>
-    /// The base class for all tests
+    /// The test fixture class for all tests
+    /// run once per test suite
     /// </summary>
     public class TestFixture : TestBase, IDisposable
     {
