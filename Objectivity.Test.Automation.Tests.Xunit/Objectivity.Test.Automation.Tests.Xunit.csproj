@@ -65,6 +65,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="TestFixture.cs" />
     <Compile Include="ProjectTestBase.cs" />
     <Compile Include="Tests\ExampleTest2.cs" />
     <Compile Include="Tests\ExampleTest1.cs" />

@@ -23,29 +23,22 @@ SOFTWARE.
 */
 
 using System;
-using Xunit;
 
 namespace Objectivity.Test.Automation.Tests.XUnit
 {
-
     using Common;
 
     /// <summary>
     /// The base class for all tests
     /// </summary>
-    public class ProjectTestBase : IDisposable, IClassFixture<TestFixture>
+    public class TestFixture : TestBase, IDisposable
     {
-        /// <summary>
-        /// The browser manager
-        /// </summary>
-        protected DriverContext DriverContext { get; } = new DriverContext();
-
         /// <summary>
         /// Before the class.
         /// </summary>
-        protected ProjectTestBase()
+        public TestFixture()
         {
-            this.DriverContext.Start();
+            StartPerformanceMeasure();
         }
 
         /// <summary>
@@ -53,7 +46,7 @@ namespace Objectivity.Test.Automation.Tests.XUnit
         /// </summary>
         public void Dispose()
         {
-            this.DriverContext.Stop();
+            StopPerfromanceMeasure();
         }
     }
 }
