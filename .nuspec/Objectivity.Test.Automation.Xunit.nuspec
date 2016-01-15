@@ -18,6 +18,7 @@
     </dependencies> 
   </metadata>
   <files>
+	<file src="..\Objectivity.Test.Automation.Tests.XUnit\TestFixture.cs" target="content" />
 	<file src="..\Objectivity.Test.Automation.Tests.XUnit\ProjectTestBase.cs" target="content" />
 	<file src="..\Objectivity.Test.Automation.Tests.XUnit\App.config" target="content" />
 	<file src="..\Objectivity.Test.Automation.Tests.PageObjects\ProjectPageBase.cs" target="content" />
