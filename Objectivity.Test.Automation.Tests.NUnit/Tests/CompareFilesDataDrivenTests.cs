@@ -17,12 +17,19 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
     using Objectivity.Test.Automation.Tests.NUnit;
     using Objectivity.Test.Automation.Tests.NUnit.DataDriven;
 
-    public class CompareCsv
+    [TestFixture]
+    public class CompareDataDrivenTests
     {
         private readonly Logger logger = LogManager.GetCurrentClassLogger();
 
         private readonly char separator = Path.DirectorySeparatorChar;
 
+        /// <summary>
+        /// Compares the CSV files, find files to compare by DataDriven methods from NUnit.
+        /// Execute that tests after DownloadFilesTestsNUnit TestFeature
+        /// </summary>
+        /// <param name="liveFiles">The live files.</param>
+        /// <param name="testFiles">The test files.</param>
         [Test, Category("CompareFiles")]
         [TestCaseSource(typeof(CompareFiles), "GetCsvFileToCompare")]
         public void CompareCsvFiles(string liveFiles, string testFiles)
@@ -44,6 +51,12 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
             this.logger.Info("Files are identical");
         }
 
+        /// <summary>
+        /// Compares the TXT files, find files to compare by DataDriven methods from NUnit.
+        /// Execute that tests after DownloadFilesTestsNUnit TestFeature
+        /// </summary>
+        /// <param name="liveFiles">The live files.</param>
+        /// <param name="testFiles">The test files.</param>
         [Test, Category("CompareFiles")]
         [TestCaseSource(typeof(CompareFiles), "GetTxtFileToCompare")]
         public void CompareTxtFiles(string liveFiles, string testFiles)

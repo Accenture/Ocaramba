@@ -28,6 +28,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
     /// <summary>
     /// Tests to test framework
     /// </summary>
+    [TestFixture]
     public class PerformanceTestsNUnit : ProjectTestBase
     {
         [Test, Repeat(3)]
