@@ -32,12 +32,23 @@ namespace Objectivity.Test.Automation.Tests.NUnit.DataDriven
     /// </summary>
     public class DataDrivenReadException : Exception
     {
-        public DataDrivenReadException() { }
+        public DataDrivenReadException()
+        {
+        }
 
-        public DataDrivenReadException(string message) : base(message) { }
+        public DataDrivenReadException(string message)
+            : base(message)
+        {
+        }
 
-        public DataDrivenReadException(string message, Exception innerException) : base(message, innerException) { }
+        public DataDrivenReadException(string message, Exception innerException)
+            : base(message, innerException)
+        {
+        }
 
-        protected DataDrivenReadException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+        protected DataDrivenReadException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+        }
     }
 }

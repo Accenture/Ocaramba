@@ -52,6 +52,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit
                 {
                     return Path.Combine(CurrentDirectory + ConfigurationManager.AppSettings["DataDrivenFile"]);
                 }
+
                 return ConfigurationManager.AppSettings["DataDrivenFile"];
             }
         }

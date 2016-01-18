@@ -46,7 +46,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit.DataDriven
         /// <param name="testData">Name of the child element in xml file.</param>
         /// <param name="diffParam">The difference parameter, will be used in test case name.</param>
         /// <param name="testName">Name of the test.</param>
-        /// <returns></returns>
+        /// <returns>IEnumerable TestCaseData</returns>
         public static IEnumerable<TestCaseData> ReadDataDriveFile(string folder, string testData, string[] diffParam, [Optional] string testName)
         {
             var doc = XDocument.Load(folder);
@@ -88,7 +88,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit.DataDriven
         /// </summary>
         /// <param name="folder">Path to folder with DataDriven file</param>
         /// <param name="testData">The test data.</param>
-        /// <returns></returns>
+        /// <returns>IEnumerable TestCaseData</returns>
         public static IEnumerable<TestCaseData> ReadDataDriveFile(string folder, string testData)
         {
             var doc = XDocument.Load(folder);
@@ -107,7 +107,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit.DataDriven
         /// <param name="testParams">The test parameters.</param>
         /// <param name="testCaseName">Name of the test case.</param>
         /// <returns>Test case name</returns>
-        /// <exception cref="NullReferenceException"></exception>
+        /// <exception cref="NullReferenceException">Exception when trying to set test case name</exception>
         private static string TestCaseName(string[] diffParam, Dictionary<string, string> testParams, string testCaseName)
         {
             if (diffParam != null && diffParam.Any())
@@ -129,11 +129,10 @@ namespace Objectivity.Test.Automation.Tests.NUnit.DataDriven
                         throw new DataDrivenReadException(p);
                     }
                 }
+
             }
+
             return testCaseName;
         }
-
     }
-
-    
 }
