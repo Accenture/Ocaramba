@@ -56,7 +56,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// </summary>
         /// <param name="type">The type.</param>
         /// <returns>Files extension</returns>
-        private static string ReturnFileExtension(FileType type)
+        public static string ReturnFileExtension(FileType type)
         {
             switch (type)
             {
