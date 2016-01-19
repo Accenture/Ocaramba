@@ -89,7 +89,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
             {
                 bitmap.Save(filePath, format);
                 bitmap.Dispose();
-                Logger.Error(CultureInfo.CurrentCulture, "Test failed: fullscreenshot saved to {0}.", filePath);
+                Logger.Error(CultureInfo.CurrentCulture, "Test failed: full screenshot saved to {0}.", filePath);
             }
         }
     }
