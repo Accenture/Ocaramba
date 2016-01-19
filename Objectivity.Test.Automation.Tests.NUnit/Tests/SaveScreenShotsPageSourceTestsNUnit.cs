@@ -33,7 +33,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
     using Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet;
 
     [TestFixture]
-    class SaveScreenShotsOageSourceTestsNUnit : ProjectTestBase
+    class SaveScreenShotsPageSourceTestsNUnit : ProjectTestBase
     {
         [Test]
         public void SaveFullScreenShotTest()
@@ -41,7 +41,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
             var downloadPage = new InternetPage(this.DriverContext).OpenHomePage().GoToFileDownloader();
             var screenShotNumber = FilesHelper.CountFiles(this.DriverContext.ScreenShotFolder, FileType.Png);
             TakeScreenShot.Save(TakeScreenShot.DoIt(), ImageFormat.Png, this.DriverContext.ScreenShotFolder, this.DriverContext.TestTitle);
-            downloadPage.CheckIfScreenShotIsSaved(screenShotNumber, "SaveFullScreenShotTest.png");
+            downloadPage.CheckIfScreenShotIsSaved(screenShotNumber, "SaveFullScreenShot.png");
         }
 
         [Test]
@@ -50,16 +50,17 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
             var downloadPage = new InternetPage(this.DriverContext).OpenHomePage().GoToFileDownloader();
             var screenShotNumber = FilesHelper.CountFiles(this.DriverContext.ScreenShotFolder, FileType.Png);
             downloadPage.SaveWebDriverScreenShot();
-            downloadPage.CheckIfScreenShotIsSaved(screenShotNumber, "SaveWebDriverScreenShotTest.png");
+            downloadPage.CheckIfScreenShotIsSaved(screenShotNumber, "SaveWebDriverScreenShot.png");
         }
 
         [Test]
         public void SaveSourcePageTest()
         {
-            var downloadPage = new InternetPage(this.DriverContext).OpenHomePage().GoToFileDownloader();
+            var basicAuthPage = new InternetPage(this.DriverContext).OpenHomePageWithUserCredentials().GoToBasicAuthPage();
             var pageSourceNumber = FilesHelper.CountFiles(this.DriverContext.PageSourceFolder, FileType.Html);
-            downloadPage.SaveSourcePage();
-            downloadPage.CheckIfScreenShotIsSaved(pageSourceNumber, "SaveSourcePageTest.html");
+            basicAuthPage.SaveSourcePage();
+            basicAuthPage.CheckIfPageSourceSaved("SaveSourcePage.html");
+            Assert.IsTrue(pageSourceNumber < FilesHelper.CountFiles(this.DriverContext.PageSourceFolder, FileType.Html), "Number of html files did not increase");
         }
     }
 }

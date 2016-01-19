@@ -30,6 +30,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 
     using Objectivity.Test.Automation.Common;
     using Objectivity.Test.Automation.Common.Extensions;
+    using Objectivity.Test.Automation.Common.Helpers;
     using Objectivity.Test.Automation.Common.Types;
     using Objectivity.Test.Automation.Tests.PageObjects;
 
@@ -59,6 +60,17 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
                 Logger.Info(CultureInfo.CurrentCulture, "Text from page '{0}'", text);
                 return text;
             }
+        }
+
+        public void SaveSourcePage()
+        {
+            this.DriverContext.SavePageSource(this.DriverContext.TestTitle);
+        }
+
+        public void CheckIfPageSourceSaved(string newNameOfFile)
+        {
+            FilesHelper.WaitForFileOfGivenName(this.Driver, 3, this.DriverContext.TestTitle + FilesHelper.ReturnFileExtension(FileType.Html), this.DriverContext.PageSourceFolder);
+            FilesHelper.RenameFile(this.Driver, 2, FilesHelper.GetLastFile(this.DriverContext.PageSourceFolder, FileType.Html).Name, newNameOfFile, this.DriverContext.PageSourceFolder);
         }
 
     }
