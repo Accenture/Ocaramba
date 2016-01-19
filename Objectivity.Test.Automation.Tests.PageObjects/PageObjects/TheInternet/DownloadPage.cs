@@ -24,6 +24,7 @@ SOFTWARE.
 
 namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 {
+    using System;
     using System.Globalization;
     using System.IO;
 
@@ -105,6 +106,28 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             }
 
             return this;
+        }
+
+        public void CheckIfScreenShotIsSaved(int screenShotNumber, string newNameOfFile)
+        {
+            FilesHelper.WaitForFileOfGivenType(FileType.Png, this.Driver, 3, screenShotNumber, this.DriverContext.ScreenShotFolder);
+            FilesHelper.RenameFile(this.Driver, 2, FilesHelper.GetLastFile(this.DriverContext.ScreenShotFolder, FileType.Png).Name,  newNameOfFile, this.DriverContext.ScreenShotFolder);
+        }
+
+        public void SaveWebDriverScreenShot()
+        {
+            this.DriverContext.SaveScreenshot(new ErrorDetail(this.DriverContext.TakeScreenshot(), DateTime.Now, null), this.DriverContext.ScreenShotFolder, this.DriverContext.TestTitle);
+        }
+
+        public void SaveSourcePage()
+        {
+            this.DriverContext.SavePageSource(this.DriverContext.TestTitle);
+        }
+
+        public void CheckIfPageSourceSaved(int screenShotNumber, string newNameOfFile)
+        {
+            FilesHelper.WaitForFileOfGivenType(FileType.Html, this.Driver, 3, screenShotNumber, this.DriverContext.PageSourceFolder);
+            FilesHelper.RenameFile(this.Driver, 2, FilesHelper.GetLastFile(this.DriverContext.PageSourceFolder, FileType.Html).Name, newNameOfFile, this.DriverContext.PageSourceFolder);
         }
     }
 }

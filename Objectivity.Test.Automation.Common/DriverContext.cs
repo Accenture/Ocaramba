@@ -373,7 +373,11 @@ namespace Objectivity.Test.Automation.Common
             }
             catch (NullReferenceException)
             {
-                Logger.Error("Test failed but was unable to get screenshot.");
+                Logger.Error("Test failed but was unable to get webdriver screenshot.");
+            }
+            catch (UnhandledAlertException)
+            {
+                Logger.Error("Test failed but was unable to get webdriver screenshot.");
             }
 
             return null;
@@ -391,9 +395,15 @@ namespace Objectivity.Test.Automation.Common
             var correctFileName = Path.GetInvalidFileNameChars().Aggregate(fileName, (current, c) => current.Replace(c.ToString(CultureInfo.CurrentCulture), string.Empty));
             var filePath = Path.Combine(folder, correctFileName);
 
-            errorDetail.Screenshot.SaveAsFile(filePath, ImageFormat.Png);
-
-            Logger.Error(CultureInfo.CurrentCulture, "Test failed: screenshot saved to {0}.", filePath);
+            try
+            {
+                errorDetail.Screenshot.SaveAsFile(filePath, ImageFormat.Png);
+                Logger.Error(CultureInfo.CurrentCulture, "Test failed: screenshot saved to {0}.", filePath);
+            }
+            catch (NullReferenceException)
+            {
+                Logger.Error("Test failed but was unable to get webdriver screenshot.");
+            }    
         }
 
         /// <summary>

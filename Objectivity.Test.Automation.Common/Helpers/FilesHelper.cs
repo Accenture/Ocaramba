@@ -380,6 +380,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// <returns></returns>
         public static string GetFolder(string appConfigValue, string currentFolder)
         {
+            Logger.Trace(CultureInfo.CurrentCulture, "appConfigValue '{0}', currentFolder '{1}', UseCurrentDirectory '{2}'", appConfigValue, currentFolder, BaseConfiguration.UseCurrentDirectory);
             string folder;
 
             if (string.IsNullOrEmpty(appConfigValue))
@@ -403,7 +404,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
                 }
             }
 
-            Logger.Trace(CultureInfo.CurrentCulture, "Folder '{0}'", folder);
+            Logger.Trace(CultureInfo.CurrentCulture, "Returned folder '{0}'", folder);
             return folder;
         }
     }

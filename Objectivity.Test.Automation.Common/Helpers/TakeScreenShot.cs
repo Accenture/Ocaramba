@@ -83,13 +83,13 @@ namespace Objectivity.Test.Automation.Common.Helpers
 
             if (bitmap == null)
             {
-                Logger.Error("Screen shot is not saved");
+                Logger.Error("Fullscreenshot is not saved");
             }
             else
             {
                 bitmap.Save(filePath, format);
                 bitmap.Dispose();
-                Logger.Error(CultureInfo.CurrentCulture, "Test failed: screenshot saved to {0}.", filePath);
+                Logger.Error(CultureInfo.CurrentCulture, "Test failed: fullscreenshot saved to {0}.", filePath);
             }
         }
     }
