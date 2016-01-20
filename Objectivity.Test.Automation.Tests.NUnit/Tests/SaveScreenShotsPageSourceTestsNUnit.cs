@@ -41,7 +41,8 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
             var downloadPage = new InternetPage(this.DriverContext).OpenHomePage().GoToFileDownloader();
             var screenShotNumber = FilesHelper.CountFiles(this.DriverContext.ScreenShotFolder, FileType.Png);
             TakeScreenShot.Save(TakeScreenShot.DoIt(), ImageFormat.Png, this.DriverContext.ScreenShotFolder, this.DriverContext.TestTitle);
-            downloadPage.CheckIfScreenShotIsSaved(screenShotNumber, "SaveFullScreenShot.png");
+            var nameOfScreenShot = downloadPage.CheckIfScreenShotIsSaved(screenShotNumber, "SaveFullScreenShot.png");
+            Assert.IsTrue(nameOfScreenShot.Contains(this.DriverContext.TestTitle), "Name of screenshot doesn't contain Test Title");
         }
 
         [Test]
@@ -50,7 +51,8 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
             var downloadPage = new InternetPage(this.DriverContext).OpenHomePage().GoToFileDownloader();
             var screenShotNumber = FilesHelper.CountFiles(this.DriverContext.ScreenShotFolder, FileType.Png);
             downloadPage.SaveWebDriverScreenShot();
-            downloadPage.CheckIfScreenShotIsSaved(screenShotNumber, "SaveWebDriverScreenShot.png");
+            var nameOfScreenShot = downloadPage.CheckIfScreenShotIsSaved(screenShotNumber, "SaveWebDriverScreenShot.png");
+            Assert.IsTrue(nameOfScreenShot.Contains(this.DriverContext.TestTitle), "Name of screenshot doesn't contain Test Title");
         }
 
         [Test]
