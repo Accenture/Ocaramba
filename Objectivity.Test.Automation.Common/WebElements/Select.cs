@@ -59,24 +59,41 @@ namespace Objectivity.Test.Automation.Common.WebElements
         }
 
         /// <summary>
+        /// Gets the selected item text within the select element.
+        /// </summary>
+        /// <remarks>
+        /// If more than one item is selected this will return the first item
+        /// </remarks>
+        /// <param name="timeout">The timeout.</param>
+        /// <returns>Selected text</returns>
+        public string SelectedOption(double timeout)
+        {
+            var element = this.WaitUntilDropdownIsPopulated(timeout);
+
+            var selectElement = new SelectElement(element);
+
+            return selectElement.SelectedOption.Text;
+        }
+
+        /// <summary>
+        /// Gets the selected item text within the select element.
+        /// </summary>
+        /// <remarks>
+        /// If more than one item is selected this will return the first item
+        /// </remarks>
+        /// <returns>Selected text</returns>
+        public string SelectedOption()
+        {
+            return this.SelectedOption(BaseConfiguration.MediumTimeout);
+        }
+
+        /// <summary>
         /// Select value in dropdown using text.
         /// </summary>
         /// <param name="selectValue">Text to be selected.</param>
         public void SelectByText(string selectValue)
         {
-            var element = this.WaitUntilDropdownIsPopulated(BaseConfiguration.MediumTimeout);
-
-            var selectElement = new SelectElement(element);
-
-            try
-            {
-                selectElement.SelectByText(selectValue);
-            }
-            catch (NoSuchElementException e)
-            {
-                Logger.Error(CultureInfo.CurrentCulture, "unable to select given label: {0}", selectValue);
-                Logger.Error(e.Message);
-            }
+            this.SelectByText(selectValue, BaseConfiguration.MediumTimeout);
         }
 
         /// <summary>
@@ -107,18 +124,7 @@ namespace Objectivity.Test.Automation.Common.WebElements
         /// <param name="index">Index value to be selected.</param>
         public void SelectByIndex(int index)
         {
-            var element = this.WaitUntilDropdownIsPopulated(BaseConfiguration.MediumTimeout);
-            var selectElement = new SelectElement(element);
-
-            try
-            {
-                selectElement.SelectByIndex(index);
-            }
-            catch (NoSuchElementException e)
-            {
-                Logger.Error(CultureInfo.CurrentCulture, "unable to select given index: {0}", index);
-                Logger.Error(e.Message);
-            }
+            this.SelectByIndex(index, BaseConfiguration.MediumTimeout);
         }
 
         /// <summary>
