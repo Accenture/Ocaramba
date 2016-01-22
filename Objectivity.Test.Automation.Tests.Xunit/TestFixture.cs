@@ -23,11 +23,10 @@ SOFTWARE.
 */
 
 using System;
+using Objectivity.Test.Automation.Common;
 
-namespace Objectivity.Test.Automation.Tests.XUnit
+namespace Objectivity.Test.Automation.Tests.xUnit
 {
-    using Common;
-
     /// <summary>
     /// The test fixture class for all tests
     /// run once per test suite

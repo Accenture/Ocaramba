@@ -1,9 +1,8 @@
 ﻿using Objectivity.Test.Automation.Tests.PageObjects.PageObjects.Kendo;
 using Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet;
-
 using Xunit;
 
-namespace Objectivity.Test.Automation.Tests.XUnit.Tests
+namespace Objectivity.Test.Automation.Tests.xUnit.Tests
 {
     public class ExampleTest2 : ProjectTestBase
     {

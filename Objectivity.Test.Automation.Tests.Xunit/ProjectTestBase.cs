@@ -23,13 +23,11 @@ SOFTWARE.
 */
 
 using System;
+using Objectivity.Test.Automation.Common;
 using Xunit;
 
-namespace Objectivity.Test.Automation.Tests.XUnit
+namespace Objectivity.Test.Automation.Tests.xUnit
 {
-
-    using Common;
-
     /// <summary>
     /// The base class for all tests
     /// </summary>
