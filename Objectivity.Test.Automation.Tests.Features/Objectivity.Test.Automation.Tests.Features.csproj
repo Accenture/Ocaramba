@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{656133FB-60B2-4124-9CE2-418DB4281D45}</ProjectGuid>
+    <ProjectGuid>{B97FEA9E-C131-4850-BC6D-563F60EE41FA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Objectivity.Test.Automation.Tests.Features</RootNamespace>

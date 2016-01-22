@@ -36,7 +36,7 @@ namespace Objectivity.Test.Automation.Tests.xUnit
         /// <summary>
         /// The browser manager
         /// </summary>
-        protected DriverContext DriverContext { get; } = new DriverContext();
+        protected readonly DriverContext DriverContext = new DriverContext();
 
         /// <summary>
         /// Before the test.
