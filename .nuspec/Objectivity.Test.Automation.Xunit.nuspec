@@ -14,13 +14,13 @@
     <copyright>Copyright 2015</copyright>
     <tags>selenium webdriver testautomation tests nunit Objectivity.Test.Automation.Common</tags>
 	<dependencies>
-	      <dependency id="xunit" version="2.1.0" targetFramework="net452" />
-		  <dependency id="xunit.abstractions" version="2.0.0" targetFramework="net452" />
-		  <dependency id="xunit.assert" version="2.1.0" targetFramework="net452" />
-		  <dependency id="xunit.core" version="2.1.0" targetFramework="net452" />
-		  <dependency id="xunit.extensibility.core" version="2.1.0" targetFramework="net452" />
-		  <dependency id="xunit.extensibility.execution" version="2.1.0" targetFramework="net452" />
-		  <dependency id="xunit.runner.visualstudio" version="2.1.0" targetFramework="net452" />
+	      <dependency id="xunit" version="2.1.0" />
+		  <dependency id="xunit.abstractions" version="2.0.0" />
+		  <dependency id="xunit.assert" version="2.1.0" />
+		  <dependency id="xunit.core" version="2.1.0" />
+		  <dependency id="xunit.extensibility.core" version="2.1.0" />
+		  <dependency id="xunit.extensibility.execution" version="2.1.0" />
+		  <dependency id="xunit.runner.visualstudio" version="2.1.0"  />
     </dependencies> 
   </metadata>
   <files>
