@@ -65,14 +65,14 @@ namespace Objectivity.Test.Automation.Common.WebElements
         /// If more than one item is selected this will return the first item
         /// </remarks>
         /// <param name="timeout">The timeout.</param>
-        /// <returns>Selected text</returns>
-        public string SelectedOption(double timeout)
+        /// <returns>Selected option IWebElement</returns>
+        public IWebElement SelectedOption(double timeout)
         {
             var element = this.WaitUntilDropdownIsPopulated(timeout);
 
             var selectElement = new SelectElement(element);
 
-            return selectElement.SelectedOption.Text;
+            return selectElement.SelectedOption;
         }
 
         /// <summary>
@@ -81,8 +81,8 @@ namespace Objectivity.Test.Automation.Common.WebElements
         /// <remarks>
         /// If more than one item is selected this will return the first item
         /// </remarks>
-        /// <returns>Selected text</returns>
-        public string SelectedOption()
+        /// <returns>Selected option IWebElement</returns>
+        public IWebElement SelectedOption()
         {
             return this.SelectedOption(BaseConfiguration.MediumTimeout);
         }
