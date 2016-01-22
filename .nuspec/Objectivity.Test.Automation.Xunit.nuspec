@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>Objectivity.Test.Automation.Common.XUnit</id>
+    <id>Objectivity.Test.Automation.Common.xUnit</id>
     <version>1.0.0</version>
-    <title>Objectivity.Test.Automation.Common.XUnit</title>
+    <title>Objectivity.Test.Automation.Common.xUnit</title>
     <authors>Objectivity Bespoke Software Specialists</authors>
     <owners>Objectivity Bespoke Software Specialists</owners>
     <licenseUrl>https://github.com/ObjectivityBSS/Test.Automation/blob/master/LICENSE</licenseUrl>
@@ -14,7 +14,13 @@
     <copyright>Copyright 2015</copyright>
     <tags>selenium webdriver testautomation tests nunit Objectivity.Test.Automation.Common</tags>
 	<dependencies>
-	  <dependency id="NUnit" version="3.0.1" />
+	      <dependency id="xunit" version="2.1.0" targetFramework="net452" />
+		  <dependency id="xunit.abstractions" version="2.0.0" targetFramework="net452" />
+		  <dependency id="xunit.assert" version="2.1.0" targetFramework="net452" />
+		  <dependency id="xunit.core" version="2.1.0" targetFramework="net452" />
+		  <dependency id="xunit.extensibility.core" version="2.1.0" targetFramework="net452" />
+		  <dependency id="xunit.extensibility.execution" version="2.1.0" targetFramework="net452" />
+		  <dependency id="xunit.runner.visualstudio" version="2.1.0" targetFramework="net452" />
     </dependencies> 
   </metadata>
   <files>

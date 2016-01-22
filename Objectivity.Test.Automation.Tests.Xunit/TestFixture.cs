@@ -32,11 +32,13 @@ namespace Objectivity.Test.Automation.Tests.XUnit
     /// The test fixture class for all tests
     /// run once per test suite
     /// </summary>
+    // ReSharper disable once ClassNeverInstantiated.Global
     public class TestFixture : TestBase, IDisposable
     {
         /// <summary>
         /// Before the class.
         /// </summary>
+        // ReSharper disable once PublicConstructorInAbstractClass
         public TestFixture()
         {
             StartPerformanceMeasure();
