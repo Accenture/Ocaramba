@@ -73,17 +73,21 @@ namespace Objectivity.Test.Automation.Common.Helpers
                         canceller.Cancel();
                         break;
                     }
-                    task = Task.Factory.StartNew(() =>
-                    {
-                        using (canceller.Token.Register(Thread.CurrentThread.Abort))
-                        {
-                            return condition();
-                        }
 
-                    }, canceller.Token);
+                    task = Task.Factory.StartNew(
+                        () =>
+                                {
+                                    using (canceller.Token.Register(Thread.CurrentThread.Abort))
+                                    {
+                                        return condition();
+                                    }
+                                }, 
+                                  canceller.Token);
                 }
+
                 Thread.Sleep(sleepInterval);
             }
+
             canceller.Cancel();
 
             if (!result)
@@ -114,20 +118,23 @@ namespace Objectivity.Test.Automation.Common.Helpers
                         canceller.Cancel();
                         break;
                     }
-                    task = Task.Factory.StartNew(() =>
-                    {
-                        using (canceller.Token.Register(Thread.CurrentThread.Abort))
-                        {
-                            return condition();
-                        }
 
-                    }, canceller.Token);
+                    task = Task.Factory.StartNew(
+                        () =>
+                            {
+                                using (canceller.Token.Register(Thread.CurrentThread.Abort))
+                                {
+                                    return condition();
+                                }
+                            },
+                              canceller.Token);
                 }
+
                 Thread.Sleep(sleepInterval);
             }
+
             canceller.Cancel();
             return false;
         }
-
     }
 }
