@@ -89,24 +89,6 @@ namespace Objectivity.Test.Automation.Common.Extensions
             return element.GetElement(locator, BaseConfiguration.LongTimeout, condition, customMessage);
         }
 
-        ///// <summary>
-        ///// Finds and waits for an element that meets specified conditions at specified time.
-        ///// </summary>
-        ///// <example>How to use it: <code>
-        ///// this.Driver.GetElement(this.loginButton, timeout, e => e.Displayed);
-        ///// </code></example>
-        ///// <param name="element">The element.</param>
-        ///// <param name="locator">The locator.</param>
-        ///// <param name="timeout">The timeout.</param>
-        ///// <param name="condition">The condition to be met.</param>
-        ///// <returns>
-        ///// Return found element
-        ///// </returns>
-        //public static IWebElement GetElement(this ISearchContext element, ElementLocator locator, double timeout, Func<IWebElement, bool> condition)
-        // {
-        //     return element.GetElement(locator, timeout, condition, string.Empty);
-        // }
-
         /// <summary>
         /// Finds and waits for an element that meets specified conditions at specified time.
         /// </summary>
@@ -125,7 +107,7 @@ namespace Objectivity.Test.Automation.Common.Extensions
         {
             var by = locator.ToBy();
 
-            var wait = new WebDriverWait(element.ToDriver(), TimeSpan.FromSeconds(timeout)) {Message = customMessage};
+            var wait = new WebDriverWait(element.ToDriver(), TimeSpan.FromSeconds(timeout)) { Message = customMessage };
             wait.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
 
             wait.Until(

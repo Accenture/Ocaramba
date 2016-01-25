@@ -268,7 +268,6 @@ namespace Objectivity.Test.Automation.Common.Helpers
             WaitHelper.Wait(
                 () => File.Exists(folder + Separator + filesName), waitTime, 1, timeoutMessage);
 
-
             Logger.Debug("File exists, checking if size of last file > 0 bytes");
             timeoutMessage = string.Format(CultureInfo.CurrentCulture, "Checking if size of file {0} > 0 bytes", filesName);
             WaitHelper.Wait(
@@ -343,8 +342,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
             var timeoutMessage = string.Format(CultureInfo.CurrentCulture, "Waiting till file will be renamed {0}", subFolder);
             Process.Start(cmdsi);
             WaitHelper.Wait(
-                () => File.Exists(subFolder + Separator + newName), waitTime, 1, timeoutMessage);
-      
+                () => File.Exists(subFolder + Separator + newName), waitTime, 1, timeoutMessage);     
         }
        
         /// <summary>

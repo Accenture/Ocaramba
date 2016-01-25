@@ -36,7 +36,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
     public static class WaitHelper
     {
         /// <summary>
-        /// Wait for a condition with given timrout.
+        /// Wait for a condition with given timeout.
         /// </summary>
         /// <param name="condition">The condition to be met.</param>
         /// <param name="timeout">The timeout value [seconds] indicating how long to wait for the condition.</param>
@@ -48,7 +48,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
         }
 
         /// <summary>
-        /// Wait for a condition with given timrout and timeInterval.
+        /// Wait for a condition with given timeout and timeInterval.
         /// </summary>
         /// <param name="condition">The condition to be met.</param>
         /// <param name="timeout">The timeout value [seconds] indicating how long to wait for the condition.</param>
@@ -80,7 +80,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
         }
 
         /// <summary>
-        /// Wait for a condition with given timrout and timeInterval.
+        /// Wait for a condition with given timeout and timeInterval.
         /// </summary>
         /// <param name="condition">The condition to be met.</param>
         /// <param name="timeout">The timeout value [seconds] indicating how long to wait for the condition.</param>
