@@ -29,6 +29,7 @@ namespace Objectivity.Test.Automation.Common.Extensions
     using System.Collections.ObjectModel;
     using System.Globalization;
     using System.Linq;
+    using System.Runtime.InteropServices;
 
     using Objectivity.Test.Automation.Common.Types;
 
@@ -49,10 +50,11 @@ namespace Objectivity.Test.Automation.Common.Extensions
         /// </code></example>
         /// <param name="element">The element.</param>
         /// <param name="locator">The locator.</param>
+        /// /// <param name="customMessage">Custom message to be displayed when there is no possible to get element</param>
         /// <returns>Found element</returns>
-        public static IWebElement GetElement(this ISearchContext element, ElementLocator locator)
+        public static IWebElement GetElement(this ISearchContext element, ElementLocator locator, [Optional] string customMessage)
         {
-            return element.GetElement(locator, BaseConfiguration.LongTimeout, e => e.Displayed & e.Enabled);
+            return element.GetElement(locator, BaseConfiguration.LongTimeout, e => e.Displayed & e.Enabled, customMessage);
         }
 
         /// <summary>
@@ -64,10 +66,11 @@ namespace Objectivity.Test.Automation.Common.Extensions
         /// <param name="element">The element.</param>
         /// <param name="locator">The locator.</param>
         /// <param name="timeout">Specified time to wait.</param>
+        /// /// <param name="customMessage">Custom message to be displayed when there is no possible to get element</param>
         /// <returns>Found element</returns>
-        public static IWebElement GetElement(this ISearchContext element, ElementLocator locator, double timeout)
+        public static IWebElement GetElement(this ISearchContext element, ElementLocator locator, double timeout, [Optional] string customMessage)
         {
-            return element.GetElement(locator, timeout, e => e.Displayed & e.Enabled);
+            return element.GetElement(locator, timeout, e => e.Displayed & e.Enabled, customMessage);
         }
 
         /// <summary>
@@ -79,11 +82,30 @@ namespace Objectivity.Test.Automation.Common.Extensions
         /// <param name="element">The element.</param>
         /// <param name="locator">The locator.</param>
         /// <param name="condition">Wait until condition met.</param>
+        /// /// <param name="customMessage">Custom message to be displayed when there is no possible to get element</param>
         /// <returns>Found element</returns>
-        public static IWebElement GetElement(this ISearchContext element, ElementLocator locator, Func<IWebElement, bool> condition)
+        public static IWebElement GetElement(this ISearchContext element, ElementLocator locator, Func<IWebElement, bool> condition, [Optional] string customMessage)
         {
-            return element.GetElement(locator, BaseConfiguration.LongTimeout, condition);
+            return element.GetElement(locator, BaseConfiguration.LongTimeout, condition, customMessage);
         }
+
+        ///// <summary>
+        ///// Finds and waits for an element that meets specified conditions at specified time.
+        ///// </summary>
+        ///// <example>How to use it: <code>
+        ///// this.Driver.GetElement(this.loginButton, timeout, e => e.Displayed);
+        ///// </code></example>
+        ///// <param name="element">The element.</param>
+        ///// <param name="locator">The locator.</param>
+        ///// <param name="timeout">The timeout.</param>
+        ///// <param name="condition">The condition to be met.</param>
+        ///// <returns>
+        ///// Return found element
+        ///// </returns>
+        //public static IWebElement GetElement(this ISearchContext element, ElementLocator locator, double timeout, Func<IWebElement, bool> condition)
+        // {
+        //     return element.GetElement(locator, timeout, condition, string.Empty);
+        // }
 
         /// <summary>
         /// Finds and waits for an element that meets specified conditions at specified time.
@@ -95,14 +117,15 @@ namespace Objectivity.Test.Automation.Common.Extensions
         /// <param name="locator">The locator.</param>
         /// <param name="timeout">The timeout.</param>
         /// <param name="condition">The condition to be met.</param>
+        /// <param name="customMessage">Custom message to be displayed when there is no possible to get element</param>
         /// <returns>
         /// Return found element
         /// </returns>
-        public static IWebElement GetElement(this ISearchContext element, ElementLocator locator, double timeout, Func<IWebElement, bool> condition)
+        public static IWebElement GetElement(this ISearchContext element, ElementLocator locator, double timeout, Func<IWebElement, bool> condition, [Optional] string customMessage)
         {
             var by = locator.ToBy();
 
-            var wait = new WebDriverWait(element.ToDriver(), TimeSpan.FromSeconds(timeout));
+            var wait = new WebDriverWait(element.ToDriver(), TimeSpan.FromSeconds(timeout)) {Message = customMessage};
             wait.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
 
             wait.Until(
@@ -125,12 +148,13 @@ namespace Objectivity.Test.Automation.Common.Extensions
         /// <typeparam name="T">IWebComponent like ICheckbox, ISelect, etc.</typeparam>
         /// <param name="searchContext">The search context.</param>
         /// <param name="locator">The locator.</param>
+        /// /// <param name="customMessage">Custom message to be displayed when there is no possible to get element</param>
         /// <returns>
         /// Located and displayed element
         /// </returns>
-        public static T GetElement<T>(this ISearchContext searchContext, ElementLocator locator) where T : class, IWebElement
+        public static T GetElement<T>(this ISearchContext searchContext, ElementLocator locator, [Optional] string customMessage) where T : class, IWebElement
         {
-            IWebElement webElemement = searchContext.GetElement(locator);
+            IWebElement webElemement = searchContext.GetElement(locator, customMessage);
             return webElemement.As<T>();
         }
 
@@ -165,12 +189,13 @@ namespace Objectivity.Test.Automation.Common.Extensions
         /// <param name="searchContext">The search context.</param>
         /// <param name="locator">The locator.</param>
         /// <param name="condition">The condition to be met.</param>
+        /// /// <param name="customMessage">Custom message to be displayed when there is no possible to get element</param>
         /// <returns>
         /// Located and displayed element
         /// </returns>
-        public static T GetElement<T>(this ISearchContext searchContext, ElementLocator locator, Func<IWebElement, bool> condition) where T : class, IWebElement
+        public static T GetElement<T>(this ISearchContext searchContext, ElementLocator locator, Func<IWebElement, bool> condition, [Optional] string customMessage) where T : class, IWebElement
         {
-            IWebElement webElemement = searchContext.GetElement(locator, condition);
+            IWebElement webElemement = searchContext.GetElement(locator, condition, customMessage);
             return webElemement.As<T>();
         }
 
@@ -186,12 +211,13 @@ namespace Objectivity.Test.Automation.Common.Extensions
         /// <param name="locator">The locator.</param>
         /// <param name="timeout">Specified time to wait.</param>
         /// <param name="condition">The condition to be met.</param>
+        /// /// <param name="customMessage">Custom message to be displayed when there is no possible to get element</param>
         /// <returns>
         /// Located and displayed element
         /// </returns>
-        public static T GetElement<T>(this ISearchContext searchContext, ElementLocator locator, double timeout, Func<IWebElement, bool> condition) where T : class, IWebElement
+        public static T GetElement<T>(this ISearchContext searchContext, ElementLocator locator, double timeout, Func<IWebElement, bool> condition, [Optional] string customMessage) where T : class, IWebElement
         {
-            IWebElement webElemement = searchContext.GetElement(locator, timeout, condition);
+            IWebElement webElemement = searchContext.GetElement(locator, timeout, condition, customMessage);
             return webElemement.As<T>();
         }
 

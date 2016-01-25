@@ -69,7 +69,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataDriven\CompareFiles.cs" />
-    <Compile Include="DataDriven\DataDrivenReadException.cs" />
     <Compile Include="ProjectBaseConfiguration.cs" />
     <Compile Include="DataDriven\TestData.cs" />
     <Compile Include="DataDriven\DataDrivenHelper.cs" />

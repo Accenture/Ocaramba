@@ -24,7 +24,6 @@ SOFTWARE.
 
 namespace Objectivity.Test.Automation.Common.Helpers
 {
-    using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Globalization;
@@ -37,7 +36,6 @@ namespace Objectivity.Test.Automation.Common.Helpers
     using Objectivity.Test.Automation.Common;
 
     using OpenQA.Selenium;
-    using OpenQA.Selenium.Support.UI;
 
     /// <summary>
     /// Class for handling downloading files
@@ -229,110 +227,102 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// Waits for file of given type for given timeout till number of files increase in sub folder.
         /// </summary>
         /// <param name="type">The type of file.</param>
-        /// <param name="driver">The driver.</param>
         /// <param name="waitTime">Wait timeout</param>
         /// <param name="filesNumber">The initial files number.</param>
         /// <param name="folder">The folder.</param>
-        public static void WaitForFileOfGivenType(FileType type, IWebDriver driver, double waitTime, int filesNumber, string folder)
+        public static void WaitForFileOfGivenType(FileType type, double waitTime, int filesNumber, string folder)
         {
             Logger.Debug("Wait for file: {0}", type);
-            IWait<IWebDriver> wait = new WebDriverWait(
-                    driver,
-                    TimeSpan.FromSeconds(waitTime));
-
-            wait.Message = string.Format(CultureInfo.CurrentCulture, "Waiting for file number to increase in {0}", folder);
-            wait.Until(x => CountFiles(folder, type) > filesNumber);
+            var timeoutMessage = string.Format(CultureInfo.CurrentCulture, "Waiting for file number to increase in {0}", folder);
+            WaitHelper.Wait(
+                () => CountFiles(folder, type) > filesNumber, waitTime, 1, timeoutMessage);
+            
             Logger.Debug("Number of files increased, checking if size of last file > 0 bytes");
-            wait.Message = "Checking if size of last file > 0 bytes";
-            wait.Until(x => GetLastFile(folder, type).Length > 0);
+            timeoutMessage = "Checking if size of last file > 0 bytes";
+
+            WaitHelper.Wait(
+               () => GetLastFile(folder).Length > 0, waitTime, 1, timeoutMessage);
         }
 
         /// <summary>
         /// Waits for file of given type for LongTimeout till number of files increase in sub folder.
         /// </summary>
         /// <param name="type">The type.</param>
-        /// <param name="driver">The driver.</param>
         /// <param name="filesNumber">The files number.</param>
         /// <param name="folder">The folder.</param>
-        public static void WaitForFileOfGivenType(FileType type, IWebDriver driver, int filesNumber, string folder)
+        public static void WaitForFileOfGivenType(FileType type, int filesNumber, string folder)
         {
-            WaitForFileOfGivenType(type, driver, BaseConfiguration.LongTimeout, filesNumber, folder);
+            WaitForFileOfGivenType(type, BaseConfiguration.LongTimeout, filesNumber, folder);
         }
 
         /// <summary>
         /// Waits for file with given name with given timeout.
         /// </summary>
-        /// <param name="driver">The driver.</param>
         /// <param name="waitTime">Wait timeout</param>
         /// <param name="filesName">Name of the files.</param>
         /// <param name="folder">The folder.</param>
-        public static void WaitForFileOfGivenName(IWebDriver driver, double waitTime, string filesName, string folder)
+        public static void WaitForFileOfGivenName(double waitTime, string filesName, string folder)
         {
             Logger.Debug(CultureInfo.CurrentCulture, "Wait for file: {0}", filesName);
-            IWait<IWebDriver> wait = new WebDriverWait(
-                    driver,
-                    TimeSpan.FromSeconds(waitTime));
+            var timeoutMessage = string.Format(CultureInfo.CurrentCulture, "Waiting for file {0} in folder {1}", filesName, folder);
+            WaitHelper.Wait(
+                () => File.Exists(folder + Separator + filesName), waitTime, 1, timeoutMessage);
 
-            wait.Message = string.Format(CultureInfo.CurrentCulture, "Waiting for file {0} in folder {1}", filesName, folder);
-            wait.Until(x => File.Exists(folder + Separator + filesName));
 
             Logger.Debug("File exists, checking if size of last file > 0 bytes");
-            wait.Message = string.Format(CultureInfo.CurrentCulture, "Checking if size of file {0} > 0 bytes", filesName);
-            wait.Until(x => GetFileByName(folder, filesName).Length > 0);
+            timeoutMessage = string.Format(CultureInfo.CurrentCulture, "Checking if size of file {0} > 0 bytes", filesName);
+            WaitHelper.Wait(
+                () => GetFileByName(folder, filesName).Length > 0, waitTime, 1, timeoutMessage);
         }
 
         /// <summary>
         /// Waits for file of given name with LongTimeout
         /// </summary>
-        /// <param name="driver">The driver.</param>
         /// <param name="filesName">Name of the files.</param>
         /// <param name="folder">The folder.</param>
-        public static void WaitForFileOfGivenName(IWebDriver driver, string filesName, string folder)
+        public static void WaitForFileOfGivenName(string filesName, string folder)
         {
-            WaitForFileOfGivenName(driver, BaseConfiguration.LongTimeout, filesName, folder);
+            WaitForFileOfGivenName(BaseConfiguration.LongTimeout, filesName, folder);
         }
 
         /// <summary>
         /// Waits for file for given timeout till number of files increase in sub folder.
         /// </summary>
-        /// <param name="driver">The driver.</param>
         /// <param name="waitTime">Wait timeout</param>
         /// <param name="filesNumber">The initial files number.</param>
         /// <param name="folder">The folder.</param>
-        public static void WaitForFile(IWebDriver driver, double waitTime, int filesNumber, string folder)
+        public static void WaitForFile(double waitTime, int filesNumber, string folder)
         {
             Logger.Debug("Wait for file");
-            IWait<IWebDriver> wait = new WebDriverWait(
-                    driver,
-                    TimeSpan.FromSeconds(waitTime));
-
-            wait.Message = string.Format(CultureInfo.CurrentCulture, "Waiting for file number to increase in {0}", folder);
-            wait.Until(x => CountFiles(folder) > filesNumber);
+            var timeoutMessage = string.Format(CultureInfo.CurrentCulture, "Waiting for file number to increase in {0}", folder);
+            WaitHelper.Wait(
+                () => CountFiles(folder) > filesNumber, waitTime, 1, timeoutMessage);
+     
             Logger.Debug("Number of files increased, checking if size of last file > 0 bytes");
-            wait.Message = "Checking if size of last file > 0 bytes";
-            wait.Until(x => GetLastFile(folder).Length > 0);
+            timeoutMessage = "Checking if size of last file > 0 bytes";
+
+            WaitHelper.Wait(
+               () => GetLastFile(folder).Length > 0, waitTime, 1, timeoutMessage);
         }
 
         /// <summary>
         /// Waits for file with LongTimeout till number of files increase in sub folder.
         /// </summary>
-        /// <param name="driver">The driver.</param>
         /// <param name="filesNumber">The initial files number.</param>
         /// <param name="folder">The folder.</param>
-        public static void WaitForFile(IWebDriver driver, int filesNumber, string folder)
+        public static void WaitForFile(int filesNumber, string folder)
         {
-            WaitForFile(driver, BaseConfiguration.LongTimeout, filesNumber, folder);
+            WaitForFile(BaseConfiguration.LongTimeout, filesNumber, folder);
         }
 
         /// <summary>
         /// Rename the file and check if file was renamed with given timeout.
         /// </summary>
-        /// <param name="driver">The driver.</param>
         /// <param name="waitTime">Timeout for checking if file was removed</param>
         /// <param name="oldName">The old name.</param>
         /// <param name="newName">The new name.</param>
         /// <param name="subFolder">The subFolder.</param>
-        public static void RenameFile(IWebDriver driver, double waitTime, string oldName, string newName, string subFolder)
+        public static void RenameFile(double waitTime, string oldName, string newName, string subFolder)
         {
             Logger.Debug(CultureInfo.CurrentCulture, "new file name: {0}", newName);
             if (File.Exists(newName))
@@ -349,27 +339,25 @@ namespace Objectivity.Test.Automation.Common.Helpers
                                              Arguments = command
                                          };
             Thread.Sleep(1000);
-            IWait<IWebDriver> wait = new WebDriverWait(
-                    driver,
-                    TimeSpan.FromSeconds(waitTime));
 
+            var timeoutMessage = string.Format(CultureInfo.CurrentCulture, "Waiting till file will be renamed {0}", subFolder);
             Process.Start(cmdsi);
-            wait.Message = string.Format(CultureInfo.CurrentCulture, "Waiting till file will be renamed {0}", subFolder);
-            wait.Until(x => File.Exists(subFolder + Separator + newName));     
+            WaitHelper.Wait(
+                () => File.Exists(subFolder + Separator + newName), waitTime, 1, timeoutMessage);
+      
         }
-
+       
         /// <summary>
         /// Rename the file of given type and check if file was renamed with ShortTimeout.
         /// </summary>
-        /// <param name="driver">The driver.</param>
         /// <param name="oldName">The old name.</param>
         /// <param name="newName">The new name.</param>
         /// <param name="subFolder">The subFolder.</param>
         /// <param name="type">The type of file.</param>
-        public static void RenameFile(IWebDriver driver, string oldName, string newName, string subFolder, FileType type)
+        public static void RenameFile(string oldName, string newName, string subFolder, FileType type)
         {
             newName = newName + ReturnFileExtension(type);
-            RenameFile(driver, BaseConfiguration.ShortTimeout, oldName, newName, subFolder);
+            RenameFile(BaseConfiguration.ShortTimeout, oldName, newName, subFolder);
         }
 
         /// <summary>

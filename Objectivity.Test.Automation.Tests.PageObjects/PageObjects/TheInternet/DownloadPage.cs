@@ -58,9 +58,9 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             if (BaseConfiguration.TestBrowser == DriverContext.BrowserType.Firefox
                 || BaseConfiguration.TestBrowser == DriverContext.BrowserType.Chrome)
             {
-                this.Driver.GetElement(this.fileLink.Evaluate(fileName)).Click();
-                FilesHelper.WaitForFileOfGivenName(this.Driver, fileName, this.DriverContext.DownloadFolder);
-                FilesHelper.RenameFile(this.Driver, fileName, newName, this.DriverContext.DownloadFolder, FileType.Csv);
+                this.Driver.GetElement(this.fileLink.Evaluate(fileName), "Click on file").Click();
+                FilesHelper.WaitForFileOfGivenName(fileName, this.DriverContext.DownloadFolder);
+                FilesHelper.RenameFile(fileName, newName, this.DriverContext.DownloadFolder, FileType.Csv);
             }
             else
             {
@@ -77,9 +77,9 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             {
                 var filesNumber = FilesHelper.CountFiles(this.DriverContext.DownloadFolder, FileType.Txt);
                 this.Driver.GetElement(this.fileLink.Evaluate("some-file.txt")).Click();
-                FilesHelper.WaitForFileOfGivenType(FileType.Txt, this.Driver, filesNumber, this.DriverContext.DownloadFolder);
+                FilesHelper.WaitForFileOfGivenType(FileType.Txt, filesNumber, this.DriverContext.DownloadFolder);
                 FileInfo file = FilesHelper.GetLastFile(this.DriverContext.DownloadFolder, FileType.Txt);
-                FilesHelper.RenameFile(this.Driver, file.Name, newName, this.DriverContext.DownloadFolder, FileType.Txt);
+                FilesHelper.RenameFile(file.Name, newName, this.DriverContext.DownloadFolder, FileType.Txt);
             }
             else
             {  
@@ -96,9 +96,9 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             {
                 var filesNumber = FilesHelper.CountFiles(this.DriverContext.DownloadFolder);
                 this.Driver.GetElement(this.fileLink.Evaluate("some-file.txt")).Click();
-                FilesHelper.WaitForFile(this.Driver, filesNumber, this.DriverContext.DownloadFolder);
+                FilesHelper.WaitForFile(filesNumber, this.DriverContext.DownloadFolder);
                 FileInfo file = FilesHelper.GetLastFile(this.DriverContext.DownloadFolder);
-                FilesHelper.RenameFile(this.Driver, BaseConfiguration.ShortTimeout,file.Name, "name_of_file_branch.txt", this.DriverContext.DownloadFolder);
+                FilesHelper.RenameFile(BaseConfiguration.ShortTimeout,file.Name, "name_of_file_branch.txt", this.DriverContext.DownloadFolder);
             }
             else
             {
@@ -110,9 +110,9 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 
         public string CheckIfScreenShotIsSaved(int screenShotNumber, string newNameOfFile)
         {
-            FilesHelper.WaitForFileOfGivenType(FileType.Png, this.Driver, 3, screenShotNumber, this.DriverContext.ScreenShotFolder);
+            FilesHelper.WaitForFileOfGivenType(FileType.Png, 3, screenShotNumber, this.DriverContext.ScreenShotFolder);
             var nameOfFile = FilesHelper.GetLastFile(this.DriverContext.ScreenShotFolder, FileType.Png).Name;
-            FilesHelper.RenameFile(this.Driver, 2, FilesHelper.GetLastFile(this.DriverContext.ScreenShotFolder, FileType.Png).Name,  newNameOfFile, this.DriverContext.ScreenShotFolder);
+            FilesHelper.RenameFile(2, FilesHelper.GetLastFile(this.DriverContext.ScreenShotFolder, FileType.Png).Name,  newNameOfFile, this.DriverContext.ScreenShotFolder);
             return nameOfFile;
         }
 

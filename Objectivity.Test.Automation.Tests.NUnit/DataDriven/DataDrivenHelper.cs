@@ -34,6 +34,8 @@ namespace Objectivity.Test.Automation.Tests.NUnit.DataDriven
 
     using global::NUnit.Framework;
 
+    using Objectivity.Test.Automation.Common.Exceptions;
+
     /// <summary>
     /// DataDriven methods for NUnit test framework
     /// </summary>

@@ -59,33 +59,16 @@ namespace Objectivity.Test.Automation.Common.WebElements
         }
 
         /// <summary>
-        /// Gets the selected item text within the select element.
+        /// Selenium SelectElement class.
         /// </summary>
-        /// <remarks>
-        /// If more than one item is selected this will return the first item
-        /// </remarks>
-        /// <param name="timeout">The timeout.</param>
-        /// <returns>Selected option IWebElement</returns>
-        public IWebElement SelectedOption(double timeout)
+        /// <example>Simple use of SelectElement: <code>
+        /// this.Driver.GetElement&lt;Select&gt;(WebElement).SelectElement().SelectedOption;
+        /// </code></example>
+        /// <returns>Return new SelectElement handle</returns>
+        public SelectElement SelectElement()
         {
-            var element = this.WaitUntilDropdownIsPopulated(timeout);
-
-            var selectElement = new SelectElement(element);
-
-            return selectElement.SelectedOption;
-        }
-
-        /// <summary>
-        /// Gets the selected item text within the select element.
-        /// </summary>
-        /// <remarks>
-        /// If more than one item is selected this will return the first item
-        /// </remarks>
-        /// <returns>Selected option IWebElement</returns>
-        public IWebElement SelectedOption()
-        {
-            return this.SelectedOption(BaseConfiguration.MediumTimeout);
-        }
+            return new SelectElement(this.webElement);
+        } 
 
         /// <summary>
         /// Select value in dropdown using text.
