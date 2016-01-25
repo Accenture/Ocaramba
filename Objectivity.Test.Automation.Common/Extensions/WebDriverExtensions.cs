@@ -305,5 +305,39 @@ namespace Objectivity.Test.Automation.Common.Extensions
                 webDriver.FindElement(By.Id("overridelink")).JavaScriptClick();
             }
         }
+
+        /// <summary>
+        /// Waits for all angular actions to be completed.
+        /// </summary>
+        /// <param name="webDriver">The web driver.</param>
+        public static void WaitForAngular(this IWebDriver webDriver)
+        {
+            WaitForAngular(webDriver, BaseConfiguration.MediumTimeout);
+        }
+
+        /// <summary>
+        /// Waits for all angular actions to be completed.
+        /// </summary>
+        /// <param name="webDriver">The web driver.</param>
+        /// <param name="timeout">The timeout.</param>
+        public static void WaitForAngular(this IWebDriver webDriver, double timeout)
+        {
+            try
+            {
+                new WebDriverWait(webDriver, TimeSpan.FromSeconds(timeout)).Until(
+                    driver =>
+                    {
+                        var javaScriptExecutor = driver as IJavaScriptExecutor;
+                        return javaScriptExecutor != null
+                               &&
+                               (bool)
+                                   javaScriptExecutor.ExecuteScript(
+                                       "return window.angular != undefined && window.angular.element(document.body).injector().get('$http').pendingRequests.length == 0");
+                    });
+            }
+            catch (InvalidOperationException)
+            {
+            }
+        }
     }
 }

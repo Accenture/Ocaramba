@@ -135,6 +135,37 @@ namespace Objectivity.Test.Automation.Common.WebElements
         }
 
         /// <summary>
+        /// Select value in dropdown using value attribute.
+        /// </summary>
+        /// <param name="selectValue">Value to be selected.</param>
+        public void SelectByValue(string selectValue)
+        {
+            this.SelectByValue(selectValue, BaseConfiguration.MediumTimeout);
+        }
+
+        /// <summary>
+        /// Select value in dropdown using value attribute.
+        /// </summary>
+        /// <param name="selectValue">Value to be selected.</param>
+        /// <param name="timeout">The timeout.</param>
+        public void SelectByValue(string selectValue, double timeout)
+        {
+            var element = WaitUntilDropdownIsPopulated(timeout);
+
+            var selectElement = new SelectElement(element);
+
+            try
+            {
+                selectElement.SelectByValue(selectValue);
+            }
+            catch (NoSuchElementException e)
+            {
+                Logger.Error(CultureInfo.CurrentCulture, "unable to select given value: {0}", selectValue);
+                Logger.Error(e.Message);
+            }
+        }
+
+        /// <summary>
         /// Determines whether text is available in dropdown.
         /// </summary>
         /// <param name="option">The text.</param>
