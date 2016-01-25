@@ -43,6 +43,7 @@ namespace Objectivity.Test.Automation.Tests.xUnit
         /// </summary>
         protected ProjectTestBase()
         {
+            this.DriverContext.CurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
             this.DriverContext.Start();
         }
 
