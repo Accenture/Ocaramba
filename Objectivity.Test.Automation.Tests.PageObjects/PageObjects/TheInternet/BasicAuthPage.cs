@@ -69,8 +69,8 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 
         public void CheckIfPageSourceSaved(string newNameOfFile)
         {
-            FilesHelper.WaitForFileOfGivenName(3, this.DriverContext.TestTitle + FilesHelper.ReturnFileExtension(FileType.Html), this.DriverContext.PageSourceFolder);
-            FilesHelper.RenameFile(2, FilesHelper.GetLastFile(this.DriverContext.PageSourceFolder, FileType.Html).Name, newNameOfFile, this.DriverContext.PageSourceFolder);
+            FilesHelper.WaitForFileOfGivenName(5, this.DriverContext.TestTitle + FilesHelper.ReturnFileExtension(FileType.Html), this.DriverContext.PageSourceFolder);
+            FilesHelper.RenameFile(5, FilesHelper.GetLastFile(this.DriverContext.PageSourceFolder, FileType.Html).Name, newNameOfFile, this.DriverContext.PageSourceFolder);
         }
 
     }

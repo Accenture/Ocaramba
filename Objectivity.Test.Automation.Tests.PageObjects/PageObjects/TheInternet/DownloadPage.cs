@@ -110,9 +110,9 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 
         public string CheckIfScreenShotIsSaved(int screenShotNumber, string newNameOfFile)
         {
-            FilesHelper.WaitForFileOfGivenType(FileType.Png, 3, screenShotNumber, this.DriverContext.ScreenShotFolder);
+            FilesHelper.WaitForFileOfGivenType(FileType.Png, 5, screenShotNumber, this.DriverContext.ScreenShotFolder);
             var nameOfFile = FilesHelper.GetLastFile(this.DriverContext.ScreenShotFolder, FileType.Png).Name;
-            FilesHelper.RenameFile(2, FilesHelper.GetLastFile(this.DriverContext.ScreenShotFolder, FileType.Png).Name,  newNameOfFile, this.DriverContext.ScreenShotFolder);
+            FilesHelper.RenameFile(5, FilesHelper.GetLastFile(this.DriverContext.ScreenShotFolder, FileType.Png).Name,  newNameOfFile, this.DriverContext.ScreenShotFolder);
             return nameOfFile;
         }
 
