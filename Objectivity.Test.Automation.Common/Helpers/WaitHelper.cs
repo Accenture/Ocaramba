@@ -27,6 +27,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
     using System;
     using System.Globalization;
     using System.Threading;
+    using System.Threading.Tasks;
 
     using Objectivity.Test.Automation.Common.Exceptions;
 
@@ -42,9 +43,9 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// <param name="timeout">The timeout value [seconds] indicating how long to wait for the condition.</param>
         /// <param name="message">The exception message</param>
         /// <exception cref="WaitTimeoutException">Timeout exception when condition is not met</exception>
-        public static void Wait(Func<bool> condition, double timeout, string message)
+        public static void Wait(Func<bool> condition, TimeSpan timeout, string message)
         {
-            Wait(condition, timeout, 1, message);
+            Wait(condition, timeout, TimeSpan.FromSeconds(1), message);
         }
 
         /// <summary>
@@ -55,23 +56,35 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// <param name="sleepInterval">The value [seconds] indicating how often to check for the condition to be true.</param>
         /// <param name="message">The exception message</param>
         /// <exception cref="WaitTimeoutException">Timeout exception when condition is not met</exception>
-        public static void Wait(Func<bool> condition, double timeout, double sleepInterval, string message)
+        public static void Wait(Func<bool> condition, TimeSpan timeout, TimeSpan sleepInterval, string message)
         {
-            var timeoutSeconds = TimeSpan.FromSeconds(timeout);
-            var sleepIntervalSeconds = TimeSpan.FromSeconds(sleepInterval);
             var start = DateTime.Now;
             var result = false;
+            var canceller = new CancellationTokenSource();
+            var task = Task.Factory.StartNew(condition, canceller.Token);
 
-            while ((DateTime.Now - start).TotalSeconds < timeoutSeconds.TotalSeconds)
+            while ((DateTime.Now - start).TotalSeconds < timeout.TotalSeconds)
             {
-                if (condition())
+                if (task.IsCompleted)
                 {
-                    result = true;
-                    break;
-                }
+                    if (task.Result)
+                    {
+                        result = true;
+                        canceller.Cancel();
+                        break;
+                    }
+                    task = Task.Factory.StartNew(() =>
+                    {
+                        using (canceller.Token.Register(Thread.CurrentThread.Abort))
+                        {
+                            return condition();
+                        }
 
-                Thread.Sleep(sleepIntervalSeconds);
+                    }, canceller.Token);
+                }
+                Thread.Sleep(sleepInterval);
             }
+            canceller.Cancel();
 
             if (!result)
             {
@@ -89,18 +102,32 @@ namespace Objectivity.Test.Automation.Common.Helpers
         public static bool Wait(Func<bool> condition, TimeSpan timeout, TimeSpan sleepInterval)
         {
             var start = DateTime.Now;
+            var canceller = new CancellationTokenSource();
+            var task = Task.Factory.StartNew(condition, canceller.Token);
 
             while ((DateTime.Now - start).TotalSeconds < timeout.TotalSeconds)
             {
-                if (condition())
+                if (task.IsCompleted)
                 {
-                    return true;
-                }
+                    if (task.Result)
+                    {
+                        canceller.Cancel();
+                        break;
+                    }
+                    task = Task.Factory.StartNew(() =>
+                    {
+                        using (canceller.Token.Register(Thread.CurrentThread.Abort))
+                        {
+                            return condition();
+                        }
 
+                    }, canceller.Token);
+                }
                 Thread.Sleep(sleepInterval);
             }
-
+            canceller.Cancel();
             return false;
         }
+
     }
 }

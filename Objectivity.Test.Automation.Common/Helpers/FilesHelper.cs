@@ -24,6 +24,7 @@ SOFTWARE.
 
 namespace Objectivity.Test.Automation.Common.Helpers
 {
+    using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Globalization;
@@ -34,8 +35,6 @@ namespace Objectivity.Test.Automation.Common.Helpers
     using NLog;
 
     using Objectivity.Test.Automation.Common;
-
-    using OpenQA.Selenium;
 
     /// <summary>
     /// Class for handling downloading files
@@ -235,13 +234,13 @@ namespace Objectivity.Test.Automation.Common.Helpers
             Logger.Debug("Wait for file: {0}", type);
             var timeoutMessage = string.Format(CultureInfo.CurrentCulture, "Waiting for file number to increase in {0}", folder);
             WaitHelper.Wait(
-                () => CountFiles(folder, type) > filesNumber, waitTime, 1, timeoutMessage);
+                () => CountFiles(folder, type) > filesNumber, TimeSpan.FromSeconds(waitTime), TimeSpan.FromSeconds(1), timeoutMessage);
             
             Logger.Debug("Number of files increased, checking if size of last file > 0 bytes");
             timeoutMessage = "Checking if size of last file > 0 bytes";
 
             WaitHelper.Wait(
-               () => GetLastFile(folder).Length > 0, waitTime, 1, timeoutMessage);
+               () => GetLastFile(folder).Length > 0, TimeSpan.FromSeconds(waitTime), TimeSpan.FromSeconds(1), timeoutMessage);
         }
 
         /// <summary>
@@ -266,12 +265,12 @@ namespace Objectivity.Test.Automation.Common.Helpers
             Logger.Debug(CultureInfo.CurrentCulture, "Wait for file: {0}", filesName);
             var timeoutMessage = string.Format(CultureInfo.CurrentCulture, "Waiting for file {0} in folder {1}", filesName, folder);
             WaitHelper.Wait(
-                () => File.Exists(folder + Separator + filesName), waitTime, 1, timeoutMessage);
+                () => File.Exists(folder + Separator + filesName), TimeSpan.FromSeconds(waitTime), TimeSpan.FromSeconds(1), timeoutMessage);
 
             Logger.Debug("File exists, checking if size of last file > 0 bytes");
             timeoutMessage = string.Format(CultureInfo.CurrentCulture, "Checking if size of file {0} > 0 bytes", filesName);
             WaitHelper.Wait(
-                () => GetFileByName(folder, filesName).Length > 0, waitTime, 1, timeoutMessage);
+                () => GetFileByName(folder, filesName).Length > 0, TimeSpan.FromSeconds(waitTime), TimeSpan.FromSeconds(1), timeoutMessage);
         }
 
         /// <summary>
@@ -295,13 +294,13 @@ namespace Objectivity.Test.Automation.Common.Helpers
             Logger.Debug("Wait for file");
             var timeoutMessage = string.Format(CultureInfo.CurrentCulture, "Waiting for file number to increase in {0}", folder);
             WaitHelper.Wait(
-                () => CountFiles(folder) > filesNumber, waitTime, 1, timeoutMessage);
+                () => CountFiles(folder) > filesNumber, TimeSpan.FromSeconds(waitTime), TimeSpan.FromSeconds(1), timeoutMessage);
      
             Logger.Debug("Number of files increased, checking if size of last file > 0 bytes");
             timeoutMessage = "Checking if size of last file > 0 bytes";
 
             WaitHelper.Wait(
-               () => GetLastFile(folder).Length > 0, waitTime, 1, timeoutMessage);
+               () => GetLastFile(folder).Length > 0, TimeSpan.FromSeconds(waitTime), TimeSpan.FromSeconds(1), timeoutMessage);
         }
 
         /// <summary>
@@ -342,7 +341,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
             var timeoutMessage = string.Format(CultureInfo.CurrentCulture, "Waiting till file will be renamed {0}", subFolder);
             Process.Start(cmdsi);
             WaitHelper.Wait(
-                () => File.Exists(subFolder + Separator + newName), waitTime, 1, timeoutMessage);     
+                () => File.Exists(subFolder + Separator + newName), TimeSpan.FromSeconds(waitTime), TimeSpan.FromSeconds(1), timeoutMessage);     
         }
        
         /// <summary>
