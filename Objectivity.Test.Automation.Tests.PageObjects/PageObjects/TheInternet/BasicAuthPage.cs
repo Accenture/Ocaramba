@@ -56,7 +56,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
         {
             get
             {
-                var text = this.Driver.GetElement(this.congratulationsInfo).Text;
+                var text = this.Driver.GetElement(this.congratulationsInfo, "Trying to get congratulations Info").Text;
                 Logger.Info(CultureInfo.CurrentCulture, "Text from page '{0}'", text);
                 return text;
             }
