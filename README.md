@@ -36,45 +36,65 @@ To run NUnit tests from Visual Studio remember to install NUnit TestAdapter.
 NUnit Example Test:
 
 ```csharp
+namespace Objectivity.Test.Automation.Tests.NUnit.Tests
+{
+    using global::NUnit.Framework;
+
+    using Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet;
+
+    [Parallelizable(ParallelScope.Fixtures)]
+    public class JavaScriptAlertsTestsNUnit : ProjectTestBase
+    {
         [Test]
-        public void SendKeysAndClickTest()
+        public void ClickJsAlertTest()
         {
-            var loginPage = new HomePage(this.DriverContext)
-                                 .OpenHomePage();
-
-            var searchResultsPage = loginPage.Search("objectivity");
-            searchResultsPage.MarkStackOverFlowFilter();
-
-            var expectedPageTitle = searchResultsPage.GetPageTitle("Search Results");
-            Assert.IsTrue(searchResultsPage.IsPageTitle(expectedPageTitle), "Search results page is not displayed");
+            var internetPage = new InternetPage(this.DriverContext).OpenHomePage();
+            var jsAlertsPage = internetPage.GoToJavaScriptAlerts();
+            jsAlertsPage.OpenJsAlert();
+            jsAlertsPage.AcceptAlert();
+            Assert.AreEqual("You successfuly clicked an alert", jsAlertsPage.ResultText);
         }
+    }
+}
+
 ```
 
 NUnit Example Page Object:
 
 ```csharp
-        public class SearchResultsPage : ProjectPageBase
-		{
-			/// <summary>
-			/// Locators for elements
-			/// </summary>
-			private readonly ElementLocator stackOverFlowCheckbox = new ElementLocator(Locator.Id, "500");
+namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
+{
+    using System;
+    using System.Globalization;
 
-			public SearchResultsPage(DriverContext driverContext)
-				: base(driverContext)
-			{
-			}
+    using NLog;
 
-			/// <summary>
-			/// Marks the stack over flow filter.
-			/// </summary>
-			public SearchResultsPage MarkStackOverFlowFilter()
-			{
-				var checkbox = this.Driver.GetElement<Checkbox>(this.stackOverFlowCheckbox);
-				checkbox.TickCheckbox();
-				return this;
-			}
-		}
+    using Objectivity.Test.Automation.Common;
+    using Objectivity.Test.Automation.Common.Extensions;
+    using Objectivity.Test.Automation.Common.Types;
+    using Objectivity.Test.Automation.Tests.PageObjects;
+
+    public class InternetPage : ProjectPageBase
+    {
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+        /// <summary>
+        /// Locators for elements
+        /// </summary>
+        private readonly ElementLocator
+            linkLocator = new ElementLocator(Locator.CssSelector, "a[href='/{0}']");
+
+        public InternetPage(DriverContext driverContext) : base(driverContext)
+        {
+        }
+
+        public JavaScriptAlertsPage GoToJavaScriptAlerts()
+        {
+            this.Driver.GetElement(this.linkLocator.Evaluate("javascript_alerts")).Click();
+            return new JavaScriptAlertsPage(this.DriverContext);
+        }
+    }
+}
 ```
 		
 #### Where to start?
