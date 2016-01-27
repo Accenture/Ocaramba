@@ -51,6 +51,8 @@ namespace Objectivity.Test.Automation.Common.Helpers
         [SuppressMessage("Microsoft.Security", "CA2100:Review SQL queries for security vulnerabilities", Justification = "SQL injection is in this case expected.")]
         public static ICollection<string> ExecuteSqlCommand(string command, string connectionString, string column)
         {
+            Logger.Trace(CultureInfo.CurrentCulture, "Execute sql query '{0}'", command);
+
             var resultList = new List<string>();
 
             using (var connection = new SqlConnection(connectionString))
@@ -63,7 +65,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
                     {
                         if (!sqlDataReader.HasRows)
                         {
-                            Logger.Error("No result for: {0} \n {1}", command, connectionString);
+                            Logger.Error(CultureInfo.CurrentCulture, "No result for: {0} \n {1} \n {2}", command, connectionString, column);
                             return resultList;
                         }
 
@@ -77,11 +79,11 @@ namespace Objectivity.Test.Automation.Common.Helpers
 
             if (resultList.Count == 0)
             {
-                Logger.Error("No result for: {0} \n {1}", command, connectionString);
+                Logger.Error(CultureInfo.CurrentCulture, "No result for: {0} \n {1} \n {2}", command, connectionString, column);
             }
             else
             {
-                Logger.Trace("sql results: {0}", resultList);
+                Logger.Trace(CultureInfo.CurrentCulture, "Sql results: {0}", resultList);
             }
 
             return resultList;
@@ -97,6 +99,8 @@ namespace Objectivity.Test.Automation.Common.Helpers
         [SuppressMessage("Microsoft.Security", "CA2100:Review SQL queries for security vulnerabilities", Justification = "SQL injection is in this case expected.")]
         public static Dictionary<string, string> ExecuteSqlCommand(string command, string connectionString, IEnumerable<string> columns)
         {
+            Logger.Trace(CultureInfo.CurrentCulture, "Execute sql query '{0}'", command);
+
             var resultList = new Dictionary<string, string>();
             var resultTemp = new Dictionary<string, string>();
 
@@ -110,7 +114,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
                     {
                         if (!sqlDataReader.HasRows)
                         {
-                            Logger.Error("No result for: {0} \n {1}", command, connectionString);
+                            Logger.Error(CultureInfo.CurrentCulture, "No result for: {0} \n {1}", command, connectionString);
                             return resultList;
                         }
 
@@ -137,6 +141,11 @@ namespace Objectivity.Test.Automation.Common.Helpers
                 {
                     throw new KeyNotFoundException(string.Format(CultureInfo.CurrentCulture, " Exception while trying to get results from sql query, lack of column '{0}'", column));
                 }
+            }
+
+            foreach (KeyValuePair<string, string> entry in resultList)
+            {
+                Logger.Trace(CultureInfo.CurrentCulture, "Sql results: {0} = {1}", entry.Key, entry.Value);
             }
 
             return resultList;
