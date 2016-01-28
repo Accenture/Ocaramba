@@ -92,7 +92,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
 
             if (!result)
             {
-                throw new WaitTimeoutException(string.Format(CultureInfo.CurrentCulture, "Timeout after {0} second(s), {1}", timeout, message));
+                throw new WaitTimeoutException(string.Format(CultureInfo.CurrentCulture, "Timeout after {0} second(s), {1}", timeout.Seconds, message));
             }
         }
 
