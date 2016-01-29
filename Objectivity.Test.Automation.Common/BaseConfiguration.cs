@@ -101,7 +101,7 @@ namespace Objectivity.Test.Automation.Common
         }
 
         /// <summary>
-        /// Gets the java script or ajax waiting time.
+        /// Gets the java script or ajax waiting time [seconds].
         /// </summary>
         public static double MediumTimeout
         {
@@ -109,7 +109,7 @@ namespace Objectivity.Test.Automation.Common
         }
 
         /// <summary>
-        /// Gets the page load waiting time.
+        /// Gets the page load waiting time [seconds].
         /// </summary>
         public static double LongTimeout
         {
@@ -117,11 +117,19 @@ namespace Objectivity.Test.Automation.Common
         }
 
         /// <summary>
-        /// Gets the assertion waiting time.
+        /// Gets the assertion waiting time [seconds].
         /// </summary>
         public static double ShortTimeout
         {
             get { return Convert.ToDouble(ConfigurationManager.AppSettings["shortTimeout"], CultureInfo.CurrentCulture); }
+        }
+
+        /// <summary>
+        /// Gets the Implicitly Wait time [milliseconds].
+        /// </summary>
+        public static double ImplicitlyWaitMilliseconds
+        {
+            get { return Convert.ToDouble(ConfigurationManager.AppSettings["ImplicitlyWaitMilliseconds"], CultureInfo.CurrentCulture); }
         }
 
         /// <summary>

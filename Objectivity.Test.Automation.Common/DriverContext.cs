@@ -349,6 +349,9 @@ namespace Objectivity.Test.Automation.Common
                         string.Format(CultureInfo.CurrentCulture, "Driver {0} is not supported", BaseConfiguration.TestBrowser));
             }
 
+            this.driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(BaseConfiguration.LongTimeout));
+            this.driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(BaseConfiguration.ShortTimeout));
+            this.driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromMilliseconds(BaseConfiguration.ImplicitlyWaitMilliseconds));
             this.driver.Manage().Window.Maximize();
         }
 
