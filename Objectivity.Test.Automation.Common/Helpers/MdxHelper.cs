@@ -47,7 +47,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// <param name="command">MDX query string.</param>
         /// <param name="connectionString">The Analysis Services connection string.</param>
         /// <param name="index">The index of column.</param>
-        /// <returns></returns>
+        /// <returns>Collection of MDX query results</returns>
         [SuppressMessage("Microsoft.Security", "CA2100:Review SQL queries for security vulnerabilities", Justification = "Mdx injection is in this case expected.")]
         public static ICollection<string> ExecuteMdxCommand(string command, string connectionString, int index)
         {

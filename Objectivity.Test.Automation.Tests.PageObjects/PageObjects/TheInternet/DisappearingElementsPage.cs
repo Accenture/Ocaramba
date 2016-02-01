@@ -44,18 +44,18 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
         {
             this.Driver.Navigate().Refresh();
             this.Driver.WaitUntilElementIsNoLongerFound(
-                this.menuLink.Evaluate(linkText),
+                this.menuLink.Format(linkText),
                 BaseConfiguration.ShortTimeout);
         }
 
         public string GetLinkTitleTagName(string linkText)
         {
-            return this.Driver.GetElement(this.menuLink.Evaluate(linkText), e => e.Displayed == true).TagName;
+            return this.Driver.GetElement(this.menuLink.Format(linkText), e => e.Displayed == true).TagName;
         }
 
         public bool IsLinkSelected(string linkText)
         {
-            return this.Driver.GetElement(this.menuLink.Evaluate(linkText), BaseConfiguration.MediumTimeout, e => e.Displayed == true).Selected;
+            return this.Driver.GetElement(this.menuLink.Format(linkText), BaseConfiguration.MediumTimeout, e => e.Displayed == true).Selected;
         }
     }
 }

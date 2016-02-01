@@ -55,10 +55,10 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 
         public DownloadPage SaveFile(string fileName, string newName)
         {
-            if (BaseConfiguration.TestBrowser == DriverContext.BrowserType.Firefox
-                || BaseConfiguration.TestBrowser == DriverContext.BrowserType.Chrome)
+            if (BaseConfiguration.TestBrowser == BrowserType.Firefox
+                || BaseConfiguration.TestBrowser == BrowserType.Chrome)
             {
-                this.Driver.GetElement(this.fileLink.Evaluate(fileName), "Click on file").Click();
+                this.Driver.GetElement(this.fileLink.Format(fileName), "Click on file").Click();
                 FilesHelper.WaitForFileOfGivenName(fileName, this.DriverContext.DownloadFolder);
                 FilesHelper.RenameFile(fileName, newName, this.DriverContext.DownloadFolder, FileType.Csv);
             }
@@ -72,11 +72,11 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 
         public DownloadPage SaveFile(string newName)
         {
-           if (BaseConfiguration.TestBrowser == DriverContext.BrowserType.Firefox
-                || BaseConfiguration.TestBrowser == DriverContext.BrowserType.Chrome)
+           if (BaseConfiguration.TestBrowser == BrowserType.Firefox
+                || BaseConfiguration.TestBrowser == BrowserType.Chrome)
             {
                 var filesNumber = FilesHelper.CountFiles(this.DriverContext.DownloadFolder, FileType.Txt);
-                this.Driver.GetElement(this.fileLink.Evaluate("some-file.txt")).Click();
+                this.Driver.GetElement(this.fileLink.Format("some-file.txt")).Click();
                 FilesHelper.WaitForFileOfGivenType(FileType.Txt, filesNumber, this.DriverContext.DownloadFolder);
                 FileInfo file = FilesHelper.GetLastFile(this.DriverContext.DownloadFolder, FileType.Txt);
                 FilesHelper.RenameFile(file.Name, newName, this.DriverContext.DownloadFolder, FileType.Txt);
@@ -91,11 +91,11 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 
         public DownloadPage SaveAnyFile()
         {
-            if (BaseConfiguration.TestBrowser == DriverContext.BrowserType.Firefox
-                 || BaseConfiguration.TestBrowser == DriverContext.BrowserType.Chrome)
+            if (BaseConfiguration.TestBrowser == BrowserType.Firefox
+                 || BaseConfiguration.TestBrowser == BrowserType.Chrome)
             {
                 var filesNumber = FilesHelper.CountFiles(this.DriverContext.DownloadFolder);
-                this.Driver.GetElement(this.fileLink.Evaluate("some-file.txt")).Click();
+                this.Driver.GetElement(this.fileLink.Format("some-file.txt")).Click();
                 FilesHelper.WaitForFile(filesNumber, this.DriverContext.DownloadFolder);
                 FileInfo file = FilesHelper.GetLastFile(this.DriverContext.DownloadFolder);
                 FilesHelper.RenameFile(BaseConfiguration.ShortTimeout,file.Name, "name_of_file_branch.txt", this.DriverContext.DownloadFolder);

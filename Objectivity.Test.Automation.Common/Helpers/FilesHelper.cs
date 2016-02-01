@@ -362,7 +362,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// </summary>
         /// <param name="appConfigValue">The application configuration value.</param>
         /// <param name="currentFolder">Directory where assembly files are located</param>
-        /// <returns></returns>
+        /// <returns>The path to folder</returns>
         public static string GetFolder(string appConfigValue, string currentFolder)
         {
             Logger.Trace(CultureInfo.CurrentCulture, "appConfigValue '{0}', currentFolder '{1}', UseCurrentDirectory '{2}'", appConfigValue, currentFolder, BaseConfiguration.UseCurrentDirectory);

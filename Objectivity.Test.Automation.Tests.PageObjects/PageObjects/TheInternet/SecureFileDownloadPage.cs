@@ -54,10 +54,10 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 
         public SecureFileDownloadPage SaveFile(string fileName, string newName)
         {
-            if (BaseConfiguration.TestBrowser == DriverContext.BrowserType.Firefox
-                || BaseConfiguration.TestBrowser == DriverContext.BrowserType.Chrome)
+            if (BaseConfiguration.TestBrowser == BrowserType.Firefox
+                || BaseConfiguration.TestBrowser == BrowserType.Chrome)
             {
-            this.Driver.GetElement(this.fileLink.Evaluate(fileName)).Click();
+            this.Driver.GetElement(this.fileLink.Format(fileName)).Click();
             FilesHelper.WaitForFileOfGivenName(5, fileName, this.DriverContext.DownloadFolder);
             FileInfo file = FilesHelper.GetLastFile(this.DriverContext.DownloadFolder, FileType.Txt);
             FilesHelper.RenameFile(file.Name, newName, this.DriverContext.DownloadFolder, FileType.Csv);
