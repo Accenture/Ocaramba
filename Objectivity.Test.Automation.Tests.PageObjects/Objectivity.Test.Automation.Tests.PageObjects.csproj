@@ -111,13 +111,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\packages\Selenium.WebDriver.ChromeDriver.2.20.0.0\driver\chromedriver.exe">
+    <Content Include="..\packages\Selenium.WebDriver.ChromeDriver.2.21.0.0\driver\chromedriver.exe">
       <Link>chromedriver.exe</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\packages\Selenium.WebDriver.IEDriver.2.48.0.0\driver\IEDriverServer.exe">
+    <Content Include="..\packages\Selenium.WebDriver.IEDriver.2.49.0.0\driver\IEDriverServer.exe">
       <Link>IEDriverServer.exe</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
