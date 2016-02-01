@@ -55,8 +55,8 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 
         public DownloadPage SaveFile(string fileName, string newName)
         {
-            if (BaseConfiguration.TestBrowser == DriverContext.BrowserType.Firefox
-                || BaseConfiguration.TestBrowser == DriverContext.BrowserType.Chrome)
+            if (BaseConfiguration.TestBrowser == BrowserType.Firefox
+                || BaseConfiguration.TestBrowser == BrowserType.Chrome)
             {
                 this.Driver.GetElement(this.fileLink.Evaluate(fileName), "Click on file").Click();
                 FilesHelper.WaitForFileOfGivenName(fileName, this.DriverContext.DownloadFolder);
@@ -72,8 +72,8 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 
         public DownloadPage SaveFile(string newName)
         {
-           if (BaseConfiguration.TestBrowser == DriverContext.BrowserType.Firefox
-                || BaseConfiguration.TestBrowser == DriverContext.BrowserType.Chrome)
+           if (BaseConfiguration.TestBrowser == BrowserType.Firefox
+                || BaseConfiguration.TestBrowser == BrowserType.Chrome)
             {
                 var filesNumber = FilesHelper.CountFiles(this.DriverContext.DownloadFolder, FileType.Txt);
                 this.Driver.GetElement(this.fileLink.Evaluate("some-file.txt")).Click();
@@ -91,8 +91,8 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 
         public DownloadPage SaveAnyFile()
         {
-            if (BaseConfiguration.TestBrowser == DriverContext.BrowserType.Firefox
-                 || BaseConfiguration.TestBrowser == DriverContext.BrowserType.Chrome)
+            if (BaseConfiguration.TestBrowser == BrowserType.Firefox
+                 || BaseConfiguration.TestBrowser == BrowserType.Chrome)
             {
                 var filesNumber = FilesHelper.CountFiles(this.DriverContext.DownloadFolder);
                 this.Driver.GetElement(this.fileLink.Evaluate("some-file.txt")).Click();

@@ -54,8 +54,8 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 
         public SecureFileDownloadPage SaveFile(string fileName, string newName)
         {
-            if (BaseConfiguration.TestBrowser == DriverContext.BrowserType.Firefox
-                || BaseConfiguration.TestBrowser == DriverContext.BrowserType.Chrome)
+            if (BaseConfiguration.TestBrowser == BrowserType.Firefox
+                || BaseConfiguration.TestBrowser == BrowserType.Chrome)
             {
             this.Driver.GetElement(this.fileLink.Evaluate(fileName)).Click();
             FilesHelper.WaitForFileOfGivenName(5, fileName, this.DriverContext.DownloadFolder);

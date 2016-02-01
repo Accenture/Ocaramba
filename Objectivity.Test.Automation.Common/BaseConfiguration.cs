@@ -36,11 +36,11 @@ namespace Objectivity.Test.Automation.Common
         /// <summary>
         /// Gets the Driver.
         /// </summary>
-        public static DriverContext.BrowserType TestBrowser
+        public static BrowserType TestBrowser
         {
             get
             {
-                DriverContext.BrowserType browserType;
+                BrowserType browserType;
                 bool supportedBrowser = Enum.TryParse(ConfigurationManager.AppSettings["browser"], out browserType);
 
                 if (supportedBrowser)
@@ -48,7 +48,7 @@ namespace Objectivity.Test.Automation.Common
                     return browserType;
                 }
 
-                return DriverContext.BrowserType.None;
+                return BrowserType.None;
             }
         }
 
@@ -252,6 +252,35 @@ namespace Objectivity.Test.Automation.Common
         public static string PageSourceFolder
         {
             get { return ConfigurationManager.AppSettings["PageSourceFolder"]; }
+        }
+
+        /// <summary>
+        /// Gets the URL value 'Protocol://HostURL'.
+        /// </summary>
+        public static string GetUrlValue
+        {
+            get
+            {
+                return string.Format(CultureInfo.CurrentCulture, "{0}://{1}{2}", Protocol, Host, Url);
+            }
+        }
+
+        /// <summary>
+        /// Gets the URL value with user credentials 'Protocol://Username:Password@HostURL'.
+        /// </summary>
+        public static string GetUrlValueWithUserCredentials
+        {
+            get
+            {
+                return string.Format(
+                    CultureInfo.CurrentCulture,
+                    "{0}://{1}:{2}@{3}{4}",
+                    Protocol,
+                    Username,
+                    Password,
+                    Host,
+                    Url);
+            }
         }
     }
 }

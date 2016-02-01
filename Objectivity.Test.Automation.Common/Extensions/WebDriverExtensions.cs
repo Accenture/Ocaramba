@@ -300,7 +300,7 @@ namespace Objectivity.Test.Automation.Common.Extensions
         /// <param name="webDriver">The web driver.</param>
         private static void ApproveCertificateForInternetExplorer(this IWebDriver webDriver)
         {
-            if (BaseConfiguration.TestBrowser.Equals(DriverContext.BrowserType.InternetExplorer) && webDriver.Title.Contains("Certificate"))
+            if (BaseConfiguration.TestBrowser.Equals(BrowserType.InternetExplorer) && webDriver.Title.Contains("Certificate"))
             {
                 webDriver.FindElement(By.Id("overridelink")).JavaScriptClick();
             }

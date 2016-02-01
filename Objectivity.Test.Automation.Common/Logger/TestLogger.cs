@@ -47,6 +47,7 @@ namespace Objectivity.Test.Automation.Common.Logger
         /// <summary>
         /// Logs the test starting.
         /// </summary>
+        /// <param name="driverContext">The driver context.</param>
         public void LogTestStarting(DriverContext driverContext)
         {
             this.startTestTime = DateTime.Now;
@@ -56,6 +57,7 @@ namespace Objectivity.Test.Automation.Common.Logger
         /// <summary>
         /// Logs the test ending.
         /// </summary>
+        /// <param name="driverContext">The driver context.</param>
         public void LogTestEnding(DriverContext driverContext)
         {
             var endTestTime = DateTime.Now;

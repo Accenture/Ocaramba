@@ -66,37 +66,6 @@ namespace Objectivity.Test.Automation.Common
         private TestLogger logTest;
 
         /// <summary>
-        /// Supported browsers
-        /// </summary>
-        public enum BrowserType
-        {
-            /// <summary>
-            /// Firefox browser
-            /// </summary>
-            Firefox,
-
-            /// <summary>
-            /// Firefox portable
-            /// </summary>
-            FirefoxPortable,
-
-            /// <summary>
-            /// InternetExplorer browser
-            /// </summary>
-            InternetExplorer,
-
-            /// <summary>
-            /// Chrome browser
-            /// </summary>
-            Chrome,
-
-            /// <summary>
-            /// Not supported browser
-            /// </summary>
-            None
-        }
-
-        /// <summary>
         /// Gets or sets the test title.
         /// </summary>
         /// <value>
@@ -366,6 +335,7 @@ namespace Objectivity.Test.Automation.Common
         /// <summary>
         /// Takes the screenshot.
         /// </summary>
+        /// <returns>An image of the page currently loaded in the browser.</returns>
         public Screenshot TakeScreenshot()
         {
             try

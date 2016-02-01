@@ -27,7 +27,7 @@ namespace Objectivity.Test.Automation.Tests.xUnit.Tests
         {
             const string h3Value = "Context Menu";
             var browser = BaseConfiguration.TestBrowser;
-            if (browser.Equals(DriverContext.BrowserType.Firefox))
+            if (browser.Equals(BrowserType.Firefox))
             {
                 var contextMenuPage = new InternetPage(DriverContext)
                     .OpenHomePage()

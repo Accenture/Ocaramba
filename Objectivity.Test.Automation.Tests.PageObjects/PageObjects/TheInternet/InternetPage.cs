@@ -53,7 +53,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
         /// </summary>
         public InternetPage OpenHomePage()
         {
-            var url = this.GetUrlValue();
+            var url = BaseConfiguration.GetUrlValue;
             this.Driver.NavigateTo(new Uri(url));
             Logger.Info(CultureInfo.CurrentCulture, "Opening page {0}", url);
             return this;
@@ -64,7 +64,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
         /// </summary>
         public InternetPage OpenHomePageAndMeasureTime()
         {
-            var url = this.GetUrlValue();
+            var url = BaseConfiguration.GetUrlValue;
             this.Driver.NavigateToAndMeasureTime(new Uri(url), waitForAjax: true);
             Logger.Info(CultureInfo.CurrentCulture, "Opening page {0}", url);
             return this;
@@ -72,7 +72,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 
         public InternetPage OpenHomePageWithUserCredentials()
         {
-            var url = this.GetUrlValueWithUserCredentials();
+            var url = BaseConfiguration.GetUrlValueWithUserCredentials;
             this.Driver.NavigateTo(new Uri(url));
             Logger.Info(CultureInfo.CurrentCulture, "Opening page {0}", url);
             return this;
@@ -165,31 +165,5 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             this.Driver.GetElement(this.linkLocator.Evaluate("floating_menu")).Click();
             return new FloatingMenuPage(this.DriverContext);
         }
-
-        private string GetUrlValue()
-        {
-            return string.Format(
-                CultureInfo.CurrentCulture,
-                "{0}://{1}{2}",
-                BaseConfiguration.Protocol,
-                BaseConfiguration.Host,
-                BaseConfiguration.Url);
-        }
-
-
-
-        private string GetUrlValueWithUserCredentials()
-        {
-            return string.Format(
-                CultureInfo.CurrentCulture,
-                "{0}://{1}:{2}@{3}{4}",
-                BaseConfiguration.Protocol,
-                BaseConfiguration.Username,
-                BaseConfiguration.Password,
-                BaseConfiguration.Host,
-                BaseConfiguration.Url);
-    }
-
-
     }
 }

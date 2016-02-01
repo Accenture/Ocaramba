@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseConfiguration.cs" />
+    <Compile Include="BrowserType.cs" />
     <Compile Include="DriverContext.cs" />
     <Compile Include="Exceptions\WaitTimeoutException.cs" />
     <Compile Include="Exceptions\DataDrivenReadException.cs" />

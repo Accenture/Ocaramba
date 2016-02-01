@@ -127,7 +127,7 @@ namespace Objectivity.Test.Automation.Common.Extensions
         }
 
         /// <summary>
-        /// Finds and waits for an element that meets specified conditions at specified time .
+        /// Finds and waits for an element that meets specified conditions at specified time, recheck condition at specific time interval.
         /// </summary>
         /// <param name="element">The element.</param>
         /// <param name="locator">The locator.</param>
@@ -139,7 +139,7 @@ namespace Objectivity.Test.Automation.Common.Extensions
         /// Return found element
         /// </returns>
         /// <example>How to use it: <code>
-        /// this.Driver.GetElement(this.loginButton, timeout, e =&gt; e.Displayed);
+        /// this.Driver.GetElement(this.loginButton, timeout, timeInterval, e =&gt; e.Displayed &amp; e.Enabled);
         /// </code></example>
         public static IWebElement GetElement(this ISearchContext element, ElementLocator locator, double timeout, double timeInterval, Func<IWebElement, bool> condition, [Optional] string customMessage)
         {

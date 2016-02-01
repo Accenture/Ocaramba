@@ -50,6 +50,7 @@ namespace Objectivity.Test.Automation.Common
         /// <summary>
         /// Take screenshot if test failed and delete cached page objects.
         /// </summary>
+        /// <param name="driverContext">The driver context.</param>
         public void SaveTestDetailsIfTestFailed(DriverContext driverContext)
         {
             if (driverContext.IsTestFailed)
@@ -73,9 +74,8 @@ namespace Objectivity.Test.Automation.Common
         /// <summary>
         /// Fail Test If Verify Failed and clear verify messages
         /// </summary>
-        /// <param name="driverContext">
-        /// Driver context includes
-        /// </param>
+        /// <param name="driverContext">Driver context includes</param>
+        /// <returns>True if test failed</returns>
         public bool IsVerifyFailedAndClearMessages(DriverContext driverContext)
         {
             if (!driverContext.VerifyMessages.Count.Equals(0) && !driverContext.IsTestFailed)

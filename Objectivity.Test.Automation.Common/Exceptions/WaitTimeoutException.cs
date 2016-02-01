@@ -28,7 +28,7 @@ namespace Objectivity.Test.Automation.Common.Exceptions
     using System.Runtime.Serialization;
 
     /// <summary>
-    /// Exception to throw when problem with setting the test case name from parameters
+    /// The exception that is thrown when the time for a process or operation has expired.
     /// </summary>
     public class WaitTimeoutException : Exception
     {
