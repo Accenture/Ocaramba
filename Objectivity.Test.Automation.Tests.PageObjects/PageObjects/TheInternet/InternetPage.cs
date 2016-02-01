@@ -80,89 +80,89 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 
         public JavaScriptAlertsPage GoToJavaScriptAlerts()
         {
-            this.Driver.GetElement(this.linkLocator.Evaluate("javascript_alerts")).Click();
+            this.Driver.GetElement(this.linkLocator.Format("javascript_alerts")).Click();
             return new JavaScriptAlertsPage(this.DriverContext);
         }
 
         public void GoToPage(string page)
         {
-            this.Driver.GetElement(this.linkLocator.Evaluate(page)).Click();
+            this.Driver.GetElement(this.linkLocator.Format(page)).Click();
         }
 
         public DownloadPage GoToFileDownloader()
         {
-            this.Driver.GetElement(this.linkLocator.Evaluate("download")).Click();
+            this.Driver.GetElement(this.linkLocator.Format("download")).Click();
             return new DownloadPage(this.DriverContext);
         }
 
         public MultipleWindowsPage GoToMultipleWindowsPage()
         {
-             this.Driver.GetElement(this.linkLocator.Evaluate("windows")).Click();
+             this.Driver.GetElement(this.linkLocator.Format("windows")).Click();
              return new MultipleWindowsPage(this.DriverContext);
         }
 
         public BasicAuthPage GoToBasicAuthPage()
         {
-            this.Driver.GetElement(this.linkLocator.Evaluate("basic_auth")).Click();
+            this.Driver.GetElement(this.linkLocator.Format("basic_auth")).Click();
             return new BasicAuthPage(this.DriverContext);
         }
 
         public NestedFramesPage GoToNestedFramesPage()
         {
-            this.Driver.GetElement(this.linkLocator.Evaluate("nested_frames")).Click();
+            this.Driver.GetElement(this.linkLocator.Format("nested_frames")).Click();
             return new NestedFramesPage(this.DriverContext);
         }
         public CheckboxesPage GoToCheckboxesPage()
         {
-            this.Driver.GetElement(this.linkLocator.Evaluate("checkboxes")).Click();
+            this.Driver.GetElement(this.linkLocator.Format("checkboxes")).Click();
             return new CheckboxesPage(this.DriverContext);
         }
 
         public ContextMenuPage GoToContextMenuPage()
         {
-            this.Driver.GetElement(this.linkLocator.Evaluate("context_menu")).Click();
+            this.Driver.GetElement(this.linkLocator.Format("context_menu")).Click();
             return new ContextMenuPage(this.DriverContext);
         }
 
         public FormAuthenticationPage GoToFormAuthenticationPage()
         {
-            this.Driver.GetElement(this.linkLocator.Evaluate("login")).Click();
+            this.Driver.GetElement(this.linkLocator.Format("login")).Click();
             return new FormAuthenticationPage(this.DriverContext);
         }
 
         public SecureFileDownloadPage GoToSecureFileDownloadPage()
         {
-            this.Driver.GetElement(this.linkLocator.Evaluate("download_secure")).Click();
+            this.Driver.GetElement(this.linkLocator.Format("download_secure")).Click();
             return new SecureFileDownloadPage(this.DriverContext);
         }
 
         public ShiftingContentPage GoToShiftingContentPage()
         {
-            this.Driver.GetElement(this.linkLocator.Evaluate("shifting_content")).Click();
+            this.Driver.GetElement(this.linkLocator.Format("shifting_content")).Click();
             return new ShiftingContentPage(this.DriverContext);
         }
 
         public HoversPage GoToHoversPage()
         {
-            this.Driver.GetElement(this.linkLocator.Evaluate("hovers")).Click();
+            this.Driver.GetElement(this.linkLocator.Format("hovers")).Click();
             return new HoversPage(this.DriverContext);
         }
 
         public StatusCodesPage GoToStatusCodesPage()
         {
-            this.Driver.GetElement(this.linkLocator.Evaluate("status_codes")).Click();
+            this.Driver.GetElement(this.linkLocator.Format("status_codes")).Click();
             return new StatusCodesPage(this.DriverContext);
         }
 
         public ForgotPasswordPage GoToForgotPasswordPage()
         {
-            this.Driver.GetElement(this.linkLocator.Evaluate("forgot_password")).Click();
+            this.Driver.GetElement(this.linkLocator.Format("forgot_password")).Click();
             return new ForgotPasswordPage(this.DriverContext);
         }
 
         public FloatingMenuPage GoToFloatingMenu()
         {
-            this.Driver.GetElement(this.linkLocator.Evaluate("floating_menu")).Click();
+            this.Driver.GetElement(this.linkLocator.Format("floating_menu")).Click();
             return new FloatingMenuPage(this.DriverContext);
         }
     }
