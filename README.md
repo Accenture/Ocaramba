@@ -106,3 +106,4 @@ Checkout the code or get it from [nuget.org](https://www.nuget.org/packages?q=Ob
 - Objectivity.Test.Automation.Common.Features [nuget](https://www.nuget.org/packages/Objectivity.Test.Automation.Common.Features/)
 - Objectivity.Test.Automation.Common.MsTest [nuget](https://www.nuget.org/packages/Objectivity.Test.Automation.Common.MsTest/)
 
+Project API documentation can be found here: http://objectivitybss.github.io/Test.Automation
