@@ -22,15 +22,63 @@
 #SOFTWARE.
 
 Feature: SmokeTests
-	In order to check if framework works correctly
 
-@smoke
-Scenario Outline: Send Keys And Click Test
-	Given I log on and default page is opened
-#	And I search for <word>
-#    Then I should be on <title> page
-#
+@Dropdown
+Scenario: Verify default option selected in dropdown
+	Given Default page is opened
+	When I click "dropdown" link
+	And I see page Dropdown List
+	And I check selected option
+	Then Option with text "Please select an option" is selected
+
+@Dropdown
+Scenario: Verify if dropdown option can be selected by text
+	Given Default page is opened
+	When I click "dropdown" link
+	And I see page Dropdown List
+	When I select option with text "Option 1"
+	And I check selected option
+	Then Option with text "Option 1" is selected
+
+@Dropdown
+Scenario: Verify if dropdown option can be selected by index
+	Given Default page is opened
+	When I click "dropdown" link
+	And I see page Dropdown List
+	When I select option with index '1'
+	And I check selected option
+	Then Option with text "Option 1" is selected
+
+
+Scenario Outline: Key Presses Test
+	Given Default page is opened
+	When I click "key_presses" link
+	And I press <key>
+	Then Valid <message> is displayed
+	
 Examples: 
-| word            | 
-| "objectivity"   | 
-#| "visual studio" |
+	| key          | message     |
+	| "ESC"        | "ESCAPE"    |
+	| "F2"         | "F2"        |
+	| "1"          | "NUMPAD1"   |
+	| "TAB"        | "TAB"       |
+	| "SPACE"      | "SPACE"     |
+	| "ARROW DOWN" | "DOWN"      |
+	| "ARROW LEFT" | "LEFT"      |
+	| "ALT"        | "ALT"       |
+	| "SHIFT"      | "SHIFT"     |
+	| "PAGE UP"    | "PAGE_UP"   |
+	| "PAGE DOWN"  | "PAGE_DOWN" |
+	| "DELETE"     | "DELETE"    |
+	| "MULTIPLY"   | "MULTIPLY"  |
+	| "SUBTRACT"   | "SUBTRACT"  |
+
+Scenario Outline: Do not press any key
+	Given Default page is opened
+	When I click "key_presses" link
+	When I press <key>
+	Then Results element is not displayed
+	
+Examples: 
+	| key |
+	| ""  |
