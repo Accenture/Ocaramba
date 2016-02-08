@@ -37,18 +37,28 @@ namespace Objectivity.Test.Automation.Tests.NUnit.DataDriven
     using Objectivity.Test.Automation.Common.Exceptions;
 
     /// <summary>
-    /// DataDriven methods for NUnit test framework
+    /// XML DataDriven methods for NUnit test framework
     /// </summary>
     public static class DataDrivenHelper
     {
         /// <summary>
         /// Reads the data drive file and set test name.
         /// </summary>
-        /// <param name="folder">Path to folder with DataDriveFile</param>
+        /// <param name="folder">Full path to XML DataDriveFile file</param>
         /// <param name="testData">Name of the child element in xml file.</param>
-        /// <param name="diffParam">The difference parameter, will be used in test case name.</param>
-        /// <param name="testName">Name of the test.</param>
-        /// <returns>IEnumerable TestCaseData</returns>
+        /// <param name="diffParam">Values of listed parameters will be used in test case name.</param>
+        /// <param name="testName">Name of the test, use as prefix for test case name.</param>
+        /// <returns>
+        /// IEnumerable TestCaseData
+        /// </returns>
+        /// <exception cref="System.ArgumentNullException"></exception>
+        /// <exception cref="DataDrivenReadException"></exception>
+        /// <example>How to use it: <code>
+        /// public static IEnumerable Credentials
+        /// {
+        /// get { return DataDrivenHelper.ReadDataDriveFile(ProjectBaseConfiguration.DataDrivenFile, "credential", new[] { "user", "password" }, "credential"); }
+        /// }
+        /// </code></example>
         public static IEnumerable<TestCaseData> ReadDataDriveFile(string folder, string testData, string[] diffParam, [Optional] string testName)
         {
             var doc = XDocument.Load(folder);
@@ -88,9 +98,18 @@ namespace Objectivity.Test.Automation.Tests.NUnit.DataDriven
         /// <summary>
         /// Reads the data drive file without setting test name.
         /// </summary>
-        /// <param name="folder">Path to folder with DataDriven file</param>
-        /// <param name="testData">The test data.</param>
-        /// <returns>IEnumerable TestCaseData</returns>
+        /// <param name="folder">Full path to XML DataDriveFile file</param>
+        /// <param name="testData">Name of the child element in xml file.</param>
+        /// <returns>
+        /// IEnumerable TestCaseData
+        /// </returns>
+        /// <exception cref="System.ArgumentNullException"></exception>
+        /// <example>How to use it: <code>
+        /// public static IEnumerable Credentials
+        /// {
+        /// get { return DataDrivenHelper.ReadDataDriveFile(ProjectBaseConfiguration.DataDrivenFile, "credential"); }
+        /// }
+        /// </code></example>
         public static IEnumerable<TestCaseData> ReadDataDriveFile(string folder, string testData)
         {
             var doc = XDocument.Load(folder);
