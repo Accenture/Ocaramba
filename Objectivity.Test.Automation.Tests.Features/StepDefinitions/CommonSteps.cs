@@ -22,6 +22,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+using System.Globalization;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 namespace Objectivity.Test.Automation.Tests.Features.StepDefinitions
 {
     using System;
@@ -44,23 +47,77 @@ namespace Objectivity.Test.Automation.Tests.Features.StepDefinitions
             this.driverContext = this.scenarioContext["DriverContext"] as DriverContext;
         }
 
-        [Given(@"I log on and default page is opened")]
-        public void GivenILogOnAndDefaultPageIsOpened()
+        [Given(@"Default page is opened")]
+        public void GivenDefaultPageIsOpened()
         {
             new InternetPage(this.driverContext).OpenHomePage();
         }
 
-        [Given(@"I navigate to ""(.*)"" link")]
-        public void GivenINavigateToLink(string nameOfThePage)
+        [When(@"I click ""(.*)"" link")]
+        public void WhenIClickLink(string nameOfThePage)
         {
             new InternetPage(this.driverContext).GoToPage(nameOfThePage);
         }
 
-        [Given(@"I have dropdown page")]
-        public void GivenIHaveDropdownPage()
+        [When(@"I see page Dropdown List")]
+        public void WhenISeePageDropdownList()
         {
             var page = new DropdownPage(this.driverContext);
             this.scenarioContext.Set(page, "DropdownPage");
+        }
+
+        [When(@"I check selected option")]
+        public void WhenICheckSelectedOption()
+        {
+            var dropDownPage = this.scenarioContext.Get<DropdownPage>("DropdownPage");
+            var selectedText = dropDownPage.SelectedText;
+            this.scenarioContext.Set(selectedText, "SelectedText");
+        }
+
+        [When(@"I press ""(.*)""")]
+        public void WhenIPress(string key)
+        {
+            new KeyPressesPage(this.driverContext).SendKeyboardKey(key);
+        }
+
+        [When(@"I select option with text ""(.*)""")]
+        public void WhenISelectOptionWithText(string text)
+        {
+            var dropDownPage = this.scenarioContext.Get<DropdownPage>("DropdownPage");
+            dropDownPage.SelectByText(text);
+        }
+
+        [When(@"I select option with index '(.*)'")]
+        public void WhenISelectOptionWithIndex(int index)
+        {
+            var dropDownPage = this.scenarioContext.Get<DropdownPage>("DropdownPage");
+            dropDownPage.SelectByIndex(index);
+        }
+
+        [Then(@"Option with text ""(.*)"" is selected")]
+        public void ThenOptionWithTextIsSelected(string expectedText)
+        {
+            var currentText = this.scenarioContext.Get<string>("SelectedText");
+            Console.Out.WriteLine(currentText);
+            Verify.That(this.driverContext, () => Assert.AreEqual(currentText, expectedText), false);
+        }
+
+        [Then(@"Valid ""(.*)"" is displayed")]
+        public void ThenValidIsDisplayed(string expectedMessage)
+        {
+            var isElementPresent = new KeyPressesPage(this.driverContext).IsResultElementPresent;
+            Verify.That(this.driverContext, () => Assert.IsTrue(isElementPresent, "Results element does not exist for unclicked key"), false);
+
+            expectedMessage = string.Format(CultureInfo.CurrentCulture, "You entered: {0}", expectedMessage);
+            var resultText = new KeyPressesPage(this.driverContext).ResultText;
+            Verify.That(this.driverContext, () => Assert.AreEqual(resultText, expectedMessage), false);
+        }
+
+        [Then(@"Results element is not displayed")]
+        public void ThenResultsElementIsNotDisplayed()
+        {
+            var isElementPresent = new KeyPressesPage(this.driverContext).IsResultElementPresent;
+            Verify.That(this.driverContext, () => Assert.IsFalse(isElementPresent, "Results element exists for unclicked key"), false);
         }
     }
 }
