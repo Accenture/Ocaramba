@@ -81,6 +81,16 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
         }
 
         [Test]
+        [TestCaseSource(typeof(TestData), "LinksSetTestName")]
+        public void CountLinksAndSetTestNameAtShiftingContentTest(IDictionary<string, string> parameters)
+        {
+            new InternetPage(this.DriverContext).OpenHomePage().GoToShiftingContentPage();
+
+            var links = new ShiftingContentPage(this.DriverContext);
+            Verify.That(this.DriverContext, () => Assert.AreEqual(parameters["number"], links.CountLinks()));
+        }
+
+        [Test]
         [TestCaseSource(typeof(TestData), "Links")]
         public void CountLinksAtShiftingContentTest(IDictionary<string, string> parameters)
         {
