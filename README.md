@@ -16,7 +16,7 @@ It provides following features:
 - Several methods to interact with kendo controls
 - Verify - asserts without stop tests
 - Measures average and 90 Percentile action times
-- DataDriven for NUnit and MSTest with examples, more details [here](https://github.com/ObjectivityBSS/Test.Automation/wiki/XML-DataDriven-tests)
+- DataDriven tests from Xml files for NUnit and MSTest with examples, more details [here](https://github.com/ObjectivityBSS/Test.Automation/wiki/DataDriven-tests-from-Xml-files)
 - Possibility to take full desktop or browser screen shot
 - Logging with NLog
 - Files downloading (Firefox, Chrome)
