@@ -100,7 +100,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// <returns>
         /// Dictionary of each column existed in raw.
         /// </returns>
-        /// <exception cref="System.Collections.Generic.KeyNotFoundException"></exception>
+        /// <exception cref="System.Collections.Generic.KeyNotFoundException">Exception when there is not given column in results from sql query</exception>
         [SuppressMessage("Microsoft.Security", "CA2100:Review SQL queries for security vulnerabilities", Justification = "SQL injection is in this case expected.")]
         public static Dictionary<string, string> ExecuteSqlCommand(string command, string connectionString, IEnumerable<string> columns)
         {
