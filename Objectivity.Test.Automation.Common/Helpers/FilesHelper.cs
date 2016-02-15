@@ -187,12 +187,17 @@ namespace Objectivity.Test.Automation.Common.Helpers
             return file;
         }
 
-         /// <summary>
-         /// Counts the files of given type.
-         /// </summary>
+        /// <summary>
+        /// Counts the files of given type.
+        /// </summary>
         /// <param name="folder">The folder.</param>
-         /// <param name="type">The type.</param>
-         /// <returns>Number of files in subfolder</returns>
+        /// <param name="type">The type.</param>
+        /// <returns>
+        /// Number of files in subfolder
+        /// </returns>
+        /// <example>How to use it: <code>
+        /// var filesNumber = FilesHelper.CountFiles(this.DriverContext.DownloadFolder, FileType.Txt);
+        /// </code></example>
         public static int CountFiles(string folder, FileType type)
         {
             Logger.Debug(CultureInfo.CurrentCulture, "Count {0} Files in '{1}'", type, folder);
@@ -205,7 +210,12 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// Counts the files.
         /// </summary>
         /// <param name="folder">The folder.</param>
-        /// <returns>Number of files in subfolder</returns>
+        /// <returns>
+        /// Number of files in subfolder
+        /// </returns>
+        /// <example>How to use it: <code>
+        /// var filesNumber = FilesHelper.CountFiles(this.DriverContext.DownloadFolder);
+        /// </code></example>
         public static int CountFiles(string folder)
         {
             Logger.Debug(CultureInfo.CurrentCulture, "Count all Files in '{0}'", folder);
@@ -220,6 +230,9 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// <param name="folder">The folder.</param>
         /// <param name="type">The type of file.</param>
         /// <returns>Last file of given type</returns>
+        /// <example>How to use it: <code>
+        /// FilesHelper.GetLastFile(this.DriverContext.ScreenShotFolder, FileType.Png);
+        /// </code></example>
         public static FileInfo GetLastFile(string folder, FileType type)
         {
             Logger.Debug(CultureInfo.CurrentCulture, "Get Last File of given type {0}", type);
@@ -236,7 +249,12 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// Gets the last file.
         /// </summary>
         /// <param name="folder">The folder.</param>
-        /// <returns>Last file of given type</returns>
+        /// <returns>
+        /// Last file of given type
+        /// </returns>
+        /// <example>How to use it: <code>
+        /// FilesHelper.GetLastFile(this.DriverContext.ScreenShotFolder);
+        /// </code></example>
         public static FileInfo GetLastFile(string folder)
         {
             Logger.Debug("Get Last File");
@@ -375,6 +393,9 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// <param name="oldName">The old name.</param>
         /// <param name="newName">The new name.</param>
         /// <param name="subFolder">The subFolder.</param>
+        /// <example>How to use it: <code>
+        ///  FilesHelper.RenameFile(BaseConfiguration.ShortTimeout, "filename.txt", "newname.txt", this.DriverContext.DownloadFolder);
+        /// </code></example>
         public static void RenameFile(double waitTime, string oldName, string newName, string subFolder)
         {
             Logger.Debug(CultureInfo.CurrentCulture, "new file name: {0}", newName);
@@ -398,7 +419,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
             WaitHelper.Wait(
                 () => File.Exists(subFolder + Separator + newName), TimeSpan.FromSeconds(waitTime), TimeSpan.FromSeconds(1), timeoutMessage);     
         }
-       
+
         /// <summary>
         /// Rename the file of given type and check if file was renamed with ShortTimeout.
         /// </summary>
@@ -406,6 +427,9 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// <param name="newName">The new name.</param>
         /// <param name="subFolder">The subFolder.</param>
         /// <param name="type">The type of file.</param>
+        /// <example>How to use it: <code>
+        ///  FilesHelper.RenameFile("filename.txt", "newname", this.DriverContext.DownloadFolder, FileType.Csv);
+        /// </code></example>
         public static void RenameFile(string oldName, string newName, string subFolder, FileType type)
         {
             newName = newName + ReturnFileExtension(type);
@@ -417,7 +441,12 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// </summary>
         /// <param name="appConfigValue">The application configuration value.</param>
         /// <param name="currentFolder">Directory where assembly files are located</param>
-        /// <returns>The path to folder</returns>
+        /// <returns>
+        /// The path to folder
+        /// </returns>
+        /// <example>How to use it: <code>
+        ///   FilesHelper.GetFolder(BaseConfiguration.DownloadFolder, this.CurrentDirectory);
+        /// </code></example>
         public static string GetFolder(string appConfigValue, string currentFolder)
         {
             Logger.Trace(CultureInfo.CurrentCulture, "appConfigValue '{0}', currentFolder '{1}', UseCurrentDirectory '{2}'", appConfigValue, currentFolder, BaseConfiguration.UseCurrentDirectory);

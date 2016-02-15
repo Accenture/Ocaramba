@@ -40,14 +40,16 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// NLog logger handle
         /// </summary>
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-        
+
         /// <summary>
         /// Method is used for execution SQL query (select) and reading each row from column.
         /// </summary>
         /// <param name="command">SQL query</param>
         /// <param name="connectionString">Server, user, pass</param>
-        /// <param name="column">Name of column </param>
-        /// <returns> Collection of each row existed in column.</returns>
+        /// <param name="column">Name of column</param>
+        /// <returns>
+        /// Collection of each row existed in column.
+        /// </returns>
         [SuppressMessage("Microsoft.Security", "CA2100:Review SQL queries for security vulnerabilities", Justification = "SQL injection is in this case expected.")]
         public static ICollection<string> ExecuteSqlCommand(string command, string connectionString, string column)
         {
@@ -94,8 +96,11 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// </summary>
         /// <param name="command">SQL query</param>
         /// <param name="connectionString">Server, user, pass</param>
-        /// <param name="columns">Name of columns </param>
-        /// <returns>Dictionary of each column existed in raw.</returns>
+        /// <param name="columns">Name of columns</param>
+        /// <returns>
+        /// Dictionary of each column existed in raw.
+        /// </returns>
+        /// <exception cref="System.Collections.Generic.KeyNotFoundException"></exception>
         [SuppressMessage("Microsoft.Security", "CA2100:Review SQL queries for security vulnerabilities", Justification = "SQL injection is in this case expected.")]
         public static Dictionary<string, string> ExecuteSqlCommand(string command, string connectionString, IEnumerable<string> columns)
         {
