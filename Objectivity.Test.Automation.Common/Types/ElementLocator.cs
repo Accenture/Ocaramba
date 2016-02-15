@@ -63,21 +63,6 @@ namespace Objectivity.Test.Automation.Common.Types
         public string Value { get; set; }
 
         /// <summary>
-        /// Evaluates the generic element locator definition and create the instance
-        /// </summary>
-        /// <example>How we can replace parts of defined locator: <code>
-        /// private readonly ElementLocator menuLink = new ElementLocator(Locator.XPath, "//*[@title='{0}' and @ms.title='{1}']");
-        /// var element = this.Driver.GetElement(this.menuLink.Evaluate("info","news"));
-        /// </code> </example>
-        /// <param name="parameters">The parameters.</param>
-        /// <returns>New element locator with value changed by injected parameters</returns>
-        [Obsolete("Evaluate is deprecated, please use Format instead.", true)]
-        public ElementLocator Evaluate(params object[] parameters)
-        {
-            return new ElementLocator(this.Kind, string.Format(CultureInfo.CurrentCulture, this.Value, parameters));
-        }
-
-        /// <summary>
         /// Formats the generic element locator definition and create the instance
         /// </summary>
         /// <example>How we can replace parts of defined locator: <code>
