@@ -65,12 +65,14 @@ namespace Objectivity.Test.Automation.Common.Types
         /// <summary>
         /// Formats the generic element locator definition and create the instance
         /// </summary>
+        /// <param name="parameters">The parameters.</param>
+        /// <returns>
+        /// New element locator with value changed by injected parameters
+        /// </returns>
         /// <example>How we can replace parts of defined locator: <code>
         /// private readonly ElementLocator menuLink = new ElementLocator(Locator.XPath, "//*[@title='{0}' and @ms.title='{1}']");
         /// var element = this.Driver.GetElement(this.menuLink.Format("info","news"));
-        /// </code> </example>
-        /// <param name="parameters">The parameters.</param>
-        /// <returns>New element locator with value changed by injected parameters</returns>
+        /// </code></example>
         public ElementLocator Format(params object[] parameters)
         {
             return new ElementLocator(this.Kind, string.Format(CultureInfo.CurrentCulture, this.Value, parameters));
