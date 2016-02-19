@@ -364,7 +364,7 @@ namespace Objectivity.Test.Automation.Common
         /// <param name="title">The title.</param>
         public void SaveScreenshot(ErrorDetail errorDetail, string folder, string title)
         {
-            var fileName = string.Format(CultureInfo.CurrentCulture, "{0}_{1}.png", title, errorDetail.DateTime.ToString("yyyy-MM-dd HH-mm-ss-fff", CultureInfo.CurrentCulture));
+            var fileName = string.Format(CultureInfo.CurrentCulture, "{0}_{1}_{2}.png", title, errorDetail.DateTime.ToString("yyyy-MM-dd HH-mm-ss-fff", CultureInfo.CurrentCulture), "browser");
             var correctFileName = Path.GetInvalidFileNameChars().Aggregate(fileName, (current, c) => current.Replace(c.ToString(CultureInfo.CurrentCulture), string.Empty));
             var filePath = Path.Combine(folder, correctFileName);
 
