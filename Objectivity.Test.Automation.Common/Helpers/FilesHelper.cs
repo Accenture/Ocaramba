@@ -136,7 +136,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
         }
 
         /// <summary>
-        /// Gets the files of given type from all subdirecories.
+        /// Gets the files of given type from all sub folders.
         /// </summary>
         /// <param name="folder">The folder.</param>
         /// <param name="type">The type of files.</param>
@@ -144,15 +144,15 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// Collection of files
         /// </returns>
         /// <example>How to use it: <code>
-        /// var files = GetFilesOfGivenTypeFromAllSubDirecories(folder, FileType.Txt);
+        /// var files = GetFilesOfGivenTypeFromAllSubFolders(folder, FileType.Txt);
         /// </code></example>
         public static ICollection<FileInfo> GetFilesOfGivenTypeFromAllSubDirecories(string folder, FileType type)
         {
-            return GetFilesOfGivenTypeFromAllSubDirecories(folder, type, string.Empty);
+            return GetFilesOfGivenTypeFromAllSubFolders(folder, type, string.Empty);
         }
 
         /// <summary>
-        /// Gets the files of given type from all subdirecories, use postfixFilesName in search pattern.
+        /// Gets the files of given type from all sub folders, use postfixFilesName in search pattern.
         /// </summary>
         /// <param name="folder">The folder.</param>
         /// <param name="type">The type of files.</param>
@@ -161,9 +161,9 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// Collection of files
         /// </returns>
         /// <example>How to use it: <code>
-        /// var files = GetFilesOfGivenTypeFromAllSubDirecories(folder, FileType.Txt, "live");
+        /// var files = GetFilesOfGivenTypeFromAllSubFolders(folder, FileType.Txt, "live");
         /// </code></example>
-        public static ICollection<FileInfo> GetFilesOfGivenTypeFromAllSubDirecories(string folder, FileType type, string postfixFilesName)
+        public static ICollection<FileInfo> GetFilesOfGivenTypeFromAllSubFolders(string folder, FileType type, string postfixFilesName)
         {
             Logger.Debug("Get Files '{0}' from '{1}', postfixFilesName '{2}'", type, folder, postfixFilesName);
             List<FileInfo> files =
@@ -195,7 +195,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
         }
 
         /// <summary>
-        /// Gets all files from all subdirecories, use postfixFilesName in search pattern.
+        /// Gets all files from all sub folders, use postfixFilesName in search pattern.
         /// </summary>
         /// <param name="folder">The folder.</param>
         /// <param name="postfixFilesName">Postfix name of files for search pattern.</param>
@@ -203,9 +203,9 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// Collection of files
         /// </returns>
         /// <example>How to use it: <code>
-        /// var files = GetAllFilesFromAllSubDirecories(folder, "live");
+        /// var files = GetAllFilesFromAllSubFolders(folder, "live");
         /// </code></example>
-        public static ICollection<FileInfo> GetAllFilesFromAllSubDirecories(string folder, string postfixFilesName)
+        public static ICollection<FileInfo> GetAllFilesFromAllSubFolders(string folder, string postfixFilesName)
         {
             Logger.Debug("Get all files from '{0}', postfixFilesName '{1}'", folder, postfixFilesName);
             ICollection<FileInfo> files =
@@ -216,18 +216,18 @@ namespace Objectivity.Test.Automation.Common.Helpers
         }
 
         /// <summary>
-        /// Gets all files from all subdirecories.
+        /// Gets all files from all sub folders.
         /// </summary>
         /// <param name="folder">The folder.</param>
         /// <returns>
         /// Collection of files
         /// </returns>
         /// <example>How to use it: <code>
-        /// var files = GetAllFilesFromAllSubDirecories(folder);
+        /// var files = GetAllFilesFromAllSubFolders(folder);
         /// </code></example>
-        public static ICollection<FileInfo> GetAllFilesFromAllSubDirecories(string folder)
+        public static ICollection<FileInfo> GetAllFilesFromAllSubFolders(string folder)
         {
-            return GetAllFilesFromAllSubDirecories(folder, string.Empty);
+            return GetAllFilesFromAllSubFolders(folder, string.Empty);
         }
 
         /// <summary>
