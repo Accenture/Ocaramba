@@ -146,7 +146,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// <example>How to use it: <code>
         /// var files = GetFilesOfGivenTypeFromAllSubDirecories(folder, FileType.Txt);
         /// </code></example>
-        public static List<FileInfo> GetFilesOfGivenTypeFromAllSubDirecories(string folder, FileType type)
+        public static ICollection<FileInfo> GetFilesOfGivenTypeFromAllSubDirecories(string folder, FileType type)
         {
             return GetFilesOfGivenTypeFromAllSubDirecories(folder, type, string.Empty);
         }
@@ -163,7 +163,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// <example>How to use it: <code>
         /// var files = GetFilesOfGivenTypeFromAllSubDirecories(folder, FileType.Txt, "live");
         /// </code></example>
-        public static List<FileInfo> GetFilesOfGivenTypeFromAllSubDirecories(string folder, FileType type, string postfixFilesName)
+        public static ICollection<FileInfo> GetFilesOfGivenTypeFromAllSubDirecories(string folder, FileType type, string postfixFilesName)
         {
             Logger.Debug("Get Files '{0}' from '{1}', postfixFilesName '{2}'", type, folder, postfixFilesName);
             List<FileInfo> files =
