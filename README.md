@@ -106,5 +106,3 @@ Checkout the code or get it from [nuget.org](https://www.nuget.org/packages?q=Ob
 - Objectivity.Test.Automation.Common.Features [nuget](https://www.nuget.org/packages/Objectivity.Test.Automation.Common.Features/)
 - Objectivity.Test.Automation.Common.MsTest [nuget](https://www.nuget.org/packages/Objectivity.Test.Automation.Common.MsTest/)
 - Objectivity.Test.Automation.Common.xUnit [nuget](https://www.nuget.org/packages/Objectivity.Test.Automation.Common.xUnit/)
-
-[![Analytics](https://ga-beacon.appspot.com/UA-73904023-1/Test.Automation/readme.md)](https://github.com/ObjectivityBSS/Test.Automation)
