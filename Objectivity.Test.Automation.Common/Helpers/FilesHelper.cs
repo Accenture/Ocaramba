@@ -146,7 +146,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// <example>How to use it: <code>
         /// var files = GetFilesOfGivenTypeFromAllSubFolders(folder, FileType.Txt);
         /// </code></example>
-        public static ICollection<FileInfo> GetFilesOfGivenTypeFromAllSubDirecories(string folder, FileType type)
+        public static ICollection<FileInfo> GetFilesOfGivenTypeFromAllSubFolders(string folder, FileType type)
         {
             return GetFilesOfGivenTypeFromAllSubFolders(folder, type, string.Empty);
         }

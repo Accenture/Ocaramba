@@ -38,7 +38,11 @@ namespace Objectivity.Test.Automation.Tests.Features.StepDefinitions
 
         public CommonSteps(ScenarioContext scenarioContext)
         {
-            if (scenarioContext == null) throw new ArgumentNullException("scenarioContext");
+            if (scenarioContext == null)
+            {
+                throw new ArgumentNullException("scenarioContext");
+            }
+
             this.scenarioContext = scenarioContext;
 
             this.driverContext = this.scenarioContext["DriverContext"] as DriverContext;
