@@ -98,7 +98,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
                 this.Driver.GetElement(this.fileLink.Format("some-file.txt")).Click();
                 FilesHelper.WaitForFile(filesNumber, this.DriverContext.DownloadFolder);
                 FileInfo file = FilesHelper.GetLastFile(this.DriverContext.DownloadFolder);
-                FilesHelper.RenameFile(BaseConfiguration.ShortTimeout,file.Name, "name_of_file_branch.txt", this.DriverContext.DownloadFolder);
+                FilesHelper.RenameFile(BaseConfiguration.ShortTimeout, file.Name, "name_of_file_branch.txt", this.DriverContext.DownloadFolder);
             }
             else
             {

@@ -110,8 +110,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.Kendo
             get
             {
                 return this.CapColorKendoDropDownList.UnorderedList;
-            }
-            
+            }          
         }
 
         public int GetNumberOfOptions(IWebElement webElement)

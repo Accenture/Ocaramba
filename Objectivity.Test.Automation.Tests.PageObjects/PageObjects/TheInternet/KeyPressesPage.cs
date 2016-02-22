@@ -22,7 +22,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-
 namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 {
     using System;
@@ -41,6 +40,13 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
         private readonly ElementLocator keyPressesPageHeader = new ElementLocator(Locator.XPath, "//h3[.='Key Presses']");
 
         private readonly ElementLocator resultTextLocator = new ElementLocator(Locator.Id, "result");
+
+        public KeyPressesPage(DriverContext driverContext) : base(driverContext)
+        {
+            Logger.Info("Waiting for Key Process page to open");
+            this.Driver.IsElementPresent(this.keyPressesPageHeader, BaseConfiguration.ShortTimeout);
+        }
+
         public string ResultText
         {
             get
@@ -57,7 +63,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             }
         }
 
-        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Checking all keys")]
         public void SendKeyboardKey(string key)
         {
             switch (key.ToLower(CultureInfo.InvariantCulture))
@@ -109,12 +115,6 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
                 default:
                     throw new ArgumentException("This keybord key is not supported: " + key);
             }
-        }
-
-        public KeyPressesPage(DriverContext driverContext) : base(driverContext)
-        {
-            Logger.Info("Waiting for Key Process page to open");
-            this.Driver.IsElementPresent(this.keyPressesPageHeader, BaseConfiguration.ShortTimeout);
         }
     }
 }

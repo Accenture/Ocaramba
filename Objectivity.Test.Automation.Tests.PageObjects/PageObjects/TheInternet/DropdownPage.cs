@@ -78,12 +78,10 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 
             if (select.IsSelectOptionAvailable(text) == false)
             {
-                throw new NoSuchElementException("Option with text " +text +" is not present");
+                throw new NoSuchElementException("Option with text " + text + " is not present");
             }
 
-
-
             select.SelectByText(text);
-   }
+        }
     }
 }

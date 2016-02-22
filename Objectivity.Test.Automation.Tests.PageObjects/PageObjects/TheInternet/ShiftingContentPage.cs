@@ -43,7 +43,6 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
         private readonly ElementLocator pageHeader = new ElementLocator(Locator.XPath, "//h3[.='Shifting Content']"),
                                         links = new ElementLocator(Locator.CssSelector, ".example>a");
 
-
         public ShiftingContentPage(DriverContext driverContext)
             : base(driverContext)
         {
