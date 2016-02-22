@@ -35,9 +35,8 @@ namespace Objectivity.Test.Automation.Tests.xUnit
     public class TestFixture : TestBase, IDisposable
     {
         /// <summary>
-        /// Before the class.
+        /// Initializes a new instance of the <see cref="TestFixture"/> class.
         /// </summary>
-        // ReSharper disable once PublicConstructorInAbstractClass
         public TestFixture()
         {
             StartPerformanceMeasure();

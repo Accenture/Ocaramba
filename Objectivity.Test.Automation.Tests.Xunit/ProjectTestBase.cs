@@ -39,7 +39,7 @@ namespace Objectivity.Test.Automation.Tests.xUnit
         protected readonly DriverContext DriverContext = new DriverContext();
 
         /// <summary>
-        /// Before the test.
+        /// Initializes a new instance of the <see cref="ProjectTestBase"/> class.
         /// </summary>
         protected ProjectTestBase()
         {
