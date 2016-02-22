@@ -51,8 +51,8 @@ namespace Objectivity.Test.Automation.Tests.NUnit.DataDriven
         /// <returns>
         /// IEnumerable TestCaseData
         /// </returns>
-        /// <exception cref="System.ArgumentNullException"></exception>
-        /// <exception cref="DataDrivenReadException"></exception>
+        /// <exception cref="System.ArgumentNullException">Exception when element not found in file</exception>
+        /// <exception cref="DataDrivenReadException">Exception when parameter not found in row</exception>
         /// <example>How to use it: <code>
         /// public static IEnumerable Credentials
         /// {
@@ -103,7 +103,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit.DataDriven
         /// <returns>
         /// IEnumerable TestCaseData
         /// </returns>
-        /// <exception cref="System.ArgumentNullException"></exception>
+        /// <exception cref="System.ArgumentNullException">Exception when element not found in file</exception>
         /// <example>How to use it: <code>
         /// public static IEnumerable Credentials
         /// {
@@ -150,7 +150,6 @@ namespace Objectivity.Test.Automation.Tests.NUnit.DataDriven
                         throw new DataDrivenReadException(p);
                     }
                 }
-
             }
 
             return testCaseName;

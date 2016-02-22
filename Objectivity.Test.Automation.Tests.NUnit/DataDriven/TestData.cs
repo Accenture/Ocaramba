@@ -31,7 +31,6 @@ namespace Objectivity.Test.Automation.Tests.NUnit.DataDriven
     /// </summary>
     public static class TestData 
     {
-
         public static IEnumerable Credentials
         {
             get { return DataDrivenHelper.ReadDataDriveFile(ProjectBaseConfiguration.DataDrivenFile, "credential", new[] { "user", "password" }, "credential"); }

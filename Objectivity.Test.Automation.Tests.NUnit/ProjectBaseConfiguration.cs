@@ -48,7 +48,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit
         {
             get
             {
-                if(BaseConfiguration.UseCurrentDirectory)
+                if (BaseConfiguration.UseCurrentDirectory)
                 {
                     return Path.Combine(CurrentDirectory + ConfigurationManager.AppSettings["DataDrivenFile"]);
                 }

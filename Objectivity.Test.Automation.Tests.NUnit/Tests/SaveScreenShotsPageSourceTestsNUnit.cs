@@ -22,7 +22,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-
 namespace Objectivity.Test.Automation.Tests.NUnit.Tests
 {
     using System.Drawing.Imaging;
@@ -33,7 +32,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
     using Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet;
 
     [TestFixture]
-    class SaveScreenShotsPageSourceTestsNUnit : ProjectTestBase
+    public class SaveScreenShotsPageSourceTestsNUnit : ProjectTestBase
     {
         [Test]
         public void SaveFullScreenShotTest()

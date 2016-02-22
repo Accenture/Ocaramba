@@ -36,7 +36,6 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
     [Parallelizable(ParallelScope.Fixtures)]
     public class HerokuappTestsNUnit : ProjectTestBase
     {
-
         [Test]
         public void BasicAuthTest()
         {
@@ -64,7 +63,6 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
             Verify.That(
                 this.DriverContext,
                 () => Assert.AreEqual(parameters["message"], formFormAuthentication.GetMessage));
-
         }
 
         [Test]
@@ -148,9 +146,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
                     .SelectTheInternetOptionFromContextMenu();
 
                 Assert.AreEqual("You selected a context menu", contextMenuPage.JavaScriptText);
-                Assert.True(contextMenuPage
-                    .ConfirmJavaScript()
-                    .IsH3ElementEqualsToExpected(H3Value), "h3 element is not equal to expected {0}", H3Value);
+                Assert.True(contextMenuPage.ConfirmJavaScript().IsH3ElementEqualsToExpected(H3Value), "h3 element is not equal to expected {0}", H3Value);
             }
         }
 
