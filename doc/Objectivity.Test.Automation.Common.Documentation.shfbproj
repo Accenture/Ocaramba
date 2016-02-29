@@ -17,7 +17,7 @@
     <RootNamespace>Documentation</RootNamespace>
     <Name>Objectivity.Test.Automation.Common.Documentation</Name>
     <!-- SHFB properties -->
-    <FrameworkVersion>.NET Framework 4.0</FrameworkVersion>
+    <FrameworkVersion>.NET Framework 4.5</FrameworkVersion>
     <OutputPath>Help\</OutputPath>
     <HtmlHelpName>Objectivity.Test.Automation.Common</HtmlHelpName>
     <Language>en-US</Language>
