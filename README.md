@@ -1,7 +1,9 @@
 ## Test.Automation
 Framework to automate tests using Selenium WebDriver
 
-Test Framework was designed in Objectivity to propose common way how people should create Selenium WebDriver tests:
+Test Framework was designed in Objectivity to propose common way how people should create Selenium WebDriver tests.
+
+Project API documentation can be found here: http://objectivitybss.github.io/Test.Automation
 
 It provides following features:
 - Possibility to use MSTest, NUnit or xUNIT framework
@@ -30,8 +32,6 @@ Projects examples of using Test Framework :
 - Objectivity.Test.Automation.Tests.NUnit for NUnit
 - Objectivity.Test.Automation.Tests.xUnit for xUnit
 - Objectivity.Test.Automation.Tests.PageObjects for Page Object Pattern
-
-Project API documentation can be found here: http://objectivitybss.github.io/Test.Automation
 
 NUnit Example Test:
 
