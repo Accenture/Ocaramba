@@ -372,6 +372,7 @@ namespace Objectivity.Test.Automation.Common
             {
                 errorDetail.Screenshot.SaveAsFile(filePath, ImageFormat.Png);
                 Logger.Error(CultureInfo.CurrentCulture, "Test failed: screenshot saved to {0}.", filePath);
+                Logger.Info(CultureInfo.CurrentCulture, "##teamcity[publishArtifacts '{0}']", filePath);
             }
             catch (NullReferenceException)
             {
@@ -396,7 +397,10 @@ namespace Objectivity.Test.Automation.Common
                 var pageSource = this.driver.PageSource;
                 pageSource = pageSource.Replace("<head>", string.Format(CultureInfo.CurrentCulture, "<head><base href=\"http://{0}\" target=\"_blank\">", BaseConfiguration.Host));
                 File.WriteAllText(path, pageSource);
-           }
+
+                Logger.Error(CultureInfo.CurrentCulture, "Test failed: page Source saved to {0}.", path);
+                Logger.Info(CultureInfo.CurrentCulture, "##teamcity[publishArtifacts '{0}']", path);
+            }
         }
 
         /// <summary>
