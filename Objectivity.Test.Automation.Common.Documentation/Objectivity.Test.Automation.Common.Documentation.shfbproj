@@ -87,4 +87,7 @@
     </PostBuildEvent>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
 </Project>
