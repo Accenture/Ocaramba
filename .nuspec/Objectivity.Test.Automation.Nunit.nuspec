@@ -10,11 +10,13 @@
     <projectUrl>https://github.com/ObjectivityBSS/Test.Automation</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Framework to automate tests using Objectivity.Test.Automation.Common with NUnit</description>
-    <!--<releaseNotes>Summary of changes made in this release of the package.</releaseNotes>-->
+    <releaseNotes>You can find info about this release here: https://github.com/ObjectivityBSS/Test.Automation/releases</releaseNotes>
     <copyright>Copyright 2015</copyright>
     <tags>selenium webdriver testautomation tests nunit Objectivity.Test.Automation.Common</tags>
 	<dependencies>
 	  <dependency id="NUnit" version="3.0.1" />
+	  <dependency id="NUnit.Console" version="3.0.1" />
+	  <dependency id="NUnit.Runners" version="3.0.1" />
     </dependencies> 
   </metadata>
   <files>

@@ -36,7 +36,6 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             get { return this.Driver.GetElement(this.bottomBody).Text; }
         }
 
-
         public NestedFramesPage SwitchToFrame(string frame)
         {
             this.Driver.SwitchTo().Frame(frame);
@@ -54,6 +53,5 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             this.Driver.SwitchTo().DefaultContent();
             return this;
         }
-
     }
 }

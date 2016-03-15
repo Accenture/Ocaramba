@@ -112,6 +112,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             this.Driver.GetElement(this.linkLocator.Format("nested_frames")).Click();
             return new NestedFramesPage(this.DriverContext);
         }
+
         public CheckboxesPage GoToCheckboxesPage()
         {
             this.Driver.GetElement(this.linkLocator.Format("checkboxes")).Click();

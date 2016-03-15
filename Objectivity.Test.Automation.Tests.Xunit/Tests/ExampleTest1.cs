@@ -4,32 +4,30 @@ using Xunit;
 
 namespace Objectivity.Test.Automation.Tests.xUnit.Tests
 {
-
     public class ExampleTest1 : ProjectTestBase
     {
-
         [Fact]
         public void TestMethod1()
         {
-            const string pageTitle = "New Window";
+            const string PageTitle = "New Window";
 
-            var newWindowPage = new InternetPage(DriverContext)
+            var newWindowPage = new InternetPage(this.DriverContext)
                 .OpenHomePage()
                 .GoToMultipleWindowsPage()
                 .OpenNewWindowPage();
 
-            Assert.True(newWindowPage.IsPageTile(pageTitle));
-            Assert.True(newWindowPage.IsNewWindowH3TextVisible(pageTitle));
+            Assert.True(newWindowPage.IsPageTile(PageTitle));
+            Assert.True(newWindowPage.IsNewWindowH3TextVisible(PageTitle));
         }
 
         [Fact]
         public void ContextMenuTest()
         {
-            const string h3Value = "Context Menu";
+            const string H3Value = "Context Menu";
             var browser = BaseConfiguration.TestBrowser;
             if (browser.Equals(BrowserType.Firefox))
             {
-                var contextMenuPage = new InternetPage(DriverContext)
+                var contextMenuPage = new InternetPage(this.DriverContext)
                     .OpenHomePage()
                     .GoToContextMenuPage()
                     .SelectTheInternetOptionFromContextMenu();
@@ -37,10 +35,8 @@ namespace Objectivity.Test.Automation.Tests.xUnit.Tests
                 Assert.Equal("You selected a context menu", contextMenuPage.JavaScriptText);
                 Assert.True(contextMenuPage
                     .ConfirmJavaScript()
-                    .IsH3ElementEqualsToExpected(h3Value));
+                    .IsH3ElementEqualsToExpected(H3Value));
             }
         }
     }
 }
-
-

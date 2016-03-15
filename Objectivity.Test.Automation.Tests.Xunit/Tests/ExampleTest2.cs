@@ -6,7 +6,6 @@ namespace Objectivity.Test.Automation.Tests.xUnit.Tests
 {
     public class ExampleTest2 : ProjectTestBase
     {
-
         [Fact]
         public void NestedFramesTest()
         {
@@ -40,6 +39,5 @@ namespace Objectivity.Test.Automation.Tests.xUnit.Tests
             homePage.CloseFabricComboBox();
             Assert.False(homePage.IsFabricComboBoxExpanded());
         }
-
     }
 }

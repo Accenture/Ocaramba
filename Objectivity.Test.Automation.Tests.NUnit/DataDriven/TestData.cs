@@ -31,15 +31,19 @@ namespace Objectivity.Test.Automation.Tests.NUnit.DataDriven
     /// </summary>
     public static class TestData 
     {
-
         public static IEnumerable Credentials
         {
             get { return DataDrivenHelper.ReadDataDriveFile(ProjectBaseConfiguration.DataDrivenFile, "credential", new[] { "user", "password" }, "credential"); }
         }
 
-        public static IEnumerable Links
+        public static IEnumerable LinksSetTestName
         {
             get { return DataDrivenHelper.ReadDataDriveFile(ProjectBaseConfiguration.DataDrivenFile, "links", new[] { "number" }, "Count_links"); }
+        }
+
+        public static IEnumerable Links
+        {
+            get { return DataDrivenHelper.ReadDataDriveFile(ProjectBaseConfiguration.DataDrivenFile, "links"); }
         }
     }
 }

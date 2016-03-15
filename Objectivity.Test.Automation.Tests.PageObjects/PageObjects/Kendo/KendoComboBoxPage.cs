@@ -37,7 +37,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.Kendo
         /// <summary>
         ///     Locators for elements
         /// </summary>
-        private readonly ElementLocator tshirtFabricComboBoxLocator = new ElementLocator(Locator.CssSelector,"input[aria-owns=fabric_listbox]");
+        private readonly ElementLocator tshirtFabricComboBoxLocator = new ElementLocator(Locator.CssSelector, "input[aria-owns=fabric_listbox]");
 
         private readonly Uri url = new Uri("http://demos.telerik.com/jsp-ui/combobox/index");
 

@@ -27,15 +27,35 @@
             checkbox2Checked = new ElementLocator(Locator.XPath, "//input[2][@checked='']");
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CheckboxesPage"/> class. 
+        /// Initializes a new instance of the <see cref="CheckboxesPage" /> class.
         /// </summary>
-        /// <param name="driverContext">
-        /// </param>
+        /// <param name="driverContext">The driver context.</param>
         public CheckboxesPage(DriverContext driverContext) : base(driverContext)
         {
             Logger.Info("Create checkboxes page.");
             Logger.Info("Check if checkboxes page is displayed.");
-            this.Driver.IsElementPresent(this.checkboxesPageHeader,BaseConfiguration.MediumTimeout);
+            this.Driver.IsElementPresent(this.checkboxesPageHeader, BaseConfiguration.MediumTimeout);
+        }
+
+        public bool IsCheckmarkOneTicked
+        {
+            get
+            {
+                Logger.Info("Check if checkbox1 is ticked.");
+                return this.Driver.IsElementPresent(this.checkbox1Checked, BaseConfiguration.ShortTimeout);
+            }
+        }
+
+        /// <summary>
+        /// Verification of checkbox selection.
+        /// </summary>
+        public bool IsCheckmarkTwoTicked
+        {
+            get
+            {
+                Logger.Info("Check if checkbox2 is ticked.");
+                return this.Driver.IsElementPresent(this.checkbox2Checked, BaseConfiguration.ShortTimeout);
+            }
         }
 
         /// <summary>
@@ -50,8 +70,9 @@
         }
 
         /// <summary>
+        /// Uncheck checkbox one.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Checkboxes Page</returns>
         public CheckboxesPage UnTickCheckboxOne()
         {
             Logger.Info("Untick checkmark1.");
@@ -60,8 +81,9 @@
         }
 
         /// <summary>
+        /// Ticks the checkbox two.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Checkboxes Page</returns>
         public CheckboxesPage TickCheckboxTwo()
         {
             Logger.Info("Tick checkmark2.");
@@ -74,27 +96,6 @@
             Logger.Info("Untick checkmark2.");
             this.Driver.GetElement<Checkbox>(this.checkbox2).UntickCheckbox();
             return this;
-        }
-
-        public bool IsCheckmarkOneTicked
-        {
-            get
-            {
-                Logger.Info("Check if checkbox1 is ticked.");
-                return this.Driver.IsElementPresent(this.checkbox1Checked,BaseConfiguration.ShortTimeout);
-            }
-        }
-
-        /// <summary>
-        /// Verification of checkbox selection.
-        /// </summary>
-        public bool IsCheckmarkTwoTicked
-        {
-            get
-            {
-                Logger.Info("Check if checkbox2 is ticked.");
-                return this.Driver.IsElementPresent(this.checkbox2Checked, BaseConfiguration.ShortTimeout);
-            }
         }
     }
 }

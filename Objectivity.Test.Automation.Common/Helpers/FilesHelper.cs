@@ -52,7 +52,12 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// Returns the file extension.
         /// </summary>
         /// <param name="type">The type.</param>
-        /// <returns>Files extension</returns>
+        /// <returns>
+        /// Files extension
+        /// </returns>
+        /// <example>How to use it: <code>
+        /// FilesHelper.ReturnFileExtension(FileType.Html);
+        /// </code></example>
         public static string ReturnFileExtension(FileType type)
         {
             switch (type)
@@ -97,7 +102,12 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// </summary>
         /// <param name="folder">The folder.</param>
         /// <param name="type">The type.</param>
-        /// <returns>Collection of files</returns>
+        /// <returns>
+        /// Collection of files
+        /// </returns>
+        /// <example>How to use it: <code>
+        /// var files = GetFilesOfGivenType(folder, FileType.Txt);
+        /// </code></example>
         public static ICollection<FileInfo> GetFilesOfGivenType(string folder, FileType type)
         {
             return GetFilesOfGivenType(folder, type, string.Empty);
@@ -109,7 +119,12 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// <param name="folder">The folder.</param>
         /// <param name="type">The type of files.</param>
         /// <param name="postfixFilesName">Postfix name of files for search pattern.</param>
-        /// <returns>Collection of files</returns>
+        /// <returns>
+        /// Collection of files
+        /// </returns>
+        /// <example>How to use it: <code>
+        /// var files = GetFilesOfGivenType(folder, FileType.Txt, "live");
+        /// </code></example>
         public static ICollection<FileInfo> GetFilesOfGivenType(string folder, FileType type, string postfixFilesName)
         {
             Logger.Debug("Get Files '{0}' from '{1}', postfixFilesName '{2}'", type, folder, postfixFilesName);
@@ -121,11 +136,54 @@ namespace Objectivity.Test.Automation.Common.Helpers
         }
 
         /// <summary>
+        /// Gets the files of given type from all sub folders.
+        /// </summary>
+        /// <param name="folder">The folder.</param>
+        /// <param name="type">The type of files.</param>
+        /// <returns>
+        /// Collection of files
+        /// </returns>
+        /// <example>How to use it: <code>
+        /// var files = GetFilesOfGivenTypeFromAllSubFolders(folder, FileType.Txt);
+        /// </code></example>
+        public static ICollection<FileInfo> GetFilesOfGivenTypeFromAllSubFolders(string folder, FileType type)
+        {
+            return GetFilesOfGivenTypeFromAllSubFolders(folder, type, string.Empty);
+        }
+
+        /// <summary>
+        /// Gets the files of given type from all sub folders, use postfixFilesName in search pattern.
+        /// </summary>
+        /// <param name="folder">The folder.</param>
+        /// <param name="type">The type of files.</param>
+        /// <param name="postfixFilesName">Postfix name of files for search pattern.</param>
+        /// <returns>
+        /// Collection of files
+        /// </returns>
+        /// <example>How to use it: <code>
+        /// var files = GetFilesOfGivenTypeFromAllSubFolders(folder, FileType.Txt, "live");
+        /// </code></example>
+        public static ICollection<FileInfo> GetFilesOfGivenTypeFromAllSubFolders(string folder, FileType type, string postfixFilesName)
+        {
+            Logger.Debug("Get Files '{0}' from '{1}', postfixFilesName '{2}'", type, folder, postfixFilesName);
+            List<FileInfo> files =
+                new DirectoryInfo(folder)
+                    .GetFiles("*" + postfixFilesName + ReturnFileExtension(type), SearchOption.AllDirectories).OrderBy(f => f.Name).ToList();
+
+            return files;
+        }
+
+        /// <summary>
         /// Gets all files from folder, use postfixFilesName in search pattern.
         /// </summary>
         /// <param name="folder">The folder.</param>
         /// <param name="postfixFilesName">Postfix name of files for search pattern.</param>
-        /// <returns>Collection of files</returns>
+        /// <returns>
+        /// Collection of files
+        /// </returns>
+        /// <example>How to use it: <code>
+        /// var files = GetAllFiles(folder, "live");
+        /// </code></example>
         public static ICollection<FileInfo> GetAllFiles(string folder, string postfixFilesName)
         {
             Logger.Debug("Get all files from '{0}', postfixFilesName '{1}'", folder, postfixFilesName);
@@ -137,10 +195,51 @@ namespace Objectivity.Test.Automation.Common.Helpers
         }
 
         /// <summary>
-        /// Gets all files from folder, use postfixFilesName in search pattern.
+        /// Gets all files from all sub folders, use postfixFilesName in search pattern.
         /// </summary>
         /// <param name="folder">The folder.</param>
-        /// <returns>Collection of files</returns>
+        /// <param name="postfixFilesName">Postfix name of files for search pattern.</param>
+        /// <returns>
+        /// Collection of files
+        /// </returns>
+        /// <example>How to use it: <code>
+        /// var files = GetAllFilesFromAllSubFolders(folder, "live");
+        /// </code></example>
+        public static ICollection<FileInfo> GetAllFilesFromAllSubFolders(string folder, string postfixFilesName)
+        {
+            Logger.Debug("Get all files from '{0}', postfixFilesName '{1}'", folder, postfixFilesName);
+            ICollection<FileInfo> files =
+                new DirectoryInfo(folder)
+                    .GetFiles("*" + postfixFilesName, SearchOption.AllDirectories).OrderBy(f => f.Name).ToList();
+
+            return files;
+        }
+
+        /// <summary>
+        /// Gets all files from all sub folders.
+        /// </summary>
+        /// <param name="folder">The folder.</param>
+        /// <returns>
+        /// Collection of files
+        /// </returns>
+        /// <example>How to use it: <code>
+        /// var files = GetAllFilesFromAllSubFolders(folder);
+        /// </code></example>
+        public static ICollection<FileInfo> GetAllFilesFromAllSubFolders(string folder)
+        {
+            return GetAllFilesFromAllSubFolders(folder, string.Empty);
+        }
+
+        /// <summary>
+        /// Gets all files from folder.
+        /// </summary>
+        /// <param name="folder">The folder.</param>
+        /// <returns>
+        /// Collection of files
+        /// </returns>
+        /// <example>How to use it: <code>
+        /// var files = GetAllFiles(folder);
+        /// </code></example>
         public static ICollection<FileInfo> GetAllFiles(string folder)
         {
             return GetAllFiles(folder, string.Empty);
@@ -162,12 +261,17 @@ namespace Objectivity.Test.Automation.Common.Helpers
             return file;
         }
 
-         /// <summary>
-         /// Counts the files of given type.
-         /// </summary>
+        /// <summary>
+        /// Counts the files of given type.
+        /// </summary>
         /// <param name="folder">The folder.</param>
-         /// <param name="type">The type.</param>
-         /// <returns>Number of files in subfolder</returns>
+        /// <param name="type">The type.</param>
+        /// <returns>
+        /// Number of files in subfolder
+        /// </returns>
+        /// <example>How to use it: <code>
+        /// var filesNumber = FilesHelper.CountFiles(this.DriverContext.DownloadFolder, FileType.Txt);
+        /// </code></example>
         public static int CountFiles(string folder, FileType type)
         {
             Logger.Debug(CultureInfo.CurrentCulture, "Count {0} Files in '{1}'", type, folder);
@@ -180,7 +284,12 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// Counts the files.
         /// </summary>
         /// <param name="folder">The folder.</param>
-        /// <returns>Number of files in subfolder</returns>
+        /// <returns>
+        /// Number of files in subfolder
+        /// </returns>
+        /// <example>How to use it: <code>
+        /// var filesNumber = FilesHelper.CountFiles(this.DriverContext.DownloadFolder);
+        /// </code></example>
         public static int CountFiles(string folder)
         {
             Logger.Debug(CultureInfo.CurrentCulture, "Count all Files in '{0}'", folder);
@@ -195,6 +304,9 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// <param name="folder">The folder.</param>
         /// <param name="type">The type of file.</param>
         /// <returns>Last file of given type</returns>
+        /// <example>How to use it: <code>
+        /// FilesHelper.GetLastFile(this.DriverContext.ScreenShotFolder, FileType.Png);
+        /// </code></example>
         public static FileInfo GetLastFile(string folder, FileType type)
         {
             Logger.Debug(CultureInfo.CurrentCulture, "Get Last File of given type {0}", type);
@@ -211,7 +323,12 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// Gets the last file.
         /// </summary>
         /// <param name="folder">The folder.</param>
-        /// <returns>Last file of given type</returns>
+        /// <returns>
+        /// Last file of given type
+        /// </returns>
+        /// <example>How to use it: <code>
+        /// FilesHelper.GetLastFile(this.DriverContext.ScreenShotFolder);
+        /// </code></example>
         public static FileInfo GetLastFile(string folder)
         {
             Logger.Debug("Get Last File");
@@ -229,6 +346,11 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// <param name="waitTime">Wait timeout</param>
         /// <param name="filesNumber">The initial files number.</param>
         /// <param name="folder">The folder.</param>
+        /// <example>How to use it: <code>
+        /// var filesNumber = FilesHelper.CountFiles(this.DriverContext.DownloadFolder, FileType.Txt);
+        /// this.Driver.GetElement(this.fileLink.Format("some-file.txt")).Click();
+        /// FilesHelper.WaitForFileOfGivenType(FileType.Txt, BaseConfiguration.LongTimeout, filesNumber, this.DriverContext.DownloadFolder);
+        /// </code></example>
         public static void WaitForFileOfGivenType(FileType type, double waitTime, int filesNumber, string folder)
         {
             Logger.Debug("Wait for file: {0}", type);
@@ -249,6 +371,11 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// <param name="type">The type.</param>
         /// <param name="filesNumber">The files number.</param>
         /// <param name="folder">The folder.</param>
+        /// <example>How to use it: <code>
+        /// var filesNumber = FilesHelper.CountFiles(this.DriverContext.DownloadFolder, FileType.Txt);
+        /// this.Driver.GetElement(this.fileLink.Format("some-file.txt")).Click();
+        /// FilesHelper.WaitForFileOfGivenType(FileType.Txt, filesNumber, this.DriverContext.DownloadFolder);
+        /// </code></example>
         public static void WaitForFileOfGivenType(FileType type, int filesNumber, string folder)
         {
             WaitForFileOfGivenType(type, BaseConfiguration.LongTimeout, filesNumber, folder);
@@ -260,6 +387,11 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// <param name="waitTime">Wait timeout</param>
         /// <param name="filesName">Name of the files.</param>
         /// <param name="folder">The folder.</param>
+        /// <example>How to use it: <code>
+        /// var file = "some-file.txt"
+        /// this.Driver.GetElement(this.fileLink.Format(file), "Click on file").Click();
+        /// FilesHelper.WaitForFileOfGivenName(BaseConfiguration.LongTimeout, file, this.DriverContext.DownloadFolder);
+        /// </code></example>
         public static void WaitForFileOfGivenName(double waitTime, string filesName, string folder)
         {
             Logger.Debug(CultureInfo.CurrentCulture, "Wait for file: {0}", filesName);
@@ -278,6 +410,11 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// </summary>
         /// <param name="filesName">Name of the files.</param>
         /// <param name="folder">The folder.</param>
+        /// <example>How to use it: <code>
+        /// var file = "some-file.txt"
+        /// this.Driver.GetElement(this.fileLink.Format(file), "Click on file").Click();
+        /// FilesHelper.WaitForFileOfGivenName(file, this.DriverContext.DownloadFolder);
+        /// </code></example>
         public static void WaitForFileOfGivenName(string filesName, string folder)
         {
             WaitForFileOfGivenName(BaseConfiguration.LongTimeout, filesName, folder);
@@ -289,6 +426,11 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// <param name="waitTime">Wait timeout</param>
         /// <param name="filesNumber">The initial files number.</param>
         /// <param name="folder">The folder.</param>
+        /// <example>How to use it: <code>
+        /// var filesNumber = FilesHelper.CountFiles(this.DriverContext.DownloadFolder);
+        /// this.Driver.GetElement(this.fileLink.Format("some-file.txt")).Click();
+        /// FilesHelper.WaitForFile(BaseConfiguration.LongTimeout, filesNumber, this.DriverContext.DownloadFolder);
+        /// </code></example>
         public static void WaitForFile(double waitTime, int filesNumber, string folder)
         {
             Logger.Debug("Wait for file");
@@ -308,6 +450,11 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// </summary>
         /// <param name="filesNumber">The initial files number.</param>
         /// <param name="folder">The folder.</param>
+        /// <example>How to use it: <code>
+        /// var filesNumber = FilesHelper.CountFiles(this.DriverContext.DownloadFolder);
+        /// this.Driver.GetElement(this.fileLink.Format("some-file.txt")).Click();
+        /// FilesHelper.WaitForFile(filesNumber, this.DriverContext.DownloadFolder);
+        /// </code></example>
         public static void WaitForFile(int filesNumber, string folder)
         {
             WaitForFile(BaseConfiguration.LongTimeout, filesNumber, folder);
@@ -320,6 +467,9 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// <param name="oldName">The old name.</param>
         /// <param name="newName">The new name.</param>
         /// <param name="subFolder">The subFolder.</param>
+        /// <example>How to use it: <code>
+        ///  FilesHelper.RenameFile(BaseConfiguration.ShortTimeout, "filename.txt", "newname.txt", this.DriverContext.DownloadFolder);
+        /// </code></example>
         public static void RenameFile(double waitTime, string oldName, string newName, string subFolder)
         {
             Logger.Debug(CultureInfo.CurrentCulture, "new file name: {0}", newName);
@@ -343,7 +493,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
             WaitHelper.Wait(
                 () => File.Exists(subFolder + Separator + newName), TimeSpan.FromSeconds(waitTime), TimeSpan.FromSeconds(1), timeoutMessage);     
         }
-       
+
         /// <summary>
         /// Rename the file of given type and check if file was renamed with ShortTimeout.
         /// </summary>
@@ -351,6 +501,9 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// <param name="newName">The new name.</param>
         /// <param name="subFolder">The subFolder.</param>
         /// <param name="type">The type of file.</param>
+        /// <example>How to use it: <code>
+        ///  FilesHelper.RenameFile("filename.txt", "newname", this.DriverContext.DownloadFolder, FileType.Csv);
+        /// </code></example>
         public static void RenameFile(string oldName, string newName, string subFolder, FileType type)
         {
             newName = newName + ReturnFileExtension(type);
@@ -362,7 +515,12 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// </summary>
         /// <param name="appConfigValue">The application configuration value.</param>
         /// <param name="currentFolder">Directory where assembly files are located</param>
-        /// <returns>The path to folder</returns>
+        /// <returns>
+        /// The path to folder
+        /// </returns>
+        /// <example>How to use it: <code>
+        ///   FilesHelper.GetFolder(BaseConfiguration.DownloadFolder, this.CurrentDirectory);
+        /// </code></example>
         public static string GetFolder(string appConfigValue, string currentFolder)
         {
             Logger.Trace(CultureInfo.CurrentCulture, "appConfigValue '{0}', currentFolder '{1}', UseCurrentDirectory '{2}'", appConfigValue, currentFolder, BaseConfiguration.UseCurrentDirectory);

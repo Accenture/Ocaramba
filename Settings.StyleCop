@@ -143,5 +143,12 @@
       </Rules>
       <AnalyzerSettings />
     </Analyzer>
+	  <Analyzer AnalyzerId="Microsoft.StyleCop.CSharp.NamingRules">
+    <AnalyzerSettings>
+      <CollectionProperty Name="Hungarian">
+        <Value>js</Value>
+      </CollectionProperty>
+    </AnalyzerSettings>
+  </Analyzer>
   </Analyzers>
 </StyleCopSettings>

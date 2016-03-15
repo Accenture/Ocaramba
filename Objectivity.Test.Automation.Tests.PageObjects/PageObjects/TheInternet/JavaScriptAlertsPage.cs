@@ -59,6 +59,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
         {
             this.Driver.GetElement(this.jsAlertButtonLocator).Click();
         }
+
         public void OpenJsConfirm()
         {
             this.Driver.GetElement(this.jsConfirmButtonLocator).Click();

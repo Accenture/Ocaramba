@@ -11,15 +11,15 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
     {
         private readonly ElementLocator
             hotSpot = new ElementLocator(Locator.CssSelector, "#hot-spot"),
-            h3Element = new ElementLocator(Locator.CssSelector, "h3");
-
-        public string JavaScriptText 
-        {
-            get { return new JavaScriptAlert(this.Driver).JavaScriptText; }
-        }
+            h3Element = new ElementLocator(Locator.CssSelector, "h3");   
 
         public ContextMenuPage(DriverContext driverContext) : base(driverContext)
         {
+        }
+
+        public string JavaScriptText
+        {
+            get { return new JavaScriptAlert(this.Driver).JavaScriptText; }
         }
 
         public ContextMenuPage SelectTheInternetOptionFromContextMenu()
@@ -46,6 +46,5 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
         {
             return this.Driver.GetElement(this.h3Element).IsElementTextEqualsToExpected(text);
         }
-
     }
 }

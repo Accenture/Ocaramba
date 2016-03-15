@@ -98,7 +98,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
                 this.Driver.GetElement(this.fileLink.Format("some-file.txt")).Click();
                 FilesHelper.WaitForFile(filesNumber, this.DriverContext.DownloadFolder);
                 FileInfo file = FilesHelper.GetLastFile(this.DriverContext.DownloadFolder);
-                FilesHelper.RenameFile(BaseConfiguration.ShortTimeout,file.Name, "name_of_file_branch.txt", this.DriverContext.DownloadFolder);
+                FilesHelper.RenameFile(BaseConfiguration.ShortTimeout, file.Name, "name_of_file_branch.txt", this.DriverContext.DownloadFolder);
             }
             else
             {
@@ -108,12 +108,12 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             return this;
         }
 
-        public string CheckIfScreenShotIsSaved(int screenShotNumber, string newNameOfFile)
+        public string CheckIfScreenShotIsSaved(int screenShotNumber)
         {
             FilesHelper.WaitForFileOfGivenType(FileType.Png, 5, screenShotNumber, this.DriverContext.ScreenShotFolder);
-            var nameOfFile = FilesHelper.GetLastFile(this.DriverContext.ScreenShotFolder, FileType.Png).Name;
-            FilesHelper.RenameFile(5, FilesHelper.GetLastFile(this.DriverContext.ScreenShotFolder, FileType.Png).Name,  newNameOfFile, this.DriverContext.ScreenShotFolder);
-            return nameOfFile;
+            var nameOfFile = FilesHelper.GetLastFile(this.DriverContext.ScreenShotFolder, FileType.Png);
+ 
+            return nameOfFile.Name;
         }
 
         public void SaveWebDriverScreenShot()

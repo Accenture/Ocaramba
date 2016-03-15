@@ -17,6 +17,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Objectivity.Test.Automation
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Objectivity.Test.Automation.Tests.xUnit", "Objectivity.Test.Automation.Tests.Xunit\Objectivity.Test.Automation.Tests.xUnit.csproj", "{8DAC5471-0F43-42F2-8C98-8C0FF3C58A4B}"
 EndProject
+Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Objectivity.Test.Automation.Common.Documentation", "Objectivity.Test.Automation.Common.Documentation\Objectivity.Test.Automation.Common.Documentation.shfbproj", "{92D1D26C-A5BC-44D2-BEE3-1560671B19EF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{46FA4EDC-A114-4E8F-A545-996F99E31EA8} = {46FA4EDC-A114-4E8F-A545-996F99E31EA8}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +52,10 @@ Global
 		{8DAC5471-0F43-42F2-8C98-8C0FF3C58A4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8DAC5471-0F43-42F2-8C98-8C0FF3C58A4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8DAC5471-0F43-42F2-8C98-8C0FF3C58A4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92D1D26C-A5BC-44D2-BEE3-1560671B19EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92D1D26C-A5BC-44D2-BEE3-1560671B19EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92D1D26C-A5BC-44D2-BEE3-1560671B19EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92D1D26C-A5BC-44D2-BEE3-1560671B19EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

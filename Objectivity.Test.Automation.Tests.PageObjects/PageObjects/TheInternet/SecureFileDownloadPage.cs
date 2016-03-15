@@ -60,8 +60,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             this.Driver.GetElement(this.fileLink.Format(fileName)).Click();
             FilesHelper.WaitForFileOfGivenName(5, fileName, this.DriverContext.DownloadFolder);
             FileInfo file = FilesHelper.GetLastFile(this.DriverContext.DownloadFolder, FileType.Txt);
-            FilesHelper.RenameFile(file.Name, newName, this.DriverContext.DownloadFolder, FileType.Csv);
-            
+            FilesHelper.RenameFile(file.Name, newName, this.DriverContext.DownloadFolder, FileType.Csv);            
             }
             else
             {

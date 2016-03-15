@@ -1,13 +1,26 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ExcelFiles.cs" company="Objectivity Ltd">
-//   Copyright (c) Objectivity Ltd. All rights reserved.
-// </copyright>
-// <author>jraczek</author>
-// <date>27-10-2015</date>
-// <summary>
-//   DataDriven class for Excel Files
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
+﻿/*
+The MIT License (MIT)
+
+Copyright (c) 2015 Objectivity Bespoke Software Specialists
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
 
 namespace Objectivity.Test.Automation.Tests.NUnit.DataDriven
 {
@@ -16,9 +29,8 @@ namespace Objectivity.Test.Automation.Tests.NUnit.DataDriven
     using System.IO;
     using System.Text.RegularExpressions;
 
-    using global::NUnit.Framework;
-
     using NLog;
+    using global::NUnit.Framework;
 
     using Objectivity.Test.Automation.Common.Helpers;
     using Objectivity.Test.Automation.Tests.NUnit;
@@ -27,7 +39,6 @@ namespace Objectivity.Test.Automation.Tests.NUnit.DataDriven
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-       
         /// <summary>
         /// Gets the comma-separated values file to compare.
         /// </summary>
@@ -67,7 +78,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit.DataDriven
                 {
                     Logger.Trace("liveFile: {0}", liveFile);
 
-                    var fileNameBranch = liveFile.Name.Replace( "live", "branch");
+                    var fileNameBranch = liveFile.Name.Replace("live", "branch");
                     var testCaseName = liveFile.Name.Replace("_" + "live", string.Empty);
 
                     TestCaseData data = new TestCaseData(liveFile.Name, fileNameBranch);

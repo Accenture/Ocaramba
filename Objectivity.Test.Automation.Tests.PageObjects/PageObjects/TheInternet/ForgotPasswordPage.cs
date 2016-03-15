@@ -54,7 +54,6 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             this.Driver.IsElementPresent(this.pageHeader, BaseConfiguration.ShortTimeout);
         }
 
-
         public string GetEmailLabel
         {
             get
@@ -65,15 +64,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             }
         }
 
-        public int EnterEmail(int name, int server, int country)
-        {
-            var email = string.Format(CultureInfo.CurrentCulture, "{0}{1}{2}{3}{4}", NameHelper.RandomName(name), "@", NameHelper.RandomName(server), ".", NameHelper.RandomName(country));
-            Logger.Info(CultureInfo.CurrentCulture, "Random generated Email'{0}'", email);
-            this.Driver.GetElement(this.emailTextBox).SendKeys(email);
-            return email.Length-2;
-        }
-
-        public string ClickRetrievePassword 
+        public string ClickRetrievePassword
         {
             get
             {
@@ -82,6 +73,14 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
                 Logger.Info(CultureInfo.CurrentCulture, "Message '{0}'", text);
                 return text;
             }
+        }
+
+        public int EnterEmail(int name, int server, int country)
+        {
+            var email = string.Format(CultureInfo.CurrentCulture, "{0}{1}{2}{3}{4}", NameHelper.RandomName(name), "@", NameHelper.RandomName(server), ".", NameHelper.RandomName(country));
+            Logger.Info(CultureInfo.CurrentCulture, "Random generated Email'{0}'", email);
+            this.Driver.GetElement(this.emailTextBox).SendKeys(email);
+            return email.Length - 2;
         }
     }
 }

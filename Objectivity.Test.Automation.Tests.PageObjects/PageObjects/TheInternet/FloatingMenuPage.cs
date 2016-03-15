@@ -22,10 +22,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+using NLog;
 using Objectivity.Test.Automation.Common;
 using Objectivity.Test.Automation.Common.Extensions;
 using Objectivity.Test.Automation.Common.Types;
-using NLog;
 
 namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 {
@@ -45,7 +45,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             : base(driverContext)
         {
             Logger.Info("Waiting for File Download page to open");
-           // this.Driver.IsElementPresent(this.floatingMenuPageText, BaseConfiguration.ShortTimeout);
+           //// this.Driver.IsElementPresent(this.floatingMenuPageText, BaseConfiguration.ShortTimeout);
         }
 
         public FloatingMenuPage ClickFloatingMenuButton()

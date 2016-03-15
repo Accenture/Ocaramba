@@ -46,7 +46,11 @@ namespace Objectivity.Test.Automation.Tests.Features
         /// </summary>
         public ProjectTestBase(ScenarioContext scenarioContext)
         {
-            if (scenarioContext == null) throw new ArgumentNullException("scenarioContext");
+            if (scenarioContext == null)
+            {
+                throw new ArgumentNullException("scenarioContext");
+            }
+
             this.scenarioContext = scenarioContext;
         }
 

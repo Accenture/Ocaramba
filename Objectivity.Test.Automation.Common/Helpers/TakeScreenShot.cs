@@ -78,8 +78,8 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// <param name="title">The title.</param>
         public static void Save(Bitmap bitmap, ImageFormat format, string folder, string title)
         {
-            var fileName = string.Format(CultureInfo.CurrentCulture, "{0}_{1}.png", title, DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss-fff", CultureInfo.CurrentCulture));
-             var filePath = Path.Combine(folder, fileName);
+            var fileName = string.Format(CultureInfo.CurrentCulture, "{0}_{1}_{2}.png", title, DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss-fff", CultureInfo.CurrentCulture), "fullscreen");
+            var filePath = Path.Combine(folder, fileName);
 
             if (bitmap == null)
             {
@@ -90,6 +90,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
                 bitmap.Save(filePath, format);
                 bitmap.Dispose();
                 Logger.Error(CultureInfo.CurrentCulture, "Test failed: full screenshot saved to {0}.", filePath);
+                Logger.Info(CultureInfo.CurrentCulture, "##teamcity[publishArtifacts '{0}']", filePath);
             }
         }
     }

@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/ObjectivityBSS/Test.Automation</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Template of the framework to automate tests using Objectivity.Test.Automation.Common with Features</description>
-    <!--<releaseNotes>Summary of changes made in this release of the package.</releaseNotes>-->
+    <releaseNotes>You can find info about this release here: https://github.com/ObjectivityBSS/Test.Automation/releases</releaseNotes>
     <copyright>Copyright 2015</copyright>
     <tags>selenium webdriver testautomation tests specflow Objectivity.Test.Automation.Common template</tags>
     <dependencies>

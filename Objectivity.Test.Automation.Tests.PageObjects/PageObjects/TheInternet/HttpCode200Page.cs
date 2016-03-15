@@ -7,7 +7,7 @@
     public class HTTPCode200Page : ProjectPageBase
     {
         private readonly ElementLocator
-            HttpCode200Header = new ElementLocator(Locator.XPath, "//*[contains(text(),'This page returned a 200 status code.')]");
+            httpCode200Header = new ElementLocator(Locator.XPath, "//*[contains(text(),'This page returned a 200 status code.')]");
 
         public HTTPCode200Page(DriverContext driverContext)
             : base(driverContext)
@@ -16,7 +16,7 @@
 
         public bool IsHTTPCode200PageIsDisplayed()
         {
-            return this.Driver.IsElementPresent(this.HttpCode200Header, BaseConfiguration.MediumTimeout);
+            return this.Driver.IsElementPresent(this.httpCode200Header, BaseConfiguration.MediumTimeout);
         }
     }
 }

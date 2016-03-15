@@ -42,9 +42,13 @@ namespace Objectivity.Test.Automation.Common
         /// Verify group of assets
         /// </summary>
         /// <param name="driverContext">Container for driver</param>
-        /// <param name="myAsserts">
-        /// Group asserts
-        /// </param>
+        /// <param name="myAsserts">Group asserts</param>
+        /// <example>How to use it: <code>
+        /// Verify.That(
+        ///     this.DriverContext,
+        ///     () => Assert.AreEqual(5 + 7 + 2, forgotPassword.EnterEmail(5, 7, 2)),
+        ///     () => Assert.AreEqual("Your e-mail's been sent!", forgotPassword.ClickRetrievePassword));
+        /// </code></example>
         public static void That(DriverContext driverContext, params Action[] myAsserts)
         {
             foreach (var myAssert in myAsserts)
@@ -62,12 +66,11 @@ namespace Objectivity.Test.Automation.Common
         /// Verify assert conditions
         /// </summary>
         /// <param name="driverContext">Container for driver</param>
-        /// <param name="myAssert">
-        /// Assert condition
-        /// </param>
-        /// <param name="enableScreenShot">
-        /// Enabling screenshot
-        /// </param>
+        /// <param name="myAssert">Assert condition</param>
+        /// <param name="enableScreenShot">Enabling screenshot</param>
+        /// <example>How to use it: <code>
+        /// Verify.That(this.DriverContext, () => Assert.IsFalse(flag), true);
+        /// </code></example>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "removed ref to unit test")]
         public static void That(DriverContext driverContext, Action myAssert, bool enableScreenShot)
         {
@@ -88,9 +91,14 @@ namespace Objectivity.Test.Automation.Common
             }
         }
 
-        /// <summary>Verify assert conditions</summary>
+        /// <summary>
+        /// Verify assert conditions
+        /// </summary>
         /// <param name="driverContext">Container for driver</param>
         /// <param name="myAssert">Assert condition</param>
+        /// <example>How to use it: <code>
+        /// Verify.That(this.DriverContext, () => Assert.AreEqual(parameters["number"], links.CountLinks()));
+        /// </code></example>
         public static void That(DriverContext driverContext, Action myAssert)
         {
             That(driverContext, myAssert, true);
