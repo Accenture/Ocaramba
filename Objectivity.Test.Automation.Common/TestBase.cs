@@ -78,13 +78,12 @@ namespace Objectivity.Test.Automation.Common
         /// <returns>True if test failed</returns>
         public bool IsVerifyFailedAndClearMessages(DriverContext driverContext)
         {
-            if (!driverContext.VerifyMessages.Count.Equals(0) && !driverContext.IsTestFailed)
+            if (driverContext.VerifyMessages.Count.Equals(0))
             {
-                driverContext.VerifyMessages.Clear();
-                return true;
+                return false;
             }
-
-            return false;
+            driverContext.VerifyMessages.Clear();
+            return true;
         }
     }
 }
