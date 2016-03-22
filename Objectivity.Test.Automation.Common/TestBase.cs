@@ -82,6 +82,7 @@ namespace Objectivity.Test.Automation.Common
             {
                 return false;
             }
+
             driverContext.VerifyMessages.Clear();
             return true;
         }
