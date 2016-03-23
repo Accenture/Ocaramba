@@ -92,11 +92,11 @@ namespace Objectivity.Test.Automation.Tests.MsTest
         [TestCleanup]
         public void AfterTest()
         {
-            this.DriverContext.IsTestFailed = this.TestContext.CurrentTestOutcome == UnitTestOutcome.Failed;
+            this.DriverContext.IsTestFailed = this.TestContext.CurrentTestOutcome == UnitTestOutcome.Failed || !this.driverContext.VerifyMessages.Count.Equals(0);
             this.SaveTestDetailsIfTestFailed(this.driverContext);
             this.DriverContext.Stop();
             this.LogTest.LogTestEnding(this.driverContext);
-            if (this.IsVerifyFailedAndClearMessages(this.driverContext))
+            if (this.IsVerifyFailedAndClearMessages(this.driverContext) && this.TestContext.CurrentTestOutcome != UnitTestOutcome.Failed)
             {
                 Assert.Fail();
             }
