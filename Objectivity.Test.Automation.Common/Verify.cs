@@ -58,7 +58,7 @@ namespace Objectivity.Test.Automation.Common
         /// Verify group of assets
         /// </summary>
         /// <param name="driverContext">Container for driver</param>
-        /// <param name="isScreenShotEnabled">Enable screenshot</param>
+        /// <param name="enableScreenShot">Enable screenshot</param>
         /// <param name="myAsserts">Group asserts</param>
         /// <example>How to use it: <code>
         /// Verify.That(
@@ -67,14 +67,14 @@ namespace Objectivity.Test.Automation.Common
         ///     () => Assert.AreEqual(5 + 7 + 2, forgotPassword.EnterEmail(5, 7, 2)),
         ///     () => Assert.AreEqual("Your e-mail's been sent!", forgotPassword.ClickRetrievePassword));
         /// </code></example>
-        public static void That(DriverContext driverContext, bool isScreenShotEnabled, params Action[] myAsserts)
+        public static void That(DriverContext driverContext, bool enableScreenShot, params Action[] myAsserts)
         {
             foreach (var myAssert in myAsserts)
             {
                 That(driverContext, myAssert, false);
             }
 
-            if (!driverContext.VerifyMessages.Count.Equals(0) && isScreenShotEnabled)
+            if (!driverContext.VerifyMessages.Count.Equals(0) && enableScreenShot)
             {
                 driverContext.TakeAndSaveScreenshot();
             }
@@ -119,7 +119,7 @@ namespace Objectivity.Test.Automation.Common
         /// </code></example>
         public static void That(DriverContext driverContext, Action myAssert)
         {
-            That(driverContext, myAssert, true);
+            That(driverContext, myAssert, false);
         }
     }
 }
