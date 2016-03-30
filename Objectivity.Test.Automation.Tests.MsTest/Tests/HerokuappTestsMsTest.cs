@@ -101,7 +101,7 @@
         public void VerifyTest()
         {
             Verify.That(this.DriverContext, () => Assert.AreEqual(1, 1), () => Assert.AreEqual(2, 2), () => Assert.AreEqual(3, 3));
-            Verify.That(this.DriverContext, () => Assert.IsFalse(false), enableScreenShot: true);
+            Verify.That(this.DriverContext, () => Assert.IsFalse(false), enableScreenShot: true, enableSavePageSource: true);
             Verify.That(this.DriverContext, () => Assert.IsTrue(true));
         }
 
