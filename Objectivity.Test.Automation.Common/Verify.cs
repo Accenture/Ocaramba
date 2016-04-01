@@ -51,14 +51,39 @@ namespace Objectivity.Test.Automation.Common
         /// </code></example>
         public static void That(DriverContext driverContext, params Action[] myAsserts)
         {
+            That(driverContext, false, false, myAsserts);
+        }
+
+        /// <summary>
+        /// Verify group of assets
+        /// </summary>
+        /// <param name="driverContext">Container for driver</param>
+        /// <param name="enableScreenShot">Enable screenshot</param>
+        /// <param name="enableSavePageSource">Enable save page source</param>
+        /// <param name="myAsserts">Group asserts</param>
+        /// <example>How to use it: <code>
+        /// Verify.That(
+        ///     this.DriverContext,
+        ///     true,
+        ///     false,
+        ///     () => Assert.AreEqual(5 + 7 + 2, forgotPassword.EnterEmail(5, 7, 2)),
+        ///     () => Assert.AreEqual("Your e-mail's been sent!", forgotPassword.ClickRetrievePassword));
+        /// </code></example>
+        public static void That(DriverContext driverContext, bool enableScreenShot, bool enableSavePageSource, params Action[] myAsserts)
+        {
             foreach (var myAssert in myAsserts)
             {
-                That(driverContext, myAssert, false);
+                That(driverContext, myAssert, false, false);
             }
 
-            if (!driverContext.VerifyMessages.Count.Equals(0))
+            if (!driverContext.VerifyMessages.Count.Equals(0) && enableScreenShot)
             {
                 driverContext.TakeAndSaveScreenshot();
+            }
+
+            if (!driverContext.VerifyMessages.Count.Equals(0) && enableSavePageSource)
+            {
+                driverContext.SavePageSource(driverContext.TestTitle);
             }
         }
 
@@ -68,11 +93,12 @@ namespace Objectivity.Test.Automation.Common
         /// <param name="driverContext">Container for driver</param>
         /// <param name="myAssert">Assert condition</param>
         /// <param name="enableScreenShot">Enabling screenshot</param>
+        /// <param name="enableSavePageSource">Enable save page source</param>
         /// <example>How to use it: <code>
         /// Verify.That(this.DriverContext, () => Assert.IsFalse(flag), true);
         /// </code></example>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "removed ref to unit test")]
-        public static void That(DriverContext driverContext, Action myAssert, bool enableScreenShot)
+        public static void That(DriverContext driverContext, Action myAssert, bool enableScreenShot, bool enableSavePageSource)
         {
             try
             {
@@ -83,6 +109,11 @@ namespace Objectivity.Test.Automation.Common
                 if (enableScreenShot)
                 {
                     driverContext.TakeAndSaveScreenshot();
+                }
+
+                if (enableSavePageSource)
+                {
+                    driverContext.SavePageSource(driverContext.TestTitle);
                 }
 
                 driverContext.VerifyMessages.Add(new ErrorDetail(null, DateTime.Now, e));
@@ -101,7 +132,7 @@ namespace Objectivity.Test.Automation.Common
         /// </code></example>
         public static void That(DriverContext driverContext, Action myAssert)
         {
-            That(driverContext, myAssert, true);
+            That(driverContext, myAssert, false, false);
         }
     }
 }

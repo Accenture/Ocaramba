@@ -100,11 +100,11 @@ namespace Objectivity.Test.Automation.Tests.NUnit
         [TearDown]
         public void AfterTest()
         {
-            this.DriverContext.IsTestFailed = TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed;
+            this.DriverContext.IsTestFailed = TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed || !this.driverContext.VerifyMessages.Count.Equals(0);
             this.SaveTestDetailsIfTestFailed(this.driverContext);
             this.DriverContext.Stop();
             this.LogTest.LogTestEnding(this.driverContext);
-            if (this.IsVerifyFailedAndClearMessages(this.driverContext))
+            if (this.IsVerifyFailedAndClearMessages(this.driverContext) && TestContext.CurrentContext.Result.Outcome.Status != TestStatus.Failed)
             {
                 Assert.Fail();
             }

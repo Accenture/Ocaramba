@@ -118,11 +118,11 @@ namespace Objectivity.Test.Automation.Tests.Features
         [After]
         public void AfterTest()
         {
-            this.DriverContext.IsTestFailed = this.scenarioContext.TestError != null;
+            this.DriverContext.IsTestFailed = this.scenarioContext.TestError != null || !this.driverContext.VerifyMessages.Count.Equals(0);
             this.SaveTestDetailsIfTestFailed(this.driverContext);
             this.DriverContext.Stop();
             this.LogTest.LogTestEnding(this.driverContext);
-            if (this.IsVerifyFailedAndClearMessages(this.driverContext))
+            if (this.IsVerifyFailedAndClearMessages(this.driverContext) && this.scenarioContext.TestError == null)
             {
                 Assert.Fail();
             }

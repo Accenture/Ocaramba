@@ -86,9 +86,10 @@
            DataAccessMethod.Sequential), TestMethod]
         public void FormAuthenticationPageTest()
         {
-            new InternetPage(this.DriverContext).OpenHomePage().GoToFormAuthenticationPage();
+            var formFormAuthentication = new InternetPage(this.DriverContext)
+                .OpenHomePage()
+                .GoToFormAuthenticationPage();
 
-            var formFormAuthentication = new FormAuthenticationPage(this.DriverContext);
             formFormAuthentication.EnterUserName((string)this.TestContext.DataRow["user"]);
             formFormAuthentication.EnterPassword((string)this.TestContext.DataRow["password"]);
             formFormAuthentication.LogOn();
@@ -101,7 +102,7 @@
         public void VerifyTest()
         {
             Verify.That(this.DriverContext, () => Assert.AreEqual(1, 1), () => Assert.AreEqual(2, 2), () => Assert.AreEqual(3, 3));
-            Verify.That(this.DriverContext, () => Assert.IsFalse(false), enableScreenShot: true);
+            Verify.That(this.DriverContext, () => Assert.IsFalse(false), enableScreenShot: true, enableSavePageSource: true);
             Verify.That(this.DriverContext, () => Assert.IsTrue(true));
         }
 

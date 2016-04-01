@@ -79,6 +79,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
         public static void Save(Bitmap bitmap, ImageFormat format, string folder, string title)
         {
             var fileName = string.Format(CultureInfo.CurrentCulture, "{0}_{1}_{2}.png", title, DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss-fff", CultureInfo.CurrentCulture), "fullscreen");
+            fileName = fileName.Replace(" ", "_").Replace("-", "_");
             var filePath = Path.Combine(folder, fileName);
 
             if (bitmap == null)
