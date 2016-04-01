@@ -98,7 +98,7 @@ namespace Objectivity.Test.Automation.Tests.MsTest
             this.LogTest.LogTestEnding(this.driverContext);
             if (this.IsVerifyFailedAndClearMessages(this.driverContext) && this.TestContext.CurrentTestOutcome != UnitTestOutcome.Failed)
             {
-                Assert.Fail();
+                Assert.Fail("Look at stack trace logs for more details");
             }
         }
     }
