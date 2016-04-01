@@ -86,9 +86,10 @@
            DataAccessMethod.Sequential), TestMethod]
         public void FormAuthenticationPageTest()
         {
-            new InternetPage(this.DriverContext).OpenHomePage().GoToFormAuthenticationPage();
+            var formFormAuthentication = new InternetPage(this.DriverContext)
+                .OpenHomePage()
+                .GoToFormAuthenticationPage();
 
-            var formFormAuthentication = new FormAuthenticationPage(this.DriverContext);
             formFormAuthentication.EnterUserName((string)this.TestContext.DataRow["user"]);
             formFormAuthentication.EnterPassword((string)this.TestContext.DataRow["password"]);
             formFormAuthentication.LogOn();

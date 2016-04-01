@@ -42,8 +42,8 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
         /// Locators for elements
         /// </summary>
         private readonly ElementLocator pageHeader = new ElementLocator(Locator.XPath, "//h3[.='Login Page']"),
-                                        userNameForm = new ElementLocator(Locator.XPath, "//label[.='Username']/following-sibling::input"),
-                                        passwordForm = new ElementLocator(Locator.XPath, "//label[.='Password']/following-sibling::input"),
+                                        userNameForm = new ElementLocator(Locator.CssSelector, "Input[id=username]"),
+                                        passwordForm = new ElementLocator(Locator.CssSelector, "Input[id=password]"),
                                         loginButton = new ElementLocator(Locator.XPath, "//form[@id='login']/button"),
                                         message = new ElementLocator(Locator.XPath, "//a[@class='close']/..");
 
@@ -83,7 +83,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
         public void LogOn()
         {
             Logger.Info(CultureInfo.CurrentCulture, "Click on Login Button");
-            this.Driver.GetElement(this.loginButton).JavaScriptClick();
+            this.Driver.GetElement(this.loginButton).Click();
         }
     }
 }
