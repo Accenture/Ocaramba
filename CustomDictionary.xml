@@ -3,6 +3,8 @@
          <Recognized>
             <Word>teamcity</Word>
 			<Word>publishArtifacts</Word>
+			<Word>fullscreen</Word>
+			<Word>png</Word>
          </Recognized>
       </Words>
 </Dictionary>

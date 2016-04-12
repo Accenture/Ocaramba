@@ -366,7 +366,9 @@ namespace Objectivity.Test.Automation.Common
         {
             var fileName = string.Format(CultureInfo.CurrentCulture, "{0}_{1}_{2}.png", title, errorDetail.DateTime.ToString("yyyy-MM-dd HH-mm-ss-fff", CultureInfo.CurrentCulture), "browser");
             var correctFileName = Path.GetInvalidFileNameChars().Aggregate(fileName, (current, c) => current.Replace(c.ToString(CultureInfo.CurrentCulture), string.Empty));
-            correctFileName = correctFileName.Replace(" ", "_").Replace("-", "_");
+            correctFileName = NameHelper.ReplaceSpecialCharacters(correctFileName);
+            correctFileName = NameHelper.ShortenText(folder, correctFileName);
+           
             var filePath = Path.Combine(folder, correctFileName);
 
             try
@@ -389,7 +391,9 @@ namespace Objectivity.Test.Automation.Common
         {
             if (BaseConfiguration.GetPageSourceEnabled)
             {
-                var path = Path.Combine(this.PageSourceFolder, string.Format(CultureInfo.CurrentCulture, "{0}{1}", fileName.Replace(" ", "_").Replace("-", "_"), ".html"));
+                var fileNameShort = NameHelper.ReplaceSpecialCharacters(fileName);
+                fileNameShort = NameHelper.ShortenText(this.PageSourceFolder, fileNameShort);
+                var path = Path.Combine(this.PageSourceFolder, string.Format(CultureInfo.CurrentCulture, "{0}{1}", fileNameShort, ".html"));
                 if (File.Exists(path))
                 {
                     File.Delete(path);

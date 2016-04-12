@@ -25,13 +25,20 @@ SOFTWARE.
 namespace Objectivity.Test.Automation.Common.Helpers
 {
     using System;
+    using System.Globalization;
     using System.Text;
-
+    using System.Text.RegularExpressions;
+    using NLog;
     /// <summary>
     /// Contains useful actions connected with test data
     /// </summary>
     public static class NameHelper
     {
+        /// <summary>
+        /// NLog logger handle
+        /// </summary>
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
         /// <summary>
         /// Create random name.
         /// </summary>
@@ -50,6 +57,40 @@ namespace Objectivity.Test.Automation.Common.Helpers
             }
 
             return randomString.ToString();
+        }
+
+        /// <summary>
+        /// Replaces the special characters.
+        /// </summary>
+        /// <param name="text">The text.</param>
+        /// <returns>String without special characters</returns>
+        public static string ReplaceSpecialCharacters(string text)
+        {
+            Logger.Trace(CultureInfo.CurrentCulture, "Removing all special characters");
+            text = Regex.Replace(text, @"[^0-9a-zA-Z._]+", "_");
+            return text;
+        }
+
+
+        /// <summary>
+        /// Shortens the text.
+        /// </summary>
+        /// <param name="folder">The folder.</param>
+        /// <param name="text">The text.</param>
+        /// <returns>String with removed all '_'</returns>
+        public static string ShortenText(string folder, string text)
+        {
+            if ((folder + text).Length > 255)
+            {
+                text = text.Replace("_", string.Empty);
+                Logger.Info(CultureInfo.CurrentCulture, "Lengt of the file fullname is over 255 characters, removing all '_'");
+            }
+
+            if ((folder + text).Length > 255)
+            {
+                Logger.Error(CultureInfo.CurrentCulture, "Lengt of the file fullname is over 255 characters, try to shorten the name of tests");
+            }
+            return text;
         }
     }
 }
