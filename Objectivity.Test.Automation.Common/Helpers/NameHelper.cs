@@ -29,6 +29,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
     using System.Text;
     using System.Text.RegularExpressions;
     using NLog;
+
     /// <summary>
     /// Contains useful actions connected with test data
     /// </summary>
@@ -71,7 +72,6 @@ namespace Objectivity.Test.Automation.Common.Helpers
             return text;
         }
 
-
         /// <summary>
         /// Shortens the text.
         /// </summary>
@@ -90,6 +90,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
             {
                 Logger.Error(CultureInfo.CurrentCulture, "Lengt of the file fullname is over 255 characters, try to shorten the name of tests");
             }
+
             return text;
         }
     }
