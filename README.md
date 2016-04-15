@@ -32,6 +32,7 @@ Projects examples of using Test Framework :
 - Objectivity.Test.Automation.Tests.NUnit for NUnit
 - Objectivity.Test.Automation.Tests.xUnit for xUnit
 - Objectivity.Test.Automation.Tests.PageObjects for Page Object Pattern
+- Objectivity.Test.Automation.Common.Documentation.shfbproj for building API documentation
 
 NUnit Example Test:
 
