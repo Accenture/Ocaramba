@@ -1,5 +1,5 @@
 ## Test.Automation
-Framework to automate tests using Selenium WebDriver
+**C# Framework to automate tests using Selenium WebDriver**
 
 Test Framework was designed in Objectivity to propose common way how people should create Selenium WebDriver tests.
 
