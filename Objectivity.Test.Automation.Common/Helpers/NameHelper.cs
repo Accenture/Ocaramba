@@ -61,7 +61,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
         }
 
         /// <summary>
-        /// Shortens the file name by removing occurences of given pattern till length of folder + filename will be shorten than maxLenght.
+        /// Shortens the file name by removing occurences of given pattern till length of folder + filename will be shorten than max Length.
         /// </summary>
         /// <param name="folder">The folder.</param>
         /// <param name="fileName">The fileName.</param>
