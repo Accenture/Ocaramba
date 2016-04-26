@@ -61,7 +61,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
         }
 
         /// <summary>
-        /// Shortens the file name by removing occurences of given pattern till length of folder + filename will be shorten than max Length.
+        /// Shortens the file name by removing occurrences of given pattern till length of folder + filename will be shorten than max Length.
         /// </summary>
         /// <param name="folder">The folder.</param>
         /// <param name="fileName">The fileName.</param>
@@ -77,7 +77,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
 
             while (((folder + fileName).Length > maxLength) && fileName.Contains(pattern))
             {
-                Logger.Trace(CultureInfo.CurrentCulture, "Length of the file full name is over {0} characters removing first occurence of {1}", maxLength, pattern);
+                Logger.Trace(CultureInfo.CurrentCulture, "Length of the file full name is over {0} characters removing first occurrence of {1}", maxLength, pattern);
                 Regex rgx = new Regex(pattern);
                 fileName = rgx.Replace(fileName, string.Empty, 1);
                 Logger.Trace(CultureInfo.CurrentCulture, "File full name: {0}", folder + fileName);
