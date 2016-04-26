@@ -461,18 +461,21 @@ namespace Objectivity.Test.Automation.Common.Helpers
         }
 
         /// <summary>
-        /// Rename the file and check if file was renamed with given timeout.
+        /// Rename the file and check if file was renamed with given timeout, shorten the name of file if needed be removing "_".
         /// </summary>
         /// <param name="waitTime">Timeout for checking if file was removed</param>
         /// <param name="oldName">The old name.</param>
         /// <param name="newName">The new name.</param>
         /// <param name="subFolder">The subFolder.</param>
+        /// <returns>The new name in case its shorten</returns>
         /// <example>How to use it: <code>
-        ///  FilesHelper.RenameFile(BaseConfiguration.ShortTimeout, "filename.txt", "newname.txt", this.DriverContext.DownloadFolder);
+        /// string newName = FilesHelper.RenameFile(BaseConfiguration.ShortTimeout, "filename.txt", "newname.txt", this.DriverContext.DownloadFolder);
         /// </code></example>
-        public static void RenameFile(double waitTime, string oldName, string newName, string subFolder)
+        public static string RenameFile(double waitTime, string oldName, string newName, string subFolder)
         {
             Logger.Debug(CultureInfo.CurrentCulture, "new file name: {0}", newName);
+            NameHelper.ShortenFileName(subFolder, newName, "_", 255);
+
             if (File.Exists(newName))
             {
                 File.Delete(newName);
@@ -491,23 +494,25 @@ namespace Objectivity.Test.Automation.Common.Helpers
             var timeoutMessage = string.Format(CultureInfo.CurrentCulture, "Waiting till file will be renamed {0}", subFolder);
             Process.Start(cmdsi);
             WaitHelper.Wait(
-                () => File.Exists(subFolder + Separator + newName), TimeSpan.FromSeconds(waitTime), TimeSpan.FromSeconds(1), timeoutMessage);     
+                () => File.Exists(subFolder + Separator + newName), TimeSpan.FromSeconds(waitTime), TimeSpan.FromSeconds(1), timeoutMessage);
+            return newName;
         }
 
         /// <summary>
-        /// Rename the file of given type and check if file was renamed with ShortTimeout.
+        /// Rename the file of given type and check if file was renamed with ShortTimeout, shorten the name of file if needed be removing "_".
         /// </summary>
         /// <param name="oldName">The old name.</param>
         /// <param name="newName">The new name.</param>
         /// <param name="subFolder">The subFolder.</param>
         /// <param name="type">The type of file.</param>
+        /// <returns>The new name in case its shorten</returns>
         /// <example>How to use it: <code>
-        ///  FilesHelper.RenameFile("filename.txt", "newname", this.DriverContext.DownloadFolder, FileType.Csv);
+        /// string newName = FilesHelper.RenameFile("filename.txt", "newname", this.DriverContext.DownloadFolder, FileType.Csv);
         /// </code></example>
-        public static void RenameFile(string oldName, string newName, string subFolder, FileType type)
+        public static string RenameFile(string oldName, string newName, string subFolder, FileType type)
         {
             newName = newName + ReturnFileExtension(type);
-            RenameFile(BaseConfiguration.ShortTimeout, oldName, newName, subFolder);
+            return RenameFile(BaseConfiguration.ShortTimeout, oldName, newName, subFolder);
         }
 
         /// <summary>

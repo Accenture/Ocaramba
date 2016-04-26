@@ -61,37 +61,34 @@ namespace Objectivity.Test.Automation.Common.Helpers
         }
 
         /// <summary>
-        /// Replaces the special characters.
-        /// </summary>
-        /// <param name="text">The text.</param>
-        /// <returns>String without special characters</returns>
-        public static string ReplaceSpecialCharacters(string text)
-        {
-            Logger.Trace(CultureInfo.CurrentCulture, "Removing all special characters");
-            text = Regex.Replace(text, @"[^0-9a-zA-Z._]+", "_");
-            return text;
-        }
-
-        /// <summary>
-        /// Shortens the text.
+        /// Shortens the file name by removing occurences of given pattern till lenght of folder + filename will be shorten than maxLenght.
         /// </summary>
         /// <param name="folder">The folder.</param>
-        /// <param name="text">The text.</param>
-        /// <returns>String with removed all '_'</returns>
-        public static string ShortenText(string folder, string text)
+        /// <param name="fileName">The fileName.</param>
+        /// <param name="pattern">The regular expression pattern to match</param>
+        /// <param name="maxLenght">Max lenght</param>
+        /// <returns>String with removed all patterns</returns>
+        /// <example>How to use it: <code>
+        /// NameHelper.ShortenFileName(folder, correctFileName, "_", 255);
+        /// </code></example>
+        public static string ShortenFileName(string folder, string fileName, string pattern, int maxLenght)
         {
-            if ((folder + text).Length > 255)
+            Logger.Debug(CultureInfo.CurrentCulture, "Lenght of the file fullname is {0} characters", (folder + fileName).Length);
+
+            while (((folder + fileName).Length > maxLenght) && fileName.Contains(pattern))
             {
-                text = text.Replace("_", string.Empty);
-                Logger.Info(CultureInfo.CurrentCulture, "Lengt of the file fullname is over 255 characters, removing all '_'");
+                Logger.Trace(CultureInfo.CurrentCulture, "Lenght of the file fullname is over {0} characters removing first occurence of {1}", maxLenght, pattern);
+                Regex rgx = new Regex(pattern);
+                fileName = rgx.Replace(fileName, string.Empty, 1);
+                Logger.Trace(CultureInfo.CurrentCulture, "File fullname: {0}", folder + fileName);
             }
 
-            if ((folder + text).Length > 255)
+            if ((folder + fileName).Length > 255)
             {
-                Logger.Error(CultureInfo.CurrentCulture, "Lengt of the file fullname is over 255 characters, try to shorten the name of tests");
+                Logger.Error(CultureInfo.CurrentCulture, "Lengt of the file fullname is over {0} characters, try to shorten the name of tests", maxLenght);
             }
 
-            return text;
+            return fileName;
         }
     }
 }

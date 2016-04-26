@@ -33,6 +33,7 @@ namespace Objectivity.Test.Automation.Common
     using System.Globalization;
     using System.IO;
     using System.Linq;
+    using System.Text.RegularExpressions;
 
     using NLog;
 
@@ -366,9 +367,9 @@ namespace Objectivity.Test.Automation.Common
         {
             var fileName = string.Format(CultureInfo.CurrentCulture, "{0}_{1}_{2}.png", title, errorDetail.DateTime.ToString("yyyy-MM-dd HH-mm-ss-fff", CultureInfo.CurrentCulture), "browser");
             var correctFileName = Path.GetInvalidFileNameChars().Aggregate(fileName, (current, c) => current.Replace(c.ToString(CultureInfo.CurrentCulture), string.Empty));
-            correctFileName = NameHelper.ReplaceSpecialCharacters(correctFileName);
-            correctFileName = NameHelper.ShortenText(folder, correctFileName);
-           
+            correctFileName = Regex.Replace(correctFileName, "[^0-9a-zA-Z._]+", "_");
+            correctFileName = NameHelper.ShortenFileName(folder, correctFileName, "_", 255);
+
             var filePath = Path.Combine(folder, correctFileName);
 
             try
@@ -391,8 +392,8 @@ namespace Objectivity.Test.Automation.Common
         {
             if (BaseConfiguration.GetPageSourceEnabled)
             {
-                var fileNameShort = NameHelper.ReplaceSpecialCharacters(fileName);
-                fileNameShort = NameHelper.ShortenText(this.PageSourceFolder, fileNameShort);
+                var fileNameShort = Regex.Replace(fileName, "[^0-9a-zA-Z._]+", "_");
+                fileNameShort = NameHelper.ShortenFileName(this.PageSourceFolder, fileNameShort, "_", 255);
                 var path = Path.Combine(this.PageSourceFolder, string.Format(CultureInfo.CurrentCulture, "{0}{1}", fileNameShort, ".html"));
                 if (File.Exists(path))
                 {

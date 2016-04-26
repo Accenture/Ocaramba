@@ -30,6 +30,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
     using System.Drawing.Imaging;
     using System.Globalization;
     using System.IO;
+    using System.Text.RegularExpressions;
     using System.Windows.Forms;
 
     using NLog;
@@ -79,8 +80,8 @@ namespace Objectivity.Test.Automation.Common.Helpers
         public static void Save(Bitmap bitmap, ImageFormat format, string folder, string title)
         {
             var fileName = string.Format(CultureInfo.CurrentCulture, "{0}_{1}_{2}.png", title, DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss-fff", CultureInfo.CurrentCulture), "fullscreen");
-            fileName = NameHelper.ReplaceSpecialCharacters(fileName);
-            fileName = NameHelper.ShortenText(folder, fileName);
+            fileName = Regex.Replace(fileName, "[^0-9a-zA-Z._]+", "_");
+            fileName = NameHelper.ShortenFileName(folder, fileName, "_", 255);
             var filePath = Path.Combine(folder, fileName);
 
             if (bitmap == null)

@@ -142,7 +142,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit.DataDriven
                     {
                         if (!string.IsNullOrEmpty(keyValue))
                         {
-                            testCaseName += "_" + Regex.Replace(keyValue, @"[.]+|\s+", "_");
+                            testCaseName += "_" + Regex.Replace(keyValue, "[^0-9a-zA-Z]+", "_");
                         }
                     }
                     else
