@@ -193,7 +193,7 @@ namespace Objectivity.Test.Automation.Common
                     // loop through all of them
                     for (var i = 0; i < firefoxPreferences.Count; i++)
                     {
-                        Logger.Trace("Set custom preference '{0},{1}'", firefoxPreferences.GetKey(i), firefoxPreferences[i]);
+                        Logger.Trace(CultureInfo.CurrentCulture, "Set custom preference '{0},{1}'", firefoxPreferences.GetKey(i), firefoxPreferences[i]);
 
                         // and verify all of them
                         switch (firefoxPreferences[i])
@@ -229,7 +229,7 @@ namespace Objectivity.Test.Automation.Common
                     // loop through all of them
                     for (var i = 0; i < firefoxExtensions.Count; i++)
                     {
-                        Logger.Trace("Installing extension {0}", firefoxExtensions.GetKey(i));
+                        Logger.Trace(CultureInfo.CurrentCulture, "Installing extension {0}", firefoxExtensions.GetKey(i));
                         profile.AddExtension(firefoxExtensions.GetKey(i));
                     }
                 }
@@ -265,7 +265,7 @@ namespace Objectivity.Test.Automation.Common
                     // loop through all of them
                     for (var i = 0; i < chromePreferences.Count; i++)
                     {
-                        Logger.Trace("Set custom preference '{0},{1}'", chromePreferences.GetKey(i), chromePreferences[i]);
+                        Logger.Trace(CultureInfo.CurrentCulture, "Set custom preference '{0},{1}'", chromePreferences.GetKey(i), chromePreferences[i]);
 
                         // and verify all of them
                         switch (chromePreferences[i])
@@ -301,7 +301,7 @@ namespace Objectivity.Test.Automation.Common
                     // loop through all of them
                     for (var i = 0; i < chromeExtensions.Count; i++)
                     {
-                        Logger.Trace("Installing extension {0}", chromeExtensions.GetKey(i));
+                        Logger.Trace(CultureInfo.CurrentCulture, "Installing extension {0}", chromeExtensions.GetKey(i));
                         options.AddExtension(chromeExtensions.GetKey(i));
                     }
                 }
