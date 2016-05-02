@@ -20,7 +20,7 @@ It provides following features:
 - Verify - asserts without stop tests, more details [here](https://github.com/ObjectivityBSS/Test.Automation/wiki/Verify-asserts-without-stop-tests)
 - Measures average and 90 Percentile action times
 - DataDriven tests from Xml files for NUnit and MSTest with examples, more details [here](https://github.com/ObjectivityBSS/Test.Automation/wiki/DataDriven-tests-from-Xml-files)
-- Possibility to take full desktop or browser screen shot, save page source, , more details [here](https://github.com/ObjectivityBSS/Test.Automation/wiki/Screen-shots:-full-desktop,-selenium.-PageSource-saving)
+- Possibility to take full desktop or browser screen shot, save page source, more details [here](https://github.com/ObjectivityBSS/Test.Automation/wiki/Screen-shots:-full-desktop,-selenium.-PageSource-saving)
 - Logging with NLog, more details [here](https://github.com/ObjectivityBSS/Test.Automation/wiki/Logging)
 - Files downloading (Firefox, Chrome), more details [here](https://github.com/ObjectivityBSS/Test.Automation/wiki/Downloading%20files)
 - Ready for parallel tests execution, more details [here](https://github.com/ObjectivityBSS/Test.Automation/wiki/Selenium%20Parallel%20tests%20execution)
