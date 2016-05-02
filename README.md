@@ -27,6 +27,8 @@ It provides following features:
 - Possibility to send SQL or MDX queries
 - Possibility of debugging framework installed from nuget package, more details [here](https://github.com/ObjectivityBSS/Test.Automation/wiki/Debugging-Test.Automation-framework).
 
+For all documentation, visit the [Test.Automation Wiki](https://github.com/ObjectivityBSS/Test.Automation/wiki).
+
 Projects examples of using Test Framework :
 - Objectivity.Test.Automation.Tests.Features for Specflow
 - Objectivity.Test.Automation.Tests.MsTest for MsTest
