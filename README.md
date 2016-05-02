@@ -11,18 +11,19 @@ It provides following features:
 - Written entirely in C#
 - Contains example projects how to use it
 - Allows to use Chrome, Firefox or Internet Explorer
+- Overrides browser profile preferences, installs browser extensions, more details [here](https://github.com/ObjectivityBSS/Test.Automation/wiki/Override%20browser%20profile%20preferences,%20install%20browser%20extensions)
 - Extends Webdriver by additional methods like JavaScriptClick, WaitForAjax, WaitForAngular, etc.
 - Automatically waits when locating element for specified time and conditions
 - Page Object Pattern
 - More common locators, e.g: ```"//*[@title='{0}' and @ms.title='{1}']"```
 - Several methods to interact with kendo controls
-- Verify - asserts without stop tests
+- Verify - asserts without stop tests, more details [here](https://github.com/ObjectivityBSS/Test.Automation/wiki/Verify-asserts-without-stop-tests)
 - Measures average and 90 Percentile action times
 - DataDriven tests from Xml files for NUnit and MSTest with examples, more details [here](https://github.com/ObjectivityBSS/Test.Automation/wiki/DataDriven-tests-from-Xml-files)
-- Possibility to take full desktop or browser screen shot
-- Logging with NLog
-- Files downloading (Firefox, Chrome)
-- Ready for parallel tests execution
+- Possibility to take full desktop or browser screen shot, save page source, , more details [here](https://github.com/ObjectivityBSS/Test.Automation/wiki/Screen-shots:-full-desktop,-selenium.-PageSource-saving)
+- Logging with NLog, more details [here](https://github.com/ObjectivityBSS/Test.Automation/wiki/Logging)
+- Files downloading (Firefox, Chrome), more details [here](https://github.com/ObjectivityBSS/Test.Automation/wiki/Downloading%20files)
+- Ready for parallel tests execution, more details [here](https://github.com/ObjectivityBSS/Test.Automation/wiki/Selenium%20Parallel%20tests%20execution)
 - Possibility to send SQL or MDX queries
 - Possibility of debugging framework installed from nuget package, more details [here](https://github.com/ObjectivityBSS/Test.Automation/wiki/Debugging-Test.Automation-framework).
 
