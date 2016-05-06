@@ -1,8 +1,10 @@
 <Dictionary>
       <Words>
          <Recognized>
-            <Word>teamcity</Word>
-			<Word>publishArtifacts</Word>
+           <Word>teamcity</Word>
+           <Word>publishArtifacts</Word>
+           <Word>Moroni</Word>
+           <Word>png</Word>
          </Recognized>
       </Words>
 </Dictionary>

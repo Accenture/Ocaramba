@@ -1,26 +1,24 @@
-/*
-The MIT License (MIT)
-
-Copyright (c) 2015 Objectivity Bespoke Software Specialists
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-*/
+// <copyright file="DriverContext.cs" company="Objectivity Bespoke Software Specialists">
+// Copyright (c) Objectivity Bespoke Software Specialists. All rights reserved.
+// </copyright>
+// <license>
+//     The MIT License (MIT)
+//     Permission is hereby granted, free of charge, to any person obtaining a copy
+//     of this software and associated documentation files (the "Software"), to deal
+//     in the Software without restriction, including without limitation the rights
+//     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//     copies of the Software, and to permit persons to whom the Software is
+//     furnished to do so, subject to the following conditions:
+//     The above copyright notice and this permission notice shall be included in all
+//     copies or substantial portions of the Software.
+//     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+//     SOFTWARE.
+// </license>
 
 namespace Objectivity.Test.Automation.Common
 {
@@ -115,9 +113,9 @@ namespace Objectivity.Test.Automation.Common
         public bool IsTestFailed { get; set; }
 
         /// <summary>
-        /// Test logger
+        /// Gets or sets test logger
         /// </summary>
-        public TestLogger LogTest 
+        public TestLogger LogTest
         {
             get
             {
@@ -131,7 +129,7 @@ namespace Objectivity.Test.Automation.Common
         }
 
         /// <summary>
-        /// Driver Handle
+        /// Gets driver Handle
         /// </summary>
         public IWebDriver Driver
         {
@@ -142,7 +140,7 @@ namespace Objectivity.Test.Automation.Common
         }
 
         /// <summary>
-        /// Held all verify messages
+        /// Gets all verify messages
         /// </summary>
         public Collection<ErrorDetail> VerifyMessages
         {
@@ -151,6 +149,11 @@ namespace Objectivity.Test.Automation.Common
                 return this.verifyMessages;
             }
         }
+
+        /// <summary>
+        /// Gets or sets directory where assembly files are located
+        /// </summary>
+        public string CurrentDirectory { get; set; }
 
         private FirefoxProfile FirefoxProfile
         {
@@ -177,7 +180,7 @@ namespace Objectivity.Test.Automation.Common
                 profile.SetPreference("browser.download.folderList", 2);
                 profile.SetPreference("browser.download.managershowWhenStarting", false);
                 profile.SetPreference("browser.helperApps.neverAsk.saveToDisk", "application/vnd.ms-excel, application/x-msexcel, application/pdf, text/csv, text/html, application/octet-stream");
-                
+
                 // disable Firefox's built-in PDF viewer
                 profile.SetPreference("pdfjs.disabled", true);
 
@@ -214,7 +217,11 @@ namespace Objectivity.Test.Automation.Common
                                 {
                                     profile.SetPreference(firefoxPreferences.GetKey(i), temp);
                                 }
-                                else profile.SetPreference(firefoxPreferences.GetKey(i), firefoxPreferences[i]);
+                                else
+                                {
+                                    profile.SetPreference(firefoxPreferences.GetKey(i), firefoxPreferences[i]);
+                                }
+
                                 break;
                         }
                     }
@@ -248,7 +255,7 @@ namespace Objectivity.Test.Automation.Common
                 {
                     options.Proxy = this.CurrentProxy();
                 }
-                
+
                 return options;
             }
         }
@@ -274,20 +281,27 @@ namespace Objectivity.Test.Automation.Common
         }
 
         /// <summary>
-        /// Directory where assembly files are located
+        /// Takes the screenshot.
         /// </summary>
-        public string CurrentDirectory { get; set; }
-
-        private Proxy CurrentProxy()
+        /// <returns>An image of the page currently loaded in the browser.</returns>
+        public Screenshot TakeScreenshot()
         {
-            Proxy proxy = new Proxy
-                              {
-                                  HttpProxy = BaseConfiguration.Proxy,
-                                  FtpProxy = BaseConfiguration.Proxy,
-                                  SslProxy = BaseConfiguration.Proxy,
-                                  SocksProxy = BaseConfiguration.Proxy
-                              };
-            return proxy;
+            try
+            {
+                var screenshotDriver = (ITakesScreenshot)this.driver;
+                var screenshot = screenshotDriver.GetScreenshot();
+                return screenshot;
+            }
+            catch (NullReferenceException)
+            {
+                Logger.Error("Test failed but was unable to get webdriver screenshot.");
+            }
+            catch (UnhandledAlertException)
+            {
+                Logger.Error("Test failed but was unable to get webdriver screenshot.");
+            }
+
+            return null;
         }
 
         /// <summary>
@@ -333,30 +347,6 @@ namespace Objectivity.Test.Automation.Common
         }
 
         /// <summary>
-        /// Takes the screenshot.
-        /// </summary>
-        /// <returns>An image of the page currently loaded in the browser.</returns>
-        public Screenshot TakeScreenshot()
-        {
-            try
-            {
-                var screenshotDriver = (ITakesScreenshot)this.driver;
-                var screenshot = screenshotDriver.GetScreenshot();
-                return screenshot;
-            }
-            catch (NullReferenceException)
-            {
-                Logger.Error("Test failed but was unable to get webdriver screenshot.");
-            }
-            catch (UnhandledAlertException)
-            {
-                Logger.Error("Test failed but was unable to get webdriver screenshot.");
-            }
-
-            return null;
-        }
-
-        /// <summary>
         /// Saves the screenshot.
         /// </summary>
         /// <param name="errorDetail">The error detail.</param>
@@ -378,7 +368,7 @@ namespace Objectivity.Test.Automation.Common
             catch (NullReferenceException)
             {
                 Logger.Error("Test failed but was unable to get webdriver screenshot.");
-            }    
+            }
         }
 
         /// <summary>
@@ -418,6 +408,18 @@ namespace Objectivity.Test.Automation.Common
             {
                 this.SaveScreenshot(new ErrorDetail(this.TakeScreenshot(), DateTime.Now, null), this.ScreenShotFolder, this.TestTitle);
             }
+        }
+
+        private Proxy CurrentProxy()
+        {
+            Proxy proxy = new Proxy
+                              {
+                                  HttpProxy = BaseConfiguration.Proxy,
+                                  FtpProxy = BaseConfiguration.Proxy,
+                                  SslProxy = BaseConfiguration.Proxy,
+                                  SocksProxy = BaseConfiguration.Proxy
+                              };
+            return proxy;
         }
     }
 }

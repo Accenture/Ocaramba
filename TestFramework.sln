@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Objectivity.Test.Automation.Common", "Objectivity.Test.Automation.Common\Objectivity.Test.Automation.Common.csproj", "{46FA4EDC-A114-4E8F-A545-996F99E31EA8}"
 EndProject
@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Objectivity.Test.Automation
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Objectivity.Test.Automation.Tests.Features", "Objectivity.Test.Automation.Tests.Features\Objectivity.Test.Automation.Tests.Features.csproj", "{B97FEA9E-C131-4850-BC6D-563F60EE41FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Objectivity.Test.Automation.Tests.xUnit", "Objectivity.Test.Automation.Tests.Xunit\Objectivity.Test.Automation.Tests.xUnit.csproj", "{8DAC5471-0F43-42F2-8C98-8C0FF3C58A4B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Objectivity.Test.Automation.Tests.Xunit", "Objectivity.Test.Automation.Tests.Xunit\Objectivity.Test.Automation.Tests.Xunit.csproj", "{8DAC5471-0F43-42F2-8C98-8C0FF3C58A4B}"
 EndProject
 Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Objectivity.Test.Automation.Common.Documentation", "Objectivity.Test.Automation.Common.Documentation\Objectivity.Test.Automation.Common.Documentation.shfbproj", "{92D1D26C-A5BC-44D2-BEE3-1560671B19EF}"
 	ProjectSection(ProjectDependencies) = postProject
