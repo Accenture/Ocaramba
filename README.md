@@ -94,7 +94,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 
         public JavaScriptAlertsPage GoToJavaScriptAlerts()
         {
-            this.Driver.GetElement(this.linkLocator.Evaluate("javascript_alerts")).Click();
+            this.Driver.GetElement(this.linkLocator.Format("javascript_alerts")).Click();
             return new JavaScriptAlertsPage(this.DriverContext);
         }
     }
