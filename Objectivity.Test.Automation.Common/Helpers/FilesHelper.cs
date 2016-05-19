@@ -1,26 +1,24 @@
-﻿/*
-The MIT License (MIT)
-
-Copyright (c) 2015 Objectivity Bespoke Software Specialists
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-*/
+﻿// <copyright file="FilesHelper.cs" company="Objectivity Bespoke Software Specialists">
+// Copyright (c) Objectivity Bespoke Software Specialists. All rights reserved.
+// </copyright>
+// <license>
+//     The MIT License (MIT)
+//     Permission is hereby granted, free of charge, to any person obtaining a copy
+//     of this software and associated documentation files (the "Software"), to deal
+//     in the Software without restriction, including without limitation the rights
+//     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//     copies of the Software, and to permit persons to whom the Software is
+//     furnished to do so, subject to the following conditions:
+//     The above copyright notice and this permission notice shall be included in all
+//     copies or substantial portions of the Software.
+//     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+//     SOFTWARE.
+// </license>
 
 namespace Objectivity.Test.Automation.Common.Helpers
 {
@@ -41,12 +39,12 @@ namespace Objectivity.Test.Automation.Common.Helpers
     /// </summary>
     public static class FilesHelper
     {
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-
         /// <summary>
         /// Directory separator
         /// </summary>
         public static readonly char Separator = Path.DirectorySeparatorChar;
+
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
         /// Returns the file extension.
@@ -357,7 +355,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
             var timeoutMessage = string.Format(CultureInfo.CurrentCulture, "Waiting for file number to increase in {0}", folder);
             WaitHelper.Wait(
                 () => CountFiles(folder, type) > filesNumber, TimeSpan.FromSeconds(waitTime), TimeSpan.FromSeconds(1), timeoutMessage);
-            
+
             Logger.Debug("Number of files increased, checking if size of last file > 0 bytes");
             timeoutMessage = "Checking if size of last file > 0 bytes";
 
@@ -437,7 +435,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
             var timeoutMessage = string.Format(CultureInfo.CurrentCulture, "Waiting for file number to increase in {0}", folder);
             WaitHelper.Wait(
                 () => CountFiles(folder) > filesNumber, TimeSpan.FromSeconds(waitTime), TimeSpan.FromSeconds(1), timeoutMessage);
-     
+
             Logger.Debug("Number of files increased, checking if size of last file > 0 bytes");
             timeoutMessage = "Checking if size of last file > 0 bytes";
 
@@ -481,7 +479,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
                 File.Delete(newName);
             }
 
-            // Use ProcessStartInfo class   
+            // Use ProcessStartInfo class
             string command = "/c ren " + '\u0022' + oldName + '\u0022' + " " + '\u0022' + newName +
                              '\u0022';
             ProcessStartInfo cmdsi = new ProcessStartInfo("cmd.exe")
@@ -493,7 +491,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
 
             var timeoutMessage = string.Format(CultureInfo.CurrentCulture, "Waiting till file will be renamed {0}", subFolder);
             Process.Start(cmdsi);
-            WaitHelper.Wait(
+            WaitHelper.Wait(     
                 () => File.Exists(subFolder + Separator + newName), TimeSpan.FromSeconds(waitTime), TimeSpan.FromSeconds(1), timeoutMessage);
             return newName;
         }
