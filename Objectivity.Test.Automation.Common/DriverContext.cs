@@ -31,6 +31,7 @@ namespace Objectivity.Test.Automation.Common
     using System.Globalization;
     using System.IO;
     using System.Linq;
+    using System.Text.RegularExpressions;
 
     using NLog;
 
@@ -195,6 +196,8 @@ namespace Objectivity.Test.Automation.Common
                     // loop through all of them
                     for (var i = 0; i < firefoxPreferences.Count; i++)
                     {
+                        Logger.Trace(CultureInfo.CurrentCulture, "Set custom preference '{0},{1}'", firefoxPreferences.GetKey(i), firefoxPreferences[i]);
+
                         // and verify all of them
                         switch (firefoxPreferences[i])
                         {
@@ -233,6 +236,7 @@ namespace Objectivity.Test.Automation.Common
                     // loop through all of them
                     for (var i = 0; i < firefoxExtensions.Count; i++)
                     {
+                        Logger.Trace(CultureInfo.CurrentCulture, "Installing extension {0}", firefoxExtensions.GetKey(i));
                         profile.AddExtension(firefoxExtensions.GetKey(i));
                     }
                 }
@@ -246,6 +250,11 @@ namespace Objectivity.Test.Automation.Common
             get
             {
                 ChromeOptions options = new ChromeOptions();
+
+                // retrieving settings from config file
+                var chromePreferences = ConfigurationManager.GetSection("ChromePreferences") as NameValueCollection;
+                var chromeExtensions = ConfigurationManager.GetSection("ChromeExtensions") as NameValueCollection;
+
                 options.AddUserProfilePreference("profile.default_content_settings.popups", 0);
                 options.AddUserProfilePreference("download.default_directory", this.DownloadFolder);
                 options.AddUserProfilePreference("download.prompt_for_download", false);
@@ -254,6 +263,54 @@ namespace Objectivity.Test.Automation.Common
                 if (!string.IsNullOrEmpty(BaseConfiguration.Proxy))
                 {
                     options.Proxy = this.CurrentProxy();
+                }
+
+                // custom preferences
+                // if there are any settings
+                if (chromePreferences != null)
+                {
+                    // loop through all of them
+                    for (var i = 0; i < chromePreferences.Count; i++)
+                    {
+                        Logger.Trace(CultureInfo.CurrentCulture, "Set custom preference '{0},{1}'", chromePreferences.GetKey(i), chromePreferences[i]);
+
+                        // and verify all of them
+                        switch (chromePreferences[i])
+                        {
+                            // if current settings value is "true"
+                            case "true":
+                                options.AddUserProfilePreference(chromePreferences.GetKey(i), true);
+                                break;
+
+                            // if "false"
+                            case "false":
+                                options.AddUserProfilePreference(chromePreferences.GetKey(i), false);
+                                break;
+
+                            // otherwise
+                            default:
+                                int temp;
+
+                                // an attempt to parse current settings value to an integer. Method TryParse returns True if the attempt is successful (the string is integer) or return False (if the string is just a string and cannot be cast to a number)
+                                if (int.TryParse(chromePreferences.Get(i), out temp))
+                                {
+                                    options.AddUserProfilePreference(chromePreferences.GetKey(i), temp);
+                                }
+                                else options.AddUserProfilePreference(chromePreferences.GetKey(i), chromePreferences[i]);
+                                break;
+                        }
+                    }
+                }
+
+                // if there are any extensions
+                if (chromeExtensions != null)
+                {
+                    // loop through all of them
+                    for (var i = 0; i < chromeExtensions.Count; i++)
+                    {
+                        Logger.Trace(CultureInfo.CurrentCulture, "Installing extension {0}", chromeExtensions.GetKey(i));
+                        options.AddExtension(chromeExtensions.GetKey(i));
+                    }
                 }
 
                 return options;
@@ -356,7 +413,9 @@ namespace Objectivity.Test.Automation.Common
         {
             var fileName = string.Format(CultureInfo.CurrentCulture, "{0}_{1}_{2}.png", title, errorDetail.DateTime.ToString("yyyy-MM-dd HH-mm-ss-fff", CultureInfo.CurrentCulture), "browser");
             var correctFileName = Path.GetInvalidFileNameChars().Aggregate(fileName, (current, c) => current.Replace(c.ToString(CultureInfo.CurrentCulture), string.Empty));
-            correctFileName = correctFileName.Replace(" ", "_").Replace("-", "_");
+            correctFileName = Regex.Replace(correctFileName, "[^0-9a-zA-Z._]+", "_");
+            correctFileName = NameHelper.ShortenFileName(folder, correctFileName, "_", 255);
+
             var filePath = Path.Combine(folder, correctFileName);
 
             try
@@ -379,7 +438,9 @@ namespace Objectivity.Test.Automation.Common
         {
             if (BaseConfiguration.GetPageSourceEnabled)
             {
-                var path = Path.Combine(this.PageSourceFolder, string.Format(CultureInfo.CurrentCulture, "{0}{1}", fileName.Replace(" ", "_").Replace("-", "_"), ".html"));
+                var fileNameShort = Regex.Replace(fileName, "[^0-9a-zA-Z._]+", "_");
+                fileNameShort = NameHelper.ShortenFileName(this.PageSourceFolder, fileNameShort, "_", 255);
+                var path = Path.Combine(this.PageSourceFolder, string.Format(CultureInfo.CurrentCulture, "{0}{1}", fileNameShort, ".html"));
                 if (File.Exists(path))
                 {
                     File.Delete(path);

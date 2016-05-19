@@ -6,7 +6,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>2e753223-59f7-47ed-9e1a-d539a462226d</ProjectGuid>
+    <ProjectGuid>{2911b385-a412-48d1-8e17-ededb98d353c}</ProjectGuid>
     <SHFBSchemaVersion>2015.6.5.0</SHFBSchemaVersion>
     <!-- AssemblyName, Name, and RootNamespace are not used by SHFB but Visual Studio adds them anyway -->
     <AssemblyName>Objectivity.Test.Automation.Common.Documentation</AssemblyName>
@@ -14,7 +14,7 @@
     <Name>Objectivity.Test.Automation.Common.Documentation</Name>
     <!-- SHFB properties -->
     <FrameworkVersion>.NET Framework 4.6</FrameworkVersion>
-    <OutputPath>Help\</OutputPath>
+    <OutputPath>HelpSelenium\</OutputPath>
     <HtmlHelpName>Objectivity.Test.Automation.Common</HtmlHelpName>
     <Language>en-US</Language>
     <TransformComponentArguments>
@@ -27,8 +27,10 @@
       <Argument Key="maxVersionParts" Value="" xmlns="" />
     </TransformComponentArguments>
     <DocumentationSources>
-      <DocumentationSource sourceFile="..\Objectivity.Test.Automation.Common\Objectivity.Test.Automation.Common.csproj" xmlns="" />
-    </DocumentationSources>
+      <DocumentationSource sourceFile="..\packages\Selenium.WebDriver.2.53.0\lib\net40\WebDriver.dll" />
+<DocumentationSource sourceFile="..\packages\Selenium.WebDriver.2.53.0\lib\net40\WebDriver.xml" />
+<DocumentationSource sourceFile="..\packages\Selenium.Support.2.53.0\lib\net40\WebDriver.Support.dll" />
+<DocumentationSource sourceFile="..\packages\Selenium.Support.2.53.0\lib\net40\WebDriver.Support.xml" /></DocumentationSources>
     <SaveComponentCacheCapacity>100</SaveComponentCacheCapacity>
     <BuildAssemblerVerbosity>OnlyWarningsAndErrors</BuildAssemblerVerbosity>
     <HelpFileFormat>Website</HelpFileFormat>
@@ -54,15 +56,6 @@
     <HtmlHelp1xCompilerPath>..\packages\EWSoftware.SHFB.2016.4.9.0\tools\</HtmlHelp1xCompilerPath>
     <ComponentPath>..\packages\</ComponentPath>
     <MissingTags>Summary, Parameter, Returns, AutoDocumentCtors, TypeParameter, AutoDocumentDispose</MissingTags>
-    <PlugInConfigurations>
-      <PlugInConfig id="Additional Reference Links" enabled="True">
-        <configuration>
-          <targets>
-            <target htmlSdkLinkType="None" helpViewerSdkLinkType="Id" websiteSdkLinkType="None" helpFileProject="Selenium.shfbproj" />
-          </targets>
-        </configuration>
-      </PlugInConfig>
-    </PlugInConfigurations>
   </PropertyGroup>
   <PropertyGroup>
     <!-- NOTE: Update the version number in the path (YYYY.M.D.R) to match the package version -->
