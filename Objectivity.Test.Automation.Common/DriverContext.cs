@@ -296,7 +296,11 @@ namespace Objectivity.Test.Automation.Common
                                 {
                                     options.AddUserProfilePreference(chromePreferences.GetKey(i), temp);
                                 }
-                                else options.AddUserProfilePreference(chromePreferences.GetKey(i), chromePreferences[i]);
+                                else
+                                {
+                                    options.AddUserProfilePreference(chromePreferences.GetKey(i), chromePreferences[i]);
+                                }
+
                                 break;
                         }
                     }

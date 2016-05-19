@@ -491,8 +491,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
 
             var timeoutMessage = string.Format(CultureInfo.CurrentCulture, "Waiting till file will be renamed {0}", subFolder);
             Process.Start(cmdsi);
-            WaitHelper.Wait(     
-                () => File.Exists(subFolder + Separator + newName), TimeSpan.FromSeconds(waitTime), TimeSpan.FromSeconds(1), timeoutMessage);
+            WaitHelper.Wait(() => File.Exists(subFolder + Separator + newName), TimeSpan.FromSeconds(waitTime), TimeSpan.FromSeconds(1), timeoutMessage);
             return newName;
         }
 
