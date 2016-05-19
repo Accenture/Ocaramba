@@ -426,7 +426,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// <param name="waitTime">Wait timeout</param>
         /// <param name="filesNumber">The initial files number.</param>
         /// <param name="folder">The folder.</param>
-        /// <example>How to use it: <code>
+        /// <example>How to use it:<code>
         /// var filesNumber = FilesHelper.CountFiles(this.DriverContext.DownloadFolder);
         /// this.Driver.GetElement(this.fileLink.Format("some-file.txt")).Click();
         /// FilesHelper.WaitForFile(BaseConfiguration.LongTimeout, filesNumber, this.DriverContext.DownloadFolder);
