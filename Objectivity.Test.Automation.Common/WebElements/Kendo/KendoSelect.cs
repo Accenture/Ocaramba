@@ -1,26 +1,24 @@
-﻿/*
-The MIT License (MIT)
-
-Copyright (c) 2015 Objectivity Bespoke Software Specialists
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-*/
+﻿// <copyright file="KendoSelect.cs" company="Objectivity Bespoke Software Specialists">
+// Copyright (c) Objectivity Bespoke Software Specialists. All rights reserved.
+// </copyright>
+// <license>
+//     The MIT License (MIT)
+//     Permission is hereby granted, free of charge, to any person obtaining a copy
+//     of this software and associated documentation files (the "Software"), to deal
+//     in the Software without restriction, including without limitation the rights
+//     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//     copies of the Software, and to permit persons to whom the Software is
+//     furnished to do so, subject to the following conditions:
+//     The above copyright notice and this permission notice shall be included in all
+//     copies or substantial portions of the Software.
+//     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+//     SOFTWARE.
+// </license>
 
 namespace Objectivity.Test.Automation.Common.WebElements.Kendo
 {
@@ -39,12 +37,6 @@ namespace Objectivity.Test.Automation.Common.WebElements.Kendo
     /// </summary>
     public abstract class KendoSelect : RemoteWebElement
     {
-        /// <summary>
-        /// The element selector.
-        /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields", Justification = "Temporary solution")]
-        protected readonly string ElementCssSelector;
-
         private readonly ElementLocator kendoSelect = new ElementLocator(
             Locator.XPath,
             "./ancestor-or-self::span[contains(@class, 'k-widget')]//input[@id]");
@@ -81,8 +73,7 @@ namespace Objectivity.Test.Automation.Common.WebElements.Kendo
             get
             {
                 var element =
-                    (IWebElement)
-                    this.Driver.JavaScripts()
+                    (IWebElement)this.Driver.JavaScripts()
                         .ExecuteScript(
                             string.Format(
                                 CultureInfo.InvariantCulture,
@@ -94,10 +85,6 @@ namespace Objectivity.Test.Automation.Common.WebElements.Kendo
             }
         }
 
-        /// <summary>Gets the selector.</summary>
-        /// <value>The selector.</value>
-        protected abstract string SelectType { get; }
-
         /// <summary>
         ///     Gets the options.
         /// </summary>
@@ -106,8 +93,7 @@ namespace Objectivity.Test.Automation.Common.WebElements.Kendo
             get
             {
                 var elements =
-                    (ReadOnlyCollection<IWebElement>)
-                    this.Driver.JavaScripts()
+                    (ReadOnlyCollection<IWebElement>)this.Driver.JavaScripts()
                         .ExecuteScript(
                             string.Format(
                                 CultureInfo.InvariantCulture,
@@ -126,8 +112,7 @@ namespace Objectivity.Test.Automation.Common.WebElements.Kendo
             get
             {
                 var option =
-                    (string)
-                    this.Driver.JavaScripts()
+                    (string)this.Driver.JavaScripts()
                         .ExecuteScript(
                             string.Format(
                                 CultureInfo.InvariantCulture,
@@ -137,6 +122,15 @@ namespace Objectivity.Test.Automation.Common.WebElements.Kendo
                 return option;
             }
         }
+
+        /// <summary>
+        /// Gets or sets the element selector.
+        /// </summary>
+        protected string ElementCssSelector { get; set; }
+
+        /// <summary>Gets the selector.</summary>
+        /// <value>The selector.</value>
+        protected abstract string SelectType { get; }
 
         /// <summary>Select by text.</summary>
         /// <param name="text">The text.</param>

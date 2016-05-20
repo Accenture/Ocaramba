@@ -1,34 +1,32 @@
-﻿/*
-The MIT License (MIT)
-
-Copyright (c) 2015 Objectivity Bespoke Software Specialists
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-*/
-
-using System.Globalization;
-using NLog;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.Events;
+﻿// <copyright file="MyEventFiringWebDriver.cs" company="Objectivity Bespoke Software Specialists">
+// Copyright (c) Objectivity Bespoke Software Specialists. All rights reserved.
+// </copyright>
+// <license>
+//     The MIT License (MIT)
+//     Permission is hereby granted, free of charge, to any person obtaining a copy
+//     of this software and associated documentation files (the "Software"), to deal
+//     in the Software without restriction, including without limitation the rights
+//     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//     copies of the Software, and to permit persons to whom the Software is
+//     furnished to do so, subject to the following conditions:
+//     The above copyright notice and this permission notice shall be included in all
+//     copies or substantial portions of the Software.
+//     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+//     SOFTWARE.
+// </license>
 
 namespace Objectivity.Test.Automation.Common.Logger
 {
+    using System.Globalization;
+    using NLog;
+    using OpenQA.Selenium;
+    using OpenQA.Selenium.Support.Events;
+
     /// <summary>
     /// Override selenium methods to add event logs
     /// </summary>
@@ -40,7 +38,8 @@ namespace Objectivity.Test.Automation.Common.Logger
         /// Initializes a new instance of the <see cref="MyEventFiringWebDriver"/> class.
         /// </summary>
         /// <param name="parentDriver">The parent driver.</param>
-        public MyEventFiringWebDriver(IWebDriver parentDriver) : base(parentDriver)
+        public MyEventFiringWebDriver(IWebDriver parentDriver)
+            : base(parentDriver)
         {
         }
 
@@ -118,11 +117,11 @@ namespace Objectivity.Test.Automation.Common.Logger
         /// To the string element.
         /// </summary>
         /// <param name="e">The <see cref="WebElementEventArgs"/> instance containing the event data.</param>
-        /// <returns></returns>
+        /// <returns>Formated issue</returns>
         private static string ToStringElement(WebElementEventArgs e)
         {
             return string.Format(
-                CultureInfo.CurrentCulture, 
+                CultureInfo.CurrentCulture,
                 "{0}{{{1}{2}{3}{4}{5}{6}{7}{8}}}",
                 e.Element.TagName,
                 AppendAttribute(e, "id"),
@@ -140,7 +139,7 @@ namespace Objectivity.Test.Automation.Common.Logger
         /// </summary>
         /// <param name="e">The <see cref="WebElementEventArgs"/> instance containing the event data.</param>
         /// <param name="attribute">The attribute.</param>
-        /// <returns></returns>
+        /// <returns>Atribute and value</returns>
         private static string AppendAttribute(WebElementEventArgs e, string attribute)
         {
             var attrValue = attribute == "text" ? e.Element.Text : e.Element.GetAttribute(attribute);

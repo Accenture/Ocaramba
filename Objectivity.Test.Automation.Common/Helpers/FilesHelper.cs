@@ -1,26 +1,24 @@
-﻿/*
-The MIT License (MIT)
-
-Copyright (c) 2015 Objectivity Bespoke Software Specialists
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-*/
+﻿// <copyright file="FilesHelper.cs" company="Objectivity Bespoke Software Specialists">
+// Copyright (c) Objectivity Bespoke Software Specialists. All rights reserved.
+// </copyright>
+// <license>
+//     The MIT License (MIT)
+//     Permission is hereby granted, free of charge, to any person obtaining a copy
+//     of this software and associated documentation files (the "Software"), to deal
+//     in the Software without restriction, including without limitation the rights
+//     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//     copies of the Software, and to permit persons to whom the Software is
+//     furnished to do so, subject to the following conditions:
+//     The above copyright notice and this permission notice shall be included in all
+//     copies or substantial portions of the Software.
+//     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+//     SOFTWARE.
+// </license>
 
 namespace Objectivity.Test.Automation.Common.Helpers
 {
@@ -41,12 +39,12 @@ namespace Objectivity.Test.Automation.Common.Helpers
     /// </summary>
     public static class FilesHelper
     {
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-
         /// <summary>
         /// Directory separator
         /// </summary>
         public static readonly char Separator = Path.DirectorySeparatorChar;
+
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
         /// Returns the file extension.
@@ -357,7 +355,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
             var timeoutMessage = string.Format(CultureInfo.CurrentCulture, "Waiting for file number to increase in {0}", folder);
             WaitHelper.Wait(
                 () => CountFiles(folder, type) > filesNumber, TimeSpan.FromSeconds(waitTime), TimeSpan.FromSeconds(1), timeoutMessage);
-            
+
             Logger.Debug("Number of files increased, checking if size of last file > 0 bytes");
             timeoutMessage = "Checking if size of last file > 0 bytes";
 
@@ -426,7 +424,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// <param name="waitTime">Wait timeout</param>
         /// <param name="filesNumber">The initial files number.</param>
         /// <param name="folder">The folder.</param>
-        /// <example>How to use it: <code>
+        /// <example>How to use it:<code>
         /// var filesNumber = FilesHelper.CountFiles(this.DriverContext.DownloadFolder);
         /// this.Driver.GetElement(this.fileLink.Format("some-file.txt")).Click();
         /// FilesHelper.WaitForFile(BaseConfiguration.LongTimeout, filesNumber, this.DriverContext.DownloadFolder);
@@ -437,7 +435,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
             var timeoutMessage = string.Format(CultureInfo.CurrentCulture, "Waiting for file number to increase in {0}", folder);
             WaitHelper.Wait(
                 () => CountFiles(folder) > filesNumber, TimeSpan.FromSeconds(waitTime), TimeSpan.FromSeconds(1), timeoutMessage);
-     
+
             Logger.Debug("Number of files increased, checking if size of last file > 0 bytes");
             timeoutMessage = "Checking if size of last file > 0 bytes";
 
@@ -461,24 +459,27 @@ namespace Objectivity.Test.Automation.Common.Helpers
         }
 
         /// <summary>
-        /// Rename the file and check if file was renamed with given timeout.
+        /// Rename the file and check if file was renamed with given timeout, shorten the name of file if needed be removing "_".
         /// </summary>
         /// <param name="waitTime">Timeout for checking if file was removed</param>
         /// <param name="oldName">The old name.</param>
         /// <param name="newName">The new name.</param>
         /// <param name="subFolder">The subFolder.</param>
+        /// <returns>The new name in case its shorten</returns>
         /// <example>How to use it: <code>
-        ///  FilesHelper.RenameFile(BaseConfiguration.ShortTimeout, "filename.txt", "newname.txt", this.DriverContext.DownloadFolder);
+        /// string newName = FilesHelper.RenameFile(BaseConfiguration.ShortTimeout, "filename.txt", "newname.txt", this.DriverContext.DownloadFolder);
         /// </code></example>
-        public static void RenameFile(double waitTime, string oldName, string newName, string subFolder)
+        public static string RenameFile(double waitTime, string oldName, string newName, string subFolder)
         {
             Logger.Debug(CultureInfo.CurrentCulture, "new file name: {0}", newName);
+            NameHelper.ShortenFileName(subFolder, newName, "_", 255);
+
             if (File.Exists(newName))
             {
                 File.Delete(newName);
             }
 
-            // Use ProcessStartInfo class   
+            // Use ProcessStartInfo class
             string command = "/c ren " + '\u0022' + oldName + '\u0022' + " " + '\u0022' + newName +
                              '\u0022';
             ProcessStartInfo cmdsi = new ProcessStartInfo("cmd.exe")
@@ -490,24 +491,25 @@ namespace Objectivity.Test.Automation.Common.Helpers
 
             var timeoutMessage = string.Format(CultureInfo.CurrentCulture, "Waiting till file will be renamed {0}", subFolder);
             Process.Start(cmdsi);
-            WaitHelper.Wait(
-                () => File.Exists(subFolder + Separator + newName), TimeSpan.FromSeconds(waitTime), TimeSpan.FromSeconds(1), timeoutMessage);     
+            WaitHelper.Wait(() => File.Exists(subFolder + Separator + newName), TimeSpan.FromSeconds(waitTime), TimeSpan.FromSeconds(1), timeoutMessage);
+            return newName;
         }
 
         /// <summary>
-        /// Rename the file of given type and check if file was renamed with ShortTimeout.
+        /// Rename the file of given type and check if file was renamed with ShortTimeout, shorten the name of file if needed be removing "_".
         /// </summary>
         /// <param name="oldName">The old name.</param>
         /// <param name="newName">The new name.</param>
         /// <param name="subFolder">The subFolder.</param>
         /// <param name="type">The type of file.</param>
+        /// <returns>The new name in case its shorten</returns>
         /// <example>How to use it: <code>
-        ///  FilesHelper.RenameFile("filename.txt", "newname", this.DriverContext.DownloadFolder, FileType.Csv);
+        /// string newName = FilesHelper.RenameFile("filename.txt", "newname", this.DriverContext.DownloadFolder, FileType.Csv);
         /// </code></example>
-        public static void RenameFile(string oldName, string newName, string subFolder, FileType type)
+        public static string RenameFile(string oldName, string newName, string subFolder, FileType type)
         {
             newName = newName + ReturnFileExtension(type);
-            RenameFile(BaseConfiguration.ShortTimeout, oldName, newName, subFolder);
+            return RenameFile(BaseConfiguration.ShortTimeout, oldName, newName, subFolder);
         }
 
         /// <summary>
