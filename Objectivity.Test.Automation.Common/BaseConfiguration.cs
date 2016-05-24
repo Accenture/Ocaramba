@@ -150,6 +150,17 @@ namespace Objectivity.Test.Automation.Common
         }
 
         /// <summary>
+        /// Gets the PhantomJs path
+        /// </summary>
+        public static string PhantomJsPath
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["PhantomJsPath"];
+            }
+        }
+
+        /// <summary>
         /// Gets a value indicating whether enable full desktop screen shot. False by default.
         /// </summary>
         public static bool FullDesktopScreenShotEnabled
