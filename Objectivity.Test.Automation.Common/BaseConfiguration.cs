@@ -26,11 +26,18 @@ namespace Objectivity.Test.Automation.Common
     using System.Configuration;
     using System.Globalization;
 
+    using NLog;
+
     /// <summary>
     /// SeleniumConfiguration that consume app.config file
     /// </summary>
     public static class BaseConfiguration
     {
+        /// <summary>
+        /// The logger
+        /// </summary>
+        private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
+
         /// <summary>
         /// Gets the Driver.
         /// </summary>
@@ -38,6 +45,7 @@ namespace Objectivity.Test.Automation.Common
         {
             get
             {
+                Logger.Trace(CultureInfo.CurrentCulture, "Browser value from App.config '{0}'", ConfigurationManager.AppSettings["browser"]);
                 BrowserType browserType;
                 bool supportedBrowser = Enum.TryParse(ConfigurationManager.AppSettings["browser"], out browserType);
 
@@ -148,6 +156,7 @@ namespace Objectivity.Test.Automation.Common
         {
             get
             {
+                Logger.Trace(CultureInfo.CurrentCulture, "Full Desktop Screen Shot Enabled value from App.config '{0}'", ConfigurationManager.AppSettings["FullDesktopScreenShotEnabled"]);
                 if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["FullDesktopScreenShotEnabled"]))
                 {
                     return false;
@@ -169,6 +178,7 @@ namespace Objectivity.Test.Automation.Common
         {
             get
             {
+                Logger.Trace(CultureInfo.CurrentCulture, "Selenium Screen Shot Enabled value from App.config '{0}'", ConfigurationManager.AppSettings["SeleniumScreenShotEnabled"]);
                 if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["SeleniumScreenShotEnabled"]))
                 {
                     return true;
@@ -190,6 +200,7 @@ namespace Objectivity.Test.Automation.Common
         {
             get
             {
+                Logger.Trace(CultureInfo.CurrentCulture, "Use Current Directory value from App.config '{0}'", ConfigurationManager.AppSettings["UseCurrentDirectory"]);
                 if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["UseCurrentDirectory"]))
                 {
                     return false;
@@ -214,6 +225,7 @@ namespace Objectivity.Test.Automation.Common
         {
             get
             {
+                Logger.Trace(CultureInfo.CurrentCulture, "Get Page Source Enabled value from App.config '{0}'", ConfigurationManager.AppSettings["GetPageSourceEnabled"]);
                 if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["GetPageSourceEnabled"]))
                 {
                     return true;
