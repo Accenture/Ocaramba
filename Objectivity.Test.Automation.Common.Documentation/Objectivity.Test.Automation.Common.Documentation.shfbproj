@@ -63,6 +63,12 @@
         </configuration>
       </PlugInConfig>
     </PlugInConfigurations>
+    <ApiFilter>
+      <Filter entryType="Namespace" fullName="Objectivity.Test.Automation.Common.Logger" isExposed="False" xmlns="">
+  <Filter entryType="Class" fullName="Objectivity.Test.Automation.Common.Logger.TestLogger" filterName="TestLogger" isExposed="True" />
+</Filter>
+    </ApiFilter>
+    <VisibleItems>InheritedMembers, InheritedFrameworkMembers, Protected, ProtectedInternalAsProtected</VisibleItems>
   </PropertyGroup>
   <PropertyGroup>
     <!-- NOTE: Update the version number in the path (YYYY.M.D.R) to match the package version -->
