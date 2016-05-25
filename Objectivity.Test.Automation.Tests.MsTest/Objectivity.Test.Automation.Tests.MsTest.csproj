@@ -87,6 +87,9 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <AdditionalFiles Include="..\stylecop.json" />
     <None Include="Testsettings.testsettings">

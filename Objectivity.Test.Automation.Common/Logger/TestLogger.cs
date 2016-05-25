@@ -49,7 +49,8 @@ namespace Objectivity.Test.Automation.Common.Logger
         public void LogTestStarting(DriverContext driverContext)
         {
             this.startTestTime = DateTime.Now;
-            this.Info("START: {0} starts at {1}", driverContext.TestTitle, this.startTestTime);
+            this.Info("*************************************************************************************");
+            this.Info("START: {0} starts at {1}.", driverContext.TestTitle, this.startTestTime);
         }
 
         /// <summary>
@@ -61,6 +62,7 @@ namespace Objectivity.Test.Automation.Common.Logger
             var endTestTime = DateTime.Now;
             var timeInSec = (endTestTime - this.startTestTime).TotalMilliseconds / 1000d;
             this.Info("END: {0} ends at {1} after {2} sec.", driverContext.TestTitle, endTestTime, timeInSec.ToString("##,###", CultureInfo.CurrentCulture));
+            this.Info("*************************************************************************************");
         }
 
         /// <summary>
