@@ -40,7 +40,8 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
         /// Locators for elements
         /// </summary>
         private readonly ElementLocator
-            linkLocator = new ElementLocator(Locator.CssSelector, "a[href='/{0}']");
+            linkLocator = new ElementLocator(Locator.CssSelector, "a[href='/{0}']"),
+            basicAuthLink = new ElementLocator(Locator.XPath, "//a[contains(text(),'Auth')]");
 
         public InternetPage(DriverContext driverContext)
             : base(driverContext)
@@ -166,6 +167,18 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
         {
             this.Driver.GetElement(this.linkLocator.Format("floating_menu")).Click();
             return new FloatingMenuPage(this.DriverContext);
+        }
+
+        public void ChangeBasicAuthLink(string newAttributeValue)
+        {
+            var element = this.Driver.GetElement(this.basicAuthLink);
+            element.SetAttribute("href", newAttributeValue);
+        }
+
+        public void BasicAuthLinkClick()
+        {
+            var element = this.Driver.GetElement(this.basicAuthLink);
+            element.Click();
         }
     }
 }
