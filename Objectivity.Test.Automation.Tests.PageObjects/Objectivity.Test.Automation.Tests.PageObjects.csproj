@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomGrid.cs" />
+    <Compile Include="PageObjects\TheInternet\BrokenImagesPage.cs" />
     <Compile Include="PageObjects\TheInternet\HttpCode200Page.cs" />
     <Compile Include="PageObjects\TheInternet\ShiftingContentPage.cs" />
     <Compile Include="PageObjects\TheInternet\SecureFileDownloadPage.cs" />

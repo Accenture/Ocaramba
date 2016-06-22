@@ -181,5 +181,19 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
             Assert.AreEqual(expected[1], text2After);
             Assert.AreEqual(expected[2], text3After);
         }
+
+        [Test]
+        public void SetAttributeTest()
+        {
+            var internetPage = new InternetPage(this.DriverContext)
+                .OpenHomePage();
+
+            internetPage.ChangeBasicAuthLink("/broken_images");
+            internetPage.BasicAuthLinkClick();
+
+            var brokenImagesPage = new BrokenImagesPage(this.DriverContext);
+
+            Assert.True(brokenImagesPage.IsPageHeaderElementEqualsToExpected("Broken Images"), "Page header element is not equal to expected 'Broken Images'");
+        }
     }
 }
