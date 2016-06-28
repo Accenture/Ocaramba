@@ -14,7 +14,7 @@
     <copyright>Copyright 2015</copyright>
     <tags>selenium webdriver testautomation tests specflow Objectivity.Test.Automation.Common template</tags>
     <dependencies>
-	  <dependency id="SpecFlow" version="2.0.0"/>
+	  <dependency id="SpecFlow" version="2.1.0"/>
     </dependencies> 
 	</metadata>
   <files>
