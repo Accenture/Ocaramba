@@ -21,6 +21,7 @@
 		  <dependency id="xunit.extensibility.core" version="2.1.0" />
 		  <dependency id="xunit.extensibility.execution" version="2.1.0" />
 		  <dependency id="xunit.runner.visualstudio" version="2.1.0"  />
+		  <dependency id="xunit.runner.console" version="2.1.0"  />
     </dependencies> 
   </metadata>
   <files>

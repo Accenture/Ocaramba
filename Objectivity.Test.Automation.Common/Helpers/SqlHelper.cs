@@ -48,6 +48,12 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// <returns>
         /// Collection of each row existed in column.
         /// </returns>
+        /// <example>How to use it: <code>
+        /// var connectionString = "User ID=sqluser;Password=sqluserpassword;server=servername;";
+        /// const string ColumnName = "AccountNumber";
+        /// const string SqlQuery = "SELECT  AccountNumber as " + ColumnName + " FROM [AdventureWorks].[Sales].[Customer] where [CustomerID] in (1, 2)";
+        /// var result = SqlHelper.ExecuteSqlCommand(SqlQuery, connectionString, ColumnName);
+        /// </code></example>
         [SuppressMessage("Microsoft.Security", "CA2100:Review SQL queries for security vulnerabilities", Justification = "SQL injection is in this case expected.")]
         public static ICollection<string> ExecuteSqlCommand(string command, string connectionString, string column)
         {
@@ -98,6 +104,14 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// <returns>
         /// Dictionary of each column existed in raw.
         /// </returns>
+        /// <example>How to use it: <code>
+        /// var connectionString = "User ID=sqluser;Password=sqluserpassword;server=servername;";
+        /// ICollection&lt;string&gt; column = new List&lt;string&gt;();
+        /// column.Add("NationalIDNumber");
+        /// column.Add("ContactID");
+        /// const string SqlQuery = "SELECT [NationalIDNumber] as " + column.ElementAt(0) + " , [ContactID] as " + column.ElementAt(1) + " from [AdventureWorks].[HumanResources].[Employee] where EmployeeID=1";
+        /// Dictionary&lt;string, string&gt; results = SqlHelper.ExecuteSqlCommand(command, GetConnectionString(server), column);
+        /// </code></example>
         /// <exception cref="System.Collections.Generic.KeyNotFoundException">Exception when there is not given column in results from SQL query</exception>
         [SuppressMessage("Microsoft.Security", "CA2100:Review SQL queries for security vulnerabilities", Justification = "SQL injection is in this case expected.")]
         public static Dictionary<string, string> ExecuteSqlCommand(string command, string connectionString, IEnumerable<string> columns)

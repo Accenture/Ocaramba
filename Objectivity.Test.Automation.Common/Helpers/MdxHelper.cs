@@ -46,6 +46,11 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// <param name="connectionString">The Analysis Services connection string.</param>
         /// <param name="index">The index of column.</param>
         /// <returns>Collection of MDX query results</returns>
+        /// <example>How to use it: <code>
+        /// var connectionString = "Provider=MSOLAP.5;Password=password;Persist Security Info=True;User ID=username;Initial Catalog=AdventureWorks;Data Source=servername;MDX Compatibility=1;Safety Options=2;MDX Missing Member Mode=Error";
+        /// const string SqlQuery = "Select [Measures].[Internet Average Sales Amount] on Columns, [Product].[Category].members on Rows From [AdventureWorks];";
+        /// ICollection&lt;string&gt; result = MdxHelper.ExecuteMdxCommand(mdxQuery, connectionString, 1);
+        /// </code></example>
         [SuppressMessage("Microsoft.Security", "CA2100:Review SQL queries for security vulnerabilities", Justification = "Mdx injection is in this case expected.")]
         public static ICollection<string> ExecuteMdxCommand(string command, string connectionString, int index)
         {

@@ -48,6 +48,11 @@ namespace Objectivity.Test.Automation.Common
         Chrome,
 
         /// <summary>
+        /// PhantomJs browser
+        /// </summary>
+        PhantomJs,
+
+        /// <summary>
         /// Not supported browser
         /// </summary>
         None

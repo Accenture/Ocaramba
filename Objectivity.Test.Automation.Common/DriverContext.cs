@@ -43,6 +43,7 @@ namespace Objectivity.Test.Automation.Common
     using OpenQA.Selenium.Chrome;
     using OpenQA.Selenium.Firefox;
     using OpenQA.Selenium.IE;
+    using OpenQA.Selenium.PhantomJS;
 
     /// <summary>
     /// Contains handle to driver and methods for web browser
@@ -387,6 +388,9 @@ namespace Objectivity.Test.Automation.Common
                     break;
                 case BrowserType.Chrome:
                     this.driver = new ChromeDriver(this.ChromeProfile);
+                    break;
+                case BrowserType.PhantomJs:
+                    this.driver = new PhantomJSDriver(this.CurrentDirectory + BaseConfiguration.PhantomJsPath);
                     break;
                 default:
                     throw new NotSupportedException(
