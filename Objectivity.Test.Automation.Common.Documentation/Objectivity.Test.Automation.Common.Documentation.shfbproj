@@ -65,8 +65,8 @@
     </PlugInConfigurations>
     <ApiFilter>
       <Filter entryType="Namespace" fullName="Objectivity.Test.Automation.Common.Logger" isExposed="False" xmlns="">
-  <Filter entryType="Class" fullName="Objectivity.Test.Automation.Common.Logger.TestLogger" filterName="TestLogger" isExposed="True" />
-</Filter>
+        <Filter entryType="Class" fullName="Objectivity.Test.Automation.Common.Logger.TestLogger" filterName="TestLogger" isExposed="True" />
+      </Filter>
     </ApiFilter>
     <VisibleItems>InheritedMembers, InheritedFrameworkMembers, Protected, ProtectedInternalAsProtected</VisibleItems>
   </PropertyGroup>
@@ -115,5 +115,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Selenium.shfbproj" />
   </ItemGroup>
 </Project>
