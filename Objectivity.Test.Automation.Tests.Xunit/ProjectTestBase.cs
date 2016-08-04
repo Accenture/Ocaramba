@@ -55,10 +55,7 @@ namespace Objectivity.Test.Automation.Tests.Xunit
             }
         }
 
-        protected DriverContext DriverContext
-        {
-            get { return new DriverContext(); }
-        }
+        protected DriverContext DriverContext { get; } = new DriverContext();
 
         public void Dispose()
         {
