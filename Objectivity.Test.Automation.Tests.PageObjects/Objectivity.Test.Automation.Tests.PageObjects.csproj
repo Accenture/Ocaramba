@@ -72,6 +72,8 @@
   <ItemGroup>
     <Compile Include="CustomGrid.cs" />
     <Compile Include="PageObjects\TheInternet\BrokenImagesPage.cs" />
+    <Compile Include="PageObjects\TheInternet\DynamicControlsPage.cs" />
+    <Compile Include="PageObjects\TheInternet\DynamicLoadingPage.cs" />
     <Compile Include="PageObjects\TheInternet\HttpCode200Page.cs" />
     <Compile Include="PageObjects\TheInternet\ShiftingContentPage.cs" />
     <Compile Include="PageObjects\TheInternet\SecureFileDownloadPage.cs" />
@@ -96,6 +98,7 @@
     <Compile Include="PageObjects\TheInternet\MultipleWindowsPage.cs" />
     <Compile Include="PageObjects\TheInternet\NestedFramesPage.cs" />
     <Compile Include="PageObjects\TheInternet\NewWindowPage.cs" />
+    <Compile Include="PageObjects\TheInternet\SlowResourcesPage.cs" />
     <Compile Include="PageObjects\TheInternet\StatusCodesPage.cs" />
     <Compile Include="ProjectPageBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
