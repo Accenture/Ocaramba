@@ -80,6 +80,24 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             return this;
         }
 
+        public DynamicControlsPage GoToDynamicControls()
+        {
+            this.Driver.GetElement(this.linkLocator.Format("dynamic_controls")).Click();
+            return new DynamicControlsPage(this.DriverContext);
+        }
+
+        public DynamicLoadingPage GoToDynamicLoading()
+        {
+            this.Driver.GetElement(this.linkLocator.Format("dynamic_loading")).Click();
+            return new DynamicLoadingPage(this.DriverContext);
+        }
+
+        public SlowResourcesPage GoToSlowResources()
+        {
+            this.Driver.GetElement(this.linkLocator.Format("slow")).Click();
+            return new SlowResourcesPage(this.DriverContext);
+        }
+
         public JavaScriptAlertsPage GoToJavaScriptAlerts()
         {
             this.Driver.GetElement(this.linkLocator.Format("javascript_alerts")).Click();
@@ -99,8 +117,8 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 
         public MultipleWindowsPage GoToMultipleWindowsPage()
         {
-             this.Driver.GetElement(this.linkLocator.Format("windows")).Click();
-             return new MultipleWindowsPage(this.DriverContext);
+            this.Driver.GetElement(this.linkLocator.Format("windows")).Click();
+            return new MultipleWindowsPage(this.DriverContext);
         }
 
         public BasicAuthPage GoToBasicAuthPage()

@@ -198,5 +198,15 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
 
             Assert.True(brokenImagesPage.IsPageHeaderElementEqualsToExpected("Broken Images"), "Page header element is not equal to expected 'Broken Images'");
         }
+
+        [Test]
+        public void SlowResourcesTest()
+        {
+            int timeout = 35;
+            new InternetPage(this.DriverContext)
+                .OpenHomePage()
+                .GoToSlowResources()
+                .WaitForIt(timeout);
+        }
     }
 }
