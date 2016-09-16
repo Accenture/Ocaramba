@@ -173,8 +173,9 @@ namespace Objectivity.Test.Automation.Common
 
                         profile = new FirefoxProfile(pathsToProfiles[0]);
                     }
-                    catch (DirectoryNotFoundException)
+                    catch (DirectoryNotFoundException e)
                     {
+                        Logger.Info(CultureInfo.CurrentCulture, $"problem with loading ff profile {e.Message}");
                         profile = new FirefoxProfile();
                     }
                 }
