@@ -167,8 +167,7 @@ namespace Objectivity.Test.Automation.Common
                 {
                     try
                     {
-                        var pathToCurrentUserProfiles = Environment.ExpandEnvironmentVariables("%APPDATA%") +
-                                                        @"\Mozilla\Firefox\Profiles"; // Path to profile
+                        var pathToCurrentUserProfiles = BaseConfiguration.PathToFirefoxProfile; // Path to profile
                         var pathsToProfiles = Directory.GetDirectories(pathToCurrentUserProfiles, "*.default", SearchOption.TopDirectoryOnly);
 
                         profile = new FirefoxProfile(pathsToProfiles[0]);

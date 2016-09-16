@@ -59,6 +59,11 @@ namespace Objectivity.Test.Automation.Common
         }
 
         /// <summary>
+        /// Gets the path to firefox profile.
+        /// </summary>
+        public static string PathToFirefoxProfile => ConfigurationManager.AppSettings["PathToFirefoxProfile"];
+
+        /// <summary>
         /// Gets the application protocol (http or https).
         /// </summary>
         public static string Protocol
