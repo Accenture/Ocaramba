@@ -173,7 +173,7 @@ namespace Objectivity.Test.Automation.Common
 
                         profile = new FirefoxProfile(pathsToProfiles[0]);
                     }
-                    catch (Exception)
+                    catch (DirectoryNotFoundException)
                     {
                         profile = new FirefoxProfile();
                     }
