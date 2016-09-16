@@ -161,7 +161,20 @@ namespace Objectivity.Test.Automation.Common
         {
             get
             {
-                var profile = new FirefoxProfile();
+                FirefoxProfile profile;
+
+                if (BaseConfiguration.UseDefaultFirefoxProfile)
+                {
+                    var pathToCurrentUserProfiles = Environment.ExpandEnvironmentVariables("%APPDATA%") +
+                                                       @"\Mozilla\Firefox\Profiles"; // Path to profile
+                    var pathsToProfiles = Directory.GetDirectories(pathToCurrentUserProfiles, "*.default", SearchOption.TopDirectoryOnly);
+
+                    profile = pathsToProfiles.Length != 0 ? new FirefoxProfile(pathsToProfiles[0]) : new FirefoxProfile();
+                }
+                else
+                {
+                    profile = new FirefoxProfile();
+                }
 
                 // predefined preferences
                 // set browser proxy for firefox

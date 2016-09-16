@@ -183,6 +183,28 @@ namespace Objectivity.Test.Automation.Common
         }
 
         /// <summary>
+        /// Gets a value indicating whether use firefox profile. False by default.
+        /// </summary>
+        public static bool UseDefaultFirefoxProfile
+        {
+            get
+            {
+                Logger.Trace(CultureInfo.CurrentCulture, "Use Default Firefox Profile value from App.config '{0}'", ConfigurationManager.AppSettings["UseDefaultFirefoxProfile"]);
+                if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["UseDefaultFirefoxProfile"]))
+                {
+                    return false;
+                }
+
+                if (ConfigurationManager.AppSettings["UseDefaultFirefoxProfile"].ToLower(CultureInfo.CurrentCulture).Equals("true"))
+                {
+                    return true;
+                }
+
+                return false;
+            }
+        }
+
+        /// <summary>
         /// Gets a value indicating whether enable full desktop screen shot. True by default.
         /// </summary>
         public static bool SeleniumScreenShotEnabled
