@@ -27,10 +27,11 @@
       <Argument Key="maxVersionParts" Value="" xmlns="" />
     </TransformComponentArguments>
     <DocumentationSources>
-      <DocumentationSource sourceFile="..\packages\Selenium.WebDriver.2.53.1\lib\net40\WebDriver.dll" />
-<DocumentationSource sourceFile="..\packages\Selenium.WebDriver.2.53.1\lib\net40\WebDriver.xml" />
-<DocumentationSource sourceFile="..\packages\Selenium.Support.2.53.1\lib\net40\WebDriver.Support.dll" />
-<DocumentationSource sourceFile="..\packages\Selenium.Support.2.53.1\lib\net40\WebDriver.Support.xml" /></DocumentationSources>
+      <DocumentationSource sourceFile="..\packages\Selenium.WebDriver.3.0.0-beta2\lib\net40\WebDriver.dll" />
+      <DocumentationSource sourceFile="..\packages\Selenium.WebDriver.3.0.0-beta2\lib\net40\WebDriver.xml" />
+      <DocumentationSource sourceFile="..\packages\Selenium.Support.3.0.0-beta2\lib\net40\WebDriver.Support.dll" />
+      <DocumentationSource sourceFile="..\packages\Selenium.Support.3.0.0-beta2\lib\net40\WebDriver.Support.xml" />
+    </DocumentationSources>
     <SaveComponentCacheCapacity>100</SaveComponentCacheCapacity>
     <BuildAssemblerVerbosity>OnlyWarningsAndErrors</BuildAssemblerVerbosity>
     <HelpFileFormat>Website</HelpFileFormat>

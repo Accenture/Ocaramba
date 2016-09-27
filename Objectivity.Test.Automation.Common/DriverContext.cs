@@ -399,9 +399,8 @@ namespace Objectivity.Test.Automation.Common
                     this.driver = new FirefoxDriver(this.FirefoxProfile);
                     break;
                 case BrowserType.FirefoxPortable:
-                    var profile= this.FirefoxProfile;
-                    var firefoxBinary = new FirefoxBinary(BaseConfiguration.FirefoxPath);
-                    this.driver = new FirefoxDriver(firefoxBinary, profile);
+                    var fireFoxOptions = new FirefoxOptions { BrowserExecutableLocation = BaseConfiguration.FirefoxPath, Profile = this.FirefoxProfile };
+                    this.driver = new FirefoxDriver(fireFoxOptions);
                     break;
                 case BrowserType.InternetExplorer:
                     this.driver = new InternetExplorerDriver(this.InternetExplorerProfile);
