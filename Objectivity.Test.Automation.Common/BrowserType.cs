@@ -53,6 +53,11 @@ namespace Objectivity.Test.Automation.Common
         PhantomJs,
 
         /// <summary>
+        /// Safari browser
+        /// </summary>
+        Safari,
+
+        /// <summary>
         /// Not supported browser
         /// </summary>
         None

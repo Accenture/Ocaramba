@@ -32,18 +32,16 @@ namespace Objectivity.Test.Automation.Common
     using System.IO;
     using System.Linq;
     using System.Text.RegularExpressions;
-
     using NLog;
-
     using Objectivity.Test.Automation.Common.Helpers;
     using Objectivity.Test.Automation.Common.Logger;
     using Objectivity.Test.Automation.Common.Types;
-
     using OpenQA.Selenium;
     using OpenQA.Selenium.Chrome;
     using OpenQA.Selenium.Firefox;
     using OpenQA.Selenium.IE;
     using OpenQA.Selenium.PhantomJS;
+    using OpenQA.Selenium.Safari;
 
     /// <summary>
     /// Contains handle to driver and methods for web browser
@@ -362,6 +360,23 @@ namespace Objectivity.Test.Automation.Common
             }
         }
 
+        private SafariOptions SafariProfile
+        {
+            get
+            {
+                var options = new SafariOptions();
+                options.AddAdditionalCapability("cleanSession", true);
+
+                // set browser proxy for Safari
+                if (!string.IsNullOrEmpty(BaseConfiguration.Proxy))
+                {
+                    throw new Exception("Use command line to setup proxy");
+                }
+
+                return options;
+            }
+        }
+
         /// <summary>
         /// Takes the screenshot.
         /// </summary>
@@ -408,6 +423,9 @@ namespace Objectivity.Test.Automation.Common
                     break;
                 case BrowserType.Chrome:
                     this.driver = new ChromeDriver(this.ChromeProfile);
+                    break;
+                case BrowserType.Safari:
+                    this.driver = new SafariDriver(this.SafariProfile);
                     break;
                 case BrowserType.PhantomJs:
                     this.driver = new PhantomJSDriver(this.CurrentDirectory + BaseConfiguration.PhantomJsPath);

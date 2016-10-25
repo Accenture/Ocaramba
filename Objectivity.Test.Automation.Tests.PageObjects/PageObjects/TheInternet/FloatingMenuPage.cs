@@ -22,6 +22,7 @@
 
 namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 {
+    using System;
     using Common;
     using Common.Extensions;
     using Common.Types;
@@ -52,6 +53,11 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             this.Driver.GetElement(this.floatingHomeButton).Click();
 
             return this;
+        }
+
+        public bool IsUrlEndsWith(string text)
+        {
+            return this.DriverContext.Driver.Url.ToString().EndsWith(text, StringComparison.CurrentCulture);
         }
     }
 }

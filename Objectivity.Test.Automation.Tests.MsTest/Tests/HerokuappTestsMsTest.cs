@@ -72,15 +72,6 @@ namespace Objectivity.Test.Automation.Tests.MsTest.Tests
         }
 
         [TestMethod]
-        public void NavigateToUrlTest()
-        {
-            this.DriverContext.Driver.NavigateTo(new Uri("http://the-internet.herokuapp.com/status_codes"));
-            var statusCodes = new StatusCodesPage(this.DriverContext);
-
-            Assert.IsTrue(statusCodes.IsStatusCodesPageDisplayed(), "Status codes page is not displayed.");
-        }
-
-        [TestMethod]
         public void JavaScriptClickTest()
         {
             HttpCode200Page httpCode200 = new InternetPage(this.DriverContext)
@@ -94,11 +85,11 @@ namespace Objectivity.Test.Automation.Tests.MsTest.Tests
         [TestMethod]
         public void ClickFloatingMenuTest()
         {
-            new InternetPage(this.DriverContext)
+            var floatingMenuPage = new InternetPage(this.DriverContext)
                 .OpenHomePage()
                 .GoToFloatingMenu()
                 .ClickFloatingMenuButton();
-            Assert.IsTrue(this.DriverContext.Driver.Url.EndsWith("#home", StringComparison.CurrentCulture), "URL does not end with #home - probably 'Home' floating menu button was not clicked properly");
+            Assert.IsTrue(floatingMenuPage.IsUrlEndsWith("#home"), "URL does not end with #home - probably 'Home' floating menu button was not clicked properly");
         }
 
         [DeploymentItem("Objectivity.Test.Automation.MsTests\\DDT.xml")]
