@@ -370,7 +370,7 @@ namespace Objectivity.Test.Automation.Common
                 // set browser proxy for Safari
                 if (!string.IsNullOrEmpty(BaseConfiguration.Proxy))
                 {
-                    throw new Exception("Use command line to setup proxy");
+                    throw new NotSupportedException(string.Format(CultureInfo.CurrentCulture, "Use command line to setup proxy"));
                 }
 
                 return options;
