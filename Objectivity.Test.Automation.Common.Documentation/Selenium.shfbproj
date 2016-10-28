@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <!-- The configuration and platform will be used to determine which assemblies to include from solution and
 				 project documentation sources -->
@@ -27,10 +27,10 @@
       <Argument Key="maxVersionParts" Value="" xmlns="" />
     </TransformComponentArguments>
     <DocumentationSources>
-      <DocumentationSource sourceFile="..\packages\Selenium.WebDriver.3.0.0-beta3\lib\net40\WebDriver.dll" />
-<DocumentationSource sourceFile="..\packages\Selenium.WebDriver.3.0.0-beta3\lib\net40\WebDriver.xml" />
-<DocumentationSource sourceFile="..\packages\Selenium.Support.3.0.0-beta3\lib\net40\WebDriver.Support.dll" />
-<DocumentationSource sourceFile="..\packages\Selenium.Support.3.0.0-beta3\lib\net40\WebDriver.Support.xml" /></DocumentationSources>
+      <DocumentationSource sourceFile="..\packages\Selenium.WebDriver.3.0.0\lib\net40\WebDriver.dll" />
+<DocumentationSource sourceFile="..\packages\Selenium.WebDriver.3.0.0\lib\net40\WebDriver.xml" />
+<DocumentationSource sourceFile="..\packages\Selenium.Support.3.0.0\lib\net40\WebDriver.Support.dll" />
+<DocumentationSource sourceFile="..\packages\Selenium.Support.3.0.0\lib\net40\WebDriver.Support.xml" /></DocumentationSources>
     <SaveComponentCacheCapacity>100</SaveComponentCacheCapacity>
     <BuildAssemblerVerbosity>OnlyWarningsAndErrors</BuildAssemblerVerbosity>
     <HelpFileFormat>Website</HelpFileFormat>
