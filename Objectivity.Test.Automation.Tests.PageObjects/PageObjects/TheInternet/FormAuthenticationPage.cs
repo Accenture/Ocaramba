@@ -20,6 +20,8 @@
 //     SOFTWARE.
 // </license>
 
+using OpenQA.Selenium;
+
 namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 {
     using System;
@@ -81,7 +83,16 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
         public void LogOn()
         {
             Logger.Info(CultureInfo.CurrentCulture, "Click on Login Button");
-            this.Driver.GetElement(this.loginButton).Click();
+            //// workaround problem with IE test
+            try
+            {
+                this.Driver.GetElement(this.loginButton).Click();
+            }
+            catch (UnhandledAlertException)
+            {
+                this.Driver.SwitchTo().Alert().Accept();
+                this.Driver.GetElement(this.loginButton).Click();
+            }
         }
     }
 }
