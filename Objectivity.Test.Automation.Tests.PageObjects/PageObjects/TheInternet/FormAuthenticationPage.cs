@@ -87,6 +87,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             }
             catch (UnhandledAlertException)
             {
+                Logger.Debug(CultureInfo.CurrentCulture, "catching UnhandledAlertException, Workaround problem with IE test");
                 this.Driver.SwitchTo().Alert().Accept();
                 this.Driver.GetElement(this.loginButton).Click();
             }
