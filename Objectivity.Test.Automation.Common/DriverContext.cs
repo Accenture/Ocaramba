@@ -397,9 +397,11 @@ namespace Objectivity.Test.Automation.Common
             {
                 case BrowserType.Firefox:
                     this.driver = new FirefoxDriver(this.FirefoxProfile);
+                    var fireFoxOptionsLegacy = new FirefoxOptions { Profile = this.FirefoxProfile, UseLegacyImplementation = BaseConfiguration.FirefoxUseLegacyImplementation };
+                    this.driver = new FirefoxDriver(fireFoxOptionsLegacy);
                     break;
                 case BrowserType.FirefoxPortable:
-                    var fireFoxOptions = new FirefoxOptions { BrowserExecutableLocation = BaseConfiguration.FirefoxPath, Profile = this.FirefoxProfile };
+                    var fireFoxOptions = new FirefoxOptions { BrowserExecutableLocation = BaseConfiguration.FirefoxPath, Profile = this.FirefoxProfile, UseLegacyImplementation = BaseConfiguration.FirefoxUseLegacyImplementation };
                     this.driver = new FirefoxDriver(fireFoxOptions);
                     break;
                 case BrowserType.InternetExplorer:
