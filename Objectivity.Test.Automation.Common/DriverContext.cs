@@ -396,7 +396,6 @@ namespace Objectivity.Test.Automation.Common
             switch (BaseConfiguration.TestBrowser)
             {
                 case BrowserType.Firefox:
-                    this.driver = new FirefoxDriver(this.FirefoxProfile);
                     var fireFoxOptionsLegacy = new FirefoxOptions { Profile = this.FirefoxProfile, UseLegacyImplementation = BaseConfiguration.FirefoxUseLegacyImplementation };
                     this.driver = new FirefoxDriver(fireFoxOptionsLegacy);
                     break;
