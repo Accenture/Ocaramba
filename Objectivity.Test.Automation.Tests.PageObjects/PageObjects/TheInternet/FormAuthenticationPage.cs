@@ -24,13 +24,12 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 {
     using System;
     using System.Globalization;
-
     using NLog;
-
     using Objectivity.Test.Automation.Common;
     using Objectivity.Test.Automation.Common.Extensions;
     using Objectivity.Test.Automation.Common.Types;
     using Objectivity.Test.Automation.Tests.PageObjects;
+    using OpenQA.Selenium;
 
     public class FormAuthenticationPage : ProjectPageBase
     {
@@ -81,7 +80,17 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
         public void LogOn()
         {
             Logger.Info(CultureInfo.CurrentCulture, "Click on Login Button");
-            this.Driver.GetElement(this.loginButton).Click();
+            //// workaround problem with IE test
+            try
+            {
+                this.Driver.GetElement(this.loginButton).Click();
+            }
+            catch (UnhandledAlertException)
+            {
+                Logger.Debug(CultureInfo.CurrentCulture, "catching UnhandledAlertException, Workaround problem with IE test");
+                this.Driver.SwitchTo().Alert().Accept();
+                this.Driver.GetElement(this.loginButton).Click();
+            }
         }
     }
 }

@@ -10,7 +10,7 @@ It provides following features:
 - Specflow ready
 - Written entirely in C#
 - Contains example projects how to use it
-- Allows to use Chrome, Firefox or Internet Explorer
+- Allows to use Chrome, Firefox, Safari or Internet Explorer
 - Overrides browser profile preferences, installs browser extensions, more details [here](https://github.com/ObjectivityBSS/Test.Automation/wiki/Override%20browser%20profile%20preferences,%20install%20browser%20extensions)
 - Extends Webdriver by additional methods like JavaScriptClick, WaitForAjax, WaitForAngular, etc., more details [here](http://objectivitybss.github.io/Test.Automation/html/0872cc4d-63cc-c3d2-30e5-1f8debf56860.htm)
 - Automatically waits when locating element for specified time and conditions, more details [here](http://objectivitybss.github.io/Test.Automation/html/6b3a28a9-75c6-bda7-e44e-962f1e91c477.htm)
