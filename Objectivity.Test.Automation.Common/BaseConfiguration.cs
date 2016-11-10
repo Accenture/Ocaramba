@@ -188,6 +188,28 @@ namespace Objectivity.Test.Automation.Common
         }
 
         /// <summary>
+        /// Gets a value indicating whether enable legacy implementation for Firefox.
+        /// </summary>
+        public static bool FirefoxUseLegacyImplementation
+        {
+            get
+            {
+                Logger.Trace(CultureInfo.CurrentCulture, "Firefox Use Legacy Implementation Enabled value from App.config '{0}'", ConfigurationManager.AppSettings["FirefoxUseLegacyImplementation"]);
+                if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["FirefoxUseLegacyImplementation"]))
+                {
+                    return false;
+                }
+
+                if (ConfigurationManager.AppSettings["FirefoxUseLegacyImplementation"].ToLower(CultureInfo.CurrentCulture).Equals("true"))
+                {
+                    return true;
+                }
+
+                return false;
+            }
+        }
+
+        /// <summary>
         /// Gets a value indicating whether use firefox profile. False by default.
         /// </summary>
         public static bool UseDefaultFirefoxProfile

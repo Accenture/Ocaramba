@@ -411,12 +411,12 @@ namespace Objectivity.Test.Automation.Common
             switch (BaseConfiguration.TestBrowser)
             {
                 case BrowserType.Firefox:
-                    this.driver = new FirefoxDriver(new FirefoxBinary(), this.FirefoxProfile, TimeSpan.FromSeconds(BaseConfiguration.LongTimeout));
+                    var fireFoxOptionsLegacy = new FirefoxOptions { Profile = this.FirefoxProfile, UseLegacyImplementation = BaseConfiguration.FirefoxUseLegacyImplementation };
+                    this.driver = new FirefoxDriver(fireFoxOptionsLegacy);
                     break;
                 case BrowserType.FirefoxPortable:
-                    var profile = this.FirefoxProfile;
-                    var firefoxBinary = new FirefoxBinary(BaseConfiguration.FirefoxPath);
-                    this.driver = new FirefoxDriver(firefoxBinary, profile, TimeSpan.FromSeconds(BaseConfiguration.LongTimeout));
+                    var fireFoxOptions = new FirefoxOptions { BrowserExecutableLocation = BaseConfiguration.FirefoxPath, Profile = this.FirefoxProfile, UseLegacyImplementation = BaseConfiguration.FirefoxUseLegacyImplementation };
+                    this.driver = new FirefoxDriver(fireFoxOptions);
                     break;
                 case BrowserType.InternetExplorer:
                     this.driver = new InternetExplorerDriver(this.InternetExplorerProfile);
