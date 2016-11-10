@@ -80,17 +80,8 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
         public void LogOn()
         {
             Logger.Info(CultureInfo.CurrentCulture, "Click on Login Button");
-            //// workaround problem with IE test
-            try
-            {
-                this.Driver.GetElement(this.loginButton).Click();
-            }
-            catch (UnhandledAlertException)
-            {
-                Logger.Debug(CultureInfo.CurrentCulture, "catching UnhandledAlertException, Workaround problem with IE test");
-                this.Driver.SwitchTo().Alert().Accept();
-                this.Driver.GetElement(this.loginButton).Click();
-            }
+
+            this.Driver.GetElement(this.loginButton).JavaScriptClick();
         }
     }
 }
