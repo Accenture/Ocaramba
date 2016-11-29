@@ -41,6 +41,7 @@ namespace Objectivity.Test.Automation.Common
     using OpenQA.Selenium.Firefox;
     using OpenQA.Selenium.IE;
     using OpenQA.Selenium.PhantomJS;
+    using OpenQA.Selenium.Remote;
     using OpenQA.Selenium.Safari;
 
     /// <summary>
@@ -402,6 +403,34 @@ namespace Objectivity.Test.Automation.Common
         }
 
         /// <summary>
+        /// Set web driver capabilities.
+        /// </summary>
+        /// <returns>Instance with set web driver capabilities.</returns>
+        public DesiredCapabilities SetCapabilities()
+        {
+            DesiredCapabilities capabilities = new DesiredCapabilities();
+
+            switch (BaseConfiguration.TestBrowserCapabilities)
+            {
+                case BrowserType.Firefox:
+                    var fireFoxOptionsLegacy = new FirefoxOptions { Profile = this.FirefoxProfile, UseLegacyImplementation = BaseConfiguration.FirefoxUseLegacyImplementation };
+                    capabilities = DesiredCapabilities.Firefox();
+                    break;
+                case BrowserType.InternetExplorer:
+                    capabilities = DesiredCapabilities.InternetExplorer();
+                    break;
+                case BrowserType.Chrome:
+                    capabilities = DesiredCapabilities.Chrome();
+                    break;
+                default:
+                    throw new NotSupportedException(
+                        string.Format(CultureInfo.CurrentCulture, "Driver {0} is not supported with Selenium Grid", BaseConfiguration.TestBrowser));
+            }
+
+            return capabilities;
+        }
+
+        /// <summary>
         /// Starts the specified Driver.
         /// </summary>
         /// <exception cref="NotSupportedException">When driver not supported</exception>
@@ -429,6 +458,9 @@ namespace Objectivity.Test.Automation.Common
                     break;
                 case BrowserType.PhantomJs:
                     this.driver = new PhantomJSDriver(this.CurrentDirectory + BaseConfiguration.PhantomJsPath);
+                    break;
+                case BrowserType.RemoteWebDriver:
+                    this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetCapabilities());
                     break;
                 default:
                     throw new NotSupportedException(
