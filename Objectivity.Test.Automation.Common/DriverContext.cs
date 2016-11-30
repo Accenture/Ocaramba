@@ -413,8 +413,8 @@ namespace Objectivity.Test.Automation.Common
             switch (BaseConfiguration.TestBrowserCapabilities)
             {
                 case BrowserType.Firefox:
-                    var fireFoxOptionsLegacy = new FirefoxOptions { Profile = this.FirefoxProfile, UseLegacyImplementation = BaseConfiguration.FirefoxUseLegacyImplementation };
                     capabilities = DesiredCapabilities.Firefox();
+                    capabilities.SetCapability(FirefoxDriver.ProfileCapabilityName, this.FirefoxProfile);
                     break;
                 case BrowserType.InternetExplorer:
                     capabilities = DesiredCapabilities.InternetExplorer();
