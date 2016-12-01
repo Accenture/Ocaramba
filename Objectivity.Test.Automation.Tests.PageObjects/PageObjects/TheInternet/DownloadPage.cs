@@ -54,7 +54,8 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
         public DownloadPage SaveFile(string fileName, string newName)
         {
             if (BaseConfiguration.TestBrowser == BrowserType.Firefox
-                || BaseConfiguration.TestBrowser == BrowserType.Chrome)
+                || BaseConfiguration.TestBrowser == BrowserType.Chrome
+                || BaseConfiguration.TestBrowser == BrowserType.RemoteWebDriver)
             {
                 this.Driver.GetElement(this.fileLink.Format(fileName), "Click on file").Click();
                 FilesHelper.WaitForFileOfGivenName(fileName, this.DriverContext.DownloadFolder);
@@ -71,7 +72,8 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
         public DownloadPage SaveFile(string newName)
         {
            if (BaseConfiguration.TestBrowser == BrowserType.Firefox
-                || BaseConfiguration.TestBrowser == BrowserType.Chrome)
+                || BaseConfiguration.TestBrowser == BrowserType.Chrome
+                || BaseConfiguration.TestBrowser == BrowserType.RemoteWebDriver)
             {
                 var filesNumber = FilesHelper.CountFiles(this.DriverContext.DownloadFolder, FileType.Txt);
                 this.Driver.GetElement(this.fileLink.Format("some-file.txt")).Click();
@@ -90,7 +92,8 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
         public DownloadPage SaveAnyFile()
         {
             if (BaseConfiguration.TestBrowser == BrowserType.Firefox
-                 || BaseConfiguration.TestBrowser == BrowserType.Chrome)
+                || BaseConfiguration.TestBrowser == BrowserType.Chrome
+                || BaseConfiguration.TestBrowser == BrowserType.RemoteWebDriver)
             {
                 var filesNumber = FilesHelper.CountFiles(this.DriverContext.DownloadFolder);
                 this.Driver.GetElement(this.fileLink.Format("some-file.txt")).Click();
