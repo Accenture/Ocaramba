@@ -14,14 +14,14 @@
     <copyright>Copyright 2015</copyright>
     <tags>selenium webdriver testautomation tests nunit Objectivity.Test.Automation.Common</tags>
 	<dependencies>
-	  <dependency id="NUnit" version="3.4.1" />
-	  <dependency id="NUnit.ConsoleRunner" version="3.4.1" />
-	  <dependency id="NUnit.Runners" version="3.4.1" />
-	  <dependency id="NUnit.Extension.NUnitProjectLoader" version="3.4.1" />
-	  <dependency id="NUnit.Extension.NUnitV2Driver" version="3.4.1" />
-	  <dependency id="NUnit.Extension.NUnitV2ResultWriter" version="3.4.1" />
-	  <dependency id="NUnit.Extension.VSProjectLoader" version="3.4.1" />
-	  <dependency id="NUnit.Extension.TeamCityEventListener" version="1.0.1" />
+	  <dependency id="NUnit" version="3.5.0" />
+	  <dependency id="NUnit.ConsoleRunner" version="3.5.0" />
+	  <dependency id="NUnit.Runners" version="3.5.0" />
+	  <dependency id="NUnit.Extension.NUnitProjectLoader" version="3.5.0" />
+	  <dependency id="NUnit.Extension.NUnitV2Driver" version="3.5.0" />
+	  <dependency id="NUnit.Extension.NUnitV2ResultWriter" version="3.5.0" />
+	  <dependency id="NUnit.Extension.VSProjectLoader" version="3.5.0" />
+	  <dependency id="NUnit.Extension.TeamCityEventListener" version="1.0.2" />
     </dependencies> 
   </metadata>
   <files>
