@@ -1,4 +1,4 @@
-﻿// <copyright file="DownloadFilesTestsNUnit.cs" company="Objectivity Bespoke Software Specialists">
+﻿// <copyright file="UploadFilesTestsNUnit.cs" company="Objectivity Bespoke Software Specialists">
 // Copyright (c) Objectivity Bespoke Software Specialists. All rights reserved.
 // </copyright>
 // <license>
@@ -26,47 +26,20 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
     using global::NUnit.Framework;
 
     /// <summary>
-    /// Tests to test framework, downloading files, must be exexuted after UploadFilesTestsNUnit.
+    /// Tests to test framework
     /// </summary>
     [TestFixture]
-    [Category("herokuapp")]
+    [Category("upload")]
     [Parallelizable(ParallelScope.Fixtures)]
-    public class DownloadFilesTestsNUnit : ProjectTestBase
+    public class UploadFilesTestsNUnit : ProjectTestBase
     {
         [Test]
         public void DownloadFileByNameTest()
         {
             new InternetPage(this.DriverContext)
                 .OpenHomePage()
-                .GoToFileDownloader()
-                .SaveFile("ObjectivityTestAutomationCSHarpFramework.txt", "name_of_file_branch");
-        }
-
-        [Test]
-        public void DownloadGivenTypeFileByCountTest()
-        {
-            new InternetPage(this.DriverContext)
-                .OpenHomePage()
-                .GoToFileDownloader()
-                .SaveFile("name_of_file_live");
-        }
-
-        [Test]
-        public void DownloadAnyFileByCountTest()
-        {
-            new InternetPage(this.DriverContext)
-                .OpenHomePage()
-                .GoToFileDownloader()
-                .SaveFile("name_of_file_branch");
-        }
-
-        [Test]
-        public void SecureDownloadFileByNameTest()
-        {
-            new InternetPage(this.DriverContext)
-                .OpenHomePageWithUserCredentials()
-                .GoToSecureFileDownloadPage()
-                .SaveFile("ObjectivityTestAutomationCSHarpFramework.txt", "name_of_file_live");
+                .GoToFileUploader()
+                .UploadFile("README.md", "ObjectivityTestAutomationCSHarpFramework.txt");
         }
     }
 }

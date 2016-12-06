@@ -72,6 +72,7 @@
   <ItemGroup>
     <Compile Include="CustomGrid.cs" />
     <Compile Include="PageObjects\TheInternet\BrokenImagesPage.cs" />
+    <Compile Include="PageObjects\TheInternet\UploadPage.cs" />
     <Compile Include="PageObjects\TheInternet\DynamicControlsPage.cs" />
     <Compile Include="PageObjects\TheInternet\DynamicLoadingPage.cs" />
     <Compile Include="PageObjects\TheInternet\HttpCode200Page.cs" />
