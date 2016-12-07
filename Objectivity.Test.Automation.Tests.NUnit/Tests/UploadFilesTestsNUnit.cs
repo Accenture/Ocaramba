@@ -34,12 +34,12 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
     public class UploadFilesTestsNUnit : ProjectTestBase
     {
         [Test]
-        public void DownloadFileByNameTest()
+        public void UploadFileTest()
         {
             new InternetPage(this.DriverContext)
                 .OpenHomePage()
                 .GoToFileUploader()
-                .UploadFile("README.md", "ObjectivityTestAutomationCSHarpFramework.txt");
+                .UploadFile("ObjectivityTestAutomationCSHarpFramework.txt");
         }
     }
 }

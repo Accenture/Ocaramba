@@ -53,14 +53,14 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             this.Driver.IsElementPresent(this.uploadPageHeader, BaseConfiguration.ShortTimeout);
         }
 
-        public UploadPage UploadFile(string fileName, string newName)
+        public UploadPage UploadFile(string newName)
         {
             if (BaseConfiguration.TestBrowser == BrowserType.Firefox
                 || BaseConfiguration.TestBrowser == BrowserType.Chrome
                 || BaseConfiguration.TestBrowser == BrowserType.RemoteWebDriver)
             {
-                FilesHelper.CopyFile(BaseConfiguration.ShortTimeout, fileName, newName, this.DriverContext.DownloadFolder + "\\..\\..\\..\\..\\", this.DriverContext.DownloadFolder + "\\..\\");
-                this.Driver.GetElement(this.fileUpload).SendKeys(this.DriverContext.DownloadFolder + "\\..\\" + newName);
+                newName = FilesHelper.CopyFile(BaseConfiguration.ShortTimeout, "filetocompare_branch.txt", newName, this.DriverContext.DownloadFolder);
+                this.Driver.GetElement(this.fileUpload).SendKeys(this.DriverContext.DownloadFolder + "\\" + newName);
                 this.Driver.GetElement(this.fileSumbit).Click();
                 this.Driver.IsElementPresent(this.fileUploadedPageHeader, BaseConfiguration.ShortTimeout);
             }
