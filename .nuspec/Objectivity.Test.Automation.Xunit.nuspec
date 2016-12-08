@@ -6,11 +6,11 @@
     <title>Objectivity.Test.Automation.Common.xUnit</title>
     <authors>Objectivity Bespoke Software Specialists</authors>
     <owners>Objectivity Bespoke Software Specialists</owners>
-    <licenseUrl>https://github.com/ObjectivityBSS/Test.Automation/blob/master/LICENSE</licenseUrl>
-    <projectUrl>https://github.com/ObjectivityBSS/Test.Automation</projectUrl>
+    <licenseUrl>https://github.com/ObjectivityLtd/Test.Automation/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/ObjectivityLtd/Test.Automation</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Framework to automate tests using Objectivity.Test.Automation.Common with xUnit</description>
-    <releaseNotes>You can find info about this release here: https://github.com/ObjectivityBSS/Test.Automation/releases</releaseNotes>
+    <releaseNotes>You can find info about this release here: https://github.com/ObjectivityLtd/Test.Automation/releases</releaseNotes>
     <copyright>Copyright 2015</copyright>
     <tags>selenium webdriver testautomation tests xunit Objectivity.Test.Automation.Common</tags>
 	<dependencies>
