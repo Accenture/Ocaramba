@@ -15,8 +15,7 @@ It provides following features:
 - Extends Webdriver by additional methods like JavaScriptClick, WaitForAjax, WaitForAngular, etc., more details [here](http://objectivitybss.github.io/Test.Automation/html/0872cc4d-63cc-c3d2-30e5-1f8debf56860.htm)
 - Automatically waits when locating element for specified time and conditions, more details [here](http://objectivitybss.github.io/Test.Automation/html/6b3a28a9-75c6-bda7-e44e-962f1e91c477.htm)
 - Page Object Pattern
-<<<<<<< HEAD
-- Support for SeleniumGrid
+- Support for SeleniumGrid, more details [here](https://github.com/ObjectivityLtd/Test.Automation/wiki/Selenium-Grid-support)
 - More common locators, e.g: ```"//*[@title='{0}' and @ms.title='{1}']"```, more details [here](https://github.com/ObjectivityBSS/Test.Automation/wiki/More%20common%20locators)
 - Several methods to interact with kendo controls, more details [here](https://github.com/ObjectivityBSS/Test.Automation/wiki/Interact%20with%20kendo%20controls)
 - Verify - asserts without stop tests, more details [here](https://github.com/ObjectivityBSS/Test.Automation/wiki/Verify-asserts-without-stop-tests)
@@ -26,7 +25,6 @@ It provides following features:
 - Logging with NLog, more details [here](https://github.com/ObjectivityBSS/Test.Automation/wiki/Logging)
 - Files downloading (Firefox, Chrome), more details [here](https://github.com/ObjectivityBSS/Test.Automation/wiki/Downloading%20files)
 - Ready for parallel tests execution, more details [here](https://github.com/ObjectivityBSS/Test.Automation/wiki/Selenium%20Parallel%20tests%20execution)
-=======
 - More common locators, e.g: ```"//*[@title='{0}' and @ms.title='{1}']"```, more details [here](https://github.com/ObjectivityLtd/Test.Automation/wiki/More%20common%20locators)
 - Several methods to interact with kendo controls, more details [here](https://github.com/ObjectivityLtd/Test.Automation/wiki/Interact%20with%20kendo%20controls)
 - Verify - asserts without stop tests, more details [here](https://github.com/ObjectivityLtd/Test.Automation/wiki/Verify-asserts-without-stop-tests)
@@ -36,7 +34,6 @@ It provides following features:
 - Logging with NLog, more details [here](https://github.com/ObjectivityLtd/Test.Automation/wiki/Logging)
 - Files downloading (Firefox, Chrome), more details [here](https://github.com/ObjectivityLtd/Test.Automation/wiki/Downloading%20files)
 - Ready for parallel tests execution, more details [here](https://github.com/ObjectivityLtd/Test.Automation/wiki/Selenium%20Parallel%20tests%20execution)
->>>>>>> master
 - Possibility to send [SQL](http://objectivitybss.github.io/Test.Automation/html/e339b346-66a4-70e6-4c54-f9c30cb3131a.htm) or [MDX](http://objectivitybss.github.io/Test.Automation/html/39ae874a-89a0-c435-c701-f20b26f1695e.htm) queries
 - Possibility of debugging framework installed from nuget package, more details [here](https://github.com/ObjectivityLtd/Test.Automation/wiki/Debugging-Test.Automation-framework).
 
