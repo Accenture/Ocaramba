@@ -25,6 +25,8 @@
       <Argument Key="logoPlacement" Value="left" xmlns="" />
       <Argument Key="logoAlignment" Value="left" xmlns="" />
       <Argument Key="maxVersionParts" Value="" xmlns="" />
+      <Argument Key="baseSourceCodeUrl" Value="https://github.com/ObjectivityLtd/Test.Automation/tree/master/Objectivity.Test.Automation.Common/" />
+      <Argument Key="requestExampleUrl" Value="https://github.com/ObjectivityLtd/Test.Automation/issues/new" />
     </TransformComponentArguments>
     <DocumentationSources>
       <DocumentationSource sourceFile="..\Objectivity.Test.Automation.Common\Objectivity.Test.Automation.Common.csproj" xmlns="" />
