@@ -79,11 +79,11 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Tests\CompareFilesDataDrivenTests.cs" />
-    <Compile Include="Tests\DownloadFilesTestsNUnit.cs" />
     <Compile Include="Tests\HerokuappTestsNUnit.cs" />
     <Compile Include="Tests\JavaScriptAlertsTestsNUnit.cs" />
     <Compile Include="Tests\PerformanceTestsNUnit.cs" />
     <Compile Include="Tests\SaveScreenShotsPageSourceTestsNUnit.cs" />
+    <Compile Include="Tests\UploadDownloadFilesTestsNUnit.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -94,6 +94,12 @@
     </None>
     <None Include="packages.config" />
     <AdditionalFiles Include="..\stylecop.json" />
+    <None Include="TestOutput\filetocompare_branch.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TestOutput\filetocompare_live.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
@@ -114,6 +120,12 @@
     <Content Include="DataDriven\DataDriven.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
+    </Content>
+    <Content Include="TestOutput\filetocompare_branch.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestOutput\filetocompare_live.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup />

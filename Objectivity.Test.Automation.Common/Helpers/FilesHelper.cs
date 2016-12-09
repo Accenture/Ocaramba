@@ -472,7 +472,8 @@ namespace Objectivity.Test.Automation.Common.Helpers
         public static string RenameFile(double waitTime, string oldName, string newName, string subFolder)
         {
             Logger.Debug(CultureInfo.CurrentCulture, "new file name: {0}", newName);
-            NameHelper.ShortenFileName(subFolder, newName, "_", 255);
+
+            newName = NameHelper.ShortenFileName(subFolder, newName, "_", 255);
 
             if (File.Exists(newName))
             {
@@ -492,6 +493,61 @@ namespace Objectivity.Test.Automation.Common.Helpers
             var timeoutMessage = string.Format(CultureInfo.CurrentCulture, "Waiting till file will be renamed {0}", subFolder);
             Process.Start(cmdsi);
             WaitHelper.Wait(() => File.Exists(subFolder + Separator + newName), TimeSpan.FromSeconds(waitTime), TimeSpan.FromSeconds(1), timeoutMessage);
+            return newName;
+        }
+
+        /// <summary>
+        /// Copy the file and check if file was copied with given timeout, shorten the name of file if needed be removing "_".
+        /// </summary>
+        /// <param name="waitTime">Timeout for checking if file was removed</param>
+        /// <param name="oldName">The old name.</param>
+        /// <param name="newName">The new name.</param>
+        /// <param name="workingDirectory">The working folder.</param>
+        /// <returns>The new name in case its shorten</returns>
+        /// <example>How to use it: <code>
+        /// FilesHelper.CopyFile(BaseConfiguration.ShortTimeout, fileName, newName, this.DriverContext.DownloadFolder);
+        /// </code></example>
+        public static string CopyFile(double waitTime, string oldName, string newName, string workingDirectory)
+        {
+            return CopyFile(waitTime, oldName, newName, workingDirectory, workingDirectory);
+        }
+
+        /// <summary>
+        /// Copy the file and check if file was copied with given timeout, shorten the name of file if needed be removing "_".
+        /// </summary>
+        /// <param name="waitTime">Timeout for checking if file was removed</param>
+        /// <param name="oldName">The old name.</param>
+        /// <param name="newName">The new name.</param>
+        /// <param name="oldSubFolder">The old subFolder.</param>
+        /// <param name="newSubFolder">The new subFolder.</param>
+        /// <returns>The new name in case its shorten</returns>
+        /// <example>How to use it: <code>
+        /// FilesHelper.CopyFile(BaseConfiguration.ShortTimeout, fileName, newName, this.DriverContext.DownloadFolder + "\\", this.DriverContext.DownloadFolder + "\\");
+        /// </code></example>
+        public static string CopyFile(double waitTime, string oldName, string newName, string oldSubFolder, string newSubFolder)
+        {
+            Logger.Debug(CultureInfo.CurrentCulture, "new file name: {0}\\{1}", newSubFolder, newName);
+
+            newName = NameHelper.ShortenFileName(newSubFolder, newName, "_", 255);
+
+            if (File.Exists(newSubFolder + Separator + newName))
+            {
+                File.Delete(newSubFolder + Separator + newName);
+            }
+
+            // Use ProcessStartInfo class
+            string command = "/c copy " + '\u0022' + oldName + '\u0022' + " " + '\u0022' + newSubFolder + Separator + newName +
+                             '\u0022';
+            ProcessStartInfo cmdsi = new ProcessStartInfo("cmd.exe")
+            {
+                WorkingDirectory = oldSubFolder,
+                Arguments = command
+            };
+            Thread.Sleep(1000);
+
+            var timeoutMessage = string.Format(CultureInfo.CurrentCulture, "Waiting till file will be copied {0}", newSubFolder);
+            Process.Start(cmdsi);
+            WaitHelper.Wait(() => File.Exists(newSubFolder + Separator + newName), TimeSpan.FromSeconds(waitTime), TimeSpan.FromSeconds(1), timeoutMessage);
             return newName;
         }
 
