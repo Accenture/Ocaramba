@@ -1,4 +1,4 @@
-﻿// <copyright file="DownloadFilesTestsNUnit.cs" company="Objectivity Bespoke Software Specialists">
+﻿// <copyright file="UploadDownloadFilesTestsNUnit.cs" company="Objectivity Bespoke Software Specialists">
 // Copyright (c) Objectivity Bespoke Software Specialists. All rights reserved.
 // </copyright>
 // <license>
@@ -31,7 +31,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
     [TestFixture]
     [Category("herokuapp")]
     [Parallelizable(ParallelScope.Fixtures)]
-    public class DownloadFilesTestsNUnit : ProjectTestBase
+    public class UploadDownloadFilesTestsNUnit : ProjectTestBase
     {
         [Test]
         public void FirstUploadFileTest()
