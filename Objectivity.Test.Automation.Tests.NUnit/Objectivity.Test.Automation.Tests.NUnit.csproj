@@ -79,7 +79,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Tests\CompareFilesDataDrivenTests.cs" />
-    <Compile Include="Tests\UploadFilesTestsNUnit.cs" />
     <Compile Include="Tests\DownloadFilesTestsNUnit.cs" />
     <Compile Include="Tests\HerokuappTestsNUnit.cs" />
     <Compile Include="Tests\JavaScriptAlertsTestsNUnit.cs" />
