@@ -27,6 +27,7 @@ namespace Objectivity.Test.Automation.Common
     using System.Globalization;
 
     using NLog;
+    using OpenQA.Selenium.Remote;
 
     /// <summary>
     /// SeleniumConfiguration that consume app.config file
@@ -48,6 +49,26 @@ namespace Objectivity.Test.Automation.Common
                 Logger.Trace(CultureInfo.CurrentCulture, "Browser value from App.config '{0}'", ConfigurationManager.AppSettings["browser"]);
                 BrowserType browserType;
                 bool supportedBrowser = Enum.TryParse(ConfigurationManager.AppSettings["browser"], out browserType);
+
+                if (supportedBrowser)
+                {
+                    return browserType;
+                }
+
+                return BrowserType.None;
+            }
+        }
+
+        /// <summary>
+        /// Gets the Driver capabilities.
+        /// </summary>
+        public static BrowserType TestBrowserCapabilities
+        {
+            get
+            {
+                Logger.Trace(CultureInfo.CurrentCulture, "Driver Capabilities value from App.config '{0}'", ConfigurationManager.AppSettings["DriverCapabilities"]);
+                BrowserType browserType;
+                bool supportedBrowser = Enum.TryParse(ConfigurationManager.AppSettings["DriverCapabilities"], out browserType);
 
                 if (supportedBrowser)
                 {
@@ -162,6 +183,17 @@ namespace Objectivity.Test.Automation.Common
             get
             {
                 return ConfigurationManager.AppSettings["PhantomJsPath"];
+            }
+        }
+
+        /// <summary>
+        /// Gets the Remote Web Driver hub url
+        /// </summary>
+        public static Uri RemoteWebDriverHub
+        {
+            get
+            {
+                return new Uri(ConfigurationManager.AppSettings["RemoteWebDriverHub"]);
             }
         }
 

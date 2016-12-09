@@ -67,7 +67,9 @@ namespace Objectivity.Test.Automation.Tests.NUnit
         [OneTimeSetUp]
         public void BeforeClass()
         {
+            this.DriverContext.CurrentDirectory = TestContext.CurrentContext.TestDirectory;
             StartPerformanceMeasure();
+            this.DriverContext.Start();
         }
 
         /// <summary>
@@ -77,6 +79,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit
         public void AfterClass()
         {
             StopPerfromanceMeasure();
+            this.DriverContext.Stop();
         }
 
         /// <summary>
@@ -85,10 +88,8 @@ namespace Objectivity.Test.Automation.Tests.NUnit
         [SetUp]
         public void BeforeTest()
         {
-            this.DriverContext.CurrentDirectory = TestContext.CurrentContext.TestDirectory;
             this.DriverContext.TestTitle = TestContext.CurrentContext.Test.Name;
             this.LogTest.LogTestStarting(this.driverContext);
-            this.DriverContext.Start();
         }
 
         /// <summary>
@@ -99,7 +100,6 @@ namespace Objectivity.Test.Automation.Tests.NUnit
         {
             this.DriverContext.IsTestFailed = TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed || !this.driverContext.VerifyMessages.Count.Equals(0);
             this.SaveTestDetailsIfTestFailed(this.driverContext);
-            this.DriverContext.Stop();
             this.LogTest.LogTestEnding(this.driverContext);
             if (this.IsVerifyFailedAndClearMessages(this.driverContext) && TestContext.CurrentContext.Result.Outcome.Status != TestStatus.Failed)
             {

@@ -36,7 +36,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
 
         /// <summary>
         /// Compares the CSV files, find files to compare by DataDriven methods from NUnit.
-        /// Execute that tests after DownloadFilesTestsNUnit TestFeature
+        /// Execute that tests after UploadDownloadFilesTestsNUnit TestFeature
         /// </summary>
         /// <param name="liveFiles">The live files.</param>
         /// <param name="testFiles">The test files.</param>
@@ -64,7 +64,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
 
         /// <summary>
         /// Compares the TXT files, find files to compare by DataDriven methods from NUnit.
-        /// Execute that tests after DownloadFilesTestsNUnit TestFeature
+        /// Execute that tests after UploadDownloadFilesTestsNUnit TestFeature
         /// </summary>
         /// <param name="liveFiles">The live files.</param>
         /// <param name="testFiles">The test files.</param>

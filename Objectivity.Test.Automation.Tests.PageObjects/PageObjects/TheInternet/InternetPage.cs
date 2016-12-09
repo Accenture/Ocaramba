@@ -115,6 +115,12 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             return new DownloadPage(this.DriverContext);
         }
 
+        public UploadPage GoToFileUploader()
+        {
+            this.Driver.GetElement(this.linkLocator.Format("upload")).Click();
+            return new UploadPage(this.DriverContext);
+        }
+
         public MultipleWindowsPage GoToMultipleWindowsPage()
         {
             this.Driver.GetElement(this.linkLocator.Format("windows")).Click();

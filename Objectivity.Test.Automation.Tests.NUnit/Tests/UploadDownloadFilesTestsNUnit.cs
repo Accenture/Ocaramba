@@ -1,4 +1,4 @@
-﻿// <copyright file="DownloadFilesTestsNUnit.cs" company="Objectivity Bespoke Software Specialists">
+﻿// <copyright file="UploadDownloadFilesTestsNUnit.cs" company="Objectivity Bespoke Software Specialists">
 // Copyright (c) Objectivity Bespoke Software Specialists. All rights reserved.
 // </copyright>
 // <license>
@@ -26,24 +26,33 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
     using global::NUnit.Framework;
 
     /// <summary>
-    /// Tests to test framework
+    /// Tests to test framework, downloading files, must be exexuted after UploadFilesTestsNUnit.
     /// </summary>
     [TestFixture]
     [Category("herokuapp")]
     [Parallelizable(ParallelScope.Fixtures)]
-    public class DownloadFilesTestsNUnit : ProjectTestBase
+    public class UploadDownloadFilesTestsNUnit : ProjectTestBase
     {
         [Test]
-        public void DownloadFileByNameTest()
+        public void FirstUploadFileTest()
+        {
+            new InternetPage(this.DriverContext)
+                .OpenHomePage()
+                .GoToFileUploader()
+                .UploadFile("ObjectivityTestAutomationCSHarpFramework.txt");
+        }
+
+        [Test]
+        public void SecondDownloadFileByNameTest()
         {
             new InternetPage(this.DriverContext)
                 .OpenHomePage()
                 .GoToFileDownloader()
-                .SaveFile("some-file.txt", "name_of_file_branch");
+                .SaveFile("ObjectivityTestAutomationCSHarpFramework.txt", "name_of_file_branch");
         }
 
         [Test]
-        public void DownloadGivenTypeFileByCountTest()
+        public void SecondDownloadGivenTypeFileByCountTest()
         {
             new InternetPage(this.DriverContext)
                 .OpenHomePage()
@@ -52,7 +61,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
         }
 
         [Test]
-        public void DownloadAnyFileByCountTest()
+        public void SecondDownloadAnyFileByCountTest()
         {
             new InternetPage(this.DriverContext)
                 .OpenHomePage()
@@ -61,12 +70,12 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
         }
 
         [Test]
-        public void SecureDownloadFileByNameTest()
+        public void SecondSecureDownloadFileByNameTest()
         {
             new InternetPage(this.DriverContext)
                 .OpenHomePageWithUserCredentials()
                 .GoToSecureFileDownloadPage()
-                .SaveFile("some-file.txt", "name_of_file_live");
+                .SaveFile("ObjectivityTestAutomationCSHarpFramework.txt", "name_of_file_live");
         }
     }
 }

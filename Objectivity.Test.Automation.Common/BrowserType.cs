@@ -58,6 +58,11 @@ namespace Objectivity.Test.Automation.Common
         Safari,
 
         /// <summary>
+        /// Remote Web driver
+        /// </summary>
+        RemoteWebDriver,
+
+        /// <summary>
         /// Not supported browser
         /// </summary>
         None
