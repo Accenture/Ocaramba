@@ -1,3 +1,10 @@
+## Angular fork
+Adds features:
+- Protractor/Angular site specific locators
+- Just use ```this.Driver.IgnoreSynchronization = true;``` if your current page doesn't have Angular
+
+The same amazing features as the main project at https://github.com/ObjectivityLtd/Test.Automation.
+-------------
 ## Test.Automation
 **C# Framework to automate tests using Selenium WebDriver**
 
