@@ -65,6 +65,26 @@ namespace Objectivity.Test.Automation.Common
         /// <summary>
         /// The XPath selector
         /// </summary>
-        XPath
+        XPath,
+
+        /// <summary>
+        /// The Protractor NgByBinding selector
+        /// </summary>
+        NgByBinding,
+
+        /// <summary>
+        /// The Protractor NgModel selector
+        /// </summary>
+        NgModel,
+
+        /// <summary>
+        /// The Protractor NgBySelected option selector
+        /// </summary>
+        NgBySelectedOption,
+
+        /// <summary>
+        /// The Protractor NgByRepeater selector
+        /// </summary>
+        NyByRepeater
     }
 }

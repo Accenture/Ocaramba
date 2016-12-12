@@ -25,6 +25,7 @@ namespace Objectivity.Test.Automation.Common.Extensions
     using Objectivity.Test.Automation.Common.Types;
 
     using OpenQA.Selenium;
+    using Protractor;
 
     /// <summary>
     /// Locator extensions methods for selenium
@@ -68,6 +69,18 @@ namespace Objectivity.Test.Automation.Common.Extensions
                     break;
                 case Locator.XPath:
                     by = By.XPath(locator.Value);
+                    break;
+                case Locator.NgByBinding:
+                    by = NgBy.Binding(locator.Value);
+                    break;
+                case Locator.NgModel:
+                    by = NgBy.Model(locator.Value);
+                    break;
+                case Locator.NgBySelectedOption:
+                    by = NgBy.SelectedOption(locator.Value);
+                    break;
+                case Locator.NyByRepeater:
+                    by = NgBy.Repeater(locator.Value);
                     break;
                 default:
                     by = By.Id(locator.Value);
