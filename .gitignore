@@ -3,6 +3,8 @@
 /TestResults
 /packages
 
+.nuget/
+
 StyleCop.Cache
 *.suo
 *.GhostDoc.xml
@@ -11,3 +13,4 @@ TestFramework.sln.DotSettings.user
 /Objectivity.Test.Automation.Tests.Features/TestFeatures/*.feature.cs
 *.user
 LastBuild.log
+/UpgradeLog.htm
