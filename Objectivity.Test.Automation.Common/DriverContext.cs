@@ -43,6 +43,7 @@ namespace Objectivity.Test.Automation.Common
     using OpenQA.Selenium.PhantomJS;
     using OpenQA.Selenium.Remote;
     using OpenQA.Selenium.Safari;
+    using Protractor;
 
     /// <summary>
     /// Contains handle to driver and methods for web browser
@@ -60,7 +61,7 @@ namespace Objectivity.Test.Automation.Common
         /// <value>
         /// The handle to driver.
         /// </value>
-        private IWebDriver driver;
+        private NgWebDriver driver;
 
         private TestLogger logTest;
 
@@ -132,7 +133,7 @@ namespace Objectivity.Test.Automation.Common
         /// <summary>
         /// Gets driver Handle
         /// </summary>
-        public IWebDriver Driver
+        public NgWebDriver Driver
         {
             get
             {
@@ -386,7 +387,7 @@ namespace Objectivity.Test.Automation.Common
         {
             try
             {
-                var screenshotDriver = (ITakesScreenshot)this.driver;
+                var screenshotDriver = (ITakesScreenshot)this.driver.WrappedDriver;
                 var screenshot = screenshotDriver.GetScreenshot();
                 return screenshot;
             }
@@ -441,26 +442,26 @@ namespace Objectivity.Test.Automation.Common
             {
                 case BrowserType.Firefox:
                     var fireFoxOptionsLegacy = new FirefoxOptions { Profile = this.FirefoxProfile, UseLegacyImplementation = BaseConfiguration.FirefoxUseLegacyImplementation };
-                    this.driver = new FirefoxDriver(fireFoxOptionsLegacy);
+                    this.driver = new NgWebDriver(new FirefoxDriver(fireFoxOptionsLegacy));
                     break;
                 case BrowserType.FirefoxPortable:
                     var fireFoxOptions = new FirefoxOptions { BrowserExecutableLocation = BaseConfiguration.FirefoxPath, Profile = this.FirefoxProfile, UseLegacyImplementation = BaseConfiguration.FirefoxUseLegacyImplementation };
-                    this.driver = new FirefoxDriver(fireFoxOptions);
+                    this.driver = new NgWebDriver(new FirefoxDriver(fireFoxOptions));
                     break;
                 case BrowserType.InternetExplorer:
-                    this.driver = new InternetExplorerDriver(this.InternetExplorerProfile);
+                    this.driver = new NgWebDriver(new InternetExplorerDriver(this.InternetExplorerProfile));
                     break;
                 case BrowserType.Chrome:
-                    this.driver = new ChromeDriver(this.ChromeProfile);
+                    this.driver = new NgWebDriver(new ChromeDriver(this.ChromeProfile));
                     break;
                 case BrowserType.Safari:
-                    this.driver = new SafariDriver(this.SafariProfile);
+                    this.driver = new NgWebDriver(new SafariDriver(this.SafariProfile));
                     break;
                 case BrowserType.PhantomJs:
-                    this.driver = new PhantomJSDriver(this.CurrentDirectory + BaseConfiguration.PhantomJsPath);
+                    this.driver = new NgWebDriver(new PhantomJSDriver(this.CurrentDirectory + BaseConfiguration.PhantomJsPath));
                     break;
                 case BrowserType.RemoteWebDriver:
-                    this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetCapabilities());
+                    this.driver = new NgWebDriver(new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetCapabilities()));
                     break;
                 default:
                     throw new NotSupportedException(
