@@ -1,4 +1,6 @@
 ## Test.Automation
+<img align="left" src="/Objectivity.Test.Automation.Common.Documentation/icons/Objectivity_logo_avatar.png">
+
 **C# Framework to automate tests using Selenium WebDriver**
 
 Test Framework was designed in Objectivity to propose common way how people should create Selenium WebDriver tests.
