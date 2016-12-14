@@ -8,7 +8,7 @@
     <owners>Objectivity Bespoke Software Specialists</owners>
     <licenseUrl>https://github.com/ObjectivityLtd/Test.Automation/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/ObjectivityLtd/Test.Automation</projectUrl>
-	<iconUrl>https://github.com/ObjectivityLtd/Test.Automation/tree/master/Objectivity.Test.Automation.Common.Documentation/icons/Objectivity_logo_avatar.png</iconUrl>
+	<iconUrl>https://github.com/ObjectivityLtd/Test.Automation/wiki/images/Objectivity_logo_avatar32.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Framework to automate tests using Objectivity.Test.Automation.Common with NUnit</description>
     <releaseNotes>You can find info about this release here: https://github.com/ObjectivityLtd/Test.Automation/releases</releaseNotes>
