@@ -414,7 +414,7 @@ namespace Objectivity.Test.Automation.Common
             {
                 case BrowserType.Firefox:
                     capabilities = DesiredCapabilities.Firefox();
-                    capabilities.SetCapability(FirefoxDriver.ProfileCapabilityName, this.FirefoxProfile);
+                    capabilities.SetCapability(FirefoxDriver.ProfileCapabilityName, this.FirefoxProfile.ToBase64String());
                     break;
                 case BrowserType.InternetExplorer:
                     capabilities = DesiredCapabilities.InternetExplorer();
