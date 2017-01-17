@@ -153,7 +153,7 @@ namespace Objectivity.Test.Automation.Common
         /// Gets the page load waiting time [seconds].
         /// </summary>
         /// <example>How to use it: <code>
-        /// element.GetElement(locator, BaseConfiguration.LongTimeout, e => e.Displayed & e.Enabled, customMessage);
+        /// element.GetElement(locator, BaseConfiguration.LongTimeout, e => e.Displayed, customMessage);
         /// </code></example>
         public static double LongTimeout
         {
