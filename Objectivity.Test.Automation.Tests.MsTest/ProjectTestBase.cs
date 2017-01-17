@@ -30,7 +30,7 @@ namespace Objectivity.Test.Automation.Tests.MsTest
     using Objectivity.Test.Automation.Common.Logger;
 
     /// <summary>
-    /// The base class for all tests
+    /// The base class for all tests <see href="https://github.com/ObjectivityLtd/Test.Automation/wiki/ProjectTestBase-class">More details on wiki</see>
     /// </summary>
     [TestClass]
     public class ProjectTestBase : TestBase
