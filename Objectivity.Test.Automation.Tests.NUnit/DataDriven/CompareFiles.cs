@@ -30,6 +30,9 @@ namespace Objectivity.Test.Automation.Tests.NUnit.DataDriven
     using global::NUnit.Framework;
     using NLog;
 
+    /// <summary>
+    /// DataDriven comparing files  methods for NUnit test framework <see href="https://github.com/ObjectivityLtd/Test.Automation/wiki/Comparing-files-by-NUnit-DataDriven-tests">More details on wiki</see>
+    /// </summary>
     public static class CompareFiles
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();

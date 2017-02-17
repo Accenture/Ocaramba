@@ -31,7 +31,7 @@ namespace Objectivity.Test.Automation.Tests.Features
     using TechTalk.SpecFlow;
 
     /// <summary>
-    /// The base class for all tests
+    /// The base class for all tests <see href="https://github.com/ObjectivityLtd/Test.Automation/wiki/ProjectTestBase-class">More details on wiki</see>
     /// </summary>
     [Binding]
     public class ProjectTestBase : TestBase

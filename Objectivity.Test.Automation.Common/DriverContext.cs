@@ -414,7 +414,7 @@ namespace Objectivity.Test.Automation.Common
             {
                 case BrowserType.Firefox:
                     capabilities = DesiredCapabilities.Firefox();
-                    capabilities.SetCapability(FirefoxDriver.ProfileCapabilityName, this.FirefoxProfile);
+                    capabilities.SetCapability(FirefoxDriver.ProfileCapabilityName, this.FirefoxProfile.ToBase64String());
                     break;
                 case BrowserType.InternetExplorer:
                     capabilities = DesiredCapabilities.InternetExplorer();
@@ -467,9 +467,9 @@ namespace Objectivity.Test.Automation.Common
                         string.Format(CultureInfo.CurrentCulture, "Driver {0} is not supported", BaseConfiguration.TestBrowser));
             }
 
-            this.driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(BaseConfiguration.LongTimeout));
-            this.driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(BaseConfiguration.ShortTimeout));
-            this.driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromMilliseconds(BaseConfiguration.ImplicitlyWaitMilliseconds));
+            this.driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(BaseConfiguration.LongTimeout);
+            this.driver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(BaseConfiguration.ShortTimeout);
+            this.driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(BaseConfiguration.ImplicitlyWaitMilliseconds);
             this.driver.Manage().Window.Maximize();
         }
 
@@ -498,7 +498,7 @@ namespace Objectivity.Test.Automation.Common
 
             try
             {
-                errorDetail.Screenshot.SaveAsFile(filePath, ImageFormat.Png);
+                errorDetail.Screenshot.SaveAsFile(filePath, ScreenshotImageFormat.Png);
                 Logger.Error(CultureInfo.CurrentCulture, "Test failed: screenshot saved to {0}.", filePath);
                 Logger.Info(CultureInfo.CurrentCulture, "##teamcity[publishArtifacts '{0}']", filePath);
             }

@@ -35,7 +35,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
     using Objectivity.Test.Automation.Common;
 
     /// <summary>
-    /// Class for handling downloading files
+    /// Class for handling downloading files <see href="https://github.com/ObjectivityLtd/Test.Automation/wiki/Downloading%20files">More details on wiki</see>
     /// </summary>
     public static class FilesHelper
     {

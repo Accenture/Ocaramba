@@ -28,7 +28,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit
     using global::NUnit.Framework.Interfaces;
 
     /// <summary>
-    /// The base class for all tests
+    /// The base class for all tests <see href="https://github.com/ObjectivityLtd/Test.Automation/wiki/ProjectTestBase-class">More details on wiki</see>
     /// </summary>
     public class ProjectTestBase : TestBase
     {
