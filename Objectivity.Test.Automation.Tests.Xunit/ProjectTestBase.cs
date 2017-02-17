@@ -27,7 +27,7 @@ namespace Objectivity.Test.Automation.Tests.Xunit
     using global::Xunit;
 
     /// <summary>
-    /// The base class for all tests
+    /// The base class for all tests <see href="https://github.com/ObjectivityLtd/Test.Automation/wiki/ProjectTestBase-class">More details on wiki</see>
     /// </summary>
     public class ProjectTestBase : IDisposable, IClassFixture<TestFixture>
     {

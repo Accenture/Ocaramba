@@ -30,7 +30,7 @@ namespace Objectivity.Test.Automation.Common
     using OpenQA.Selenium.Remote;
 
     /// <summary>
-    /// SeleniumConfiguration that consume app.config file
+    /// SeleniumConfiguration that consume app.config file <see href="https://github.com/ObjectivityLtd/Test.Automation/wiki/Description%20of%20App.config%20file">More details on wiki</see>
     /// </summary>
     public static class BaseConfiguration
     {
@@ -42,6 +42,12 @@ namespace Objectivity.Test.Automation.Common
         /// <summary>
         /// Gets the Driver.
         /// </summary>
+        /// <example>How to use it: <code>
+        /// if (BaseConfiguration.TestBrowser == BrowserType.Firefox)
+        ///     {
+        ///     this.Driver.GetElement(this.fileLink.Format(fileName), "Click on file").Click();
+        ///     };
+        /// </code></example>
         public static BrowserType TestBrowser
         {
             get
@@ -135,6 +141,9 @@ namespace Objectivity.Test.Automation.Common
         /// <summary>
         /// Gets the java script or ajax waiting time [seconds].
         /// </summary>
+        /// <example>How to use it: <code>
+        /// this.Driver.IsElementPresent(this.statusCodeHeader, BaseConfiguration.MediumTimeout);
+        /// </code></example>
         public static double MediumTimeout
         {
             get { return Convert.ToDouble(ConfigurationManager.AppSettings["mediumTimeout"], CultureInfo.CurrentCulture); }
@@ -143,6 +152,9 @@ namespace Objectivity.Test.Automation.Common
         /// <summary>
         /// Gets the page load waiting time [seconds].
         /// </summary>
+        /// <example>How to use it: <code>
+        /// element.GetElement(locator, BaseConfiguration.LongTimeout, e => e.Displayed, customMessage);
+        /// </code></example>
         public static double LongTimeout
         {
             get { return Convert.ToDouble(ConfigurationManager.AppSettings["longTimeout"], CultureInfo.CurrentCulture); }
@@ -151,6 +163,9 @@ namespace Objectivity.Test.Automation.Common
         /// <summary>
         /// Gets the assertion waiting time [seconds].
         /// </summary>
+        /// <example>How to use it: <code>
+        /// this.Driver.IsElementPresent(this.downloadPageHeader, BaseConfiguration.ShortTimeout);
+        /// </code></example>
         public static double ShortTimeout
         {
             get { return Convert.ToDouble(ConfigurationManager.AppSettings["shortTimeout"], CultureInfo.CurrentCulture); }
@@ -359,6 +374,9 @@ namespace Objectivity.Test.Automation.Common
         /// <summary>
         /// Gets the URL value 'Protocol://HostURL'.
         /// </summary>
+        /// <example>How to use it: <code>
+        /// var url = BaseConfiguration.GetUrlValue;
+        /// </code></example>
         public static string GetUrlValue
         {
             get
@@ -370,6 +388,9 @@ namespace Objectivity.Test.Automation.Common
         /// <summary>
         /// Gets the URL value with user credentials 'Protocol://Username:Password@HostURL'.
         /// </summary>
+        /// <example>How to use it: <code>
+        /// var url = BaseConfiguration.GetUrlValueWithUserCredentials;
+        /// </code></example>
         public static string GetUrlValueWithUserCredentials
         {
             get
