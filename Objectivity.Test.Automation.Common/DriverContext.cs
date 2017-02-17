@@ -498,7 +498,7 @@ namespace Objectivity.Test.Automation.Common
 
             try
             {
-                errorDetail.Screenshot.SaveAsFile(filePath, ImageFormat.Png);
+                errorDetail.Screenshot.SaveAsFile(filePath, ScreenshotImageFormat.Png);
                 Logger.Error(CultureInfo.CurrentCulture, "Test failed: screenshot saved to {0}.", filePath);
                 Logger.Info(CultureInfo.CurrentCulture, "##teamcity[publishArtifacts '{0}']", filePath);
             }
