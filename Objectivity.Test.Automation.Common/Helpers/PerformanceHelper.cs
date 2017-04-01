@@ -50,11 +50,6 @@ namespace Objectivity.Test.Automation.Common.Helpers
         private readonly List<SavedTimes> loadTimeList;
 
         /// <summary>
-        /// Gets the scenario list
-        /// </summary>
-        public IList<SavedTimes> GetloadTimeList => this.loadTimeList;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="PerformanceHelper"/> class.
         /// </summary>
         public PerformanceHelper()
@@ -70,6 +65,11 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// The performance manager.
         /// </value>
         public static PerformanceHelper Instance { get; set; }
+
+        /// <summary>
+        /// Gets the scenario list
+        /// </summary>
+        public IList<SavedTimes> GetloadTimeList => this.loadTimeList;
 
         /// <summary>
         /// Gets or sets measured time.
