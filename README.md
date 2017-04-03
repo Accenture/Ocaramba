@@ -1,5 +1,5 @@
 ## Test.Automation
-<img align="left" src="/Objectivity.Test.Automation.Common.Documentation/icons/Objectivity_logo_avatar.png">
+<img align="left" src="https://github.com/ObjectivityLtd/Test.Automation/blob/master/Objectivity.Test.Automation.Common.Documentation/icons/Objectivity_logo_avatar.png">
 
 **C# Framework to automate tests using Selenium WebDriver**
 
