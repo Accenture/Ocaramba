@@ -198,6 +198,7 @@
   <HelpKINode Title="GetFolder method" Url="html/fa1c0378-fc93-432e-4e9b-5adf1dea7122.htm" />
   <HelpKINode Title="GetFutureDate method" Url="html/36011179-8107-eb57-af1e-782fc0c09dca.htm" />
   <HelpKINode Title="GetLastFile method" Url="html/f866f427-a770-6ada-0c8c-25a9f813ae9e.htm" />
+  <HelpKINode Title="GetloadTimeList property" Url="html/be33b478-559b-f6c5-7a06-a16bf845f48c.htm" />
   <HelpKINode Title="GetPageSourceEnabled property" Url="html/33eaa706-cb74-88b2-99cd-12b00ba02479.htm" />
   <HelpKINode Title="GetTable method" Url="html/4c5fad7c-c472-7c50-49fa-b12dc532d1e9.htm" />
   <HelpKINode Title="GetTextContent method" Url="html/b6fd457a-f027-209b-c074-ab192d9b1027.htm" />
@@ -397,6 +398,7 @@
     <HelpKINode Title="methods" Url="html/1e2d0ced-6121-ff95-37b5-e89ed30ef4e5.htm" />
     <HelpKINode Title="properties" Url="html/e6944346-f455-4c20-1ee2-7048c87a83d1.htm" />
   </HelpKINode>
+  <HelpKINode Title="PerformanceHelper.GetloadTimeList property" Url="html/be33b478-559b-f6c5-7a06-a16bf845f48c.htm" />
   <HelpKINode Title="PerformanceHelper.Instance property" Url="html/1dc566ef-3347-db3c-fd6e-74a5c33d7d0f.htm" />
   <HelpKINode Title="PerformanceHelper.PerformanceHelper constructor" Url="html/64c50249-8c6e-8e09-8542-bcba3827ff8a.htm" />
   <HelpKINode Title="PerformanceHelper.PrintAveragePercentiles90DurationMilliseconds method" Url="html/ef9dcfe7-5515-334f-f575-39746472dc8b.htm" />
