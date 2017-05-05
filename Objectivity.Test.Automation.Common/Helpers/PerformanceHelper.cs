@@ -67,6 +67,11 @@ namespace Objectivity.Test.Automation.Common.Helpers
         public static PerformanceHelper Instance { get; set; }
 
         /// <summary>
+        /// Gets the scenario list
+        /// </summary>
+        public IList<SavedTimes> GetloadTimeList => this.loadTimeList;
+
+        /// <summary>
         /// Gets or sets measured time.
         /// </summary>
         /// <value>Return last measured time.</value>
