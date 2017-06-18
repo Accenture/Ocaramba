@@ -471,6 +471,10 @@ namespace Objectivity.Test.Automation.Common
             this.driver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(BaseConfiguration.ShortTimeout);
             this.driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(BaseConfiguration.ImplicitlyWaitMilliseconds);
             this.driver.Manage().Window.Maximize();
+            if (BaseConfiguration.EnableEventFiringWebDriver)
+            {
+                this.driver = new MyEventFiringWebDriver(this.driver);
+            }
         }
 
         /// <summary>

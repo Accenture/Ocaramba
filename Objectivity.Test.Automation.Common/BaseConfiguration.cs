@@ -301,6 +301,28 @@ namespace Objectivity.Test.Automation.Common
         }
 
         /// <summary>
+        /// Gets a value indicating whether enable EventFiringWebDriver.
+        /// </summary>
+        public static bool EnableEventFiringWebDriver
+        {
+            get
+            {
+                Logger.Trace(CultureInfo.CurrentCulture, "Enable EventFiringWebDriver from App.config '{0}'", ConfigurationManager.AppSettings["Enable EventFiringWebDriver"]);
+                if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["EnableEventFiringWebDriver"]))
+                {
+                    return false;
+                }
+
+                if (ConfigurationManager.AppSettings["EnableEventFiringWebDriver"].ToLower(CultureInfo.CurrentCulture).Equals("true"))
+                {
+                    return true;
+                }
+
+                return false;
+            }
+        }
+
+        /// <summary>
         /// Gets a value indicating whether use CurrentDirectory for path where assembly files are located.
         /// </summary>
         public static bool UseCurrentDirectory
