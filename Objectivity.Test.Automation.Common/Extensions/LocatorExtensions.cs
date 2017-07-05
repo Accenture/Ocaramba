@@ -36,7 +36,7 @@ namespace Objectivity.Test.Automation.Common.Extensions
         /// </summary>
         /// <example>Using standard method FindElement, even we have locator as ElementLocator: <code>
         /// private readonly ElementLocator searchTextbox = new ElementLocator(Locator.Id, "SearchTextBoxId");
-        /// this.Driver.FindElement(locator.ToBy());
+        /// this.Driver.FindElement(searchTextbox.ToBy());
         /// </code> </example>
         /// <param name="locator">The element locator.</param>
         /// <returns>The Selenium By</returns>
