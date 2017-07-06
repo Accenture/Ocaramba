@@ -5,8 +5,9 @@
            <Word>publishArtifacts</Word>
            <Word>Moroni</Word>
            <Word>png</Word>
-			<Word>fullscreen</Word>
-			<Word>png</Word>
+		   <Word>fullscreen</Word>
+		   <Word>png</Word>
+		   <Word>EventFiringWebDriver</Word>
          </Recognized>
       </Words>
 </Dictionary>
