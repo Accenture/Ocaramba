@@ -20,6 +20,8 @@
 //     SOFTWARE.
 // </license>
 
+using System.Collections.Generic;
+
 namespace Objectivity.Test.Automation.Common
 {
     using System;
@@ -544,21 +546,21 @@ namespace Objectivity.Test.Automation.Common
         /// <summary>
         /// Takes and saves screen shot
         /// </summary>
-        /// <returns>Path to the screenshot</returns>
-        public string TakeAndSaveScreenshot()
+        /// <returns>Array of filepaths</returns>
+        public string[] TakeAndSaveScreenshot()
         {
-            string path = null;
+            List<string> filePaths = new List<string>();
             if (BaseConfiguration.FullDesktopScreenShotEnabled)
             {
-                path = TakeScreenShot.Save(TakeScreenShot.DoIt(), ImageFormat.Png, this.ScreenShotFolder, this.TestTitle);
+                filePaths.Add(TakeScreenShot.Save(TakeScreenShot.DoIt(), ImageFormat.Png, this.ScreenShotFolder, this.TestTitle));
             }
 
             if (BaseConfiguration.SeleniumScreenShotEnabled)
             {
-                path = this.SaveScreenshot(new ErrorDetail(this.TakeScreenshot(), DateTime.Now, null), this.ScreenShotFolder, this.TestTitle);
+                filePaths.Add(this.SaveScreenshot(new ErrorDetail(this.TakeScreenshot(), DateTime.Now, null), this.ScreenShotFolder, this.TestTitle));
             }
 
-            return path;
+            return filePaths.ToArray();
         }
 
         private Proxy CurrentProxy()
