@@ -20,10 +20,9 @@
 //     SOFTWARE.
 // </license>
 
-using System.Collections.Generic;
-
 namespace Objectivity.Test.Automation.Common
 {
+    using System.Collections.Generic;
     using Objectivity.Test.Automation.Common.Helpers;
 
     /// <summary>
