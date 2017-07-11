@@ -75,7 +75,8 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// <param name="format">The format.</param>
         /// <param name="folder">The folder.</param>
         /// <param name="title">The title.</param>
-        public static void Save(Bitmap bitmap, ImageFormat format, string folder, string title)
+        /// <returns>The path to the saved bitmap, null if not saved.</returns>
+        public static string Save(Bitmap bitmap, ImageFormat format, string folder, string title)
         {
             var fileName = string.Format(CultureInfo.CurrentCulture, "{0}_{1}_{2}.png", title, DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss-fff", CultureInfo.CurrentCulture), "fullscreen");
             fileName = Regex.Replace(fileName, "[^0-9a-zA-Z._]+", "_");
@@ -92,7 +93,10 @@ namespace Objectivity.Test.Automation.Common.Helpers
                 bitmap.Dispose();
                 Logger.Error(CultureInfo.CurrentCulture, "Test failed: full screenshot saved to {0}.", filePath);
                 Logger.Info(CultureInfo.CurrentCulture, "##teamcity[publishArtifacts '{0}']", filePath);
+                return filePath;
             }
+
+            return null;
         }
     }
 }
