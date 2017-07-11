@@ -487,6 +487,7 @@ namespace Objectivity.Test.Automation.Common
         /// <param name="errorDetail">The error detail.</param>
         /// <param name="folder">The folder.</param>
         /// <param name="title">The title.</param>
+        /// <returns>Path to the screenshot</returns>
         public string SaveScreenshot(ErrorDetail errorDetail, string folder, string title)
         {
             var fileName = string.Format(CultureInfo.CurrentCulture, "{0}_{1}_{2}.png", title, errorDetail.DateTime.ToString("yyyy-MM-dd HH-mm-ss-fff", CultureInfo.CurrentCulture), "browser");
@@ -507,6 +508,7 @@ namespace Objectivity.Test.Automation.Common
             {
                 Logger.Error("Test failed but was unable to get webdriver screenshot.");
             }
+
             return null;
         }
 
@@ -542,6 +544,7 @@ namespace Objectivity.Test.Automation.Common
         /// <summary>
         /// Takes and saves screen shot
         /// </summary>
+        /// <returns>Path to the screenshot</returns>
         public string TakeAndSaveScreenshot()
         {
             string path = null;

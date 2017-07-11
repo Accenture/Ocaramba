@@ -95,6 +95,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
                 Logger.Info(CultureInfo.CurrentCulture, "##teamcity[publishArtifacts '{0}']", filePath);
                 return filePath;
             }
+
             return null;
         }
     }

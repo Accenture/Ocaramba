@@ -38,7 +38,8 @@ namespace Objectivity.Test.Automation.Common
         {
             if (driverContext.IsTestFailed)
             {
-                return new string[] {
+                return new string[]
+                {
                     driverContext.TakeAndSaveScreenshot(),
                     this.SavePageSource(driverContext)
                 };
@@ -53,6 +54,7 @@ namespace Objectivity.Test.Automation.Common
         /// <param name="driverContext">
         /// Driver context includes
         /// </param>
+        /// <returns>Path to the page source</returns>
         public string SavePageSource(DriverContext driverContext)
         {
             return driverContext.SavePageSource(driverContext.TestTitle);
@@ -90,5 +92,4 @@ namespace Objectivity.Test.Automation.Common
             PerformanceHelper.Instance.PrintAveragePercentiles90DurationMilliseconds();
         }
     }
-    
 }
