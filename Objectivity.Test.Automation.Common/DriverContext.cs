@@ -487,7 +487,7 @@ namespace Objectivity.Test.Automation.Common
         /// <param name="errorDetail">The error detail.</param>
         /// <param name="folder">The folder.</param>
         /// <param name="title">The title.</param>
-        public void SaveScreenshot(ErrorDetail errorDetail, string folder, string title)
+        public string SaveScreenshot(ErrorDetail errorDetail, string folder, string title)
         {
             var fileName = string.Format(CultureInfo.CurrentCulture, "{0}_{1}_{2}.png", title, errorDetail.DateTime.ToString("yyyy-MM-dd HH-mm-ss-fff", CultureInfo.CurrentCulture), "browser");
             var correctFileName = Path.GetInvalidFileNameChars().Aggregate(fileName, (current, c) => current.Replace(c.ToString(CultureInfo.CurrentCulture), string.Empty));
@@ -501,18 +501,21 @@ namespace Objectivity.Test.Automation.Common
                 errorDetail.Screenshot.SaveAsFile(filePath, ScreenshotImageFormat.Png);
                 Logger.Error(CultureInfo.CurrentCulture, "Test failed: screenshot saved to {0}.", filePath);
                 Logger.Info(CultureInfo.CurrentCulture, "##teamcity[publishArtifacts '{0}']", filePath);
+                return filePath;
             }
             catch (NullReferenceException)
             {
                 Logger.Error("Test failed but was unable to get webdriver screenshot.");
             }
+            return null;
         }
 
         /// <summary>
         /// Saves the page source.
         /// </summary>
         /// <param name="fileName">Name of the file.</param>
-        public void SavePageSource(string fileName)
+        /// <returns>The saved source file</returns>
+        public string SavePageSource(string fileName)
         {
             if (BaseConfiguration.GetPageSourceEnabled)
             {
@@ -530,23 +533,29 @@ namespace Objectivity.Test.Automation.Common
 
                 Logger.Error(CultureInfo.CurrentCulture, "Test failed: page Source saved to {0}.", path);
                 Logger.Info(CultureInfo.CurrentCulture, "##teamcity[publishArtifacts '{0}']", path);
+                return path;
             }
+
+            return null;
         }
 
         /// <summary>
         /// Takes and saves screen shot
         /// </summary>
-        public void TakeAndSaveScreenshot()
+        public string TakeAndSaveScreenshot()
         {
+            string path = null;
             if (BaseConfiguration.FullDesktopScreenShotEnabled)
             {
-                TakeScreenShot.Save(TakeScreenShot.DoIt(), ImageFormat.Png, this.ScreenShotFolder, this.TestTitle);
+                path = TakeScreenShot.Save(TakeScreenShot.DoIt(), ImageFormat.Png, this.ScreenShotFolder, this.TestTitle);
             }
 
             if (BaseConfiguration.SeleniumScreenShotEnabled)
             {
-                this.SaveScreenshot(new ErrorDetail(this.TakeScreenshot(), DateTime.Now, null), this.ScreenShotFolder, this.TestTitle);
+                path = this.SaveScreenshot(new ErrorDetail(this.TakeScreenshot(), DateTime.Now, null), this.ScreenShotFolder, this.TestTitle);
             }
+
+            return path;
         }
 
         private Proxy CurrentProxy()
