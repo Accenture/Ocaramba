@@ -497,7 +497,8 @@ namespace Objectivity.Test.Automation.Common
         /// </summary>
         public void Stop()
         {
-            if (this.driver != null) {
+            if (this.driver != null)
+            {
                 this.driver.Quit();
             }
         }
