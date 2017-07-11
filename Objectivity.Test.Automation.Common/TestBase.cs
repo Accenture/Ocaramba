@@ -20,6 +20,8 @@
 //     SOFTWARE.
 // </license>
 
+using System.Collections.Generic;
+
 namespace Objectivity.Test.Automation.Common
 {
     using Objectivity.Test.Automation.Common.Helpers;
@@ -38,10 +40,17 @@ namespace Objectivity.Test.Automation.Common
         {
             if (driverContext.IsTestFailed)
             {
-                return new string[] {
-                    driverContext.TakeAndSaveScreenshot(),
-                    this.SavePageSource(driverContext)
-                };
+                var screenshots = driverContext.TakeAndSaveScreenshot();
+                var pageSource = this.SavePageSource(driverContext);
+
+                var returnList = new List<string>();
+                returnList.AddRange(screenshots);
+                if (pageSource != null)
+                {
+                    returnList.Add(pageSource);
+                }
+
+                return returnList.ToArray();
             }
 
             return null;
