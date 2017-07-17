@@ -423,6 +423,9 @@ namespace Objectivity.Test.Automation.Common
                 case BrowserType.Chrome:
                     capabilities = DesiredCapabilities.Chrome();
                     break;
+                case BrowserType.Safari:
+                    capabilities = DesiredCapabilities.Safari();
+                    break;
                 default:
                     throw new NotSupportedException(
                         string.Format(CultureInfo.CurrentCulture, "Driver {0} is not supported with Selenium Grid", BaseConfiguration.TestBrowser));
