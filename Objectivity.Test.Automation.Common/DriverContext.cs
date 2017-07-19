@@ -52,6 +52,11 @@ namespace Objectivity.Test.Automation.Common
     [SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable", Justification = "Driver is disposed on test end")]
     public class DriverContext
     {
+        /// <summary>
+        /// Fires before the capabilities are set
+        /// </summary>
+        public event BeforeCapabilitiesSetHandler BeforeCapabilitiesSet;
+
         private static readonly NLog.Logger Logger = LogManager.GetLogger("DRIVER");
 
         private readonly Collection<ErrorDetail> verifyMessages = new Collection<ErrorDetail>();
@@ -408,7 +413,7 @@ namespace Objectivity.Test.Automation.Common
         /// Set web driver capabilities.
         /// </summary>
         /// <returns>Instance with set web driver capabilities.</returns>
-        public DesiredCapabilities SetCapabilities()
+        private DesiredCapabilities SetCapabilities()
         {
             DesiredCapabilities capabilities = new DesiredCapabilities();
 
@@ -429,9 +434,29 @@ namespace Objectivity.Test.Automation.Common
                         string.Format(CultureInfo.CurrentCulture, "Driver {0} is not supported with Selenium Grid", BaseConfiguration.TestBrowser));
             }
 
+            var driverCapabilitiesConf = ConfigurationManager.GetSection("DriverCapabilities") as NameValueCollection;
+
+            // if there are any capability
+            if (driverCapabilitiesConf != null)
+            {
+                // loop through all of them
+                for (var i = 0; i < driverCapabilitiesConf.Count; i++)
+                {
+                    string value = driverCapabilitiesConf.GetValues(i)[0];
+                    Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0}", driverCapabilitiesConf.GetKey(i));
+                    capabilities.SetCapability(driverCapabilitiesConf.GetKey(i), value);
+                }
+            }
+
+            if (this.BeforeCapabilitiesSet != null)
+            {
+                this.BeforeCapabilitiesSet(this, new BeforeCapabilitiesSetHandlerArgs(capabilities));
+            }
+
+
             return capabilities;
         }
-
+        
         /// <summary>
         /// Starts the specified Driver.
         /// </summary>
@@ -480,7 +505,10 @@ namespace Objectivity.Test.Automation.Common
         /// </summary>
         public void Stop()
         {
-            this.driver.Quit();
+            if (this.driver != null)
+            {
+                this.driver.Quit();
+            }
         }
 
         /// <summary>
@@ -564,12 +592,12 @@ namespace Objectivity.Test.Automation.Common
         private Proxy CurrentProxy()
         {
             Proxy proxy = new Proxy
-                              {
-                                  HttpProxy = BaseConfiguration.Proxy,
-                                  FtpProxy = BaseConfiguration.Proxy,
-                                  SslProxy = BaseConfiguration.Proxy,
-                                  SocksProxy = BaseConfiguration.Proxy
-                              };
+            {
+                HttpProxy = BaseConfiguration.Proxy,
+                FtpProxy = BaseConfiguration.Proxy,
+                SslProxy = BaseConfiguration.Proxy,
+                SocksProxy = BaseConfiguration.Proxy
+            };
             return proxy;
         }
     }
