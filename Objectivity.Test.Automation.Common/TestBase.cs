@@ -20,10 +20,9 @@
 //     SOFTWARE.
 // </license>
 
-using System.Collections.Generic;
-
 namespace Objectivity.Test.Automation.Common
 {
+    using System.Collections.Generic;
     using Objectivity.Test.Automation.Common.Helpers;
 
     /// <summary>
@@ -62,6 +61,7 @@ namespace Objectivity.Test.Automation.Common
         /// <param name="driverContext">
         /// Driver context includes
         /// </param>
+        /// <returns>The path to the saved filename</returns>
         public string SavePageSource(DriverContext driverContext)
         {
             return driverContext.SavePageSource(driverContext.TestTitle);
@@ -99,5 +99,4 @@ namespace Objectivity.Test.Automation.Common
             PerformanceHelper.Instance.PrintAveragePercentiles90DurationMilliseconds();
         }
     }
-    
 }

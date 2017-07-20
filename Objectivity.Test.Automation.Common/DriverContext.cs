@@ -20,11 +20,10 @@
 //     SOFTWARE.
 // </license>
 
-using System.Collections.Generic;
-
 namespace Objectivity.Test.Automation.Common
 {
     using System;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Collections.Specialized;
     using System.Configuration;
@@ -52,11 +51,6 @@ namespace Objectivity.Test.Automation.Common
     [SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable", Justification = "Driver is disposed on test end")]
     public class DriverContext
     {
-        /// <summary>
-        /// Fires before the capabilities are set
-        /// </summary>
-        public event BeforeCapabilitiesSetHandler BeforeCapabilitiesSet;
-
         private static readonly NLog.Logger Logger = LogManager.GetLogger("DRIVER");
 
         private readonly Collection<ErrorDetail> verifyMessages = new Collection<ErrorDetail>();
@@ -70,6 +64,11 @@ namespace Objectivity.Test.Automation.Common
         private IWebDriver driver;
 
         private TestLogger logTest;
+
+        /// <summary>
+        /// Fires before the capabilities are set
+        /// </summary>
+        public event EventHandler<CapabilitiesSetEventArgs> CapabilitiesSet;
 
         /// <summary>
         /// Gets or sets the test title.
@@ -410,57 +409,6 @@ namespace Objectivity.Test.Automation.Common
         }
 
         /// <summary>
-        /// Set web driver capabilities.
-        /// </summary>
-        /// <returns>Instance with set web driver capabilities.</returns>
-        private DesiredCapabilities SetCapabilities()
-        {
-            DesiredCapabilities capabilities = new DesiredCapabilities();
-
-            switch (BaseConfiguration.TestBrowserCapabilities)
-            {
-                case BrowserType.Firefox:
-                    capabilities = DesiredCapabilities.Firefox();
-                    capabilities.SetCapability(FirefoxDriver.ProfileCapabilityName, this.FirefoxProfile.ToBase64String());
-                    break;
-                case BrowserType.InternetExplorer:
-                    capabilities = DesiredCapabilities.InternetExplorer();
-                    break;
-                case BrowserType.Chrome:
-                    capabilities = DesiredCapabilities.Chrome();
-                    break;
-                case BrowserType.Safari:
-                    capabilities = DesiredCapabilities.Safari();
-                    break;
-                default:
-                    throw new NotSupportedException(
-                        string.Format(CultureInfo.CurrentCulture, "Driver {0} is not supported with Selenium Grid", BaseConfiguration.TestBrowser));
-            }
-
-            var driverCapabilitiesConf = ConfigurationManager.GetSection("DriverCapabilities") as NameValueCollection;
-
-            // if there are any capability
-            if (driverCapabilitiesConf != null)
-            {
-                // loop through all of them
-                for (var i = 0; i < driverCapabilitiesConf.Count; i++)
-                {
-                    string value = driverCapabilitiesConf.GetValues(i)[0];
-                    Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0}", driverCapabilitiesConf.GetKey(i));
-                    capabilities.SetCapability(driverCapabilitiesConf.GetKey(i), value);
-                }
-            }
-
-            if (this.BeforeCapabilitiesSet != null)
-            {
-                this.BeforeCapabilitiesSet(this, new BeforeCapabilitiesSetHandlerArgs(capabilities));
-            }
-
-
-            return capabilities;
-        }
-        
-        /// <summary>
         /// Starts the specified Driver.
         /// </summary>
         /// <exception cref="NotSupportedException">When driver not supported</exception>
@@ -520,6 +468,7 @@ namespace Objectivity.Test.Automation.Common
         /// <param name="errorDetail">The error detail.</param>
         /// <param name="folder">The folder.</param>
         /// <param name="title">The title.</param>
+        /// <returns>The path to the saved file</returns>
         public string SaveScreenshot(ErrorDetail errorDetail, string folder, string title)
         {
             var fileName = string.Format(CultureInfo.CurrentCulture, "{0}_{1}_{2}.png", title, errorDetail.DateTime.ToString("yyyy-MM-dd HH-mm-ss-fff", CultureInfo.CurrentCulture), "browser");
@@ -540,6 +489,7 @@ namespace Objectivity.Test.Automation.Common
             {
                 Logger.Error("Test failed but was unable to get webdriver screenshot.");
             }
+
             return null;
         }
 
@@ -590,6 +540,56 @@ namespace Objectivity.Test.Automation.Common
             }
 
             return filePaths.ToArray();
+        }
+
+        /// <summary>
+        /// Set web driver capabilities.
+        /// </summary>
+        /// <returns>Instance with set web driver capabilities.</returns>
+        private DesiredCapabilities SetCapabilities()
+        {
+            DesiredCapabilities capabilities = new DesiredCapabilities();
+
+            switch (BaseConfiguration.TestBrowserCapabilities)
+            {
+                case BrowserType.Firefox:
+                    capabilities = DesiredCapabilities.Firefox();
+                    capabilities.SetCapability(FirefoxDriver.ProfileCapabilityName, this.FirefoxProfile.ToBase64String());
+                    break;
+                case BrowserType.InternetExplorer:
+                    capabilities = DesiredCapabilities.InternetExplorer();
+                    break;
+                case BrowserType.Chrome:
+                    capabilities = DesiredCapabilities.Chrome();
+                    break;
+                case BrowserType.Safari:
+                    capabilities = DesiredCapabilities.Safari();
+                    break;
+                default:
+                    throw new NotSupportedException(
+                        string.Format(CultureInfo.CurrentCulture, "Driver {0} is not supported with Selenium Grid", BaseConfiguration.TestBrowser));
+            }
+
+            var driverCapabilitiesConf = ConfigurationManager.GetSection("DriverCapabilities") as NameValueCollection;
+
+            // if there are any capability
+            if (driverCapabilitiesConf != null)
+            {
+                // loop through all of them
+                for (var i = 0; i < driverCapabilitiesConf.Count; i++)
+                {
+                    string value = driverCapabilitiesConf.GetValues(i)[0];
+                    Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0}", driverCapabilitiesConf.GetKey(i));
+                    capabilities.SetCapability(driverCapabilitiesConf.GetKey(i), value);
+                }
+            }
+
+            if (this.CapabilitiesSet != null)
+            {
+                this.CapabilitiesSet(this, new CapabilitiesSetEventArgs(capabilities));
+            }
+
+            return capabilities;
         }
 
         private Proxy CurrentProxy()
