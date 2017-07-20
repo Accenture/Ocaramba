@@ -66,6 +66,11 @@ namespace Objectivity.Test.Automation.Common
         private TestLogger logTest;
 
         /// <summary>
+        /// Fires before the capabilities are set
+        /// </summary>
+        public event EventHandler<CapabilitiesSetEventArgs> CapabilitiesSet;
+
+        /// <summary>
         /// Gets or sets the test title.
         /// </summary>
         /// <value>
@@ -586,15 +591,65 @@ namespace Objectivity.Test.Automation.Common
             return filePaths.ToArray();
         }
 
+        /// <summary>
+        /// Set web driver capabilities.
+        /// </summary>
+        /// <returns>Instance with set web driver capabilities.</returns>
+        private DesiredCapabilities SetCapabilities()
+        {
+            DesiredCapabilities capabilities = new DesiredCapabilities();
+
+            switch (BaseConfiguration.TestBrowserCapabilities)
+            {
+                case BrowserType.Firefox:
+                    capabilities = DesiredCapabilities.Firefox();
+                    capabilities.SetCapability(FirefoxDriver.ProfileCapabilityName, this.FirefoxProfile.ToBase64String());
+                    break;
+                case BrowserType.InternetExplorer:
+                    capabilities = DesiredCapabilities.InternetExplorer();
+                    break;
+                case BrowserType.Chrome:
+                    capabilities = DesiredCapabilities.Chrome();
+                    break;
+                case BrowserType.Safari:
+                    capabilities = DesiredCapabilities.Safari();
+                    break;
+                default:
+                    throw new NotSupportedException(
+                        string.Format(CultureInfo.CurrentCulture, "Driver {0} is not supported with Selenium Grid", BaseConfiguration.TestBrowser));
+            }
+
+            var driverCapabilitiesConf = ConfigurationManager.GetSection("DriverCapabilities") as NameValueCollection;
+
+            // if there are any capability
+            if (driverCapabilitiesConf != null)
+            {
+                // loop through all of them
+                for (var i = 0; i < driverCapabilitiesConf.Count; i++)
+                {
+                    string value = driverCapabilitiesConf.GetValues(i)[0];
+                    Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0}", driverCapabilitiesConf.GetKey(i));
+                    capabilities.SetCapability(driverCapabilitiesConf.GetKey(i), value);
+                }
+            }
+
+            if (this.CapabilitiesSet != null)
+            {
+                this.CapabilitiesSet(this, new CapabilitiesSetEventArgs(capabilities));
+            }
+
+            return capabilities;
+        }
+
         private Proxy CurrentProxy()
         {
             Proxy proxy = new Proxy
-                              {
-                                  HttpProxy = BaseConfiguration.Proxy,
-                                  FtpProxy = BaseConfiguration.Proxy,
-                                  SslProxy = BaseConfiguration.Proxy,
-                                  SocksProxy = BaseConfiguration.Proxy
-                              };
+            {
+                HttpProxy = BaseConfiguration.Proxy,
+                FtpProxy = BaseConfiguration.Proxy,
+                SslProxy = BaseConfiguration.Proxy,
+                SocksProxy = BaseConfiguration.Proxy
+            };
             return proxy;
         }
     }
