@@ -18,7 +18,7 @@ It provides following features:
 - Extends Webdriver by additional methods like JavaScriptClick, WaitForAjax, WaitForAngular, etc., more details [here](http://objectivityltd.github.io/Test.Automation/html/0872cc4d-63cc-c3d2-30e5-1f8debf56860.htm)
 - Automatically waits when locating element for specified time and conditions, more details [here](http://objectivityltd.github.io/Test.Automation/html/6b3a28a9-75c6-bda7-e44e-962f1e91c477.htm)
 - Page Object Pattern
-- Support for SeleniumGrid, more details [here](https://github.com/ObjectivityLtd/Test.Automation/wiki/Selenium-Grid-support)
+- Support for [SeleniumGrid](https://github.com/SeleniumHQ/selenium/wiki/Grid2), [SauceLab](https://saucelabs.com/) and [Browserstack](https://www.browserstack.com/) more details [here](https://github.com/ObjectivityLtd/Test.Automation/wiki/Selenium-Grid-support), Advanced-Browser-Capabilities more details [here](https://github.com/ObjectivityLtd/Test.Automation/wiki/Advanced-Browser-Capabilities)
 - More common locators, e.g: ```"//*[@title='{0}' and @ms.title='{1}']"```, more details [here](https://github.com/ObjectivityLtd/Test.Automation/wiki/More%20common%20locators)
 - Several methods to interact with kendo controls, more details [here](https://github.com/ObjectivityLtd/Test.Automation/wiki/Interact%20with%20kendo%20controls)
 - Verify - asserts without stop tests, more details [here](https://github.com/ObjectivityLtd/Test.Automation/wiki/Verify-asserts-without-stop-tests)
