@@ -1,5 +1,5 @@
 ## Test.Automation
-<img align="left" src="https://github.com/ObjectivityLtd/Test.Automation/blob/master/Objectivity.Test.Automation.Common.Documentation/icons/Objectivity_logo_avatar.png">
+<img align="left" src="/Objectivity.Test.Automation.Common.Documentation/icons/Objectivity_logo_avatar.png">
 
 **C# Framework to automate tests using Selenium WebDriver**
 
@@ -18,14 +18,14 @@ It provides following features:
 - Extends Webdriver by additional methods like JavaScriptClick, WaitForAjax, WaitForAngular, etc., more details [here](http://objectivityltd.github.io/Test.Automation/html/0872cc4d-63cc-c3d2-30e5-1f8debf56860.htm)
 - Automatically waits when locating element for specified time and conditions, more details [here](http://objectivityltd.github.io/Test.Automation/html/6b3a28a9-75c6-bda7-e44e-962f1e91c477.htm)
 - Page Object Pattern
-- Support for SeleniumGrid, more details [here](https://github.com/ObjectivityLtd/Test.Automation/wiki/Selenium-Grid-support)
+- Support for [SeleniumGrid](https://github.com/SeleniumHQ/selenium/wiki/Grid2), [SauceLab](https://saucelabs.com/) and [Browserstack](https://www.browserstack.com/) more details [here](https://github.com/ObjectivityLtd/Test.Automation/wiki/Selenium-Grid-support), Advanced-Browser-Capabilities more details [here](https://github.com/ObjectivityLtd/Test.Automation/wiki/Advanced-Browser-Capabilities)
 - More common locators, e.g: ```"//*[@title='{0}' and @ms.title='{1}']"```, more details [here](https://github.com/ObjectivityLtd/Test.Automation/wiki/More%20common%20locators)
 - Several methods to interact with kendo controls, more details [here](https://github.com/ObjectivityLtd/Test.Automation/wiki/Interact%20with%20kendo%20controls)
 - Verify - asserts without stop tests, more details [here](https://github.com/ObjectivityLtd/Test.Automation/wiki/Verify-asserts-without-stop-tests)
 - Measures average and 90 Percentile action times, more details [here](https://github.com/ObjectivityLtd/Test.Automation/wiki/Performance%20measures)
 - DataDriven tests from Xml files for NUnit and MSTest with examples, more details [here](https://github.com/ObjectivityLtd/Test.Automation/wiki/DataDriven-tests-from-Xml-files)
 - Possibility to take full desktop or browser screen shot, save page source, more details [here](https://github.com/ObjectivityLtd/Test.Automation/wiki/Screen-shots:-full-desktop,-selenium.-PageSource-saving)
-- Logging with NLog, more details [here](https://github.com/ObjectivityLtd/Test.Automation/wiki/Logging)
+- Logging with NLog, EventFiringWebDriver logs, more details [here](https://github.com/ObjectivityLtd/Test.Automation/wiki/Logging)
 - Files downloading (Firefox, Chrome), more details [here](https://github.com/ObjectivityLtd/Test.Automation/wiki/Downloading%20files)
 - Possibility to send [SQL](http://objectivityltd.github.io/Test.Automation/html/e339b346-66a4-70e6-4c54-f9c30cb3131a.htm) or [MDX](http://objectivityltd.github.io/Test.Automation/html/39ae874a-89a0-c435-c701-f20b26f1695e.htm) queries
 - Possibility of debugging framework installed from nuget package, more details [here](https://github.com/ObjectivityLtd/Test.Automation/wiki/Debugging-Test.Automation-framework).
