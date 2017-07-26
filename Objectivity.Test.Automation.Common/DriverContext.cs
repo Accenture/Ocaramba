@@ -23,6 +23,7 @@
 namespace Objectivity.Test.Automation.Common
 {
     using System;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Collections.Specialized;
     using System.Configuration;
@@ -63,6 +64,11 @@ namespace Objectivity.Test.Automation.Common
         private IWebDriver driver;
 
         private TestLogger logTest;
+
+        /// <summary>
+        /// Fires before the capabilities are set
+        /// </summary>
+        public event EventHandler<CapabilitiesSetEventArgs> CapabilitiesSet;
 
         /// <summary>
         /// Gets or sets the test title.
@@ -403,34 +409,6 @@ namespace Objectivity.Test.Automation.Common
         }
 
         /// <summary>
-        /// Set web driver capabilities.
-        /// </summary>
-        /// <returns>Instance with set web driver capabilities.</returns>
-        public DesiredCapabilities SetCapabilities()
-        {
-            DesiredCapabilities capabilities = new DesiredCapabilities();
-
-            switch (BaseConfiguration.TestBrowserCapabilities)
-            {
-                case BrowserType.Firefox:
-                    capabilities = DesiredCapabilities.Firefox();
-                    capabilities.SetCapability(FirefoxDriver.ProfileCapabilityName, this.FirefoxProfile.ToBase64String());
-                    break;
-                case BrowserType.InternetExplorer:
-                    capabilities = DesiredCapabilities.InternetExplorer();
-                    break;
-                case BrowserType.Chrome:
-                    capabilities = DesiredCapabilities.Chrome();
-                    break;
-                default:
-                    throw new NotSupportedException(
-                        string.Format(CultureInfo.CurrentCulture, "Driver {0} is not supported with Selenium Grid", BaseConfiguration.TestBrowser));
-            }
-
-            return capabilities;
-        }
-
-        /// <summary>
         /// Starts the specified Driver.
         /// </summary>
         /// <exception cref="NotSupportedException">When driver not supported</exception>
@@ -471,6 +449,10 @@ namespace Objectivity.Test.Automation.Common
             this.driver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(BaseConfiguration.ShortTimeout);
             this.driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(BaseConfiguration.ImplicitlyWaitMilliseconds);
             this.driver.Manage().Window.Maximize();
+            if (BaseConfiguration.EnableEventFiringWebDriver)
+            {
+                this.driver = new MyEventFiringWebDriver(this.driver);
+            }
         }
 
         /// <summary>
@@ -478,7 +460,10 @@ namespace Objectivity.Test.Automation.Common
         /// </summary>
         public void Stop()
         {
-            this.driver.Quit();
+            if (this.driver != null)
+            {
+                this.driver.Quit();
+            }
         }
 
         /// <summary>
@@ -487,7 +472,8 @@ namespace Objectivity.Test.Automation.Common
         /// <param name="errorDetail">The error detail.</param>
         /// <param name="folder">The folder.</param>
         /// <param name="title">The title.</param>
-        public void SaveScreenshot(ErrorDetail errorDetail, string folder, string title)
+        /// <returns>Path to the screenshot</returns>
+        public string SaveScreenshot(ErrorDetail errorDetail, string folder, string title)
         {
             var fileName = string.Format(CultureInfo.CurrentCulture, "{0}_{1}_{2}.png", title, errorDetail.DateTime.ToString("yyyy-MM-dd HH-mm-ss-fff", CultureInfo.CurrentCulture), "browser");
             var correctFileName = Path.GetInvalidFileNameChars().Aggregate(fileName, (current, c) => current.Replace(c.ToString(CultureInfo.CurrentCulture), string.Empty));
@@ -501,18 +487,22 @@ namespace Objectivity.Test.Automation.Common
                 errorDetail.Screenshot.SaveAsFile(filePath, ScreenshotImageFormat.Png);
                 Logger.Error(CultureInfo.CurrentCulture, "Test failed: screenshot saved to {0}.", filePath);
                 Logger.Info(CultureInfo.CurrentCulture, "##teamcity[publishArtifacts '{0}']", filePath);
+                return filePath;
             }
             catch (NullReferenceException)
             {
                 Logger.Error("Test failed but was unable to get webdriver screenshot.");
             }
+
+            return null;
         }
 
         /// <summary>
         /// Saves the page source.
         /// </summary>
         /// <param name="fileName">Name of the file.</param>
-        public void SavePageSource(string fileName)
+        /// <returns>The saved source file</returns>
+        public string SavePageSource(string fileName)
         {
             if (BaseConfiguration.GetPageSourceEnabled)
             {
@@ -530,34 +520,91 @@ namespace Objectivity.Test.Automation.Common
 
                 Logger.Error(CultureInfo.CurrentCulture, "Test failed: page Source saved to {0}.", path);
                 Logger.Info(CultureInfo.CurrentCulture, "##teamcity[publishArtifacts '{0}']", path);
+                return path;
             }
+
+            return null;
         }
 
         /// <summary>
         /// Takes and saves screen shot
         /// </summary>
-        public void TakeAndSaveScreenshot()
+        /// <returns>Array of filepaths</returns>
+        public string[] TakeAndSaveScreenshot()
         {
+            List<string> filePaths = new List<string>();
             if (BaseConfiguration.FullDesktopScreenShotEnabled)
             {
-                TakeScreenShot.Save(TakeScreenShot.DoIt(), ImageFormat.Png, this.ScreenShotFolder, this.TestTitle);
+                filePaths.Add(TakeScreenShot.Save(TakeScreenShot.DoIt(), ImageFormat.Png, this.ScreenShotFolder, this.TestTitle));
             }
 
             if (BaseConfiguration.SeleniumScreenShotEnabled)
             {
-                this.SaveScreenshot(new ErrorDetail(this.TakeScreenshot(), DateTime.Now, null), this.ScreenShotFolder, this.TestTitle);
+                filePaths.Add(this.SaveScreenshot(new ErrorDetail(this.TakeScreenshot(), DateTime.Now, null), this.ScreenShotFolder, this.TestTitle));
             }
+
+            return filePaths.ToArray();
+        }
+
+        /// <summary>
+        /// Set web driver capabilities.
+        /// </summary>
+        /// <returns>Instance with set web driver capabilities.</returns>
+        private DesiredCapabilities SetCapabilities()
+        {
+            DesiredCapabilities capabilities = new DesiredCapabilities();
+
+            switch (BaseConfiguration.TestBrowserCapabilities)
+            {
+                case BrowserType.Firefox:
+                    capabilities = DesiredCapabilities.Firefox();
+                    capabilities.SetCapability(FirefoxDriver.ProfileCapabilityName, this.FirefoxProfile.ToBase64String());
+                    break;
+                case BrowserType.InternetExplorer:
+                    capabilities = DesiredCapabilities.InternetExplorer();
+                    break;
+                case BrowserType.Chrome:
+                    capabilities = DesiredCapabilities.Chrome();
+                    break;
+                case BrowserType.Safari:
+                    capabilities = DesiredCapabilities.Safari();
+                    break;
+                default:
+                    throw new NotSupportedException(
+                        string.Format(CultureInfo.CurrentCulture, "Driver {0} is not supported with Selenium Grid", BaseConfiguration.TestBrowser));
+            }
+
+            var driverCapabilitiesConf = ConfigurationManager.GetSection("DriverCapabilities") as NameValueCollection;
+
+            // if there are any capability
+            if (driverCapabilitiesConf != null)
+            {
+                // loop through all of them
+                for (var i = 0; i < driverCapabilitiesConf.Count; i++)
+                {
+                    string value = driverCapabilitiesConf.GetValues(i)[0];
+                    Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0}", driverCapabilitiesConf.GetKey(i));
+                    capabilities.SetCapability(driverCapabilitiesConf.GetKey(i), value);
+                }
+            }
+
+            if (this.CapabilitiesSet != null)
+            {
+                this.CapabilitiesSet(this, new CapabilitiesSetEventArgs(capabilities));
+            }
+
+            return capabilities;
         }
 
         private Proxy CurrentProxy()
         {
             Proxy proxy = new Proxy
-                              {
-                                  HttpProxy = BaseConfiguration.Proxy,
-                                  FtpProxy = BaseConfiguration.Proxy,
-                                  SslProxy = BaseConfiguration.Proxy,
-                                  SocksProxy = BaseConfiguration.Proxy
-                              };
+            {
+                HttpProxy = BaseConfiguration.Proxy,
+                FtpProxy = BaseConfiguration.Proxy,
+                SslProxy = BaseConfiguration.Proxy,
+                SocksProxy = BaseConfiguration.Proxy
+            };
             return proxy;
         }
     }

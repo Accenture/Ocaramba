@@ -64,7 +64,6 @@ namespace Objectivity.Test.Automation.Common.Extensions
             webDriver.Navigate().GoToUrl(url);
 
             ApproveCertificateForInternetExplorer(webDriver);
-            ApproveCertificateForInternetExplorer(webDriver);
         }
 
         /// <summary>

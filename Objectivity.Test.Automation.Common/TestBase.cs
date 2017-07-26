@@ -22,6 +22,7 @@
 
 namespace Objectivity.Test.Automation.Common
 {
+    using System.Collections.Generic;
     using Objectivity.Test.Automation.Common.Helpers;
 
     /// <summary>
@@ -33,13 +34,25 @@ namespace Objectivity.Test.Automation.Common
         /// Take screenshot if test failed and delete cached page objects.
         /// </summary>
         /// <param name="driverContext">The driver context.</param>
-        public void SaveTestDetailsIfTestFailed(DriverContext driverContext)
+        /// <returns>The saved attachements, null if not found.</returns>
+        public string[] SaveTestDetailsIfTestFailed(DriverContext driverContext)
         {
             if (driverContext.IsTestFailed)
             {
-                driverContext.TakeAndSaveScreenshot();
-                this.SavePageSource(driverContext);
+                var screenshots = driverContext.TakeAndSaveScreenshot();
+                var pageSource = this.SavePageSource(driverContext);
+
+                var returnList = new List<string>();
+                returnList.AddRange(screenshots);
+                if (pageSource != null)
+                {
+                    returnList.Add(pageSource);
+                }
+
+                return returnList.ToArray();
             }
+
+            return null;
         }
 
         /// <summary>
@@ -48,9 +61,10 @@ namespace Objectivity.Test.Automation.Common
         /// <param name="driverContext">
         /// Driver context includes
         /// </param>
-        public void SavePageSource(DriverContext driverContext)
+        /// <returns>Path to the page source</returns>
+        public string SavePageSource(DriverContext driverContext)
         {
-            driverContext.SavePageSource(driverContext.TestTitle);
+            return driverContext.SavePageSource(driverContext.TestTitle);
         }
 
         /// <summary>

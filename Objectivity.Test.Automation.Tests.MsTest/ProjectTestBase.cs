@@ -91,12 +91,25 @@ namespace Objectivity.Test.Automation.Tests.MsTest
         public void AfterTest()
         {
             this.DriverContext.IsTestFailed = this.TestContext.CurrentTestOutcome == UnitTestOutcome.Failed || !this.driverContext.VerifyMessages.Count.Equals(0);
-            this.SaveTestDetailsIfTestFailed(this.driverContext);
+            var filePaths = this.SaveTestDetailsIfTestFailed(this.driverContext);
+            this.SaveAttachmentsToTestContext(filePaths);
             this.DriverContext.Stop();
             this.LogTest.LogTestEnding(this.driverContext);
             if (this.IsVerifyFailedAndClearMessages(this.driverContext) && this.TestContext.CurrentTestOutcome != UnitTestOutcome.Failed)
             {
                 Assert.Fail("Look at stack trace logs for more details");
+            }
+        }
+
+        private void SaveAttachmentsToTestContext(string[] filePaths)
+        {
+            if (filePaths != null)
+            {
+                foreach (var filePath in filePaths)
+                {
+                    this.LogTest.Info("Uploading file [{0}] to test context", filePath);
+                    this.TestContext.AddResultFile(filePath);
+                }
             }
         }
     }
