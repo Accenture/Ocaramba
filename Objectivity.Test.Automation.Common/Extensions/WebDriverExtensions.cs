@@ -319,6 +319,7 @@ namespace Objectivity.Test.Automation.Common.Extensions
             }
             catch (InvalidOperationException)
             {
+                Logger.Info("Wait for angular invalid operation exception.");
             }
         }
 

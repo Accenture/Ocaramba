@@ -22,6 +22,8 @@ Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Objectivity.Test.Automation
 		{46FA4EDC-A114-4E8F-A545-996F99E31EA8} = {46FA4EDC-A114-4E8F-A545-996F99E31EA8}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Objectivity.Test.Automation.Tests.Angular", "Objectivity.Test.Automation.Tests.Angular\Objectivity.Test.Automation.Tests.Angular.csproj", "{EE625CF5-B283-44A9-A35F-0BFBBF4D409E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -56,6 +58,10 @@ Global
 		{2E753223-59F7-47ED-9E1A-D539A462226D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E753223-59F7-47ED-9E1A-D539A462226D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E753223-59F7-47ED-9E1A-D539A462226D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE625CF5-B283-44A9-A35F-0BFBBF4D409E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE625CF5-B283-44A9-A35F-0BFBBF4D409E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE625CF5-B283-44A9-A35F-0BFBBF4D409E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE625CF5-B283-44A9-A35F-0BFBBF4D409E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

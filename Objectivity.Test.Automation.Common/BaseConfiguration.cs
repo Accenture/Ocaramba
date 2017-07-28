@@ -427,5 +427,27 @@ namespace Objectivity.Test.Automation.Common
                     Url);
             }
         }
+
+        /// <summary>
+        /// Gets a value indicating whether enable AngularJS synchronization. False by default.
+        /// </summary>
+        public static bool SynchronizationWithAngularEnabled
+        {
+            get
+            {
+                Logger.Trace(CultureInfo.CurrentCulture, "Angular synchronization Enabled value from App.config '{0}'", ConfigurationManager.AppSettings["SynchronizationWithAngularEnabled"]);
+                if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["SynchronizationWithAngularEnabled"]))
+                {
+                    return false;
+                }
+
+                if (ConfigurationManager.AppSettings["SynchronizationWithAngularEnabled"].ToLower(CultureInfo.CurrentCulture).Equals("true"))
+                {
+                    return true;
+                }
+
+                return false;
+            }
+        }
     }
 }
