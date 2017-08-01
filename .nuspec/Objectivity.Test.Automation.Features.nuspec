@@ -16,8 +16,8 @@
     <tags>selenium webdriver testautomation tests specflow Objectivity.Test.Automation.Common template</tags>
     <dependencies>
 	  <dependency id="SpecFlow" version="2.2.0"/>
-	  <dependency id="NUnit" version="3.6.1" />
-	  <dependency id="NUnit.ConsoleRunner" version="3.6.1" />
+	  <dependency id="NUnit" version="3.7.1" />
+	  <dependency id="NUnit.ConsoleRunner" version="3.7.0" />
     </dependencies> 
 	</metadata>
   <files>
