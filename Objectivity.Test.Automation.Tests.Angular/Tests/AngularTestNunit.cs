@@ -9,7 +9,7 @@ namespace Objectivity.Test.Automation.Tests.Angular.Tests
     public class AngularTestNunit : ProjectTestBase
     {
         [Test]
-        public void Test1()
+        public void AngularPageNavigationTest()
         {
             var protractorApiPage = new ProtractorHomePage(this.DriverContext)
                 .OpenProtractorHomePage()
