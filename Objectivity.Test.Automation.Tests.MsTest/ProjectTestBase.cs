@@ -82,6 +82,7 @@ namespace Objectivity.Test.Automation.Tests.MsTest
             this.DriverContext.TestTitle = this.TestContext.TestName;
             this.LogTest.LogTestStarting(this.driverContext);
             this.DriverContext.Start();
+            this.DriverContext.WindowMaximize();
         }
 
         /// <summary>
