@@ -70,6 +70,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit
             this.DriverContext.CurrentDirectory = TestContext.CurrentContext.TestDirectory;
             StartPerformanceMeasure();
             this.DriverContext.Start();
+            this.DriverContext.WindowMaximize();
         }
 
         /// <summary>

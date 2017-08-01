@@ -448,11 +448,19 @@ namespace Objectivity.Test.Automation.Common
             this.driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(BaseConfiguration.LongTimeout);
             this.driver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(BaseConfiguration.ShortTimeout);
             this.driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(BaseConfiguration.ImplicitlyWaitMilliseconds);
-            this.driver.Manage().Window.Maximize();
+
             if (BaseConfiguration.EnableEventFiringWebDriver)
             {
                 this.driver = new MyEventFiringWebDriver(this.driver);
             }
+        }
+
+        /// <summary>
+        /// Maximizes the current window if it is not already maximized.
+        /// </summary>
+        public void WindowMaximize()
+        {
+            this.driver.Manage().Window.Maximize();
         }
 
         /// <summary>
