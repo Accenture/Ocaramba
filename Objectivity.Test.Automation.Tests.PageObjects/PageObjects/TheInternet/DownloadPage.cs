@@ -117,9 +117,9 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             return nameOfFile.Name;
         }
 
-        public void SaveWebDriverScreenShot()
+        public string SaveWebDriverScreenShot()
         {
-            this.DriverContext.SaveScreenshot(new ErrorDetail(this.DriverContext.TakeScreenshot(), DateTime.Now, null), this.DriverContext.ScreenShotFolder, this.DriverContext.TestTitle);
+            return this.DriverContext.SaveScreenshot(new ErrorDetail(this.DriverContext.TakeScreenshot(), DateTime.Now, null), this.DriverContext.ScreenShotFolder, this.DriverContext.TestTitle);
         }
     }
 }

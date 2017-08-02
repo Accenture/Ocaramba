@@ -59,9 +59,9 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             }
         }
 
-        public void SaveSourcePage()
+        public string SaveSourcePage()
         {
-            this.DriverContext.SavePageSource(this.DriverContext.TestTitle);
+            return this.DriverContext.SavePageSource(this.DriverContext.TestTitle);
         }
 
         public void CheckIfPageSourceSaved()
