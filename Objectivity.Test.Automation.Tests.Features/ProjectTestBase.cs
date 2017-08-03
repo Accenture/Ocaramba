@@ -108,7 +108,6 @@ namespace Objectivity.Test.Automation.Tests.Features
             this.DriverContext.TestTitle = this.scenarioContext.ScenarioInfo.Title;
             this.LogTest.LogTestStarting(this.driverContext);
             this.DriverContext.Start();
-            this.DriverContext.WindowMaximize();
             this.scenarioContext["DriverContext"] = this.DriverContext;
         }
 

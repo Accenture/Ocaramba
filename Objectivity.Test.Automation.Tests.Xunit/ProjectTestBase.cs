@@ -40,7 +40,6 @@ namespace Objectivity.Test.Automation.Tests.Xunit
         {
             this.DriverContext.CurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
             this.DriverContext.Start();
-            this.DriverContext.WindowMaximize();
         }
 
         public bool Disposed
