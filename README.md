@@ -29,10 +29,12 @@ It provides following features:
 - Files downloading (Firefox, Chrome), more details [here](https://github.com/ObjectivityLtd/Test.Automation/wiki/Downloading%20files)
 - Possibility to send [SQL](http://objectivityltd.github.io/Test.Automation/html/e339b346-66a4-70e6-4c54-f9c30cb3131a.htm) or [MDX](http://objectivityltd.github.io/Test.Automation/html/39ae874a-89a0-c435-c701-f20b26f1695e.htm) queries
 - Possibility of debugging framework installed from nuget package, more details [here](https://github.com/ObjectivityLtd/Test.Automation/wiki/Debugging-Test.Automation-framework).
+- AngularJS support, more details [here](https://github.com/ObjectivityLtd/Test.Automation/wiki/Angular-support).
 
 For all documentation, visit the [Test.Automation Wiki](https://github.com/ObjectivityLtd/Test.Automation/wiki).
 
 Projects examples of using Test Framework :
+- Objectivity.Test.Automation.Tests.Angular for AngularJS
 - Objectivity.Test.Automation.Tests.Features for Specflow
 - Objectivity.Test.Automation.Tests.MsTest for MsTest
 - Objectivity.Test.Automation.Tests.NUnit for NUnit

@@ -23,6 +23,7 @@
 namespace Objectivity.Test.Automation.Tests.NUnit.Tests
 {
     using System.Drawing.Imaging;
+    using System.Globalization;
     using Automation.Tests.PageObjects.PageObjects.TheInternet;
     using Common.Helpers;
     using global::NUnit.Framework;
@@ -35,9 +36,10 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
         {
             var downloadPage = new InternetPage(this.DriverContext).OpenHomePage().GoToFileDownloader();
             var screenShotNumber = FilesHelper.CountFiles(this.DriverContext.ScreenShotFolder, FileType.Png);
-            TakeScreenShot.Save(TakeScreenShot.DoIt(), ImageFormat.Png, this.DriverContext.ScreenShotFolder, this.DriverContext.TestTitle);
+            Assert.IsNotNull(TakeScreenShot.Save(TakeScreenShot.DoIt(), ImageFormat.Png, this.DriverContext.ScreenShotFolder, string.Format(CultureInfo.CurrentCulture, this.DriverContext.TestTitle + "_first")));
             var nameOfScreenShot = downloadPage.CheckIfScreenShotIsSaved(screenShotNumber);
             Assert.IsTrue(nameOfScreenShot.Contains(this.DriverContext.TestTitle), "Name of screenshot doesn't contain Test Title");
+            Assert.IsNotNull(this.DriverContext.TakeAndSaveScreenshot());
         }
 
         [Test]
@@ -45,7 +47,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
         {
             var downloadPage = new InternetPage(this.DriverContext).OpenHomePage().GoToFileDownloader();
             var screenShotNumber = FilesHelper.CountFiles(this.DriverContext.ScreenShotFolder, FileType.Png);
-            downloadPage.SaveWebDriverScreenShot();
+            Assert.IsNotNull(downloadPage.SaveWebDriverScreenShot());
             var nameOfScreenShot = downloadPage.CheckIfScreenShotIsSaved(screenShotNumber);
             Assert.IsTrue(nameOfScreenShot.Contains(this.DriverContext.TestTitle), "Name of screenshot doesn't contain Test Title");
         }
@@ -55,7 +57,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
         {
             var basicAuthPage = new InternetPage(this.DriverContext).OpenHomePageWithUserCredentials().GoToBasicAuthPage();
             var pageSourceNumber = FilesHelper.CountFiles(this.DriverContext.PageSourceFolder, FileType.Html);
-            basicAuthPage.SaveSourcePage();
+            Assert.IsNotNull(basicAuthPage.SaveSourcePage());
             basicAuthPage.CheckIfPageSourceSaved();
             Assert.IsTrue(pageSourceNumber < FilesHelper.CountFiles(this.DriverContext.PageSourceFolder, FileType.Html), "Number of html files did not increase");
         }

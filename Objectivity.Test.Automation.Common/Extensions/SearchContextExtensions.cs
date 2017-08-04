@@ -109,6 +109,11 @@ namespace Objectivity.Test.Automation.Common.Extensions
         /// </code></example>
         public static IWebElement GetElement(this ISearchContext element, ElementLocator locator, double timeout, Func<IWebElement, bool> condition, [Optional] string customMessage)
         {
+            if (BaseConfiguration.SynchronizationWithAngularEnabled)
+            {
+                element.ToDriver().WaitForAngular();
+            }
+
             var by = locator.ToBy();
 
             var wait = new WebDriverWait(element.ToDriver(), TimeSpan.FromSeconds(timeout)) { Message = customMessage };
