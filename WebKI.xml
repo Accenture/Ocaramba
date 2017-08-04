@@ -41,6 +41,7 @@
   <HelpKINode Title="BaseConfiguration.ScreenShotFolder property" Url="html/122c7ee5-d318-9638-24a9-6b965f20a6d4.htm" />
   <HelpKINode Title="BaseConfiguration.SeleniumScreenShotEnabled property" Url="html/7ef5ad16-c228-b25c-d822-faeff6500045.htm" />
   <HelpKINode Title="BaseConfiguration.ShortTimeout property" Url="html/01202364-e1b5-63a7-9450-abe95b2a0e01.htm" />
+  <HelpKINode Title="BaseConfiguration.SynchronizationWithAngularEnabled property" Url="html/76115b13-a389-4acf-c02a-b5c4167aa800.htm" />
   <HelpKINode Title="BaseConfiguration.TestBrowser property" Url="html/3b9b8dd0-2974-e198-b614-393af8dfe4e3.htm" />
   <HelpKINode Title="BaseConfiguration.TestBrowserCapabilities property" Url="html/1cc503ab-e714-8ef2-42a1-ac2bfffa7c5b.htm" />
   <HelpKINode Title="BaseConfiguration.Url property" Url="html/0b048082-e0b6-9950-7cc0-2d133cf5ae9a.htm" />
@@ -143,6 +144,7 @@
   <HelpKINode Title="DriverContext.TakeScreenshot method" Url="html/d45a1b28-cb0b-ffab-6ee7-cf4a76d8f4c5.htm" />
   <HelpKINode Title="DriverContext.TestTitle property" Url="html/489bd4ae-cd4d-1e85-3233-1227a53c8579.htm" />
   <HelpKINode Title="DriverContext.VerifyMessages property" Url="html/d179f82c-d46e-62ee-4fde-f080eaebb431.htm" />
+  <HelpKINode Title="DriverContext.WindowMaximize method" Url="html/e3647cb9-524e-092d-312a-2d1b0bc190f9.htm" />
   <HelpKINode Title="Duration property" Url="html/b95e80fb-6200-f4d1-5ffe-482fa8566b4d.htm" />
   <HelpKINode Title="ElementCssSelector property" Url="html/eb06f9e0-2685-cbfa-6a0d-d92147e8430a.htm" />
   <HelpKINode Title="ElementLocator class">
@@ -521,6 +523,7 @@
   <HelpKINode Title="StopMeasure method" Url="html/a5b8ff37-8967-8b4b-d148-cb87a46423a0.htm" />
   <HelpKINode Title="StopPerfromanceMeasure method" Url="html/91e74427-1e12-adb7-a530-b4a30c562846.htm" />
   <HelpKINode Title="SwitchToWindowUsingUrl method" Url="html/de9df0ec-a00f-f4e3-6882-cad311c29bc1.htm" />
+  <HelpKINode Title="SynchronizationWithAngularEnabled property" Url="html/76115b13-a389-4acf-c02a-b5c4167aa800.htm" />
   <HelpKINode Title="Table class">
     <HelpKINode Title="Table Class" Url="html/b32fe87a-4b52-8172-1167-bdd18b78f9a6.htm" />
     <HelpKINode Title="about Table class" Url="html/b32fe87a-4b52-8172-1167-bdd18b78f9a6.htm" />
@@ -639,6 +642,7 @@
   <HelpKINode Title="WebElementExtensions.IsElementTextEqualsToExpected method" Url="html/239e1044-aeae-a0ef-f85e-76c98c56ddfa.htm" />
   <HelpKINode Title="WebElementExtensions.JavaScriptClick method" Url="html/f5bab9af-031c-e559-d73e-4490715223c3.htm" />
   <HelpKINode Title="WebElementExtensions.SetAttribute method" Url="html/031dd2e4-b20e-5b8b-ed9f-6444bb32b218.htm" />
+  <HelpKINode Title="WindowMaximize method" Url="html/e3647cb9-524e-092d-312a-2d1b0bc190f9.htm" />
   <HelpKINode Title="Xls enumeration member" Url="html/24ea484b-208c-10a9-79d9-518c88c2b6e9.htm" />
   <HelpKINode Title="Xlsx enumeration member" Url="html/24ea484b-208c-10a9-79d9-518c88c2b6e9.htm" />
   <HelpKINode Title="Xml enumeration member" Url="html/24ea484b-208c-10a9-79d9-518c88c2b6e9.htm" />
