@@ -191,6 +191,17 @@ namespace Objectivity.Test.Automation.Common
         }
 
         /// <summary>
+        /// Gets the chrome path
+        /// </summary>
+         public static string ChromePath
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["ChromePath"];
+            }
+        }
+
+        /// <summary>
         /// Gets the PhantomJs path
         /// </summary>
         public static string PhantomJsPath
