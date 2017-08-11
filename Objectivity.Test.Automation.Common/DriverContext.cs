@@ -344,6 +344,11 @@ namespace Objectivity.Test.Automation.Common
                     }
                 }
 
+                if (BaseConfiguration.ChromePath != null)
+                {
+                    options.BinaryLocation = BaseConfiguration.ChromePath;
+                }
+
                 // if there are any arguments
                 if (chromeArguments != null)
                 {
