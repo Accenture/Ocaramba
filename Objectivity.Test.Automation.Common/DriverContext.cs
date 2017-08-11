@@ -280,6 +280,7 @@ namespace Objectivity.Test.Automation.Common
                 // retrieving settings from config file
                 var chromePreferences = ConfigurationManager.GetSection("ChromePreferences") as NameValueCollection;
                 var chromeExtensions = ConfigurationManager.GetSection("ChromeExtensions") as NameValueCollection;
+                var chromeArguments = ConfigurationManager.GetSection("ChromeArguments") as NameValueCollection;
 
                 options.AddUserProfilePreference("profile.default_content_settings.popups", 0);
                 options.AddUserProfilePreference("download.default_directory", this.DownloadFolder);
@@ -340,6 +341,16 @@ namespace Objectivity.Test.Automation.Common
                     {
                         Logger.Trace(CultureInfo.CurrentCulture, "Installing extension {0}", chromeExtensions.GetKey(i));
                         options.AddExtension(chromeExtensions.GetKey(i));
+                    }
+                }
+
+                // if there are any arguments
+                if (chromeArguments != null)
+                {
+                    // loop through all of them
+                    for (var i = 0; i < chromeArguments.Count; i++)
+                    {
+                        options.AddArgument(chromeArguments.GetKey(i));
                     }
                 }
 
