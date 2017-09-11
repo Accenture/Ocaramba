@@ -114,7 +114,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             FilesHelper.WaitForFileOfGivenType(FileType.Png, 5, screenShotNumber, this.DriverContext.ScreenShotFolder);
             var nameOfFile = FilesHelper.GetLastFile(this.DriverContext.ScreenShotFolder, FileType.Png);
 
-            return nameOfFile.Name;
+            return Path.Combine(this.DriverContext.ScreenShotFolder, nameOfFile.Name);
         }
 
         public string SaveWebDriverScreenShot()
