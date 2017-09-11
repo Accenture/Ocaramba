@@ -92,7 +92,8 @@ namespace Objectivity.Test.Automation.Common.Helpers
                 bitmap.Save(filePath, format);
                 bitmap.Dispose();
                 Logger.Error(CultureInfo.CurrentCulture, "Test failed: full screenshot saved to {0}.", filePath);
-                Logger.Info(CultureInfo.CurrentCulture, "##teamcity[publishArtifacts '{0}']", filePath);
+                FilesHelper.WaitForFileOfGivenName(BaseConfiguration.ShortTimeout, fileName, folder);
+                Console.WriteLine(string.Format(CultureInfo.CurrentCulture, "##teamcity[publishArtifacts '{0}']", filePath));
                 return filePath;
             }
 

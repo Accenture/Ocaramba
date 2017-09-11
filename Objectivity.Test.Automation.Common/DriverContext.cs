@@ -509,8 +509,9 @@ namespace Objectivity.Test.Automation.Common
             try
             {
                 errorDetail.Screenshot.SaveAsFile(filePath, ScreenshotImageFormat.Png);
+                FilesHelper.WaitForFileOfGivenName(BaseConfiguration.ShortTimeout, correctFileName, folder);
                 Logger.Error(CultureInfo.CurrentCulture, "Test failed: screenshot saved to {0}.", filePath);
-                Logger.Info(CultureInfo.CurrentCulture, "##teamcity[publishArtifacts '{0}']", filePath);
+                Console.WriteLine(string.Format(CultureInfo.CurrentCulture, "##teamcity[publishArtifacts '{0}']", filePath));
                 return filePath;
             }
             catch (NullReferenceException)
@@ -532,7 +533,8 @@ namespace Objectivity.Test.Automation.Common
             {
                 var fileNameShort = Regex.Replace(fileName, "[^0-9a-zA-Z._]+", "_");
                 fileNameShort = NameHelper.ShortenFileName(this.PageSourceFolder, fileNameShort, "_", 255);
-                var path = Path.Combine(this.PageSourceFolder, string.Format(CultureInfo.CurrentCulture, "{0}{1}", fileNameShort, ".html"));
+                var fileNameWithExtension = string.Format(CultureInfo.CurrentCulture, "{0}{1}", fileNameShort, ".html");
+                var path = Path.Combine(this.PageSourceFolder, fileNameWithExtension);
                 if (File.Exists(path))
                 {
                     File.Delete(path);
@@ -541,9 +543,9 @@ namespace Objectivity.Test.Automation.Common
                 var pageSource = this.driver.PageSource;
                 pageSource = pageSource.Replace("<head>", string.Format(CultureInfo.CurrentCulture, "<head><base href=\"http://{0}\" target=\"_blank\">", BaseConfiguration.Host));
                 File.WriteAllText(path, pageSource);
-
+                FilesHelper.WaitForFileOfGivenName(BaseConfiguration.LongTimeout, fileNameWithExtension, this.PageSourceFolder);
                 Logger.Error(CultureInfo.CurrentCulture, "Test failed: page Source saved to {0}.", path);
-                Logger.Info(CultureInfo.CurrentCulture, "##teamcity[publishArtifacts '{0}']", path);
+                Console.WriteLine(string.Format(CultureInfo.CurrentCulture, "##teamcity[publishArtifacts '{0}']", path));
                 return path;
             }
 

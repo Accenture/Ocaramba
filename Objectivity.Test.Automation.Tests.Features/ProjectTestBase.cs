@@ -118,12 +118,25 @@ namespace Objectivity.Test.Automation.Tests.Features
         public void AfterTest()
         {
             this.DriverContext.IsTestFailed = this.scenarioContext.TestError != null || !this.driverContext.VerifyMessages.Count.Equals(0);
-            this.SaveTestDetailsIfTestFailed(this.driverContext);
+            var filePaths = this.SaveTestDetailsIfTestFailed(this.driverContext);
+            this.SaveAttachmentsToTestContext(filePaths);
             this.DriverContext.Stop();
             this.LogTest.LogTestEnding(this.driverContext);
             if (this.IsVerifyFailedAndClearMessages(this.driverContext) && this.scenarioContext.TestError == null)
             {
                 Assert.Fail();
+            }
+        }
+
+        private void SaveAttachmentsToTestContext(string[] filePaths)
+        {
+            if (filePaths != null)
+            {
+                foreach (var filePath in filePaths)
+                {
+                    this.LogTest.Info("Uploading file [{0}] to test context", filePath);
+                    TestContext.AddTestAttachment(filePath);
+                }
             }
         }
     }
