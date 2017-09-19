@@ -114,6 +114,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// </code></example>
         public static bool Wait(Func<bool> condition, TimeSpan timeout, TimeSpan sleepInterval)
         {
+            var result = false;
             var start = DateTime.Now;
             var canceller = new CancellationTokenSource();
             var task = Task.Factory.StartNew(condition, canceller.Token);
@@ -124,6 +125,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
                 {
                     if (task.Result)
                     {
+                        result = true;
                         canceller.Cancel();
                         break;
                     }
@@ -143,7 +145,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
             }
 
             canceller.Cancel();
-            return false;
+            return result;
         }
     }
 }

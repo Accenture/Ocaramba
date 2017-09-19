@@ -38,6 +38,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
             var screenShotNumber = FilesHelper.CountFiles(this.DriverContext.ScreenShotFolder, FileType.Png);
             Assert.IsNotNull(TakeScreenShot.Save(TakeScreenShot.DoIt(), ImageFormat.Png, this.DriverContext.ScreenShotFolder, string.Format(CultureInfo.CurrentCulture, this.DriverContext.TestTitle + "_first")));
             var nameOfScreenShot = downloadPage.CheckIfScreenShotIsSaved(screenShotNumber);
+            TestContext.AddTestAttachment(nameOfScreenShot);
             Assert.IsTrue(nameOfScreenShot.Contains(this.DriverContext.TestTitle), "Name of screenshot doesn't contain Test Title");
             Assert.IsNotNull(this.DriverContext.TakeAndSaveScreenshot());
         }
@@ -49,6 +50,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
             var screenShotNumber = FilesHelper.CountFiles(this.DriverContext.ScreenShotFolder, FileType.Png);
             Assert.IsNotNull(downloadPage.SaveWebDriverScreenShot());
             var nameOfScreenShot = downloadPage.CheckIfScreenShotIsSaved(screenShotNumber);
+            TestContext.AddTestAttachment(nameOfScreenShot);
             Assert.IsTrue(nameOfScreenShot.Contains(this.DriverContext.TestTitle), "Name of screenshot doesn't contain Test Title");
         }
 

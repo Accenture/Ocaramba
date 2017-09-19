@@ -23,6 +23,7 @@ namespace Objectivity.Test.Automation.Tests.Angular.PageObjects
         public ProtractorHomePage OpenProtractorHomePage()
         {
             var url = BaseConfiguration.GetUrlValue;
+            this.Driver.SynchronizeWithAngular(true);
             this.Driver.NavigateTo(new Uri(url));
             Logger.Info(CultureInfo.CurrentCulture, "Opening page {0}", url);
             return this;
