@@ -55,6 +55,8 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="ProjectTestBase.cs" />
+    <Compile Include="Tests\WaitHelperTests.cs" />
     <Compile Include="Tests\DriversCustomSettingsUnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -70,6 +72,10 @@
     <ProjectReference Include="..\Objectivity.Test.Automation.Common\Objectivity.Test.Automation.Common.csproj">
       <Project>{46fa4edc-a114-4e8f-a545-996f99e31ea8}</Project>
       <Name>Objectivity.Test.Automation.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Objectivity.Test.Automation.Tests.NUnit\Objectivity.Test.Automation.Tests.NUnit.csproj">
+      <Project>{74F9B9A8-0055-4C13-B3C9-FACED546CB43}</Project>
+      <Name>Objectivity.Test.Automation.Tests.NUnit</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

@@ -112,7 +112,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 - See [Getting started](https://github.com/ObjectivityLtd/Test.Automation/wiki/Getting%20started).
 
 Checkout the code or get it from [nuget.org](https://www.nuget.org/packages?q=Objectivity.Test.Automation.Common)
-- Objectivity.Test.Automation.Common.NUnit [nuget](https://www.nuget.org/packages/Objectivity.Test.Automation.Common.NUnit/)
-- Objectivity.Test.Automation.Common.Features [nuget](https://www.nuget.org/packages/Objectivity.Test.Automation.Common.Features/)
-- Objectivity.Test.Automation.Common.MsTest [nuget](https://www.nuget.org/packages/Objectivity.Test.Automation.Common.MsTest/)
-- Objectivity.Test.Automation.Common.xUnit [nuget](https://www.nuget.org/packages/Objectivity.Test.Automation.Common.xUnit/)
+- Objectivity.Test.Automation.Common.NUnit [![NuGet Package](https://img.shields.io/nuget/v/Objectivity.Test.Automation.Common.NUnit.svg)](https://www.nuget.org/packages/Objectivity.Test.Automation.Common.NUnit/)
+- Objectivity.Test.Automation.Common.Features [![NuGet Package](https://img.shields.io/nuget/v/Objectivity.Test.Automation.Common.Features.svg)](https://www.nuget.org/packages/Objectivity.Test.Automation.Common.Features/)
+- Objectivity.Test.Automation.Common.MsTest [![NuGet Package](https://img.shields.io/nuget/v/Objectivity.Test.Automation.Common.MsTest.svg)](https://www.nuget.org/packages/Objectivity.Test.Automation.Common.MsTest/)
+- Objectivity.Test.Automation.Common.xUnit [![NuGet Package](https://img.shields.io/nuget/v/Objectivity.Test.Automation.Common.xUnit.svg)](https://www.nuget.org/packages/Objectivity.Test.Automation.Common.xUnit/)

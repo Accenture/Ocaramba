@@ -29,6 +29,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
     /// Tests to test framework
     /// </summary>
     [TestFixture]
+    [Parallelizable(ParallelScope.None)]
     public class PerformanceTestsNUnit : ProjectTestBase
     {
         [Test]
