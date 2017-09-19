@@ -10,7 +10,7 @@ Test Framework was designed in Objectivity to propose common way how people shou
 Project API documentation can be found here: http://objectivityltd.github.io/Test.Automation
 
 
-It provides following features:
+**It provides following features:**
 - Ready for parallel tests execution, more details [here](https://github.com/ObjectivityLtd/Test.Automation/wiki/Selenium%20Parallel%20tests%20execution)
 - Possibility to use MSTest, NUnit or xUNIT framework
 - Specflow ready
