@@ -480,6 +480,14 @@ namespace Objectivity.Test.Automation.Common
         }
 
         /// <summary>
+        /// Deletes all cookies from the page.
+        /// </summary>
+        public void DeleteAllCookies()
+        {
+            this.driver.Manage().Cookies.DeleteAllCookies();
+        }
+
+        /// <summary>
         /// Stop browser instance.
         /// </summary>
         public void Stop()
