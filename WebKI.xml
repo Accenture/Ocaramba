@@ -19,6 +19,7 @@
     <HelpKINode Title="about BaseConfiguration class" Url="html/f4719844-316f-7604-9f30-52e4cb9631e4.htm" />
     <HelpKINode Title="properties" Url="html/e1c3b808-daa8-2857-b97f-1b523bef97bc.htm" />
   </HelpKINode>
+  <HelpKINode Title="BaseConfiguration.ChromePath property" Url="html/555d3ba6-6e62-91aa-fb0c-2a742a55fe48.htm" />
   <HelpKINode Title="BaseConfiguration.DownloadFolder property" Url="html/ac1824c3-e57d-b245-e27e-eae41c49fefd.htm" />
   <HelpKINode Title="BaseConfiguration.EnableEventFiringWebDriver property" Url="html/f4edce29-3f26-89f8-037a-ff32030fbc52.htm" />
   <HelpKINode Title="BaseConfiguration.FirefoxPath property" Url="html/62829289-389b-ef22-d436-19ac417327bf.htm" />
@@ -74,6 +75,7 @@
   <HelpKINode Title="Checkbox.TickCheckbox method" Url="html/cb2903b1-8378-326b-0a30-5104ffb83885.htm" />
   <HelpKINode Title="Checkbox.UntickCheckbox method" Url="html/9c38b78a-d89b-038d-1e4c-2669e847a00b.htm" />
   <HelpKINode Title="Chrome enumeration member" Url="html/fd8f95a4-1921-2ebe-a199-a6c1d3adcc8c.htm" />
+  <HelpKINode Title="ChromePath property" Url="html/555d3ba6-6e62-91aa-fb0c-2a742a55fe48.htm" />
   <HelpKINode Title="ClassName enumeration member" Url="html/64a6eff1-1642-a6be-95f5-38c0ebf1f42e.htm" />
   <HelpKINode Title="Close method" Url="html/0f04e455-b1f4-fde2-334b-81200d069f7b.htm" />
   <HelpKINode Title="Collapse method" Url="html/456fb4f3-dc15-b75a-66ac-1fddfb3d3548.htm" />
@@ -105,6 +107,7 @@
   <HelpKINode Title="DateHelper.GetFutureDate method" Url="html/36011179-8107-eb57-af1e-782fc0c09dca.htm" />
   <HelpKINode Title="DateHelper.TomorrowDate property" Url="html/36c8be0a-a004-7065-792e-f4b9e2cd7e68.htm" />
   <HelpKINode Title="DateTime property" Url="html/95c2fdd9-0390-95ee-b4ff-c846b6ec8389.htm" />
+  <HelpKINode Title="DeleteAllCookies method" Url="html/c8f7c30b-01db-0fe7-1476-f3f02735e5dc.htm" />
   <HelpKINode Title="DismissJavaScriptAlert method" Url="html/44fa81a6-6df6-33d3-18d6-ee6af5cf0b5b.htm" />
   <HelpKINode Title="Doc enumeration member" Url="html/24ea484b-208c-10a9-79d9-518c88c2b6e9.htm" />
   <HelpKINode Title="Docx enumeration member" Url="html/24ea484b-208c-10a9-79d9-518c88c2b6e9.htm" />
@@ -129,6 +132,7 @@
   </HelpKINode>
   <HelpKINode Title="DriverContext.CapabilitiesSet event" Url="html/45dca327-d19f-808c-5a1a-a55d039aa660.htm" />
   <HelpKINode Title="DriverContext.CurrentDirectory property" Url="html/a2043213-95fd-ac97-6f6c-c52429cb4220.htm" />
+  <HelpKINode Title="DriverContext.DeleteAllCookies method" Url="html/c8f7c30b-01db-0fe7-1476-f3f02735e5dc.htm" />
   <HelpKINode Title="DriverContext.DownloadFolder property" Url="html/46a0e3d4-218d-2ae7-471d-0597e2010b07.htm" />
   <HelpKINode Title="DriverContext.Driver property" Url="html/b98f4da9-1193-06e0-89d6-3cc82e62aa0a.htm" />
   <HelpKINode Title="DriverContext.DriverContext constructor" Url="html/c57e394e-6f2e-4405-6db2-2f62a373ff12.htm" />
@@ -145,6 +149,13 @@
   <HelpKINode Title="DriverContext.TestTitle property" Url="html/489bd4ae-cd4d-1e85-3233-1227a53c8579.htm" />
   <HelpKINode Title="DriverContext.VerifyMessages property" Url="html/d179f82c-d46e-62ee-4fde-f080eaebb431.htm" />
   <HelpKINode Title="DriverContext.WindowMaximize method" Url="html/e3647cb9-524e-092d-312a-2d1b0bc190f9.htm" />
+  <HelpKINode Title="DriversCustomSettings class">
+    <HelpKINode Title="DriversCustomSettings Class" Url="html/ab747e09-d87d-5f53-d158-d574feae4574.htm" />
+    <HelpKINode Title="about DriversCustomSettings class" Url="html/ab747e09-d87d-5f53-d158-d574feae4574.htm" />
+    <HelpKINode Title="methods" Url="html/d7462fc1-fc4d-9a81-1d03-3a833ca267c0.htm" />
+  </HelpKINode>
+  <HelpKINode Title="DriversCustomSettings.IsDriverSynchronizationWithAngular method" Url="html/c4ca2d43-711f-0a0a-b16f-9683a2db6de4.htm" />
+  <HelpKINode Title="DriversCustomSettings.SetAngularSynchronizationForDriver method" Url="html/4030f31c-44c0-1e86-1d91-88b43f89b8c5.htm" />
   <HelpKINode Title="Duration property" Url="html/b95e80fb-6200-f4d1-5ffe-482fa8566b4d.htm" />
   <HelpKINode Title="ElementCssSelector property" Url="html/eb06f9e0-2685-cbfa-6a0d-d92147e8430a.htm" />
   <HelpKINode Title="ElementLocator class">
@@ -229,6 +240,7 @@
   <HelpKINode Title="Input property" Url="html/50a5d181-bebc-45f4-aaa8-2758d30399be.htm" />
   <HelpKINode Title="Instance property" Url="html/1dc566ef-3347-db3c-fd6e-74a5c33d7d0f.htm" />
   <HelpKINode Title="InternetExplorer enumeration member" Url="html/fd8f95a4-1921-2ebe-a199-a6c1d3adcc8c.htm" />
+  <HelpKINode Title="IsDriverSynchronizationWithAngular method" Url="html/c4ca2d43-711f-0a0a-b16f-9683a2db6de4.htm" />
   <HelpKINode Title="IsElementPresent method" Url="html/91aa6234-30e7-9f8c-4202-48141d302683.htm" />
   <HelpKINode Title="IsElementTextEqualsToExpected method" Url="html/239e1044-aeae-a0ef-f85e-76c98c56ddfa.htm" />
   <HelpKINode Title="IsPageTitle method" Url="html/059da495-7686-8b48-88f2-5286c31dbf8b.htm" />
@@ -356,6 +368,7 @@
   <HelpKINode Title="Objectivity.Test.Automation.Common.BrowserType enumeration" Url="html/fd8f95a4-1921-2ebe-a199-a6c1d3adcc8c.htm" />
   <HelpKINode Title="Objectivity.Test.Automation.Common.CapabilitiesSetEventArgs class" Url="html/12c1e90a-6c30-35f0-bc85-0f6d178d528c.htm" />
   <HelpKINode Title="Objectivity.Test.Automation.Common.DriverContext class" Url="html/2ab328ae-8420-be17-e66b-cfbce57f943f.htm" />
+  <HelpKINode Title="Objectivity.Test.Automation.Common.DriversCustomSettings class" Url="html/ab747e09-d87d-5f53-d158-d574feae4574.htm" />
   <HelpKINode Title="Objectivity.Test.Automation.Common.Exceptions namespace" Url="html/58d21d65-ee05-dc19-9960-fd362ec0fc5d.htm" />
   <HelpKINode Title="Objectivity.Test.Automation.Common.Exceptions.DataDrivenReadException class" Url="html/86e1000d-0226-4d8c-93bd-cc9324e9fe8b.htm" />
   <HelpKINode Title="Objectivity.Test.Automation.Common.Exceptions.WaitTimeoutException class" Url="html/7e037372-81ab-273e-adca-940a84b60c47.htm" />
@@ -504,6 +517,7 @@
   <HelpKINode Title="SendKeys method" Url="html/075ecad7-fb6a-b79d-316f-385d80c3bbfa.htm" />
   <HelpKINode Title="SendTextToJavaScript method" Url="html/bab803cc-74f2-84ee-51ca-b850462082ab.htm" />
   <HelpKINode Title="Separator field" Url="html/95a21efc-9211-f841-9f61-dc0df8768279.htm" />
+  <HelpKINode Title="SetAngularSynchronizationForDriver method" Url="html/4030f31c-44c0-1e86-1d91-88b43f89b8c5.htm" />
   <HelpKINode Title="SetAttribute method" Url="html/031dd2e4-b20e-5b8b-ed9f-6444bb32b218.htm" />
   <HelpKINode Title="SetDuration method" Url="html/3c83d32e-8959-e1ce-17a8-c5ad1877ff40.htm" />
   <HelpKINode Title="SetPage method" Url="html/3658f2fd-c4cd-87fc-ad45-f14123c3c77f.htm" />
@@ -524,6 +538,7 @@
   <HelpKINode Title="StopPerfromanceMeasure method" Url="html/91e74427-1e12-adb7-a530-b4a30c562846.htm" />
   <HelpKINode Title="SwitchToWindowUsingUrl method" Url="html/de9df0ec-a00f-f4e3-6882-cad311c29bc1.htm" />
   <HelpKINode Title="SynchronizationWithAngularEnabled property" Url="html/76115b13-a389-4acf-c02a-b5c4167aa800.htm" />
+  <HelpKINode Title="SynchronizeWithAngular method" Url="html/64c7bbf3-17e8-709e-1472-31eb527d8459.htm" />
   <HelpKINode Title="Table class">
     <HelpKINode Title="Table Class" Url="html/b32fe87a-4b52-8172-1167-bdd18b78f9a6.htm" />
     <HelpKINode Title="about Table class" Url="html/b32fe87a-4b52-8172-1167-bdd18b78f9a6.htm" />
@@ -630,6 +645,7 @@
   <HelpKINode Title="WebDriverExtensions.PageSourceContainsCase method" Url="html/65238bf2-27c4-7440-c6db-4f25345d3d76.htm" />
   <HelpKINode Title="WebDriverExtensions.ScrollIntoMiddle method" Url="html/84b4eb00-a2f9-0c33-2858-0cd69bd2411d.htm" />
   <HelpKINode Title="WebDriverExtensions.SwitchToWindowUsingUrl method" Url="html/de9df0ec-a00f-f4e3-6882-cad311c29bc1.htm" />
+  <HelpKINode Title="WebDriverExtensions.SynchronizeWithAngular method" Url="html/64c7bbf3-17e8-709e-1472-31eb527d8459.htm" />
   <HelpKINode Title="WebDriverExtensions.WaitForAjax method" Url="html/7eed96ef-0c9d-3806-3070-a72653f4b560.htm" />
   <HelpKINode Title="WebDriverExtensions.WaitForAngular method" Url="html/07901653-e8f0-14dc-184c-b31d97e0f169.htm" />
   <HelpKINode Title="WebDriverExtensions.WaitUntilElementIsNoLongerFound method" Url="html/c63b62ef-677b-ca01-2143-386c4a76e8a6.htm" />
