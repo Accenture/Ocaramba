@@ -324,6 +324,16 @@ namespace Objectivity.Test.Automation.Common.Extensions
         }
 
         /// <summary>
+        /// Enable synchronization with angular.
+        /// </summary>
+        /// <param name="webDriver">The WebDriver.</param>
+        /// <param name="enable">Enable or disable synchronization.</param>
+        public static void SynchronizeWithAngular(this IWebDriver webDriver, bool enable)
+        {
+            DriversCustomSettings.SetAngularSynchronizationForDriver(webDriver, enable);
+        }
+
+        /// <summary>
         /// Approves the trust certificate for internet explorer.
         /// </summary>
         /// <param name="webDriver">The web driver.</param>

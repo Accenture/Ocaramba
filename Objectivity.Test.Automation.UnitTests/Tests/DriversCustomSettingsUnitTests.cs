@@ -1,4 +1,4 @@
-﻿// <copyright file="PerformanceTestsNUnit.cs" company="Objectivity Bespoke Software Specialists">
+﻿// <copyright file="DriversCustomSettingsUnitTests.cs" company="Objectivity Bespoke Software Specialists">
 // Copyright (c) Objectivity Bespoke Software Specialists. All rights reserved.
 // </copyright>
 // <license>
@@ -20,23 +20,29 @@
 //     SOFTWARE.
 // </license>
 
-namespace Objectivity.Test.Automation.Tests.NUnit.Tests
+namespace Objectivity.Test.Automation.UnitTests.Tests
 {
-    using Automation.Tests.PageObjects.PageObjects.TheInternet;
-    using global::NUnit.Framework;
+    using NUnit.Framework;
+    using Common;
+    using Common.Extensions;
 
-    /// <summary>
-    /// Tests to test framework
-    /// </summary>
-    [TestFixture]
-    [Parallelizable(ParallelScope.None)]
-    public class PerformanceTestsNUnit : ProjectTestBase
+    [TestFixture, Parallelizable(ParallelScope.Fixtures)]
+    public class DriversCustomSettingsUnitTests
     {
         [Test]
-        [Repeat(3)]
-        public void HerokuappTests()
+        public void CheckSynchronizationWithAngularFuctionality()
         {
-            new InternetPage(this.DriverContext).OpenHomePageAndMeasureTime();
+            var driverContext = new DriverContext {CurrentDirectory = TestContext.CurrentContext.TestDirectory};
+            driverContext.Start();
+            var Default_false = DriversCustomSettings.IsDriverSynchronizationWithAngular(driverContext.Driver);
+            driverContext.Driver.SynchronizeWithAngular(true);
+            var TurnOn_true = DriversCustomSettings.IsDriverSynchronizationWithAngular(driverContext.Driver);
+            driverContext.Driver.SynchronizeWithAngular(false);
+            var TurnOn_false = DriversCustomSettings.IsDriverSynchronizationWithAngular(driverContext.Driver);
+            driverContext.Stop();
+            Assert.False(Default_false, "Default setting is not false");
+            Assert.True(TurnOn_true, "Setting is not true");
+            Assert.False(TurnOn_false, "Setting is not false");
         }
     }
 }
