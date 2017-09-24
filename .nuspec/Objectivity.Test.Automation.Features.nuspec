@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Objectivity.Test.Automation.Common.Features</id>
-    <version>1.0.0</version>
+    <version>$version$</version>
     <title>Objectivity.Test.Automation.Common.Features</title>
     <authors>Objectivity Bespoke Software Specialists</authors>
     <owners>Objectivity Bespoke Software Specialists</owners>
