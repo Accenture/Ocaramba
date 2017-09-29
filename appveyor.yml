@@ -1,0 +1,156 @@
+version: $(frameworkVersion).{build}
+branches:
+  except:
+  - gh-pages
+configuration: Release
+init:
+- ps: "if ($env:APPVEYOR_REPO_TAG -eq \"true\")
+  {
+  Update-AppveyorBuild -Version \"$env:APPVEYOR_REPO_TAG_NAME\"
+  $env:frameworkVersion = \"$env:APPVEYOR_REPO_TAG_NAME\" 
+  }
+  echo 'frameworkVersion'  $env:frameworkVersion 
+  echo 'version' $env:appveyor_build_version
+  
+  iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))"
+assembly_info:
+  patch: true
+  file: '**\AssemblyInfo.*'
+  assembly_version: $(frameworkVersion)
+  assembly_file_version: '{version}'
+  assembly_informational_version: $(frameworkVersion)
+environment:
+  APPVEYOR_RDP_PASSWORD: RDCTest.Automation$Password0X!
+  frameworkVersion: 3.0.9
+  GithubAuthToken:
+    secure: x9uTnOFLUnZ6DiVhpBBxIJxij33Sz9uAIe+qef6M3sj9+J/AUmpfBmiGgqRabTqs
+before_build:
+- cmd: >-
+    nuget restore
+
+    git clone https://github.com/ObjectivityLtd/Test.Automation.git --branch gh-pages .\Help
+build:
+  verbosity: minimal
+after_build:
+- ps: "Copy-Item .\\.nuspec\\Objectivity.Test.Automation.Nunit.nuspec .\\Objectivity.Test.Automation.Common\\Objectivity.Test.Automation.Common.nuspec
+       nuget pack .\\Objectivity.Test.Automation.Common\\Objectivity.Test.Automation.Common.csproj -symbols -properties Configuration=Release
+       Copy-Item .\\.nuspec\\Objectivity.Test.Automation.MsTest.nuspec .\\Objectivity.Test.Automation.Common\\Objectivity.Test.Automation.Common.nuspec
+	   nuget pack .\\Objectivity.Test.Automation.Common\\Objectivity.Test.Automation.Common.csproj -symbols -properties Configuration=Release
+	   Copy-Item .\\.nuspec\\Objectivity.Test.Automation.MsTest.nuspec .\\Objectivity.Test.Automation.Common\\Objectivity.Test.Automation.Common.nuspec
+	   nuget pack .\\Objectivity.Test.Automation.Common\\Objectivity.Test.Automation.Common.csproj -symbols -properties Configuration=Release
+	   Copy-Item .\\.nuspec\\Objectivity.Test.Automation.Features.nuspec .\\Objectivity.Test.Automation.Common\\Objectivity.Test.Automation.Common.nuspec
+	   nuget pack .\\Objectivity.Test.Automation.Common\\Objectivity.Test.Automation.Common.csproj -symbols -properties Configuration=Release
+	   Copy-Item .\\.nuspec\\Objectivity.Test.Automation.Xunit.nuspec .\\Objectivity.Test.Automation.Common\\Objectivity.Test.Automation.Common.nuspec
+	   nuget pack .\\Objectivity.Test.Automation.Common\\Objectivity.Test.Automation.Common.csproj -symbols -properties Configuration=Release
+	   
+	   Remove-Item -recurse .\\Help\\* -exclude .git\nCopy-Item -Path .\\README.md -Destination .\\Objectivity.Test.Automation.Common.Documentation\\Help\\ -recurse -force -verbose
+	   
+	   $filesList = Get-ChildItem  -Path .\\Help\\** -Filter *.* -Recurse
+	   
+	   foreach ($file in $filesList)	
+	   {
+			(Get-Content $file.Fullname) | foreach-object { $_ -replace \"`n\", \"`r`n\" } | Set-Content $file.Fullname
+	   }
+	   
+	   Copy-Item -Path .\\Objectivity.Test.Automation.Common.Documentation\\Help\\** -Destination .\\Help\\ -recurse -force
+	 
+	   Invoke-Expression \"git config --global credential.helper store\"
+	   Add-Content \"$env:USERPROFILE\\.git-credentials\" \"https://$($env:GithubAuthToken):x-oauth-basic@github.com`n\"
+	   Invoke-Expression \"git config --global core.autocrlf true\"
+	   Invoke-Expression \"git config --global user.email 'TestAutomationGroup@objectivity.co.uk'\"
+	   Invoke-Expression \"git config --global user.name 'TestAutomationGroup'\"
+	   
+	   Add-Content \"$env:USERPROFILE\\.git-credentials\" \"https://$($env:GithubAuthToken):x-oauth-basic@github.com`n\"
+	   
+	   if ($env:APPVEYOR_REPO_TAG -eq \"true\")
+	   {
+		   cd .\\Help 
+		   Invoke-Expression \"git add --all\"
+		   Invoke-Expression \"git commit -m 'Publishing to gh-pages $env:appveyor_build_version'\"
+		   Invoke-Expression \"git push origin gh-pages\"
+		   cd ..
+	   }
+	   Remove-Item .\\Help\\.git -Force  -Recurse -ErrorAction SilentlyContinue
+	   7z a gh-pages_$env:appveyor_build_version.zip .\\Help\\** 
+	   appveyor PushArtifact gh-pages_$env:appveyor_build_version.zip"
+test_script:
+- ps: >-
+    Invoke-Expression '.\packages\xunit.runner.console.2.1.0\tools\xunit.console.exe .\Objectivity.Test.Automation.Tests.Xunit\bin\Release\Objectivity.Test.Automation.Tests.Xunit.dll -appveyor'
+
+
+    if($lastexitcode -ne 0)
+      {
+       echo $lastexitcode
+      }
+
+    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.Xunit\bin\Release\**\*.png
+
+    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.Xunit\bin\Release\**\*.html
+
+    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.Xunit\bin\Release\*.log
+
+
+    Invoke-Expression 'nunit3-console .\Objectivity.Test.Automation.Tests.NUnit\bin\Release\Objectivity.Test.Automation.Tests.NUnit.dll .\Objectivity.Test.Automation.Tests.Angular\bin\Release\Objectivity.Test.Automation.Tests.Angular.dll .\Objectivity.Test.Automation.Tests.Features\bin\Release\Objectivity.Test.Automation.Tests.Features.dll .\Objectivity.Test.Automation.UnitTests\bin\Release\Objectivity.Test.Automation.UnitTests.dll --result=myresults.xml`;format=AppVeyor'
+
+
+
+    if($lastexitcode -ne 0)
+      {
+       echo $lastexitcode
+      }
+
+    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.NUnit\bin\Release\**\*.png
+
+    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.NUnit\bin\Release\**\*.html
+
+    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.NUnit\bin\Release\*.log
+
+
+    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.Angular\bin\Release\**\*.png
+
+    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.Angular\bin\Release\**\*.html
+
+    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.Angular\bin\Release\*.log
+
+
+    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.Features\bin\Release\**\*.png
+
+    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.Features\bin\Release\**\*.html
+
+    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.Features\bin\Release\*.log
+
+
+    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.UnitTests\bin\Release\**\*.png
+
+    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.UnitTests\bin\Release\**\*.html
+
+    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.UnitTests\bin\Release\*.log
+
+
+
+    Invoke-Expression 'vstest.console /logger`:Appveyor .\Objectivity.Test.Automation.Tests.MSTest\bin\Release\Objectivity.Test.Automation.Tests.MsTest.dll /Settings`:.\Objectivity.Test.Automation.Tests.MSTest\bin\Release\Runsettings.runsettings'
+
+
+    if($lastexitcode -ne 0)
+      {
+       echo $lastexitcode
+      }
+
+    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.MSTest\bin\Release\**\*.png
+
+    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.MSTest\bin\Release\**\*.html
+
+    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.MSTest\bin\Release\*.log
+
+
+    appveyor PushArtifact testresults_$env:appveyor_build_version.zip
+artifacts:
+- path: .\Objectivity.Test.Automation.Common.*.nupkg
+  name: NuGet
+deploy:
+- provider: NuGet
+  api_key:
+    secure: 3oOPQoiQEcO33c/fxjAMdvjTlmB3dHrc/uwV9ehKYjNARfzrBT+xmuLCjTtKrI9F
+  on:
+    branch: master
+    appveyor_repo_tag: true
