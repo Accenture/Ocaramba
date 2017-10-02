@@ -36,16 +36,16 @@ build:
   verbosity: minimal
 after_build:
  - ps: >-
-      Copy-Item .\\.nuspec\\Objectivity.Test.Automation.Nunit.nuspec .\\Objectivity.Test.Automation.Common\\Objectivity.Test.Automation.Common.nuspec
-      nuget pack .\\Objectivity.Test.Automation.Common\\Objectivity.Test.Automation.Common.csproj -symbols -properties Configuration=Release
-      Copy-Item .\\.nuspec\\Objectivity.Test.Automation.MsTest.nuspec .\\Objectivity.Test.Automation.Common\\Objectivity.Test.Automation.Common.nuspec
-      nuget pack .\\Objectivity.Test.Automation.Common\\Objectivity.Test.Automation.Common.csproj -symbols -properties Configuration=Release
-      Copy-Item .\\.nuspec\\Objectivity.Test.Automation.MsTest.nuspec .\\Objectivity.Test.Automation.Common\\Objectivity.Test.Automation.Common.nuspec
-      nuget pack .\\Objectivity.Test.Automation.Common\\Objectivity.Test.Automation.Common.csproj -symbols -properties Configuration=Release
-      Copy-Item .\\.nuspec\\Objectivity.Test.Automation.Features.nuspec .\\Objectivity.Test.Automation.Common\\Objectivity.Test.Automation.Common.nuspec
-      nuget pack .\\Objectivity.Test.Automation.Common\\Objectivity.Test.Automation.Common.csproj -symbols -properties Configuration=Release
-      Copy-Item .\\.nuspec\\Objectivity.Test.Automation.Xunit.nuspec .\\Objectivity.Test.Automation.Common\\Objectivity.Test.Automation.Common.nuspec
-      nuget pack .\\Objectivity.Test.Automation.Common\\Objectivity.Test.Automation.Common.csproj -symbols -properties Configuration=Release
+      Copy-Item .\.nuspec\Objectivity.Test.Automation.Nunit.nuspec .\Objectivity.Test.Automation.Common\Objectivity.Test.Automation.Common.nuspec
+      nuget pack .\Objectivity.Test.Automation.Common\Objectivity.Test.Automation.Common.csproj -symbols -properties Configuration=Release
+      Copy-Item .\.nuspec\Objectivity.Test.Automation.MsTest.nuspec .\Objectivity.Test.Automation.Common\Objectivity.Test.Automation.Common.nuspec
+      nuget pack .\Objectivity.Test.Automation.Common\Objectivity.Test.Automation.Common.csproj -symbols -properties Configuration=Release
+      Copy-Item .\.nuspec\Objectivity.Test.Automation.MsTest.nuspec .\Objectivity.Test.Automation.Common\Objectivity.Test.Automation.Common.nuspec
+      nuget pack .\Objectivity.Test.Automation.Common\Objectivity.Test.Automation.Common.csproj -symbols -properties Configuration=Release
+      Copy-Item .\.nuspec\Objectivity.Test.Automation.Features.nuspec .\Objectivity.Test.Automation.Common\Objectivity.Test.Automation.Common.nuspec
+      nuget pack .\Objectivity.Test.Automation.Common\Objectivity.Test.Automation.Common.csproj -symbols -properties Configuration=Release
+      Copy-Item .\.nuspec\Objectivity.Test.Automation.Xunit.nuspec .\Objectivity.Test.Automation.Common\Objectivity.Test.Automation.Common.nuspec
+      nuget pack .\Objectivity.Test.Automation.Common\Objectivity.Test.Automation.Common.csproj -symbols -properties Configuration=Release
       Copy-Item -Path .\README.md -Destination .\Objectivity.Test.Automation.Common.Documentation\Help\ -recurse -force -verbose
       if ($env:APPVEYOR_REPO_TAG -eq "true")
       {
@@ -65,14 +65,14 @@ after_build:
      
       if ($env:APPVEYOR_REPO_TAG -eq "true")
       {
-        cd .\\Help 
+        cd .\Help 
         Invoke-Expression "git add --all"
         Invoke-Expression "git commit -m 'Publishing to gh-pages $env:appveyor_build_version'"
         Invoke-Expression "git push origin gh-pages --porcelain"
         cd ..
-        Remove-Item .\\Help\\.git -Force  -Recurse -ErrorAction SilentlyContinue
+        Remove-Item .\Help\.git -Force  -Recurse -ErrorAction SilentlyContinue
       }
-      7z a gh-pages_$env:appveyor_build_version.zip .\\Help\\** 
+      7z a gh-pages_$env:appveyor_build_version.zip .\Help\** 
       appveyor PushArtifact gh-pages_$env:appveyor_build_version.zip
 test_script:
 - ps: >-
