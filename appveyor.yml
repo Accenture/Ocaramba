@@ -1,10 +1,22 @@
+skip_commits:
+  files:
+    - README.md
 version: $(frameworkVersion).{build}
 branches:
   except:
   - gh-pages
 configuration: Release
 init:
-- ps: "if ($env:APPVEYOR_REPO_TAG -eq \"true\")\n  {\n    Update-AppveyorBuild -Version \"$env:APPVEYOR_REPO_TAG_NAME\"\n    $env:frameworkVersion = \"$env:APPVEYOR_REPO_TAG_NAME\" \n  }\necho 'frameworkVersion'  $env:frameworkVersion \necho 'version' $env:appveyor_build_version\n\niex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))"
+ - ps: >-
+      if ($env:APPVEYOR_REPO_TAG -eq "true")
+      {
+        Update-AppveyorBuild -Version "$env:APPVEYOR_REPO_TAG_NAME"
+        $env:frameworkVersion = "$env:APPVEYOR_REPO_TAG_NAME" 
+      }
+      echo 'frameworkVersion'  $env:frameworkVersion
+      echo 'version' $env:appveyor_build_version 
+      iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+
 assembly_info:
   patch: true
   file: '**\AssemblyInfo.*'
@@ -20,11 +32,48 @@ before_build:
 - cmd: >-
     nuget restore
 
-    git clone https://github.com/ObjectivityLtd/Test.Automation.git --branch gh-pages .\Help
 build:
   verbosity: minimal
 after_build:
-- ps: "Copy-Item .\\.nuspec\\Objectivity.Test.Automation.Nunit.nuspec .\\Objectivity.Test.Automation.Common\\Objectivity.Test.Automation.Common.nuspec\n\nnuget pack .\\Objectivity.Test.Automation.Common\\Objectivity.Test.Automation.Common.csproj -symbols -properties Configuration=Release\n\n\nCopy-Item .\\.nuspec\\Objectivity.Test.Automation.MsTest.nuspec .\\Objectivity.Test.Automation.Common\\Objectivity.Test.Automation.Common.nuspec\n\nnuget pack .\\Objectivity.Test.Automation.Common\\Objectivity.Test.Automation.Common.csproj -symbols -properties Configuration=Release\n\n\nCopy-Item .\\.nuspec\\Objectivity.Test.Automation.MsTest.nuspec .\\Objectivity.Test.Automation.Common\\Objectivity.Test.Automation.Common.nuspec\n\nnuget pack .\\Objectivity.Test.Automation.Common\\Objectivity.Test.Automation.Common.csproj -symbols -properties Configuration=Release\n\n\nCopy-Item .\\.nuspec\\Objectivity.Test.Automation.Features.nuspec .\\Objectivity.Test.Automation.Common\\Objectivity.Test.Automation.Common.nuspec\n\nnuget pack .\\Objectivity.Test.Automation.Common\\Objectivity.Test.Automation.Common.csproj -symbols -properties Configuration=Release\n\n\nCopy-Item .\\.nuspec\\Objectivity.Test.Automation.Xunit.nuspec .\\Objectivity.Test.Automation.Common\\Objectivity.Test.Automation.Common.nuspec\n\nnuget pack .\\Objectivity.Test.Automation.Common\\Objectivity.Test.Automation.Common.csproj -symbols -properties Configuration=Release\n\n\nRemove-Item -recurse .\\Help\\* -exclude .git\nCopy-Item -Path .\\README.md -Destination .\\Objectivity.Test.Automation.Common.Documentation\\Help\\ -recurse -force -verbose\n\n$filesList = Get-ChildItem  -Path .\\Help\\** -Filter *.* -Recurse\nforeach ($file in $filesList)	\n{\n (Get-Content $file.Fullname) | foreach-object { $_ -replace \"`n\", \"`r`n\" } | Set-Content $file.Fullname\n		    }\n\nCopy-Item -Path .\\Objectivity.Test.Automation.Common.Documentation\\Help\\** -Destination .\\Help\\ -recurse -force\n\nInvoke-Expression \"git config --global credential.helper store\"\nAdd-Content \"$env:USERPROFILE\\.git-credentials\" \"https://$($env:GithubAuthToken):x-oauth-basic@github.com`n\"\nInvoke-Expression \"git config --global core.autocrlf true\"\nInvoke-Expression \"git config --global user.email 'TestAutomationGroup@objectivity.co.uk'\"\nInvoke-Expression \"git config --global user.name 'TestAutomationGroup'\"\n\nAdd-Content \"$env:USERPROFILE\\.git-credentials\" \"https://$($env:GithubAuthToken):x-oauth-basic@github.com`n\"\nif ($env:APPVEYOR_REPO_TAG -eq \"true\")\n{\ncd .\\Help \nInvoke-Expression \"git add --all\"\nInvoke-Expression \"git commit -m 'Publishing to gh-pages $env:appveyor_build_version'\"\n\nInvoke-Expression \"git push origin gh-pages --porcelain\"\n\ncd ..\n}\nRemove-Item .\\Help\\.git -Force  -Recurse -ErrorAction SilentlyContinue\n\n7z a gh-pages_$env:appveyor_build_version.zip .\\Help\\** \n\nappveyor PushArtifact gh-pages_$env:appveyor_build_version.zip"
+ - ps: >-
+      Copy-Item .\\.nuspec\\Objectivity.Test.Automation.Nunit.nuspec .\\Objectivity.Test.Automation.Common\\Objectivity.Test.Automation.Common.nuspec
+      nuget pack .\\Objectivity.Test.Automation.Common\\Objectivity.Test.Automation.Common.csproj -symbols -properties Configuration=Release
+      Copy-Item .\\.nuspec\\Objectivity.Test.Automation.MsTest.nuspec .\\Objectivity.Test.Automation.Common\\Objectivity.Test.Automation.Common.nuspec
+      nuget pack .\\Objectivity.Test.Automation.Common\\Objectivity.Test.Automation.Common.csproj -symbols -properties Configuration=Release
+      Copy-Item .\\.nuspec\\Objectivity.Test.Automation.MsTest.nuspec .\\Objectivity.Test.Automation.Common\\Objectivity.Test.Automation.Common.nuspec
+      nuget pack .\\Objectivity.Test.Automation.Common\\Objectivity.Test.Automation.Common.csproj -symbols -properties Configuration=Release
+      Copy-Item .\\.nuspec\\Objectivity.Test.Automation.Features.nuspec .\\Objectivity.Test.Automation.Common\\Objectivity.Test.Automation.Common.nuspec
+      nuget pack .\\Objectivity.Test.Automation.Common\\Objectivity.Test.Automation.Common.csproj -symbols -properties Configuration=Release
+      Copy-Item .\\.nuspec\\Objectivity.Test.Automation.Xunit.nuspec .\\Objectivity.Test.Automation.Common\\Objectivity.Test.Automation.Common.nuspec
+      nuget pack .\\Objectivity.Test.Automation.Common\\Objectivity.Test.Automation.Common.csproj -symbols -properties Configuration=Release
+      Copy-Item -Path .\README.md -Destination .\Objectivity.Test.Automation.Common.Documentation\Help\ -recurse -force -verbose
+      if ($env:APPVEYOR_REPO_TAG -eq "true")
+      {
+        Invoke-Expression "git config --global credential.helper store"
+        Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:GithubAuthToken):x-oauth-basic@github.com`n"
+        Invoke-Expression "git config --global core.autocrlf true"
+        Invoke-Expression "git config --global user.email 'TestAutomationGroup@objectivity.co.uk'"
+        Invoke-Expression "git config --global user.name 'TestAutomationGroup'"
+        Invoke-Expression "git clone https://github.com/ObjectivityLtd/Test.Automation.git --branch gh-pages .\Help"
+        Remove-Item -recurse .\Help\* -exclude .git
+      } else
+      {
+        New-Item -ItemType Directory -Force -Path .\Help
+      }
+      
+      Copy-Item -Path .\Objectivity.Test.Automation.Common.Documentation\Help\** -Destination .\Help\ -recurse -force
+     
+      if ($env:APPVEYOR_REPO_TAG -eq "true")
+      {
+        cd .\\Help 
+        Invoke-Expression "git add --all"
+        Invoke-Expression "git commit -m 'Publishing to gh-pages $env:appveyor_build_version'"
+        Invoke-Expression "git push origin gh-pages --porcelain"
+        cd ..
+        Remove-Item .\\Help\\.git -Force  -Recurse -ErrorAction SilentlyContinue
+      }
+      7z a gh-pages_$env:appveyor_build_version.zip .\\Help\\** 
+      appveyor PushArtifact gh-pages_$env:appveyor_build_version.zip
 test_script:
 - ps: >-
     Invoke-Expression '.\packages\xunit.runner.console.2.1.0\tools\xunit.console.exe .\Objectivity.Test.Automation.Tests.Xunit\bin\Release\Objectivity.Test.Automation.Tests.Xunit.dll -appveyor'
