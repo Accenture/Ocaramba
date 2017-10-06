@@ -30,7 +30,8 @@ assembly_info:
   assembly_file_version: '{version}'
   assembly_informational_version: $(frameworkVersion)
 environment:
-  APPVEYOR_RDP_PASSWORD: RDCTest.Automation$Password0X!
+  APPVEYOR_RDP_PASSWORD:
+    secure: 3OiDAcFLoSt3UCnmEU+XgM2d541PAqCNJAPqoiRqwRI=
   frameworkVersion: 3.0.9
   GithubAuthToken:
     secure: x9uTnOFLUnZ6DiVhpBBxIJxij33Sz9uAIe+qef6M3sj9+J/AUmpfBmiGgqRabTqs
