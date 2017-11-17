@@ -188,13 +188,6 @@ namespace Objectivity.Test.Automation.Common
                     profile = new FirefoxProfile();
                 }
 
-                // predefined preferences
-                // set browser proxy for firefox
-                if (!string.IsNullOrEmpty(BaseConfiguration.Proxy))
-                {
-                    profile.SetProxyPreferences(this.CurrentProxy());
-                }
-
                 profile.SetPreference("toolkit.startup.max_resumed_crashes", "999999");
                 profile.SetPreference("network.automatic-ntlm-auth.trusted-uris", BaseConfiguration.Host ?? string.Empty);
 
@@ -435,10 +428,12 @@ namespace Objectivity.Test.Automation.Common
             {
                 case BrowserType.Firefox:
                     var fireFoxOptionsLegacy = new FirefoxOptions { Profile = this.FirefoxProfile, UseLegacyImplementation = BaseConfiguration.FirefoxUseLegacyImplementation };
+                    fireFoxOptionsLegacy = this.SetProxy(fireFoxOptionsLegacy);
                     this.driver = new FirefoxDriver(fireFoxOptionsLegacy);
                     break;
                 case BrowserType.FirefoxPortable:
                     var fireFoxOptions = new FirefoxOptions { BrowserExecutableLocation = BaseConfiguration.FirefoxPath, Profile = this.FirefoxProfile, UseLegacyImplementation = BaseConfiguration.FirefoxUseLegacyImplementation };
+                    fireFoxOptions = this.SetProxy(fireFoxOptions);
                     this.driver = new FirefoxDriver(fireFoxOptions);
                     break;
                 case BrowserType.InternetExplorer:
@@ -475,9 +470,9 @@ namespace Objectivity.Test.Automation.Common
         /// Maximizes the current window if it is not already maximized.
         /// </summary>
         public void WindowMaximize()
-        {
-            this.driver.Manage().Window.Maximize();
-        }
+            {
+                this.driver.Manage().Window.Maximize();
+            }
 
         /// <summary>
         /// Deletes all cookies from the page.
@@ -591,17 +586,17 @@ namespace Objectivity.Test.Automation.Common
             switch (BaseConfiguration.TestBrowserCapabilities)
             {
                 case BrowserType.Firefox:
-                    capabilities = DesiredCapabilities.Firefox();
+                    ////capabilities = DesiredCapabilities.Firefox();
                     capabilities.SetCapability(FirefoxDriver.ProfileCapabilityName, this.FirefoxProfile.ToBase64String());
                     break;
                 case BrowserType.InternetExplorer:
-                    capabilities = DesiredCapabilities.InternetExplorer();
+                    ////capabilities = DesiredCapabilities.InternetExplorer();
                     break;
                 case BrowserType.Chrome:
-                    capabilities = DesiredCapabilities.Chrome();
+                    ////capabilities = DesiredCapabilities.Chrome();
                     break;
                 case BrowserType.Safari:
-                    capabilities = DesiredCapabilities.Safari();
+                    ////capabilities = DesiredCapabilities.Safari();
                     break;
                 default:
                     throw new NotSupportedException(
@@ -628,6 +623,23 @@ namespace Objectivity.Test.Automation.Common
             }
 
             return capabilities;
+        }
+
+        /// <summary>
+        /// Set proxy for Firefox
+        /// </summary>
+        /// <param name="options">FireFox Options</param>
+        /// <returns>FireFox options</returns>
+        private FirefoxOptions SetProxy(FirefoxOptions options)
+        {
+            // predefined preferences
+            // set browser proxy for firefox
+            if (!string.IsNullOrEmpty(BaseConfiguration.Proxy))
+            {
+                options.Proxy = this.CurrentProxy();
+            }
+
+            return options;
         }
 
         private Proxy CurrentProxy()
