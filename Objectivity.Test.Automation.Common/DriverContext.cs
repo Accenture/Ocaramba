@@ -586,17 +586,19 @@ namespace Objectivity.Test.Automation.Common
             switch (BaseConfiguration.TestBrowserCapabilities)
             {
                 case BrowserType.Firefox:
-                    ////capabilities = DesiredCapabilities.Firefox();
                     capabilities.SetCapability(FirefoxDriver.ProfileCapabilityName, this.FirefoxProfile.ToBase64String());
                     break;
                 case BrowserType.InternetExplorer:
-                    ////capabilities = DesiredCapabilities.InternetExplorer();
+                    var ieOption = new InternetExplorerOptions();
+                    capabilities = (DesiredCapabilities)ieOption.ToCapabilities();
                     break;
                 case BrowserType.Chrome:
-                    ////capabilities = DesiredCapabilities.Chrome();
+                    var chromeOptions = new ChromeOptions();
+                    capabilities = (DesiredCapabilities)chromeOptions.ToCapabilities();
                     break;
                 case BrowserType.Safari:
-                    ////capabilities = DesiredCapabilities.Safari();
+                    var safariOptions = new SafariOptions();
+                    capabilities = (DesiredCapabilities)safariOptions.ToCapabilities();
                     break;
                 default:
                     throw new NotSupportedException(
