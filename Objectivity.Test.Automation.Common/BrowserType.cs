@@ -63,6 +63,11 @@ namespace Objectivity.Test.Automation.Common
         RemoteWebDriver,
 
         /// <summary>
+        /// Edge driver
+        /// </summary>
+        Edge,
+
+        /// <summary>
         /// Not supported browser
         /// </summary>
         None

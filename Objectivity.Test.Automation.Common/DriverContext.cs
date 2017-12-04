@@ -39,6 +39,7 @@ namespace Objectivity.Test.Automation.Common
     using Objectivity.Test.Automation.Common.Types;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Chrome;
+    using OpenQA.Selenium.Edge;
     using OpenQA.Selenium.Firefox;
     using OpenQA.Selenium.IE;
     using OpenQA.Selenium.PhantomJS;
@@ -162,11 +163,29 @@ namespace Objectivity.Test.Automation.Common
         /// </summary>
         public string CurrentDirectory { get; set; }
 
-        private FirefoxProfile FirefoxProfile
+        private FirefoxOptions FirefoxProfile
         {
             get
             {
                 FirefoxProfile profile;
+
+                FirefoxOptions options;
+
+                if (BaseConfiguration.TestBrowser == BrowserType.FirefoxPortable)
+                {
+                    options = new FirefoxOptions
+                    {
+                        BrowserExecutableLocation = BaseConfiguration.FirefoxPath,
+                        UseLegacyImplementation = BaseConfiguration.FirefoxUseLegacyImplementation
+                    };
+                }
+                else
+                {
+                    options = new FirefoxOptions()
+                    {
+                        UseLegacyImplementation = BaseConfiguration.FirefoxUseLegacyImplementation
+                    };
+                }
 
                 if (BaseConfiguration.UseDefaultFirefoxProfile)
                 {
@@ -260,7 +279,14 @@ namespace Objectivity.Test.Automation.Common
                     }
                 }
 
-                return profile;
+                // set browser proxy for firefox
+                if (!string.IsNullOrEmpty(BaseConfiguration.Proxy))
+                {
+                    options.Proxy = this.CurrentProxy();
+                }
+
+                options.Profile = profile;
+                return options;
             }
         }
 
@@ -376,6 +402,22 @@ namespace Objectivity.Test.Automation.Common
             }
         }
 
+        private EdgeOptions EdgeProfile
+        {
+            get
+            {
+                var options = new EdgeOptions();
+
+                // set browser proxy for Edge
+                if (!string.IsNullOrEmpty(BaseConfiguration.Proxy))
+                {
+                    options.Proxy = this.CurrentProxy();
+                }
+
+                return options;
+            }
+        }
+
         private SafariOptions SafariProfile
         {
             get
@@ -427,14 +469,8 @@ namespace Objectivity.Test.Automation.Common
             switch (BaseConfiguration.TestBrowser)
             {
                 case BrowserType.Firefox:
-                    var fireFoxOptionsLegacy = new FirefoxOptions { Profile = this.FirefoxProfile, UseLegacyImplementation = BaseConfiguration.FirefoxUseLegacyImplementation };
-                    fireFoxOptionsLegacy = this.SetProxy(fireFoxOptionsLegacy);
-                    this.driver = new FirefoxDriver(fireFoxOptionsLegacy);
-                    break;
                 case BrowserType.FirefoxPortable:
-                    var fireFoxOptions = new FirefoxOptions { BrowserExecutableLocation = BaseConfiguration.FirefoxPath, Profile = this.FirefoxProfile, UseLegacyImplementation = BaseConfiguration.FirefoxUseLegacyImplementation };
-                    fireFoxOptions = this.SetProxy(fireFoxOptions);
-                    this.driver = new FirefoxDriver(fireFoxOptions);
+                    this.driver = new FirefoxDriver(this.FirefoxProfile);
                     break;
                 case BrowserType.InternetExplorer:
                     this.driver = new InternetExplorerDriver(this.InternetExplorerProfile);
@@ -450,6 +486,9 @@ namespace Objectivity.Test.Automation.Common
                     break;
                 case BrowserType.RemoteWebDriver:
                     this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetCapabilities());
+                    break;
+                case BrowserType.Edge:
+                    this.driver = new EdgeDriver(this.EdgeProfile);
                     break;
                 default:
                     throw new NotSupportedException(
@@ -470,9 +509,9 @@ namespace Objectivity.Test.Automation.Common
         /// Maximizes the current window if it is not already maximized.
         /// </summary>
         public void WindowMaximize()
-            {
-                this.driver.Manage().Window.Maximize();
-            }
+        {
+            this.driver.Manage().Window.Maximize();
+        }
 
         /// <summary>
         /// Deletes all cookies from the page.
@@ -586,19 +625,20 @@ namespace Objectivity.Test.Automation.Common
             switch (BaseConfiguration.TestBrowserCapabilities)
             {
                 case BrowserType.Firefox:
-                    capabilities.SetCapability(FirefoxDriver.ProfileCapabilityName, this.FirefoxProfile.ToBase64String());
+                case BrowserType.FirefoxPortable:
+                    capabilities = (DesiredCapabilities)this.FirefoxProfile.ToCapabilities();
                     break;
                 case BrowserType.InternetExplorer:
-                    var ieOption = new InternetExplorerOptions();
-                    capabilities = (DesiredCapabilities)ieOption.ToCapabilities();
+                    capabilities = (DesiredCapabilities)this.InternetExplorerProfile.ToCapabilities();
                     break;
                 case BrowserType.Chrome:
-                    var chromeOptions = new ChromeOptions();
-                    capabilities = (DesiredCapabilities)chromeOptions.ToCapabilities();
+                    capabilities = (DesiredCapabilities)this.ChromeProfile.ToCapabilities();
                     break;
                 case BrowserType.Safari:
-                    var safariOptions = new SafariOptions();
-                    capabilities = (DesiredCapabilities)safariOptions.ToCapabilities();
+                    capabilities = (DesiredCapabilities)this.SafariProfile.ToCapabilities();
+                    break;
+                case BrowserType.Edge:
+                    capabilities = (DesiredCapabilities)this.EdgeProfile.ToCapabilities();
                     break;
                 default:
                     throw new NotSupportedException(
@@ -625,23 +665,6 @@ namespace Objectivity.Test.Automation.Common
             }
 
             return capabilities;
-        }
-
-        /// <summary>
-        /// Set proxy for Firefox
-        /// </summary>
-        /// <param name="options">FireFox Options</param>
-        /// <returns>FireFox options</returns>
-        private FirefoxOptions SetProxy(FirefoxOptions options)
-        {
-            // predefined preferences
-            // set browser proxy for firefox
-            if (!string.IsNullOrEmpty(BaseConfiguration.Proxy))
-            {
-                options.Proxy = this.CurrentProxy();
-            }
-
-            return options;
         }
 
         private Proxy CurrentProxy()
