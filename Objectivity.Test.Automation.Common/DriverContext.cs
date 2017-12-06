@@ -163,29 +163,11 @@ namespace Objectivity.Test.Automation.Common
         /// </summary>
         public string CurrentDirectory { get; set; }
 
-        private FirefoxOptions FirefoxProfile
+        private FirefoxProfile FirefoxProfile
         {
             get
             {
                 FirefoxProfile profile;
-
-                FirefoxOptions options;
-
-                if (BaseConfiguration.TestBrowser == BrowserType.FirefoxPortable)
-                {
-                    options = new FirefoxOptions
-                    {
-                        BrowserExecutableLocation = BaseConfiguration.FirefoxPath,
-                        UseLegacyImplementation = BaseConfiguration.FirefoxUseLegacyImplementation
-                    };
-                }
-                else
-                {
-                    options = new FirefoxOptions()
-                    {
-                        UseLegacyImplementation = BaseConfiguration.FirefoxUseLegacyImplementation
-                    };
-                }
 
                 if (BaseConfiguration.UseDefaultFirefoxProfile)
                 {
@@ -279,13 +261,15 @@ namespace Objectivity.Test.Automation.Common
                     }
                 }
 
-                // set browser proxy for firefox
-                if (!string.IsNullOrEmpty(BaseConfiguration.Proxy))
-                {
-                    options.Proxy = this.CurrentProxy();
-                }
+                return profile;
+            }
+        }
 
-                options.Profile = profile;
+        private FirefoxOptions FirefoxOptions
+        {
+            get
+            {
+                FirefoxOptions options = new FirefoxOptions();
                 return options;
             }
         }
@@ -469,8 +453,26 @@ namespace Objectivity.Test.Automation.Common
             switch (BaseConfiguration.TestBrowser)
             {
                 case BrowserType.Firefox:
+                    var fireFoxOptionsLegacy = new FirefoxOptions { Profile = this.FirefoxProfile, UseLegacyImplementation = BaseConfiguration.FirefoxUseLegacyImplementation };
+
+                    // set browser proxy for Firefox
+                    if (!string.IsNullOrEmpty(BaseConfiguration.Proxy))
+                    {
+                        fireFoxOptionsLegacy.Proxy = this.CurrentProxy();
+                    }
+
+                    this.driver = new FirefoxDriver(fireFoxOptionsLegacy);
+                    break;
                 case BrowserType.FirefoxPortable:
-                    this.driver = new FirefoxDriver(this.FirefoxProfile);
+                    var fireFoxOptions = new FirefoxOptions { BrowserExecutableLocation = BaseConfiguration.FirefoxPath, Profile = this.FirefoxProfile, UseLegacyImplementation = BaseConfiguration.FirefoxUseLegacyImplementation };
+
+                    // set browser proxy for Firefox
+                    if (!string.IsNullOrEmpty(BaseConfiguration.Proxy))
+                    {
+                        fireFoxOptions.Proxy = this.CurrentProxy();
+                    }
+
+                    this.driver = new FirefoxDriver(fireFoxOptions);
                     break;
                 case BrowserType.InternetExplorer:
                     this.driver = new InternetExplorerDriver(this.InternetExplorerProfile);
@@ -625,8 +627,8 @@ namespace Objectivity.Test.Automation.Common
             switch (BaseConfiguration.TestBrowserCapabilities)
             {
                 case BrowserType.Firefox:
-                case BrowserType.FirefoxPortable:
-                    capabilities = (DesiredCapabilities)this.FirefoxProfile.ToCapabilities();
+                    capabilities = (DesiredCapabilities)this.FirefoxOptions.ToCapabilities();
+                    capabilities.SetCapability(FirefoxDriver.ProfileCapabilityName, this.FirefoxProfile.ToBase64String());
                     break;
                 case BrowserType.InternetExplorer:
                     capabilities = (DesiredCapabilities)this.InternetExplorerProfile.ToCapabilities();

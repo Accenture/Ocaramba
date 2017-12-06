@@ -58,7 +58,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
                 || BaseConfiguration.TestBrowser == BrowserType.RemoteWebDriver)
             {
                 this.Driver.GetElement(this.fileLink.Format(fileName), "Click on file").Click();
-                FilesHelper.WaitForFileOfGivenName(fileName, this.DriverContext.DownloadFolder);
+                FilesHelper.WaitForFileOfGivenName(fileName, this.DriverContext.DownloadFolder, false);
                 FilesHelper.RenameFile(fileName, newName, this.DriverContext.DownloadFolder, FileType.Csv);
             }
             else
@@ -111,7 +111,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 
         public string CheckIfScreenShotIsSaved(int screenShotNumber)
         {
-            FilesHelper.WaitForFileOfGivenType(FileType.Png, 5, screenShotNumber, this.DriverContext.ScreenShotFolder);
+            FilesHelper.WaitForFileOfGivenType(FileType.Png, 5, screenShotNumber, this.DriverContext.ScreenShotFolder, true);
             var nameOfFile = FilesHelper.GetLastFile(this.DriverContext.ScreenShotFolder, FileType.Png);
 
             return nameOfFile.FullName;
