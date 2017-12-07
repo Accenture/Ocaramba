@@ -1,4 +1,4 @@
-﻿// <copyright file="BrowserType.cs" company="Objectivity Bespoke Software Specialists">
+﻿// <copyright file="ProjectBaseConfiguration.cs" company="Objectivity Bespoke Software Specialists">
 // Copyright (c) Objectivity Bespoke Software Specialists. All rights reserved.
 // </copyright>
 // <license>
@@ -20,61 +20,46 @@
 //     SOFTWARE.
 // </license>
 
-namespace Objectivity.Test.Automation.Common
+namespace Objectivity.Test.Automation.Tests.NUnit
 {
+    using System.Configuration;
+    using System.IO;
+    using System.Reflection;
+    using Common;
+    using Common.Helpers;
+
     /// <summary>
-    /// Supported browsers
+    /// SeleniumConfiguration that consume app.config file
     /// </summary>
-    public enum BrowserType
+    public static class ProjectBaseConfiguration
     {
-        /// <summary>
-        /// Firefox browser
-        /// </summary>
-        Firefox,
+        private static readonly string CurrentDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
         /// <summary>
-        /// Firefox portable
+        /// Gets the data driven file.
         /// </summary>
-        FirefoxPortable,
+        /// <value>
+        /// The data driven file.
+        /// </value>
+        public static string DataDrivenFile
+        {
+            get
+            {
+                if (BaseConfiguration.UseCurrentDirectory)
+                {
+                    return Path.Combine(CurrentDirectory + ConfigurationManager.AppSettings["DataDrivenFile"]);
+                }
+
+                return ConfigurationManager.AppSettings["DataDrivenFile"];
+            }
+        }
 
         /// <summary>
-        /// InternetExplorer browser
+        /// Gets the Download Folder path
         /// </summary>
-        InternetExplorer,
-
-        /// <summary>
-        /// Chrome browser
-        /// </summary>
-        Chrome,
-
-        /// <summary>
-        /// PhantomJs browser
-        /// </summary>
-        PhantomJs,
-
-        /// <summary>
-        /// Safari browser
-        /// </summary>
-        Safari,
-
-        /// <summary>
-        /// Remote Web driver
-        /// </summary>
-        RemoteWebDriver,
-
-        /// <summary>
-        /// Edge driver
-        /// </summary>
-        Edge,
-
-        /// <summary>
-        /// BrowserStack parallel cross bowser testing
-        /// </summary>
-        BrowserStack,
-
-        /// <summary>
-        /// Not supported browser
-        /// </summary>
-        None
+        public static string DownloadFolderPath
+        {
+            get { return FilesHelper.GetFolder(ConfigurationManager.AppSettings["DownloadFolder"], CurrentDirectory); }
+        }
     }
 }

@@ -642,6 +642,8 @@ namespace Objectivity.Test.Automation.Common
                 case BrowserType.Edge:
                     capabilities = (DesiredCapabilities)this.EdgeProfile.ToCapabilities();
                     break;
+                case BrowserType.BrowserStack:
+                    break;
                 default:
                     throw new NotSupportedException(
                         string.Format(CultureInfo.CurrentCulture, "Driver {0} is not supported with Selenium Grid", BaseConfiguration.TestBrowser));
