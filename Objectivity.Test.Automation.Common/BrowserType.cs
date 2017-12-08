@@ -68,6 +68,11 @@ namespace Objectivity.Test.Automation.Common
         Edge,
 
         /// <summary>
+        /// BrowserStack parallel cross browsers testing
+        /// </summary>
+        BrowserStack,
+
+        /// <summary>
         /// Not supported browser
         /// </summary>
         None

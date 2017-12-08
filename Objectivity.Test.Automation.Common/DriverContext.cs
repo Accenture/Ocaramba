@@ -487,6 +487,7 @@ namespace Objectivity.Test.Automation.Common
                     this.driver = new PhantomJSDriver(this.CurrentDirectory + BaseConfiguration.PhantomJsPath);
                     break;
                 case BrowserType.RemoteWebDriver:
+                case BrowserType.BrowserStack:
                     this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetCapabilities());
                     break;
                 case BrowserType.Edge:
@@ -625,27 +626,29 @@ namespace Objectivity.Test.Automation.Common
             DesiredCapabilities capabilities = new DesiredCapabilities();
 
             switch (BaseConfiguration.TestBrowserCapabilities)
-            {
-                case BrowserType.Firefox:
-                    capabilities = (DesiredCapabilities)this.FirefoxOptions.ToCapabilities();
-                    capabilities.SetCapability(FirefoxDriver.ProfileCapabilityName, this.FirefoxProfile.ToBase64String());
-                    break;
-                case BrowserType.InternetExplorer:
-                    capabilities = (DesiredCapabilities)this.InternetExplorerProfile.ToCapabilities();
-                    break;
-                case BrowserType.Chrome:
-                    capabilities = (DesiredCapabilities)this.ChromeProfile.ToCapabilities();
-                    break;
-                case BrowserType.Safari:
-                    capabilities = (DesiredCapabilities)this.SafariProfile.ToCapabilities();
-                    break;
-                case BrowserType.Edge:
-                    capabilities = (DesiredCapabilities)this.EdgeProfile.ToCapabilities();
-                    break;
-                default:
-                    throw new NotSupportedException(
-                        string.Format(CultureInfo.CurrentCulture, "Driver {0} is not supported with Selenium Grid", BaseConfiguration.TestBrowser));
-            }
+              {
+                  case BrowserType.Firefox:
+                      capabilities = (DesiredCapabilities)this.FirefoxOptions.ToCapabilities();
+                      capabilities.SetCapability(FirefoxDriver.ProfileCapabilityName, this.FirefoxProfile.ToBase64String());
+                      break;
+                  case BrowserType.InternetExplorer:
+                      capabilities = (DesiredCapabilities)this.InternetExplorerProfile.ToCapabilities();
+                      break;
+                  case BrowserType.Chrome:
+                      capabilities = (DesiredCapabilities)this.ChromeProfile.ToCapabilities();
+                      break;
+                  case BrowserType.Safari:
+                      capabilities = (DesiredCapabilities)this.SafariProfile.ToCapabilities();
+                      break;
+                  case BrowserType.Edge:
+                      capabilities = (DesiredCapabilities)this.EdgeProfile.ToCapabilities();
+                      break;
+                  case BrowserType.BrowserStack:
+                      break;
+                  default:
+                      throw new NotSupportedException(
+                          string.Format(CultureInfo.CurrentCulture, "Driver {0} is not supported with Selenium Grid", BaseConfiguration.TestBrowser));
+                }
 
             var driverCapabilitiesConf = ConfigurationManager.GetSection("DriverCapabilities") as NameValueCollection;
 
