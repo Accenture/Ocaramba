@@ -25,13 +25,13 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
     using System.Collections.Generic;
     using Automation.Tests.PageObjects.PageObjects.TheInternet;
     using Common;
-    using DataDriven;
     using global::NUnit.Framework;
 
     [TestFixture("Chrome")]
     [TestFixture("Firefox")]
     [TestFixture("Safari")]
     [TestFixture("Edge")]
+    [TestFixture("IE")]
     [Parallelizable(ParallelScope.Fixtures)]
     public class HerokuappTestsNUnit : ProjectTestBase
     {
