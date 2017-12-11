@@ -179,8 +179,25 @@ test_script:
     7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.MSTest\bin\Release\**\*.html
 
     7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.MSTest\bin\Release\*.log
+    
+    cd .\\scripts
+    
+    set_AppConfig_for_tests "..\Objectivity.Test.Automation.Tests.BrowserStackCrossBrowser\bin\Release" "Objectivity.Test.Automation.Tests.NUnit.dll.config" "//DriverCapabilities" "browserstack.user|browserstack.key|build" "$env:browserstackuser|$env:browserstackkey|Objectivity.Test.Automation.Tests.BrowserStackCrossBrowser$env:appveyor_build_version"
 
+    cd ..
+    
+    Invoke-Expression 'nunit3-console .\Objectivity.Test.Automation.Tests.BrowserStackCrossBrowser\bin\Release\Objectivity.Test.Automation.Tests.NUnit.dll --result=myresults.xml`;format=AppVeyor'
 
+    if($lastexitcode -ne 0)
+      {
+       echo $lastexitcode
+      }
+    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.BrowserStackCrossBrowser\bin\Release\**\*.png
+
+    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.BrowserStackCrossBrowser\bin\Release\**\*.html
+
+    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.BrowserStackCrossBrowser\bin\Release\*.log
+    
     appveyor PushArtifact testresults_$env:appveyor_build_version.zip
 artifacts:
 - path: .\Objectivity.Test.Automation.Common.*.nupkg
