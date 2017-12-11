@@ -17,8 +17,19 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 #>
+    param(
+    [string]$OutDir,
+    
+    [string]$configName,
 
-Function set_AppConfig_for_tests()
+    [string]$section,
+    
+    [string]$keys,
+    
+    [string]$values
+    )
+
+Function set_AppConfig_for_tests([string]$OutDir,[string]$configName,[string]$section,[string]$keys,[string]$values)
 {
 	    <#
     .SYNOPSIS
@@ -40,17 +51,6 @@ Function set_AppConfig_for_tests()
     set_AppConfig_for_tests "..\Objectivity.Test.Automation.Tests.BrowserStackCrossBrowser\bin\Debug" "Objectivity.Test.Automation.Tests.NUnit.dll.config" "//DriverCapabilities" "browserstack.user|browserstack.key" "key1value|key2value"
     #>
 
-    param(
-    [string]$OutDir,
-    
-    [string]$configName,
-
-    [string]$section,
-    
-    [string]$keys,
-    
-    [string]$values
-    )
 
 	$workingDir = Resolve-Path $OutDir
     Write-Host OutDir $OutDir
@@ -81,3 +81,5 @@ Function set_AppConfig_for_tests()
 	  }	
     $config.Save($configFile)
     }
+
+set_AppConfig_for_tests $OutDir $configName $section $keys $values

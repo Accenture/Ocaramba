@@ -182,7 +182,7 @@ test_script:
     
     cd .\\scripts
     
-    set_AppConfig_for_tests "..\Objectivity.Test.Automation.Tests.BrowserStackCrossBrowser\bin\Release" "Objectivity.Test.Automation.Tests.NUnit.dll.config" "//DriverCapabilities" "browserstack.user|browserstack.key|build" "$env:browserstackuser|$env:browserstackkey|Objectivity.Test.Automation.Tests.BrowserStackCrossBrowser$env:appveyor_build_version"
+    .\set_AppConfig_for_tests.ps1 "..\Objectivity.Test.Automation.Tests.BrowserStackCrossBrowser\bin\Release" "Objectivity.Test.Automation.Tests.NUnit.dll.config" "//DriverCapabilities" "browserstack.user|browserstack.key|build" "$env:browserstackuser|$env:browserstackkey|Objectivity.Test.Automation.Tests.BrowserStackCrossBrowser$env:appveyor_build_version"
 
     cd ..
     
