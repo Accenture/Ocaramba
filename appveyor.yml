@@ -35,6 +35,8 @@ environment:
   frameworkVersion: 3.0.9
   GithubAuthToken:
     secure: x9uTnOFLUnZ6DiVhpBBxIJxij33Sz9uAIe+qef6M3sj9+J/AUmpfBmiGgqRabTqs
+  browserstackuser:
+    secure: 0JGVozUyY/OYBuPZk2Pbgw==
 before_build:
 - cmd: >-
     nuget restore
