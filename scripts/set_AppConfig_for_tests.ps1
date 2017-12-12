@@ -58,7 +58,7 @@ Function set_AppConfig_for_tests([string]$OutDir,[string]$configName,[string]$se
     Write-Host configName $configName
     Write-Host section $section
     Write-Host keys $keys
-    Write-Host values $values
+    #Write-Host values $values
 
     $configFile = "$workingDir\$configName"
     Write-Host configFile $configFile
@@ -74,7 +74,7 @@ Function set_AppConfig_for_tests([string]$OutDir,[string]$configName,[string]$se
         $key=$keysArray[$i]
         Write-Host  "key:" $i $key
         $value=$valueArray[$i]
-        Write-Host "value:" $i $value
+        #Write-Host "value:" $i $value
        
         $config.SelectSingleNode("/configuration$section//add[@key='$key']/@value").value = $value
 
