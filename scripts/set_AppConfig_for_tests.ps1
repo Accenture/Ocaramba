@@ -26,10 +26,12 @@ SOFTWARE.
     
     [string]$keys,
     
-    [string]$values
+    [string]$values,
+	
+	[bool]$logValues=$false
     )
 
-Function set_AppConfig_for_tests([string]$OutDir,[string]$configName,[string]$section,[string]$keys,[string]$values)
+Function set_AppConfig_for_tests([string]$OutDir,[string]$configName,[string]$section,[string]$keys,[string]$values, [bool]$logValues)
 {
 	    <#
     .SYNOPSIS
@@ -48,7 +50,8 @@ Function set_AppConfig_for_tests([string]$OutDir,[string]$configName,[string]$se
     .PARAMETER values
     Values of keys for update separated by |, in same order as keys.
     .EXAMPLE
-    set_AppConfig_for_tests "..\Objectivity.Test.Automation.Tests.BrowserStackCrossBrowser\bin\Debug" "Objectivity.Test.Automation.Tests.NUnit.dll.config" "//DriverCapabilities" "browserstack.user|browserstack.key" "key1value|key2value"
+    .\set_AppConfig_for_tests "..\Objectivity.Test.Automation.Tests.BrowserStackCrossBrowser\bin\Debug" "Objectivity.Test.Automation.Tests.NUnit.dll.config" "//DriverCapabilities" "browserstack.user|browserstack.key" "key1value|key2value"
+    .\set_AppConfig_for_tests.ps1 "..\Objectivity.Test.Automation.Tests.BrowserStackCrossBrowser\bin\Debug" "Objectivity.Test.Automation.Tests.NUnit.dll.config" "//DriverCapabilities" "browserstack.user|browserstack.key" "key1value|key2value" $true
     #>
 
 
@@ -58,7 +61,11 @@ Function set_AppConfig_for_tests([string]$OutDir,[string]$configName,[string]$se
     Write-Host configName $configName
     Write-Host section $section
     Write-Host keys $keys
-    #Write-Host values $values
+	Write-Host logValues $logValues
+	if($logValues -eq $true)
+	{
+		Write-Host values $values
+	}
 
     $configFile = "$workingDir\$configName"
     Write-Host configFile $configFile
@@ -74,12 +81,14 @@ Function set_AppConfig_for_tests([string]$OutDir,[string]$configName,[string]$se
         $key=$keysArray[$i]
         Write-Host  "key:" $i $key
         $value=$valueArray[$i]
-        #Write-Host "value:" $i $value
-       
+		if($logValues -eq $true)
+		{
+			Write-Host "value:" $i $value
+        }
         $config.SelectSingleNode("/configuration$section//add[@key='$key']/@value").value = $value
 
 	  }	
     $config.Save($configFile)
     }
 
-set_AppConfig_for_tests $OutDir $configName $section $keys $values
+set_AppConfig_for_tests $OutDir $configName $section $keys $values $logValues
