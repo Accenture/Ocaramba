@@ -37,6 +37,8 @@ environment:
     secure: x9uTnOFLUnZ6DiVhpBBxIJxij33Sz9uAIe+qef6M3sj9+J/AUmpfBmiGgqRabTqs
   browserstackuser:
     secure: 0JGVozUyY/OYBuPZk2Pbgw==
+  browserstackkey:
+    secure: YHh04n6C6SbfOzML+yYwW9nVYN/zDWJ/kM2GLaOy/ro=
 before_build:
 - cmd: >-
     nuget restore
