@@ -26,7 +26,7 @@ namespace Objectivity.Test.Automation.Common
     using OpenQA.Selenium.Remote;
 
     /// <summary>
-    /// Before Capabilities Set Handler
+    /// Before Capabilities Set Handler. <see href="https://github.com/ObjectivityLtd/Test.Automation/wiki/Advanced-Browser-Capabilities">More details on wiki</see>
     /// </summary>
     public class CapabilitiesSetEventArgs : EventArgs
     {
