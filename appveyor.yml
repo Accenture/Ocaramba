@@ -11,7 +11,7 @@ init:
       if ($env:APPVEYOR_REPO_TAG -eq "true")
       {
       
-        Update-AppveyorBuild -Version "$env:APPVEYOR_REPO_TAG_NAME"
+        Update-AppveyorBuild -Version "$env:APPVEYOR_REPO_TAG_NAME.{build}"
         
         $env:frameworkVersion = "$env:APPVEYOR_REPO_TAG_NAME" 
         
@@ -32,7 +32,7 @@ assembly_info:
 environment:
   APPVEYOR_RDP_PASSWORD:
     secure: 3OiDAcFLoSt3UCnmEU+XgM2d541PAqCNJAPqoiRqwRI=
-  frameworkVersion: 3.0.9
+  frameworkVersion: 3.1.0
   GithubAuthToken:
     secure: x9uTnOFLUnZ6DiVhpBBxIJxij33Sz9uAIe+qef6M3sj9+J/AUmpfBmiGgqRabTqs
 before_build:
