@@ -63,6 +63,16 @@ namespace Objectivity.Test.Automation.Common
         RemoteWebDriver,
 
         /// <summary>
+        /// Edge driver
+        /// </summary>
+        Edge,
+
+        /// <summary>
+        /// BrowserStack parallel cross browsers testing
+        /// </summary>
+        BrowserStack,
+
+        /// <summary>
         /// Not supported browser
         /// </summary>
         None

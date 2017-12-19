@@ -39,6 +39,7 @@ namespace Objectivity.Test.Automation.Common
     using Objectivity.Test.Automation.Common.Types;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Chrome;
+    using OpenQA.Selenium.Edge;
     using OpenQA.Selenium.Firefox;
     using OpenQA.Selenium.IE;
     using OpenQA.Selenium.PhantomJS;
@@ -188,13 +189,6 @@ namespace Objectivity.Test.Automation.Common
                     profile = new FirefoxProfile();
                 }
 
-                // predefined preferences
-                // set browser proxy for firefox
-                if (!string.IsNullOrEmpty(BaseConfiguration.Proxy))
-                {
-                    profile.SetProxyPreferences(this.CurrentProxy());
-                }
-
                 profile.SetPreference("toolkit.startup.max_resumed_crashes", "999999");
                 profile.SetPreference("network.automatic-ntlm-auth.trusted-uris", BaseConfiguration.Host ?? string.Empty);
 
@@ -268,6 +262,15 @@ namespace Objectivity.Test.Automation.Common
                 }
 
                 return profile;
+            }
+        }
+
+        private FirefoxOptions FirefoxOptions
+        {
+            get
+            {
+                FirefoxOptions options = new FirefoxOptions();
+                return options;
             }
         }
 
@@ -383,6 +386,22 @@ namespace Objectivity.Test.Automation.Common
             }
         }
 
+        private EdgeOptions EdgeProfile
+        {
+            get
+            {
+                var options = new EdgeOptions();
+
+                // set browser proxy for Edge
+                if (!string.IsNullOrEmpty(BaseConfiguration.Proxy))
+                {
+                    options.Proxy = this.CurrentProxy();
+                }
+
+                return options;
+            }
+        }
+
         private SafariOptions SafariProfile
         {
             get
@@ -435,10 +454,24 @@ namespace Objectivity.Test.Automation.Common
             {
                 case BrowserType.Firefox:
                     var fireFoxOptionsLegacy = new FirefoxOptions { Profile = this.FirefoxProfile, UseLegacyImplementation = BaseConfiguration.FirefoxUseLegacyImplementation };
+
+                    // set browser proxy for Firefox
+                    if (!string.IsNullOrEmpty(BaseConfiguration.Proxy))
+                    {
+                        fireFoxOptionsLegacy.Proxy = this.CurrentProxy();
+                    }
+
                     this.driver = new FirefoxDriver(fireFoxOptionsLegacy);
                     break;
                 case BrowserType.FirefoxPortable:
                     var fireFoxOptions = new FirefoxOptions { BrowserExecutableLocation = BaseConfiguration.FirefoxPath, Profile = this.FirefoxProfile, UseLegacyImplementation = BaseConfiguration.FirefoxUseLegacyImplementation };
+
+                    // set browser proxy for Firefox
+                    if (!string.IsNullOrEmpty(BaseConfiguration.Proxy))
+                    {
+                        fireFoxOptions.Proxy = this.CurrentProxy();
+                    }
+
                     this.driver = new FirefoxDriver(fireFoxOptions);
                     break;
                 case BrowserType.InternetExplorer:
@@ -454,7 +487,11 @@ namespace Objectivity.Test.Automation.Common
                     this.driver = new PhantomJSDriver(this.CurrentDirectory + BaseConfiguration.PhantomJsPath);
                     break;
                 case BrowserType.RemoteWebDriver:
+                case BrowserType.BrowserStack:
                     this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetCapabilities());
+                    break;
+                case BrowserType.Edge:
+                    this.driver = new EdgeDriver(this.EdgeProfile);
                     break;
                 default:
                     throw new NotSupportedException(
@@ -589,24 +626,29 @@ namespace Objectivity.Test.Automation.Common
             DesiredCapabilities capabilities = new DesiredCapabilities();
 
             switch (BaseConfiguration.TestBrowserCapabilities)
-            {
-                case BrowserType.Firefox:
-                    capabilities = DesiredCapabilities.Firefox();
-                    capabilities.SetCapability(FirefoxDriver.ProfileCapabilityName, this.FirefoxProfile.ToBase64String());
-                    break;
-                case BrowserType.InternetExplorer:
-                    capabilities = DesiredCapabilities.InternetExplorer();
-                    break;
-                case BrowserType.Chrome:
-                    capabilities = DesiredCapabilities.Chrome();
-                    break;
-                case BrowserType.Safari:
-                    capabilities = DesiredCapabilities.Safari();
-                    break;
-                default:
-                    throw new NotSupportedException(
-                        string.Format(CultureInfo.CurrentCulture, "Driver {0} is not supported with Selenium Grid", BaseConfiguration.TestBrowser));
-            }
+              {
+                  case BrowserType.Firefox:
+                      capabilities = (DesiredCapabilities)this.FirefoxOptions.ToCapabilities();
+                      capabilities.SetCapability(FirefoxDriver.ProfileCapabilityName, this.FirefoxProfile.ToBase64String());
+                      break;
+                  case BrowserType.InternetExplorer:
+                      capabilities = (DesiredCapabilities)this.InternetExplorerProfile.ToCapabilities();
+                      break;
+                  case BrowserType.Chrome:
+                      capabilities = (DesiredCapabilities)this.ChromeProfile.ToCapabilities();
+                      break;
+                  case BrowserType.Safari:
+                      capabilities = (DesiredCapabilities)this.SafariProfile.ToCapabilities();
+                      break;
+                  case BrowserType.Edge:
+                      capabilities = (DesiredCapabilities)this.EdgeProfile.ToCapabilities();
+                      break;
+                  case BrowserType.BrowserStack:
+                      break;
+                  default:
+                      throw new NotSupportedException(
+                          string.Format(CultureInfo.CurrentCulture, "Driver {0} is not supported with Selenium Grid", BaseConfiguration.TestBrowser));
+                }
 
             var driverCapabilitiesConf = ConfigurationManager.GetSection("DriverCapabilities") as NameValueCollection;
 

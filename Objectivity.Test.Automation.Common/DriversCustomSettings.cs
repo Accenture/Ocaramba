@@ -26,7 +26,7 @@ namespace Objectivity.Test.Automation.Common
     using OpenQA.Selenium;
 
     /// <summary>
-    /// To keep drivers custom setting
+    /// To keep drivers custom setting. <see href="https://github.com/ObjectivityLtd/Test.Automation/wiki/Angular-support">More details on wiki</see>
     /// </summary>
     public static class DriversCustomSettings
     {

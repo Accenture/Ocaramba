@@ -52,6 +52,15 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
         }
 
         [Test]
+        public void DownloadFileByNameTest()
+        {
+            new InternetPage(this.DriverContext)
+                .OpenHomePage()
+                .GoToFileDownloader()
+                .SaveFile("some-file.txt", "new_file");
+        }
+
+        [Test]
         public void SecondDownloadGivenTypeFileByCountTest()
         {
             new InternetPage(this.DriverContext)

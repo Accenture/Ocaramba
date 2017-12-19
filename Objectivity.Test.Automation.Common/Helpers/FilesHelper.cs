@@ -338,33 +338,39 @@ namespace Objectivity.Test.Automation.Common.Helpers
         }
 
         /// <summary>
-        /// Waits for file of given type for given timeout till number of files increase in sub folder.
+        /// Waits for file of given type for given timeout till number of files increase in sub folder,checks  the size of the current file.
         /// </summary>
         /// <param name="type">The type of file.</param>
         /// <param name="waitTime">Wait timeout</param>
         /// <param name="filesNumber">The initial files number.</param>
         /// <param name="folder">The folder.</param>
+        /// <param name="checkSize">Check if  the size, in bytes, of the current file > 0.</param>
         /// <example>How to use it: <code>
         /// var filesNumber = FilesHelper.CountFiles(this.DriverContext.DownloadFolder, FileType.Txt);
         /// this.Driver.GetElement(this.fileLink.Format("some-file.txt")).Click();
         /// FilesHelper.WaitForFileOfGivenType(FileType.Txt, BaseConfiguration.LongTimeout, filesNumber, this.DriverContext.DownloadFolder);
         /// </code></example>
-        public static void WaitForFileOfGivenType(FileType type, double waitTime, int filesNumber, string folder)
+        public static void WaitForFileOfGivenType(FileType type, double waitTime, int filesNumber, string folder, bool checkSize)
         {
             Logger.Debug("Wait for file: {0}", type);
             var timeoutMessage = string.Format(CultureInfo.CurrentCulture, "Waiting for file number to increase in {0}", folder);
             WaitHelper.Wait(
                 () => CountFiles(folder, type) > filesNumber, TimeSpan.FromSeconds(waitTime), TimeSpan.FromSeconds(1), timeoutMessage);
 
-            Logger.Debug("Number of files increased, checking if size of last file > 0 bytes");
-            timeoutMessage = "Checking if size of last file > 0 bytes";
+            Logger.Debug("Number of files increased");
 
-            WaitHelper.Wait(
-               () => GetLastFile(folder).Length > 0, TimeSpan.FromSeconds(waitTime), TimeSpan.FromSeconds(1), timeoutMessage);
+            if (checkSize)
+            {
+                Logger.Debug("Checking if size of last file > 0 bytes");
+                timeoutMessage = "Checking if size of last file > 0 bytes";
+
+                WaitHelper.Wait(
+                    () => GetLastFile(folder).Length > 0, TimeSpan.FromSeconds(waitTime), TimeSpan.FromSeconds(1), timeoutMessage);
+            }
         }
 
         /// <summary>
-        /// Waits for file of given type for LongTimeout till number of files increase in sub folder.
+        /// Waits for file of given type for LongTimeout till number of files increase in sub folder, checks  the size of the current file.
         /// </summary>
         /// <param name="type">The type.</param>
         /// <param name="filesNumber">The files number.</param>
@@ -376,11 +382,40 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// </code></example>
         public static void WaitForFileOfGivenType(FileType type, int filesNumber, string folder)
         {
-            WaitForFileOfGivenType(type, BaseConfiguration.LongTimeout, filesNumber, folder);
+            WaitForFileOfGivenType(type, BaseConfiguration.LongTimeout, filesNumber, folder, true);
         }
 
         /// <summary>
-        /// Waits for file with given name with given timeout.
+        /// Waits for file with given name with given timeout, checks  the size of the current file.
+        /// </summary>
+        /// <param name="waitTime">Wait timeout</param>
+        /// <param name="filesName">Name of the files.</param>
+        /// <param name="folder">The folder.</param>
+        /// <param name="checkSize">If true, check the size, in bytes, of the current file > 0.</param>
+        /// <example>How to use it: <code>
+        /// var file = "some-file.txt"
+        /// this.Driver.GetElement(this.fileLink.Format(file), "Click on file").Click();
+        /// FilesHelper.WaitForFileOfGivenName(BaseConfiguration.LongTimeout, file, this.DriverContext.DownloadFolder, true);
+        /// </code></example>
+        public static void WaitForFileOfGivenName(double waitTime, string filesName, string folder, bool checkSize)
+        {
+            Logger.Debug(CultureInfo.CurrentCulture, "Wait for file: {0}", filesName);
+            var timeoutMessage = string.Format(CultureInfo.CurrentCulture, "Waiting for file {0} in folder {1}", filesName, folder);
+            WaitHelper.Wait(
+                () => File.Exists(folder + Separator + filesName), TimeSpan.FromSeconds(waitTime), TimeSpan.FromSeconds(1), timeoutMessage);
+
+            Logger.Debug("File exists");
+            if (checkSize)
+            {
+                Logger.Debug("Checking if size of last file > 0 bytes");
+                timeoutMessage = string.Format(CultureInfo.CurrentCulture, "Checking if size of file {0} > 0 bytes", filesName);
+                WaitHelper.Wait(
+                    () => GetFileByName(folder, filesName).Length > 0, TimeSpan.FromSeconds(waitTime), TimeSpan.FromSeconds(1), timeoutMessage);
+            }
+        }
+
+        /// <summary>
+        /// Waits for file with given name with given timeout, checks  the size of the current file.
         /// </summary>
         /// <param name="waitTime">Wait timeout</param>
         /// <param name="filesName">Name of the files.</param>
@@ -392,19 +427,11 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// </code></example>
         public static void WaitForFileOfGivenName(double waitTime, string filesName, string folder)
         {
-            Logger.Debug(CultureInfo.CurrentCulture, "Wait for file: {0}", filesName);
-            var timeoutMessage = string.Format(CultureInfo.CurrentCulture, "Waiting for file {0} in folder {1}", filesName, folder);
-            WaitHelper.Wait(
-                () => File.Exists(folder + Separator + filesName), TimeSpan.FromSeconds(waitTime), TimeSpan.FromSeconds(1), timeoutMessage);
-
-            Logger.Debug("File exists, checking if size of last file > 0 bytes");
-            timeoutMessage = string.Format(CultureInfo.CurrentCulture, "Checking if size of file {0} > 0 bytes", filesName);
-            WaitHelper.Wait(
-                () => GetFileByName(folder, filesName).Length > 0, TimeSpan.FromSeconds(waitTime), TimeSpan.FromSeconds(1), timeoutMessage);
+            WaitForFileOfGivenName(waitTime, filesName, folder, true);
         }
 
         /// <summary>
-        /// Waits for file of given name with LongTimeout
+        /// Waits for file of given name with LongTimeout, checks  the size of the current file.
         /// </summary>
         /// <param name="filesName">Name of the files.</param>
         /// <param name="folder">The folder.</param>
@@ -419,32 +446,54 @@ namespace Objectivity.Test.Automation.Common.Helpers
         }
 
         /// <summary>
-        /// Waits for file for given timeout till number of files increase in sub folder.
+        /// Waits for file of given name with LongTimeout, checks  the size of the current file.
+        /// </summary>
+        /// <param name="filesName">Name of the files.</param>
+        /// <param name="folder">The folder.</param>
+        /// <param name="checkSize">Check if  the size, in bytes, of the current file > 0.</param>
+        /// <example>How to use it: <code>
+        /// var file = "some-file.txt"
+        /// this.Driver.GetElement(this.fileLink.Format(file), "Click on file").Click();
+        /// FilesHelper.WaitForFileOfGivenName(file, this.DriverContext.DownloadFolder, true);
+        /// </code></example>
+        public static void WaitForFileOfGivenName(string filesName, string folder, bool checkSize)
+        {
+            WaitForFileOfGivenName(BaseConfiguration.LongTimeout, filesName, folder, checkSize);
+        }
+
+        /// <summary>
+        /// Waits for file for given timeout till number of files increase in sub folder, checks  the size of the current file.
         /// </summary>
         /// <param name="waitTime">Wait timeout</param>
         /// <param name="filesNumber">The initial files number.</param>
         /// <param name="folder">The folder.</param>
+        /// <param name="checkSize">Check if  the size, in bytes, of the current file > 0.</param>
         /// <example>How to use it:<code>
         /// var filesNumber = FilesHelper.CountFiles(this.DriverContext.DownloadFolder);
         /// this.Driver.GetElement(this.fileLink.Format("some-file.txt")).Click();
-        /// FilesHelper.WaitForFile(BaseConfiguration.LongTimeout, filesNumber, this.DriverContext.DownloadFolder);
+        /// FilesHelper.WaitForFile(BaseConfiguration.LongTimeout, filesNumber, this.DriverContext.DownloadFolder, true);
         /// </code></example>
-        public static void WaitForFile(double waitTime, int filesNumber, string folder)
+        public static void WaitForFile(double waitTime, int filesNumber, string folder, bool checkSize)
         {
             Logger.Debug("Wait for file");
             var timeoutMessage = string.Format(CultureInfo.CurrentCulture, "Waiting for file number to increase in {0}", folder);
             WaitHelper.Wait(
                 () => CountFiles(folder) > filesNumber, TimeSpan.FromSeconds(waitTime), TimeSpan.FromSeconds(1), timeoutMessage);
 
-            Logger.Debug("Number of files increased, checking if size of last file > 0 bytes");
-            timeoutMessage = "Checking if size of last file > 0 bytes";
+            Logger.Debug("Number of files increased");
 
-            WaitHelper.Wait(
-               () => GetLastFile(folder).Length > 0, TimeSpan.FromSeconds(waitTime), TimeSpan.FromSeconds(1), timeoutMessage);
+            if (checkSize)
+            {
+                Logger.Debug("checking if size of last file > 0 bytes");
+                timeoutMessage = "Checking if size of last file > 0 bytes";
+
+                WaitHelper.Wait(
+                    () => GetLastFile(folder).Length > 0, TimeSpan.FromSeconds(waitTime), TimeSpan.FromSeconds(1), timeoutMessage);
+            }
         }
 
         /// <summary>
-        /// Waits for file with LongTimeout till number of files increase in sub folder.
+        /// Waits for file with LongTimeout till number of files increase in sub folder, checks  the size of the current file.
         /// </summary>
         /// <param name="filesNumber">The initial files number.</param>
         /// <param name="folder">The folder.</param>
@@ -455,7 +504,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// </code></example>
         public static void WaitForFile(int filesNumber, string folder)
         {
-            WaitForFile(BaseConfiguration.LongTimeout, filesNumber, folder);
+            WaitForFile(BaseConfiguration.LongTimeout, filesNumber, folder, true);
         }
 
         /// <summary>

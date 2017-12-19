@@ -49,7 +49,7 @@ namespace Objectivity.Test.Automation.Common.WebElements
         /// <summary>
         /// Initializes a new instance of the <see cref="Select"/> class.
         /// </summary>
-        /// <param name="webElement">The webElement.</param>
+        /// <param name="webElement">The _webElement.</param>
         public Select(IWebElement webElement)
             : base(webElement.ToDriver() as RemoteWebDriver, null)
         {
