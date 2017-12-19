@@ -52,6 +52,7 @@
   <HelpKINode Title="Bmp enumeration member" Url="html/24ea484b-208c-10a9-79d9-518c88c2b6e9.htm" />
   <HelpKINode Title="Browser property" Url="html/d76bb42c-77f3-6115-eac5-e51f53aff2a0.htm" />
   <HelpKINode Title="BrowserName property" Url="html/dd90b482-8cf8-8dc4-4e7f-bf46e57c61b1.htm" />
+  <HelpKINode Title="BrowserStack enumeration member" Url="html/fd8f95a4-1921-2ebe-a199-a6c1d3adcc8c.htm" />
   <HelpKINode Title="BrowserType enumeration" Url="html/fd8f95a4-1921-2ebe-a199-a6c1d3adcc8c.htm" />
   <HelpKINode Title="Capabilities property" Url="html/f47c7a06-06a9-82eb-4068-fcea7a12b7fb.htm" />
   <HelpKINode Title="CapabilitiesSet event" Url="html/45dca327-d19f-808c-5a1a-a55d039aa660.htm" />
@@ -157,6 +158,7 @@
   <HelpKINode Title="DriversCustomSettings.IsDriverSynchronizationWithAngular method" Url="html/c4ca2d43-711f-0a0a-b16f-9683a2db6de4.htm" />
   <HelpKINode Title="DriversCustomSettings.SetAngularSynchronizationForDriver method" Url="html/4030f31c-44c0-1e86-1d91-88b43f89b8c5.htm" />
   <HelpKINode Title="Duration property" Url="html/b95e80fb-6200-f4d1-5ffe-482fa8566b4d.htm" />
+  <HelpKINode Title="Edge enumeration member" Url="html/fd8f95a4-1921-2ebe-a199-a6c1d3adcc8c.htm" />
   <HelpKINode Title="ElementCssSelector property" Url="html/eb06f9e0-2685-cbfa-6a0d-d92147e8430a.htm" />
   <HelpKINode Title="ElementLocator class">
     <HelpKINode Title="ElementLocator Class" Url="html/3e37c08d-14aa-a6a3-c8c9-71243476f712.htm" />
