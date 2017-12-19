@@ -11,7 +11,7 @@ init:
       if ($env:APPVEYOR_REPO_TAG -eq "true")
       {
       
-        Update-AppveyorBuild -Version "$env:APPVEYOR_REPO_TAG_NAME.{build}"
+        Update-AppveyorBuild -Version "$env:APPVEYOR_REPO_TAG_NAME.$env:APPVEYOR_BUILD_NUMBER"
         
         $env:frameworkVersion = "$env:APPVEYOR_REPO_TAG_NAME" 
         
