@@ -134,7 +134,7 @@ test_script:
 
     7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.Xunit\bin\Release\*.log
     
-    & $OpenCover -target:nunit3-console -mergeoutput -targetargs:".\Objectivity.Test.Automation.Tests.NUnit\bin\Release\Objectivity.Test.Automation.Tests.NUnit.dll .\Objectivity.Test.Automation.Tests.Angular\bin\Release\Objectivity.Test.Automation.Tests.Angular.dll .\Objectivity.Test.Automation.Tests.Features\bin\Release\Objectivity.Test.Automation.Tests.Features.dll .\Objectivity.Test.Automation.UnitTests\bin\Release\Objectivity.Test.Automation.UnitTests.dll --result=myresults.xml`;format=AppVeyor" -filter:"+[Objectivity.Test.Automation.Common]*" -register:user -output:opencoverCoverage.xml
+    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Objectivity.Test.Automation.Tests.NUnit\bin\Release\Objectivity.Test.Automation.Tests.NUnit.dll .\Objectivity.Test.Automation.Tests.Angular\bin\Release\Objectivity.Test.Automation.Tests.Angular.dll .\Objectivity.Test.Automation.Tests.Features\bin\Release\Objectivity.Test.Automation.Tests.Features.dll .\Objectivity.Test.Automation.UnitTests\bin\Release\Objectivity.Test.Automation.UnitTests.dll --result=myresults.xml`;format=AppVeyor" -filter:"+[Objectivity.Test.Automation.Common]*" -register:user -output:opencoverCoverage.xml
 
 
 
@@ -171,7 +171,7 @@ test_script:
     7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.UnitTests\bin\Release\*.log
 
 
-    & $OpenCover -target:vstest.console -mergeoutput -targetargs:"/logger`:Appveyor .\Objectivity.Test.Automation.Tests.MSTest\bin\Release\Objectivity.Test.Automation.Tests.MsTest.dll /Settings`:.\Objectivity.Test.Automation.Tests.MSTest\bin\Release\Runsettings.runsettings" -filter:"+[Objectivity.Test.Automation.Common]*" -register:user -output:opencoverCoverage.xml
+    & $OpenCover -target:vstest.console.exe -mergeoutput -targetargs:"/logger`:Appveyor .\Objectivity.Test.Automation.Tests.MSTest\bin\Release\Objectivity.Test.Automation.Tests.MsTest.dll /Settings`:.\Objectivity.Test.Automation.Tests.MSTest\bin\Release\Runsettings.runsettings" -filter:"+[Objectivity.Test.Automation.Common]*" -register:user -output:opencoverCoverage.xml
 
 
     if($lastexitcode -ne 0)
