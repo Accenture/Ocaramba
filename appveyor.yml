@@ -35,6 +35,8 @@ environment:
   frameworkVersion: 3.1.0
   GithubAuthToken:
     secure: x9uTnOFLUnZ6DiVhpBBxIJxij33Sz9uAIe+qef6M3sj9+J/AUmpfBmiGgqRabTqs
+  COVERALLS_REPO_TOKEN:
+    secure: ast5HH2v0jAME1tKDxPMw3TExnMxNp1+wXBea5zIzGNaKBm8ojTzv6YB03eQtEi+
 before_build:
 - cmd: >-
     nuget restore
@@ -113,8 +115,11 @@ after_build:
       appveyor PushArtifact gh-pages_$env:appveyor_build_version.zip
 test_script:
 - ps: >-
+    $OpenCover = (Resolve-Path ".\packages\OpenCover.*\tools\OpenCover.Console.exe").ToString()
+    
     $xunit = (Resolve-Path ".\packages\xunit.runner.console.*\tools\xunit.console.exe").ToString()
-    & $xunit .\Objectivity.Test.Automation.Tests.Xunit\bin\Release\Objectivity.Test.Automation.Tests.Xunit.dll -appveyor
+    
+    & $OpenCover -target:"$xunit" -mergeoutput -targetargs:".\Objectivity.Test.Automation.Tests.Xunit\bin\Debug\Objectivity.Test.Automation.Tests.Xunit.dll -appveyor -noshadow" -filter:"+[Objectivity.Test.Automation.Common]*" -register:user -output:opencoverCoverage.xml
 
 
     if($lastexitcode -ne 0)
@@ -180,6 +185,13 @@ test_script:
     7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.MSTest\bin\Release\**\*.html
 
     7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.MSTest\bin\Release\*.log
+    
+    $coveralls = (Resolve-Path ".\packages\coveralls.net.*\tools\csmacnz.coveralls.exe").ToString()
+    
+    & $coveralls --opencover -i opencoverCoverage.xml --repoToken $env:COVERALLS_REPO_TOKEN --useRelativePaths --commitId $env:APPVEYOR_REPO_COMMIT --commitBranch $env:APPVEYOR_REPO_BRANCH --commitAuthor $env:APPVEYOR_REPO_COMMIT_AUTHOR --commitMessage $env:APPVEYOR_REPO_COMMIT_MESSAGE --jobId $env:APPVEYOR_BUILD_NUMBER --serviceName appveyor
+
+
+
 
 
     appveyor PushArtifact testresults_$env:appveyor_build_version.zip
