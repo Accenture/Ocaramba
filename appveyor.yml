@@ -35,14 +35,19 @@ environment:
   frameworkVersion: 3.1.0
   GithubAuthToken:
     secure: x9uTnOFLUnZ6DiVhpBBxIJxij33Sz9uAIe+qef6M3sj9+J/AUmpfBmiGgqRabTqs
+  COVERALLS_REPO_TOKEN:
+    secure: ast5HH2v0jAME1tKDxPMw3TExnMxNp1+wXBea5zIzGNaKBm8ojTzv6YB03eQtEi+
 before_build:
 - cmd: >-
     nuget restore
 
 build:
+  project: TestFramework.sln
   verbosity: minimal
 after_build:
  - ps: >-
+      echo '********************************************Creating nuget packages********************************************'
+      
       Copy-Item .\.nuspec\Objectivity.Test.Automation.Nunit.nuspec .\\Objectivity.Test.Automation.Common\\Objectivity.Test.Automation.Common.nuspec
       
       nuget pack .\Objectivity.Test.Automation.Common\Objectivity.Test.Automation.Common.csproj -symbols -properties Configuration=Release
@@ -63,10 +68,19 @@ after_build:
       
       nuget pack .\Objectivity.Test.Automation.Common\Objectivity.Test.Automation.Common.csproj -symbols -properties Configuration=Release
       
-      Copy-Item -Path .\README.md -Destination .\Objectivity.Test.Automation.Common.Documentation\Help\ -recurse -force -verbose
+      echo '********************************************Copying files for gh-pages********************************************'
+      
+      Copy-Item -Path .\README.md -Destination .\Objectivity.Test.Automation.Common.Documentation\Help\ -recurse -force -verbose 
+      
+      New-Item .\Objectivity.Test.Automation.Common.Documentation\Help\Objectivity.Test.Automation.Common.Documentation\icons\ -Type Directory
+      
+      Copy-Item -Path .\Objectivity.Test.Automation.Common.Documentation\icons\Objectivity_logo_avatar.png -Destination .\Objectivity.Test.Automation.Common.Documentation\Help\Objectivity.Test.Automation.Common.Documentation\icons\ -recurse -force -verbose
+      
+      Copy-Item -Path .\Objectivity.Test.Automation.Common.Documentation\icons\Help.png -Destination .\Objectivity.Test.Automation.Common.Documentation\Help\Objectivity.Test.Automation.Common.Documentation\icons\ -recurse -force -verbose
       
       if ($env:APPVEYOR_REPO_TAG -eq "true")
       {
+        echo '********************************************Cloning gh-pages branch********************************************'
       
         Invoke-Expression "git config --global credential.helper store"
         
@@ -93,7 +107,8 @@ after_build:
      
       if ($env:APPVEYOR_REPO_TAG -eq "true")
       {
-      
+        echo '********************************************Publishing new version of gh-pages********************************************'
+        
         cd .\\Help 
         
         Invoke-Expression "git add --all"
@@ -113,10 +128,15 @@ after_build:
       appveyor PushArtifact gh-pages_$env:appveyor_build_version.zip
 test_script:
 - ps: >-
+    echo '********************************************Executing tests********************************************'
+
+    $OpenCover = (Resolve-Path ".\packages\OpenCover.*\tools\OpenCover.Console.exe").ToString()
+    
+    echo '********************************************XUnit tests********************************************'
+    
     $xunit = (Resolve-Path ".\packages\xunit.runner.console.*\tools\xunit.console.exe").ToString()
     
-    & $xunit .\Objectivity.Test.Automation.Tests.Xunit\bin\Release\Objectivity.Test.Automation.Tests.Xunit.dll -appveyor
-
+    & $OpenCover -target:"$xunit" -mergeoutput -targetargs:".\Objectivity.Test.Automation.Tests.Xunit\bin\Release\Objectivity.Test.Automation.Tests.Xunit.dll -appveyor -noshadow" -filter:"+[Objectivity.Test.Automation.Common]*" -register:user -output:opencoverCoverage.xml
 
     if($lastexitcode -ne 0)
       {
@@ -128,11 +148,10 @@ test_script:
     7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.Xunit\bin\Release\**\*.html
 
     7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.Xunit\bin\Release\*.log
-
-
-    Invoke-Expression 'nunit3-console .\Objectivity.Test.Automation.Tests.NUnit\bin\Release\Objectivity.Test.Automation.Tests.NUnit.dll .\Objectivity.Test.Automation.Tests.Angular\bin\Release\Objectivity.Test.Automation.Tests.Angular.dll .\Objectivity.Test.Automation.Tests.Features\bin\Release\Objectivity.Test.Automation.Tests.Features.dll .\Objectivity.Test.Automation.UnitTests\bin\Release\Objectivity.Test.Automation.UnitTests.dll --result=myresults.xml`;format=AppVeyor'
-
-
+    
+    echo '********************************************NUnit tests********************************************'
+    
+    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Objectivity.Test.Automation.Tests.NUnit\bin\Release\Objectivity.Test.Automation.Tests.NUnit.dll .\Objectivity.Test.Automation.Tests.Angular\bin\Release\Objectivity.Test.Automation.Tests.Angular.dll .\Objectivity.Test.Automation.Tests.Features\bin\Release\Objectivity.Test.Automation.Tests.Features.dll .\Objectivity.Test.Automation.UnitTests\bin\Release\Objectivity.Test.Automation.UnitTests.dll --result=myresults.xml`;format=AppVeyor" -filter:"+[Objectivity.Test.Automation.Common]*" -register:user -output:opencoverCoverage.xml
 
     if($lastexitcode -ne 0)
       {
@@ -166,9 +185,9 @@ test_script:
 
     7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.UnitTests\bin\Release\*.log
 
+    echo '********************************************MSTest tests********************************************'
 
-
-    Invoke-Expression 'vstest.console /logger`:Appveyor .\Objectivity.Test.Automation.Tests.MSTest\bin\Release\Objectivity.Test.Automation.Tests.MsTest.dll /Settings`:.\Objectivity.Test.Automation.Tests.MSTest\bin\Release\Runsettings.runsettings'
+    & $OpenCover -target:vstest.console.exe -mergeoutput -targetargs:"/logger`:Appveyor .\Objectivity.Test.Automation.Tests.MSTest\bin\Release\Objectivity.Test.Automation.Tests.MsTest.dll /Settings`:.\Objectivity.Test.Automation.Tests.MSTest\bin\Release\Runsettings.runsettings" -filter:"+[Objectivity.Test.Automation.Common]*" -register:user -output:opencoverCoverage.xml
 
 
     if($lastexitcode -ne 0)
@@ -181,8 +200,18 @@ test_script:
     7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.MSTest\bin\Release\**\*.html
 
     7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.MSTest\bin\Release\*.log
+    
+    echo '********************************************Sending coverage test results********************************************'
+    
+    $coveralls = (Resolve-Path ".\packages\coveralls.net.*\tools\csmacnz.coveralls.exe").ToString()
+    
+    & $coveralls --opencover -i opencoverCoverage.xml --repoToken $env:COVERALLS_REPO_TOKEN --useRelativePaths --commitId $env:APPVEYOR_REPO_COMMIT --commitBranch $env:APPVEYOR_REPO_BRANCH --commitAuthor $env:APPVEYOR_REPO_COMMIT_AUTHOR --commitEmail $env:APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL --commitMessage $env:APPVEYOR_REPO_COMMIT_MESSAGE --jobId $env:APPVEYOR_BUILD_NUMBER --serviceName appveyor
 
 
+    appveyor PushArtifact  opencoverCoverage.xml
+
+    echo '********************************************Uploading test results artifact********************************************'
+    
     appveyor PushArtifact testresults_$env:appveyor_build_version.zip
 artifacts:
 - path: .\Objectivity.Test.Automation.Common.*.nupkg
