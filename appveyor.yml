@@ -72,6 +72,8 @@ after_build:
       
       Copy-Item -Path .\README.md -Destination .\Objectivity.Test.Automation.Common.Documentation\Help\ -recurse -force -verbose 
       
+      New-Item .\Objectivity.Test.Automation.Common.Documentation\Help\Objectivity.Test.Automation.Common.Documentation\icons\ -Type Directory
+      
       Copy-Item -Path .\Objectivity.Test.Automation.Common.Documentation\icons\Objectivity_logo_avatar.png -Destination .\Objectivity.Test.Automation.Common.Documentation\Help\Objectivity.Test.Automation.Common.Documentation\icons\ -recurse -force -verbose
       
       Copy-Item -Path .\Objectivity.Test.Automation.Common.Documentation\icons\Help.png -Destination .\Objectivity.Test.Automation.Common.Documentation\Help\Objectivity.Test.Automation.Common.Documentation\icons\ -recurse -force -verbose
