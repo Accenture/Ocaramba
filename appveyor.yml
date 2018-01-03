@@ -138,7 +138,6 @@ test_script:
     
     & $OpenCover -target:"$xunit" -mergeoutput -targetargs:".\Objectivity.Test.Automation.Tests.Xunit\bin\Release\Objectivity.Test.Automation.Tests.Xunit.dll -appveyor -noshadow" -filter:"+[Objectivity.Test.Automation.Common]*" -register:user -output:opencoverCoverage.xml
 
-
     if($lastexitcode -ne 0)
       {
        echo $lastexitcode
@@ -153,8 +152,6 @@ test_script:
     echo '********************************************NUnit tests********************************************'
     
     & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Objectivity.Test.Automation.Tests.NUnit\bin\Release\Objectivity.Test.Automation.Tests.NUnit.dll .\Objectivity.Test.Automation.Tests.Angular\bin\Release\Objectivity.Test.Automation.Tests.Angular.dll .\Objectivity.Test.Automation.Tests.Features\bin\Release\Objectivity.Test.Automation.Tests.Features.dll .\Objectivity.Test.Automation.UnitTests\bin\Release\Objectivity.Test.Automation.UnitTests.dll --result=myresults.xml`;format=AppVeyor" -filter:"+[Objectivity.Test.Automation.Common]*" -register:user -output:opencoverCoverage.xml
-
-
 
     if($lastexitcode -ne 0)
       {
