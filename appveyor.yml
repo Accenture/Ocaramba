@@ -17,9 +17,9 @@ init:
         
       }
       
-      echo 'frameworkVersion'  $env:frameworkVersion
+      Add-AppveyorMessage "frameworkVersion  $env:frameworkVersion"
       
-      echo 'version' $env:appveyor_build_version 
+      Add-AppveyorMessage "version $env:appveyor_build_version" 
       
       iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 
@@ -66,7 +66,11 @@ after_build:
       
       nuget pack .\Objectivity.Test.Automation.Common\Objectivity.Test.Automation.Common.csproj -symbols -properties Configuration=Release
       
-      Copy-Item -Path .\README.md -Destination .\Objectivity.Test.Automation.Common.Documentation\Help\ -recurse -force -verbose
+      Copy-Item -Path .\README.md -Destination .\Objectivity.Test.Automation.Common.Documentation\Help\ -recurse -force -verbose 
+      
+      Copy-Item -Path .\Objectivity.Test.Automation.Common.Documentation\icons\Objectivity_logo_avatar.png -Destination .\Objectivity.Test.Automation.Common.Documentation\Help\Objectivity.Test.Automation.Common.Documentation\icons\ -recurse -force -verbose
+      
+      Copy-Item -Path .\Objectivity.Test.Automation.Common.Documentation\icons\Help.png -Destination .\Objectivity.Test.Automation.Common.Documentation\Help\Objectivity.Test.Automation.Common.Documentation\icons\ -recurse -force -verbose
       
       if ($env:APPVEYOR_REPO_TAG -eq "true")
       {
