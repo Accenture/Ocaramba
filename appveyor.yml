@@ -46,7 +46,7 @@ build:
   verbosity: minimal
 after_build:
  - ps: >-
-      echo '*************************Creating nuget packages*************************'
+      echo '********************************************Creating nuget packages********************************************'
       
       Copy-Item .\.nuspec\Objectivity.Test.Automation.Nunit.nuspec .\\Objectivity.Test.Automation.Common\\Objectivity.Test.Automation.Common.nuspec
       
@@ -68,7 +68,7 @@ after_build:
       
       nuget pack .\Objectivity.Test.Automation.Common\Objectivity.Test.Automation.Common.csproj -symbols -properties Configuration=Release
       
-      echo '*************************Copying files for gh-pages*************************'
+      echo '********************************************Copying files for gh-pages********************************************'
       
       Copy-Item -Path .\README.md -Destination .\Objectivity.Test.Automation.Common.Documentation\Help\ -recurse -force -verbose 
       
@@ -78,7 +78,7 @@ after_build:
       
       if ($env:APPVEYOR_REPO_TAG -eq "true")
       {
-        echo '*************************Cloning gh-pages branch*************************'
+        echo '********************************************Cloning gh-pages branch********************************************'
       
         Invoke-Expression "git config --global credential.helper store"
         
@@ -105,7 +105,7 @@ after_build:
      
       if ($env:APPVEYOR_REPO_TAG -eq "true")
       {
-        echo '*************************Publishing new version of gh-pages*************************'
+        echo '********************************************Publishing new version of gh-pages********************************************'
         
         cd .\\Help 
         
@@ -126,11 +126,11 @@ after_build:
       appveyor PushArtifact gh-pages_$env:appveyor_build_version.zip
 test_script:
 - ps: >-
-    echo '*************************Executing tests*************************'
+    echo '********************************************Executing tests********************************************'
 
     $OpenCover = (Resolve-Path ".\packages\OpenCover.*\tools\OpenCover.Console.exe").ToString()
     
-    echo '*************************XUnit tests*************************'
+    echo '********************************************XUnit tests********************************************'
     
     $xunit = (Resolve-Path ".\packages\xunit.runner.console.*\tools\xunit.console.exe").ToString()
     
@@ -148,7 +148,7 @@ test_script:
 
     7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.Xunit\bin\Release\*.log
     
-    echo '*************************NUnit tests*************************'
+    echo '********************************************NUnit tests********************************************'
     
     & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Objectivity.Test.Automation.Tests.NUnit\bin\Release\Objectivity.Test.Automation.Tests.NUnit.dll .\Objectivity.Test.Automation.Tests.Angular\bin\Release\Objectivity.Test.Automation.Tests.Angular.dll .\Objectivity.Test.Automation.Tests.Features\bin\Release\Objectivity.Test.Automation.Tests.Features.dll .\Objectivity.Test.Automation.UnitTests\bin\Release\Objectivity.Test.Automation.UnitTests.dll --result=myresults.xml`;format=AppVeyor" -filter:"+[Objectivity.Test.Automation.Common]*" -register:user -output:opencoverCoverage.xml
 
@@ -186,7 +186,7 @@ test_script:
 
     7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.UnitTests\bin\Release\*.log
 
-    echo '*************************MSTest tests*************************'
+    echo '********************************************MSTest tests********************************************'
 
     & $OpenCover -target:vstest.console.exe -mergeoutput -targetargs:"/logger`:Appveyor .\Objectivity.Test.Automation.Tests.MSTest\bin\Release\Objectivity.Test.Automation.Tests.MsTest.dll /Settings`:.\Objectivity.Test.Automation.Tests.MSTest\bin\Release\Runsettings.runsettings" -filter:"+[Objectivity.Test.Automation.Common]*" -register:user -output:opencoverCoverage.xml
 
@@ -202,7 +202,7 @@ test_script:
 
     7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.MSTest\bin\Release\*.log
     
-    echo '*************************Sending coverage test results*************************'
+    echo '********************************************Sending coverage test results********************************************'
     
     $coveralls = (Resolve-Path ".\packages\coveralls.net.*\tools\csmacnz.coveralls.exe").ToString()
     
@@ -211,7 +211,7 @@ test_script:
 
     appveyor PushArtifact  opencoverCoverage.xml
 
-    echo '*************************Uploading test results artifact*************************'
+    echo '********************************************Uploading test results artifact********************************************'
     
     appveyor PushArtifact testresults_$env:appveyor_build_version.zip
 artifacts:
