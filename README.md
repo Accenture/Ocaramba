@@ -6,6 +6,7 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/p8p3bndotyknv7rk/branch/master?svg=true)](https://ci.appveyor.com/project/ObjectivityAdminsTeam/test-automation/branch/master)
 [![Build status](https://ci.appveyor.com/api/projects/status/p8p3bndotyknv7rk?svg=true)](https://ci.appveyor.com/project/ObjectivityAdminsTeam/test-automation)
 [![Coverage Status](https://coveralls.io/repos/github/ObjectivityLtd/Test.Automation/badge.svg?branch=codecoverage)](https://coveralls.io/github/ObjectivityLtd/Test.Automation?branch=codecoverage)
+[![AppVeyor tests](https://img.shields.io/appveyor/tests/ObjectivityAdminsTeam/test-automation.svg)](https://ci.appveyor.com/project/ObjectivityAdminsTeam/test-automation/build/tests)
 
 Test Framework was designed in Objectivity to propose common way how people should create Selenium WebDriver tests.
 
