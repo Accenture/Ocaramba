@@ -37,6 +37,10 @@ environment:
     secure: x9uTnOFLUnZ6DiVhpBBxIJxij33Sz9uAIe+qef6M3sj9+J/AUmpfBmiGgqRabTqs
   COVERALLS_REPO_TOKEN:
     secure: ast5HH2v0jAME1tKDxPMw3TExnMxNp1+wXBea5zIzGNaKBm8ojTzv6YB03eQtEi+
+  browserstackuser:
+    secure: 0JGVozUyY/OYBuPZk2Pbgw==
+  browserstackkey:
+    secure: YHh04n6C6SbfOzML+yYwW9nVYN/zDWJ/kM2GLaOy/ro=
 before_build:
 - cmd: >-
     nuget restore
@@ -201,6 +205,21 @@ test_script:
 
     7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.MSTest\bin\Release\*.log
     
+    echo '********************************************BrowserStack tests********************************************'
+    
+    cd .\\scripts
+    
+    .\set_AppConfig_for_tests.ps1 "..\Objectivity.Test.Automation.Tests.BrowserStackCrossBrowser\bin\Release" "Objectivity.Test.Automation.Tests.NUnit.dll.config" "//DriverCapabilities" "browserstack.user|browserstack.key|build" "$env:browserstackuser|$env:browserstackkey|Objectivity.Test.Automation.Tests.BrowserStackCrossBrowser$env:appveyor_build_version"
+
+    cd ..
+    
+    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Objectivity.Test.Automation.Tests.BrowserStackCrossBrowser\bin\Release\Objectivity.Test.Automation.Tests.NUnit.dll --result=myresults.xml`;format=AppVeyor'" -filter:"+[Objectivity.Test.Automation.Common]*" -register:user -output:opencoverCoverage.xml
+
+    if($lastexitcode -ne 0)
+      {
+       echo $lastexitcode
+      }
+      
     echo '********************************************Sending coverage test results********************************************'
     
     $coveralls = (Resolve-Path ".\packages\coveralls.net.*\tools\csmacnz.coveralls.exe").ToString()
@@ -209,8 +228,14 @@ test_script:
 
 
     appveyor PushArtifact  opencoverCoverage.xml
-
+    
     echo '********************************************Uploading test results artifact********************************************'
+  
+    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.BrowserStackCrossBrowser\bin\Release\**\*.png
+
+    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.BrowserStackCrossBrowser\bin\Release\**\*.html
+
+    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.BrowserStackCrossBrowser\bin\Release\*.log
     
     appveyor PushArtifact testresults_$env:appveyor_build_version.zip
 artifacts:

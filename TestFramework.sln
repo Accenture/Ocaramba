@@ -26,6 +26,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Objectivity.Test.Automation
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Objectivity.Test.Automation.UnitTests", "Objectivity.Test.Automation.UnitTests\Objectivity.Test.Automation.UnitTests.csproj", "{4F7A9D54-779A-4F45-91DC-4C8B81B4A9C9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Objectivity.Test.Automation.Tests.BrowserStackCrossBrowser", "Objectivity.Test.Automation.Tests.BrowserStackCrossBrowser\Objectivity.Test.Automation.Tests.BrowserStackCrossBrowser.csproj", "{F5B79C58-AC3B-448A-8325-5EF9A962B4A3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -68,6 +70,10 @@ Global
 		{4F7A9D54-779A-4F45-91DC-4C8B81B4A9C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F7A9D54-779A-4F45-91DC-4C8B81B4A9C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F7A9D54-779A-4F45-91DC-4C8B81B4A9C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5B79C58-AC3B-448A-8325-5EF9A962B4A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5B79C58-AC3B-448A-8325-5EF9A962B4A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5B79C58-AC3B-448A-8325-5EF9A962B4A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5B79C58-AC3B-448A-8325-5EF9A962B4A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
