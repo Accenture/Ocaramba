@@ -213,7 +213,7 @@ test_script:
 
     cd ..
     
-    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Objectivity.Test.Automation.Tests.BrowserStackCrossBrowser\bin\Release\Objectivity.Test.Automation.Tests.NUnit.dll --result=myresults.xml`;format=AppVeyor'" -filter:"+[Objectivity.Test.Automation.Common]*" -register:user -output:opencoverCoverage.xml
+    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Objectivity.Test.Automation.Tests.BrowserStackCrossBrowser\bin\Release\Objectivity.Test.Automation.Tests.NUnit.dll --result=myresults.xml`;format=AppVeyor" -filter:"+[Objectivity.Test.Automation.Common]*" -register:user -output:opencoverCoverage.xml
 
     if($lastexitcode -ne 0)
       {
