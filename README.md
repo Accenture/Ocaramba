@@ -1,4 +1,4 @@
-## Test.Automation
+## Objectivity.Test.Automation
 <img align="left" src="/Objectivity.Test.Automation.Common.Documentation/icons/Objectivity_logo_avatar.png">
 
 **C# Framework to automate tests using Selenium WebDriver**
@@ -48,6 +48,7 @@ Projects examples of using Test Framework :
 - Objectivity.Test.Automation.Tests.xUnit for xUnit
 - Objectivity.Test.Automation.Tests.PageObjects for Page Object Pattern
 - Objectivity.Test.Automation.Common.Documentation.shfbproj for building API documentation
+- Objectivity.Test.Automation.Tests.BrowserStackCrossBrowse for cross browser parallel test execution with BrowserStack\SeleniumGrid
 - Objectivity.Test.Automation.UnitTests for unit test of framework
 
 NUnit Example Test:
