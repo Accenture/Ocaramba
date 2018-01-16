@@ -110,6 +110,23 @@ namespace Objectivity.Test.Automation.Tests.MsTest.Tests
                 () => Assert.AreEqual((string)this.TestContext.DataRow["message"], formFormAuthentication.GetMessage));
         }
 
+        [DeploymentItem("Objectivity.Test.Automation.MsTests\\DDT.csv")]
+        [DataSource("Microsoft.VisualStudio.TestTools.DataSource.CSV", "|DataDirectory|\\DDT.csv", "DDT#csv", DataAccessMethod.Sequential)]
+        [TestMethod]
+        public void FormAuthenticationPageCsvDataDrivenTest()
+        {
+            var formFormAuthentication = new InternetPage(this.DriverContext)
+                .OpenHomePage()
+                .GoToFormAuthenticationPage();
+
+            formFormAuthentication.EnterUserName((string)this.TestContext.DataRow["user"]);
+            formFormAuthentication.EnterPassword((string)this.TestContext.DataRow["password"]);
+            formFormAuthentication.LogOn();
+            Verify.That(
+                this.DriverContext,
+                () => Assert.AreEqual((string)this.TestContext.DataRow["message"], formFormAuthentication.GetMessage));
+        }
+
         [TestMethod]
         public void VerifyTest()
         {
