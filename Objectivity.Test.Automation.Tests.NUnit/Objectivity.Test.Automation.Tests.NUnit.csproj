@@ -70,6 +70,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.XML" />
     <Reference Include="System.Xml.Linq" />
+	<Reference Include="WebDriver, Version=3.8.0.0, Culture=neutral, PublicKeyToken=null" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataDriven\CompareFiles.cs" />
