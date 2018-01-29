@@ -618,6 +618,43 @@ namespace Objectivity.Test.Automation.Common
         }
 
         /// <summary>
+        /// Logs JavaScript errors
+        /// </summary>
+        /// <returns>Javascript errors</returns>
+        public IEnumerable<LogEntry> LogJavaScriptErrors()
+        {
+            IEnumerable<LogEntry> jsErrors = null;
+
+            // JavaScript errors type to be search on browser logs
+            var errorStrings = new global::System.Collections.Generic.List<string>
+                {
+                    "SyntaxError",
+                     "EvalError",
+                    "ReferenceError",
+                     "RangeError",
+                     "TypeError",
+                     "URIError",
+                     "Refused to display",
+                     "Internal Server Error",
+                     "Cannot read property"
+                };
+
+            // Check JavaScript browser logs for errors.
+            if (BaseConfiguration.JavaScriptErrorLogging)
+            {
+                jsErrors = this.driver.Manage().Logs.GetLog(LogType.Browser).Where(x => errorStrings.Any(e => x.Message.Contains(e)));
+
+                if (jsErrors.Any())
+                {
+                    // Show JavaScript erros if there are any
+                    Logger.Error(CultureInfo.CurrentCulture, "JavaScript error(s): {0}", Environment.NewLine + jsErrors.Aggregate(string.Empty, (s, entry) => s + entry.Message + Environment.NewLine));
+                }
+            }
+
+            return jsErrors;
+        }
+
+        /// <summary>
         /// Set web driver capabilities.
         /// </summary>
         /// <returns>Instance with set web driver capabilities.</returns>

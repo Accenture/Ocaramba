@@ -246,6 +246,28 @@ namespace Objectivity.Test.Automation.Common
         }
 
         /// <summary>
+        /// Gets a value indicating whether logs JavaScript errors from a browser. False by default.
+        /// </summary>
+        public static bool JavaScriptErrorLogging
+        {
+            get
+            {
+                Logger.Trace(CultureInfo.CurrentCulture, "JavaScript error logging value from App.config '{0}'", ConfigurationManager.AppSettings["JavaScriptErrorLogging"]);
+                if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["JavaScriptErrorLogging"]))
+                {
+                    return false;
+                }
+
+                if (ConfigurationManager.AppSettings["JavaScriptErrorLogging"].ToLower(CultureInfo.CurrentCulture).Equals("true"))
+                {
+                    return true;
+                }
+
+                return false;
+            }
+        }
+
+        /// <summary>
         /// Gets a value indicating whether enable legacy implementation for Firefox.
         /// </summary>
         public static bool FirefoxUseLegacyImplementation

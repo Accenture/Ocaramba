@@ -37,6 +37,7 @@ Project API documentation can be found here: http://objectivityltd.github.io/Tes
 - Possibility to send [SQL](http://objectivityltd.github.io/Test.Automation/html/e339b346-66a4-70e6-4c54-f9c30cb3131a.htm) or [MDX](http://objectivityltd.github.io/Test.Automation/html/39ae874a-89a0-c435-c701-f20b26f1695e.htm) queries
 - Possibility of debugging framework installed from nuget package, more details [here](https://github.com/ObjectivityLtd/Test.Automation/wiki/Debugging-Test.Automation-framework).
 - AngularJS support, more details [here](https://github.com/ObjectivityLtd/Test.Automation/wiki/Angular-support).
+- Possiblity to check for JavaScript errors from browser, more details [here](https://github.com/ObjectivityLtd/Test.Automation/wiki/Verifying-Javascript-Errors-from-browser).
 
 For all documentation, visit the [Test.Automation Wiki](https://github.com/ObjectivityLtd/Test.Automation/wiki).
 

@@ -104,6 +104,12 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             return new JavaScriptAlertsPage(this.DriverContext);
         }
 
+        public JavaScriptOnLoadPage GoToJavaScriptOnLoad()
+        {
+            this.Driver.GetElement(this.linkLocator.Format("javascript_error")).Click();
+            return new JavaScriptOnLoadPage(this.DriverContext);
+        }
+
         public void GoToPage(string page)
         {
             this.Driver.GetElement(this.linkLocator.Format(page)).Click();

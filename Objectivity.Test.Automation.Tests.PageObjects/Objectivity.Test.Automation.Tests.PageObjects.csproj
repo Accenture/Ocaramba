@@ -77,6 +77,7 @@
     <Compile Include="PageObjects\TheInternet\DynamicControlsPage.cs" />
     <Compile Include="PageObjects\TheInternet\DynamicLoadingPage.cs" />
     <Compile Include="PageObjects\TheInternet\HttpCode200Page.cs" />
+    <Compile Include="PageObjects\TheInternet\JavaScriptOnLoadPage.cs" />
     <Compile Include="PageObjects\TheInternet\ShiftingContentPage.cs" />
     <Compile Include="PageObjects\TheInternet\SecureFileDownloadPage.cs" />
     <Compile Include="PageObjects\TheInternet\ContextMenuPage.cs" />

@@ -22,13 +22,11 @@
 
 namespace Objectivity.Test.Automation.Tests.NUnit
 {
-    using System;
     using System.Linq;
     using Common;
     using Common.Logger;
     using global::NUnit.Framework;
     using global::NUnit.Framework.Interfaces;
-    using OpenQA.Selenium;
 
     /// <summary>
     /// The base class for all tests <see href="https://github.com/ObjectivityLtd/Test.Automation/wiki/ProjectTestBase-class">More details on wiki</see>
@@ -110,26 +108,9 @@ namespace Objectivity.Test.Automation.Tests.NUnit
                 Assert.Fail();
             }
 
-            // JavaScript errors type to be search on browser logs
-            var errorStrings = new global::System.Collections.Generic.List<string>
-                {
-                    "SyntaxError",
-                     "EvalError",
-                    "ReferenceError",
-                     "RangeError",
-                     "TypeError",
-                     "URIError",
-                     "Refused to display",
-                     "Internal Server Error"
-                };
-
-            // Check JavaScript browser logs for errors.
-            var jsErrors = this.DriverContext.Driver.Manage().Logs.GetLog(LogType.Browser).Where(x => errorStrings.Any(e => x.Message.Contains(e)));
-
-            if (jsErrors.Any())
+            if (this.DriverContext.LogJavaScriptErrors() != null)
             {
-                // Fail test if any error from errorStrings is found.
-                Assert.Fail("JavaScript error(s):" + Environment.NewLine + jsErrors.Aggregate(string.Empty, (s, entry) => s + entry.Message + Environment.NewLine));
+                Assert.Fail("JavaScript errors found. See the logs for details");
             }
         }
 
