@@ -82,6 +82,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
         }
 
         [Test]
+        [Ignore("Ignore a test")]
         public void LogJavaScriptErrorTest()
         {
             var internetPage = new InternetPage(this.DriverContext).OpenHomePage();
