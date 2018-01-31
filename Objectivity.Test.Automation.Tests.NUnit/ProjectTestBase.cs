@@ -103,12 +103,13 @@ namespace Objectivity.Test.Automation.Tests.NUnit
             var filePaths = this.SaveTestDetailsIfTestFailed(this.driverContext);
             this.SaveAttachmentsToTestContext(filePaths);
             this.LogTest.LogTestEnding(this.driverContext);
+            var javaScriptErrors = this.DriverContext.LogJavaScriptErrors();
             if (this.IsVerifyFailedAndClearMessages(this.driverContext) && TestContext.CurrentContext.Result.Outcome.Status != TestStatus.Failed)
             {
                 Assert.Fail();
             }
 
-            if (this.DriverContext.LogJavaScriptErrors())
+            if (javaScriptErrors)
             {
                 Assert.Fail("JavaScript errors found. See the logs for details");
             }

@@ -120,6 +120,7 @@ namespace Objectivity.Test.Automation.Tests.Features
             this.DriverContext.IsTestFailed = this.scenarioContext.TestError != null || !this.driverContext.VerifyMessages.Count.Equals(0);
             var filePaths = this.SaveTestDetailsIfTestFailed(this.driverContext);
             this.SaveAttachmentsToTestContext(filePaths);
+            var javaScriptErrors = this.DriverContext.LogJavaScriptErrors();
             this.DriverContext.Stop();
             this.LogTest.LogTestEnding(this.driverContext);
             if (this.IsVerifyFailedAndClearMessages(this.driverContext) && this.scenarioContext.TestError == null)
@@ -127,7 +128,7 @@ namespace Objectivity.Test.Automation.Tests.Features
                 Assert.Fail();
             }
 
-            if (this.DriverContext.LogJavaScriptErrors())
+            if (javaScriptErrors)
             {
                 Assert.Fail("JavaScript errors found. See the logs for details");
             }
