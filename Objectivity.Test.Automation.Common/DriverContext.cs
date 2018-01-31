@@ -620,10 +620,11 @@ namespace Objectivity.Test.Automation.Common
         /// <summary>
         /// Logs JavaScript errors
         /// </summary>
-        /// <returns>Javascript errors</returns>
-        public IEnumerable<LogEntry> LogJavaScriptErrors()
+        /// <returns>True if Javascript errors found</returns>
+        public bool LogJavaScriptErrors()
         {
             IEnumerable<LogEntry> jsErrors = null;
+            bool javScriptErrors = false;
 
             // JavaScript errors type to be search on browser logs
             var errorStrings = new global::System.Collections.Generic.List<string>
@@ -648,10 +649,11 @@ namespace Objectivity.Test.Automation.Common
                 {
                     // Show JavaScript erros if there are any
                     Logger.Error(CultureInfo.CurrentCulture, "JavaScript error(s): {0}", Environment.NewLine + jsErrors.Aggregate(string.Empty, (s, entry) => s + entry.Message + Environment.NewLine));
+                    javScriptErrors = true;
                 }
             }
 
-            return jsErrors;
+            return javScriptErrors;
         }
 
         /// <summary>

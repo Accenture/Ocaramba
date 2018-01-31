@@ -108,7 +108,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit
                 Assert.Fail();
             }
 
-            if (this.DriverContext.LogJavaScriptErrors() != null)
+            if (this.DriverContext.LogJavaScriptErrors())
             {
                 Assert.Fail("JavaScript errors found. See the logs for details");
             }

@@ -80,13 +80,5 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
             jsAlertsPage.DismissAlert();
             Assert.AreEqual("You entered: null", jsAlertsPage.ResultText);
         }
-
-        [Test]
-        [Ignore("Ignore a test")]
-        public void LogJavaScriptErrorTest()
-        {
-            var internetPage = new InternetPage(this.DriverContext).OpenHomePage();
-            internetPage.GoToJavaScriptOnLoad();
-        }
     }
 }

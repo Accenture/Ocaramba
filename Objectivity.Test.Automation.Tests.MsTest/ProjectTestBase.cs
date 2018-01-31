@@ -99,6 +99,11 @@ namespace Objectivity.Test.Automation.Tests.MsTest
             {
                 Assert.Fail("Look at stack trace logs for more details");
             }
+
+            if (this.DriverContext.LogJavaScriptErrors())
+            {
+                Assert.Fail("JavaScript errors found. See the logs for details");
+            }
         }
 
         private void SaveAttachmentsToTestContext(string[] filePaths)
