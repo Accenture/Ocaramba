@@ -643,6 +643,7 @@ namespace Objectivity.Test.Automation.Common
             // Check JavaScript browser logs for errors.
             if (BaseConfiguration.JavaScriptErrorLogging)
             {
+                Logger.Debug(CultureInfo.CurrentCulture, "Checking JavaScript error(s) in browser");
                 jsErrors = this.driver.Manage().Logs.GetLog(LogType.Browser).Where(x => errorStrings.Any(e => x.Message.Contains(e)));
 
                 if (jsErrors.Any())

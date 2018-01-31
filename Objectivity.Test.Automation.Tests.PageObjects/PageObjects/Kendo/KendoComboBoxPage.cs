@@ -24,7 +24,8 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.Kendo
 {
     using System;
     using System.Collections.ObjectModel;
-
+    using System.Globalization;
+    using NLog;
     using Objectivity.Test.Automation.Common;
     using Objectivity.Test.Automation.Common.Extensions;
     using Objectivity.Test.Automation.Common.Types;
@@ -32,6 +33,8 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.Kendo
 
     public class KendoComboBoxPage : ProjectPageBase
     {
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
         /// <summary>
         ///     Locators for elements
         /// </summary>
@@ -49,6 +52,11 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.Kendo
             get
             {
                 var options = this.FabricKendoComboBox.Options;
+                foreach (var option in options)
+                {
+                    Logger.Info(CultureInfo.CurrentCulture, "Option: {0}", option);
+                }
+
                 return options;
             }
         }
@@ -64,6 +72,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.Kendo
 
         public void SearchFabricOptions(string text)
         {
+            Logger.Info(CultureInfo.CurrentCulture, "Typing text {0}", text);
             this.FabricKendoComboBox.SendKeys(text);
             this.Driver.WaitForAjax(BaseConfiguration.ShortTimeout);
         }
