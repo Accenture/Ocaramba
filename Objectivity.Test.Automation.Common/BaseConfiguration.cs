@@ -20,17 +20,13 @@
 //     SOFTWARE.
 // </license>
 
-using System.Collections.Generic;
-using OpenQA.Selenium;
-
 namespace Objectivity.Test.Automation.Common
 {
     using System;
+    using System.Collections.ObjectModel;
     using System.Configuration;
     using System.Globalization;
-
     using NLog;
-    using OpenQA.Selenium.Remote;
 
     /// <summary>
     /// SeleniumConfiguration that consume app.config file <see href="https://github.com/ObjectivityLtd/Test.Automation/wiki/Description%20of%20App.config%20file">More details on wiki</see>
@@ -271,16 +267,16 @@ namespace Objectivity.Test.Automation.Common
         }
 
         /// <summary>
-        /// Gets a value indicating whether logs JavaScript errors from a browser. False by default.
+        /// Gets JavaScript error types from a browser. "SyntaxError,EvalError,ReferenceError,RangeError,TypeError,URIError,Refused to display,Internal Server Error,Cannot read property" by default.
         /// </summary>
-        public static List<string> JavaScriptErrorTypes
+        public static Collection<string> JavaScriptErrorTypes
         {
             get
             {
                 Logger.Trace(CultureInfo.CurrentCulture, "JavaScript error logging value from App.config '{0}'", ConfigurationManager.AppSettings["JavaScriptErrorTypes"]);
                 if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["JavaScriptErrorTypes"]))
                 {
-                    return new List<string>
+                    return new Collection<string>
                     {
                         "SyntaxError",
                         "EvalError",
@@ -294,7 +290,7 @@ namespace Objectivity.Test.Automation.Common
                     };
                 }
 
-                return new List<string>(ConfigurationManager.AppSettings["JavaScriptErrorTypes"].Split(new char[] { ',' }));
+                return new Collection<string>(ConfigurationManager.AppSettings["JavaScriptErrorTypes"].Split(new char[] { ',' }));
             }
         }
 
