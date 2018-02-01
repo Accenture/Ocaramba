@@ -626,25 +626,11 @@ namespace Objectivity.Test.Automation.Common
             IEnumerable<LogEntry> jsErrors = null;
             bool javScriptErrors = false;
 
-            // JavaScript errors type to be search on browser logs
-            var errorStrings = new global::System.Collections.Generic.List<string>
-                {
-                    "SyntaxError",
-                     "EvalError",
-                    "ReferenceError",
-                     "RangeError",
-                     "TypeError",
-                     "URIError",
-                     "Refused to display",
-                     "Internal Server Error",
-                     "Cannot read property"
-                };
-
             // Check JavaScript browser logs for errors.
             if (BaseConfiguration.JavaScriptErrorLogging)
             {
                 Logger.Debug(CultureInfo.CurrentCulture, "Checking JavaScript error(s) in browser");
-                jsErrors = this.driver.Manage().Logs.GetLog(LogType.Browser).Where(x => errorStrings.Any(e => x.Message.Contains(e)));
+                jsErrors = this.driver.Manage().Logs.GetLog(LogType.Browser).Where(x => BaseConfiguration.JavaScriptErrorTypes.Any(e => x.Message.Contains(e)));
 
                 if (jsErrors.Any())
                 {

@@ -20,6 +20,9 @@
 //     SOFTWARE.
 // </license>
 
+using System.Collections.Generic;
+using OpenQA.Selenium;
+
 namespace Objectivity.Test.Automation.Common
 {
     using System;
@@ -264,6 +267,34 @@ namespace Objectivity.Test.Automation.Common
                 }
 
                 return false;
+            }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether logs JavaScript errors from a browser. False by default.
+        /// </summary>
+        public static List<string> JavaScriptErrorTypes
+        {
+            get
+            {
+                Logger.Trace(CultureInfo.CurrentCulture, "JavaScript error logging value from App.config '{0}'", ConfigurationManager.AppSettings["JavaScriptErrorTypes"]);
+                if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["JavaScriptErrorTypes"]))
+                {
+                    return new List<string>
+                    {
+                        "SyntaxError",
+                        "EvalError",
+                        "ReferenceError",
+                        "RangeError",
+                        "TypeError",
+                        "URIError",
+                        "Refused to display",
+                        "Internal Server Error",
+                        "Cannot read property"
+                    };
+                }
+
+                return new List<string>(ConfigurationManager.AppSettings["JavaScriptErrorTypes"].Split(new char[] { ',' }));
             }
         }
 
