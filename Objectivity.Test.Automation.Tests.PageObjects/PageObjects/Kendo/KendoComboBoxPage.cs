@@ -28,6 +28,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.Kendo
     using NLog;
     using Objectivity.Test.Automation.Common;
     using Objectivity.Test.Automation.Common.Extensions;
+    using Objectivity.Test.Automation.Common.Helpers;
     using Objectivity.Test.Automation.Common.Types;
     using Objectivity.Test.Automation.Common.WebElements.Kendo;
 
@@ -51,6 +52,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.Kendo
         {
             get
             {
+                WaitHelper.Wait(() => this.FabricKendoComboBox.Options.Count <= 2, TimeSpan.FromSeconds(3), "Check number of options");
                 var options = this.FabricKendoComboBox.Options;
                 foreach (var option in options)
                 {
