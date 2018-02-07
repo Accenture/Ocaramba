@@ -76,6 +76,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.Kendo
         {
             Logger.Info(CultureInfo.CurrentCulture, "Typing text {0}", text);
             this.Driver.ScrollIntoMiddle(this.tshirtFabricComboBoxLocator);
+            this.Driver.GetElement(this.tshirtFabricComboBoxLocator).JavaScriptClick();
             this.FabricKendoComboBox.SendKeys(text);
             this.Driver.WaitForAjax(BaseConfiguration.ShortTimeout);
         }
