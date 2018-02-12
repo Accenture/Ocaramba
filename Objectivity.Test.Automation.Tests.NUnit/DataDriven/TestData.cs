@@ -34,6 +34,11 @@ namespace Objectivity.Test.Automation.Tests.NUnit.DataDriven
             get { return DataDrivenHelper.ReadDataDriveFile(ProjectBaseConfiguration.DataDrivenFile, "credential", new[] { "user", "password" }, "credential"); }
         }
 
+        public static IEnumerable CredentialsExcel
+        {
+            get { return DataDrivenHelper.ReadXlsxDataDriveFile(ProjectBaseConfiguration.DataDrivenFileXlsx, "credential", new[] { "user", "password" }, "credentialExcel"); }
+        }
+
         public static IEnumerable LinksSetTestName
         {
             get { return DataDrivenHelper.ReadDataDriveFile(ProjectBaseConfiguration.DataDrivenFile, "links", new[] { "number" }, "Count_links"); }
@@ -42,6 +47,11 @@ namespace Objectivity.Test.Automation.Tests.NUnit.DataDriven
         public static IEnumerable Links
         {
             get { return DataDrivenHelper.ReadDataDriveFile(ProjectBaseConfiguration.DataDrivenFile, "links"); }
+        }
+
+        public static IEnumerable LinksExcel
+        {
+            get { return DataDrivenHelper.ReadXlsxDataDriveFile(ProjectBaseConfiguration.DataDrivenFileXlsx, "links"); }
         }
     }
 }
