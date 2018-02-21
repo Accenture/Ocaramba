@@ -55,6 +55,25 @@ namespace Objectivity.Test.Automation.Tests.NUnit
         }
 
         /// <summary>
+        /// Gets the Excel data driven file.
+        /// </summary>
+        /// <value>
+        /// The Excel data driven file.
+        /// </value>
+        public static string DataDrivenFileXlsx
+        {
+            get
+            {
+                if (BaseConfiguration.UseCurrentDirectory)
+                {
+                    return Path.Combine(CurrentDirectory + ConfigurationManager.AppSettings["DataDrivenFileXlsx"]);
+                }
+
+                return ConfigurationManager.AppSettings["DataDrivenFileXlsx"];
+            }
+        }
+
+        /// <summary>
         /// Gets the Download Folder path
         /// </summary>
         public static string DownloadFolderPath

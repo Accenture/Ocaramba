@@ -93,11 +93,17 @@ namespace Objectivity.Test.Automation.Tests.MsTest
             this.DriverContext.IsTestFailed = this.TestContext.CurrentTestOutcome == UnitTestOutcome.Failed || !this.driverContext.VerifyMessages.Count.Equals(0);
             var filePaths = this.SaveTestDetailsIfTestFailed(this.driverContext);
             this.SaveAttachmentsToTestContext(filePaths);
+            var javaScriptErrors = this.DriverContext.LogJavaScriptErrors();
             this.DriverContext.Stop();
             this.LogTest.LogTestEnding(this.driverContext);
             if (this.IsVerifyFailedAndClearMessages(this.driverContext) && this.TestContext.CurrentTestOutcome != UnitTestOutcome.Failed)
             {
                 Assert.Fail("Look at stack trace logs for more details");
+            }
+
+            if (javaScriptErrors)
+            {
+                Assert.Fail("JavaScript errors found. See the logs for details");
             }
         }
 

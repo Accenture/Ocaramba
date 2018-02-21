@@ -30,13 +30,14 @@ Project API documentation can be found here: http://objectivityltd.github.io/Tes
 - Several methods to interact with kendo controls, more details [here](https://github.com/ObjectivityLtd/Test.Automation/wiki/Interact%20with%20kendo%20controls)
 - Verify - asserts without stop tests, more details [here](https://github.com/ObjectivityLtd/Test.Automation/wiki/Verify-asserts-without-stop-tests)
 - Measures average and 90 Percentile action times, more details [here](https://github.com/ObjectivityLtd/Test.Automation/wiki/Performance%20measures)
-- DataDriven tests from Xml files for NUnit and MSTest with examples, more details [here](https://github.com/ObjectivityLtd/Test.Automation/wiki/DataDriven-tests-from-Xml-files)
+- DataDriven tests from Xml, Csv and Excel files for NUnit and  Xml, Csv for MSTest with examples, more details [NUnit](https://github.com/ObjectivityLtd/Test.Automation/wiki/NUnit-DataDriven-tests-from-Xml,-CSV-and-Excel-files), [MsTest](https://github.com/ObjectivityLtd/Test.Automation/wiki/MsTest-DataDriven-tests-from-Xml-and-CSV-files)
 - Possibility to take full desktop or browser screen shot, save page source, more details [here](https://github.com/ObjectivityLtd/Test.Automation/wiki/Screen-shots:-full-desktop,-selenium.-PageSource-saving)
 - Logging with NLog, EventFiringWebDriver logs, more details [here](https://github.com/ObjectivityLtd/Test.Automation/wiki/Logging)
 - Files downloading (Firefox, Chrome), more details [here](https://github.com/ObjectivityLtd/Test.Automation/wiki/Downloading%20files)
 - Possibility to send [SQL](http://objectivityltd.github.io/Test.Automation/html/e339b346-66a4-70e6-4c54-f9c30cb3131a.htm) or [MDX](http://objectivityltd.github.io/Test.Automation/html/39ae874a-89a0-c435-c701-f20b26f1695e.htm) queries
 - Possibility of debugging framework installed from nuget package, more details [here](https://github.com/ObjectivityLtd/Test.Automation/wiki/Debugging-Test.Automation-framework).
 - AngularJS support, more details [here](https://github.com/ObjectivityLtd/Test.Automation/wiki/Angular-support).
+- Possiblity to check for JavaScript errors from browser, more details [here](https://github.com/ObjectivityLtd/Test.Automation/wiki/Verifying-Javascript-Errors-from-browser).
 
 For all documentation, visit the [Test.Automation Wiki](https://github.com/ObjectivityLtd/Test.Automation/wiki).
 

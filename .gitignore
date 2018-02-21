@@ -11,3 +11,8 @@ TestFramework.sln.DotSettings.user
 /Objectivity.Test.Automation.Tests.Features/TestFeatures/*.feature.cs
 *.user
 LastBuild.log
+/Objectivity.Test.Automation.Common.Documentation/Help
+/TestResult.xml
+/myresults.xml
+/opencoverCoverage.xml
+/.nuget/NuGet.exe

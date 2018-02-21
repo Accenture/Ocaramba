@@ -618,6 +618,32 @@ namespace Objectivity.Test.Automation.Common
         }
 
         /// <summary>
+        /// Logs JavaScript errors
+        /// </summary>
+        /// <returns>True if Javascript errors found</returns>
+        public bool LogJavaScriptErrors()
+        {
+            IEnumerable<LogEntry> jsErrors = null;
+            bool javScriptErrors = false;
+
+            // Check JavaScript browser logs for errors.
+            if (BaseConfiguration.JavaScriptErrorLogging)
+            {
+                Logger.Debug(CultureInfo.CurrentCulture, "Checking JavaScript error(s) in browser");
+                jsErrors = this.driver.Manage().Logs.GetLog(LogType.Browser).Where(x => BaseConfiguration.JavaScriptErrorTypes.Any(e => x.Message.Contains(e)));
+
+                if (jsErrors.Any())
+                {
+                    // Show JavaScript erros if there are any
+                    Logger.Error(CultureInfo.CurrentCulture, "JavaScript error(s): {0}", Environment.NewLine + jsErrors.Aggregate(string.Empty, (s, entry) => s + entry.Message + Environment.NewLine));
+                    javScriptErrors = true;
+                }
+            }
+
+            return javScriptErrors;
+        }
+
+        /// <summary>
         /// Set web driver capabilities.
         /// </summary>
         /// <returns>Instance with set web driver capabilities.</returns>

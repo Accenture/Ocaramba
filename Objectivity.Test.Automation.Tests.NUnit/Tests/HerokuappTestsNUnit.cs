@@ -47,21 +47,6 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
         }
 
         [Test]
-        [TestCaseSource(typeof(TestData), "Credentials")]
-        public void FormAuthenticationPageTest(IDictionary<string, string> parameters)
-        {
-            new InternetPage(this.DriverContext).OpenHomePage().GoToFormAuthenticationPage();
-
-            var formFormAuthentication = new FormAuthenticationPage(this.DriverContext);
-            formFormAuthentication.EnterUserName(parameters["user"]);
-            formFormAuthentication.EnterPassword(parameters["password"]);
-            formFormAuthentication.LogOn();
-            Verify.That(
-                this.DriverContext,
-                () => Assert.AreEqual(parameters["message"], formFormAuthentication.GetMessage));
-        }
-
-        [Test]
         public void ForgotPasswordTest()
         {
             new InternetPage(this.DriverContext).OpenHomePage().GoToForgotPasswordPage();
@@ -72,27 +57,6 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
                 this.DriverContext,
                 () => Assert.AreEqual(5 + 7 + 2, forgotPassword.EnterEmail(5, 7, 2)),
                 () => Assert.AreEqual("Your e-mail's been sent!", forgotPassword.ClickRetrievePassword));
-        }
-
-        [Test]
-        [Category("PhantomJs")]
-        [TestCaseSource(typeof(TestData), "LinksSetTestName")]
-        public void CountLinksAndSetTestNameAtShiftingContentTest(IDictionary<string, string> parameters)
-        {
-            new InternetPage(this.DriverContext).OpenHomePage().GoToShiftingContentPage();
-
-            var links = new ShiftingContentPage(this.DriverContext);
-            Verify.That(this.DriverContext, () => Assert.AreEqual(parameters["number"], links.CountLinks()));
-        }
-
-        [Test]
-        [TestCaseSource(typeof(TestData), "Links")]
-        public void CountLinksAtShiftingContentTest(IDictionary<string, string> parameters)
-        {
-            new InternetPage(this.DriverContext).OpenHomePage().GoToShiftingContentPage();
-
-            var links = new ShiftingContentPage(this.DriverContext);
-            Verify.That(this.DriverContext, () => Assert.AreEqual(parameters["number"], links.CountLinks()));
         }
 
         [Test]

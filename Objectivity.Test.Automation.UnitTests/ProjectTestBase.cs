@@ -20,38 +20,19 @@
 //     SOFTWARE.
 // </license>
 
-namespace Objectivity.Test.Automation.Tests.Features
+using NUnit.Framework;
+using NUnit.Framework.Interfaces;
+using Objectivity.Test.Automation.Common;
+using Objectivity.Test.Automation.Common.Logger;
+
+namespace Objectivity.Test.Automation.UnitTests
 {
-    using System;
-
-    using NUnit.Framework;
-    using Objectivity.Test.Automation.Common;
-    using Objectivity.Test.Automation.Common.Logger;
-
-    using TechTalk.SpecFlow;
-
     /// <summary>
     /// The base class for all tests <see href="https://github.com/ObjectivityLtd/Test.Automation/wiki/ProjectTestBase-class">More details on wiki</see>
     /// </summary>
-    [Binding]
     public class ProjectTestBase : TestBase
     {
-        private readonly ScenarioContext scenarioContext;
         private readonly DriverContext driverContext = new DriverContext();
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ProjectTestBase"/> class.
-        /// </summary>
-        /// <param name="scenarioContext"> Scenario Context </param>
-        public ProjectTestBase(ScenarioContext scenarioContext)
-        {
-            if (scenarioContext == null)
-            {
-                throw new ArgumentNullException("scenarioContext");
-            }
-
-            this.scenarioContext = scenarioContext;
-        }
 
         /// <summary>
         /// Gets or sets logger instance for driver
@@ -70,7 +51,7 @@ namespace Objectivity.Test.Automation.Tests.Features
         }
 
         /// <summary>
-        /// Gets the browser manager
+        /// Gets or Sets the driver context
         /// </summary>
         protected DriverContext DriverContext
         {
@@ -83,54 +64,47 @@ namespace Objectivity.Test.Automation.Tests.Features
         /// <summary>
         /// Before the class.
         /// </summary>
-        [BeforeFeature]
-        public static void BeforeClass()
+        [OneTimeSetUp]
+        public void BeforeClass()
         {
+            this.DriverContext.CurrentDirectory = TestContext.CurrentContext.TestDirectory;
             StartPerformanceMeasure();
+            this.DriverContext.Start();
         }
 
         /// <summary>
         /// After the class.
         /// </summary>
-        [AfterFeature]
-        public static void AfterClass()
+        [OneTimeTearDown]
+        public void AfterClass()
         {
             StopPerfromanceMeasure();
+            this.DriverContext.Stop();
         }
 
         /// <summary>
         /// Before the test.
         /// </summary>
-        [Before]
+        [SetUp]
         public void BeforeTest()
         {
-            this.DriverContext.CurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            this.DriverContext.TestTitle = this.scenarioContext.ScenarioInfo.Title;
+            this.DriverContext.TestTitle = TestContext.CurrentContext.Test.Name;
             this.LogTest.LogTestStarting(this.driverContext);
-            this.DriverContext.Start();
-            this.scenarioContext["DriverContext"] = this.DriverContext;
         }
 
         /// <summary>
         /// After the test.
         /// </summary>
-        [After]
+        [TearDown]
         public void AfterTest()
         {
-            this.DriverContext.IsTestFailed = this.scenarioContext.TestError != null || !this.driverContext.VerifyMessages.Count.Equals(0);
+            this.DriverContext.IsTestFailed = TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed || !this.driverContext.VerifyMessages.Count.Equals(0);
             var filePaths = this.SaveTestDetailsIfTestFailed(this.driverContext);
             this.SaveAttachmentsToTestContext(filePaths);
-            var javaScriptErrors = this.DriverContext.LogJavaScriptErrors();
-            this.DriverContext.Stop();
             this.LogTest.LogTestEnding(this.driverContext);
-            if (this.IsVerifyFailedAndClearMessages(this.driverContext) && this.scenarioContext.TestError == null)
+            if (this.IsVerifyFailedAndClearMessages(this.driverContext) && TestContext.CurrentContext.Result.Outcome.Status != TestStatus.Failed)
             {
                 Assert.Fail();
-            }
-
-            if (javaScriptErrors)
-            {
-                Assert.Fail("JavaScript errors found. See the logs for details");
             }
         }
 
