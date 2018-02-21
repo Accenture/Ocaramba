@@ -115,6 +115,9 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="DataDriven\TestDataCsv.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="DataDriven\DataDriven.xlsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

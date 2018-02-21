@@ -63,6 +63,21 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
         }
 
         [Test]
+        [TestCaseSource(typeof(TestData), "CredentialsCSV")]
+        public void CSVTest(IDictionary<string, string> parameters)
+        {
+            new InternetPage(this.DriverContext).OpenHomePage().GoToFormAuthenticationPage();
+
+            var formFormAuthentication = new FormAuthenticationPage(this.DriverContext);
+            formFormAuthentication.EnterUserName(parameters["user"]);
+            formFormAuthentication.EnterPassword(parameters["password"]);
+            formFormAuthentication.LogOn();
+            Verify.That(
+                this.DriverContext,
+                () => Assert.AreEqual(parameters["message"], formFormAuthentication.GetMessage));
+        }
+
+        [Test]
         [Category("PhantomJs")]
         [TestCaseSource(typeof(TestData), "LinksSetTestName")]
         public void CountLinksAndSetTestNameAtShiftingContentTest(IDictionary<string, string> parameters)

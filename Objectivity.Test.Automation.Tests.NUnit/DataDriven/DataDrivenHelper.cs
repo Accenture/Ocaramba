@@ -98,6 +98,87 @@ namespace Objectivity.Test.Automation.Tests.NUnit.DataDriven
         }
 
         /// <summary>
+        /// Reads the Csv data drive file and set test name.
+        /// </summary>
+        /// <param name="file">Full path to Excel DataDriveFile file</param>
+        /// <param name="diffParam">The difference parameter.</param>
+        /// <param name="testName">Name of the test, use as prefix for test case name.</param>
+        /// <returns>
+        /// IEnumerable TestCaseData
+        /// </returns>
+        /// <exception cref="System.InvalidOperationException">Exception when wrong cell type in file</exception>
+        /// <exception cref="DataDrivenReadException">Exception when parameter not found in row</exception>
+        /// <example>How to use it: <code>
+        ///  {
+        ///  var a = TestContext.CurrentContext.TestDirectory;
+        ///  a = string.Format(CultureInfo.CurrentCulture, "{0}{1}", a, @"\DataDriven\TestDataCsv.csv");
+        ///  return DataDrivenHelper.ReadDataDriveFileCsv(a, new[] { "user", "password" }, "credentialCsv");
+        ///  }
+        /// </code></example>
+        public static IEnumerable<TestCaseData> ReadDataDriveFileCsv(string file, string[] diffParam, string testName)
+        {
+            using (var fs = File.OpenRead(file))
+            using (var sr = new StreamReader(fs))
+            {
+                string line = string.Empty;
+                line = sr.ReadLine(); // naglowek
+                string[] columns = line.Split(
+                                new char[] { ';' },
+                                StringSplitOptions.None);
+
+                var columnsNumber = columns.Length;
+                var row = 1;
+
+                while (line != null)
+                {
+                    line = sr.ReadLine();
+                    if (line != null)
+                    {
+                        var testParams = new Dictionary<string, string>();
+
+                        string[] split = line.Split(
+                            new char[] { ';' },
+                            StringSplitOptions.None);
+
+                        for (int i = 0; i < columnsNumber; i++)
+                        {
+                            testParams.Add(columns[i], split[i]);
+                        }
+
+                        if (diffParam != null && diffParam.Any())
+                        {
+                            try
+                            {
+                                testName = TestCaseName(diffParam, testParams, testName);
+                            }
+                            catch (DataDrivenReadException e)
+                            {
+                                throw new DataDrivenReadException(
+                                    string.Format(
+                                        " Exception while reading Excel Data Driven file\n searched key '{0}' not found at sheet '{1}' \n for test {2} in file '{3}' at row {4}",
+                                        e.Message,
+                                        testName,
+                                        testName,
+                                        file,
+                                        row));
+                            }
+                        }
+                        else
+                        {
+                            testName = testName + "_row(" + row + ")";
+                        }
+
+                        row = row + 1;
+
+                        var data = new TestCaseData(testParams);
+                        data.SetName(testName);
+                        yield return data;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
         /// Reads the data drive file without setting test name.
         /// </summary>
         /// <param name="folder">Full path to XML DataDriveFile file</param>
@@ -250,5 +331,5 @@ namespace Objectivity.Test.Automation.Tests.NUnit.DataDriven
 
             return testCaseName;
         }
-}
+    }
 }
