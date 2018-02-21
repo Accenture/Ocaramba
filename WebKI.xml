@@ -30,6 +30,8 @@
   <HelpKINode Title="BaseConfiguration.GetUrlValueWithUserCredentials property" Url="html/0e9f2a4e-ad2d-a964-5646-14731f55cb6f.htm" />
   <HelpKINode Title="BaseConfiguration.Host property" Url="html/1f8a6f66-7a75-405e-e796-724dc803b22d.htm" />
   <HelpKINode Title="BaseConfiguration.ImplicitlyWaitMilliseconds property" Url="html/b982730c-7a0e-9a6f-46c9-f979a688707c.htm" />
+  <HelpKINode Title="BaseConfiguration.JavaScriptErrorLogging property" Url="html/4c97f9d2-61f1-9d79-00f0-d9bef3728510.htm" />
+  <HelpKINode Title="BaseConfiguration.JavaScriptErrorTypes property" Url="html/3d3c48bb-828f-d6f3-edb8-c3a369422e6f.htm" />
   <HelpKINode Title="BaseConfiguration.LongTimeout property" Url="html/6ca1cd60-eaf0-8a9c-afb9-fef2515a7432.htm" />
   <HelpKINode Title="BaseConfiguration.MediumTimeout property" Url="html/80e04432-9686-d8c2-d6a7-c348412d4c68.htm" />
   <HelpKINode Title="BaseConfiguration.PageSourceFolder property" Url="html/94be23dd-73c0-bcd7-2792-0dcebe037f52.htm" />
@@ -138,6 +140,7 @@
   <HelpKINode Title="DriverContext.Driver property" Url="html/b98f4da9-1193-06e0-89d6-3cc82e62aa0a.htm" />
   <HelpKINode Title="DriverContext.DriverContext constructor" Url="html/c57e394e-6f2e-4405-6db2-2f62a373ff12.htm" />
   <HelpKINode Title="DriverContext.IsTestFailed property" Url="html/58a17885-5f93-c051-6332-03cec59eea79.htm" />
+  <HelpKINode Title="DriverContext.LogJavaScriptErrors method" Url="html/fee355f3-fdb1-5827-76c9-7523d77aed85.htm" />
   <HelpKINode Title="DriverContext.LogTest property" Url="html/316cf040-5f09-d012-0917-e688d7ba66c2.htm" />
   <HelpKINode Title="DriverContext.PageSourceFolder property" Url="html/aa9135f1-2efb-8013-0cc5-d83b0f1a81b5.htm" />
   <HelpKINode Title="DriverContext.SavePageSource method" Url="html/a1c34082-3c4e-bcf3-e405-9fcdd5d3250b.htm" />
@@ -263,6 +266,8 @@
   <HelpKINode Title="JavaScriptAlert.JavaScriptText property" Url="html/4b2b1526-f99c-d83d-0773-85db8cd38c95.htm" />
   <HelpKINode Title="JavaScriptAlert.SendTextToJavaScript method" Url="html/bab803cc-74f2-84ee-51ca-b850462082ab.htm" />
   <HelpKINode Title="JavaScriptClick method" Url="html/f5bab9af-031c-e559-d73e-4490715223c3.htm" />
+  <HelpKINode Title="JavaScriptErrorLogging property" Url="html/4c97f9d2-61f1-9d79-00f0-d9bef3728510.htm" />
+  <HelpKINode Title="JavaScriptErrorTypes property" Url="html/3d3c48bb-828f-d6f3-edb8-c3a369422e6f.htm" />
   <HelpKINode Title="JavaScripts method" Url="html/006985d3-4e92-4cc0-9c2a-e82829eba67e.htm" />
   <HelpKINode Title="JavaScriptText property" Url="html/4b2b1526-f99c-d83d-0773-85db8cd38c95.htm" />
   <HelpKINode Title="Jpg enumeration member" Url="html/24ea484b-208c-10a9-79d9-518c88c2b6e9.htm" />
@@ -340,6 +345,7 @@
   </HelpKINode>
   <HelpKINode Title="LocatorExtensions.ToBy method" Url="html/cbc1d227-5e8d-95c9-cf52-044585dce0fa.htm" />
   <HelpKINode Title="LogError method" Url="html/9533bdac-2e01-040f-f17a-3e9bf9d2d837.htm" />
+  <HelpKINode Title="LogJavaScriptErrors method" Url="html/fee355f3-fdb1-5827-76c9-7523d77aed85.htm" />
   <HelpKINode Title="LogTest property" Url="html/316cf040-5f09-d012-0917-e688d7ba66c2.htm" />
   <HelpKINode Title="LogTestEnding method" Url="html/9c3bee61-4346-d128-e728-f0b152ed7755.htm" />
   <HelpKINode Title="LogTestStarting method" Url="html/dd7b5bfe-7bfe-0a4a-602f-d8440725f3a6.htm" />
