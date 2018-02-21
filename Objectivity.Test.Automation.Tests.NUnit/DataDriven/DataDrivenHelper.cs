@@ -110,9 +110,9 @@ namespace Objectivity.Test.Automation.Tests.NUnit.DataDriven
         /// <exception cref="DataDrivenReadException">Exception when parameter not found in row</exception>
         /// <example>How to use it: <code>
         ///  {
-        ///  var a = TestContext.CurrentContext.TestDirectory;
-        ///  a = string.Format(CultureInfo.CurrentCulture, "{0}{1}", a, @"\DataDriven\TestDataCsv.csv");
-        ///  return DataDrivenHelper.ReadDataDriveFileCsv(a, new[] { "user", "password" }, "credentialCsv");
+        ///  var path = TestContext.CurrentContext.TestDirectory;
+        ///  path = string.Format(CultureInfo.CurrentCulture, "{0}{1}", path, @"\DataDriven\TestDataCsv.csv");
+        ///  return DataDrivenHelper.ReadDataDriveFileCsv(path, new[] { "user", "password" }, "credentialCsv");
         ///  }
         /// </code></example>
         public static IEnumerable<TestCaseData> ReadDataDriveFileCsv(string file, string[] diffParam, string testName)
