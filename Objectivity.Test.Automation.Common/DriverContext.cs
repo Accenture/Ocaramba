@@ -630,7 +630,18 @@ namespace Objectivity.Test.Automation.Common
             if (BaseConfiguration.JavaScriptErrorLogging)
             {
                 Logger.Debug(CultureInfo.CurrentCulture, "Checking JavaScript error(s) in browser");
-                jsErrors = this.driver.Manage().Logs.GetLog(LogType.Browser).Where(x => BaseConfiguration.JavaScriptErrorTypes.Any(e => x.Message.Contains(e)));
+                try
+                {
+                    jsErrors =
+                        this.driver.Manage()
+                            .Logs.GetLog(LogType.Browser)
+                            .Where(x => BaseConfiguration.JavaScriptErrorTypes.Any(e => x.Message.Contains(e)));
+                }
+                catch (NullReferenceException)
+                {
+                    Logger.Error(CultureInfo.CurrentCulture, "NullReferenceException while trying to read JavaScript errors from browser.");
+                    return false;
+                }
 
                 if (jsErrors.Any())
                 {
