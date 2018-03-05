@@ -39,7 +39,7 @@ namespace Objectivity.Test.Automation.Common.WebElements.Kendo
     {
         private readonly ElementLocator kendoSelect = new ElementLocator(
             Locator.XPath,
-            "./ancestor-or-self::span[contains(@class, 'k-widget')]//input[@id]");
+            "./ancestor-or-self::span[contains(@class, 'k-widget')]//*[@data-role='dropdownlist'][@id]");
 
         private readonly IWebElement webElement;
 
