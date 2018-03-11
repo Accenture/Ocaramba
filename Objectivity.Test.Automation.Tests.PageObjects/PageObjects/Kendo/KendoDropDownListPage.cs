@@ -36,9 +36,9 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.Kendo
         /// <summary>
         ///     Locators for elements
         /// </summary>
-        private readonly ElementLocator capColorKendoDropDownListLocator = new ElementLocator(
-            Locator.CssSelector,
-            "span[aria-owns='color_listbox']");
+        private readonly ElementLocator
+            capColorKendoDropDownListLocator = new ElementLocator(Locator.CssSelector, "span[aria-owns='color_listbox']"),
+            capSizeKendoDropDownListLocator = new ElementLocator(Locator.CssSelector, "span[aria-owns='size_listbox']");
 
         private readonly Uri url = new Uri("http://demos.telerik.com/jsp-ui/dropdownlist/index");
 
@@ -56,11 +56,29 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.Kendo
             }
         }
 
+        public Collection<string> CapSizeOptions
+        {
+            get
+            {
+                var options = this.CapSizeKendoDropDownList.Options;
+                return options;
+            }
+        }
+
         public string CapColorSelectedOption
         {
             get
             {
                 var option = this.CapColorKendoDropDownList.SelectedOption;
+                return option;
+            }
+        }
+
+        public string CapSizeSelectedOption
+        {
+            get
+            {
+                var option = this.CapSizeKendoDropDownList.SelectedOption;
                 return option;
             }
         }
@@ -82,9 +100,23 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.Kendo
             }
         }
 
+        protected KendoDropDownList CapSizeKendoDropDownList
+        {
+            get
+            {
+                var element = this.Driver.GetElement<KendoDropDownList>(this.capSizeKendoDropDownListLocator);
+                return element;
+            }
+        }
+
         public void SelectCapColor(string text)
         {
             this.CapColorKendoDropDownList.SelectByText(text);
+        }
+
+        public void SelectCapSize(string text)
+        {
+            this.CapSizeKendoDropDownList.SelectByText(text);
         }
 
         public KendoDropDownListPage Open()

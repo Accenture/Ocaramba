@@ -48,21 +48,6 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.Kendo
         {
         }
 
-        public Collection<string> FabricOptions
-        {
-            get
-            {
-                WaitHelper.Wait(() => this.FabricKendoComboBox.Options.Count <= 2, TimeSpan.FromSeconds(3), "Check number of options");
-                var options = this.FabricKendoComboBox.Options;
-                foreach (var option in options)
-                {
-                    Logger.Info(CultureInfo.CurrentCulture, "Option: {0}", option);
-                }
-
-                return options;
-            }
-        }
-
         protected KendoComboBox FabricKendoComboBox
         {
             get
@@ -70,6 +55,18 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.Kendo
                 var element = this.Driver.GetElement<KendoComboBox>(this.tshirtFabricComboBoxLocator);
                 return element;
             }
+        }
+
+        public Collection<string> FabricOptions(int number)
+        {
+            WaitHelper.Wait(() => this.FabricKendoComboBox.Options.Count <= number, TimeSpan.FromSeconds(3), "Check number of options");
+            var options = this.FabricKendoComboBox.Options;
+            foreach (var option in options)
+            {
+                Logger.Info(CultureInfo.CurrentCulture, "Option: {0}", option);
+            }
+
+            return options;
         }
 
         public void SearchFabricOptions(string text)

@@ -41,6 +41,15 @@ namespace Objectivity.Test.Automation.Tests.MsTest.Tests.KendoTests
         }
 
         [TestMethod]
+        public void KendoDropDownSizeListOptionsTest()
+        {
+            var options = new Collection<string> { "S - 6 3/4\"", "M - 7 1/4\"", "L - 7 1/8\"", "XL - 7 5/8\"" };
+            var homePage = new KendoDropDownListPage(this.DriverContext);
+            homePage.Open();
+            CollectionAssert.AreEqual(options, homePage.CapSizeOptions);
+        }
+
+        [TestMethod]
         public void KendoDropDownListSelectedOptionTest()
         {
             var option = "Black";
@@ -57,6 +66,16 @@ namespace Objectivity.Test.Automation.Tests.MsTest.Tests.KendoTests
             homePage.Open();
             homePage.SelectCapColor(option);
             Assert.AreEqual(option, homePage.CapColorSelectedOption);
+        }
+
+        [TestMethod]
+        public void KendoDropDownSizeListSelectByTextTest()
+        {
+            var option = "XL - 7 5/8\"";
+            var homePage = new KendoDropDownListPage(this.DriverContext);
+            homePage.Open();
+            homePage.SelectCapSize(option);
+            Assert.AreEqual(option, homePage.CapSizeSelectedOption);
         }
     }
 }
