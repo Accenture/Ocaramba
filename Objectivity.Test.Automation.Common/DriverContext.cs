@@ -42,7 +42,6 @@ namespace Objectivity.Test.Automation.Common
     using OpenQA.Selenium.Edge;
     using OpenQA.Selenium.Firefox;
     using OpenQA.Selenium.IE;
-    using OpenQA.Selenium.PhantomJS;
     using OpenQA.Selenium.Remote;
     using OpenQA.Selenium.Safari;
 
@@ -482,9 +481,6 @@ namespace Objectivity.Test.Automation.Common
                     break;
                 case BrowserType.Safari:
                     this.driver = new SafariDriver(this.SafariProfile);
-                    break;
-                case BrowserType.PhantomJs:
-                    this.driver = new PhantomJSDriver(this.CurrentDirectory + BaseConfiguration.PhantomJsPath);
                     break;
                 case BrowserType.RemoteWebDriver:
                 case BrowserType.BrowserStack:

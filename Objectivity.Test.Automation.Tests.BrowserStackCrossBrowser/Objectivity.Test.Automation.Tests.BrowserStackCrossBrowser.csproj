@@ -70,7 +70,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.XML" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="WebDriver, Version=3.10.0.0, Culture=neutral, PublicKeyToken=null" />
+    <Reference Include="WebDriver, Version=3.11.0.0, Culture=neutral, PublicKeyToken=null" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ProjectBaseConfiguration.cs" />
