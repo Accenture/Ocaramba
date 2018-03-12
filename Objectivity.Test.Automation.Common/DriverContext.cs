@@ -369,11 +369,36 @@ namespace Objectivity.Test.Automation.Common
         {
             get
             {
+                // retrieving settings from config file
+                var internetExplorerPreferences = ConfigurationManager.GetSection("InternetExplorerPreferences") as NameValueCollection;
                 var options = new InternetExplorerOptions
                 {
                     EnsureCleanSession = true,
                     IgnoreZoomLevel = true,
                 };
+
+                // custom preferences
+                // if there are any settings
+                if (internetExplorerPreferences != null)
+                {
+                    // loop through all of them
+                    for (var i = 0; i < internetExplorerPreferences.Count; i++)
+                    {
+                        Logger.Trace(CultureInfo.CurrentCulture, "Set custom preference '{0},{1}'", internetExplorerPreferences.GetKey(i), internetExplorerPreferences[i]);
+
+                        // and verify all of them
+                        switch (internetExplorerPreferences.GetKey(i))
+                        {
+                            case "EnsureCleanSession":
+                                options.EnsureCleanSession = Convert.ToBoolean(internetExplorerPreferences[i]);
+                                break;
+
+                            case "IgnoreZoomLevel":
+                                options.IgnoreZoomLevel = Convert.ToBoolean(internetExplorerPreferences[i]);
+                                break;
+                        }
+                    }
+                }
 
                 // set browser proxy for IE
                 if (!string.IsNullOrEmpty(BaseConfiguration.Proxy))
