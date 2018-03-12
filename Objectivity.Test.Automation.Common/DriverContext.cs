@@ -390,11 +390,11 @@ namespace Objectivity.Test.Automation.Common
                         switch (internetExplorerPreferences.GetKey(i))
                         {
                             case "EnsureCleanSession":
-                                options.EnsureCleanSession = Convert.ToBoolean(internetExplorerPreferences[i]);
+                                options.EnsureCleanSession = Convert.ToBoolean(internetExplorerPreferences[i], CultureInfo.CurrentCulture);
                                 break;
 
                             case "IgnoreZoomLevel":
-                                options.IgnoreZoomLevel = Convert.ToBoolean(internetExplorerPreferences[i]);
+                                options.IgnoreZoomLevel = Convert.ToBoolean(internetExplorerPreferences[i], CultureInfo.CurrentCulture);
                                 break;
                         }
                     }
