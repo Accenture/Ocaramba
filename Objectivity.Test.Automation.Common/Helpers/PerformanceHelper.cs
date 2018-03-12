@@ -124,7 +124,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// All the durations milliseconds.
         /// </summary>
         /// <returns>Return average load times for particular scenarios and browsers.</returns>
-        private IEnumerable<AverageGroupedTimes> AllGroupedDurationsMilliseconds()
+        public IEnumerable<AverageGroupedTimes> AllGroupedDurationsMilliseconds()
         {
             var groupedList =
                 this.loadTimeList.OrderBy(dur => dur.Duration).GroupBy(
