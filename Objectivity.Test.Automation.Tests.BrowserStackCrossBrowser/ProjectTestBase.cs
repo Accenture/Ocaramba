@@ -84,7 +84,6 @@ namespace Objectivity.Test.Automation.Tests.NUnit
         public void BeforeClass()
         {
             this.DriverContext.CurrentDirectory = TestContext.CurrentContext.TestDirectory;
-            StartPerformanceMeasure();
             this.DriverContext.Start();
         }
 
@@ -94,7 +93,6 @@ namespace Objectivity.Test.Automation.Tests.NUnit
         [OneTimeTearDown]
         public void AfterClass()
         {
-            StopPerfromanceMeasure();
             this.DriverContext.Stop();
         }
 

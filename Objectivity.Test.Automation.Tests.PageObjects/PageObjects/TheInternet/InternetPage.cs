@@ -60,18 +60,6 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             return this;
         }
 
-        /// <summary>
-        /// Methods for this HomePage
-        /// </summary>
-        /// <returns>Returns Homepage</returns>
-        public InternetPage OpenHomePageAndMeasureTime()
-        {
-            var url = BaseConfiguration.GetUrlValue;
-            this.Driver.NavigateToAndMeasureTime(new Uri(url), waitForAjax: true);
-            Logger.Info(CultureInfo.CurrentCulture, "Opening page {0}", url);
-            return this;
-        }
-
         public InternetPage OpenHomePageWithUserCredentials()
         {
             var url = BaseConfiguration.GetUrlValueWithUserCredentials;

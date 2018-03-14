@@ -67,27 +67,6 @@ namespace Objectivity.Test.Automation.Common.Extensions
         }
 
         /// <summary>
-        /// Navigates to given url and measure time for this action including or not Ajax.
-        /// </summary>
-        /// <example>Sample confirmation for java script alert: <code>
-        /// this.Driver.NavigateToAndMeasureTime("http://objectivity.co.uk", waitForAjax: true);
-        /// </code></example>
-        /// <param name="webDriver">The web driver.</param>
-        /// <param name="url">The URL.</param>
-        /// <param name="waitForAjax">Wait or not for Ajax</param>
-        public static void NavigateToAndMeasureTime(this IWebDriver webDriver, Uri url, bool waitForAjax)
-        {
-            PerformanceHelper.Instance.StartMeasure();
-            webDriver.Navigate().GoToUrl(url);
-            if (waitForAjax)
-            {
-                webDriver.WaitForAjax();
-            }
-
-            PerformanceHelper.Instance.StopMeasure(url.AbsolutePath);
-        }
-
-        /// <summary>
         /// Waits for all ajax actions to be completed.
         /// </summary>
         /// <param name="webDriver">The web driver.</param>

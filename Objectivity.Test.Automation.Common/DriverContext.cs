@@ -71,6 +71,11 @@ namespace Objectivity.Test.Automation.Common
         public event EventHandler<CapabilitiesSetEventArgs> CapabilitiesSet;
 
         /// <summary>
+        /// Gets instance of Performance PerformanceMeasures class
+        /// </summary>
+        public PerformanceHelper PerformanceMeasures { get; } = new PerformanceHelper();
+
+        /// <summary>
         /// Gets or sets the test title.
         /// </summary>
         /// <value>

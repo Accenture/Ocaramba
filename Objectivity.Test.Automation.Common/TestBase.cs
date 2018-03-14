@@ -82,21 +82,5 @@ namespace Objectivity.Test.Automation.Common
             driverContext.VerifyMessages.Clear();
             return true;
         }
-
-        /// <summary>
-        /// Run before the class.
-        /// </summary>
-        protected static void StartPerformanceMeasure()
-        {
-            PerformanceHelper.Instance = new PerformanceHelper();
-        }
-
-        /// <summary>
-        /// Run after the class.
-        /// </summary>
-        protected static void StopPerfromanceMeasure()
-        {
-            PerformanceHelper.Instance.PrintAveragePercentiles90DurationMilliseconds();
-        }
     }
 }

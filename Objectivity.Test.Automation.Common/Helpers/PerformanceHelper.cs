@@ -59,14 +59,6 @@ namespace Objectivity.Test.Automation.Common.Helpers
         }
 
         /// <summary>
-        /// Gets or sets the performance manager.
-        /// </summary>
-        /// <value>
-        /// The performance manager.
-        /// </value>
-        public static PerformanceHelper Instance { get; set; }
-
-        /// <summary>
         /// Gets the scenario list
         /// </summary>
         public IList<SavedTimes> GetloadTimeList => this.loadTimeList;
@@ -76,6 +68,52 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// </summary>
         /// <value>Return last measured time.</value>
         private long MeasuredTime { get; set; }
+
+        /// <summary>
+        /// Prints the performance summary.
+        /// </summary>
+        /// <param name="measures">The instance of PerformanceHelper class.</param>
+        /// TODO: Decide what parameters must be printed
+        public static void PrintAveragePercentiles90DurationMilliseconds(PerformanceHelper measures)
+        {
+            var groupedDurations = AllGroupedDurationsMilliseconds(measures).Select(v =>
+                "##teamcity[testStarted name='" + v.StepName + "." + v.Browser + ".Average']\n" +
+                "##teamcity[testFinished name='" + v.StepName + "." + v.Browser + ".Average' duration='" + v.AverageDuration + "']\n" +
+                "##teamcity[testStarted name='" + v.StepName + "." + v.Browser + ".Percentile90Line']\n" +
+                "##teamcity[testFinished name='" + v.StepName + "." + v.Browser + ".Percentile90Line' duration='" + v.Percentile90 + "']\n" +
+                v.StepName + " " + v.Browser + " Average: " + v.AverageDuration + "\n" +
+                v.StepName + " " + v.Browser + " Percentile90Line: " + v.Percentile90).ToList().OrderBy(listElement => listElement);
+
+            for (int i = 0; i < groupedDurations.Count(); i++)
+            {
+                Logger.Info(groupedDurations.ElementAt(i));
+            }
+        }
+
+        /// <summary>
+        /// All the durations milliseconds.
+        /// </summary>
+        /// <param name="measures">The instance of PerformanceHelper class.</param>
+        /// <returns>Return average load times for particular scenarios and browsers.</returns>
+        public static IEnumerable<AverageGroupedTimes> AllGroupedDurationsMilliseconds(PerformanceHelper measures)
+        {
+            var loadTimeList = measures.GetloadTimeList;
+            var groupedList =
+                loadTimeList.OrderBy(dur => dur.Duration).GroupBy(
+                    st => new { st.Scenario, BName = st.BrowserName },
+                    (key, g) =>
+                    {
+                        var savedTimeses = g as IList<SavedTimes> ?? g.ToList();
+                        return new AverageGroupedTimes
+                        {
+                            StepName = key.Scenario,
+                            Browser = key.BName,
+                            AverageDuration = Math.Round(savedTimeses.Average(dur => dur.Duration)),
+                            Percentile90 = savedTimeses[(int)(Math.Ceiling(savedTimeses.Count * 0.9) - 1)].Duration
+                        };
+                    }).ToList().OrderBy(listElement => listElement.StepName);
+            return groupedList;
+        }
 
         /// <summary>
         /// Starts the measure.
@@ -101,46 +139,6 @@ namespace Objectivity.Test.Automation.Common.Helpers
             Logger.Info(CultureInfo.CurrentCulture, "Load Time {0}", this.MeasuredTime);
 
             this.loadTimeList.Add(savedTimes);
-        }
-
-        /// <summary>
-        /// Prints the performance summary.
-        /// </summary>
-        /// TODO: Decide what parameters must be printed
-        public void PrintAveragePercentiles90DurationMilliseconds()
-        {
-            var groupedDurations = this.AllGroupedDurationsMilliseconds().Select(v =>
-                "##teamcity[testStarted name='" + v.StepName + "." + v.Browser + ".Average']\n" +
-                "##teamcity[testFinished name='" + v.StepName + "." + v.Browser + ".Average' duration='" + v.AverageDuration + "']\n" +
-                "##teamcity[testStarted name='" + v.StepName + "." + v.Browser + ".Percentile90Line']\n" +
-                "##teamcity[testFinished name='" + v.StepName + "." + v.Browser + ".Percentile90Line' duration='" + v.Percentile90 + "']\n" +
-                v.StepName + " " + v.Browser + " Average: " + v.AverageDuration + "\n" +
-                v.StepName + " " + v.Browser + " Percentile90Line: " + v.Percentile90);
-
-            groupedDurations.ToList().ForEach(Console.WriteLine);
-        }
-
-        /// <summary>
-        /// All the durations milliseconds.
-        /// </summary>
-        /// <returns>Return average load times for particular scenarios and browsers.</returns>
-        public IEnumerable<AverageGroupedTimes> AllGroupedDurationsMilliseconds()
-        {
-            var groupedList =
-                this.loadTimeList.OrderBy(dur => dur.Duration).GroupBy(
-                    st => new { st.Scenario, BName = st.BrowserName },
-                    (key, g) =>
-                        {
-                            var savedTimeses = g as IList<SavedTimes> ?? g.ToList();
-                            return new AverageGroupedTimes
-                            {
-                                StepName = key.Scenario,
-                                Browser = key.BName,
-                                AverageDuration = Math.Round(savedTimeses.Average(dur => dur.Duration)),
-                                Percentile90 = savedTimeses[(int)(Math.Ceiling(savedTimeses.Count * 0.9) - 1)].Duration
-                            };
-                        }).ToList().OrderBy(listElement => listElement.StepName);
-            return groupedList;
         }
     }
 }

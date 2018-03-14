@@ -1,4 +1,4 @@
-﻿// <copyright file="PerformanceTestsNUnit.cs" company="Objectivity Bespoke Software Specialists">
+﻿// <copyright file="PerformanceTests1NUnit.cs" company="Objectivity Bespoke Software Specialists">
 // Copyright (c) Objectivity Bespoke Software Specialists. All rights reserved.
 // </copyright>
 // <license>
@@ -30,11 +30,11 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
     /// </summary>
     [TestFixture]
     [Parallelizable(ParallelScope.Fixtures)]
-    public class PerformanceTestsNUnit : ProjectTestBase
+    public class PerformanceTests1NUnit : ProjectTestBase
     {
         [Test]
         [Repeat(3)]
-        public void HerokuappPerfTests()
+        public void HerokuappPerfTests1()
         {
             this.DriverContext.PerformanceMeasures.StartMeasure();
             InternetPage internet = new InternetPage(this.DriverContext);
