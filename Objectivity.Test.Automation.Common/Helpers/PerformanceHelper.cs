@@ -24,12 +24,11 @@ namespace Objectivity.Test.Automation.Common.Helpers
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Diagnostics;
     using System.Globalization;
     using System.Linq;
-
     using NLog;
-
     using Objectivity.Test.Automation.Common.Types;
 
     /// <summary>
@@ -84,9 +83,41 @@ namespace Objectivity.Test.Automation.Common.Helpers
                 v.StepName + " " + v.Browser + " Average: " + v.AverageDuration + "\n" +
                 v.StepName + " " + v.Browser + " Percentile90Line: " + v.Percentile90).ToList().OrderBy(listElement => listElement);
 
+            var groupedDurationsAppVeyor = AllGroupedDurationsMilliseconds(measures).Select(v =>
+                v.StepName + "." + v.Browser + ".Average -Framework NUnit -Filename PerformanceResults -Outcome Passed -Duration " + v.AverageDuration).ToList().OrderBy(listElement => listElement);
+
             for (int i = 0; i < groupedDurations.Count(); i++)
             {
                 Logger.Info(groupedDurations.ElementAt(i));
+            }
+
+            // Use ProcessStartInfo class
+            ProcessStartInfo startInfo = new ProcessStartInfo();
+
+            startInfo.CreateNoWindow = false;
+            startInfo.UseShellExecute = false;
+            startInfo.FileName = "appveyor";
+            startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            for (int i = 0; i < groupedDurationsAppVeyor.Count(); i++)
+            {
+                startInfo.Arguments = "AddTest " + groupedDurationsAppVeyor.ElementAt(i);
+
+                // Start the process with the info we specified.
+                // Call WaitForExit and then the using statement will close.
+                try
+                {
+                    using (Process exeProcess = Process.Start(startInfo))
+                    {
+                        if (exeProcess != null)
+                        {
+                            exeProcess.WaitForExit();
+                        }
+                    }
+                }
+                catch (Win32Exception)
+                {
+                    Logger.Error("AppVeyor app not found");
+                }
             }
         }
 
