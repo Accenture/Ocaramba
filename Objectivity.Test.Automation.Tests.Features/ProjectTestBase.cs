@@ -86,7 +86,6 @@ namespace Objectivity.Test.Automation.Tests.Features
         [BeforeFeature]
         public static void BeforeClass()
         {
-            StartPerformanceMeasure();
         }
 
         /// <summary>
@@ -95,7 +94,6 @@ namespace Objectivity.Test.Automation.Tests.Features
         [AfterFeature]
         public static void AfterClass()
         {
-            StopPerfromanceMeasure();
         }
 
         /// <summary>
