@@ -32,7 +32,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
     /// </summary>
     public static class PrintPerformanceResultsHelper
     {
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+        private static readonly Logger Logger = LogManager.GetLogger("DRIVER");
 
         /// <summary>
         /// Prints the performance summary of percentiles 90 duration in millisecond in Teamcity.
@@ -40,17 +40,14 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// <param name="measures">The instance of PerformanceHelper class.</param>
         public static void PrintPercentiles90DurationMillisecondsinTeamcity(PerformanceHelper measures)
         {
-            var groupedDurations = measures.AllGroupedDurationsMilliseconds.Select(v =>
-                "\n##teamcity[testStarted name='" + v.StepName + "." + v.Browser + ".Percentile90Line']\n" +
-                "##teamcity[testFinished name='" + v.StepName + "." + v.Browser + ".Percentile90Line' duration='" +
-                v.Percentile90 + "']\n" +
-                v.StepName + " " + v.Browser + " Percentile90Line: " + v.Percentile90)
-                .ToList()
-                .OrderBy(listElement => listElement);
+            var groupedPercentiles90Durations = measures.AllGroupedDurationsMilliseconds.Select(v =>
+                "##teamcity[testStarted name='" + v.StepName + "." + v.Browser + ".Percentile90Line']\n" +
+                "##teamcity[testFinished name='" + v.StepName + "." + v.Browser + ".Percentile90Line' duration='" + v.Percentile90 + "']\n" +
+                v.StepName + " " + v.Browser + " Percentile90Line: " + v.Percentile90).ToList().OrderBy(listElement => listElement);
 
-            for (int i = 0; i < groupedDurations.Count(); i++)
+            for (int i = 0; i < groupedPercentiles90Durations.Count(); i++)
             {
-                Logger.Info(groupedDurations.ElementAt(i));
+                Logger.Info(groupedPercentiles90Durations.ElementAt(i));
             }
         }
 
@@ -60,17 +57,14 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// <param name="measures">The instance of PerformanceHelper class.</param>
         public static void PrintAverageDurationMillisecondsInTeamcity(PerformanceHelper measures)
         {
-            var groupedDurations = measures.AllGroupedDurationsMilliseconds.Select(v =>
-                "\n##teamcity[testStarted name='" + v.StepName + "." + v.Browser + ".Average']\n" +
-                "##teamcity[testFinished name='" + v.StepName + "." + v.Browser + ".Average' duration='" +
-                v.AverageDuration + "']\n" +
-                v.StepName + " " + v.Browser + " Average: " + v.AverageDuration + "\n")
-                .ToList()
-                .OrderBy(listElement => listElement);
+            var groupedAverageDurations = measures.AllGroupedDurationsMilliseconds.Select(v =>
+                "##teamcity[testStarted name='" + v.StepName + "." + v.Browser + ".Average']\n" +
+                "##teamcity[testFinished name='" + v.StepName + "." + v.Browser + ".Average' duration='" + v.AverageDuration + "']\n" +
+                v.StepName + " " + v.Browser + " Average: " + v.AverageDuration + "\n").ToList().OrderBy(listElement => listElement);
 
-            for (int i = 0; i < groupedDurations.Count(); i++)
+            for (int i = 0; i < groupedAverageDurations.Count(); i++)
             {
-                Logger.Info(groupedDurations.ElementAt(i));
+                Logger.Info(groupedAverageDurations.ElementAt(i));
             }
         }
 
