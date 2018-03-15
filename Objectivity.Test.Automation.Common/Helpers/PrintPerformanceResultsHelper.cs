@@ -41,7 +41,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
         public static void PrintPercentiles90DurationMillisecondsinTeamcity(PerformanceHelper measures)
         {
             var groupedDurations = measures.AllGroupedDurationsMilliseconds.Select(v =>
-                "##teamcity[testStarted name='" + v.StepName + "." + v.Browser + ".Percentile90Line']\n" +
+                "\n##teamcity[testStarted name='" + v.StepName + "." + v.Browser + ".Percentile90Line']\n" +
                 "##teamcity[testFinished name='" + v.StepName + "." + v.Browser + ".Percentile90Line' duration='" +
                 v.Percentile90 + "']\n" +
                 v.StepName + " " + v.Browser + " Percentile90Line: " + v.Percentile90)
@@ -61,7 +61,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
         public static void PrintAverageDurationMillisecondsInTeamcity(PerformanceHelper measures)
         {
             var groupedDurations = measures.AllGroupedDurationsMilliseconds.Select(v =>
-                "##teamcity[testStarted name='" + v.StepName + "." + v.Browser + ".Average']\n" +
+                "\n##teamcity[testStarted name='" + v.StepName + "." + v.Browser + ".Average']\n" +
                 "##teamcity[testFinished name='" + v.StepName + "." + v.Browser + ".Average' duration='" +
                 v.AverageDuration + "']\n" +
                 v.StepName + " " + v.Browser + " Average: " + v.AverageDuration + "\n")
