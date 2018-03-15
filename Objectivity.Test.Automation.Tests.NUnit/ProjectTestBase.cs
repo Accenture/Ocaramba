@@ -79,7 +79,10 @@ namespace Objectivity.Test.Automation.Tests.NUnit
         [OneTimeTearDown]
         public void AfterClass()
         {
-            PerformanceHelper.PrintAveragePercentiles90DurationMilliseconds(this.DriverContext.PerformanceMeasures);
+            PrintPerformanceResultsHelper.PrintAverageDurationMillisecondsInAppVeyor(this.DriverContext.PerformanceMeasures);
+            PrintPerformanceResultsHelper.PrintPercentiles90DurationMillisecondsInAppVeyor(this.DriverContext.PerformanceMeasures);
+            PrintPerformanceResultsHelper.PrintAverageDurationMillisecondsInTeamcity(this.DriverContext.PerformanceMeasures);
+            PrintPerformanceResultsHelper.PrintPercentiles90DurationMillisecondsinTeamcity(this.DriverContext.PerformanceMeasures);
             this.DriverContext.Stop();
         }
 
