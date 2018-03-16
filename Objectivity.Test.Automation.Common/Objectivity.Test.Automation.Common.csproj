@@ -66,6 +66,7 @@
     <Compile Include="DriversCustomSettings.cs" />
     <Compile Include="Exceptions\WaitTimeoutException.cs" />
     <Compile Include="Exceptions\DataDrivenReadException.cs" />
+    <Compile Include="Helpers\PrintPerformanceResultsHelper.cs" />
     <Compile Include="Helpers\WaitHelper.cs" />
     <Compile Include="Helpers\MdxHelper.cs" />
     <Compile Include="Helpers\FileType.cs" />
