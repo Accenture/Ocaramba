@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <HelpKI>
   <HelpKINode Title="Actions method" Url="html/74057790-1ce7-6460-b6cb-527e4e3c74de.htm" />
+  <HelpKINode Title="AllGroupedDurationsMilliseconds property" Url="html/27fe60ef-1c90-216f-f368-bea6eacfed0e.htm" />
   <HelpKINode Title="AverageDuration property" Url="html/2f98f38c-eef6-2d06-c74d-1c7fcf69393d.htm" />
   <HelpKINode Title="AverageGroupedTimes class">
     <HelpKINode Title="AverageGroupedTimes Class" Url="html/fb99d5ce-acf3-03e9-b87e-80ff1422bc66.htm" />
@@ -37,7 +38,6 @@
   <HelpKINode Title="BaseConfiguration.PageSourceFolder property" Url="html/94be23dd-73c0-bcd7-2792-0dcebe037f52.htm" />
   <HelpKINode Title="BaseConfiguration.Password property" Url="html/ebe26c1e-1314-0239-0079-3146f5c8398c.htm" />
   <HelpKINode Title="BaseConfiguration.PathToFirefoxProfile property" Url="html/e6056b97-fc5d-8643-da13-686cf2900170.htm" />
-  <HelpKINode Title="BaseConfiguration.PhantomJsPath property" Url="html/f9462fa2-43fd-88b2-d557-d1310602f223.htm" />
   <HelpKINode Title="BaseConfiguration.Protocol property" Url="html/2a59eb82-246e-11a2-e857-95483f98d1f7.htm" />
   <HelpKINode Title="BaseConfiguration.Proxy property" Url="html/f50d335c-f673-3296-79c4-62b45c78ecc9.htm" />
   <HelpKINode Title="BaseConfiguration.RemoteWebDriverHub property" Url="html/d8c0e0e3-fe56-c754-3448-1c36d8d28978.htm" />
@@ -143,6 +143,7 @@
   <HelpKINode Title="DriverContext.LogJavaScriptErrors method" Url="html/fee355f3-fdb1-5827-76c9-7523d77aed85.htm" />
   <HelpKINode Title="DriverContext.LogTest property" Url="html/316cf040-5f09-d012-0917-e688d7ba66c2.htm" />
   <HelpKINode Title="DriverContext.PageSourceFolder property" Url="html/aa9135f1-2efb-8013-0cc5-d83b0f1a81b5.htm" />
+  <HelpKINode Title="DriverContext.PerformanceMeasures property" Url="html/8347849f-a473-b72c-23ed-a4847fb4061d.htm" />
   <HelpKINode Title="DriverContext.SavePageSource method" Url="html/a1c34082-3c4e-bcf3-e405-9fcdd5d3250b.htm" />
   <HelpKINode Title="DriverContext.SaveScreenshot method" Url="html/a73b584f-d8ff-220d-0758-2f922e2dc9b7.htm" />
   <HelpKINode Title="DriverContext.ScreenShotFolder property" Url="html/8df8212d-a224-1fb0-b90c-38d35a91ab73.htm" />
@@ -243,7 +244,6 @@
   <HelpKINode Title="ImplicitlyWaitMilliseconds property" Url="html/b982730c-7a0e-9a6f-46c9-f979a688707c.htm" />
   <HelpKINode Title="Info method" Url="html/5946d461-48fb-2dec-f8e8-593077efa516.htm" />
   <HelpKINode Title="Input property" Url="html/50a5d181-bebc-45f4-aaa8-2758d30399be.htm" />
-  <HelpKINode Title="Instance property" Url="html/1dc566ef-3347-db3c-fd6e-74a5c33d7d0f.htm" />
   <HelpKINode Title="InternetExplorer enumeration member" Url="html/fd8f95a4-1921-2ebe-a199-a6c1d3adcc8c.htm" />
   <HelpKINode Title="IsDriverSynchronizationWithAngular method" Url="html/c4ca2d43-711f-0a0a-b16f-9683a2db6de4.htm" />
   <HelpKINode Title="IsElementPresent method" Url="html/91aa6234-30e7-9f8c-4202-48141d302683.htm" />
@@ -366,7 +366,6 @@
   <HelpKINode Title="NameHelper.RandomName method" Url="html/9e5bee3b-7676-3dac-020e-c9306827cd01.htm" />
   <HelpKINode Title="NameHelper.ShortenFileName method" Url="html/dea15dcd-5c00-dd48-0964-505c658f8972.htm" />
   <HelpKINode Title="NavigateTo method" Url="html/1702a394-9e46-d38d-abac-816522dc2b64.htm" />
-  <HelpKINode Title="NavigateToAndMeasureTime method" Url="html/fd519924-92cd-90fe-9c2e-941a2c5702cb.htm" />
   <HelpKINode Title="None enumeration member">
     <HelpKINode Title="BrowserType Enumeration" Url="html/fd8f95a4-1921-2ebe-a199-a6c1d3adcc8c.htm" />
     <HelpKINode Title="FileType Enumeration" Url="html/24ea484b-208c-10a9-79d9-518c88c2b6e9.htm" />
@@ -392,6 +391,7 @@
   <HelpKINode Title="Objectivity.Test.Automation.Common.Helpers.MdxHelper class" Url="html/49f244cc-37eb-9a5e-1b96-7b4f4efb0262.htm" />
   <HelpKINode Title="Objectivity.Test.Automation.Common.Helpers.NameHelper class" Url="html/c8ce5d12-58ae-7918-7616-014b87d8db2c.htm" />
   <HelpKINode Title="Objectivity.Test.Automation.Common.Helpers.PerformanceHelper class" Url="html/611a4090-f274-1c21-b671-93b6053744c6.htm" />
+  <HelpKINode Title="Objectivity.Test.Automation.Common.Helpers.PrintPerformanceResultsHelper class" Url="html/48280242-a505-e893-2b4a-f0ced1258360.htm" />
   <HelpKINode Title="Objectivity.Test.Automation.Common.Helpers.SqlHelper class" Url="html/f2f836b4-a389-534a-5d23-c6b3ef95cdbd.htm" />
   <HelpKINode Title="Objectivity.Test.Automation.Common.Helpers.TakeScreenShot class" Url="html/cfe592d5-3e39-53c7-526d-a08902910555.htm" />
   <HelpKINode Title="Objectivity.Test.Automation.Common.Helpers.WaitHelper class" Url="html/24822fca-e459-1c40-fc1b-57de5298cc20.htm" />
@@ -436,18 +436,30 @@
     <HelpKINode Title="methods" Url="html/1e2d0ced-6121-ff95-37b5-e89ed30ef4e5.htm" />
     <HelpKINode Title="properties" Url="html/e6944346-f455-4c20-1ee2-7048c87a83d1.htm" />
   </HelpKINode>
+  <HelpKINode Title="PerformanceHelper.AllGroupedDurationsMilliseconds property" Url="html/27fe60ef-1c90-216f-f368-bea6eacfed0e.htm" />
   <HelpKINode Title="PerformanceHelper.GetloadTimeList property" Url="html/be33b478-559b-f6c5-7a06-a16bf845f48c.htm" />
-  <HelpKINode Title="PerformanceHelper.Instance property" Url="html/1dc566ef-3347-db3c-fd6e-74a5c33d7d0f.htm" />
   <HelpKINode Title="PerformanceHelper.PerformanceHelper constructor" Url="html/64c50249-8c6e-8e09-8542-bcba3827ff8a.htm" />
-  <HelpKINode Title="PerformanceHelper.PrintAveragePercentiles90DurationMilliseconds method" Url="html/ef9dcfe7-5515-334f-f575-39746472dc8b.htm" />
   <HelpKINode Title="PerformanceHelper.StartMeasure method" Url="html/3fcea8da-15e7-3507-2557-b0e3fe5939b6.htm" />
   <HelpKINode Title="PerformanceHelper.StopMeasure method" Url="html/a5b8ff37-8967-8b4b-d148-cb87a46423a0.htm" />
-  <HelpKINode Title="PhantomJs enumeration member" Url="html/fd8f95a4-1921-2ebe-a199-a6c1d3adcc8c.htm" />
-  <HelpKINode Title="PhantomJsPath property" Url="html/f9462fa2-43fd-88b2-d557-d1310602f223.htm" />
+  <HelpKINode Title="PerformanceMeasures property" Url="html/8347849f-a473-b72c-23ed-a4847fb4061d.htm" />
   <HelpKINode Title="Png enumeration member" Url="html/24ea484b-208c-10a9-79d9-518c88c2b6e9.htm" />
   <HelpKINode Title="Ppt enumeration member" Url="html/24ea484b-208c-10a9-79d9-518c88c2b6e9.htm" />
   <HelpKINode Title="Pptx enumeration member" Url="html/24ea484b-208c-10a9-79d9-518c88c2b6e9.htm" />
-  <HelpKINode Title="PrintAveragePercentiles90DurationMilliseconds method" Url="html/ef9dcfe7-5515-334f-f575-39746472dc8b.htm" />
+  <HelpKINode Title="PrintAverageDurationMillisecondsInAppVeyor method" Url="html/f38e61a9-555c-3e23-68d4-b7a6b848cd72.htm" />
+  <HelpKINode Title="PrintAverageDurationMillisecondsInTeamcity method" Url="html/9048abde-9bb0-c4c3-2346-da822c329823.htm" />
+  <HelpKINode Title="PrintPercentiles90DurationMillisecondsInAppVeyor method" Url="html/c4fd83f6-03b6-e491-7627-71d89336c06c.htm" />
+  <HelpKINode Title="PrintPercentiles90DurationMillisecondsinTeamcity method" Url="html/1c7d81ef-4393-878c-7de8-2830eb5d034f.htm" />
+  <HelpKINode Title="PrintPerformanceResultsHelper class">
+    <HelpKINode Title="PrintPerformanceResultsHelper Class" Url="html/48280242-a505-e893-2b4a-f0ced1258360.htm" />
+    <HelpKINode Title="about PrintPerformanceResultsHelper class" Url="html/48280242-a505-e893-2b4a-f0ced1258360.htm" />
+    <HelpKINode Title="methods" Url="html/c19e2489-9614-4a3f-2366-7837ac3b8761.htm" />
+  </HelpKINode>
+  <HelpKINode Title="PrintPerformanceResultsHelper.PrintAverageDurationMillisecondsInAppVeyor method" Url="html/f38e61a9-555c-3e23-68d4-b7a6b848cd72.htm" />
+  <HelpKINode Title="PrintPerformanceResultsHelper.PrintAverageDurationMillisecondsInTeamcity method" Url="html/9048abde-9bb0-c4c3-2346-da822c329823.htm" />
+  <HelpKINode Title="PrintPerformanceResultsHelper.PrintPercentiles90DurationMillisecondsInAppVeyor method" Url="html/c4fd83f6-03b6-e491-7627-71d89336c06c.htm" />
+  <HelpKINode Title="PrintPerformanceResultsHelper.PrintPercentiles90DurationMillisecondsinTeamcity method" Url="html/1c7d81ef-4393-878c-7de8-2830eb5d034f.htm" />
+  <HelpKINode Title="PrintPerformanceResultsHelper.PrintResultsInAppVeyor method" Url="html/583e6eaa-a515-9529-1718-7bf045a50c15.htm" />
+  <HelpKINode Title="PrintResultsInAppVeyor method" Url="html/583e6eaa-a515-9529-1718-7bf045a50c15.htm" />
   <HelpKINode Title="Protocol property" Url="html/2a59eb82-246e-11a2-e857-95483f98d1f7.htm" />
   <HelpKINode Title="Proxy property" Url="html/f50d335c-f673-3296-79c4-62b45c78ecc9.htm" />
   <HelpKINode Title="RandomName method" Url="html/9e5bee3b-7676-3dac-020e-c9306827cd01.htm" />
@@ -539,11 +551,9 @@
   <HelpKINode Title="SqlHelper.ExecuteSqlCommand method" Url="html/75e5b4ee-4564-d16b-7f4e-9aa464591005.htm" />
   <HelpKINode Title="Start method" Url="html/87be11c3-810a-06ae-06b5-269dd1a211c1.htm" />
   <HelpKINode Title="StartMeasure method" Url="html/3fcea8da-15e7-3507-2557-b0e3fe5939b6.htm" />
-  <HelpKINode Title="StartPerformanceMeasure method" Url="html/6fd2603a-9878-7dbc-ba64-e0b3613af3e5.htm" />
   <HelpKINode Title="StepName property" Url="html/06959621-0ea5-320a-9ce1-0533b74ae808.htm" />
   <HelpKINode Title="Stop method" Url="html/baf4e39a-ef63-1b4c-d6c2-d43183df166b.htm" />
   <HelpKINode Title="StopMeasure method" Url="html/a5b8ff37-8967-8b4b-d148-cb87a46423a0.htm" />
-  <HelpKINode Title="StopPerfromanceMeasure method" Url="html/91e74427-1e12-adb7-a530-b4a30c562846.htm" />
   <HelpKINode Title="SwitchToWindowUsingUrl method" Url="html/de9df0ec-a00f-f4e3-6882-cad311c29bc1.htm" />
   <HelpKINode Title="SynchronizationWithAngularEnabled property" Url="html/76115b13-a389-4acf-c02a-b5c4167aa800.htm" />
   <HelpKINode Title="SynchronizeWithAngular method" Url="html/64c7bbf3-17e8-709e-1472-31eb527d8459.htm" />
@@ -575,8 +585,6 @@
   <HelpKINode Title="TestBase.IsVerifyFailedAndClearMessages method" Url="html/5c1e29f7-66e4-e1aa-9bbf-2261e9fcd7e8.htm" />
   <HelpKINode Title="TestBase.SavePageSource method" Url="html/3efa26a9-5948-202f-9ed6-91dd562de662.htm" />
   <HelpKINode Title="TestBase.SaveTestDetailsIfTestFailed method" Url="html/b7fc505e-b9a9-0390-0dee-930d606412aa.htm" />
-  <HelpKINode Title="TestBase.StartPerformanceMeasure method" Url="html/6fd2603a-9878-7dbc-ba64-e0b3613af3e5.htm" />
-  <HelpKINode Title="TestBase.StopPerfromanceMeasure method" Url="html/91e74427-1e12-adb7-a530-b4a30c562846.htm" />
   <HelpKINode Title="TestBase.TestBase constructor" Url="html/98e2911e-35e2-035f-2e9a-9f192832872f.htm" />
   <HelpKINode Title="TestBrowser property" Url="html/3b9b8dd0-2974-e198-b614-393af8dfe4e3.htm" />
   <HelpKINode Title="TestBrowserCapabilities property" Url="html/1cc503ab-e714-8ef2-42a1-ac2bfffa7c5b.htm" />
@@ -649,7 +657,6 @@
   <HelpKINode Title="WebDriverExtensions.JavaScriptAlert method" Url="html/f9a09a0f-559c-7de2-a2e3-1d8acd530947.htm" />
   <HelpKINode Title="WebDriverExtensions.JavaScripts method" Url="html/006985d3-4e92-4cc0-9c2a-e82829eba67e.htm" />
   <HelpKINode Title="WebDriverExtensions.NavigateTo method" Url="html/1702a394-9e46-d38d-abac-816522dc2b64.htm" />
-  <HelpKINode Title="WebDriverExtensions.NavigateToAndMeasureTime method" Url="html/fd519924-92cd-90fe-9c2e-941a2c5702cb.htm" />
   <HelpKINode Title="WebDriverExtensions.PageSourceContainsCase method" Url="html/65238bf2-27c4-7440-c6db-4f25345d3d76.htm" />
   <HelpKINode Title="WebDriverExtensions.ScrollIntoMiddle method" Url="html/84b4eb00-a2f9-0c33-2858-0cd69bd2411d.htm" />
   <HelpKINode Title="WebDriverExtensions.SwitchToWindowUsingUrl method" Url="html/de9df0ec-a00f-f4e3-6882-cad311c29bc1.htm" />
