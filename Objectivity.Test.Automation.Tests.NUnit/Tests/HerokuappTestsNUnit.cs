@@ -60,7 +60,6 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
         }
 
         [Test]
-        [Category("PhantomJs")]
         public void MultipleWindowsTest()
         {
             const string PageTitle = "New Window";
@@ -96,7 +95,6 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
         }
 
         [Test]
-        [Category("PhantomJs")]
         public void ContextMenuTest()
         {
             const string H3Value = "Context Menu";

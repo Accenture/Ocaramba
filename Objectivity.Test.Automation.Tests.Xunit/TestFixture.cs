@@ -39,7 +39,6 @@ namespace Objectivity.Test.Automation.Tests.Xunit
         /// </summary>
         public TestFixture()
         {
-            StartPerformanceMeasure();
         }
 
         public bool Disposed
@@ -70,7 +69,6 @@ namespace Objectivity.Test.Automation.Tests.Xunit
             {
                 if (disposing)
                 {
-                    StopPerfromanceMeasure();
                 }
 
                 this.disposed = true;

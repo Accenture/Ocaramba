@@ -1,4 +1,4 @@
-﻿// <copyright file="BrowserType.cs" company="Objectivity Bespoke Software Specialists">
+﻿// <copyright file="PerformanceTests1NUnit.cs" company="Objectivity Bespoke Software Specialists">
 // Copyright (c) Objectivity Bespoke Software Specialists. All rights reserved.
 // </copyright>
 // <license>
@@ -20,56 +20,29 @@
 //     SOFTWARE.
 // </license>
 
-namespace Objectivity.Test.Automation.Common
+namespace Objectivity.Test.Automation.Tests.NUnit.Tests
 {
+    using Automation.Tests.PageObjects.PageObjects.TheInternet;
+    using global::NUnit.Framework;
+
     /// <summary>
-    /// Supported browsers
+    /// Tests to test framework
     /// </summary>
-    public enum BrowserType
+    [TestFixture]
+    [Parallelizable(ParallelScope.Fixtures)]
+    public class PerformanceTests1NUnit : ProjectTestBase
     {
-        /// <summary>
-        /// Firefox browser
-        /// </summary>
-        Firefox,
-
-        /// <summary>
-        /// Firefox portable
-        /// </summary>
-        FirefoxPortable,
-
-        /// <summary>
-        /// InternetExplorer browser
-        /// </summary>
-        InternetExplorer,
-
-        /// <summary>
-        /// Chrome browser
-        /// </summary>
-        Chrome,
-
-        /// <summary>
-        /// Safari browser
-        /// </summary>
-        Safari,
-
-        /// <summary>
-        /// Remote Web driver
-        /// </summary>
-        RemoteWebDriver,
-
-        /// <summary>
-        /// Edge driver
-        /// </summary>
-        Edge,
-
-        /// <summary>
-        /// BrowserStack parallel cross browsers testing
-        /// </summary>
-        BrowserStack,
-
-        /// <summary>
-        /// Not supported browser
-        /// </summary>
-        None
+        [Test]
+        [Repeat(3)]
+        public void HerokuappPerfTests1()
+        {
+            this.DriverContext.PerformanceMeasures.StartMeasure();
+            InternetPage internet = new InternetPage(this.DriverContext);
+            internet.OpenHomePage();
+            this.DriverContext.PerformanceMeasures.StopMeasure(TestContext.CurrentContext.Test.Name + "LoadingMainPage");
+            this.DriverContext.PerformanceMeasures.StartMeasure();
+            internet.GoToCheckboxesPage();
+            this.DriverContext.PerformanceMeasures.StopMeasure(TestContext.CurrentContext.Test.Name + "LoadingCheckboxesPage");
+        }
     }
 }

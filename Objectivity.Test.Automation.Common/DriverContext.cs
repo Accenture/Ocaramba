@@ -42,7 +42,6 @@ namespace Objectivity.Test.Automation.Common
     using OpenQA.Selenium.Edge;
     using OpenQA.Selenium.Firefox;
     using OpenQA.Selenium.IE;
-    using OpenQA.Selenium.PhantomJS;
     using OpenQA.Selenium.Remote;
     using OpenQA.Selenium.Safari;
 
@@ -70,6 +69,11 @@ namespace Objectivity.Test.Automation.Common
         /// Fires before the capabilities are set
         /// </summary>
         public event EventHandler<CapabilitiesSetEventArgs> CapabilitiesSet;
+
+        /// <summary>
+        /// Gets instance of Performance PerformanceMeasures class
+        /// </summary>
+        public PerformanceHelper PerformanceMeasures { get; } = new PerformanceHelper();
 
         /// <summary>
         /// Gets or sets the test title.
@@ -370,11 +374,36 @@ namespace Objectivity.Test.Automation.Common
         {
             get
             {
+                // retrieving settings from config file
+                var internetExplorerPreferences = ConfigurationManager.GetSection("InternetExplorerPreferences") as NameValueCollection;
                 var options = new InternetExplorerOptions
                 {
                     EnsureCleanSession = true,
                     IgnoreZoomLevel = true,
                 };
+
+                // custom preferences
+                // if there are any settings
+                if (internetExplorerPreferences != null)
+                {
+                    // loop through all of them
+                    for (var i = 0; i < internetExplorerPreferences.Count; i++)
+                    {
+                        Logger.Trace(CultureInfo.CurrentCulture, "Set custom preference '{0},{1}'", internetExplorerPreferences.GetKey(i), internetExplorerPreferences[i]);
+
+                        // and verify all of them
+                        switch (internetExplorerPreferences.GetKey(i))
+                        {
+                            case "EnsureCleanSession":
+                                options.EnsureCleanSession = Convert.ToBoolean(internetExplorerPreferences[i], CultureInfo.CurrentCulture);
+                                break;
+
+                            case "IgnoreZoomLevel":
+                                options.IgnoreZoomLevel = Convert.ToBoolean(internetExplorerPreferences[i], CultureInfo.CurrentCulture);
+                                break;
+                        }
+                    }
+                }
 
                 // set browser proxy for IE
                 if (!string.IsNullOrEmpty(BaseConfiguration.Proxy))
@@ -482,9 +511,6 @@ namespace Objectivity.Test.Automation.Common
                     break;
                 case BrowserType.Safari:
                     this.driver = new SafariDriver(this.SafariProfile);
-                    break;
-                case BrowserType.PhantomJs:
-                    this.driver = new PhantomJSDriver(this.CurrentDirectory + BaseConfiguration.PhantomJsPath);
                     break;
                 case BrowserType.RemoteWebDriver:
                 case BrowserType.BrowserStack:
@@ -630,7 +656,18 @@ namespace Objectivity.Test.Automation.Common
             if (BaseConfiguration.JavaScriptErrorLogging)
             {
                 Logger.Debug(CultureInfo.CurrentCulture, "Checking JavaScript error(s) in browser");
-                jsErrors = this.driver.Manage().Logs.GetLog(LogType.Browser).Where(x => BaseConfiguration.JavaScriptErrorTypes.Any(e => x.Message.Contains(e)));
+                try
+                {
+                    jsErrors =
+                        this.driver.Manage()
+                            .Logs.GetLog(LogType.Browser)
+                            .Where(x => BaseConfiguration.JavaScriptErrorTypes.Any(e => x.Message.Contains(e)));
+                }
+                catch (NullReferenceException)
+                {
+                    Logger.Error(CultureInfo.CurrentCulture, "NullReferenceException while trying to read JavaScript errors from browser.");
+                    return false;
+                }
 
                 if (jsErrors.Any())
                 {

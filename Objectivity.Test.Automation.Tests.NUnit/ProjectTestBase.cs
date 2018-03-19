@@ -27,6 +27,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit
     using Common.Logger;
     using global::NUnit.Framework;
     using global::NUnit.Framework.Interfaces;
+    using Objectivity.Test.Automation.Common.Helpers;
 
     /// <summary>
     /// The base class for all tests <see href="https://github.com/ObjectivityLtd/Test.Automation/wiki/ProjectTestBase-class">More details on wiki</see>
@@ -69,7 +70,6 @@ namespace Objectivity.Test.Automation.Tests.NUnit
         public void BeforeClass()
         {
             this.DriverContext.CurrentDirectory = TestContext.CurrentContext.TestDirectory;
-            StartPerformanceMeasure();
             this.DriverContext.Start();
         }
 
@@ -79,7 +79,10 @@ namespace Objectivity.Test.Automation.Tests.NUnit
         [OneTimeTearDown]
         public void AfterClass()
         {
-            StopPerfromanceMeasure();
+            PrintPerformanceResultsHelper.PrintAverageDurationMillisecondsInAppVeyor(this.DriverContext.PerformanceMeasures);
+            PrintPerformanceResultsHelper.PrintPercentiles90DurationMillisecondsInAppVeyor(this.DriverContext.PerformanceMeasures);
+            PrintPerformanceResultsHelper.PrintAverageDurationMillisecondsInTeamcity(this.DriverContext.PerformanceMeasures);
+            PrintPerformanceResultsHelper.PrintPercentiles90DurationMillisecondsinTeamcity(this.DriverContext.PerformanceMeasures);
             this.DriverContext.Stop();
         }
 

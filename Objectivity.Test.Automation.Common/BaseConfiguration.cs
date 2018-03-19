@@ -201,17 +201,6 @@ namespace Objectivity.Test.Automation.Common
         }
 
         /// <summary>
-        /// Gets the PhantomJs path
-        /// </summary>
-        public static string PhantomJsPath
-        {
-            get
-            {
-                return ConfigurationManager.AppSettings["PhantomJsPath"];
-            }
-        }
-
-        /// <summary>
         /// Gets the Remote Web Driver hub url
         /// </summary>
         public static Uri RemoteWebDriverHub

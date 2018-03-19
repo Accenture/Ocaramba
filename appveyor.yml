@@ -32,7 +32,7 @@ assembly_info:
 environment:
   APPVEYOR_RDP_PASSWORD:
     secure: 3OiDAcFLoSt3UCnmEU+XgM2d541PAqCNJAPqoiRqwRI=
-  frameworkVersion: 3.1.1
+  frameworkVersion: 3.1.2
   GithubAuthToken:
     secure: x9uTnOFLUnZ6DiVhpBBxIJxij33Sz9uAIe+qef6M3sj9+J/AUmpfBmiGgqRabTqs
   COVERALLS_REPO_TOKEN:
@@ -226,8 +226,7 @@ test_script:
     
     & $coveralls --opencover -i opencoverCoverage.xml --repoToken $env:COVERALLS_REPO_TOKEN --useRelativePaths --commitId $env:APPVEYOR_REPO_COMMIT --commitBranch $env:APPVEYOR_REPO_BRANCH --commitAuthor $env:APPVEYOR_REPO_COMMIT_AUTHOR --commitEmail $env:APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL --commitMessage $env:APPVEYOR_REPO_COMMIT_MESSAGE --jobId $env:APPVEYOR_BUILD_NUMBER --serviceName appveyor
 
-
-    appveyor PushArtifact  opencoverCoverage.xml
+    7z a testresults_$env:appveyor_build_version.zip opencoverCoverage.xml
     
     echo '********************************************Uploading test results artifact********************************************'
   

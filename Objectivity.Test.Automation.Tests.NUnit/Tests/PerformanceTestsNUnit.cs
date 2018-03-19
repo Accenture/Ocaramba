@@ -29,14 +29,20 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
     /// Tests to test framework
     /// </summary>
     [TestFixture]
-    [Parallelizable(ParallelScope.None)]
+    [Parallelizable(ParallelScope.Fixtures)]
     public class PerformanceTestsNUnit : ProjectTestBase
     {
         [Test]
         [Repeat(3)]
-        public void HerokuappTests()
+        public void HerokuappPerfTests()
         {
-            new InternetPage(this.DriverContext).OpenHomePageAndMeasureTime();
+            this.DriverContext.PerformanceMeasures.StartMeasure();
+            InternetPage internet = new InternetPage(this.DriverContext);
+            internet.OpenHomePage();
+            this.DriverContext.PerformanceMeasures.StopMeasure(TestContext.CurrentContext.Test.Name + "LoadingMainPage");
+            this.DriverContext.PerformanceMeasures.StartMeasure();
+            internet.GoToCheckboxesPage();
+            this.DriverContext.PerformanceMeasures.StopMeasure(TestContext.CurrentContext.Test.Name + "LoadingCheckboxesPage");
         }
     }
 }

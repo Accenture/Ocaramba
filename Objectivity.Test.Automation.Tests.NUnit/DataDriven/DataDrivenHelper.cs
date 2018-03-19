@@ -155,9 +155,8 @@ namespace Objectivity.Test.Automation.Tests.NUnit.DataDriven
                             {
                                 throw new DataDrivenReadException(
                                     string.Format(
-                                        " Exception while reading Excel Data Driven file\n searched key '{0}' not found at sheet '{1}' \n for test {2} in file '{3}' at row {4}",
+                                        " Exception while reading Csv Data Driven file\n searched key '{0}' not found \n for test {1} in file '{2}' at row {3}",
                                         e.Message,
-                                        testName,
                                         testName,
                                         file,
                                         row));

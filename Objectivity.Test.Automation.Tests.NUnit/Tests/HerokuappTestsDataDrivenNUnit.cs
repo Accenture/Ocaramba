@@ -78,7 +78,6 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
         }
 
         [Test]
-        [Category("PhantomJs")]
         [TestCaseSource(typeof(TestData), "LinksSetTestName")]
         public void CountLinksAndSetTestNameAtShiftingContentTest(IDictionary<string, string> parameters)
         {

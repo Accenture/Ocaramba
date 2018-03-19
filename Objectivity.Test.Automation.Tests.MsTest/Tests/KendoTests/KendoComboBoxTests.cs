@@ -37,7 +37,7 @@ namespace Objectivity.Test.Automation.Tests.MsTest.Tests.KendoTests
             var options = new Collection<string> { "Cotton", "Polyester", "Cotton/Polyester", "Rib Knit" };
             var homePage = new KendoComboBoxPage(this.DriverContext);
             homePage.Open();
-            CollectionAssert.AreEqual(options, homePage.FabricOptions);
+            CollectionAssert.AreEqual(options, homePage.FabricOptions(options.Count));
         }
 
         [TestMethod]
@@ -48,7 +48,7 @@ namespace Objectivity.Test.Automation.Tests.MsTest.Tests.KendoTests
             var homePage = new KendoComboBoxPage(this.DriverContext);
             homePage.Open();
             homePage.SearchFabricOptions(searchString);
-            CollectionAssert.AreEqual(options, homePage.FabricOptions);
+            CollectionAssert.AreEqual(options, homePage.FabricOptions(options.Count));
         }
     }
 }
