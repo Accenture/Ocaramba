@@ -100,7 +100,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit.DataDriven
         /// <summary>
         /// Reads the Csv data drive file and set test name.
         /// </summary>
-        /// <param name="file">Full path to Excel DataDriveFile file</param>
+        /// <param name="file">Full path to csv DataDriveFile file</param>
         /// <param name="diffParam">The difference parameter.</param>
         /// <param name="testName">Name of the test, use as prefix for test case name.</param>
         /// <returns>
@@ -121,7 +121,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit.DataDriven
             using (var sr = new StreamReader(fs))
             {
                 string line = string.Empty;
-                line = sr.ReadLine(); // naglowek
+                line = sr.ReadLine();
                 string[] columns = line.Split(
                                 new char[] { ';' },
                                 StringSplitOptions.None);
