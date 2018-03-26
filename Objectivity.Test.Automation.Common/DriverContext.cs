@@ -71,6 +71,11 @@ namespace Objectivity.Test.Automation.Common
         public event EventHandler<CapabilitiesSetEventArgs> CapabilitiesSet;
 
         /// <summary>
+        /// Occurs when [driver options set].
+        /// </summary>
+        public event EventHandler<DriverOptionsSetEventArgs> DriverOptionsSet;
+
+        /// <summary>
         /// Gets instance of Performance PerformanceMeasures class
         /// </summary>
         public PerformanceHelper PerformanceMeasures { get; } = new PerformanceHelper();
@@ -490,7 +495,7 @@ namespace Objectivity.Test.Automation.Common
                         fireFoxOptionsLegacy.Proxy = this.CurrentProxy();
                     }
 
-                    this.driver = new FirefoxDriver(fireFoxOptionsLegacy);
+                    this.driver = new FirefoxDriver(this.SetDriverOptions(fireFoxOptionsLegacy));
                     break;
                 case BrowserType.FirefoxPortable:
                     var fireFoxOptions = new FirefoxOptions { BrowserExecutableLocation = BaseConfiguration.FirefoxPath, Profile = this.FirefoxProfile, UseLegacyImplementation = BaseConfiguration.FirefoxUseLegacyImplementation };
@@ -501,16 +506,16 @@ namespace Objectivity.Test.Automation.Common
                         fireFoxOptions.Proxy = this.CurrentProxy();
                     }
 
-                    this.driver = new FirefoxDriver(fireFoxOptions);
+                    this.driver = new FirefoxDriver(this.SetDriverOptions(fireFoxOptions));
                     break;
                 case BrowserType.InternetExplorer:
-                    this.driver = new InternetExplorerDriver(this.InternetExplorerProfile);
+                    this.driver = new InternetExplorerDriver(this.SetDriverOptions(this.InternetExplorerProfile));
                     break;
                 case BrowserType.Chrome:
-                    this.driver = new ChromeDriver(this.ChromeProfile);
+                    this.driver = new ChromeDriver(this.SetDriverOptions(this.ChromeProfile));
                     break;
                 case BrowserType.Safari:
-                    this.driver = new SafariDriver(this.SafariProfile);
+                    this.driver = new SafariDriver(this.SetDriverOptions(this.SafariProfile));
                     break;
                 case BrowserType.RemoteWebDriver:
                 case BrowserType.BrowserStack:
@@ -646,7 +651,7 @@ namespace Objectivity.Test.Automation.Common
         /// <summary>
         /// Logs JavaScript errors
         /// </summary>
-        /// <returns>True if Javascript errors found</returns>
+        /// <returns>True if JavaScript errors found</returns>
         public bool LogJavaScriptErrors()
         {
             IEnumerable<LogEntry> jsErrors = null;
@@ -671,13 +676,28 @@ namespace Objectivity.Test.Automation.Common
 
                 if (jsErrors.Any())
                 {
-                    // Show JavaScript erros if there are any
+                    // Show JavaScript errors if there are any
                     Logger.Error(CultureInfo.CurrentCulture, "JavaScript error(s): {0}", Environment.NewLine + jsErrors.Aggregate(string.Empty, (s, entry) => s + entry.Message + Environment.NewLine));
                     javScriptErrors = true;
                 }
             }
 
             return javScriptErrors;
+        }
+
+        /// <summary>
+        /// Sets the driver options.
+        /// </summary>
+        /// <typeparam name="T">The type of DriverOptions for the specific Browser</typeparam>
+        /// <param name="options">The options.</param>
+        /// <returns>
+        /// The Driver Options
+        /// </returns>
+        private T SetDriverOptions<T>(T options)
+            where T : DriverOptions
+        {
+            this.DriverOptionsSet?.Invoke(this, new DriverOptionsSetEventArgs(options));
+            return options;
         }
 
         /// <summary>
