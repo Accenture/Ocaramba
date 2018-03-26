@@ -32,7 +32,7 @@ assembly_info:
 environment:
   APPVEYOR_RDP_PASSWORD:
     secure: 3OiDAcFLoSt3UCnmEU+XgM2d541PAqCNJAPqoiRqwRI=
-  frameworkVersion: 3.1.2
+  frameworkVersion: 3.1.3
   GithubAuthToken:
     secure: x9uTnOFLUnZ6DiVhpBBxIJxij33Sz9uAIe+qef6M3sj9+J/AUmpfBmiGgqRabTqs
   COVERALLS_REPO_TOKEN:
@@ -40,7 +40,7 @@ environment:
   browserstackuser:
     secure: 0JGVozUyY/OYBuPZk2Pbgw==
   browserstackkey:
-    secure: YHh04n6C6SbfOzML+yYwW9nVYN/zDWJ/kM2GLaOy/ro=
+    secure: opcJPLrPneM8MyVpapvon/18SF9oGQ0+ylJINJeio78=
 before_build:
 - cmd: >-
     nuget restore
