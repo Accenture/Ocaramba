@@ -24,7 +24,6 @@ using NUnit.Framework;
 namespace Objectivity.Test.Automation.Tests.Angular.Tests
 {
     using Objectivity.Test.Automation.Tests.Angular.PageObjects;
-    using Objectivity.Test.Automation.Tests.NUnit;
 
     [TestFixture]
     [Parallelizable(ParallelScope.Fixtures)]

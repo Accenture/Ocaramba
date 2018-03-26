@@ -20,8 +20,6 @@
 //     SOFTWARE.
 // </license>
 
-using System;
-using NLog;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 using Objectivity.Test.Automation.Common;
