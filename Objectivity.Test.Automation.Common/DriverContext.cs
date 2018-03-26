@@ -522,7 +522,7 @@ namespace Objectivity.Test.Automation.Common
                     this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetCapabilities());
                     break;
                 case BrowserType.Edge:
-                    this.driver = new EdgeDriver(this.EdgeProfile);
+                    this.driver = new EdgeDriver(this.SetDriverOptions(this.EdgeProfile));
                     break;
                 default:
                     throw new NotSupportedException(
