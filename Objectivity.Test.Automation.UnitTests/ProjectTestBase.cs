@@ -26,7 +26,6 @@ using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 using Objectivity.Test.Automation.Common;
 using Objectivity.Test.Automation.Common.Logger;
-using OpenQA.Selenium;
 
 namespace Objectivity.Test.Automation.UnitTests
 {
@@ -36,13 +35,6 @@ namespace Objectivity.Test.Automation.UnitTests
     public class ProjectTestBase : TestBase
     {
         private readonly DriverContext driverContext = new DriverContext();
-
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-
-        public ProjectTestBase()
-        {
-            this.driverContext.DriverOptionsSet += this.DriverContext_DriverOptionsSet;
-        }
 
         /// <summary>
         /// Gets or sets logger instance for driver
@@ -109,13 +101,6 @@ namespace Objectivity.Test.Automation.UnitTests
             this.DriverContext.IsTestFailed = TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed || !this.driverContext.VerifyMessages.Count.Equals(0);
             var filePaths = this.SaveTestDetailsIfTestFailed(this.driverContext);
             this.SaveAttachmentsToTestContext(filePaths);
-            this.LogTest.LogTestEnding(this.driverContext);
-            var logs = this.driverContext.Driver.Manage().Logs;
-            var perfLogs = logs.GetLog("performance");
-            foreach (var perfLog in perfLogs)
-            {
-                Logger.Info(perfLog.ToString);
-            }
             if (this.IsVerifyFailedAndClearMessages(this.driverContext) && TestContext.CurrentContext.Result.Outcome.Status != TestStatus.Failed)
             {
                 Assert.Fail();
@@ -132,17 +117,6 @@ namespace Objectivity.Test.Automation.UnitTests
                     TestContext.AddTestAttachment(filePath);
                 }
             }
-        }
-
-        private void DriverContext_DriverOptionsSet(object sender, DriverOptionsSetEventArgs args)
-        {
-            if (args == null || args.DriverOptions == null)
-            {
-                throw new ArgumentNullException();
-            }
-
-            args.DriverOptions.SetLoggingPreference("performance", OpenQA.Selenium.LogLevel.All);
-            args.DriverOptions.SetLoggingPreference(LogType.Browser, OpenQA.Selenium.LogLevel.All);
         }
     }
 }
