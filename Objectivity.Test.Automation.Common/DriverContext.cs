@@ -711,20 +711,20 @@ namespace Objectivity.Test.Automation.Common
             switch (BaseConfiguration.TestBrowserCapabilities)
               {
                   case BrowserType.Firefox:
-                      capabilities = (DesiredCapabilities)this.FirefoxOptions.ToCapabilities();
+                      capabilities = (DesiredCapabilities)this.SetDriverOptions(this.FirefoxOptions).ToCapabilities();
                       capabilities.SetCapability(FirefoxDriver.ProfileCapabilityName, this.FirefoxProfile.ToBase64String());
                       break;
                   case BrowserType.InternetExplorer:
-                      capabilities = (DesiredCapabilities)this.InternetExplorerProfile.ToCapabilities();
+                      capabilities = (DesiredCapabilities)this.SetDriverOptions(this.InternetExplorerProfile).ToCapabilities();
                       break;
                   case BrowserType.Chrome:
-                      capabilities = (DesiredCapabilities)this.ChromeProfile.ToCapabilities();
+                      capabilities = (DesiredCapabilities)this.SetDriverOptions(this.ChromeProfile).ToCapabilities();
                       break;
                   case BrowserType.Safari:
-                      capabilities = (DesiredCapabilities)this.SafariProfile.ToCapabilities();
+                      capabilities = (DesiredCapabilities)this.SetDriverOptions(this.SafariProfile).ToCapabilities();
                       break;
                   case BrowserType.Edge:
-                      capabilities = (DesiredCapabilities)this.EdgeProfile.ToCapabilities();
+                      capabilities = (DesiredCapabilities)this.SetDriverOptions(this.EdgeProfile).ToCapabilities();
                       break;
                   case BrowserType.BrowserStack:
                       break;
