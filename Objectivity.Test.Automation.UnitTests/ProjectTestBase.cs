@@ -99,7 +99,6 @@ namespace Objectivity.Test.Automation.UnitTests
             this.DriverContext.IsTestFailed = TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed || !this.driverContext.VerifyMessages.Count.Equals(0);
             var filePaths = this.SaveTestDetailsIfTestFailed(this.driverContext);
             this.SaveAttachmentsToTestContext(filePaths);
-            this.LogTest.LogTestEnding(this.driverContext);
             if (this.IsVerifyFailedAndClearMessages(this.driverContext) && TestContext.CurrentContext.Result.Outcome.Status != TestStatus.Failed)
             {
                 Assert.Fail();

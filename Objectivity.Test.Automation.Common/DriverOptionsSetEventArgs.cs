@@ -1,4 +1,4 @@
-﻿// <copyright file="NameHelper.cs" company="Objectivity Bespoke Software Specialists">
+﻿// <copyright file="DriverOptionsSetEventArgs.cs" company="Objectivity Bespoke Software Specialists">
 // Copyright (c) Objectivity Bespoke Software Specialists. All rights reserved.
 // </copyright>
 // <license>
@@ -20,27 +20,28 @@
 //     SOFTWARE.
 // </license>
 
-using NUnit.Framework;
-namespace Objectivity.Test.Automation.Tests.Angular.Tests
+namespace Objectivity.Test.Automation.Common
 {
-    using Objectivity.Test.Automation.Tests.Angular.PageObjects;
+    using System;
+    using OpenQA.Selenium;
 
-    [TestFixture]
-    [Parallelizable(ParallelScope.Fixtures)]
-    public class AngularTestNunit : ProjectTestBase
+    /// <summary>
+    /// Before Capabilities Set Handler. <see href="https://github.com/ObjectivityLtd/Test.Automation/wiki/Advanced-Browser-Capabilities-and-options">More details on wiki</see>
+    /// </summary>
+    public class DriverOptionsSetEventArgs : EventArgs
     {
-        [Test]
-        public void AngularPageNavigationTest()
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DriverOptionsSetEventArgs" /> class.
+        /// </summary>
+        /// <param name="options">The options.</param>
+        public DriverOptionsSetEventArgs(DriverOptions options)
         {
-            var protractorApiPage = new ProtractorHomePage(this.DriverContext)
-                .OpenProtractorHomePage()
-                .ClickQuickStart()
-                .ClickTutorial()
-                .ClickTableOfContents()
-                .ClickProtractorApi()
-                .ClickElementToBeSelected();
-
-            Assert.True(protractorApiPage.IsElementToBeSelectedHeaderDisplayed(), "Header is not displayed.");
+            this.DriverOptions = options;
         }
+
+        /// <summary>
+        /// Gets the current capabilities
+        /// </summary>
+        public DriverOptions DriverOptions { get; }
     }
 }
