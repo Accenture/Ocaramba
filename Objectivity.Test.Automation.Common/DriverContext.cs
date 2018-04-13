@@ -762,7 +762,12 @@ namespace Objectivity.Test.Automation.Common
                     capabilities = (DesiredCapabilities)this.SetDriverOptions(this.EdgeProfile).ToCapabilities();
                     break;
                 case BrowserType.BrowserStack:
-                    capabilities = this.BrowserStackCapabilities(capabilities);
+                    if (!string.IsNullOrEmpty(this.crossBrowserProfile) &&
+                        !string.IsNullOrEmpty(this.crossBrowserEnvironment))
+                    {
+                        capabilities = this.BrowserStackCapabilities(capabilities);
+                    }
+
                     break;
                 default:
                     throw new NotSupportedException(
