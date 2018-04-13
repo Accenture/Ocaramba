@@ -52,8 +52,10 @@ namespace Objectivity.Test.Automation.Common
     public class DriverContext
     {
         private static readonly NLog.Logger Logger = LogManager.GetLogger("DRIVER");
-
         private readonly Collection<ErrorDetail> verifyMessages = new Collection<ErrorDetail>();
+
+        private string crossBrowserProfile;
+        private string crossBrowserEnvironment;
 
         /// <summary>
         /// Gets or sets the handle to current driver.
@@ -540,6 +542,39 @@ namespace Objectivity.Test.Automation.Common
         }
 
         /// <summary>
+        /// Starts the specified Driver.
+        /// </summary>
+        /// <param name="profile">CrossBrowser profile.</param>
+        /// <param name="environment">CrossBrowser environment.</param>
+        /// <exception cref="NotSupportedException">When driver not supported</exception>
+        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "Driver disposed later in stop method")]
+        public void Start(string profile, string environment)
+        {
+            this.crossBrowserProfile = profile;
+            this.crossBrowserEnvironment = environment;
+
+            switch (BaseConfiguration.TestBrowser)
+            {
+                case BrowserType.RemoteWebDriver:
+                case BrowserType.BrowserStack:
+                    this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetCapabilities());
+                    break;
+                default:
+                    throw new NotSupportedException(
+                        string.Format(CultureInfo.CurrentCulture, "Driver {0} is not supported", BaseConfiguration.TestBrowser));
+            }
+
+            this.driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(BaseConfiguration.LongTimeout);
+            this.driver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(BaseConfiguration.ShortTimeout);
+            this.driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(BaseConfiguration.ImplicitlyWaitMilliseconds);
+
+            if (BaseConfiguration.EnableEventFiringWebDriver)
+            {
+                this.driver = new MyEventFiringWebDriver(this.driver);
+            }
+        }
+
+        /// <summary>
         /// Maximizes the current window if it is not already maximized.
         /// </summary>
         public void WindowMaximize()
@@ -750,6 +785,19 @@ namespace Objectivity.Test.Automation.Common
             if (this.CapabilitiesSet != null)
             {
                 this.CapabilitiesSet(this, new CapabilitiesSetEventArgs(capabilities));
+            }
+
+            NameValueCollection caps = ConfigurationManager.GetSection("capabilities/" + this.crossBrowserProfile) as NameValueCollection;
+            NameValueCollection settings = ConfigurationManager.GetSection("environments/" + this.crossBrowserEnvironment) as NameValueCollection;
+
+            foreach (string key in caps.AllKeys)
+            {
+                capabilities.SetCapability(key, caps[key]);
+            }
+
+            foreach (string key in settings.AllKeys)
+            {
+                capabilities.SetCapability(key, settings[key]);
             }
 
             return capabilities;
