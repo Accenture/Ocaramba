@@ -744,29 +744,30 @@ namespace Objectivity.Test.Automation.Common
             DesiredCapabilities capabilities = new DesiredCapabilities();
 
             switch (BaseConfiguration.TestBrowserCapabilities)
-              {
-                  case BrowserType.Firefox:
-                      capabilities = (DesiredCapabilities)this.SetDriverOptions(this.FirefoxOptions).ToCapabilities();
-                      capabilities.SetCapability(FirefoxDriver.ProfileCapabilityName, this.FirefoxProfile.ToBase64String());
-                      break;
-                  case BrowserType.InternetExplorer:
-                      capabilities = (DesiredCapabilities)this.SetDriverOptions(this.InternetExplorerProfile).ToCapabilities();
-                      break;
-                  case BrowserType.Chrome:
-                      capabilities = (DesiredCapabilities)this.SetDriverOptions(this.ChromeProfile).ToCapabilities();
-                      break;
-                  case BrowserType.Safari:
-                      capabilities = (DesiredCapabilities)this.SetDriverOptions(this.SafariProfile).ToCapabilities();
-                      break;
-                  case BrowserType.Edge:
-                      capabilities = (DesiredCapabilities)this.SetDriverOptions(this.EdgeProfile).ToCapabilities();
-                      break;
-                  case BrowserType.BrowserStack:
-                      break;
-                  default:
-                      throw new NotSupportedException(
-                          string.Format(CultureInfo.CurrentCulture, "Driver {0} is not supported with Selenium Grid", BaseConfiguration.TestBrowser));
-                }
+            {
+                case BrowserType.Firefox:
+                    capabilities = (DesiredCapabilities)this.SetDriverOptions(this.FirefoxOptions).ToCapabilities();
+                    capabilities.SetCapability(FirefoxDriver.ProfileCapabilityName, this.FirefoxProfile.ToBase64String());
+                    break;
+                case BrowserType.InternetExplorer:
+                    capabilities = (DesiredCapabilities)this.SetDriverOptions(this.InternetExplorerProfile).ToCapabilities();
+                    break;
+                case BrowserType.Chrome:
+                    capabilities = (DesiredCapabilities)this.SetDriverOptions(this.ChromeProfile).ToCapabilities();
+                    break;
+                case BrowserType.Safari:
+                    capabilities = (DesiredCapabilities)this.SetDriverOptions(this.SafariProfile).ToCapabilities();
+                    break;
+                case BrowserType.Edge:
+                    capabilities = (DesiredCapabilities)this.SetDriverOptions(this.EdgeProfile).ToCapabilities();
+                    break;
+                case BrowserType.BrowserStack:
+                    capabilities = this.BrowserStackCapabilities(capabilities);
+                    break;
+                default:
+                    throw new NotSupportedException(
+                        string.Format(CultureInfo.CurrentCulture, "Driver {0} is not supported with Selenium Grid", BaseConfiguration.TestBrowser));
+            }
 
             var driverCapabilitiesConf = ConfigurationManager.GetSection("DriverCapabilities") as NameValueCollection;
 
@@ -787,6 +788,16 @@ namespace Objectivity.Test.Automation.Common
                 this.CapabilitiesSet(this, new CapabilitiesSetEventArgs(capabilities));
             }
 
+            return capabilities;
+        }
+
+        /// <summary>
+        /// Set BrowserStack driver capabilities.
+        /// </summary>
+        /// <param name="capabilities">The DesiredCapabilities.</param>
+        /// <returns>Instance with set BrowserStack driver capabilities.</returns>
+        private DesiredCapabilities BrowserStackCapabilities(DesiredCapabilities capabilities)
+        {
             NameValueCollection caps = ConfigurationManager.GetSection("capabilities/" + this.crossBrowserProfile) as NameValueCollection;
             NameValueCollection settings = ConfigurationManager.GetSection("environments/" + this.crossBrowserEnvironment) as NameValueCollection;
 
