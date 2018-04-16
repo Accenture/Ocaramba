@@ -520,7 +520,7 @@ namespace Objectivity.Test.Automation.Common
                     this.driver = new SafariDriver(this.SetDriverOptions(this.SafariProfile));
                     break;
                 case BrowserType.RemoteWebDriver:
-                case BrowserType.BrowserStack:
+                case BrowserType.CloudProvider:
                     this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetCapabilities());
                     break;
                 case BrowserType.Edge:
@@ -556,7 +556,7 @@ namespace Objectivity.Test.Automation.Common
             switch (BaseConfiguration.TestBrowser)
             {
                 case BrowserType.RemoteWebDriver:
-                case BrowserType.BrowserStack:
+                case BrowserType.CloudProvider:
                     this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetCapabilities());
                     break;
                 default:
@@ -761,13 +761,8 @@ namespace Objectivity.Test.Automation.Common
                 case BrowserType.Edge:
                     capabilities = (DesiredCapabilities)this.SetDriverOptions(this.EdgeProfile).ToCapabilities();
                     break;
-                case BrowserType.BrowserStack:
-                    if (!string.IsNullOrEmpty(this.crossBrowserProfile) &&
-                        !string.IsNullOrEmpty(this.crossBrowserEnvironment))
-                    {
-                        capabilities = this.BrowserStackCapabilities(capabilities);
-                    }
-
+                case BrowserType.CloudProvider:
+                    capabilities = this.CloudProviderCapabilities(capabilities);
                     break;
                 default:
                     throw new NotSupportedException(
@@ -797,26 +792,32 @@ namespace Objectivity.Test.Automation.Common
         }
 
         /// <summary>
-        /// Set BrowserStack driver capabilities.
+        /// Set CloudProvider driver capabilities.
         /// </summary>
         /// <param name="capabilities">The DesiredCapabilities.</param>
-        /// <returns>Instance with set BrowserStack driver capabilities.</returns>
-        private DesiredCapabilities BrowserStackCapabilities(DesiredCapabilities capabilities)
+        /// <returns>Instance with set CloudProvider driver capabilities.</returns>
+        private DesiredCapabilities CloudProviderCapabilities(DesiredCapabilities capabilities)
         {
-            NameValueCollection caps = ConfigurationManager.GetSection("capabilities/" + this.crossBrowserProfile) as NameValueCollection;
-            NameValueCollection settings = ConfigurationManager.GetSection("environments/" + this.crossBrowserEnvironment) as NameValueCollection;
-
-            foreach (string key in caps.AllKeys)
+            if (!string.IsNullOrEmpty(this.crossBrowserEnvironment))
             {
-                capabilities.SetCapability(key, caps[key]);
+                NameValueCollection caps = ConfigurationManager.GetSection("capabilities/" + this.crossBrowserProfile) as NameValueCollection;
+
+                foreach (string key in caps.AllKeys)
+                {
+                    capabilities.SetCapability(key, caps[key]);
+                }
             }
 
-            foreach (string key in settings.AllKeys)
-            {
-                capabilities.SetCapability(key, settings[key]);
-            }
+            if (!string.IsNullOrEmpty(this.crossBrowserEnvironment))
+                {
+                NameValueCollection settings = ConfigurationManager.GetSection("environments/" + this.crossBrowserEnvironment) as NameValueCollection;
+                foreach (string key in settings.AllKeys)
+                    {
+                        capabilities.SetCapability(key, settings[key]);
+                    }
+                }
 
-            return capabilities;
+           return capabilities;
         }
 
         private Proxy CurrentProxy()

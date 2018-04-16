@@ -20,17 +20,17 @@
 //     SOFTWARE.
 // </license>
 
-namespace Objectivity.Test.Automation.Tests.NUnit
+namespace Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser
 {
     using System;
     using System.Collections.Specialized;
     using System.Configuration;
     using System.Globalization;
-    using Common;
-    using Common.Logger;
     using global::NUnit.Framework;
     using global::NUnit.Framework.Interfaces;
     using NLog;
+    using Objectivity.Test.Automation.Common;
+    using Objectivity.Test.Automation.Common.Logger;
 
     /// <summary>
     /// The base class for all tests <see href="https://github.com/ObjectivityLtd/Test.Automation/wiki/ProjectTestBase-class">More details on wiki</see>

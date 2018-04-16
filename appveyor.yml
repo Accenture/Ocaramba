@@ -205,15 +205,15 @@ test_script:
 
     7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.MSTest\bin\Release\*.log
     
-    echo '********************************************BrowserStack tests********************************************'
+    echo '********************************************CloudProviderCrossBrowser tests********************************************'
     
     cd .\\scripts
     
-    .\set_AppConfig_for_tests.ps1 "..\Objectivity.Test.Automation.Tests.BrowserStackCrossBrowser\bin\Release" "Objectivity.Test.Automation.Tests.NUnit.dll.config" "//DriverCapabilities" "browserstack.user|browserstack.key|build" "$env:browserstackuser|$env:browserstackkey|Objectivity.Test.Automation.Tests.BrowserStackCrossBrowser$env:appveyor_build_version"
+    .\set_AppConfig_for_tests.ps1 "..\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\bin\Release" "Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser.dll.config" "//DriverCapabilities" "browserstack.user|browserstack.key|build" "$env:browserstackuser|$env:browserstackkey|Objectivity.Test.Automation.Tests.BrowserStackCrossBrowser$env:appveyor_build_version"
 
     cd ..
     
-    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Objectivity.Test.Automation.Tests.BrowserStackCrossBrowser\bin\Release\Objectivity.Test.Automation.Tests.NUnit.dll --result=myresults.xml`;format=AppVeyor" -filter:"+[Objectivity.Test.Automation.Common]*" -register:user -output:opencoverCoverage.xml
+    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\bin\Release\Objectivity.Test.Automation.Tests.NUnit.dll --result=myresults.xml`;format=AppVeyor" -filter:"+[Objectivity.Test.Automation.Common]*" -register:user -output:opencoverCoverage.xml
 
     if($lastexitcode -ne 0)
       {
@@ -230,11 +230,11 @@ test_script:
     
     echo '********************************************Uploading test results artifact********************************************'
   
-    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.BrowserStackCrossBrowser\bin\Release\**\*.png
+    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\bin\Release\**\*.png
 
-    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.BrowserStackCrossBrowser\bin\Release\**\*.html
+    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\bin\Release\**\*.html
 
-    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.BrowserStackCrossBrowser\bin\Release\*.log
+    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\bin\Release\*.log
     
     appveyor PushArtifact testresults_$env:appveyor_build_version.zip
 artifacts:

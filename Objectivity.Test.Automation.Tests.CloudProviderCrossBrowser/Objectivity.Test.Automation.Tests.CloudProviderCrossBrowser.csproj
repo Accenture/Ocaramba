@@ -8,8 +8,8 @@
     <ProjectGuid>{F5B79C58-AC3B-448A-8325-5EF9A962B4A3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Objectivity.Test.Automation.Tests.NUnit</RootNamespace>
-    <AssemblyName>Objectivity.Test.Automation.Tests.NUnit</AssemblyName>
+    <RootNamespace>Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser</RootNamespace>
+    <AssemblyName>Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
