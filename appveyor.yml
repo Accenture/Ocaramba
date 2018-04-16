@@ -41,6 +41,10 @@ environment:
     secure: 0JGVozUyY/OYBuPZk2Pbgw==
   browserstackkey:
     secure: opcJPLrPneM8MyVpapvon/18SF9oGQ0+ylJINJeio78=
+  testingbotkey:
+    secure: 1aRAvq8QRbkPLQb7BWdggEqsgd0P8Wbn96zGFb9iBG75eWbexX5n38Zadmxkv2ng
+  testingbotsecret:
+    secure: 6hiQzkSN5XvXxWg+idSkvJSaNni9ZTCPwlWZy1s7BkagXFyrfUPmNdRWdWwy08B8
 before_build:
 - cmd: >-
     nuget restore
@@ -207,9 +211,27 @@ test_script:
     
     echo '********************************************CloudProviderCrossBrowser tests********************************************'
     
+    echo '********************************************BrowserStack tests********************************************'
+    
     cd .\\scripts
     
     .\set_AppConfig_for_tests.ps1 "..\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\bin\Release" "Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser.dll.config" "//DriverCapabilities" "browserstack.user|browserstack.key|build" "$env:browserstackuser|$env:browserstackkey|Objectivity.Test.Automation.Tests.BrowserStackCrossBrowser$env:appveyor_build_version"
+
+    cd ..
+    
+    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\bin\Release\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser.dll --result=myresults.xml`;format=AppVeyor" -filter:"+[Objectivity.Test.Automation.Common]*" -register:user -output:opencoverCoverage.xml
+
+    if($lastexitcode -ne 0)
+      {
+       echo $lastexitcode
+      }
+      
+     echo '********************************************testingbot.com tests********************************************'
+      
+    cd .\\scripts
+    
+    .\set_AppConfig_for_tests.ps1 "..\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\bin\Release" "Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser.dll.config" "//appSettings" "RemoteWebDriverHub" "https://hub.testingbot.com/wd/hub/"
+    .\set_AppConfig_for_tests.ps1 "..\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\bin\Release" "Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser.dll.config" "//DriverCapabilities" "key|secret|build" "$env:testingbotkey|$env:testingbotsecret|Objectivity.Test.Automation.Tests.BrowserStackCrossBrowser$env:appveyor_build_version"
 
     cd ..
     
