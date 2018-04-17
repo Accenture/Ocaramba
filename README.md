@@ -8,6 +8,7 @@
 [![Coverage Status](https://img.shields.io/coveralls/github/ObjectivityLtd/Test.Automation.svg)](https://coveralls.io/github/ObjectivityLtd/Test.Automation)
 [![AppVeyor tests](https://img.shields.io/appveyor/tests/ObjectivityAdminsTeam/test-automation.svg)](https://ci.appveyor.com/project/ObjectivityAdminsTeam/test-automation/build/tests)
 [![BrowserStack Status](https://www.browserstack.com/automate/badge.svg?badge_key=TmV0eWg4WElNTVBER2M2YWZSYVc2UjFCS2tJWjV4TUEwOFFpb0FXdGZVND0tLTJqRkVubVhnQWd2NHlISkFnMlBsM0E9PQ==--f3a8ace2e27c1ddf49487dd172e969dcacef037d)](https://www.browserstack.com/automate/public-build/TmV0eWg4WElNTVBER2M2YWZSYVc2UjFCS2tJWjV4TUEwOFFpb0FXdGZVND0tLTJqRkVubVhnQWd2NHlISkFnMlBsM0E9PQ==--f3a8ace2e27c1ddf49487dd172e969dcacef037d)
+[![TestingBot Test Status](https://testingbot.com/buildstatus/6c99f8b7ca2f26bce10eda33fb54d14d?auth=5aa956b811a0824f120d2eb984a671a2)](https://testingbot.com/builds/6c99f8b7ca2f26bce10eda33fb54d14d?auth=5aa956b811a0824f120d2eb984a671a2)
 
 Test Framework was designed in Objectivity to propose common way how people should create Selenium WebDriver tests.
 
