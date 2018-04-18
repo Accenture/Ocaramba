@@ -31,6 +31,7 @@ namespace Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser
     using NLog;
     using Objectivity.Test.Automation.Common;
     using Objectivity.Test.Automation.Common.Logger;
+    using OpenQA.Selenium.Remote;
 
     /// <summary>
     /// The base class for all tests <see href="https://github.com/ObjectivityLtd/Test.Automation/wiki/ProjectTestBase-class">More details on wiki</see>
@@ -138,8 +139,15 @@ namespace Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser
                  foreach (string key in settings.AllKeys)
                  {
                       Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0}", key);
-                      args.Capabilities.SetCapability(key, settings[key]);
-                  }
+                    if (key == "browser")
+                    {
+                        args.Capabilities.SetCapability(CapabilityType.BrowserName, settings[key]);
+                    }
+                    else
+                     {
+                         args.Capabilities.SetCapability(key, settings[key]);
+                     }
+                 }
              }
         }
 

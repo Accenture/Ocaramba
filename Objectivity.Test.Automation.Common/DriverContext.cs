@@ -813,7 +813,14 @@ namespace Objectivity.Test.Automation.Common
                 NameValueCollection settings = ConfigurationManager.GetSection("environments/" + this.crossBrowserEnvironment) as NameValueCollection;
                 foreach (string key in settings.AllKeys)
                     {
-                        capabilities.SetCapability(key, settings[key]);
+                        if (key == "browser")
+                        {
+                            capabilities.SetCapability(CapabilityType.BrowserName, settings[key]);
+                        }
+                        else
+                        {
+                            capabilities.SetCapability(key, settings[key]);
+                        }
                     }
                 }
 
