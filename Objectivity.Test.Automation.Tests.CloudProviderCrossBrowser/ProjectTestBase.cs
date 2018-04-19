@@ -112,7 +112,7 @@ namespace Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser
             }
             else if (BaseConfiguration.RemoteWebDriverHub.ToString().Contains("saucelabs"))
             {
-                Logger.Info("\nSauceOnDemandSessionID={0} job-name={1}=", ((RemoteWebDriver)this.driverContext.Driver).SessionId, "saucelabs_test");
+                Logger.Info("\nSauceOnDemandSessionID={0} job-name={1}", ((RemoteWebDriver)this.driverContext.Driver).SessionId, "saucelabs_test");
             }
         }
 
