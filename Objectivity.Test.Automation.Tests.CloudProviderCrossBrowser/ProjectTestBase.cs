@@ -105,6 +105,11 @@ namespace Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser
         {
             this.DriverContext.TestTitle = TestContext.CurrentContext.Test.Name;
             this.LogTest.LogTestStarting(this.driverContext);
+
+            if (BaseConfiguration.RemoteWebDriverHub.ToString().Contains("testingbot"))
+            {
+                Logger.Info("TestingBotSessionID=" + ((RemoteWebDriver)this.driverContext.Driver).SessionId);
+            }
         }
 
         /// <summary>
