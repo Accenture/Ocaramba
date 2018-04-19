@@ -110,6 +110,10 @@ namespace Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser
             {
                 Logger.Info("TestingBotSessionID=" + ((RemoteWebDriver)this.driverContext.Driver).SessionId);
             }
+            else if (BaseConfiguration.RemoteWebDriverHub.ToString().Contains("saucelabs"))
+            {
+                Logger.Info("SauceOnDemandSessionID={0} job-name={1}=", ((RemoteWebDriver)this.driverContext.Driver).SessionId, "saucelabs_test");
+            }
         }
 
         /// <summary>
