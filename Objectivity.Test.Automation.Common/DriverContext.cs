@@ -54,9 +54,6 @@ namespace Objectivity.Test.Automation.Common
         private static readonly NLog.Logger Logger = LogManager.GetLogger("DRIVER");
         private readonly Collection<ErrorDetail> verifyMessages = new Collection<ErrorDetail>();
 
-        private string crossBrowserProfile;
-        private string crossBrowserEnvironment;
-
         /// <summary>
         /// Gets or sets the handle to current driver.
         /// </summary>
@@ -89,6 +86,16 @@ namespace Objectivity.Test.Automation.Common
         /// The test title.
         /// </value>
         public string TestTitle { get; set; }
+
+        /// <summary>
+        /// Gets or sets the CrossBrowserProfile from App.config
+        /// </summary>
+        public string CrossBrowserProfile { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Environment Browsers from App.config
+        /// </summary>
+        public string CrossBrowserEnvironment { get; set; }
 
         /// <summary>
         /// Gets Sets Folder name for ScreenShot
@@ -550,8 +557,8 @@ namespace Objectivity.Test.Automation.Common
         [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "Driver disposed later in stop method")]
         public void Start(string profile, string environment)
         {
-            this.crossBrowserProfile = profile;
-            this.crossBrowserEnvironment = environment;
+            this.CrossBrowserProfile = profile;
+            this.CrossBrowserEnvironment = environment;
 
             switch (BaseConfiguration.TestBrowser)
             {
@@ -798,9 +805,9 @@ namespace Objectivity.Test.Automation.Common
         /// <returns>Instance with set CloudProvider driver capabilities.</returns>
         private DesiredCapabilities CloudProviderCapabilities(DesiredCapabilities capabilities)
         {
-            if (!string.IsNullOrEmpty(this.crossBrowserEnvironment))
+            if (!string.IsNullOrEmpty(this.CrossBrowserEnvironment))
             {
-                NameValueCollection caps = ConfigurationManager.GetSection("capabilities/" + this.crossBrowserProfile) as NameValueCollection;
+                NameValueCollection caps = ConfigurationManager.GetSection("capabilities/" + this.CrossBrowserProfile) as NameValueCollection;
 
                 foreach (string key in caps.AllKeys)
                 {
@@ -808,9 +815,9 @@ namespace Objectivity.Test.Automation.Common
                 }
             }
 
-            if (!string.IsNullOrEmpty(this.crossBrowserEnvironment))
+            if (!string.IsNullOrEmpty(this.CrossBrowserEnvironment))
                 {
-                NameValueCollection settings = ConfigurationManager.GetSection("environments/" + this.crossBrowserEnvironment) as NameValueCollection;
+                NameValueCollection settings = ConfigurationManager.GetSection("environments/" + this.CrossBrowserEnvironment) as NameValueCollection;
                 foreach (string key in settings.AllKeys)
                     {
                         if (key == "browser")
