@@ -518,6 +518,7 @@ namespace Objectivity.Test.Automation.Common
                     this.driver = new FirefoxDriver(this.SetDriverOptions(fireFoxOptions));
                     break;
                 case BrowserType.InternetExplorer:
+                case BrowserType.IE:
                     this.driver = new InternetExplorerDriver(this.SetDriverOptions(this.InternetExplorerProfile));
                     break;
                 case BrowserType.Chrome:
@@ -757,6 +758,7 @@ namespace Objectivity.Test.Automation.Common
                     capabilities.SetCapability(FirefoxDriver.ProfileCapabilityName, this.FirefoxProfile.ToBase64String());
                     break;
                 case BrowserType.InternetExplorer:
+                case BrowserType.IE:
                     capabilities = (DesiredCapabilities)this.SetDriverOptions(this.InternetExplorerProfile).ToCapabilities();
                     break;
                 case BrowserType.Chrome:
@@ -805,7 +807,7 @@ namespace Objectivity.Test.Automation.Common
         /// <returns>Instance with set CloudProvider driver capabilities.</returns>
         private DesiredCapabilities CloudProviderCapabilities(DesiredCapabilities capabilities)
         {
-            if (!string.IsNullOrEmpty(this.CrossBrowserEnvironment))
+            if (!string.IsNullOrEmpty(this.CrossBrowserProfile))
             {
                 NameValueCollection caps = ConfigurationManager.GetSection("capabilities/" + this.CrossBrowserProfile) as NameValueCollection;
 

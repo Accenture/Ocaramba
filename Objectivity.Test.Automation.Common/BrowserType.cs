@@ -43,6 +43,11 @@ namespace Objectivity.Test.Automation.Common
         InternetExplorer,
 
         /// <summary>
+        /// InternetExplorer browser
+        /// </summary>
+        IE,
+
+        /// <summary>
         /// Chrome browser
         /// </summary>
         Chrome,

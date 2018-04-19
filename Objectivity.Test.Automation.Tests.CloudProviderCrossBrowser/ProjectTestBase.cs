@@ -43,12 +43,9 @@ namespace Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser
         private readonly DriverContext
             driverContext = new DriverContext();
 
-        private string environment;
-
         public ProjectTestBase(string environment)
         {
-            this.environment = environment;
-            this.driverContext.CapabilitiesSet += this.DriverContext_CapabilitiesSet;
+            this.DriverContext.CrossBrowserEnvironment = environment;
         }
 
         /// <summary>
@@ -130,34 +127,6 @@ namespace Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser
             {
                 Assert.Fail();
             }
-        }
-
-        private void DriverContext_CapabilitiesSet(object sender, CapabilitiesSetEventArgs args)
-        {
-            if (args == null || args.Capabilities == null)
-            {
-                throw new ArgumentNullException();
-            }
-
-            var settings = ConfigurationManager.GetSection("environments/" + this.environment) as NameValueCollection;
-
-            // if there are any settings
-            if (settings != null)
-             {
-                 // loop through all of them
-                 foreach (string key in settings.AllKeys)
-                 {
-                      Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0}", key);
-                    if (key == "browser")
-                    {
-                        args.Capabilities.SetCapability(CapabilityType.BrowserName, settings[key]);
-                    }
-                    else
-                     {
-                         args.Capabilities.SetCapability(key, settings[key]);
-                     }
-                 }
-             }
         }
 
         private void SaveAttachmentsToTestContext(string[] filePaths)
