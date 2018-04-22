@@ -790,7 +790,7 @@ namespace Objectivity.Test.Automation.Common
                     capabilities.SetCapability(driverCapabilitiesConf.GetKey(i), value);
                 }
             }
-            
+
             capabilities = this.CloudProviderCapabilities(capabilities);
 
             if (this.CapabilitiesSet != null)
