@@ -771,7 +771,6 @@ namespace Objectivity.Test.Automation.Common
                     capabilities = (DesiredCapabilities)this.SetDriverOptions(this.EdgeProfile).ToCapabilities();
                     break;
                 case BrowserType.CloudProvider:
-                    capabilities = this.CloudProviderCapabilities(capabilities);
                     break;
                 default:
                     throw new NotSupportedException(
@@ -791,6 +790,8 @@ namespace Objectivity.Test.Automation.Common
                     capabilities.SetCapability(driverCapabilitiesConf.GetKey(i), value);
                 }
             }
+            
+            capabilities = this.CloudProviderCapabilities(capabilities);
 
             if (this.CapabilitiesSet != null)
             {
