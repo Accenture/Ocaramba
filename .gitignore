@@ -16,3 +16,4 @@ LastBuild.log
 /myresults.xml
 /opencoverCoverage.xml
 /.nuget/NuGet.exe
+/.vs/TestFramework/v15/Server/sqlite3

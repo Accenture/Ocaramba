@@ -550,39 +550,6 @@ namespace Objectivity.Test.Automation.Common
         }
 
         /// <summary>
-        /// Starts the specified Driver.
-        /// </summary>
-        /// <param name="profile">CrossBrowser profile.</param>
-        /// <param name="environment">CrossBrowser environment.</param>
-        /// <exception cref="NotSupportedException">When driver not supported</exception>
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "Driver disposed later in stop method")]
-        public void Start(string profile, string environment)
-        {
-            this.CrossBrowserProfile = profile;
-            this.CrossBrowserEnvironment = environment;
-
-            switch (BaseConfiguration.TestBrowser)
-            {
-                case BrowserType.RemoteWebDriver:
-                case BrowserType.CloudProvider:
-                    this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetCapabilities());
-                    break;
-                default:
-                    throw new NotSupportedException(
-                        string.Format(CultureInfo.CurrentCulture, "Driver {0} is not supported", BaseConfiguration.TestBrowser));
-            }
-
-            this.driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(BaseConfiguration.LongTimeout);
-            this.driver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(BaseConfiguration.ShortTimeout);
-            this.driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(BaseConfiguration.ImplicitlyWaitMilliseconds);
-
-            if (BaseConfiguration.EnableEventFiringWebDriver)
-            {
-                this.driver = new MyEventFiringWebDriver(this.driver);
-            }
-        }
-
-        /// <summary>
         /// Maximizes the current window if it is not already maximized.
         /// </summary>
         public void WindowMaximize()
@@ -786,7 +753,7 @@ namespace Objectivity.Test.Automation.Common
                 for (var i = 0; i < driverCapabilitiesConf.Count; i++)
                 {
                     string value = driverCapabilitiesConf.GetValues(i)[0];
-                    Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0}", driverCapabilitiesConf.GetKey(i));
+                    Logger.Debug(CultureInfo.CurrentCulture, "Adding driver capability {0}", driverCapabilitiesConf.GetKey(i));
                     capabilities.SetCapability(driverCapabilitiesConf.GetKey(i), value);
                 }
             }
@@ -808,22 +775,26 @@ namespace Objectivity.Test.Automation.Common
         /// <returns>Instance with set CloudProvider driver capabilities.</returns>
         private DesiredCapabilities CloudProviderCapabilities(DesiredCapabilities capabilities)
         {
+            Logger.Debug(CultureInfo.CurrentCulture, "Cross Browser Profile '{0}'", this.CrossBrowserProfile.ToString());
             if (!string.IsNullOrEmpty(this.CrossBrowserProfile))
             {
                 NameValueCollection caps = ConfigurationManager.GetSection("capabilities/" + this.CrossBrowserProfile) as NameValueCollection;
 
                 foreach (string key in caps.AllKeys)
                 {
+                    Logger.Debug(CultureInfo.CurrentCulture, "Adding driver capability {0} from {1}", key, this.CrossBrowserProfile);
                     capabilities.SetCapability(key, caps[key]);
                 }
             }
 
+            Logger.Debug(CultureInfo.CurrentCulture, "Cross Browser Environment '{0}'", this.CrossBrowserEnvironment.ToString());
             if (!string.IsNullOrEmpty(this.CrossBrowserEnvironment))
                 {
                 NameValueCollection settings = ConfigurationManager.GetSection("environments/" + this.CrossBrowserEnvironment) as NameValueCollection;
                 foreach (string key in settings.AllKeys)
                     {
-                        if (key == "browser")
+                    Logger.Debug(CultureInfo.CurrentCulture, "Adding driver capability {0} from {1}", key, this.CrossBrowserEnvironment);
+                    if (key == "browser")
                         {
                             capabilities.SetCapability(CapabilityType.BrowserName, settings[key]);
                         }
