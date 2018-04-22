@@ -223,7 +223,7 @@ test_script:
 
     cd ..
     
-    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\bin\Release\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser.dll --result=myresults.xml`;format=AppVeyor" -filter:"+[Objectivity.Test.Automation.Common]*" -register:user -output:opencoverCoverage.xml
+    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\bin\Release\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser.dll --workers=5 --result=myresults.xml`;format=AppVeyor" -filter:"+[Objectivity.Test.Automation.Common]*" -register:user -output:opencoverCoverage.xml
 
     if($lastexitcode -ne 0)
       {
@@ -240,7 +240,7 @@ test_script:
 
     cd ..
     
-    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\bin\Release\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser.dll --result=myresults.xml`;format=AppVeyor" -filter:"+[Objectivity.Test.Automation.Common]*" -register:user -output:opencoverCoverage.xml
+    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\bin\Release\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser.dll --workers=5 --result=myresults.xml`;format=AppVeyor" -filter:"+[Objectivity.Test.Automation.Common]*" -register:user -output:opencoverCoverage.xml
 
     if($lastexitcode -ne 0)
       {
@@ -263,7 +263,7 @@ test_script:
 
     cd ..
     
-    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\bin\Release\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser.dll --result=myresults.xml`;format=AppVeyor" -filter:"+[Objectivity.Test.Automation.Common]*" -register:user -output:opencoverCoverage.xml
+    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\bin\Release\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser.dll --workers=5 --result=myresults.xml`;format=AppVeyor" -filter:"+[Objectivity.Test.Automation.Common]*" -register:user -output:opencoverCoverage.xml
 
     if($lastexitcode -ne 0)
       {
