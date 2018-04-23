@@ -753,7 +753,7 @@ namespace Objectivity.Test.Automation.Common
                 for (var i = 0; i < driverCapabilitiesConf.Count; i++)
                 {
                     string value = driverCapabilitiesConf.GetValues(i)[0];
-                    Logger.Debug(CultureInfo.CurrentCulture, "Adding driver capability {0}", driverCapabilitiesConf.GetKey(i));
+                    Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0}", driverCapabilitiesConf.GetKey(i));
                     capabilities.SetCapability(driverCapabilitiesConf.GetKey(i), value);
                 }
             }
@@ -775,25 +775,25 @@ namespace Objectivity.Test.Automation.Common
         /// <returns>Instance with set CloudProvider driver capabilities.</returns>
         private DesiredCapabilities CloudProviderCapabilities(DesiredCapabilities capabilities)
         {
-            Logger.Debug(CultureInfo.CurrentCulture, "Cross Browser Profile '{0}'", this.CrossBrowserProfile.ToString());
+            Logger.Debug(CultureInfo.CurrentCulture, "Cross Browser Profile '{0}'", this.CrossBrowserProfile);
             if (!string.IsNullOrEmpty(this.CrossBrowserProfile))
             {
                 NameValueCollection caps = ConfigurationManager.GetSection("capabilities/" + this.CrossBrowserProfile) as NameValueCollection;
 
                 foreach (string key in caps.AllKeys)
                 {
-                    Logger.Debug(CultureInfo.CurrentCulture, "Adding driver capability {0} from {1}", key, this.CrossBrowserProfile);
+                    Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0} from {1}", key, this.CrossBrowserProfile);
                     capabilities.SetCapability(key, caps[key]);
                 }
             }
 
-            Logger.Debug(CultureInfo.CurrentCulture, "Cross Browser Environment '{0}'", this.CrossBrowserEnvironment.ToString());
+            Logger.Trace(CultureInfo.CurrentCulture, "Cross Browser Environment '{0}'", this.CrossBrowserEnvironment);
             if (!string.IsNullOrEmpty(this.CrossBrowserEnvironment))
                 {
                 NameValueCollection settings = ConfigurationManager.GetSection("environments/" + this.CrossBrowserEnvironment) as NameValueCollection;
                 foreach (string key in settings.AllKeys)
                     {
-                    Logger.Debug(CultureInfo.CurrentCulture, "Adding driver capability {0} from {1}", key, this.CrossBrowserEnvironment);
+                    Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0} from {1}", key, this.CrossBrowserEnvironment);
                     if (key == "browser")
                         {
                             capabilities.SetCapability(CapabilityType.BrowserName, settings[key]);
@@ -818,6 +818,6 @@ namespace Objectivity.Test.Automation.Common
                 SocksProxy = BaseConfiguration.Proxy
             };
             return proxy;
-        }
+         }
     }
 }
