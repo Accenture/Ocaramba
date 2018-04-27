@@ -94,6 +94,7 @@ namespace Objectivity.Test.Automation.Common.Extensions
             }
             catch (InvalidOperationException)
             {
+                Logger.Error(CultureInfo.CurrentCulture, "Invalid Operation Exception");
             }
         }
 
