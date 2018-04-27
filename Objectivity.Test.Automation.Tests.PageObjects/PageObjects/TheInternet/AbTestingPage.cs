@@ -60,7 +60,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
         {
             get
             {
-                return this.Driver.GetElement(this.contentText, BaseConfiguration.MediumTimeout).Text;
+                return this.Driver.GetElement(this.contentText, BaseConfiguration.MediumTimeout, "Getting Description").Text;
             }
         }
     }
