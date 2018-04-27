@@ -207,14 +207,11 @@ namespace Objectivity.Test.Automation.Common.Extensions
             var js = (IJavaScriptExecutor)webDriver;
             var element = webDriver.ToDriver().GetElement(locator);
 
-            if (webDriver != null)
-            {
-                int height = webDriver.Manage().Window.Size.Height;
+            var height = webDriver.Manage().Window.Size.Height;
 
-                var hoverItem = (ILocatable)element;
-                var locationY = hoverItem.LocationOnScreenOnceScrolledIntoView.Y;
-                js.ExecuteScript(string.Format(CultureInfo.InvariantCulture, "javascript:window.scrollBy(0,{0})", locationY - (height / 2)));
-            }
+            var hoverItem = (ILocatable)element;
+            var locationY = hoverItem.LocationOnScreenOnceScrolledIntoView.Y;
+            js.ExecuteScript(string.Format(CultureInfo.InvariantCulture, "javascript:window.scrollBy(0,{0})", locationY - (height / 2)));
         }
 
         /// <summary>

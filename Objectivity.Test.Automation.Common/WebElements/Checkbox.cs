@@ -52,7 +52,7 @@ namespace Objectivity.Test.Automation.Common.WebElements
         /// </summary>
         public void TickCheckbox()
         {
-            if (this.webElement.Selected == false)
+            if (!this.webElement.Selected)
             {
                 this.webElement.Click();
             }

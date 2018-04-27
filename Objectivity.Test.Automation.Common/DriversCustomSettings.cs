@@ -50,7 +50,7 @@ namespace Objectivity.Test.Automation.Common
         /// <param name="enable">Set true to enable.</param>
         public static void SetAngularSynchronizationForDriver(IWebDriver driver, bool enable)
         {
-            if (enable == false && driversAngularSynchronizationEnable.ContainsKey(driver))
+            if (!enable && driversAngularSynchronizationEnable.ContainsKey(driver))
             {
                 driversAngularSynchronizationEnable.Remove(driver);
             }
