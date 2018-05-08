@@ -21,7 +21,6 @@ init:
       
       echo 'version' $env:appveyor_build_version 
       
-      iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 
 assembly_info:
   patch: true
