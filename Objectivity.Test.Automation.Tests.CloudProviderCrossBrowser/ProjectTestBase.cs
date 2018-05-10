@@ -148,7 +148,7 @@ namespace Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser
             }
 
              // Set the capability
-            args.Capabilities.SetCapability("name", TestContext.CurrentContext.Test.Name);
+            args.Capabilities.SetCapability("name", TestContext.CurrentContext.Test.FullName);
         }
     }
 }
