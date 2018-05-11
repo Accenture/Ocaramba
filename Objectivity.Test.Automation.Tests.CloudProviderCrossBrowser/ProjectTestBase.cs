@@ -29,6 +29,7 @@ namespace Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser
     using NLog;
     using Objectivity.Test.Automation.Common;
     using Objectivity.Test.Automation.Common.Logger;
+    using OpenQA.Selenium;
     using OpenQA.Selenium.Remote;
 
     /// <summary>
@@ -122,6 +123,13 @@ namespace Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser
             var filePaths = this.SaveTestDetailsIfTestFailed(this.driverContext);
             this.SaveAttachmentsToTestContext(filePaths);
             this.LogTest.LogTestEnding(this.driverContext);
+
+            // Logs the result to Sauce Labs
+            if (BaseConfiguration.RemoteWebDriverHub.ToString().ToLower(CultureInfo.CurrentCulture).Contains("saucelabs"))
+            {
+                ((IJavaScriptExecutor)this.DriverContext.Driver).ExecuteScript("sauce:job-result=" + (this.DriverContext.IsTestFailed ? "failed" : "passed"));
+            }
+
             if (this.IsVerifyFailedAndClearMessages(this.driverContext) && TestContext.CurrentContext.Result.Outcome.Status != TestStatus.Failed)
             {
                 Assert.Fail();
