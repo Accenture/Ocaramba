@@ -52,7 +52,6 @@
   <HelpKINode Title="Bmp enumeration member" Url="html/24ea484b-208c-10a9-79d9-518c88c2b6e9.htm" />
   <HelpKINode Title="Browser property" Url="html/d76bb42c-77f3-6115-eac5-e51f53aff2a0.htm" />
   <HelpKINode Title="BrowserName property" Url="html/dd90b482-8cf8-8dc4-4e7f-bf46e57c61b1.htm" />
-  <HelpKINode Title="BrowserStack enumeration member" Url="html/fd8f95a4-1921-2ebe-a199-a6c1d3adcc8c.htm" />
   <HelpKINode Title="BrowserType enumeration" Url="html/fd8f95a4-1921-2ebe-a199-a6c1d3adcc8c.htm" />
   <HelpKINode Title="Capabilities property" Url="html/f47c7a06-06a9-82eb-4068-fcea7a12b7fb.htm" />
   <HelpKINode Title="CapabilitiesSet event" Url="html/45dca327-d19f-808c-5a1a-a55d039aa660.htm" />
@@ -77,10 +76,13 @@
   <HelpKINode Title="ChromePath property" Url="html/555d3ba6-6e62-91aa-fb0c-2a742a55fe48.htm" />
   <HelpKINode Title="ClassName enumeration member" Url="html/64a6eff1-1642-a6be-95f5-38c0ebf1f42e.htm" />
   <HelpKINode Title="Close method" Url="html/0f04e455-b1f4-fde2-334b-81200d069f7b.htm" />
+  <HelpKINode Title="CloudProvider enumeration member" Url="html/fd8f95a4-1921-2ebe-a199-a6c1d3adcc8c.htm" />
   <HelpKINode Title="Collapse method" Url="html/456fb4f3-dc15-b75a-66ac-1fddfb3d3548.htm" />
   <HelpKINode Title="ConfirmJavaScriptAlert method" Url="html/e96b823a-6b3a-8392-0366-2313a5fbd95f.htm" />
   <HelpKINode Title="CopyFile method" Url="html/6916c4e2-c1a0-ae64-1e9c-02ab6642765e.htm" />
   <HelpKINode Title="CountFiles method" Url="html/4e71690e-1128-1a7b-0908-5e283ac59cc8.htm" />
+  <HelpKINode Title="CrossBrowserEnvironment property" Url="html/94e4921b-f4c7-e679-8840-40c23996e73f.htm" />
+  <HelpKINode Title="CrossBrowserProfile property" Url="html/982b371e-db1e-bc80-604d-2e685873e0bd.htm" />
   <HelpKINode Title="CssSelector enumeration member" Url="html/64a6eff1-1642-a6be-95f5-38c0ebf1f42e.htm" />
   <HelpKINode Title="Csv enumeration member" Url="html/24ea484b-208c-10a9-79d9-518c88c2b6e9.htm" />
   <HelpKINode Title="CurrentDate property" Url="html/7dcf6e15-ab9e-82e0-71b2-d13fb9e30009.htm" />
@@ -127,6 +129,8 @@
     <HelpKINode Title="properties" Url="html/f5975ac0-f16a-cca8-8614-61dfb52c5fed.htm" />
   </HelpKINode>
   <HelpKINode Title="DriverContext.CapabilitiesSet event" Url="html/45dca327-d19f-808c-5a1a-a55d039aa660.htm" />
+  <HelpKINode Title="DriverContext.CrossBrowserEnvironment property" Url="html/94e4921b-f4c7-e679-8840-40c23996e73f.htm" />
+  <HelpKINode Title="DriverContext.CrossBrowserProfile property" Url="html/982b371e-db1e-bc80-604d-2e685873e0bd.htm" />
   <HelpKINode Title="DriverContext.CurrentDirectory property" Url="html/a2043213-95fd-ac97-6f6c-c52429cb4220.htm" />
   <HelpKINode Title="DriverContext.DeleteAllCookies method" Url="html/c8f7c30b-01db-0fe7-1476-f3f02735e5dc.htm" />
   <HelpKINode Title="DriverContext.DownloadFolder property" Url="html/46a0e3d4-218d-2ae7-471d-0597e2010b07.htm" />
@@ -241,6 +245,7 @@
   <HelpKINode Title="Host property" Url="html/1f8a6f66-7a75-405e-e796-724dc803b22d.htm" />
   <HelpKINode Title="Html enumeration member" Url="html/24ea484b-208c-10a9-79d9-518c88c2b6e9.htm" />
   <HelpKINode Title="Id enumeration member" Url="html/64a6eff1-1642-a6be-95f5-38c0ebf1f42e.htm" />
+  <HelpKINode Title="IE enumeration member" Url="html/fd8f95a4-1921-2ebe-a199-a6c1d3adcc8c.htm" />
   <HelpKINode Title="ImplicitlyWaitMilliseconds property" Url="html/b982730c-7a0e-9a6f-46c9-f979a688707c.htm" />
   <HelpKINode Title="Info method" Url="html/5946d461-48fb-2dec-f8e8-593077efa516.htm" />
   <HelpKINode Title="Input property" Url="html/50a5d181-bebc-45f4-aaa8-2758d30399be.htm" />
