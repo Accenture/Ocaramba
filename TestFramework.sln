@@ -26,7 +26,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Objectivity.Test.Automation
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Objectivity.Test.Automation.UnitTests", "Objectivity.Test.Automation.UnitTests\Objectivity.Test.Automation.UnitTests.csproj", "{4F7A9D54-779A-4F45-91DC-4C8B81B4A9C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Objectivity.Test.Automation.Tests.BrowserStackCrossBrowser", "Objectivity.Test.Automation.Tests.BrowserStackCrossBrowser\Objectivity.Test.Automation.Tests.BrowserStackCrossBrowser.csproj", "{F5B79C58-AC3B-448A-8325-5EF9A962B4A3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser", "Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser.csproj", "{F5B79C58-AC3B-448A-8325-5EF9A962B4A3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2CF5AF89-028E-4D81-B39E-A021B5C01C11}"
+	ProjectSection(SolutionItems) = preProject
+		appveyor.yml = appveyor.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -52,7 +52,6 @@ namespace Objectivity.Test.Automation.Common
     public class DriverContext
     {
         private static readonly NLog.Logger Logger = LogManager.GetLogger("DRIVER");
-
         private readonly Collection<ErrorDetail> verifyMessages = new Collection<ErrorDetail>();
 
         /// <summary>
@@ -87,6 +86,16 @@ namespace Objectivity.Test.Automation.Common
         /// The test title.
         /// </value>
         public string TestTitle { get; set; }
+
+        /// <summary>
+        /// Gets or sets the CrossBrowserProfile from App.config
+        /// </summary>
+        public string CrossBrowserProfile { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Environment Browsers from App.config
+        /// </summary>
+        public string CrossBrowserEnvironment { get; set; }
 
         /// <summary>
         /// Gets Sets Folder name for ScreenShot
@@ -218,47 +227,6 @@ namespace Objectivity.Test.Automation.Common
                 profile.SetPreference("plugin.scan.Acrobat", "99.0");
                 profile.SetPreference("plugin.scan.plid.all", false);
 
-                // custom preferences
-                // if there are any settings
-                if (firefoxPreferences != null)
-                {
-                    // loop through all of them
-                    for (var i = 0; i < firefoxPreferences.Count; i++)
-                    {
-                        Logger.Trace(CultureInfo.CurrentCulture, "Set custom preference '{0},{1}'", firefoxPreferences.GetKey(i), firefoxPreferences[i]);
-
-                        // and verify all of them
-                        switch (firefoxPreferences[i])
-                        {
-                            // if current settings value is "true"
-                            case "true":
-                                profile.SetPreference(firefoxPreferences.GetKey(i), true);
-                                break;
-
-                            // if "false"
-                            case "false":
-                                profile.SetPreference(firefoxPreferences.GetKey(i), false);
-                                break;
-
-                            // otherwise
-                            default:
-                                int temp;
-
-                                // an attempt to parse current settings value to an integer. Method TryParse returns True if the attempt is successful (the string is integer) or return False (if the string is just a string and cannot be cast to a number)
-                                if (int.TryParse(firefoxPreferences.Get(i), out temp))
-                                {
-                                    profile.SetPreference(firefoxPreferences.GetKey(i), temp);
-                                }
-                                else
-                                {
-                                    profile.SetPreference(firefoxPreferences.GetKey(i), firefoxPreferences[i]);
-                                }
-
-                                break;
-                        }
-                    }
-                }
-
                 // if there are any extensions
                 if (firefoxExtensions != null)
                 {
@@ -267,6 +235,49 @@ namespace Objectivity.Test.Automation.Common
                     {
                         Logger.Trace(CultureInfo.CurrentCulture, "Installing extension {0}", firefoxExtensions.GetKey(i));
                         profile.AddExtension(firefoxExtensions.GetKey(i));
+                    }
+                }
+
+                // custom preferences
+                // if there are any settings
+                if (firefoxPreferences == null)
+                {
+                    return profile;
+                }
+
+                // loop through all of them
+                for (var i = 0; i < firefoxPreferences.Count; i++)
+                {
+                    Logger.Trace(CultureInfo.CurrentCulture, "Set custom preference '{0},{1}'", firefoxPreferences.GetKey(i), firefoxPreferences[i]);
+
+                    // and verify all of them
+                    switch (firefoxPreferences[i])
+                    {
+                        // if current settings value is "true"
+                        case "true":
+                            profile.SetPreference(firefoxPreferences.GetKey(i), true);
+                            break;
+
+                        // if "false"
+                        case "false":
+                            profile.SetPreference(firefoxPreferences.GetKey(i), false);
+                            break;
+
+                        // otherwise
+                        default:
+                            int temp;
+
+                            // an attempt to parse current settings value to an integer. Method TryParse returns True if the attempt is successful (the string is integer) or return False (if the string is just a string and cannot be cast to a number)
+                            if (int.TryParse(firefoxPreferences.Get(i), out temp))
+                            {
+                                profile.SetPreference(firefoxPreferences.GetKey(i), temp);
+                            }
+                            else
+                            {
+                                profile.SetPreference(firefoxPreferences.GetKey(i), firefoxPreferences[i]);
+                            }
+
+                            break;
                     }
                 }
 
@@ -304,47 +315,6 @@ namespace Objectivity.Test.Automation.Common
                     options.Proxy = this.CurrentProxy();
                 }
 
-                // custom preferences
-                // if there are any settings
-                if (chromePreferences != null)
-                {
-                    // loop through all of them
-                    for (var i = 0; i < chromePreferences.Count; i++)
-                    {
-                        Logger.Trace(CultureInfo.CurrentCulture, "Set custom preference '{0},{1}'", chromePreferences.GetKey(i), chromePreferences[i]);
-
-                        // and verify all of them
-                        switch (chromePreferences[i])
-                        {
-                            // if current settings value is "true"
-                            case "true":
-                                options.AddUserProfilePreference(chromePreferences.GetKey(i), true);
-                                break;
-
-                            // if "false"
-                            case "false":
-                                options.AddUserProfilePreference(chromePreferences.GetKey(i), false);
-                                break;
-
-                            // otherwise
-                            default:
-                                int temp;
-
-                                // an attempt to parse current settings value to an integer. Method TryParse returns True if the attempt is successful (the string is integer) or return False (if the string is just a string and cannot be cast to a number)
-                                if (int.TryParse(chromePreferences.Get(i), out temp))
-                                {
-                                    options.AddUserProfilePreference(chromePreferences.GetKey(i), temp);
-                                }
-                                else
-                                {
-                                    options.AddUserProfilePreference(chromePreferences.GetKey(i), chromePreferences[i]);
-                                }
-
-                                break;
-                        }
-                    }
-                }
-
                 // if there are any extensions
                 if (chromeExtensions != null)
                 {
@@ -371,6 +341,49 @@ namespace Objectivity.Test.Automation.Common
                     }
                 }
 
+                // custom preferences
+                // if there are any settings
+                if (chromePreferences == null)
+                {
+                    return options;
+                }
+
+                // loop through all of them
+                for (var i = 0; i < chromePreferences.Count; i++)
+                {
+                    Logger.Trace(CultureInfo.CurrentCulture, "Set custom preference '{0},{1}'", chromePreferences.GetKey(i), chromePreferences[i]);
+
+                    // and verify all of them
+                    switch (chromePreferences[i])
+                    {
+                        // if current settings value is "true"
+                        case "true":
+                            options.AddUserProfilePreference(chromePreferences.GetKey(i), true);
+                            break;
+
+                        // if "false"
+                        case "false":
+                            options.AddUserProfilePreference(chromePreferences.GetKey(i), false);
+                            break;
+
+                        // otherwise
+                        default:
+                            int temp;
+
+                            // an attempt to parse current settings value to an integer. Method TryParse returns True if the attempt is successful (the string is integer) or return False (if the string is just a string and cannot be cast to a number)
+                            if (int.TryParse(chromePreferences.Get(i), out temp))
+                            {
+                                options.AddUserProfilePreference(chromePreferences.GetKey(i), temp);
+                            }
+                            else
+                            {
+                                options.AddUserProfilePreference(chromePreferences.GetKey(i), chromePreferences[i]);
+                            }
+
+                            break;
+                    }
+                }
+
                 return options;
             }
         }
@@ -387,33 +400,35 @@ namespace Objectivity.Test.Automation.Common
                     IgnoreZoomLevel = true,
                 };
 
-                // custom preferences
-                // if there are any settings
-                if (internetExplorerPreferences != null)
-                {
-                    // loop through all of them
-                    for (var i = 0; i < internetExplorerPreferences.Count; i++)
-                    {
-                        Logger.Trace(CultureInfo.CurrentCulture, "Set custom preference '{0},{1}'", internetExplorerPreferences.GetKey(i), internetExplorerPreferences[i]);
-
-                        // and verify all of them
-                        switch (internetExplorerPreferences.GetKey(i))
-                        {
-                            case "EnsureCleanSession":
-                                options.EnsureCleanSession = Convert.ToBoolean(internetExplorerPreferences[i], CultureInfo.CurrentCulture);
-                                break;
-
-                            case "IgnoreZoomLevel":
-                                options.IgnoreZoomLevel = Convert.ToBoolean(internetExplorerPreferences[i], CultureInfo.CurrentCulture);
-                                break;
-                        }
-                    }
-                }
-
                 // set browser proxy for IE
                 if (!string.IsNullOrEmpty(BaseConfiguration.Proxy))
                 {
                     options.Proxy = this.CurrentProxy();
+                }
+
+                // custom preferences
+                // if there are any settings
+                if (internetExplorerPreferences == null)
+                {
+                    return options;
+                }
+
+                // loop through all of them
+                for (var i = 0; i < internetExplorerPreferences.Count; i++)
+                {
+                    Logger.Trace(CultureInfo.CurrentCulture, "Set custom preference '{0},{1}'", internetExplorerPreferences.GetKey(i), internetExplorerPreferences[i]);
+
+                    // and verify all of them
+                    switch (internetExplorerPreferences.GetKey(i))
+                    {
+                        case "EnsureCleanSession":
+                            options.EnsureCleanSession = Convert.ToBoolean(internetExplorerPreferences[i], CultureInfo.CurrentCulture);
+                            break;
+
+                        case "IgnoreZoomLevel":
+                            options.IgnoreZoomLevel = Convert.ToBoolean(internetExplorerPreferences[i], CultureInfo.CurrentCulture);
+                            break;
+                    }
                 }
 
                 return options;
@@ -442,12 +457,6 @@ namespace Objectivity.Test.Automation.Common
             {
                 var options = new SafariOptions();
                 options.AddAdditionalCapability("cleanSession", true);
-
-                // set browser proxy for Safari
-                if (!string.IsNullOrEmpty(BaseConfiguration.Proxy))
-                {
-                    throw new NotSupportedException(string.Format(CultureInfo.CurrentCulture, "Use command line to setup proxy"));
-                }
 
                 return options;
             }
@@ -509,6 +518,7 @@ namespace Objectivity.Test.Automation.Common
                     this.driver = new FirefoxDriver(this.SetDriverOptions(fireFoxOptions));
                     break;
                 case BrowserType.InternetExplorer:
+                case BrowserType.IE:
                     this.driver = new InternetExplorerDriver(this.SetDriverOptions(this.InternetExplorerProfile));
                     break;
                 case BrowserType.Chrome:
@@ -516,9 +526,9 @@ namespace Objectivity.Test.Automation.Common
                     break;
                 case BrowserType.Safari:
                     this.driver = new SafariDriver(this.SetDriverOptions(this.SafariProfile));
+                    this.CheckIfProxySetForSafari();
                     break;
                 case BrowserType.RemoteWebDriver:
-                case BrowserType.BrowserStack:
                     this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetCapabilities());
                     break;
                 case BrowserType.Edge:
@@ -709,29 +719,31 @@ namespace Objectivity.Test.Automation.Common
             DesiredCapabilities capabilities = new DesiredCapabilities();
 
             switch (BaseConfiguration.TestBrowserCapabilities)
-              {
-                  case BrowserType.Firefox:
-                      capabilities = (DesiredCapabilities)this.SetDriverOptions(this.FirefoxOptions).ToCapabilities();
-                      capabilities.SetCapability(FirefoxDriver.ProfileCapabilityName, this.FirefoxProfile.ToBase64String());
-                      break;
-                  case BrowserType.InternetExplorer:
-                      capabilities = (DesiredCapabilities)this.SetDriverOptions(this.InternetExplorerProfile).ToCapabilities();
-                      break;
-                  case BrowserType.Chrome:
-                      capabilities = (DesiredCapabilities)this.SetDriverOptions(this.ChromeProfile).ToCapabilities();
-                      break;
-                  case BrowserType.Safari:
-                      capabilities = (DesiredCapabilities)this.SetDriverOptions(this.SafariProfile).ToCapabilities();
-                      break;
-                  case BrowserType.Edge:
-                      capabilities = (DesiredCapabilities)this.SetDriverOptions(this.EdgeProfile).ToCapabilities();
-                      break;
-                  case BrowserType.BrowserStack:
-                      break;
-                  default:
-                      throw new NotSupportedException(
-                          string.Format(CultureInfo.CurrentCulture, "Driver {0} is not supported with Selenium Grid", BaseConfiguration.TestBrowser));
-                }
+            {
+                case BrowserType.Firefox:
+                    capabilities = (DesiredCapabilities)this.SetDriverOptions(this.FirefoxOptions).ToCapabilities();
+                    capabilities.SetCapability(FirefoxDriver.ProfileCapabilityName, this.FirefoxProfile.ToBase64String());
+                    break;
+                case BrowserType.InternetExplorer:
+                case BrowserType.IE:
+                    capabilities = (DesiredCapabilities)this.SetDriverOptions(this.InternetExplorerProfile).ToCapabilities();
+                    break;
+                case BrowserType.Chrome:
+                    capabilities = (DesiredCapabilities)this.SetDriverOptions(this.ChromeProfile).ToCapabilities();
+                    break;
+                case BrowserType.Safari:
+                    capabilities = (DesiredCapabilities)this.SetDriverOptions(this.SafariProfile).ToCapabilities();
+                    this.CheckIfProxySetForSafari();
+                    break;
+                case BrowserType.Edge:
+                    capabilities = (DesiredCapabilities)this.SetDriverOptions(this.EdgeProfile).ToCapabilities();
+                    break;
+                case BrowserType.CloudProvider:
+                    break;
+                default:
+                    throw new NotSupportedException(
+                        string.Format(CultureInfo.CurrentCulture, "Driver {0} is not supported with Selenium Grid", BaseConfiguration.TestBrowser));
+            }
 
             var driverCapabilitiesConf = ConfigurationManager.GetSection("DriverCapabilities") as NameValueCollection;
 
@@ -747,12 +759,54 @@ namespace Objectivity.Test.Automation.Common
                 }
             }
 
+            capabilities = this.CloudProviderCapabilities(capabilities);
+
             if (this.CapabilitiesSet != null)
             {
                 this.CapabilitiesSet(this, new CapabilitiesSetEventArgs(capabilities));
             }
 
             return capabilities;
+        }
+
+        /// <summary>
+        /// Set CloudProvider driver capabilities.
+        /// </summary>
+        /// <param name="capabilities">The DesiredCapabilities.</param>
+        /// <returns>Instance with set CloudProvider driver capabilities.</returns>
+        private DesiredCapabilities CloudProviderCapabilities(DesiredCapabilities capabilities)
+        {
+            Logger.Debug(CultureInfo.CurrentCulture, "Cross Browser Profile '{0}'", this.CrossBrowserProfile);
+            if (!string.IsNullOrEmpty(this.CrossBrowserProfile))
+            {
+                NameValueCollection caps = ConfigurationManager.GetSection("capabilities/" + this.CrossBrowserProfile) as NameValueCollection;
+
+                foreach (string key in caps.AllKeys)
+                {
+                    Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0} from {1}", key, this.CrossBrowserProfile);
+                    capabilities.SetCapability(key, caps[key]);
+                }
+            }
+
+            Logger.Trace(CultureInfo.CurrentCulture, "Cross Browser Environment '{0}'", this.CrossBrowserEnvironment);
+            if (!string.IsNullOrEmpty(this.CrossBrowserEnvironment))
+                {
+                NameValueCollection settings = ConfigurationManager.GetSection("environments/" + this.CrossBrowserEnvironment) as NameValueCollection;
+                foreach (string key in settings.AllKeys)
+                    {
+                    Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0} from {1}", key, this.CrossBrowserEnvironment);
+                    if (key == "browser")
+                        {
+                            capabilities.SetCapability(CapabilityType.BrowserName, settings[key]);
+                        }
+                        else
+                        {
+                            capabilities.SetCapability(key, settings[key]);
+                        }
+                    }
+                }
+
+           return capabilities;
         }
 
         private Proxy CurrentProxy()
@@ -765,6 +819,15 @@ namespace Objectivity.Test.Automation.Common
                 SocksProxy = BaseConfiguration.Proxy
             };
             return proxy;
+         }
+
+        private void CheckIfProxySetForSafari()
+        {
+            // set browser proxy for Safari
+            if (!string.IsNullOrEmpty(BaseConfiguration.Proxy))
+            {
+                throw new NotSupportedException("Use command line to setup proxy");
+            }
         }
     }
 }

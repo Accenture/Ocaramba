@@ -70,9 +70,26 @@ namespace Objectivity.Test.Automation.Common.Extensions
         /// <example>How to use it: <code>
         /// this.Driver.GetElement(this.loginButton, timeout);
         /// </code></example>
-        public static IWebElement GetElement(this ISearchContext element, ElementLocator locator, double timeout, [Optional] string customMessage)
+        public static IWebElement GetElement(this ISearchContext element, ElementLocator locator, double timeout, string customMessage)
         {
             return element.GetElement(locator, timeout, e => e.Displayed & e.Enabled, customMessage);
+        }
+
+        /// <summary>
+        /// Finds and waits for an element that is visible and displayed at specified time.
+        /// </summary>
+        /// <param name="element">The element.</param>
+        /// <param name="locator">The locator.</param>
+        /// <param name="timeout">Specified time to wait.</param>
+        /// <returns>
+        /// Found element
+        /// </returns>
+        /// <example>How to use it: <code>
+        /// this.Driver.GetElement(this.loginButton, timeout);
+        /// </code></example>
+        public static IWebElement GetElement(this ISearchContext element, ElementLocator locator, double timeout)
+        {
+            return element.GetElement(locator, timeout, e => e.Displayed & e.Enabled);
         }
 
         /// <summary>

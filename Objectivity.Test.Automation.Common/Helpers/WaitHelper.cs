@@ -62,37 +62,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// </code></example>
         public static void Wait(Func<bool> condition, TimeSpan timeout, TimeSpan sleepInterval, string message)
         {
-            var start = DateTime.Now;
-            var result = false;
-            var canceller = new CancellationTokenSource();
-            var task = Task.Factory.StartNew(condition, canceller.Token);
-
-            while ((DateTime.Now - start).TotalSeconds < timeout.TotalSeconds)
-            {
-                if (task.IsCompleted)
-                {
-                    if (task.Result)
-                    {
-                        result = true;
-                        canceller.Cancel();
-                        break;
-                    }
-
-                    task = Task.Factory.StartNew(
-                        () =>
-                                {
-                                    using (canceller.Token.Register(Thread.CurrentThread.Abort))
-                                    {
-                                        return condition();
-                                    }
-                                },
-                                  canceller.Token);
-                }
-
-                Thread.Sleep(sleepInterval);
-            }
-
-            canceller.Cancel();
+            var result = Wait(condition, timeout, sleepInterval);
 
             if (!result)
             {

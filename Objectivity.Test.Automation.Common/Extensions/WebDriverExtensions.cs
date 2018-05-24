@@ -94,6 +94,7 @@ namespace Objectivity.Test.Automation.Common.Extensions
             }
             catch (InvalidOperationException)
             {
+                Logger.Error(CultureInfo.CurrentCulture, "Invalid Operation Exception");
             }
         }
 
@@ -206,14 +207,11 @@ namespace Objectivity.Test.Automation.Common.Extensions
             var js = (IJavaScriptExecutor)webDriver;
             var element = webDriver.ToDriver().GetElement(locator);
 
-            if (webDriver != null)
-            {
-                int height = webDriver.Manage().Window.Size.Height;
+            var height = webDriver.Manage().Window.Size.Height;
 
-                var hoverItem = (ILocatable)element;
-                var locationY = hoverItem.LocationOnScreenOnceScrolledIntoView.Y;
-                js.ExecuteScript(string.Format(CultureInfo.InvariantCulture, "javascript:window.scrollBy(0,{0})", locationY - (height / 2)));
-            }
+            var hoverItem = (ILocatable)element;
+            var locationY = hoverItem.LocationOnScreenOnceScrolledIntoView.Y;
+            js.ExecuteScript(string.Format(CultureInfo.InvariantCulture, "javascript:window.scrollBy(0,{0})", locationY - (height / 2)));
         }
 
         /// <summary>
@@ -318,7 +316,7 @@ namespace Objectivity.Test.Automation.Common.Extensions
         /// <param name="webDriver">The web driver.</param>
         private static void ApproveCertificateForInternetExplorer(this IWebDriver webDriver)
         {
-            if (BaseConfiguration.TestBrowser.Equals(BrowserType.InternetExplorer) && webDriver.Title.Contains("Certificate"))
+            if ((BaseConfiguration.TestBrowser.Equals(BrowserType.InternetExplorer) || BaseConfiguration.TestBrowser.Equals(BrowserType.IE)) && webDriver.Title.Contains("Certificate"))
             {
                 webDriver.FindElement(By.Id("overridelink")).JavaScriptClick();
             }

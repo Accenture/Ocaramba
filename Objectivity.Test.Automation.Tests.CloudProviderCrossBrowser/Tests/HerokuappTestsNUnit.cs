@@ -19,13 +19,11 @@
 //     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //     SOFTWARE.
 // </license>
-
-namespace Objectivity.Test.Automation.Tests.NUnit.Tests
+namespace Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser.Tests
 {
-    using System.Collections.Generic;
-    using Automation.Tests.PageObjects.PageObjects.TheInternet;
     using Common;
     using global::NUnit.Framework;
+    using PageObjects.PageObjects.TheInternet;
 
     [TestFixture("Chrome")]
     [TestFixture("Firefox")]

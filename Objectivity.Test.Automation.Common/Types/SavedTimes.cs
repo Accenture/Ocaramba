@@ -28,11 +28,6 @@ namespace Objectivity.Test.Automation.Common.Types
     public class SavedTimes
     {
         /// <summary>
-        /// The browser key
-        /// </summary>
-        private const string BrowserKey = "browser";
-
-        /// <summary>
         /// The scenario
         /// </summary>
         private readonly string scenario;

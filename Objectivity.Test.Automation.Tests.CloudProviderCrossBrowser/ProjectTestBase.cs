@@ -20,17 +20,17 @@
 //     SOFTWARE.
 // </license>
 
-namespace Objectivity.Test.Automation.Tests.NUnit
+namespace Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser
 {
     using System;
-    using System.Collections.Specialized;
-    using System.Configuration;
     using System.Globalization;
-    using Common;
-    using Common.Logger;
     using global::NUnit.Framework;
     using global::NUnit.Framework.Interfaces;
     using NLog;
+    using Objectivity.Test.Automation.Common;
+    using Objectivity.Test.Automation.Common.Logger;
+    using OpenQA.Selenium;
+    using OpenQA.Selenium.Remote;
 
     /// <summary>
     /// The base class for all tests <see href="https://github.com/ObjectivityLtd/Test.Automation/wiki/ProjectTestBase-class">More details on wiki</see>
@@ -42,11 +42,9 @@ namespace Objectivity.Test.Automation.Tests.NUnit
         private readonly DriverContext
             driverContext = new DriverContext();
 
-        private string environment;
-
         public ProjectTestBase(string environment)
         {
-            this.environment = environment;
+            this.DriverContext.CrossBrowserEnvironment = environment;
             this.driverContext.CapabilitiesSet += this.DriverContext_CapabilitiesSet;
         }
 
@@ -104,6 +102,15 @@ namespace Objectivity.Test.Automation.Tests.NUnit
         {
             this.DriverContext.TestTitle = TestContext.CurrentContext.Test.Name;
             this.LogTest.LogTestStarting(this.driverContext);
+
+            if (BaseConfiguration.RemoteWebDriverHub.ToString().ToLower(CultureInfo.CurrentCulture).Contains("testingbot"))
+            {
+                Logger.Info("\nTestingBotSessionID=" + ((RemoteWebDriver)this.driverContext.Driver).SessionId);
+            }
+            else if (BaseConfiguration.RemoteWebDriverHub.ToString().ToLower(CultureInfo.CurrentCulture).Contains("saucelabs"))
+            {
+                Logger.Info("\nSauceOnDemandSessionID={0} job-name={1}", ((RemoteWebDriver)this.driverContext.Driver).SessionId, "saucelabs_test");
+            }
         }
 
         /// <summary>
@@ -116,31 +123,17 @@ namespace Objectivity.Test.Automation.Tests.NUnit
             var filePaths = this.SaveTestDetailsIfTestFailed(this.driverContext);
             this.SaveAttachmentsToTestContext(filePaths);
             this.LogTest.LogTestEnding(this.driverContext);
+
+            // Logs the result to Sauce Labs
+            if (BaseConfiguration.RemoteWebDriverHub.ToString().ToLower(CultureInfo.CurrentCulture).Contains("saucelabs"))
+            {
+                ((IJavaScriptExecutor)this.DriverContext.Driver).ExecuteScript("sauce:job-result=" + (this.DriverContext.IsTestFailed ? "failed" : "passed"));
+            }
+
             if (this.IsVerifyFailedAndClearMessages(this.driverContext) && TestContext.CurrentContext.Result.Outcome.Status != TestStatus.Failed)
             {
                 Assert.Fail();
             }
-        }
-
-        private void DriverContext_CapabilitiesSet(object sender, CapabilitiesSetEventArgs args)
-        {
-            if (args == null || args.Capabilities == null)
-            {
-                throw new ArgumentNullException();
-            }
-
-            var settings = ConfigurationManager.GetSection("environments/" + this.environment) as NameValueCollection;
-
-            // if there are any settings
-            if (settings != null)
-             {
-                 // loop through all of them
-                 foreach (string key in settings.AllKeys)
-                 {
-                      Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0}", key);
-                      args.Capabilities.SetCapability(key, settings[key]);
-                  }
-             }
         }
 
         private void SaveAttachmentsToTestContext(string[] filePaths)
@@ -153,6 +146,17 @@ namespace Objectivity.Test.Automation.Tests.NUnit
                     TestContext.AddTestAttachment(filePath);
                 }
             }
+        }
+
+        private void DriverContext_CapabilitiesSet(object sender, CapabilitiesSetEventArgs args)
+        {
+            if (args == null || args.Capabilities == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+             // Set the capability
+            args.Capabilities.SetCapability("name", TestContext.CurrentContext.Test.FullName);
         }
     }
 }
