@@ -67,7 +67,7 @@ namespace Objectivity.Test.Automation.Common.Logger
         /// Raises the <see cref="E:ElementValueChanging" /> event.
         /// </summary>
         /// <param name="e">The <see cref="WebElementEventArgs"/> instance containing the event data.</param>
-        protected override void OnElementValueChanging(WebElementEventArgs e)
+        protected override void OnElementValueChanging(WebElementValueEventArgs e)
         {
             Logger.Trace(CultureInfo.CurrentCulture, "On Element Value Changing: {0}", ToStringElement(e));
             base.OnElementValueChanging(e);
@@ -77,7 +77,7 @@ namespace Objectivity.Test.Automation.Common.Logger
         /// Raises the <see cref="E:ElementValueChanged" /> event.
         /// </summary>
         /// <param name="e">The <see cref="WebElementEventArgs"/> instance containing the event data.</param>
-        protected override void OnElementValueChanged(WebElementEventArgs e)
+        protected override void OnElementValueChanged(WebElementValueEventArgs e)
         {
             Logger.Trace(CultureInfo.CurrentCulture, "On Element Value Changed: {0}", ToStringElement(e));
             base.OnElementValueChanging(e);
