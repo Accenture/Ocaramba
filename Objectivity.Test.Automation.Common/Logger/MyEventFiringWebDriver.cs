@@ -80,7 +80,7 @@ namespace Objectivity.Test.Automation.Common.Logger
         protected override void OnElementValueChanged(WebElementEventArgs e)
         {
             Logger.Trace(CultureInfo.CurrentCulture, "On Element Value Changed: {0}", ToStringElement(e));
-            base.OnElementValueChanged(e);
+            base.OnElementValueChanging(e);
         }
 
         /// <summary>
