@@ -170,5 +170,17 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
                 .GoToSlowResources()
                 .WaitForIt(timeout);
         }
+
+        [Test]
+        public void TablesTest()
+        {
+            var tableElements = new InternetPage(this.DriverContext)
+                .OpenHomePage()
+                .GoToTablesPage();
+            var table = tableElements.GetTableElements();
+
+            Assert.AreEqual("Smith", table[0][0]);
+            Assert.AreEqual("edit delete", table[3][5]);
+        }
     }
 }

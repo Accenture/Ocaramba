@@ -22,9 +22,9 @@
 
 namespace Objectivity.Test.Automation.Common.WebElements
 {
+    using NLog;
     using Objectivity.Test.Automation.Common.Extensions;
     using Objectivity.Test.Automation.Common.Types;
-
     using OpenQA.Selenium;
     using OpenQA.Selenium.Remote;
 
@@ -33,6 +33,8 @@ namespace Objectivity.Test.Automation.Common.WebElements
     /// </summary>
     public class Table : RemoteWebElement
     {
+        private static readonly NLog.Logger Logger = LogManager.GetLogger("DRIVER");
+
         /// <summary>
         /// The web element
         /// </summary>
@@ -72,8 +74,12 @@ namespace Objectivity.Test.Automation.Common.WebElements
                 var j = 0;
                 foreach (var cell in cells)
                 {
-                    result[i][j++] = cell.Text;
+                    var cellValue = cell.Text;
+                    Logger.Debug("Table cell Row {0}, column {1}, Value: {2}", i, j, cellValue);
+                    result[i][j++] = cellValue;
                 }
+
+                i++;
             }
 
             return result;
