@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="ProjectTestBase.cs" />
     <Compile Include="Tests\JavaScriptAlertsTestsNUnit.cs" />
+    <Compile Include="Tests\FilesHelperTests.cs" />
     <Compile Include="Tests\WaitHelperTests.cs" />
     <Compile Include="Tests\DriversCustomSettingsUnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

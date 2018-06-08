@@ -524,9 +524,11 @@ namespace Objectivity.Test.Automation.Common.Helpers
 
             newName = NameHelper.ShortenFileName(subFolder, newName, "_", 255);
 
-            if (File.Exists(newName))
+            string fullPath = Path.Combine(subFolder, newName);
+
+            if (File.Exists(fullPath))
             {
-                File.Delete(newName);
+                File.Delete(fullPath);
             }
 
             // Use ProcessStartInfo class
