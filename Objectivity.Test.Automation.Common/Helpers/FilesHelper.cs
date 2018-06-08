@@ -362,7 +362,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
             if (checkSize)
             {
                 Logger.Debug("Checking if size of last file of given type {0} > 0 bytes", type);
-                timeoutMessage = $"Checking if size of last file of given type {type} > 0 bytes";
+                timeoutMessage = string.Format(CultureInfo.CurrentCulture, "Checking if size of last file of given type {0} > 0 bytes", type);
 
                 WaitHelper.Wait(
                     () => GetLastFile(folder, type).Length > 0, TimeSpan.FromSeconds(waitTime), TimeSpan.FromSeconds(1), timeoutMessage);
