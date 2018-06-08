@@ -361,11 +361,11 @@ namespace Objectivity.Test.Automation.Common.Helpers
 
             if (checkSize)
             {
-                Logger.Debug("Checking if size of last file > 0 bytes");
-                timeoutMessage = "Checking if size of last file > 0 bytes";
+                Logger.Debug("Checking if size of last file of given type {0} > 0 bytes", type);
+                timeoutMessage = $"Checking if size of last file of given type {type} > 0 bytes";
 
                 WaitHelper.Wait(
-                    () => GetLastFile(folder).Length > 0, TimeSpan.FromSeconds(waitTime), TimeSpan.FromSeconds(1), timeoutMessage);
+                    () => GetLastFile(folder, type).Length > 0, TimeSpan.FromSeconds(waitTime), TimeSpan.FromSeconds(1), timeoutMessage);
             }
         }
 

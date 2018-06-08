@@ -111,7 +111,8 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 
         public string CheckIfScreenShotIsSaved(int screenShotNumber)
         {
-            FilesHelper.WaitForFileOfGivenType(FileType.Png, 5, screenShotNumber, this.DriverContext.ScreenShotFolder, true);
+            Logger.Info(CultureInfo.CurrentCulture, "Number of files {0}", screenShotNumber);
+            FilesHelper.WaitForFileOfGivenType(FileType.Png, 10, screenShotNumber, this.DriverContext.ScreenShotFolder, true);
             var nameOfFile = FilesHelper.GetLastFile(this.DriverContext.ScreenShotFolder, FileType.Png);
 
             return nameOfFile.FullName;
