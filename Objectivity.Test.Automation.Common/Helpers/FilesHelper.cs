@@ -603,6 +603,24 @@ namespace Objectivity.Test.Automation.Common.Helpers
         }
 
         /// <summary>
+        /// Delete file in given folder if exists.
+        /// </summary>
+        /// <param name="name">The name of file.</param>
+        /// <param name="subFolder">The subFolder.</param>
+        /// <example>How to use it: <code>
+        /// FilesHelper.DeleteFile("filename.txt", this.DriverContext.DownloadFolder);
+        /// </code></example>
+        public static void DeleteFile(string name, string subFolder)
+        {
+            string fullPath = Path.Combine(subFolder, name);
+
+            if (File.Exists(fullPath))
+            {
+                File.Delete(fullPath);
+            }
+        }
+
+        /// <summary>
         /// Rename the file of given type and check if file was renamed with ShortTimeout, shorten the name of file if needed be removing "_".
         /// </summary>
         /// <param name="oldName">The old name.</param>
