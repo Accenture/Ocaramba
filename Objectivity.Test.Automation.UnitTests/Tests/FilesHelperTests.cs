@@ -1,6 +1,8 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using NUnit.Framework;
 using Objectivity.Test.Automation.Common;
+using Objectivity.Test.Automation.Common.Exceptions;
 using Objectivity.Test.Automation.Common.Helpers;
 
 namespace Objectivity.Test.Automation.UnitTests.Tests
@@ -12,14 +14,16 @@ namespace Objectivity.Test.Automation.UnitTests.Tests
         [Test()]
         public void GetFilesOfGivenTypeFromAllSubFolderTest()
         {
-            var files = FilesHelper.GetFilesOfGivenTypeFromAllSubFolders(TestContext.CurrentContext.TestDirectory, FileType.Xls);
+            var files = FilesHelper.GetFilesOfGivenTypeFromAllSubFolders(TestContext.CurrentContext.TestDirectory,
+                FileType.Xls);
             Assert.IsTrue(files.Count > 0);
         }
 
         [Test()]
         public void GetFilesOfGivenTypeFromAllSubFoldersTest()
         {
-            var files = FilesHelper.GetFilesOfGivenTypeFromAllSubFolders(TestContext.CurrentContext.TestDirectory, FileType.Xml, "Driven");
+            var files = FilesHelper.GetFilesOfGivenTypeFromAllSubFolders(TestContext.CurrentContext.TestDirectory,
+                FileType.Xml, "Driven");
             Assert.IsTrue(files.Count > 0);
         }
 
@@ -33,7 +37,8 @@ namespace Objectivity.Test.Automation.UnitTests.Tests
         [Test()]
         public void GetAllFilesFromAllSubFoldersPrefixTest()
         {
-            var files = FilesHelper.GetAllFilesFromAllSubFolders(TestContext.CurrentContext.TestDirectory, "Common.dll");
+            var files = FilesHelper.GetAllFilesFromAllSubFolders(TestContext.CurrentContext.TestDirectory,
+                "Common.dll");
             Assert.IsTrue(files.Count > 0);
             File.Create("testfile.txt");
 
@@ -46,7 +51,8 @@ namespace Objectivity.Test.Automation.UnitTests.Tests
             File.Create(path).Close();
             path = Path.Combine(TestContext.CurrentContext.TestDirectory, "testfile2.txt");
             File.Create(path).Close();
-            FilesHelper.RenameFile(BaseConfiguration.ShortTimeout, "testfile1.txt", "testfile2.txt", TestContext.CurrentContext.TestDirectory);
+            FilesHelper.RenameFile(BaseConfiguration.ShortTimeout, "testfile1.txt", "testfile2.txt",
+                TestContext.CurrentContext.TestDirectory);
         }
 
         [Test()]
@@ -56,7 +62,17 @@ namespace Objectivity.Test.Automation.UnitTests.Tests
             File.Create(path).Close();
             path = Path.Combine(TestContext.CurrentContext.TestDirectory, "testfile4.txt");
             File.Create(path).Close();
-            FilesHelper.CopyFile(BaseConfiguration.ShortTimeout, "testfile3.txt", "testfile4.txt", TestContext.CurrentContext.TestDirectory);
+            FilesHelper.CopyFile(BaseConfiguration.ShortTimeout, "testfile3.txt", "testfile4.txt",
+                TestContext.CurrentContext.TestDirectory);
+        }
+
+        [Test()]
+        public void WaitForFileOfGivenNameExceptionTest()
+        {
+            var start = DateTime.Now;
+            Assert.Throws<WaitTimeoutException>(() => FilesHelper.WaitForFileOfGivenName("nofile.txt", TestContext.CurrentContext.TestDirectory));
+            var stop = DateTime.Now;
+            Assert.True(stop - start <= TimeSpan.FromSeconds(BaseConfiguration.LongTimeout + 2));
         }
     }
 }
