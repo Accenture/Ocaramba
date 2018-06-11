@@ -61,6 +61,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="ProjectTestBase.cs" />
+    <Compile Include="Tests\NameHelperTests.cs" />
+    <Compile Include="Tests\DateHelperTests.cs" />
     <Compile Include="Tests\JavaScriptAlertsTestsNUnit.cs" />
     <Compile Include="Tests\FilesHelperTests.cs" />
     <Compile Include="Tests\WaitHelperTests.cs" />
