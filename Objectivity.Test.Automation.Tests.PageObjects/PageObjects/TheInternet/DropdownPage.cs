@@ -65,10 +65,28 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             return isPresent;
         }
 
+        public void SelectByIndexWithCustomTimeout(int index, int timeout)
+        {
+            Select select = this.Driver.GetElement<Select>(this.dropDownLocator, timeout);
+            select.SelectByIndex(index, timeout);
+        }
+
         public void SelectByIndex(int index)
         {
             Select select = this.Driver.GetElement<Select>(this.dropDownLocator, 300);
             select.SelectByIndex(index, 300);
+        }
+
+        public void SelectByValue(string value)
+        {
+            Select select = this.Driver.GetElement<Select>(this.dropDownLocator, 300);
+            select.SelectByValue(value);
+        }
+
+        public void SelectByValueWithCustomTimeout(string value, int timeout)
+        {
+            Select select = this.Driver.GetElement<Select>(this.dropDownLocator, 300);
+            select.SelectByValue(value, timeout);
         }
 
         public void SelectByText(string text)

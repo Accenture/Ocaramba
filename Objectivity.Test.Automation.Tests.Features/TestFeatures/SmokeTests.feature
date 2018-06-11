@@ -41,6 +41,15 @@ Scenario: Verify if dropdown option can be selected by text
 	Then Option with text "Option 1" is selected
 
 @Dropdown
+Scenario: Verify if dropdown option can be selected by index with custom timeout
+	Given Default page is opened
+	When I click "dropdown" link
+	And I see page Dropdown List
+	When I select option with custom timeout '300' with index '1'
+	And I check selected option
+	Then Option with text "Option 1" is selected
+
+@Dropdown
 Scenario: Verify if dropdown option can be selected by index
 	Given Default page is opened
 	When I click "dropdown" link
@@ -49,6 +58,23 @@ Scenario: Verify if dropdown option can be selected by index
 	And I check selected option
 	Then Option with text "Option 1" is selected
 
+@Dropdown
+Scenario: Verify if dropdown option can be selected by value
+	Given Default page is opened
+	When I click "dropdown" link
+	And I see page Dropdown List
+	When I select option with value '2'
+	And I check selected option
+	Then Option with text "Option 2" is selected
+
+@Dropdown
+Scenario: Verify if dropdown option can be selected by value with custom timeout
+	Given Default page is opened
+	When I click "dropdown" link
+	And I see page Dropdown List
+	When I select option with custom timeout '300' with value '2'
+	And I check selected option
+	Then Option with text "Option 2" is selected
 
 Scenario Outline: Key Presses Test
 	Given Default page is opened

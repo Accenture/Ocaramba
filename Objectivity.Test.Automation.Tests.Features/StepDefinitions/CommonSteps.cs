@@ -87,11 +87,32 @@ namespace Objectivity.Test.Automation.Tests.Features.StepDefinitions
             dropDownPage.SelectByText(text);
         }
 
+        [When(@"I select option with custom timeout '(.*)' with index '(.*)'")]
+        public void WhenISelectOptionWithIndex(int timeout, int index)
+        {
+            var dropDownPage = this.scenarioContext.Get<DropdownPage>("DropdownPage");
+            dropDownPage.SelectByIndexWithCustomTimeout(index, timeout);
+        }
+
         [When(@"I select option with index '(.*)'")]
         public void WhenISelectOptionWithIndex(int index)
         {
             var dropDownPage = this.scenarioContext.Get<DropdownPage>("DropdownPage");
             dropDownPage.SelectByIndex(index);
+        }
+
+        [When(@"I select option with value '(.*)'")]
+        public void WhenISelectOptionWithValue(string value)
+        {
+            var dropDownPage = this.scenarioContext.Get<DropdownPage>("DropdownPage");
+            dropDownPage.SelectByValue(value);
+        }
+
+        [When(@"I select option with custom timeout '(.*)' with value '(.*)'")]
+        public void WhenISelectOptionWithValue(int timeout, string value)
+        {
+            var dropDownPage = this.scenarioContext.Get<DropdownPage>("DropdownPage");
+            dropDownPage.SelectByValueWithCustomTimeout(value, timeout);
         }
 
         [Then(@"Option with text ""(.*)"" is selected")]
