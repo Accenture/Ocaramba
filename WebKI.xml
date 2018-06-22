@@ -107,6 +107,7 @@
   <HelpKINode Title="DateHelper.TomorrowDate property" Url="html/36c8be0a-a004-7065-792e-f4b9e2cd7e68.htm" />
   <HelpKINode Title="DateTime property" Url="html/95c2fdd9-0390-95ee-b4ff-c846b6ec8389.htm" />
   <HelpKINode Title="DeleteAllCookies method" Url="html/c8f7c30b-01db-0fe7-1476-f3f02735e5dc.htm" />
+  <HelpKINode Title="DeleteFile method" Url="html/a876e5ed-24a7-5c49-0dc5-5bbf351f86ea.htm" />
   <HelpKINode Title="DismissJavaScriptAlert method" Url="html/44fa81a6-6df6-33d3-18d6-ee6af5cf0b5b.htm" />
   <HelpKINode Title="Doc enumeration member" Url="html/24ea484b-208c-10a9-79d9-518c88c2b6e9.htm" />
   <HelpKINode Title="Docx enumeration member" Url="html/24ea484b-208c-10a9-79d9-518c88c2b6e9.htm" />
@@ -204,6 +205,7 @@
   </HelpKINode>
   <HelpKINode Title="FilesHelper.CopyFile method" Url="html/6916c4e2-c1a0-ae64-1e9c-02ab6642765e.htm" />
   <HelpKINode Title="FilesHelper.CountFiles method" Url="html/4e71690e-1128-1a7b-0908-5e283ac59cc8.htm" />
+  <HelpKINode Title="FilesHelper.DeleteFile method" Url="html/a876e5ed-24a7-5c49-0dc5-5bbf351f86ea.htm" />
   <HelpKINode Title="FilesHelper.GetAllFiles method" Url="html/cdf63e37-43ea-cfc0-e841-28b8de8f4dca.htm" />
   <HelpKINode Title="FilesHelper.GetAllFilesFromAllSubFolders method" Url="html/61c53864-0f19-607a-5af9-d09ea5a84c87.htm" />
   <HelpKINode Title="FilesHelper.GetFileByName method" Url="html/622d6288-7cf5-57a9-9ef6-4a335c7aeae8.htm" />
