@@ -357,6 +357,11 @@ namespace Objectivity.Test.Automation.Common.Extensions
             var wrappedElement = webElement as IWrapsDriver;
             if (wrappedElement == null)
             {
+                if (BaseConfiguration.EnableEventFiringWebDriver)
+                {
+                    return ((IWrapsElement)webElement).WrappedElement.ToDriver();
+                }
+
                 return (IWebDriver)webElement;
             }
 

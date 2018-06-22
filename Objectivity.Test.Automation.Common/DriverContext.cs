@@ -328,6 +328,7 @@ namespace Objectivity.Test.Automation.Common
 
                 if (BaseConfiguration.ChromePath != null)
                 {
+                    Logger.Trace(CultureInfo.CurrentCulture, "Setting Chrome Path {0}", BaseConfiguration.ChromePath);
                     options.BinaryLocation = BaseConfiguration.ChromePath;
                 }
 
@@ -337,6 +338,7 @@ namespace Objectivity.Test.Automation.Common
                     // loop through all of them
                     for (var i = 0; i < chromeArguments.Count; i++)
                     {
+                        Logger.Trace(CultureInfo.CurrentCulture, "Setting Chrome Arguments {0}", chromeArguments.GetKey(i));
                         options.AddArgument(chromeArguments.GetKey(i));
                     }
                 }
@@ -504,6 +506,8 @@ namespace Objectivity.Test.Automation.Common
                         fireFoxOptionsLegacy.Proxy = this.CurrentProxy();
                     }
 
+                    fireFoxOptionsLegacy = this.AddFirefoxArguments(fireFoxOptionsLegacy);
+
                     this.driver = new FirefoxDriver(this.SetDriverOptions(fireFoxOptionsLegacy));
                     break;
                 case BrowserType.FirefoxPortable:
@@ -514,6 +518,8 @@ namespace Objectivity.Test.Automation.Common
                     {
                         fireFoxOptions.Proxy = this.CurrentProxy();
                     }
+
+                    fireFoxOptions = this.AddFirefoxArguments(fireFoxOptions);
 
                     this.driver = new FirefoxDriver(this.SetDriverOptions(fireFoxOptions));
                     break;
@@ -828,6 +834,24 @@ namespace Objectivity.Test.Automation.Common
             {
                 throw new NotSupportedException("Use command line to setup proxy");
             }
+        }
+
+        private FirefoxOptions AddFirefoxArguments(FirefoxOptions option)
+        {
+            var firefoxArguments = ConfigurationManager.GetSection("FirefoxArguments") as NameValueCollection;
+
+            // if there are any arguments
+            if (firefoxArguments != null)
+            {
+                // loop through all of them
+                for (var i = 0; i < firefoxArguments.Count; i++)
+                {
+                    Logger.Trace(CultureInfo.CurrentCulture, "Setting FireFox Arguments {0}", firefoxArguments.GetKey(i));
+                    option.AddArgument(firefoxArguments.GetKey(i));
+                }
+            }
+
+            return option;
         }
     }
 }

@@ -62,13 +62,11 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
-    <Reference Include="WebDriver, Version=3.11.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Selenium.WebDriver.3.11.0\lib\net45\WebDriver.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="WebDriver, Version=3.12.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Selenium.WebDriver.3.12.1\lib\net45\WebDriver.dll</HintPath>
     </Reference>
-    <Reference Include="WebDriver.Support, Version=3.11.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Selenium.Support.3.11.0\lib\net45\WebDriver.Support.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="WebDriver.Support, Version=3.12.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Selenium.Support.3.12.1\lib\net45\WebDriver.Support.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -76,6 +74,7 @@
     <Compile Include="PageObjects\TheInternet\BrokenImagesPage.cs" />
     <Compile Include="PageObjects\TheInternet\DynamicControlsPage.cs" />
     <Compile Include="PageObjects\TheInternet\DynamicLoadingPage.cs" />
+    <Compile Include="PageObjects\TheInternet\TablesPage.cs" />
     <Compile Include="PageObjects\TheInternet\HttpCode200Page.cs" />
     <Compile Include="PageObjects\TheInternet\JavaScriptOnLoadPage.cs" />
     <Compile Include="PageObjects\TheInternet\ShiftingContentPage.cs" />

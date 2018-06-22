@@ -133,6 +133,12 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             return new NestedFramesPage(this.DriverContext);
         }
 
+        public TablesPage GoToTablesPage()
+        {
+            this.Driver.GetElement(this.linkLocator.Format("tables")).Click();
+            return new TablesPage(this.DriverContext);
+        }
+
         public CheckboxesPage GoToCheckboxesPage()
         {
             this.Driver.GetElement(this.linkLocator.Format("checkboxes")).Click();

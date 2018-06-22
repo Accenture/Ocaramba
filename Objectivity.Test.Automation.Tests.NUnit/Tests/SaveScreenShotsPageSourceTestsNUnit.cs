@@ -58,6 +58,8 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
         public void SaveSourcePageTest()
         {
             var basicAuthPage = new InternetPage(this.DriverContext).OpenHomePageWithUserCredentials().GoToBasicAuthPage();
+            var name = this.DriverContext.TestTitle + FilesHelper.ReturnFileExtension(FileType.Html);
+            FilesHelper.DeleteFile(name, this.DriverContext.PageSourceFolder);
             var pageSourceNumber = FilesHelper.CountFiles(this.DriverContext.PageSourceFolder, FileType.Html);
             Assert.IsNotNull(basicAuthPage.SaveSourcePage());
             basicAuthPage.CheckIfPageSourceSaved();

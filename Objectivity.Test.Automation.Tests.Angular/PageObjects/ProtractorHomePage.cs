@@ -35,7 +35,7 @@ namespace Objectivity.Test.Automation.Tests.Angular.PageObjects
 
         public ProtractorHomePage ClickQuickStart()
         {
-            this.Driver.GetElement(this.QuickStart).Click();
+            this.Driver.GetElement(this.QuickStart).JavaScriptClick();
             return this;
         }
 

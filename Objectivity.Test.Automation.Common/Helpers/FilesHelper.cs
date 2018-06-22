@@ -361,11 +361,11 @@ namespace Objectivity.Test.Automation.Common.Helpers
 
             if (checkSize)
             {
-                Logger.Debug("Checking if size of last file > 0 bytes");
-                timeoutMessage = "Checking if size of last file > 0 bytes";
+                Logger.Debug("Checking if size of last file of given type {0} > 0 bytes", type);
+                timeoutMessage = string.Format(CultureInfo.CurrentCulture, "Checking if size of last file of given type {0} > 0 bytes", type);
 
                 WaitHelper.Wait(
-                    () => GetLastFile(folder).Length > 0, TimeSpan.FromSeconds(waitTime), TimeSpan.FromSeconds(1), timeoutMessage);
+                    () => GetLastFile(folder, type).Length > 0, TimeSpan.FromSeconds(waitTime), TimeSpan.FromSeconds(1), timeoutMessage);
             }
         }
 
@@ -524,9 +524,11 @@ namespace Objectivity.Test.Automation.Common.Helpers
 
             newName = NameHelper.ShortenFileName(subFolder, newName, "_", 255);
 
-            if (File.Exists(newName))
+            string fullPath = Path.Combine(subFolder, newName);
+
+            if (File.Exists(fullPath))
             {
-                File.Delete(newName);
+                File.Delete(fullPath);
             }
 
             // Use ProcessStartInfo class
@@ -598,6 +600,24 @@ namespace Objectivity.Test.Automation.Common.Helpers
             Process.Start(cmdsi);
             WaitHelper.Wait(() => File.Exists(newSubFolder + Separator + newName), TimeSpan.FromSeconds(waitTime), TimeSpan.FromSeconds(1), timeoutMessage);
             return newName;
+        }
+
+        /// <summary>
+        /// Delete file in given folder if exists.
+        /// </summary>
+        /// <param name="name">The name of file.</param>
+        /// <param name="subFolder">The subFolder.</param>
+        /// <example>How to use it: <code>
+        /// FilesHelper.DeleteFile("filename.txt", this.DriverContext.DownloadFolder);
+        /// </code></example>
+        public static void DeleteFile(string name, string subFolder)
+        {
+            string fullPath = Path.Combine(subFolder, name);
+
+            if (File.Exists(fullPath))
+            {
+                File.Delete(fullPath);
+            }
         }
 
         /// <summary>
