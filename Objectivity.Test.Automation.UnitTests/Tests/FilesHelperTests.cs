@@ -40,7 +40,7 @@ namespace Objectivity.Test.Automation.UnitTests.Tests
             var files = FilesHelper.GetAllFilesFromAllSubFolders(TestContext.CurrentContext.TestDirectory,
                 "Common.dll");
             Assert.IsTrue(files.Count > 0);
-            File.Create("testfile.txt");
+            File.Create(TestContext.CurrentContext.TestDirectory + "\\" + "testfile.txt");
 
         }
 
