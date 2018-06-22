@@ -69,6 +69,8 @@ namespace Objectivity.Test.Automation.UnitTests
         {
             this.DriverContext.CurrentDirectory = TestContext.CurrentContext.TestDirectory;
             this.DriverContext.Start();
+            this.DriverContext.WindowMaximize();
+            this.DriverContext.DeleteAllCookies();
         }
 
         /// <summary>
