@@ -131,6 +131,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit.DataDriven
 
                 while (line != null)
                 {
+                    string testCaseName;
                     line = sr.ReadLine();
                     if (line != null)
                     {
@@ -145,32 +146,25 @@ namespace Objectivity.Test.Automation.Tests.NUnit.DataDriven
                             testParams.Add(columns[i], split[i]);
                         }
 
-                        if (diffParam != null && diffParam.Any())
+                        try
                         {
-                            try
-                            {
-                                testName = TestCaseName(diffParam, testParams, testName);
-                            }
-                            catch (DataDrivenReadException e)
-                            {
-                                throw new DataDrivenReadException(
-                                    string.Format(
-                                        " Exception while reading Csv Data Driven file\n searched key '{0}' not found \n for test {1} in file '{2}' at row {3}",
+                            testCaseName = TestCaseName(diffParam, testParams, testName);
+                        }
+                        catch (DataDrivenReadException e)
+                        {
+                            throw new DataDrivenReadException(
+                            string.Format(
+                                       " Exception while reading Csv Data Driven file\n searched key '{0}' not found \n for test {1} in file '{2}' at row {3}",
                                         e.Message,
                                         testName,
                                         file,
                                         row));
-                            }
-                        }
-                        else
-                        {
-                            testName = testName + "_row(" + row + ")";
                         }
 
                         row = row + 1;
 
                         var data = new TestCaseData(testParams);
-                        data.SetName(testName);
+                        data.SetName(testCaseName);
                         yield return data;
                     }
                 }
@@ -311,8 +305,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit.DataDriven
             {
                 foreach (var p in diffParam)
                 {
-                    string keyValue;
-                    bool keyFlag = testParams.TryGetValue(p, out keyValue);
+                    bool keyFlag = testParams.TryGetValue(p, out var keyValue);
 
                     if (keyFlag)
                     {
