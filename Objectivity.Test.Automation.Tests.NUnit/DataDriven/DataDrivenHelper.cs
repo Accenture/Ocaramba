@@ -115,7 +115,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit.DataDriven
         ///  return DataDrivenHelper.ReadDataDriveFileCsv(path, new[] { "user", "password" }, "credentialCsv");
         ///  }
         /// </code></example>
-        public static IEnumerable<TestCaseData> ReadDataDriveFileCsv(string file, string[] diffParam, [Optional] string testName)
+        public static IEnumerable<TestCaseData> ReadDataDriveFileCsv(string file, string[] diffParam, string testName)
         {
             using (var fs = File.OpenRead(file))
             using (var sr = new StreamReader(fs))
