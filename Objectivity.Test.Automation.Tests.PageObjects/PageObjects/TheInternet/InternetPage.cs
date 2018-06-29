@@ -193,6 +193,12 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             return new FloatingMenuPage(this.DriverContext);
         }
 
+        public DragAndDropPage GoToDragAndDropPage()
+        {
+            this.Driver.GetElement(this.linkLocator.Format("drag_and_drop")).Click();
+            return new DragAndDropPage(this.DriverContext);
+        }
+
         public void ChangeBasicAuthLink(string newAttributeValue)
         {
             var element = this.Driver.GetElement(this.basicAuthLink);

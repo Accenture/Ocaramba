@@ -311,6 +311,53 @@ namespace Objectivity.Test.Automation.Common.Extensions
         }
 
         /// <summary>
+        /// Javascript drag and drop function.
+        /// </summary>
+        /// <param name="webDriver">The WebDriver</param>
+        /// <param name="source">Source element</param>
+        /// <param name="destination">Destination element</param>
+        public static void DragAndDropJs(this IWebDriver webDriver, IWebElement source, IWebElement destination)
+        {
+            var script =
+                "function createEvent(typeOfEvent) { " +
+                   "var event = document.createEvent(\"CustomEvent\"); " +
+                   "event.initCustomEvent(typeOfEvent, true, true, null); " +
+                   "event.dataTransfer = { " +
+                            "data: { }, " +
+                        "setData: function(key, value) { " +
+                                "this.data[key] = value; " +
+                            "}, " +
+                        "getData: function(key) { " +
+                               "return this.data[key]; " +
+                            "} " +
+                        "}; " +
+                    "return event; " +
+                        "} " +
+                        "function dispatchEvent(element, event, transferData) { " +
+                            "if (transferData !== undefined)" +
+                            "{" +
+                        "event.dataTransfer = transferData;" +
+                        "}" +
+                    "if (element.dispatchEvent) {" +
+                        "element.dispatchEvent(event);" +
+                        "} else if (element.fireEvent) {" +
+                        "element.fireEvent(\"on\" + event.type, event);" +
+                        "}" +
+                    "}" +
+                    "function simulateHTML5DragAndDrop(element, target)" +
+                    "{" +
+                        "var dragStartEvent = createEvent('dragstart');" +
+                        "dispatchEvent(element, dragStartEvent);" +
+                        "var dropEvent = createEvent('drop');" +
+                        "dispatchEvent(target, dropEvent, dragStartEvent.dataTransfer);" +
+                        "var dragEndEvent = createEvent('dragend');" +
+                        "dispatchEvent(element, dragEndEvent, dropEvent.dataTransfer);" +
+                    "} simulateHTML5DragAndDrop(arguments[0], arguments[1])";
+
+            ((IJavaScriptExecutor)webDriver).ExecuteScript(script, source, destination);
+        }
+
+        /// <summary>
         /// Approves the trust certificate for internet explorer.
         /// </summary>
         /// <param name="webDriver">The web driver.</param>
