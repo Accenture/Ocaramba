@@ -159,11 +159,20 @@ namespace Objectivity.Test.Automation.Common.Helpers
 
             var image = new Rectangle(locationX, locationY, elementWidth, elementHeight);
             var importFile = new Bitmap(filePath);
-            var newFilePath = Path.Combine(folder, screenshotName + ".jpeg");
-            var cloneFile = (Bitmap)importFile.Clone(image, importFile.PixelFormat);
+            string newFilePath;
+            Bitmap cloneFile;
+            try
+            {
+                newFilePath = Path.Combine(folder, screenshotName + ".jpeg");
+                cloneFile = (Bitmap)importFile.Clone(image, importFile.PixelFormat);
+            }
+            finally
+            {
+            importFile.Dispose();
+            }
+
             Logger.Debug(CultureInfo.CurrentCulture, "Saving screenshot of element {0}", newFilePath);
             cloneFile.Save(newFilePath);
-            importFile.Dispose();
             File.Delete(filePath);
             return newFilePath;
         }
