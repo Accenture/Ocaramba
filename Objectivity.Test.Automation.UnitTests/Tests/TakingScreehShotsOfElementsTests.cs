@@ -21,6 +21,7 @@
 // </license>
 
 using NUnit.Framework;
+using Objectivity.Test.Automation.Common;
 using Objectivity.Test.Automation.Tests.NUnit;
 using Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet;
 
@@ -28,19 +29,27 @@ namespace Objectivity.Test.Automation.UnitTests.Tests
 {
     [TestFixture]
     [Parallelizable(ParallelScope.Fixtures)]
-    [Category("JavaScriptError")]
-    public class JavaScriptAlertsTestsNUnit : ProjectTestBase
+    [Category("TakingScreehShots")]
+    public class TakingScreehShotsOfElementsTests : ProjectTestBase
     {
         [Test]
-        public void LogJavaScriptErrorTest()
+        public void TakingScreehShotsOfElementInIFrameTest()
         {
             var internetPage = new InternetPage(this.DriverContext).OpenHomePage();
-            internetPage.GoToJavaScriptOnLoad();
+            internetPage.GoToIFramePage();
+            
+            IFramePage page = new IFramePage(this.DriverContext);
+            page.TakeScreenShotsOfTextInIFrame(TestContext.CurrentContext.TestDirectory + BaseConfiguration.ScreenShotFolder, "TextWithinIFrame");
+        }
 
-            if (!this.DriverContext.LogJavaScriptErrors())
-            {
-                Assert.Fail("JavaScript errors were not found.");
-            }
+        [Test]
+        public void TakingScreehShotsOfElementTest()
+        {
+            var internetPage = new InternetPage(this.DriverContext).OpenHomePage();
+            internetPage.GoToIFramePage();
+
+            IFramePage page = new IFramePage(this.DriverContext);
+            page.TakeScreenShotsOfMenu(TestContext.CurrentContext.TestDirectory + BaseConfiguration.ScreenShotFolder, "MenuOutSideTheIFrame");
         }
     }
 }

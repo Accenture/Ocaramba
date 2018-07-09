@@ -75,6 +75,7 @@
     <Compile Include="PageObjects\TheInternet\DragAndDropPage.cs" />
     <Compile Include="PageObjects\TheInternet\DynamicControlsPage.cs" />
     <Compile Include="PageObjects\TheInternet\DynamicLoadingPage.cs" />
+    <Compile Include="PageObjects\TheInternet\IFramePage.cs" />
     <Compile Include="PageObjects\TheInternet\TablesPage.cs" />
     <Compile Include="PageObjects\TheInternet\HttpCode200Page.cs" />
     <Compile Include="PageObjects\TheInternet\JavaScriptOnLoadPage.cs" />

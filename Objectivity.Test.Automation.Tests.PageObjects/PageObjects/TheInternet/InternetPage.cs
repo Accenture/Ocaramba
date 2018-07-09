@@ -133,6 +133,13 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             return new NestedFramesPage(this.DriverContext);
         }
 
+        public IFramePage GoToIFramePage()
+        {
+            this.Driver.GetElement(this.linkLocator.Format("frames")).Click();
+            this.Driver.GetElement(this.linkLocator.Format("iframe")).Click();
+            return new IFramePage(this.DriverContext);
+        }
+
         public TablesPage GoToTablesPage()
         {
             this.Driver.GetElement(this.linkLocator.Format("tables")).Click();

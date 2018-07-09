@@ -30,8 +30,9 @@ namespace Objectivity.Test.Automation.Common.Helpers
     using System.IO;
     using System.Text.RegularExpressions;
     using System.Windows.Forms;
-
     using NLog;
+    using Objectivity.Test.Automation.Common.Extensions;
+    using OpenQA.Selenium;
 
     /// <summary>
     /// Custom screenshot solution
@@ -98,6 +99,73 @@ namespace Objectivity.Test.Automation.Common.Helpers
             }
 
             return null;
+        }
+
+        /// <summary>
+        /// Takes screen shot of specific element.
+        /// </summary>
+        /// <param name="element">Element to take screenshot</param>
+        /// <param name="folder">Folder to save screenshot</param>
+        /// <param name="screenshotName">Name of screenshot</param>
+        /// <returns>Full path to taken screenshot</returns>
+        /// <example>How to use it: <code>
+        /// var el = this.Driver.GetElement(this.menu);
+        /// TakeScreenShot.TakeScreenShotOfElement(el, TestContext.CurrentContext.TestDirectory + BaseConfiguration.ScreenShotFolder, "MenuOutSideTheIFrame");
+        /// </code></example>
+        public static string TakeScreenShotOfElement(IWebElement element, string folder, string screenshotName)
+        {
+            Logger.Debug("Taking screenhot of element not within iframe");
+            return TakeScreenShotOfElement(0, 0, element, folder, screenshotName);
+        }
+
+        /// <summary>
+        /// Takes screen shot of specific element within iframe.
+        /// </summary>
+        /// <param name="iframeLocationX">X coordinate of iframe</param>
+        /// <param name="iframeLocationY">Y coordinate of iframe</param>
+        /// <param name="element">Element to take screenshot</param>
+        /// <param name="folder">Folder to save screenshot</param>
+        /// <param name="screenshotName">Name of screenshot</param>
+        /// <returns>Full path to taken screenshot</returns>
+        /// <example>How to use it: <code>
+        /// var iFrame = this.Driver.GetElement(this.iframe);
+        /// int x = iFrame.Location.X;
+        /// int y = iFrame.Location.Y;
+        /// this.Driver.SwitchTo().Frame(0);
+        /// var el = this.Driver.GetElement(this.elelemtInIFrame);
+        /// TakeScreenShot.TakeScreenShotOfElement(el, TestContext.CurrentContext.TestDirectory + BaseConfiguration.ScreenShotFolder, "MenuOutSideTheIFrame");
+        /// </code></example>
+        public static string TakeScreenShotOfElement(int iframeLocationX, int iframeLocationY, IWebElement element, string folder, string screenshotName)
+        {
+            Logger.Debug("Taking screenhot of iframe {0}:{1}", iframeLocationX, iframeLocationY);
+            var locationX = iframeLocationX;
+            var locationY = iframeLocationY;
+
+            var driver = element.ToDriver();
+
+            var screenshotDriver = (ITakesScreenshot)driver;
+            var screenshot = screenshotDriver.GetScreenshot();
+            var filePath = Path.Combine(folder, DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss-fff", CultureInfo.CurrentCulture) + "temporary_fullscreen.jpeg");
+            Logger.Debug(CultureInfo.CurrentCulture, "Taking full screenshot {0}", filePath);
+            screenshot.SaveAsFile(filePath, ScreenshotImageFormat.Jpeg);
+
+            locationX = element.Location.X + locationX;
+            locationY = element.Location.Y + locationY;
+
+            var elementWidth = element.Size.Width;
+            var elementHeight = element.Size.Height;
+
+            Logger.Debug(CultureInfo.CurrentCulture, "Taking screenhot of element {0}:{1}:{2}:{3}", locationX, locationY, elementWidth, elementHeight);
+
+            var image = new Rectangle(locationX, locationY, elementWidth, elementHeight);
+            var importFile = new Bitmap(filePath);
+            var newFilePath = Path.Combine(folder, screenshotName + ".jpeg");
+            var cloneFile = (Bitmap)importFile.Clone(image, importFile.PixelFormat);
+            Logger.Debug(CultureInfo.CurrentCulture, "Saving screenshot of element {0}", newFilePath);
+            cloneFile.Save(newFilePath);
+            importFile.Dispose();
+            File.Delete(filePath);
+            return newFilePath;
         }
     }
 }
