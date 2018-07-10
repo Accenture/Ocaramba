@@ -189,12 +189,27 @@ test_script:
 
     7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.Features\bin\Release\*.log
 
+    echo '********************************************Unit tests for Firefox********************************************'
+    
+    cd .\\scripts
+    
+    .\set_AppConfig_for_tests.ps1 "..\Objectivity.Test.Automation.UnitTests\bin\Release" "Objectivity.Test.Automation.UnitTests.config" "//appSettings" "browser" "Firefox"
+
+    cd ..
+
+    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Objectivity.Test.Automation.UnitTests\bin\Release\Objectivity.Test.Automation.UnitTests.dll --where:cat=TakingScreehShots --result=myresults.xml`;format=AppVeyor" -filter:"+[Objectivity.Test.Automation.Common]*" -register:user -output:opencoverCoverage.xml
+
+    if($lastexitcode -ne 0)
+      {
+       echo $lastexitcode
+      }
 
     7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.UnitTests\bin\Release\**\*.png
 
     7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.UnitTests\bin\Release\**\*.html
 
     7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.UnitTests\bin\Release\*.log
+
 
     echo '********************************************MSTest tests********************************************'
 
