@@ -137,7 +137,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// </code></example>
         public static string TakeScreenShotOfElement(int iframeLocationX, int iframeLocationY, IWebElement element, string folder, string screenshotName)
         {
-            Logger.Debug("Taking screenhot of iframe {0}:{1}", iframeLocationX, iframeLocationY);
+            Logger.Debug("Taking screenhot of iframe LocationX:{0} LocationY:{1}", iframeLocationX, iframeLocationY);
             var locationX = iframeLocationX;
             var locationY = iframeLocationY;
 
@@ -155,7 +155,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
             var elementWidth = element.Size.Width;
             var elementHeight = element.Size.Height;
 
-            Logger.Debug(CultureInfo.CurrentCulture, "Taking screenhot of element {0}:{1}:{2}:{3}", locationX, locationY, elementWidth, elementHeight);
+            Logger.Debug(CultureInfo.CurrentCulture, "Cutting out screenhot of element locationX:{0} locationY:{1} elementWidth:{2} elementHeight:{3}", locationX, locationY, elementWidth, elementHeight);
 
             var image = new Rectangle(locationX, locationY, elementWidth, elementHeight);
             var importFile = new Bitmap(filePath);
