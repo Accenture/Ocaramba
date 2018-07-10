@@ -193,7 +193,7 @@ test_script:
     
     cd .\\scripts
     
-    .\set_AppConfig_for_tests.ps1 "..\Objectivity.Test.Automation.UnitTests\bin\Release" "Objectivity.Test.Automation.UnitTests.config" "//appSettings" "browser" "Firefox"
+    .\set_AppConfig_for_tests.ps1 "..\Objectivity.Test.Automation.UnitTests\bin\Release" "Objectivity.Test.Automation.Common.dll.config" "//appSettings" "browser" "Firefox"
 
     cd ..
 
