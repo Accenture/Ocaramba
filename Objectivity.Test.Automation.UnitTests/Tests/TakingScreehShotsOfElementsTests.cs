@@ -39,7 +39,7 @@ namespace Objectivity.Test.Automation.UnitTests.Tests
             internetPage.GoToIFramePage();
             
             IFramePage page = new IFramePage(this.DriverContext);
-            page.TakeScreenShotsOfTextInIFrame(TestContext.CurrentContext.TestDirectory + BaseConfiguration.ScreenShotFolder, "TextWithinIFrame");
+            page.TakeScreenShotsOfTextInIFrame(TestContext.CurrentContext.TestDirectory + BaseConfiguration.ScreenShotFolder, "TextWithinIFrame" + BaseConfiguration.TestBrowser);
         }
 
         [Test]
@@ -49,7 +49,7 @@ namespace Objectivity.Test.Automation.UnitTests.Tests
             internetPage.GoToIFramePage();
 
             IFramePage page = new IFramePage(this.DriverContext);
-            page.TakeScreenShotsOfMenu(TestContext.CurrentContext.TestDirectory + BaseConfiguration.ScreenShotFolder, "MenuOutSideTheIFrame");
+            page.TakeScreenShotsOfMenu(TestContext.CurrentContext.TestDirectory + BaseConfiguration.ScreenShotFolder, "MenuOutSideTheIFrame" + BaseConfiguration.TestBrowser);
         }
     }
 }

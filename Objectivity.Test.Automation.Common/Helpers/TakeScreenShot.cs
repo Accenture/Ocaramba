@@ -149,13 +149,21 @@ namespace Objectivity.Test.Automation.Common.Helpers
             Logger.Debug(CultureInfo.CurrentCulture, "Taking full screenshot {0}", filePath);
             screenshot.SaveAsFile(filePath, ScreenshotImageFormat.Jpeg);
 
-            locationX = element.Location.X + locationX;
-            locationY = element.Location.Y + locationY;
+            if (BaseConfiguration.TestBrowser == BrowserType.Chrome)
+            {
+                locationX = element.Location.X + locationX;
+                locationY = element.Location.Y + locationY;
+            }
+            else
+            {
+                locationX = element.Location.X;
+                locationY = element.Location.Y;
+            }
 
             var elementWidth = element.Size.Width;
             var elementHeight = element.Size.Height;
 
-            Logger.Debug(CultureInfo.CurrentCulture, "Cutting out screenhot of element locationX:{0} locationY:{1} elementWidth:{2} elementHeight:{3}", locationX, locationY, elementWidth, elementHeight);
+            Logger.Debug(CultureInfo.CurrentCulture, "Cutting out screenshot of element locationX:{0} locationY:{1} elementWidth:{2} elementHeight:{3}", locationX, locationY, elementWidth, elementHeight);
 
             var image = new Rectangle(locationX, locationY, elementWidth, elementHeight);
             var importFile = new Bitmap(filePath);
