@@ -145,9 +145,9 @@ namespace Objectivity.Test.Automation.Common.Helpers
 
             var screenshotDriver = (ITakesScreenshot)driver;
             var screenshot = screenshotDriver.GetScreenshot();
-            var filePath = Path.Combine(folder, DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss-fff", CultureInfo.CurrentCulture) + "temporary_fullscreen.jpeg");
+            var filePath = Path.Combine(folder, DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss-fff", CultureInfo.CurrentCulture) + "temporary_fullscreen.png");
             Logger.Debug(CultureInfo.CurrentCulture, "Taking full screenshot {0}", filePath);
-            screenshot.SaveAsFile(filePath, ScreenshotImageFormat.Jpeg);
+            screenshot.SaveAsFile(filePath, ScreenshotImageFormat.Png);
 
             if (BaseConfiguration.TestBrowser == BrowserType.Chrome)
             {
@@ -171,7 +171,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
             Bitmap cloneFile;
             try
             {
-                newFilePath = Path.Combine(folder, screenshotName + ".jpeg");
+                newFilePath = Path.Combine(folder, screenshotName + ".png");
                 cloneFile = (Bitmap)importFile.Clone(image, importFile.PixelFormat);
             }
             finally

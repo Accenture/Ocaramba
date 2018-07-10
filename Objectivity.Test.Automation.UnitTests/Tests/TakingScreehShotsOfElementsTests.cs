@@ -20,6 +20,7 @@
 //     SOFTWARE.
 // </license>
 
+using ImageMagick;
 using NUnit.Framework;
 using Objectivity.Test.Automation.Common;
 using Objectivity.Test.Automation.Tests.NUnit;
@@ -39,7 +40,24 @@ namespace Objectivity.Test.Automation.UnitTests.Tests
             internetPage.GoToIFramePage();
             
             IFramePage page = new IFramePage(this.DriverContext);
-            page.TakeScreenShotsOfTextInIFrame(TestContext.CurrentContext.TestDirectory + BaseConfiguration.ScreenShotFolder, "TextWithinIFrame" + BaseConfiguration.TestBrowser);
+            var path = page.TakeScreenShotsOfTextInIFrame(TestContext.CurrentContext.TestDirectory + BaseConfiguration.ScreenShotFolder, "TextWithinIFrame" + BaseConfiguration.TestBrowser);
+            var path2 = TestContext.CurrentContext.TestDirectory + BaseConfiguration.ScreenShotFolder + "\\TextWithinIFrameChromeError.png";
+            bool flag = true;
+            using (var img1 = new MagickImage(path))
+            {
+                using (var img2 = new MagickImage(path2))
+                {
+                    using (var imgDiff = new MagickImage())
+                    {
+                        img1.Compose = CompositeOperator.Src;
+                        double diff = img1.Compare(img2, new ErrorMetric(), imgDiff);
+                        flag = img1.Equals(img2);
+                        imgDiff.Write(TestContext.CurrentContext.TestDirectory + BaseConfiguration.ScreenShotFolder + "\\TextWithinIFrameDIFF.png");
+                    }
+                }
+            }
+
+            Assert.IsFalse(flag);
         }
 
         [Test]

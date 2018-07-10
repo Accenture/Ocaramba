@@ -43,7 +43,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
         {
         }
 
-        public void TakeScreenShotsOfTextInIFrame(string folder, string name)
+        public string TakeScreenShotsOfTextInIFrame(string folder, string name)
         {
             Logger.Info(CultureInfo.CurrentCulture, "Take Screen Shots");
             var iFrame = this.Driver.GetElement(this.iframe);
@@ -51,14 +51,14 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             int y = iFrame.Location.Y;
             this.Driver.SwitchTo().Frame(0);
             var el = this.Driver.GetElement(this.elelemtInIFrame);
-            TakeScreenShot.TakeScreenShotOfElement(x, y, el, folder, name);
+            return TakeScreenShot.TakeScreenShotOfElement(x, y, el, folder, name);
         }
 
-        public void TakeScreenShotsOfMenu(string folder, string name)
+        public string TakeScreenShotsOfMenu(string folder, string name)
         {
             Logger.Info(CultureInfo.CurrentCulture, "Take Screen Shots");
             var el = this.Driver.GetElement(this.menu);
-            TakeScreenShot.TakeScreenShotOfElement(el, folder, name);
+            return TakeScreenShot.TakeScreenShotOfElement(el, folder, name);
         }
     }
 }
