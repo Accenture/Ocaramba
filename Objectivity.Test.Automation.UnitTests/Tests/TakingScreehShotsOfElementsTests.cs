@@ -50,7 +50,7 @@ namespace Objectivity.Test.Automation.UnitTests.Tests
                     using (var imgDiff = new MagickImage())
                     {
                         img1.Compose = CompositeOperator.Src;
-                        double diff = img1.Compare(img2, new ErrorMetric(), imgDiff);
+                        img1.Compare(img2, new ErrorMetric(), imgDiff);
                         flag = img1.Equals(img2);
                         imgDiff.Write(TestContext.CurrentContext.TestDirectory + BaseConfiguration.ScreenShotFolder + "\\" + BaseConfiguration.TestBrowser + "TextWithinIFrameDIFF.png");
                     }
