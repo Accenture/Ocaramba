@@ -32,5 +32,7 @@
 	<file src="..\Objectivity.Test.Automation.Tests.NUnit\App.config" target="content" />
 	<file src="..\Objectivity.Test.Automation.Tests.PageObjects\ProjectPageBase.cs" target="content" />
 	<file src="..\Objectivity.Test.Automation.Tests.NUnit\DataDriven\DataDrivenHelper.cs" target="content\DataDriven" />
+	<file src="..\Objectivity.Test.Automation.Tests.NUnit\DataDriven\TestData.cs" target="content\DataDriven" />
+	<file src="..\Objectivity.Test.Automation.Tests.NUnit\ProjectBaseConfiguration.cs" target="content" />
   </files>
 </package>
