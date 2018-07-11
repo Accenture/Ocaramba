@@ -27,13 +27,14 @@ namespace Objectivity.Test.Automation.Tests.NUnit
     using System.Reflection;
     using Common;
     using Common.Helpers;
+    using global::NUnit.Framework;
 
     /// <summary>
     /// SeleniumConfiguration that consume app.config file
     /// </summary>
     public static class ProjectBaseConfiguration
     {
-        private static readonly string CurrentDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+        private static readonly string CurrentDirectory = TestContext.CurrentContext.TestDirectory;
 
         /// <summary>
         /// Gets the data driven file.

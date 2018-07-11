@@ -133,6 +133,13 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             return new NestedFramesPage(this.DriverContext);
         }
 
+        public IFramePage GoToIFramePage()
+        {
+            this.Driver.GetElement(this.linkLocator.Format("frames")).Click();
+            this.Driver.GetElement(this.linkLocator.Format("iframe")).Click();
+            return new IFramePage(this.DriverContext);
+        }
+
         public TablesPage GoToTablesPage()
         {
             this.Driver.GetElement(this.linkLocator.Format("tables")).Click();
@@ -191,6 +198,12 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
         {
             this.Driver.GetElement(this.linkLocator.Format("floating_menu")).Click();
             return new FloatingMenuPage(this.DriverContext);
+        }
+
+        public DragAndDropPage GoToDragAndDropPage()
+        {
+            this.Driver.GetElement(this.linkLocator.Format("drag_and_drop")).Click();
+            return new DragAndDropPage(this.DriverContext);
         }
 
         public void ChangeBasicAuthLink(string newAttributeValue)

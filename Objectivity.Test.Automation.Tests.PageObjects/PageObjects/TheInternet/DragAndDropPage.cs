@@ -1,4 +1,4 @@
-﻿// <copyright file="JavaScriptAlertsTestsNUnit.cs" company="Objectivity Bespoke Software Specialists">
+﻿// <copyright file="DragAndDropPage.cs" company="Objectivity Bespoke Software Specialists">
 // Copyright (c) Objectivity Bespoke Software Specialists. All rights reserved.
 // </copyright>
 // <license>
@@ -20,27 +20,32 @@
 //     SOFTWARE.
 // </license>
 
-using NUnit.Framework;
-using Objectivity.Test.Automation.Tests.NUnit;
-using Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet;
-
-namespace Objectivity.Test.Automation.UnitTests.Tests
+namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 {
-    [TestFixture]
-    [Parallelizable(ParallelScope.Fixtures)]
-    [Category("JavaScriptError")]
-    public class JavaScriptAlertsTestsNUnit : ProjectTestBase
-    {
-        [Test]
-        public void LogJavaScriptErrorTest()
-        {
-            var internetPage = new InternetPage(this.DriverContext).OpenHomePage();
-            internetPage.GoToJavaScriptOnLoad();
+    using Common;
+    using Common.Extensions;
+    using Objectivity.Test.Automation.Common.Types;
 
-            if (!this.DriverContext.LogJavaScriptErrors())
-            {
-                Assert.Fail("JavaScript errors were not found.");
-            }
+    public class DragAndDropPage : ProjectPageBase
+    {
+        private readonly ElementLocator boxA = new ElementLocator(Locator.Id, "column-a");
+        private readonly ElementLocator boxB = new ElementLocator(Locator.Id, "column-b");
+        private readonly ElementLocator boxBtext = new ElementLocator(Locator.XPath, "//div[@id='column-b']/header");
+
+        public DragAndDropPage(DriverContext driverContext)
+            : base(driverContext)
+        {
+        }
+
+        public DragAndDropPage MoveElementAtoElementB()
+        {
+           this.Driver.DragAndDropJs(this.Driver.GetElement(this.boxA), this.Driver.GetElement(this.boxB));
+           return this;
+        }
+
+        public bool IsElementAMovedToB()
+        {
+            return this.Driver.GetElement(this.boxBtext).Text.Equals("A");
         }
     }
 }

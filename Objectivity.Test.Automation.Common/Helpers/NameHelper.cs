@@ -88,5 +88,23 @@ namespace Objectivity.Test.Automation.Common.Helpers
 
             return fileName;
         }
+
+        /// <summary>
+        /// Remove all special characters except digit and letters.
+        /// </summary>
+        /// <param name="name">The string to remove special chracters.</param>
+        /// <returns>String with removed all special chracters</returns>
+        /// <example>How to use it: <code>
+        /// var name = NameHelper.RemoveSpecialCharacters("country/region");
+        /// </code></example>
+        public static string RemoveSpecialCharacters(string name)
+        {
+            Logger.Debug(CultureInfo.CurrentCulture, "Removing all special characters except digit and letters from '{0}'", name);
+            Regex rgx = new Regex("[^a-zA-Z0-9]");
+            name = rgx.Replace(name, string.Empty);
+            Logger.Debug(CultureInfo.CurrentCulture, "name without special characters: '{0}'", name);
+
+            return name;
+        }
     }
 }

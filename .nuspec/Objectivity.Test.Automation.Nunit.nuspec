@@ -23,6 +23,8 @@
 	  <dependency id="NUnit.Extension.NUnitV2ResultWriter" version="3.6.0" />
 	  <dependency id="NUnit.Extension.VSProjectLoader" version="3.7.0" />
 	  <dependency id="NUnit.Extension.TeamCityEventListener" version="1.0.3" />
+	  <dependency id="NPOI" version="2.3.0" />
+	  <dependency id="SharpZipLib" version="0.86.0" />
     </dependencies> 
   </metadata>
   <files>
@@ -30,5 +32,7 @@
 	<file src="..\Objectivity.Test.Automation.Tests.NUnit\App.config" target="content" />
 	<file src="..\Objectivity.Test.Automation.Tests.PageObjects\ProjectPageBase.cs" target="content" />
 	<file src="..\Objectivity.Test.Automation.Tests.NUnit\DataDriven\DataDrivenHelper.cs" target="content\DataDriven" />
+	<file src="..\Objectivity.Test.Automation.Tests.NUnit\DataDriven\TestData.cs" target="content\DataDriven" />
+	<file src="..\Objectivity.Test.Automation.Tests.NUnit\ProjectBaseConfiguration.cs" target="content" />
   </files>
 </package>

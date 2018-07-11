@@ -17,5 +17,13 @@ namespace Objectivity.Test.Automation.UnitTests.Tests
             Assert.AreEqual(255, (TestContext.CurrentContext.TestDirectory + text).Length);
         }
 
+        [Test()]
+        public void RemoveSpecialCharactersTest()
+        {
+            var name = "name$%//4324 name ^//";
+            name = NameHelper.RemoveSpecialCharacters(name);
+            Assert.AreEqual("name4324name", name);
+        }
+
     }
 }

@@ -34,6 +34,7 @@ namespace Objectivity.Test.Automation.UnitTests.Tests
             Assert.IsTrue(files.Count > 0);
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
         [Test()]
         public void GetAllFilesFromAllSubFoldersPrefixTest()
         {

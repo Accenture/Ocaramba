@@ -182,5 +182,16 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
             Assert.AreEqual("Smith", table[0][0]);
             Assert.AreEqual("edit delete", table[3][5]);
         }
+
+        [Test]
+        public void DragAndDropTest()
+        {
+            var dragAndDrop = new InternetPage(this.DriverContext)
+                .OpenHomePage()
+                .GoToDragAndDropPage()
+                .MoveElementAtoElementB();
+
+            Assert.IsTrue(dragAndDrop.IsElementAMovedToB(), "Element is not moved.");
+        }
     }
 }
