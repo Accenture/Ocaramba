@@ -116,6 +116,7 @@
     <HelpKINode Title="BaseConfiguration.DownloadFolder Property " Url="html/ac1824c3-e57d-b245-e27e-eae41c49fefd.htm" />
     <HelpKINode Title="DriverContext.DownloadFolder Property " Url="html/46a0e3d4-218d-2ae7-471d-0597e2010b07.htm" />
   </HelpKINode>
+  <HelpKINode Title="DragAndDropJs method" Url="html/69346fc1-09e9-3e0b-73c2-ccad3ec3eac2.htm" />
   <HelpKINode Title="Driver property">
     <HelpKINode Title="DriverContext.Driver Property " Url="html/b98f4da9-1193-06e0-89d6-3cc82e62aa0a.htm" />
     <HelpKINode Title="KendoGrid.Driver Property " Url="html/e426e55f-a64d-26b8-d70d-5ec042e4922e.htm" />
@@ -362,6 +363,7 @@
     <HelpKINode Title="methods" Url="html/5ee9401c-99de-6676-a5f2-3a0bf4615681.htm" />
   </HelpKINode>
   <HelpKINode Title="NameHelper.RandomName method" Url="html/9e5bee3b-7676-3dac-020e-c9306827cd01.htm" />
+  <HelpKINode Title="NameHelper.RemoveSpecialCharacters method" Url="html/5eab538c-4fa2-49d1-cc91-229114f6ca5c.htm" />
   <HelpKINode Title="NameHelper.ShortenFileName method" Url="html/dea15dcd-5c00-dd48-0964-505c658f8972.htm" />
   <HelpKINode Title="NavigateTo method" Url="html/1702a394-9e46-d38d-abac-816522dc2b64.htm" />
   <HelpKINode Title="None enumeration member">
@@ -462,6 +464,7 @@
   <HelpKINode Title="RandomName method" Url="html/9e5bee3b-7676-3dac-020e-c9306827cd01.htm" />
   <HelpKINode Title="RemoteWebDriver enumeration member" Url="html/fd8f95a4-1921-2ebe-a199-a6c1d3adcc8c.htm" />
   <HelpKINode Title="RemoteWebDriverHub property" Url="html/d8c0e0e3-fe56-c754-3448-1c36d8d28978.htm" />
+  <HelpKINode Title="RemoveSpecialCharacters method" Url="html/5eab538c-4fa2-49d1-cc91-229114f6ca5c.htm" />
   <HelpKINode Title="RenameFile method" Url="html/94bf5e76-e0d2-4546-74ca-c07d11ce7cb8.htm" />
   <HelpKINode Title="ReturnFileExtension method" Url="html/49a9e6c5-5bfa-de7d-4d92-c19a09a41f5f.htm" />
   <HelpKINode Title="Safari enumeration member" Url="html/fd8f95a4-1921-2ebe-a199-a6c1d3adcc8c.htm" />
@@ -567,6 +570,8 @@
   <HelpKINode Title="TakeScreenshot method" Url="html/d45a1b28-cb0b-ffab-6ee7-cf4a76d8f4c5.htm" />
   <HelpKINode Title="TakeScreenShot.DoIt method" Url="html/7b737e34-665d-473b-db45-c4e0afea7265.htm" />
   <HelpKINode Title="TakeScreenShot.Save method" Url="html/e825b701-75a4-97df-5e24-8fac345a9195.htm" />
+  <HelpKINode Title="TakeScreenShot.TakeScreenShotOfElement method" Url="html/afe6705c-aa6b-dba3-fe6b-e9075ad2db41.htm" />
+  <HelpKINode Title="TakeScreenShotOfElement method" Url="html/afe6705c-aa6b-dba3-fe6b-e9075ad2db41.htm" />
   <HelpKINode Title="TestBase class">
     <HelpKINode Title="TestBase Class" Url="html/56feabed-6c8e-cff2-aadc-c33d37f41bda.htm" />
     <HelpKINode Title="constructor" Url="html/98e2911e-35e2-035f-2e9a-9f192832872f.htm" />
@@ -637,6 +642,7 @@
     <HelpKINode Title="methods" Url="html/0872cc4d-63cc-c3d2-30e5-1f8debf56860.htm" />
   </HelpKINode>
   <HelpKINode Title="WebDriverExtensions.Actions method" Url="html/74057790-1ce7-6460-b6cb-527e4e3c74de.htm" />
+  <HelpKINode Title="WebDriverExtensions.DragAndDropJs method" Url="html/69346fc1-09e9-3e0b-73c2-ccad3ec3eac2.htm" />
   <HelpKINode Title="WebDriverExtensions.IsElementPresent method" Url="html/91aa6234-30e7-9f8c-4202-48141d302683.htm" />
   <HelpKINode Title="WebDriverExtensions.IsPageTitle method" Url="html/059da495-7686-8b48-88f2-5286c31dbf8b.htm" />
   <HelpKINode Title="WebDriverExtensions.JavaScriptAlert method" Url="html/f9a09a0f-559c-7de2-a2e3-1d8acd530947.htm" />
