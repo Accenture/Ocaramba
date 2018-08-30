@@ -50,7 +50,14 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 
         public string CountLinks()
         {
-            var count = this.Driver.GetElements(this.links).Count;
+            var count = this.Driver.GetElements(this.links, BaseConfiguration.ShortTimeout, e => e.Displayed && e.Enabled, 1).Count;
+            Logger.Info(CultureInfo.CurrentCulture, "Number of links on page '{0}'", count);
+            return count.ToString(CultureInfo.CurrentCulture);
+        }
+
+        public string CountLinksGetElementsBasic()
+        {
+            var count = this.Driver.GetElements(this.links, 3).Count;
             Logger.Info(CultureInfo.CurrentCulture, "Number of links on page '{0}'", count);
             return count.ToString(CultureInfo.CurrentCulture);
         }
