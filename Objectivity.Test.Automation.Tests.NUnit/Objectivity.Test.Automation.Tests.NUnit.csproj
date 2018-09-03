@@ -111,6 +111,7 @@
     <Compile Include="Tests\PerformanceTests1NUnit.cs" />
     <Compile Include="Tests\PerformanceTestsNUnit.cs" />
     <Compile Include="Tests\SaveScreenShotsPageSourceTestsNUnit.cs" />
+    <Compile Include="Tests\SelectWebElementTests.cs" />
     <Compile Include="Tests\UploadDownloadFilesTestsNUnit.cs" />
   </ItemGroup>
   <ItemGroup>
