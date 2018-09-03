@@ -181,11 +181,11 @@ namespace Objectivity.Test.Automation.Common
         /// </summary>
         public string CurrentDirectory { get; set; }
 
-        private FirefoxProfile FirefoxProfile
+        private FirefoxOptions FirefoxOptions
         {
             get
             {
-                FirefoxProfile profile;
+                FirefoxOptions options = new FirefoxOptions();
 
                 if (BaseConfiguration.UseDefaultFirefoxProfile)
                 {
@@ -194,38 +194,41 @@ namespace Objectivity.Test.Automation.Common
                         var pathToCurrentUserProfiles = BaseConfiguration.PathToFirefoxProfile; // Path to profile
                         var pathsToProfiles = Directory.GetDirectories(pathToCurrentUserProfiles, "*.default", SearchOption.TopDirectoryOnly);
 
-                        profile = new FirefoxProfile(pathsToProfiles[0]);
+                        options.Profile = new FirefoxProfile(pathsToProfiles[0]);
                     }
                     catch (DirectoryNotFoundException e)
                     {
                         Logger.Info(CultureInfo.CurrentCulture, "problem with loading firefox profile {0}", e.Message);
-                        profile = new FirefoxProfile();
                     }
                 }
-                else
-                {
-                    profile = new FirefoxProfile();
-                }
 
-                profile.SetPreference("toolkit.startup.max_resumed_crashes", "999999");
-                profile.SetPreference("network.automatic-ntlm-auth.trusted-uris", BaseConfiguration.Host ?? string.Empty);
+                options.SetPreference("toolkit.startup.max_resumed_crashes", "999999");
+                options.SetPreference("network.automatic-ntlm-auth.trusted-uris", BaseConfiguration.Host ?? string.Empty);
 
                 // retrieving settings from config file
                 var firefoxPreferences = ConfigurationManager.GetSection("FirefoxPreferences") as NameValueCollection;
                 var firefoxExtensions = ConfigurationManager.GetSection("FirefoxExtensions") as NameValueCollection;
 
                 // preference for downloading files
-                profile.SetPreference("browser.download.dir", this.DownloadFolder);
-                profile.SetPreference("browser.download.folderList", 2);
-                profile.SetPreference("browser.download.managershowWhenStarting", false);
-                profile.SetPreference("browser.helperApps.neverAsk.saveToDisk", "application/vnd.ms-excel, application/x-msexcel, application/pdf, text/csv, text/html, application/octet-stream");
+                options.SetPreference("browser.download.dir", this.DownloadFolder);
+                options.SetPreference("browser.download.folderList", 2);
+                options.SetPreference("browser.download.managershowWhenStarting", false);
+                options.SetPreference("browser.helperApps.neverAsk.saveToDisk", "application/vnd.ms-excel, application/x-msexcel, application/pdf, text/csv, text/html, application/octet-stream");
 
                 // disable Firefox's built-in PDF viewer
-                profile.SetPreference("pdfjs.disabled", true);
+                options.SetPreference("pdfjs.disabled", true);
 
                 // disable Adobe Acrobat PDF preview plugin
-                profile.SetPreference("plugin.scan.Acrobat", "99.0");
-                profile.SetPreference("plugin.scan.plid.all", false);
+                options.SetPreference("plugin.scan.Acrobat", "99.0");
+                options.SetPreference("plugin.scan.plid.all", false);
+
+                options.UseLegacyImplementation = BaseConfiguration.FirefoxUseLegacyImplementation;
+
+                // set browser proxy for Firefox
+                if (!string.IsNullOrEmpty(BaseConfiguration.Proxy))
+                {
+                    options.Proxy = this.CurrentProxy();
+                }
 
                 // if there are any extensions
                 if (firefoxExtensions != null)
@@ -234,7 +237,7 @@ namespace Objectivity.Test.Automation.Common
                     for (var i = 0; i < firefoxExtensions.Count; i++)
                     {
                         Logger.Trace(CultureInfo.CurrentCulture, "Installing extension {0}", firefoxExtensions.GetKey(i));
-                        profile.AddExtension(firefoxExtensions.GetKey(i));
+                        options.Profile.AddExtension(firefoxExtensions.GetKey(i));
                     }
                 }
 
@@ -242,7 +245,7 @@ namespace Objectivity.Test.Automation.Common
                 // if there are any settings
                 if (firefoxPreferences == null)
                 {
-                    return profile;
+                    return options;
                 }
 
                 // loop through all of them
@@ -255,12 +258,12 @@ namespace Objectivity.Test.Automation.Common
                     {
                         // if current settings value is "true"
                         case "true":
-                            profile.SetPreference(firefoxPreferences.GetKey(i), true);
+                            options.SetPreference(firefoxPreferences.GetKey(i), true);
                             break;
 
                         // if "false"
                         case "false":
-                            profile.SetPreference(firefoxPreferences.GetKey(i), false);
+                            options.SetPreference(firefoxPreferences.GetKey(i), false);
                             break;
 
                         // otherwise
@@ -270,31 +273,22 @@ namespace Objectivity.Test.Automation.Common
                             // an attempt to parse current settings value to an integer. Method TryParse returns True if the attempt is successful (the string is integer) or return False (if the string is just a string and cannot be cast to a number)
                             if (int.TryParse(firefoxPreferences.Get(i), out temp))
                             {
-                                profile.SetPreference(firefoxPreferences.GetKey(i), temp);
+                                options.SetPreference(firefoxPreferences.GetKey(i), temp);
                             }
                             else
                             {
-                                profile.SetPreference(firefoxPreferences.GetKey(i), firefoxPreferences[i]);
+                                options.SetPreference(firefoxPreferences.GetKey(i), firefoxPreferences[i]);
                             }
 
                             break;
                     }
                 }
 
-                return profile;
-            }
-        }
-
-        private FirefoxOptions FirefoxOptions
-        {
-            get
-            {
-                FirefoxOptions options = new FirefoxOptions();
                 return options;
             }
         }
 
-        private ChromeOptions ChromeProfile
+        private ChromeOptions ChromeOptions
         {
             get
             {
@@ -390,7 +384,7 @@ namespace Objectivity.Test.Automation.Common
             }
         }
 
-        private InternetExplorerOptions InternetExplorerProfile
+        private InternetExplorerOptions InternetExplorerOptions
         {
             get
             {
@@ -437,7 +431,7 @@ namespace Objectivity.Test.Automation.Common
             }
         }
 
-        private EdgeOptions EdgeProfile
+        private EdgeOptions EdgeOptions
         {
             get
             {
@@ -453,7 +447,7 @@ namespace Objectivity.Test.Automation.Common
             }
         }
 
-        private SafariOptions SafariProfile
+        private SafariOptions SafariOptions
         {
             get
             {
@@ -498,47 +492,28 @@ namespace Objectivity.Test.Automation.Common
             switch (BaseConfiguration.TestBrowser)
             {
                 case BrowserType.Firefox:
-                    var fireFoxOptionsLegacy = new FirefoxOptions { Profile = this.FirefoxProfile, UseLegacyImplementation = BaseConfiguration.FirefoxUseLegacyImplementation };
-
-                    // set browser proxy for Firefox
-                    if (!string.IsNullOrEmpty(BaseConfiguration.Proxy))
-                    {
-                        fireFoxOptionsLegacy.Proxy = this.CurrentProxy();
-                    }
-
-                    fireFoxOptionsLegacy = this.AddFirefoxArguments(fireFoxOptionsLegacy);
-
-                    this.driver = new FirefoxDriver(this.SetDriverOptions(fireFoxOptionsLegacy));
+                    this.driver = new FirefoxDriver(this.SetDriverOptions(this.FirefoxOptions));
                     break;
                 case BrowserType.FirefoxPortable:
-                    var fireFoxOptions = new FirefoxOptions { BrowserExecutableLocation = BaseConfiguration.FirefoxPath, Profile = this.FirefoxProfile, UseLegacyImplementation = BaseConfiguration.FirefoxUseLegacyImplementation };
-
-                    // set browser proxy for Firefox
-                    if (!string.IsNullOrEmpty(BaseConfiguration.Proxy))
-                    {
-                        fireFoxOptions.Proxy = this.CurrentProxy();
-                    }
-
-                    fireFoxOptions = this.AddFirefoxArguments(fireFoxOptions);
-
-                    this.driver = new FirefoxDriver(this.SetDriverOptions(fireFoxOptions));
+                    this.FirefoxOptions.BrowserExecutableLocation = BaseConfiguration.FirefoxPath;
+                    this.driver = new FirefoxDriver(this.SetDriverOptions(this.FirefoxOptions));
                     break;
                 case BrowserType.InternetExplorer:
                 case BrowserType.IE:
-                    this.driver = new InternetExplorerDriver(this.SetDriverOptions(this.InternetExplorerProfile));
+                    this.driver = new InternetExplorerDriver(this.SetDriverOptions(this.InternetExplorerOptions));
                     break;
                 case BrowserType.Chrome:
-                    this.driver = new ChromeDriver(this.SetDriverOptions(this.ChromeProfile));
+                    this.driver = new ChromeDriver(this.SetDriverOptions(this.ChromeOptions));
                     break;
                 case BrowserType.Safari:
-                    this.driver = new SafariDriver(this.SetDriverOptions(this.SafariProfile));
+                    this.driver = new SafariDriver(this.SetDriverOptions(this.SafariOptions));
                     this.CheckIfProxySetForSafari();
                     break;
                 case BrowserType.RemoteWebDriver:
                     this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetCapabilities());
                     break;
                 case BrowserType.Edge:
-                    this.driver = new EdgeDriver(this.SetDriverOptions(this.EdgeProfile));
+                    this.driver = new EdgeDriver(this.SetDriverOptions(this.EdgeOptions));
                     break;
                 default:
                     throw new NotSupportedException(
@@ -728,21 +703,20 @@ namespace Objectivity.Test.Automation.Common
             {
                 case BrowserType.Firefox:
                     capabilities = (DesiredCapabilities)this.SetDriverOptions(this.FirefoxOptions).ToCapabilities();
-                    capabilities.SetCapability(FirefoxDriver.ProfileCapabilityName, this.FirefoxProfile.ToBase64String());
                     break;
                 case BrowserType.InternetExplorer:
                 case BrowserType.IE:
-                    capabilities = (DesiredCapabilities)this.SetDriverOptions(this.InternetExplorerProfile).ToCapabilities();
+                    capabilities = (DesiredCapabilities)this.SetDriverOptions(this.InternetExplorerOptions).ToCapabilities();
                     break;
                 case BrowserType.Chrome:
-                    capabilities = (DesiredCapabilities)this.SetDriverOptions(this.ChromeProfile).ToCapabilities();
+                    capabilities = (DesiredCapabilities)this.SetDriverOptions(this.ChromeOptions).ToCapabilities();
                     break;
                 case BrowserType.Safari:
-                    capabilities = (DesiredCapabilities)this.SetDriverOptions(this.SafariProfile).ToCapabilities();
+                    capabilities = (DesiredCapabilities)this.SetDriverOptions(this.SafariOptions).ToCapabilities();
                     this.CheckIfProxySetForSafari();
                     break;
                 case BrowserType.Edge:
-                    capabilities = (DesiredCapabilities)this.SetDriverOptions(this.EdgeProfile).ToCapabilities();
+                    capabilities = (DesiredCapabilities)this.SetDriverOptions(this.EdgeOptions).ToCapabilities();
                     break;
                 case BrowserType.CloudProvider:
                     break;
