@@ -37,12 +37,18 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
         private readonly ElementLocator
             tableLocator = new ElementLocator(Locator.ClassName, "tablesorter"),
             column = new ElementLocator(Locator.CssSelector, "tr td"),
-            row = new ElementLocator(Locator.CssSelector, "tbody tr");
+            row = new ElementLocator(Locator.CssSelector, "tbody tr"),
+            tagNameLocator = new ElementLocator(Locator.TagName, "th"),
+            xPathLocator = new ElementLocator(Locator.XPath, "//span");
 
         public TablesPage(DriverContext driverContext)
             : base(driverContext)
         {
         }
+
+        public string GetByTagNameLocator => this.Driver.GetElement(this.tagNameLocator).Text;
+
+        public string GetByXpathLocator => this.Driver.GetElement(this.xPathLocator).Text;
 
         public string[][] GetTableElements()
         {
