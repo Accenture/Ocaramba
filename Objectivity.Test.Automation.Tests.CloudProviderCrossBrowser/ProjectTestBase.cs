@@ -155,8 +155,10 @@ namespace Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser
                 throw new ArgumentNullException();
             }
 
-             // Set the capability
+            // Set the capability
+#pragma warning disable CS0618 // Type or member is obsolete
             args.Capabilities.SetCapability("name", TestContext.CurrentContext.Test.FullName);
+#pragma warning restore CS0618 // Type or member is obsolete
         }
     }
 }
