@@ -26,6 +26,9 @@
 	  <dependency id="NPOI" version="2.3.0" />
 	  <dependency id="SharpZipLib" version="0.86.0" />
     </dependencies> 
+	<frameworkAssemblies>
+		<frameworkAssembly assemblyName="System.Configuration" />
+	</frameworkAssemblies>
   </metadata>
   <files>
 	<file src="..\Objectivity.Test.Automation.Tests.NUnit\ProjectTestBase.cs" target="content" />

@@ -47,6 +47,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// <returns>Image contains desktop screenshot</returns>
         public static Bitmap DoIt()
         {
+            Logger.Info("****************************Taking*Screenshot***************************************");
             var screen = Screen.PrimaryScreen;
             using (var bitmap = new Bitmap(screen.Bounds.Width, screen.Bounds.Height))
             {
@@ -110,7 +111,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// <returns>Full path to taken screenshot</returns>
         /// <example>How to use it: <code>
         /// var el = this.Driver.GetElement(this.menu);
-        /// TakeScreenShot.TakeScreenShotOfElement(el, TestContext.CurrentContext.TestDirectory + BaseConfiguration.ScreenShotFolder, "MenuOutSideTheIFrame");
+        /// var fullPath = TakeScreenShot.TakeScreenShotOfElement(el, TestContext.CurrentContext.TestDirectory + BaseConfiguration.ScreenShotFolder, "MenuOutSideTheIFrame");
         /// </code></example>
         public static string TakeScreenShotOfElement(IWebElement element, string folder, string screenshotName)
         {
@@ -133,7 +134,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
         /// int y = iFrame.Location.Y;
         /// this.Driver.SwitchTo().Frame(0);
         /// var el = this.Driver.GetElement(this.elelemtInIFrame);
-        /// TakeScreenShot.TakeScreenShotOfElement(el, TestContext.CurrentContext.TestDirectory + BaseConfiguration.ScreenShotFolder, "MenuOutSideTheIFrame");
+        /// var fullPath = TakeScreenShot.TakeScreenShotOfElement(x, y, el, TestContext.CurrentContext.TestDirectory + BaseConfiguration.ScreenShotFolder, "MenuOutSideTheIFrame");
         /// </code></example>
         public static string TakeScreenShotOfElement(int iframeLocationX, int iframeLocationY, IWebElement element, string folder, string screenshotName)
         {

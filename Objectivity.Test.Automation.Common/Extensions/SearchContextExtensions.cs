@@ -28,9 +28,8 @@ namespace Objectivity.Test.Automation.Common.Extensions
     using System.Globalization;
     using System.Linq;
     using System.Runtime.InteropServices;
-
+    using Objectivity.Test.Automation.Common.Helpers;
     using Objectivity.Test.Automation.Common.Types;
-
     using OpenQA.Selenium;
     using OpenQA.Selenium.Internal;
     using OpenQA.Selenium.Support.UI;
@@ -267,7 +266,7 @@ namespace Objectivity.Test.Automation.Common.Extensions
         }
 
         /// <summary>
-        /// Finds elements that are visible and displayed.
+        /// Finds elements that are enabled and displayed.
         /// </summary>
         /// <param name="element">The element.</param>
         /// <param name="locator">The locator.</param>
@@ -280,6 +279,52 @@ namespace Objectivity.Test.Automation.Common.Extensions
         public static IList<IWebElement> GetElements(this ISearchContext element, ElementLocator locator)
         {
             return element.GetElements(locator, e => e.Displayed && e.Enabled).ToList();
+        }
+
+        /// <summary>
+        /// Finds and waits for given timeout for at least minimum number of elements that meet specified conditions.
+        /// </summary>
+        /// <param name="element">The element.</param>
+        /// <param name="locator">The locator.</param>
+        /// <param name="timeout">Specified time to wait.</param>
+        /// <param name="condition">Condition to be fulfilled by elements</param>
+        /// <param name="minNumberOfElements">The minimum number of elements to get</param>
+        /// <returns>
+        /// Return all found and displayed and enabled elements
+        /// </returns>
+        /// <example>How to find elements : <code>
+        /// var checkboxes = this.Driver.GetElements(this.stackOverFlowCheckbox, timeout, e =&gt; e.Displayed &amp;&amp; e.Enabled, 1);
+        /// </code></example>
+        public static IList<IWebElement> GetElements(this ISearchContext element, ElementLocator locator, double timeout, Func<IWebElement, bool> condition, int minNumberOfElements)
+        {
+            IList<IWebElement> elements = null;
+            WaitHelper.Wait(
+                () => (elements = GetElements(element, locator, condition).ToList()).Count >= minNumberOfElements,
+                TimeSpan.FromSeconds(timeout),
+                "Timeout while getting elements");
+            return elements;
+        }
+
+        /// <summary>
+        /// Finds and waits for LongTimeout timeout for at least minimum number of elements that are enabled and displayed.
+        /// </summary>
+        /// <param name="element">The element.</param>
+        /// <param name="locator">The locator.</param>
+        /// <param name="minNumberOfElements">The minimum number of elements to get</param>
+        /// <returns>
+        /// Return all found and displayed and enabled elements
+        /// </returns>
+        /// <example>How to find elements : <code>
+        /// var checkboxes = this.Driver.GetElements(this.stackOverFlowCheckbox, 1);
+        /// </code></example>
+        public static IList<IWebElement> GetElements(this ISearchContext element, ElementLocator locator, int minNumberOfElements)
+        {
+            IList<IWebElement> elements = null;
+            WaitHelper.Wait(
+                () => (elements = GetElements(element, locator, e => e.Displayed && e.Enabled).ToList()).Count >= minNumberOfElements,
+                TimeSpan.FromSeconds(BaseConfiguration.LongTimeout),
+                "Timeout while getting elements");
+            return elements;
         }
 
         /// <summary>

@@ -31,11 +31,20 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
         private readonly ElementLocator boxA = new ElementLocator(Locator.Id, "column-a");
         private readonly ElementLocator boxB = new ElementLocator(Locator.Id, "column-b");
         private readonly ElementLocator boxBtext = new ElementLocator(Locator.XPath, "//div[@id='column-b']/header");
+        private readonly ElementLocator classNameLocator = new ElementLocator(Locator.ClassName, "example");
+
+        private readonly ElementLocator cssSelectorLocator = new ElementLocator(Locator.CssSelector, "[class='example']");
 
         public DragAndDropPage(DriverContext driverContext)
             : base(driverContext)
         {
         }
+
+        public string GetByIdLocator => this.Driver.GetElement(this.boxA).Text;
+
+        public string GetByClassName => this.Driver.GetElement(this.classNameLocator).Text;
+
+        public string GetByCssSelectorLocator => this.Driver.GetElement(this.cssSelectorLocator).Text;
 
         public DragAndDropPage MoveElementAtoElementB()
         {

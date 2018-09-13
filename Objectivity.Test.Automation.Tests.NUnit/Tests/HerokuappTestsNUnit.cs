@@ -27,6 +27,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
     using Common;
     using DataDriven;
     using global::NUnit.Framework;
+    using OpenQA.Selenium;
 
     [TestFixture]
     [Parallelizable(ParallelScope.Fixtures)]
@@ -192,6 +193,32 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
                 .MoveElementAtoElementB();
 
             Assert.IsTrue(dragAndDrop.IsElementAMovedToB(), "Element is not moved.");
+        }
+
+        [Test]
+        public void DynamicallyLoadedPageElementsTest()
+        {
+            var page = new InternetPage(this.DriverContext)
+                .OpenHomePage()
+                .GoToDynamicLoading()
+                .ClickOnExample2();
+
+            this.DriverContext.PerformanceMeasures.StartMeasure();
+            page.ClickStart();
+            Assert.AreEqual(page.Text, "Hello World!");
+            this.DriverContext.PerformanceMeasures.StopMeasure(TestContext.CurrentContext.Test.Name + "WaitForTest");
+        }
+
+        [Test]
+        public void DynamicallyLoadedPageElementsTimeOutTest()
+        {
+            var page = new InternetPage(this.DriverContext)
+                .OpenHomePage()
+                .GoToDynamicLoading()
+                .ClickOnExample2();
+
+            page.ClickStart();
+            Assert.Throws<WebDriverTimeoutException>(() => page.ShortTimeoutText());
         }
     }
 }

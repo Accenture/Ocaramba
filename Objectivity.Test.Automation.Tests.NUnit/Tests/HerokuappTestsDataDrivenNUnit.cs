@@ -94,7 +94,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
             new InternetPage(this.DriverContext).OpenHomePage().GoToShiftingContentPage();
 
             var links = new ShiftingContentPage(this.DriverContext);
-            Verify.That(this.DriverContext, () => Assert.AreEqual(parameters["number"], links.CountLinks()));
+            Verify.That(this.DriverContext, () => Assert.AreEqual(parameters["number"], links.CountLinksGetElementsBasic()));
         }
 
         [Test]

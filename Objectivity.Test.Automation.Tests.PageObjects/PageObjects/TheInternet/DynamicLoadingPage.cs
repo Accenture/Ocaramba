@@ -23,28 +23,50 @@
 namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 {
     using Common.Types;
+    using NLog;
     using Objectivity.Test.Automation.Common;
     using Objectivity.Test.Automation.Common.Extensions;
     using Objectivity.Test.Automation.Tests.PageObjects;
 
     public class DynamicLoadingPage : ProjectPageBase
     {
-        private readonly ElementLocator exampleLink1 = new ElementLocator(Locator.CssSelector, "a[href='/dynamic_loading/1'"),
-        startButton = new ElementLocator(Locator.Id, "start");
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+        private readonly ElementLocator exampleLink1 = new ElementLocator(Locator.CssSelector, "a[href='/dynamic_loading/2'"),
+        startButton = new ElementLocator(Locator.XPath, "//button[.='Start']"),
+        text = new ElementLocator(Locator.XPath, "//div[@id='finish']/h4");
 
         public DynamicLoadingPage(DriverContext driverContext)
             : base(driverContext)
         {
         }
 
-        public void ClickOnExample1()
+        public string Text
         {
-            this.Driver.GetElement(this.exampleLink1).Click();
+            get
+            {
+                var returnText = this.Driver.GetElement(this.text).Text;
+                Logger.Debug(returnText);
+                return returnText;
+            }
         }
 
-        public void ClickStart()
+        public void ShortTimeoutText()
+        {
+          var returnText = this.Driver.GetElement(this.text, BaseConfiguration.ShortTimeout).Text;
+          Logger.Debug(returnText);
+        }
+
+        public DynamicLoadingPage ClickOnExample2()
+        {
+            this.Driver.GetElement(this.exampleLink1).Click();
+            return this;
+        }
+
+        public DynamicLoadingPage ClickStart()
         {
             this.Driver.GetElement(this.startButton).Click();
+            return this;
         }
     }
 }
