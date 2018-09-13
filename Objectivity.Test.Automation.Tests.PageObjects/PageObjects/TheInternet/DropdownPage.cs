@@ -74,7 +74,13 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
         public void SelectByIndex(int index)
         {
             Select select = this.Driver.GetElement<Select>(this.dropDownLocator, 300);
-            select.SelectByIndex(index, 300);
+            select.SelectByIndex(index);
+        }
+
+        public void SelectByIndex(int index, int timeout)
+        {
+            Select select = this.Driver.GetElement<Select>(this.dropDownLocator, 300);
+            select.SelectByIndex(index, timeout);
         }
 
         public void SelectByValue(string value)
@@ -99,6 +105,20 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
             }
 
             select.SelectByText(text);
+        }
+
+        public void SelectByText(string text, int timeout)
+        {
+            Select select = this.Driver.GetElement<Select>(this.dropDownLocator);
+
+            select.SelectByText(text, timeout);
+        }
+
+        public string SelectedOption()
+        {
+            Select select = this.Driver.GetElement<Select>(this.dropDownLocator);
+
+            return select.SelectElement().SelectedOption.Text;
         }
     }
 }
