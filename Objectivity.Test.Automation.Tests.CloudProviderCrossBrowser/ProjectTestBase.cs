@@ -46,7 +46,8 @@ namespace Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser
 
         public ProjectTestBase(string environment)
         {
-            bool supportedBrowser = Enum.TryParse(environment, out BrowserType browserType);
+            BrowserType browserType;
+            bool supportedBrowser = Enum.TryParse(environment, out browserType);
 
             if (supportedBrowser)
             {
