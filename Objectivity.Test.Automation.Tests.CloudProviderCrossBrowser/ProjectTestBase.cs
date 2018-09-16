@@ -23,6 +23,8 @@
 namespace Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser
 {
     using System;
+    using System.Collections.Specialized;
+    using System.Configuration;
     using System.Globalization;
     using global::NUnit.Framework;
     using global::NUnit.Framework.Interfaces;
@@ -44,8 +46,14 @@ namespace Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser
 
         public ProjectTestBase(string environment)
         {
-            this.DriverContext.CrossBrowserEnvironment = environment;
-            this.driverContext.CapabilitiesSet += this.DriverContext_CapabilitiesSet;
+            bool supportedBrowser = Enum.TryParse(environment, out BrowserType browserType);
+
+            if (supportedBrowser)
+            {
+                this.DriverContext.CrossBrowserEnvironment = browserType;
+            }
+
+            this.driverContext.DriverOptionsSet += this.DriverContext_DriverOptionsSet;
         }
 
         /// <summary>
@@ -148,17 +156,34 @@ namespace Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser
             }
         }
 
-        private void DriverContext_CapabilitiesSet(object sender, CapabilitiesSetEventArgs args)
+        private void DriverContext_DriverOptionsSet(object sender, DriverOptionsSetEventArgs args)
         {
-            if (args == null || args.Capabilities == null)
+            if (args == null || args.DriverOptions == null)
             {
                 throw new ArgumentNullException();
             }
 
-            // Set the capability
-#pragma warning disable CS0618 // Type or member is obsolete
-            args.Capabilities.SetCapability("name", TestContext.CurrentContext.Test.FullName);
-#pragma warning restore CS0618 // Type or member is obsolete
+            var driverCapabilitiesConf = ConfigurationManager.GetSection("DriverCapabilities") as NameValueCollection;
+
+            // if there are any capability
+            if (driverCapabilitiesConf != null)
+            {
+                // loop through all of them
+                for (var i = 0; i < driverCapabilitiesConf.Count; i++)
+                {
+                    string value = driverCapabilitiesConf.GetValues(i)[0];
+                    Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0}", driverCapabilitiesConf.GetKey(i));
+                    args.DriverOptions.AddAdditionalCapability(driverCapabilitiesConf.GetKey(i), value);
+                }
+            }
+
+            NameValueCollection settings = ConfigurationManager.GetSection("environments/" + this.DriverContext.CrossBrowserEnvironment) as NameValueCollection;
+                foreach (string key in settings.AllKeys)
+                {
+                    Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0} from {1}", key, this.DriverContext.CrossBrowserEnvironment);
+
+                        args.DriverOptions.AddAdditionalCapability(key, settings[key]);
+                }
         }
     }
 }

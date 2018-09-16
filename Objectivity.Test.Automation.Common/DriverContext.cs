@@ -65,11 +65,6 @@ namespace Objectivity.Test.Automation.Common
         private TestLogger logTest;
 
         /// <summary>
-        /// Fires before the capabilities are set
-        /// </summary>
-        public event EventHandler<CapabilitiesSetEventArgs> CapabilitiesSet;
-
-        /// <summary>
         /// Occurs when [driver options set].
         /// </summary>
         public event EventHandler<DriverOptionsSetEventArgs> DriverOptionsSet;
@@ -95,7 +90,7 @@ namespace Objectivity.Test.Automation.Common
         /// <summary>
         /// Gets or sets the Environment Browsers from App.config
         /// </summary>
-        public string CrossBrowserEnvironment { get; set; }
+        public BrowserType CrossBrowserEnvironment { get; set; }
 
         /// <summary>
         /// Gets Sets Folder name for ScreenShot
@@ -510,7 +505,29 @@ namespace Objectivity.Test.Automation.Common
                     this.CheckIfProxySetForSafari();
                     break;
                 case BrowserType.RemoteWebDriver:
-                    this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetCapabilities());
+                    switch (this.CrossBrowserEnvironment)
+                    {
+                        case BrowserType.Firefox:
+                            this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(this.FirefoxOptions));
+                            break;
+                        case BrowserType.Chrome:
+                            this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(this.ChromeOptions));
+                            break;
+                        case BrowserType.Safari:
+                            this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(this.SafariOptions));
+                            break;
+                        case BrowserType.Edge:
+                            this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(this.EdgeOptions));
+                            break;
+                        case BrowserType.IE:
+                        case BrowserType.InternetExplorer:
+                            this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(this.EdgeOptions));
+                            break;
+                        default:
+                            throw new NotSupportedException(
+                                string.Format(CultureInfo.CurrentCulture, "Driver {0} is not supported", BaseConfiguration.TestBrowser));
+                    }
+
                     break;
                 case BrowserType.Edge:
                     this.driver = new EdgeDriver(this.SetDriverOptions(this.EdgeOptions));
@@ -689,104 +706,6 @@ namespace Objectivity.Test.Automation.Common
         {
             this.DriverOptionsSet?.Invoke(this, new DriverOptionsSetEventArgs(options));
             return options;
-        }
-
-        /// <summary>
-        /// Set web driver capabilities.
-        /// </summary>
-        /// <returns>Instance with set web driver capabilities.</returns>
-        private DesiredCapabilities SetCapabilities()
-        {
-            DesiredCapabilities capabilities = new DesiredCapabilities();
-
-            switch (BaseConfiguration.TestBrowserCapabilities)
-            {
-                case BrowserType.Firefox:
-                    capabilities = (DesiredCapabilities)this.SetDriverOptions(this.FirefoxOptions).ToCapabilities();
-                    break;
-                case BrowserType.InternetExplorer:
-                case BrowserType.IE:
-                    capabilities = (DesiredCapabilities)this.SetDriverOptions(this.InternetExplorerOptions).ToCapabilities();
-                    break;
-                case BrowserType.Chrome:
-                    capabilities = (DesiredCapabilities)this.SetDriverOptions(this.ChromeOptions).ToCapabilities();
-                    break;
-                case BrowserType.Safari:
-                    capabilities = (DesiredCapabilities)this.SetDriverOptions(this.SafariOptions).ToCapabilities();
-                    this.CheckIfProxySetForSafari();
-                    break;
-                case BrowserType.Edge:
-                    capabilities = (DesiredCapabilities)this.SetDriverOptions(this.EdgeOptions).ToCapabilities();
-                    break;
-                case BrowserType.CloudProvider:
-                    break;
-                default:
-                    throw new NotSupportedException(
-                        string.Format(CultureInfo.CurrentCulture, "Driver {0} is not supported with Selenium Grid", BaseConfiguration.TestBrowser));
-            }
-
-            var driverCapabilitiesConf = ConfigurationManager.GetSection("DriverCapabilities") as NameValueCollection;
-
-            // if there are any capability
-            if (driverCapabilitiesConf != null)
-            {
-                // loop through all of them
-                for (var i = 0; i < driverCapabilitiesConf.Count; i++)
-                {
-                    string value = driverCapabilitiesConf.GetValues(i)[0];
-                    Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0}", driverCapabilitiesConf.GetKey(i));
-                    capabilities.SetCapability(driverCapabilitiesConf.GetKey(i), value);
-                }
-            }
-
-            capabilities = this.CloudProviderCapabilities(capabilities);
-
-            if (this.CapabilitiesSet != null)
-            {
-                this.CapabilitiesSet(this, new CapabilitiesSetEventArgs(capabilities));
-            }
-
-            return capabilities;
-        }
-
-        /// <summary>
-        /// Set CloudProvider driver capabilities.
-        /// </summary>
-        /// <param name="capabilities">The DesiredCapabilities.</param>
-        /// <returns>Instance with set CloudProvider driver capabilities.</returns>
-        private DesiredCapabilities CloudProviderCapabilities(DesiredCapabilities capabilities)
-        {
-            Logger.Debug(CultureInfo.CurrentCulture, "Cross Browser Profile '{0}'", this.CrossBrowserProfile);
-            if (!string.IsNullOrEmpty(this.CrossBrowserProfile))
-            {
-                NameValueCollection caps = ConfigurationManager.GetSection("capabilities/" + this.CrossBrowserProfile) as NameValueCollection;
-
-                foreach (string key in caps.AllKeys)
-                {
-                    Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0} from {1}", key, this.CrossBrowserProfile);
-                    capabilities.SetCapability(key, caps[key]);
-                }
-            }
-
-            Logger.Trace(CultureInfo.CurrentCulture, "Cross Browser Environment '{0}'", this.CrossBrowserEnvironment);
-            if (!string.IsNullOrEmpty(this.CrossBrowserEnvironment))
-                {
-                NameValueCollection settings = ConfigurationManager.GetSection("environments/" + this.CrossBrowserEnvironment) as NameValueCollection;
-                foreach (string key in settings.AllKeys)
-                    {
-                    Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0} from {1}", key, this.CrossBrowserEnvironment);
-                    if (key == "browser")
-                        {
-                            capabilities.SetCapability(CapabilityType.BrowserName, settings[key]);
-                        }
-                        else
-                        {
-                            capabilities.SetCapability(key, settings[key]);
-                        }
-                    }
-                }
-
-           return capabilities;
         }
 
         private Proxy CurrentProxy()
