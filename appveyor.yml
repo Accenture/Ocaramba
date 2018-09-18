@@ -233,7 +233,9 @@ test_script:
     
     cd .\\scripts
     
-    .\set_AppConfig_for_tests.ps1 "..\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\bin\Release" "Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser.dll.config" "//DriverCapabilities" "browserstack.user|browserstack.key|build" "$env:browserstackuser|$env:browserstackkey|Objectivity.Test.Automation.Tests.BrowserStackCrossBrowser$env:appveyor_build_version"
+    .\set_AppConfig_for_tests.ps1 "..\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\bin\Release" "Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser.dll.config" "//appSettings" "RemoteWebDriverHub" "http://$env:browserstackuser:$env:browserstackkey@hub-cloud.browserstack.com/wd/hub"
+    
+    .\set_AppConfig_for_tests.ps1 "..\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\bin\Release" "Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser.dll.config" "//DriverCapabilities" "build" "Objectivity.Test.Automation.Tests.BrowserStackCrossBrowser$env:appveyor_build_version" $true
 
     cd ..
     
@@ -265,13 +267,9 @@ test_script:
       
     cd .\\scripts
     
-    .\set_AppConfig_for_tests.ps1 "..\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\bin\Release" "Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser.dll.config" "//appSettings" "RemoteWebDriverHub" "http://ondemand.saucelabs.com:80/wd/hub" $true
+    .\set_AppConfig_for_tests.ps1 "..\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\bin\Release" "Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser.dll.config" "//appSettings" "RemoteWebDriverHub" "http://$env:saucelabsusername:$env:saucelabsaccessKey@ondemand.saucelabs.com:80/wd/hub"
     
-    .\set_AppConfig_for_tests.ps1 "..\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\bin\Release" "Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser.dll.config" "//DriverCapabilities" "username|accessKey|build" "$env:saucelabsusername|$env:saucelabsaccessKey|Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser$env:appveyor_build_version"
-    
-    .\set_AppConfig_for_tests.ps1 "..\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\bin\Release" "Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser.dll.config" "//environments/Edge" "browser" "MicrosoftEdge" $true
-    
-    .\set_AppConfig_for_tests.ps1 "..\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\bin\Release" "Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser.dll.config" "//environments/IE" "browser" "Internet Explorer" $true
+    .\set_AppConfig_for_tests.ps1 "..\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\bin\Release" "Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser.dll.config" "//DriverCapabilities" "build" "Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser$env:appveyor_build_version" $true
     
     .\set_AppConfig_for_tests.ps1 "..\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\bin\Release" "Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser.dll.config" "//environments/Safari" "platform" "macOS 10.13" $true
 

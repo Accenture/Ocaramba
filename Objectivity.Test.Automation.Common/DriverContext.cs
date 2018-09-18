@@ -508,20 +508,25 @@ namespace Objectivity.Test.Automation.Common
                     switch (this.CrossBrowserEnvironment)
                     {
                         case BrowserType.Firefox:
-                            this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(this.FirefoxOptions));
+                            this.SetDriverOptions(this.FirefoxOptions);
+                            this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.FirefoxOptions.ToCapabilities());
                             break;
                         case BrowserType.Chrome:
-                            this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(this.ChromeOptions));
+                            this.SetDriverOptions(this.ChromeOptions);
+                            this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.ChromeOptions.ToCapabilities());
                             break;
                         case BrowserType.Safari:
-                            this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(this.SafariOptions));
+                            this.SetDriverOptions(this.SafariOptions);
+                            this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SafariOptions.ToCapabilities());
                             break;
                         case BrowserType.Edge:
+                            this.SetDriverOptions(this.EdgeOptions);
                             this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(this.EdgeOptions));
                             break;
                         case BrowserType.IE:
                         case BrowserType.InternetExplorer:
-                            this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(this.EdgeOptions));
+                            this.SetDriverOptions(this.InternetExplorerOptions);
+                            this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.InternetExplorerOptions.ToCapabilities());
                             break;
                         default:
                             throw new NotSupportedException(

@@ -179,12 +179,12 @@ namespace Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser
             }
 
             NameValueCollection settings = ConfigurationManager.GetSection("environments/" + this.DriverContext.CrossBrowserEnvironment) as NameValueCollection;
-                foreach (string key in settings.AllKeys)
-                {
-                    Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0} from {1}", key, this.DriverContext.CrossBrowserEnvironment);
+            foreach (string key in settings.AllKeys)
+            {
+                Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0} from {1}", key, this.DriverContext.CrossBrowserEnvironment);
 
-                        args.DriverOptions.AddAdditionalCapability(key, settings[key]);
-                }
+                args.DriverOptions.AddAdditionalCapability(key, settings[key]);
+            }
         }
     }
 }
