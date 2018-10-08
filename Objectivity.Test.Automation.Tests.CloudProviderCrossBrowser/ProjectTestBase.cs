@@ -54,7 +54,7 @@ namespace Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser
                 this.DriverContext.CrossBrowserEnvironment = browserType;
             }
 
-            this.driverContext.DriverOptionsSet += this.DriverContext_DriverOptionsSet;
+            ////this.driverContext.DriverOptionsSet += this.DriverContext_DriverOptionsSet;
         }
 
         /// <summary>
