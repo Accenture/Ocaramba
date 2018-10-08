@@ -53,8 +53,6 @@ namespace Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser
             {
                 this.DriverContext.CrossBrowserEnvironment = browserType;
             }
-
-            ////this.driverContext.DriverOptionsSet += this.DriverContext_DriverOptionsSet;
         }
 
         /// <summary>
@@ -154,36 +152,6 @@ namespace Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser
                     this.LogTest.Info("Uploading file [{0}] to test context", filePath);
                     TestContext.AddTestAttachment(filePath);
                 }
-            }
-        }
-
-        private void DriverContext_DriverOptionsSet(object sender, DriverOptionsSetEventArgs args)
-        {
-            if (args == null || args.DriverOptions == null)
-            {
-                throw new ArgumentNullException();
-            }
-
-            var driverCapabilitiesConf = ConfigurationManager.GetSection("DriverCapabilities") as NameValueCollection;
-
-            // if there are any capability
-            if (driverCapabilitiesConf != null)
-            {
-                // loop through all of them
-                for (var i = 0; i < driverCapabilitiesConf.Count; i++)
-                {
-                    string value = driverCapabilitiesConf.GetValues(i)[0];
-                    Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0}", driverCapabilitiesConf.GetKey(i));
-                    args.DriverOptions.AddAdditionalCapability(driverCapabilitiesConf.GetKey(i), value);
-                }
-            }
-
-            NameValueCollection settings = ConfigurationManager.GetSection("environments/" + this.DriverContext.CrossBrowserEnvironment) as NameValueCollection;
-            foreach (string key in settings.AllKeys)
-            {
-                Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0} from {1}", key, this.DriverContext.CrossBrowserEnvironment);
-
-                args.DriverOptions.AddAdditionalCapability(key, settings[key]);
             }
         }
     }

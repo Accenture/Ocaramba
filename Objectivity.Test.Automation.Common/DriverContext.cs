@@ -532,7 +532,7 @@ namespace Objectivity.Test.Automation.Common
                                 firefoxOptions.AddAdditionalCapability(key, settings[key], true);
                             }
 
-                            this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, firefoxOptions.ToCapabilities());
+                            this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(firefoxOptions).ToCapabilities());
                             break;
                         case BrowserType.Chrome:
                             ChromeOptions chromeOptions = new ChromeOptions();
@@ -556,7 +556,7 @@ namespace Objectivity.Test.Automation.Common
                                 chromeOptions.AddAdditionalCapability(key, settings[key], true);
                             }
 
-                            this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, chromeOptions.ToCapabilities());
+                            this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(chromeOptions).ToCapabilities());
                             break;
                         case BrowserType.Safari:
                             SafariOptions safariOptions = new SafariOptions();
@@ -580,7 +580,7 @@ namespace Objectivity.Test.Automation.Common
                                 safariOptions.AddAdditionalCapability(key, settings[key]);
                             }
 
-                            this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, safariOptions.ToCapabilities());
+                            this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(safariOptions).ToCapabilities());
                             break;
                         case BrowserType.Edge:
                             EdgeOptions egEdgeOptions = new EdgeOptions();
@@ -604,7 +604,7 @@ namespace Objectivity.Test.Automation.Common
                                 egEdgeOptions.AddAdditionalCapability(key, settings[key]);
                             }
 
-                            this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, egEdgeOptions.ToCapabilities());
+                            this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(egEdgeOptions).ToCapabilities());
                             break;
                         case BrowserType.IE:
                         case BrowserType.InternetExplorer:
@@ -629,7 +629,7 @@ namespace Objectivity.Test.Automation.Common
                                 internetExplorerOptions.AddAdditionalCapability(key, settings[key], true);
                             }
 
-                            this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, internetExplorerOptions.ToCapabilities());
+                            this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(internetExplorerOptions).ToCapabilities());
                             break;
                         default:
                             throw new NotSupportedException(
