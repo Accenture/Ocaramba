@@ -532,7 +532,7 @@ namespace Objectivity.Test.Automation.Common
                                 firefoxOptions.AddAdditionalCapability(key, settings[key], true);
                             }
 
-                            this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.FirefoxOptions.ToCapabilities());
+                            this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, firefoxOptions.ToCapabilities());
                             break;
                         case BrowserType.Chrome:
                             ChromeOptions chromeOptions = new ChromeOptions();
