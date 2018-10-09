@@ -481,7 +481,6 @@ namespace Objectivity.Test.Automation.Common
         /// Starts the specified Driver.
         /// </summary>
         /// <exception cref="NotSupportedException">When driver not supported</exception>
-        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Workaround for DesiredCapabilities")]
         [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "Driver disposed later in stop method")]
         public void Start()
         {
@@ -512,123 +511,28 @@ namespace Objectivity.Test.Automation.Common
                     {
                         case BrowserType.Firefox:
                             FirefoxOptions firefoxOptions = new FirefoxOptions();
-
-                            // if there are any capability
-                            if (driverCapabilitiesConf != null)
-                            {
-                                // loop through all of them
-                                for (var i = 0; i < driverCapabilitiesConf.Count; i++)
-                                {
-                                    string value = driverCapabilitiesConf.GetValues(i)[0];
-                                    Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0}", driverCapabilitiesConf.GetKey(i));
-                                    firefoxOptions.AddAdditionalCapability(driverCapabilitiesConf.GetKey(i), value, true);
-                                }
-                            }
-
-                            foreach (string key in settings.AllKeys)
-                            {
-                                Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0} from {1}", key, this.CrossBrowserEnvironment);
-
-                                firefoxOptions.AddAdditionalCapability(key, settings[key], true);
-                            }
-
+                            this.SetRemoteDriverFireFoxOptions(driverCapabilitiesConf, settings, firefoxOptions);
                             this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(firefoxOptions).ToCapabilities());
                             break;
                         case BrowserType.Chrome:
                             ChromeOptions chromeOptions = new ChromeOptions();
-
-                            // if there are any capability
-                            if (driverCapabilitiesConf != null)
-                            {
-                                // loop through all of them
-                                for (var i = 0; i < driverCapabilitiesConf.Count; i++)
-                                {
-                                    string value = driverCapabilitiesConf.GetValues(i)[0];
-                                    Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0}", driverCapabilitiesConf.GetKey(i));
-                                    chromeOptions.AddAdditionalCapability(driverCapabilitiesConf.GetKey(i), value, true);
-                                }
-                            }
-
-                            foreach (string key in settings.AllKeys)
-                            {
-                                Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0} from {1}", key, this.CrossBrowserEnvironment);
-
-                                chromeOptions.AddAdditionalCapability(key, settings[key], true);
-                            }
-
+                            this.SetRemoteDriverChromeOptions(driverCapabilitiesConf, settings, chromeOptions);
                             this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(chromeOptions).ToCapabilities());
                             break;
                         case BrowserType.Safari:
                             SafariOptions safariOptions = new SafariOptions();
-
-                            // if there are any capability
-                            if (driverCapabilitiesConf != null)
-                            {
-                                // loop through all of them
-                                for (var i = 0; i < driverCapabilitiesConf.Count; i++)
-                                {
-                                    string value = driverCapabilitiesConf.GetValues(i)[0];
-                                    Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0}", driverCapabilitiesConf.GetKey(i));
-                                    safariOptions.AddAdditionalCapability(driverCapabilitiesConf.GetKey(i), value);
-                                }
-                            }
-
-                            foreach (string key in settings.AllKeys)
-                            {
-                                Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0} from {1}", key, this.CrossBrowserEnvironment);
-
-                                safariOptions.AddAdditionalCapability(key, settings[key]);
-                            }
-
+                            this.SetRemoteDriverOptions(driverCapabilitiesConf, settings, safariOptions);
                             this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(safariOptions).ToCapabilities());
                             break;
                         case BrowserType.Edge:
                             EdgeOptions egEdgeOptions = new EdgeOptions();
-
-                            // if there are any capability
-                            if (driverCapabilitiesConf != null)
-                            {
-                                // loop through all of them
-                                for (var i = 0; i < driverCapabilitiesConf.Count; i++)
-                                {
-                                    string value = driverCapabilitiesConf.GetValues(i)[0];
-                                    Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0}", driverCapabilitiesConf.GetKey(i));
-                                    egEdgeOptions.AddAdditionalCapability(driverCapabilitiesConf.GetKey(i), value);
-                                }
-                            }
-
-                            foreach (string key in settings.AllKeys)
-                            {
-                                Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0} from {1}", key, this.CrossBrowserEnvironment);
-
-                                egEdgeOptions.AddAdditionalCapability(key, settings[key]);
-                            }
-
+                            this.SetRemoteDriverOptions(driverCapabilitiesConf, settings, egEdgeOptions);
                             this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(egEdgeOptions).ToCapabilities());
                             break;
                         case BrowserType.IE:
                         case BrowserType.InternetExplorer:
                             InternetExplorerOptions internetExplorerOptions = new InternetExplorerOptions();
-
-                            // if there are any capability
-                            if (driverCapabilitiesConf != null)
-                            {
-                                // loop through all of them
-                                for (var i = 0; i < driverCapabilitiesConf.Count; i++)
-                                {
-                                    string value = driverCapabilitiesConf.GetValues(i)[0];
-                                    Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0}", driverCapabilitiesConf.GetKey(i));
-                                    internetExplorerOptions.AddAdditionalCapability(driverCapabilitiesConf.GetKey(i), value, true);
-                                }
-                            }
-
-                            foreach (string key in settings.AllKeys)
-                            {
-                                Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0} from {1}", key, this.CrossBrowserEnvironment);
-
-                                internetExplorerOptions.AddAdditionalCapability(key, settings[key], true);
-                            }
-
+                            this.SetRemoteDriverOptions(driverCapabilitiesConf, settings, internetExplorerOptions);
                             this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(internetExplorerOptions).ToCapabilities());
                             break;
                         default:
@@ -853,6 +757,77 @@ namespace Objectivity.Test.Automation.Common
             }
 
             return option;
+        }
+
+        private T SetRemoteDriverOptions<T>(NameValueCollection driverCapabilitiesConf, NameValueCollection settings, T options)
+            where T : DriverOptions
+        {
+            // if there are any capability
+            if (driverCapabilitiesConf != null)
+            {
+                // loop through all of them
+                for (var i = 0; i < driverCapabilitiesConf.Count; i++)
+                {
+                    string value = driverCapabilitiesConf.GetValues(i)[0];
+                    Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0}", driverCapabilitiesConf.GetKey(i));
+                    options.AddAdditionalCapability(driverCapabilitiesConf.GetKey(i), value);
+                }
+            }
+
+            foreach (string key in settings.AllKeys)
+            {
+                Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0} from {1}", key, this.CrossBrowserEnvironment);
+
+                options.AddAdditionalCapability(key, settings[key]);
+            }
+
+            return options;
+        }
+
+        private void SetRemoteDriverFireFoxOptions(NameValueCollection driverCapabilitiesConf, NameValueCollection settings, FirefoxOptions firefoxOptions)
+        {
+            // if there are any capability
+            if (driverCapabilitiesConf != null)
+            {
+                // loop through all of them
+                for (var i = 0; i < driverCapabilitiesConf.Count; i++)
+                {
+                    string value = driverCapabilitiesConf.GetValues(i)[0];
+                    Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0}", driverCapabilitiesConf.GetKey(i));
+                    firefoxOptions.AddAdditionalCapability(driverCapabilitiesConf.GetKey(i), value, true);
+                }
+            }
+
+            foreach (string key in settings.AllKeys)
+            {
+                Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0} from {1}", key,
+                    this.CrossBrowserEnvironment);
+
+                firefoxOptions.AddAdditionalCapability(key, settings[key], true);
+            }
+        }
+
+        private void SetRemoteDriverChromeOptions(NameValueCollection driverCapabilitiesConf, NameValueCollection settings, ChromeOptions chromeOptions)
+        {
+            // if there are any capability
+            if (driverCapabilitiesConf != null)
+            {
+                // loop through all of them
+                for (var i = 0; i < driverCapabilitiesConf.Count; i++)
+                {
+                    string value = driverCapabilitiesConf.GetValues(i)[0];
+                    Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0}", driverCapabilitiesConf.GetKey(i));
+                    chromeOptions.AddAdditionalCapability(driverCapabilitiesConf.GetKey(i), value, true);
+                }
+            }
+
+            foreach (string key in settings.AllKeys)
+            {
+                Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0} from {1}", key,
+                    this.CrossBrowserEnvironment);
+
+                chromeOptions.AddAdditionalCapability(key, settings[key], true);
+            }
         }
     }
 }
