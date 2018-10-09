@@ -42,7 +42,8 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
                                         userNameForm = new ElementLocator(Locator.CssSelector, "Input[id=username]"),
                                         passwordForm = new ElementLocator(Locator.CssSelector, "Input[id=password]"),
                                         loginButton = new ElementLocator(Locator.XPath, "//form[@id='login']/button"),
-                                        message = new ElementLocator(Locator.XPath, "//a[@class='close']/..");
+                                        message = new ElementLocator(Locator.XPath, "//a[@class='close']/.."),
+                                        nameLocator = new ElementLocator(Locator.Name, "login");
 
         public FormAuthenticationPage(DriverContext driverContext)
             : base(driverContext)
@@ -63,6 +64,8 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
                 return text;
             }
         }
+
+        public string GetUsernameByNameLocator => this.Driver.GetElement(this.nameLocator).Text;
 
         public void EnterPassword(string password)
         {

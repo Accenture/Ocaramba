@@ -90,8 +90,8 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.XML" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="WebDriver, Version=3.14.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Selenium.WebDriver.3.14.0\lib\net45\WebDriver.dll</HintPath>
+    <Reference Include="WebDriver, Version=3.12.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Selenium.WebDriver.3.12.1\lib\net45\WebDriver.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -110,6 +110,7 @@
     <Compile Include="Tests\PerformanceTests1NUnit.cs" />
     <Compile Include="Tests\PerformanceTestsNUnit.cs" />
     <Compile Include="Tests\SaveScreenShotsPageSourceTestsNUnit.cs" />
+    <Compile Include="Tests\SelectWebElementTests.cs" />
     <Compile Include="Tests\UploadDownloadFilesTestsNUnit.cs" />
   </ItemGroup>
   <ItemGroup>
