@@ -41,12 +41,16 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
         /// </summary>
         private readonly ElementLocator
             linkLocator = new ElementLocator(Locator.CssSelector, "a[href='/{0}']"),
-            basicAuthLink = new ElementLocator(Locator.XPath, "//a[contains(text(),'Auth')]");
+            basicAuthLink = new ElementLocator(Locator.XPath, "//a[contains(text(),'Auth')]"),
+            dropdownPageByLinkTextLocator = new ElementLocator(Locator.LinkText, "Dropdown"),
+            partialLinkTextLocator = new ElementLocator(Locator.PartialLinkText, "Drag");
 
         public InternetPage(DriverContext driverContext)
             : base(driverContext)
         {
         }
+
+        public string GetDragAndDropLinkByPartialLinkText => this.Driver.GetElement(this.partialLinkTextLocator).Text;
 
         /// <summary>
         /// Methods for this HomePage
@@ -107,6 +111,12 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
         {
             this.Driver.GetElement(this.linkLocator.Format("download")).Click();
             return new DownloadPage(this.DriverContext);
+        }
+
+        public DropdownPage GoToDropdownPage()
+        {
+            this.Driver.GetElement(this.linkLocator.Format("dropdown")).Click();
+            return new DropdownPage(this.DriverContext);
         }
 
         public UploadPage GoToFileUploader()
@@ -216,6 +226,12 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
         {
             var element = this.Driver.GetElement(this.basicAuthLink);
             element.Click();
+        }
+
+        public DropdownPage GoToDropdownPageByLinkText()
+        {
+            this.Driver.GetElement(this.dropdownPageByLinkTextLocator).Click();
+            return new DropdownPage(this.DriverContext);
         }
     }
 }
