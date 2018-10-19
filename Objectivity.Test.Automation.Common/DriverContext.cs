@@ -532,7 +532,7 @@ namespace Objectivity.Test.Automation.Common
                         case BrowserType.IE:
                         case BrowserType.InternetExplorer:
                             InternetExplorerOptions internetExplorerOptions = new InternetExplorerOptions();
-                            this.SetRemoteDriverOptions(driverCapabilitiesConf, settings, internetExplorerOptions);
+                            this.SetRemoteDriverIEOptions(driverCapabilitiesConf, settings, internetExplorerOptions);
                             this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(internetExplorerOptions).ToCapabilities());
                             break;
                         default:
@@ -803,6 +803,28 @@ namespace Objectivity.Test.Automation.Common
                 Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0} from {1}", key, this.CrossBrowserEnvironment);
 
                 firefoxOptions.AddAdditionalCapability(key, settings[key], true);
+            }
+        }
+
+        private void SetRemoteDriverIEOptions(NameValueCollection driverCapabilitiesConf, NameValueCollection settings, InternetExplorerOptions internetExplorerOptions)
+        {
+            // if there are any capability
+            if (driverCapabilitiesConf != null)
+            {
+                // loop through all of them
+                for (var i = 0; i < driverCapabilitiesConf.Count; i++)
+                {
+                    string value = driverCapabilitiesConf.GetValues(i)[0];
+                    Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0}", driverCapabilitiesConf.GetKey(i));
+                    internetExplorerOptions.AddAdditionalCapability(driverCapabilitiesConf.GetKey(i), value, true);
+                }
+            }
+
+            foreach (string key in settings.AllKeys)
+            {
+                Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0} from {1}", key, this.CrossBrowserEnvironment);
+
+                internetExplorerOptions.AddAdditionalCapability(key, settings[key], true);
             }
         }
 
