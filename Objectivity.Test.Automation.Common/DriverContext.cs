@@ -232,7 +232,15 @@ namespace Objectivity.Test.Automation.Common
                     for (var i = 0; i < firefoxExtensions.Count; i++)
                     {
                         Logger.Trace(CultureInfo.CurrentCulture, "Installing extension {0}", firefoxExtensions.GetKey(i));
-                        options.Profile.AddExtension(firefoxExtensions.GetKey(i));
+                        try
+                        {
+                            options.Profile.AddExtension(firefoxExtensions.GetKey(i));
+                        }
+                        catch (FileNotFoundException)
+                        {
+                            Logger.Trace(CultureInfo.CurrentCulture, "Installing extension {0}", this.CurrentDirectory + FilesHelper.Separator + firefoxExtensions.GetKey(i));
+                            options.Profile.AddExtension(this.CurrentDirectory + FilesHelper.Separator + firefoxExtensions.GetKey(i));
+                        }
                     }
                 }
 
@@ -311,7 +319,15 @@ namespace Objectivity.Test.Automation.Common
                     for (var i = 0; i < chromeExtensions.Count; i++)
                     {
                         Logger.Trace(CultureInfo.CurrentCulture, "Installing extension {0}", chromeExtensions.GetKey(i));
-                        options.AddExtension(chromeExtensions.GetKey(i));
+                        try
+                        {
+                            options.AddExtension(chromeExtensions.GetKey(i));
+                        }
+                        catch (FileNotFoundException)
+                        {
+                            Logger.Trace(CultureInfo.CurrentCulture, "Installing extension {0}", this.CurrentDirectory + FilesHelper.Separator + chromeExtensions.GetKey(i));
+                            options.AddExtension(this.CurrentDirectory + FilesHelper.Separator + chromeExtensions.GetKey(i));
+                        }
                     }
                 }
 
