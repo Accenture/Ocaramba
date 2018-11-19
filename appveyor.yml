@@ -288,7 +288,7 @@ test_script:
     
     $grid = "selenium-server-standalone-3.141.59.jar"
     
-    $output = $env:APPVEYOR_BUILD_FOLDER + "Objectivity.Test.Automation.Tests.NUnit\bin\Release\$grid"
+    $output = $env:APPVEYOR_BUILD_FOLDER + "\Objectivity.Test.Automation.Tests.NUnit\bin\Release\$grid"
     
     $start_time = Get-Date
 
