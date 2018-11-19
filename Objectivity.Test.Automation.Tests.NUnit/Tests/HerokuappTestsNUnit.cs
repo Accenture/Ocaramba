@@ -30,6 +30,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
     using OpenQA.Selenium;
 
     [TestFixture]
+    [Category("BasicNUnit")]
     [Parallelizable(ParallelScope.Fixtures)]
     public class HerokuappTestsNUnit : ProjectTestBase
     {

@@ -22,7 +22,6 @@
 
 namespace Objectivity.Test.Automation.Tests.NUnit
 {
-    using System.Linq;
     using Common;
     using Common.Logger;
     using global::NUnit.Framework;
@@ -69,6 +68,11 @@ namespace Objectivity.Test.Automation.Tests.NUnit
         [OneTimeSetUp]
         public void BeforeClass()
         {
+            if (BaseConfiguration.TestBrowser == BrowserType.RemoteWebDriver)
+            {
+                this.DriverContext.CrossBrowserEnvironment = BaseConfiguration.TestBrowserCapabilities;
+            }
+
             this.DriverContext.CurrentDirectory = TestContext.CurrentContext.TestDirectory;
             this.DriverContext.Start();
         }

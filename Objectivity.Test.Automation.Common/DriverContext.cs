@@ -858,11 +858,16 @@ namespace Objectivity.Test.Automation.Common
                 }
             }
 
-            foreach (string key in settings.AllKeys)
+            // if there are any capability
+            if (settings != null)
             {
-                Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0} from {1}", key, this.CrossBrowserEnvironment);
+                foreach (string key in settings.AllKeys)
+                {
+                    Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0} from {1}", key,
+                        this.CrossBrowserEnvironment);
 
-                chromeOptions.AddAdditionalCapability(key, settings[key], true);
+                    chromeOptions.AddAdditionalCapability(key, settings[key], true);
+                }
             }
         }
     }

@@ -282,6 +282,22 @@ test_script:
        echo $lastexitcode
       }
       
+    echo '********************************************Downloading Selenium Grid********************************************' 
+    
+    $url = "https://bit.ly/2TlkRyu"
+    
+    $grid = "selenium-server-standalone-3.141.59.jar"
+    
+    $output = $env:APPVEYOR_BUILD_FOLDER + "Objectivity.Test.Automation.Tests.NUnit\bin\Release\$grid"
+    
+    $start_time = Get-Date
+
+    Import-Module BitsTransfer
+
+    Start-BitsTransfer -Source $url -Destination $output
+
+    Write-Output "Time taken: $((Get-Date).Subtract($start_time).Seconds) second(s)"
+      
     echo '********************************************Sending coverage test results********************************************'
     
     $coveralls = (Resolve-Path ".\packages\coveralls.net.*\tools\csmacnz.coveralls.exe").ToString()
