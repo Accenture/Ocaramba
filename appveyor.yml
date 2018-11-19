@@ -333,9 +333,9 @@ test_script:
        echo $lastexitcode
       }
     
-    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.NUnit\bin\Release\*.err
+    appveyor PushArtifact .\Objectivity.Test.Automation.Tests.NUnit\bin\Release\*.err
     
-    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.NUnit\bin\Release\*.out
+    appveyor PushArtifact .\Objectivity.Test.Automation.Tests.NUnit\bin\Release\*.out
       
     echo '********************************************Sending coverage test results********************************************'
     
