@@ -310,11 +310,11 @@ test_script:
     
     echo '********************************************Start Selenium Grid in background****************************************' 
     
-    Start-Process java -ArgumentList '-jar', $output' -role hub' -RedirectStandardOutput $outputLogs'console_hub.out' -RedirectStandardError $outputLogs'console_hub.err' 
+    $appHub=Start-Process java -ArgumentList '-jar', $output' -role hub' -RedirectStandardOutput $outputLogs'console_hub.out' -RedirectStandardError $outputLogs'console_hub.err' -passthru
 
     Start-Sleep -s 5
 
-    Start-Process java -ArgumentList '-jar', $output' -role node  -hub http://localhost:4444/grid/register' -RedirectStandardOutput $outputLogs'console_node.out' -RedirectStandardError $outputLogs'console_node.err'  
+    $appNode=Start-Process java -ArgumentList '-jar', $output' -role node  -hub http://localhost:4444/grid/register' -RedirectStandardOutput $outputLogs'console_node.out' -RedirectStandardError $outputLogs'console_node.err' -passthru 
     
     Start-Sleep -s 5
     
@@ -332,10 +332,14 @@ test_script:
       {
        echo $lastexitcode
       }
+      
+    Stop-Process -Id $appNode.Id
     
-    appveyor PushArtifact .\Objectivity.Test.Automation.Tests.NUnit\bin\Release\*.err
+    Stop-Process -Id $appHub.Id
     
-    appveyor PushArtifact .\Objectivity.Test.Automation.Tests.NUnit\bin\Release\*.out
+    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.NUnit\bin\Release\*.err
+    
+    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.NUnit\bin\Release\*.out
       
     echo '********************************************Sending coverage test results********************************************'
     
