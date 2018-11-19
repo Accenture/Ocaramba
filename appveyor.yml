@@ -292,11 +292,13 @@ test_script:
     
     $start_time = Get-Date
 
-    Import-Module BitsTransfer
-
-    Start-BitsTransfer -Source $url -Destination $output
-
-    Write-Output "Time taken: $((Get-Date).Subtract($start_time).Seconds) second(s)"
+    echo "output" $output
+    
+    $wc = New-Object System.Net.WebClient
+    
+    (New-Object System.Net.WebClient).DownloadFile($url, $output)
+    
+    echo "Time taken to download $($grid): $((Get-Date).Subtract($start_time).Seconds) second(s)"
       
     echo '********************************************Sending coverage test results********************************************'
     
