@@ -310,7 +310,24 @@ test_script:
     
     Start-Sleep -s 5
     
-    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.NUnit\bin\Release\console_*.*
+    echo '********************************************Run tests with Selenium Grid ****************************************' 
+    
+    cd .\\scripts
+    
+    .\set_AppConfig_for_tests.ps1 "..\Objectivity.Test.Automation.Tests.NUnit\bin\Release\" "Objectivity.Test.Automation.Tests.NUnit.dll.config" "//appSettings" "RemoteWebDriverHub" "http://localhost:4444/wd/hub" $true
+
+    cd ..
+    
+    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Objectivity.Test.Automation.Tests.NUnit\bin\Release\Objectivity.Test.Automation.Tests.NUnit.dll --where (cat==BasicNUnit) --workers=5 --result=myresults.xml`;format=AppVeyor" -filter:"+[Objectivity.Test.Automation.Common]*" -register:user -output:opencoverCoverage.xml
+
+    if($lastexitcode -ne 0)
+      {
+       echo $lastexitcode
+      }
+    
+    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.NUnit\bin\Release\*.err
+    
+    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.NUnit\bin\Release\*.out
       
     echo '********************************************Sending coverage test results********************************************'
     
