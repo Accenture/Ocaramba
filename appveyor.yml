@@ -299,6 +299,18 @@ test_script:
     (New-Object System.Net.WebClient).DownloadFile($url, $output)
     
     echo "Time taken to download $($grid): $((Get-Date).Subtract($start_time).Seconds) second(s)"
+    
+    echo '********************************************Start Selenium Grid in background****************************************' 
+    
+    Start-Process java -ArgumentList '-jar', $output' -role hub' -RedirectStandardOutput '.\console_hub.out' -RedirectStandardError '.\console_hub.err' 
+
+    Start-Sleep -s 5
+
+    Start-Process java -ArgumentList '-jar', $output' -role node  -hub http://localhost:4444/grid/register' -RedirectStandardOutput '.\console_node.out' -RedirectStandardError '.\console_node.err'  
+    
+    Start-Sleep -s 5
+    
+    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.NUnit\bin\Release\console_*.*
       
     echo '********************************************Sending coverage test results********************************************'
     
