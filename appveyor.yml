@@ -20,6 +20,10 @@ init:
       echo 'frameworkVersion'  $env:frameworkVersion
       
       echo 'version' $env:appveyor_build_version 
+
+      echo 'seleniumGridVersion' $env:seleniumGridVersion 
+
+      echo 'seleniumGridUrl' $env:seleniumGridUrl 
       
 
 assembly_info:
@@ -286,11 +290,13 @@ test_script:
       
     echo '********************************************Downloading Selenium Grid********************************************' 
     
-    $url = $(seleniumGridUrl)
+    $url = $env:seleniumGridUrl
     
-    $grid = $(seleniumGridVersion)
+    $grid = $env:seleniumGridVersion
     
     $output = $env:APPVEYOR_BUILD_FOLDER + "\Objectivity.Test.Automation.Tests.NUnit\bin\Release\$grid"
+    
+    $outputLogs = $env:APPVEYOR_BUILD_FOLDER + "\Objectivity.Test.Automation.Tests.NUnit\bin\Release\"
     
     $start_time = Get-Date
 
@@ -304,11 +310,11 @@ test_script:
     
     echo '********************************************Start Selenium Grid in background****************************************' 
     
-    Start-Process java -ArgumentList '-jar', $output' -role hub' -RedirectStandardOutput '.\console_hub.out' -RedirectStandardError '.\console_hub.err' 
+    Start-Process java -ArgumentList '-jar', $output' -role hub' -RedirectStandardOutput $outputLogs'console_hub.out' -RedirectStandardError $outputLogs'console_hub.err' 
 
     Start-Sleep -s 5
 
-    Start-Process java -ArgumentList '-jar', $output' -role node  -hub http://localhost:4444/grid/register' -RedirectStandardOutput '.\console_node.out' -RedirectStandardError '.\console_node.err'  
+    Start-Process java -ArgumentList '-jar', $output' -role node  -hub http://localhost:4444/grid/register' -RedirectStandardOutput $outputLogs'console_node.out' -RedirectStandardError $outputLogs'console_node.err'  
     
     Start-Sleep -s 5
     
