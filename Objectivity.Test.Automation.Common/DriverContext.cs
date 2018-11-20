@@ -530,11 +530,13 @@ namespace Objectivity.Test.Automation.Common
                             this.SetRemoteDriverFireFoxOptions(driverCapabilitiesConf, settings, firefoxOptions);
                             this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(firefoxOptions).ToCapabilities());
                             break;
+                        case BrowserType.Android:
                         case BrowserType.Chrome:
                             ChromeOptions chromeOptions = new ChromeOptions();
                             this.SetRemoteDriverChromeOptions(driverCapabilitiesConf, settings, chromeOptions);
                             this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(chromeOptions).ToCapabilities());
                             break;
+                        case BrowserType.Iphone:
                         case BrowserType.Safari:
                             SafariOptions safariOptions = new SafariOptions();
                             this.SetRemoteDriverOptions(driverCapabilitiesConf, settings, safariOptions);

@@ -73,6 +73,16 @@ namespace Objectivity.Test.Automation.Common
         CloudProvider,
 
         /// <summary>
+        /// Browser type to run test on Android with CloudProviders
+        /// </summary>
+        Android,
+
+        /// <summary>
+        /// Browser type to run test on Iphone with CloudProviders
+        /// </summary>
+        Iphone,
+
+        /// <summary>
         /// Not supported browser
         /// </summary>
         None
