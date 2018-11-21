@@ -281,7 +281,7 @@ test_script:
 
     cd ..
     
-    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\bin\Release\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser.dll --workers=5 --where \"test =~ Chrome \|\| test =~ Firefox \|\| test =~ IE \|\| test =~ Safari\" --result=myresults.xml`;format=AppVeyor" -filter:"+[Objectivity.Test.Automation.Common]*" -register:user -output:opencoverCoverage.xml
+    & nunit3-console.exe .\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\bin\Release\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser.dll --workers=5 --where "test =~ Chrome || test =~ Firefox || test =~ IE || test =~ Safari" --result=myresults.xml`;format=AppVeyor
 
     if($lastexitcode -ne 0)
       {
