@@ -37,7 +37,7 @@ environment:
     secure: 3OiDAcFLoSt3UCnmEU+XgM2d541PAqCNJAPqoiRqwRI=
   frameworkVersion: 3.1.3
   seleniumGridVersion: selenium-server-standalone-3.141.59.jar
-  seleniumGridUrl: https://bit.ly/2TlkRyu
+  seleniumGridUrl: http://selenium-release.storage.googleapis.com/3.141/selenium-server-standalone-3.141.59.jar
   GithubAuthToken:
     secure: x9uTnOFLUnZ6DiVhpBBxIJxij33Sz9uAIe+qef6M3sj9+J/AUmpfBmiGgqRabTqs
   COVERALLS_REPO_TOKEN:
@@ -300,11 +300,13 @@ test_script:
     
     $start_time = Get-Date
 
-    echo "output" $output
+    echo "Downloading Selenium Grid from:" $url
     
     $wc = New-Object System.Net.WebClient
     
     (New-Object System.Net.WebClient).DownloadFile($url, $output)
+    
+    echo "Selenium Grid downloaded to:" $output
     
     echo "Time taken to download $($grid): $((Get-Date).Subtract($start_time).Seconds) second(s)"
     
@@ -313,10 +315,14 @@ test_script:
     $appHub=Start-Process java -ArgumentList '-jar', $output' -role hub' -RedirectStandardOutput $outputLogs'console_hub.out' -RedirectStandardError $outputLogs'console_hub.err' -passthru
 
     Start-Sleep -s 5
+    
+    echo "Selenium Grid hub app Id:" $appHub.Id
 
     $appNode=Start-Process java -ArgumentList '-jar', $output' -role node  -hub http://localhost:4444/grid/register' -RedirectStandardOutput $outputLogs'console_node.out' -RedirectStandardError $outputLogs'console_node.err' -passthru 
     
     Start-Sleep -s 5
+    
+    echo "Selenium Grid node app Id:" $appNode.Id
     
     echo '********************************************Run tests with Selenium Grid ****************************************' 
     
@@ -333,7 +339,7 @@ test_script:
        echo $lastexitcode
       }
       
-    echo '********************************************Run CloudProviderCrossBrowser tests with Selenium Grid********************************************'
+    echo '*****************************Run CloudProviderCrossBrowser tests with Selenium Grid****************************'
       
     cd .\\scripts
     
@@ -348,7 +354,11 @@ test_script:
        echo $lastexitcode
       }
       
+    echo "Stop Selenium Grid node" 
+      
     Stop-Process -Id $appNode.Id
+    
+    echo "Stop Selenium Grid hub" 
     
     Stop-Process -Id $appHub.Id
     
