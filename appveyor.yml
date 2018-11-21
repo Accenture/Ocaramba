@@ -322,7 +322,7 @@ test_script:
     
     cd .\\scripts
     
-    .\set_AppConfig_for_tests.ps1 "..\Objectivity.Test.Automation.Tests.NUnit\bin\Release\" "Objectivity.Test.Automation.Tests.NUnit.dll.config" "//appSettings" "RemoteWebDriverHub" "http://localhost:4444/wd/hub" $true
+    .\set_AppConfig_for_tests.ps1 "..\Objectivity.Test.Automation.Tests.NUnit\bin\Release\" "Objectivity.Test.Automation.Tests.NUnit.dll.config" "//appSettings" "browser|RemoteWebDriverHub" "RemoteWebDriver|http://localhost:4444/wd/hub" $true
 
     cd ..
     
