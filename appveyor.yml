@@ -316,13 +316,13 @@ test_script:
 
     Start-Sleep -s 5
     
-    echo "Selenium Grid hub app Id:" $appHub.Id
+    echo "Selenium Grid hub started"
 
     $appNode=Start-Process java -ArgumentList '-jar', $output' -role node  -hub http://localhost:4444/grid/register' -RedirectStandardOutput $outputLogs'console_node.out' -RedirectStandardError $outputLogs'console_node.err' -passthru 
     
     Start-Sleep -s 5
     
-    echo "Selenium Grid node app Id:" $appNode.Id
+    echo "Selenium Grid node started"
     
     echo '********************************************Run tests with Selenium Grid ****************************************' 
     
@@ -353,6 +353,8 @@ test_script:
       {
        echo $lastexitcode
       }
+     
+    echo '*****************************Stop Selenium Grid****************************'
       
     echo "Stop Selenium Grid node" 
       
@@ -361,6 +363,8 @@ test_script:
     echo "Stop Selenium Grid hub" 
     
     Stop-Process -Id $appHub.Id
+    
+    echo '*****************************Add Selenium Grid logs to testresults****************************'
     
     7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.NUnit\bin\Release\*.err
     
