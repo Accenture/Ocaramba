@@ -197,11 +197,7 @@ test_script:
 
     echo '********************************************Unit tests for Firefox********************************************'
     
-    cd .\\scripts
-    
-    .\set_AppConfig_for_tests.ps1 "..\Objectivity.Test.Automation.UnitTests\bin\Release" "Objectivity.Test.Automation.UnitTests.dll.config" "//appSettings" "browser" "Firefox"
-
-    cd ..
+    .\scripts\set_AppConfig_for_tests.ps1 ".\Objectivity.Test.Automation.UnitTests\bin\Release" "Objectivity.Test.Automation.UnitTests.dll.config" "//appSettings" "browser" "Firefox"
 
     & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Objectivity.Test.Automation.UnitTests\bin\Release\Objectivity.Test.Automation.UnitTests.dll --where:cat=TakingScreehShots --result=myresults.xml`;format=AppVeyor" -filter:"+[Objectivity.Test.Automation.Common]*" -register:user -output:opencoverCoverage.xml
 
@@ -237,13 +233,9 @@ test_script:
     
     echo '********************************************BrowserStack tests********************************************'
     
-    cd .\\scripts
+    .\scripts\set_AppConfig_for_tests.ps1 ".\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\bin\Release" "Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser.dll.config" "//appSettings" "RemoteWebDriverHub" "http://$($env:browserstackuser):$($env:browserstackkey)@hub-cloud.browserstack.com/wd/hub"
     
-    .\set_AppConfig_for_tests.ps1 "..\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\bin\Release" "Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser.dll.config" "//appSettings" "RemoteWebDriverHub" "http://$($env:browserstackuser):$($env:browserstackkey)@hub-cloud.browserstack.com/wd/hub"
-    
-    .\set_AppConfig_for_tests.ps1 "..\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\bin\Release" "Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser.dll.config" "//DriverCapabilities" "build" "Objectivity.Test.Automation.Tests.BrowserStackCrossBrowser$env:appveyor_build_version" $true
-
-    cd ..
+    .\scripts\set_AppConfig_for_tests.ps1 ".\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\bin\Release" "Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser.dll.config" "//DriverCapabilities" "build" "Objectivity.Test.Automation.Tests.BrowserStackCrossBrowser$env:appveyor_build_version" $true
     
     & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\bin\Release\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser.dll --workers=5 --result=myresults.xml`;format=AppVeyor" -filter:"+[Objectivity.Test.Automation.Common]*" -register:user -output:opencoverCoverage.xml
 
@@ -252,15 +244,12 @@ test_script:
        echo $lastexitcode
       }
       
-     <#echo '********************************************testingbot.com tests********************************************'
-      
-    cd .\\scripts
+     <#echo '********************************************testingbot.com tests********************************************'  
     
-    .\set_AppConfig_for_tests.ps1 "..\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\bin\Release" "Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser.dll.config" "//appSettings" "RemoteWebDriverHub" "https://hub.testingbot.com/wd/hub/" $true
+    .\scripts\set_AppConfig_for_tests.ps1 ".\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\bin\Release" "Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser.dll.config" "//appSettings" "RemoteWebDriverHub" "https://hub.testingbot.com/wd/hub/" $true
     
-    .\set_AppConfig_for_tests.ps1 "..\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\bin\Release" "Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser.dll.config" "//DriverCapabilities" "key|secret|build|browserstack.user" "$env:testingbotkey|$env:testingbotsecret|Objectivity.Test.Automation.Tests.TestingBotCrossBrowser$env:appveyor_build_version|empty"
+    .\scripts\set_AppConfig_for_tests.ps1 ".\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\bin\Release" "Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser.dll.config" "//DriverCapabilities" "key|secret|build|browserstack.user" "$env:testingbotkey|$env:testingbotsecret|Objectivity.Test.Automation.Tests.TestingBotCrossBrowser$env:appveyor_build_version|empty"
 
-    cd ..
     
     & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\bin\Release\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser.dll --workers=5 --result=myresults.xml`;format=AppVeyor" -filter:"+[Objectivity.Test.Automation.Common]*" -register:user -output:opencoverCoverage.xml
 
@@ -270,16 +259,12 @@ test_script:
       }#>
       
     echo '********************************************saucelabs tests********************************************'
-      
-    cd .\\scripts
     
-    .\set_AppConfig_for_tests.ps1 "..\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\bin\Release" "Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser.dll.config" "//appSettings" "RemoteWebDriverHub" "http://$($env:saucelabsusername):$($env:saucelabsaccessKey)@ondemand.saucelabs.com:80/wd/hub"
+    .\scripts\set_AppConfig_for_tests.ps1 ".\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\bin\Release" "Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser.dll.config" "//appSettings" "RemoteWebDriverHub" "http://$($env:saucelabsusername):$($env:saucelabsaccessKey)@ondemand.saucelabs.com:80/wd/hub"
     
-    .\set_AppConfig_for_tests.ps1 "..\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\bin\Release" "Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser.dll.config" "//DriverCapabilities" "build" "Objectivity.Test.Automation.Tests.SauceLabsCrossBrowser$env:appveyor_build_version" $true
+    .\scripts\set_AppConfig_for_tests.ps1 ".\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\bin\Release" "Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser.dll.config" "//DriverCapabilities" "build" "Objectivity.Test.Automation.Tests.SauceLabsCrossBrowser$env:appveyor_build_version" $true
     
-    .\set_AppConfig_for_tests.ps1 "..\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\bin\Release" "Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser.dll.config" "//environments/Safari" "platform" "macOS 10.13" $true
-
-    cd ..
+    .\scripts\set_AppConfig_for_tests.ps1 ".\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\bin\Release" "Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser.dll.config" "//environments/Safari" "platform" "macOS 10.13" $true
     
     & nunit3-console.exe .\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\bin\Release\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser.dll --workers=5 --where "test =~ Chrome || test =~ IE || test =~ Safari" --result=myresults.xml`;format=AppVeyor
 
@@ -326,11 +311,7 @@ test_script:
     
     echo '********************************************Run tests with Selenium Grid ****************************************' 
     
-    cd .\\scripts
-    
-    .\set_AppConfig_for_tests.ps1 "..\Objectivity.Test.Automation.Tests.NUnit\bin\Release\" "Objectivity.Test.Automation.Tests.NUnit.dll.config" "//appSettings" "browser|RemoteWebDriverHub" "RemoteWebDriver|http://localhost:4444/wd/hub" $true
-
-    cd ..
+    .\scripts\set_AppConfig_for_tests.ps1 ".\Objectivity.Test.Automation.Tests.NUnit\bin\Release\" "Objectivity.Test.Automation.Tests.NUnit.dll.config" "//appSettings" "browser|RemoteWebDriverHub" "RemoteWebDriver|http://localhost:4444/wd/hub" $true
     
     & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Objectivity.Test.Automation.Tests.NUnit\bin\Release\Objectivity.Test.Automation.Tests.NUnit.dll --where (cat==BasicNUnit) --result=myresults.xml`;format=AppVeyor" -filter:"+[Objectivity.Test.Automation.Common]*" -register:user -output:opencoverCoverage.xml
 
@@ -340,12 +321,8 @@ test_script:
       }
       
     echo '*****************************Run CloudProviderCrossBrowser tests with Selenium Grid****************************'
-      
-    cd .\\scripts
     
-    .\set_AppConfig_for_tests.ps1 "..\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\bin\Release" "Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser.dll.config" "//appSettings" "RemoteWebDriverHub" "http://localhost:4444/wd/hub" $true
-
-    cd ..
+    .\scripts\set_AppConfig_for_tests.ps1 ".\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\bin\Release" "Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser.dll.config" "//appSettings" "RemoteWebDriverHub" "http://localhost:4444/wd/hub" $true
     
     & nunit3-console.exe .\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\bin\Release\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser.dll --where "test =~ Chrome" --result=myresults.xml`;format=AppVeyor
 
