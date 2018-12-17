@@ -2,6 +2,7 @@
 <HelpKI>
   <HelpKINode Title="Actions method" Url="html/74057790-1ce7-6460-b6cb-527e4e3c74de.htm" />
   <HelpKINode Title="AllGroupedDurationsMilliseconds property" Url="html/27fe60ef-1c90-216f-f368-bea6eacfed0e.htm" />
+  <HelpKINode Title="Android enumeration member" Url="html/fd8f95a4-1921-2ebe-a199-a6c1d3adcc8c.htm" />
   <HelpKINode Title="AverageDuration property" Url="html/2f98f38c-eef6-2d06-c74d-1c7fcf69393d.htm" />
   <HelpKINode Title="AverageGroupedTimes class">
     <HelpKINode Title="AverageGroupedTimes Class" Url="html/fb99d5ce-acf3-03e9-b87e-80ff1422bc66.htm" />
@@ -53,16 +54,6 @@
   <HelpKINode Title="Browser property" Url="html/d76bb42c-77f3-6115-eac5-e51f53aff2a0.htm" />
   <HelpKINode Title="BrowserName property" Url="html/dd90b482-8cf8-8dc4-4e7f-bf46e57c61b1.htm" />
   <HelpKINode Title="BrowserType enumeration" Url="html/fd8f95a4-1921-2ebe-a199-a6c1d3adcc8c.htm" />
-  <HelpKINode Title="Capabilities property" Url="html/f47c7a06-06a9-82eb-4068-fcea7a12b7fb.htm" />
-  <HelpKINode Title="CapabilitiesSet event" Url="html/45dca327-d19f-808c-5a1a-a55d039aa660.htm" />
-  <HelpKINode Title="CapabilitiesSetEventArgs class">
-    <HelpKINode Title="CapabilitiesSetEventArgs Class" Url="html/12c1e90a-6c30-35f0-bc85-0f6d178d528c.htm" />
-    <HelpKINode Title="constructor" Url="html/9bfeee27-428d-6359-3721-ec97d17b1124.htm" />
-    <HelpKINode Title="methods" Url="html/61054e77-d980-3b7c-8d7d-87ab3f21491d.htm" />
-    <HelpKINode Title="properties" Url="html/9e9166e9-578e-ac54-87a7-c1a3b00ed4f4.htm" />
-  </HelpKINode>
-  <HelpKINode Title="CapabilitiesSetEventArgs.Capabilities property" Url="html/f47c7a06-06a9-82eb-4068-fcea7a12b7fb.htm" />
-  <HelpKINode Title="CapabilitiesSetEventArgs.CapabilitiesSetEventArgs constructor" Url="html/9bfeee27-428d-6359-3721-ec97d17b1124.htm" />
   <HelpKINode Title="Checkbox class">
     <HelpKINode Title="Checkbox Class" Url="html/c124ae5b-b220-48ac-5ad2-b3aeba01c2f4.htm" />
     <HelpKINode Title="constructor" Url="html/0838205d-d2e4-f891-cbdc-2f76cd3b263f.htm" />
@@ -130,7 +121,6 @@
     <HelpKINode Title="methods" Url="html/8f6e6d14-685a-1c88-d6b5-a56f6cb6fab7.htm" />
     <HelpKINode Title="properties" Url="html/f5975ac0-f16a-cca8-8614-61dfb52c5fed.htm" />
   </HelpKINode>
-  <HelpKINode Title="DriverContext.CapabilitiesSet event" Url="html/45dca327-d19f-808c-5a1a-a55d039aa660.htm" />
   <HelpKINode Title="DriverContext.CrossBrowserEnvironment property" Url="html/94e4921b-f4c7-e679-8840-40c23996e73f.htm" />
   <HelpKINode Title="DriverContext.CrossBrowserProfile property" Url="html/982b371e-db1e-bc80-604d-2e685873e0bd.htm" />
   <HelpKINode Title="DriverContext.CurrentDirectory property" Url="html/a2043213-95fd-ac97-6f6c-c52429cb4220.htm" />
@@ -253,6 +243,7 @@
   <HelpKINode Title="Info method" Url="html/5946d461-48fb-2dec-f8e8-593077efa516.htm" />
   <HelpKINode Title="Input property" Url="html/50a5d181-bebc-45f4-aaa8-2758d30399be.htm" />
   <HelpKINode Title="InternetExplorer enumeration member" Url="html/fd8f95a4-1921-2ebe-a199-a6c1d3adcc8c.htm" />
+  <HelpKINode Title="Iphone enumeration member" Url="html/fd8f95a4-1921-2ebe-a199-a6c1d3adcc8c.htm" />
   <HelpKINode Title="IsDriverSynchronizationWithAngular method" Url="html/c4ca2d43-711f-0a0a-b16f-9683a2db6de4.htm" />
   <HelpKINode Title="IsElementPresent method" Url="html/91aa6234-30e7-9f8c-4202-48141d302683.htm" />
   <HelpKINode Title="IsElementTextEqualsToExpected method" Url="html/239e1044-aeae-a0ef-f85e-76c98c56ddfa.htm" />
@@ -373,7 +364,6 @@
   <HelpKINode Title="Objectivity.Test.Automation.Common namespace" Url="html/754f07ec-ee08-6463-5bed-12cfa57bc4f9.htm" />
   <HelpKINode Title="Objectivity.Test.Automation.Common.BaseConfiguration class" Url="html/f4719844-316f-7604-9f30-52e4cb9631e4.htm" />
   <HelpKINode Title="Objectivity.Test.Automation.Common.BrowserType enumeration" Url="html/fd8f95a4-1921-2ebe-a199-a6c1d3adcc8c.htm" />
-  <HelpKINode Title="Objectivity.Test.Automation.Common.CapabilitiesSetEventArgs class" Url="html/12c1e90a-6c30-35f0-bc85-0f6d178d528c.htm" />
   <HelpKINode Title="Objectivity.Test.Automation.Common.DriverContext class" Url="html/2ab328ae-8420-be17-e66b-cfbce57f943f.htm" />
   <HelpKINode Title="Objectivity.Test.Automation.Common.DriverOptionsSetEventArgs class" Url="html/89334e08-57f7-63a0-8233-66c99d4b19aa.htm" />
   <HelpKINode Title="Objectivity.Test.Automation.Common.DriversCustomSettings class" Url="html/ab747e09-d87d-5f53-d158-d574feae4574.htm" />
