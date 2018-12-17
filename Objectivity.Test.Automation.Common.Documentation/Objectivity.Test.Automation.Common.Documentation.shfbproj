@@ -53,7 +53,7 @@
     <HeaderText>Framework to automate tests using Selenium WebDriver</HeaderText>
     <FeedbackEMailAddress>TestAutomationGroup%40objectivity.co.uk</FeedbackEMailAddress>
     <CopyrightHref>http://www.objectivity.co.uk/</CopyrightHref>
-    <HtmlHelp1xCompilerPath>..\packages\EWSoftware.SHFB.2017.12.30.2\tools\</HtmlHelp1xCompilerPath>
+    <HtmlHelp1xCompilerPath>..\packages\EWSoftware.SHFB.2018.7.8.1\tools\</HtmlHelp1xCompilerPath>
     <ComponentPath>..\packages\</ComponentPath>
     <MissingTags>Summary, Parameter, Returns, AutoDocumentCtors, TypeParameter, AutoDocumentDispose</MissingTags>
     <PlugInConfigurations>
@@ -76,7 +76,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <!-- NOTE: Update the version number in the path (YYYY.M.D.R) to match the package version -->
-    <SHFBROOT Condition=" '$(SHFBROOT)' == '' ">$(MSBuildThisFileDirectory)..\packages\EWSoftware.SHFB.2017.12.30.2\tools\</SHFBROOT>
+    <SHFBROOT Condition=" '$(SHFBROOT)' == '' ">$(MSBuildThisFileDirectory)..\packages\EWSoftware.SHFB.2018.7.8.1\tools\</SHFBROOT>
   </PropertyGroup>
   <!-- There are no properties for these groups.  AnyCPU needs to appear in order for Visual Studio to perform
 			 the build.  The others are optional common platform types that may appear. -->

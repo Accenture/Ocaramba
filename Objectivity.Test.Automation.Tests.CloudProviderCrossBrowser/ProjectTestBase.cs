@@ -23,6 +23,8 @@
 namespace Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser
 {
     using System;
+    using System.Collections.Specialized;
+    using System.Configuration;
     using System.Globalization;
     using global::NUnit.Framework;
     using global::NUnit.Framework.Interfaces;
@@ -44,8 +46,14 @@ namespace Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser
 
         public ProjectTestBase(string environment)
         {
-            this.DriverContext.CrossBrowserEnvironment = environment;
-            this.driverContext.CapabilitiesSet += this.DriverContext_CapabilitiesSet;
+            BrowserType browserType;
+            bool supportedBrowser = Enum.TryParse(environment, out browserType);
+            Logger.Info(CultureInfo.CurrentCulture, "supportedBrowser {0} : {1}", supportedBrowser, browserType);
+
+            if (supportedBrowser)
+            {
+                this.DriverContext.CrossBrowserEnvironment = browserType;
+            }
         }
 
         /// <summary>
@@ -146,17 +154,6 @@ namespace Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser
                     TestContext.AddTestAttachment(filePath);
                 }
             }
-        }
-
-        private void DriverContext_CapabilitiesSet(object sender, CapabilitiesSetEventArgs args)
-        {
-            if (args == null || args.Capabilities == null)
-            {
-                throw new ArgumentNullException();
-            }
-
-             // Set the capability
-            args.Capabilities.SetCapability("name", TestContext.CurrentContext.Test.FullName);
         }
     }
 }

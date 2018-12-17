@@ -34,6 +34,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuspec", ".nuspec", "{1A98C4E2-FE6C-4E95-BA56-5F6B4F088A44}"
+	ProjectSection(SolutionItems) = preProject
+		.nuspec\Objectivity.Test.Automation.Features.nuspec = .nuspec\Objectivity.Test.Automation.Features.nuspec
+		.nuspec\Objectivity.Test.Automation.MsTest.nuspec = .nuspec\Objectivity.Test.Automation.MsTest.nuspec
+		.nuspec\Objectivity.Test.Automation.Nunit.nuspec = .nuspec\Objectivity.Test.Automation.Nunit.nuspec
+		.nuspec\Objectivity.Test.Automation.Xunit.nuspec = .nuspec\Objectivity.Test.Automation.Xunit.nuspec
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +91,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1A98C4E2-FE6C-4E95-BA56-5F6B4F088A44} = {2CF5AF89-028E-4D81-B39E-A021B5C01C11}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2EB905F9-3273-4103-957E-84D778012D8C}
