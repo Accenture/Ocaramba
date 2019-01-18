@@ -244,19 +244,19 @@ test_script:
        echo $lastexitcode
       }
       
-     <#echo '********************************************testingbot.com tests********************************************'  
+    echo '********************************************testingbot.com tests********************************************'  
     
-    .\scripts\set_AppConfig_for_tests.ps1 ".\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\bin\Release" "Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser.dll.config" "//appSettings" "RemoteWebDriverHub" "https://hub.testingbot.com/wd/hub/" $true
+    .\scripts\set_AppConfig_for_tests.ps1 ".\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\bin\Release" "Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser.dll.config" "//appSettings" "RemoteWebDriverHub" "https://$($env:testingbotkey):$($env:testingbotsecret)@hub.testingbot.com/wd/hub/"
     
-    .\scripts\set_AppConfig_for_tests.ps1 ".\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\bin\Release" "Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser.dll.config" "//DriverCapabilities" "key|secret|build|browserstack.user" "$env:testingbotkey|$env:testingbotsecret|Objectivity.Test.Automation.Tests.TestingBotCrossBrowser$env:appveyor_build_version|empty"
+    .\scripts\set_AppConfig_for_tests.ps1 ".\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\bin\Release" "Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser.dll.config" "//DriverCapabilities" "build" "$Objectivity.Test.Automation.Tests.TestingBotCrossBrowser$env:appveyor_build_version" $true
 
     
-    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\bin\Release\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser.dll --workers=5 --result=myresults.xml`;format=AppVeyor" -filter:"+[Objectivity.Test.Automation.Common]*" -register:user -output:opencoverCoverage.xml
+    & nunit3-console.exe .\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\bin\Release\Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser.dll --workers=1 --where "test =~ Chrome" --result=myresults.xml`;format=AppVeyor
 
     if($lastexitcode -ne 0)
       {
        echo $lastexitcode
-      }#>
+      }
       
     echo '********************************************saucelabs tests********************************************'
     
