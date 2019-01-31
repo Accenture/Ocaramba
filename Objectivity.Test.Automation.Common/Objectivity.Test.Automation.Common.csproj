@@ -64,6 +64,14 @@
     <Compile Include="DriverContext.cs" />
     <Compile Include="DriverOptionsSetEventArgs.cs" />
     <Compile Include="DriversCustomSettings.cs" />
+    <Compile Include="Driver\ChromeDriverContext.cs" />
+    <Compile Include="Driver\CommonDriver.cs" />
+    <Compile Include="Driver\EdgeDriverContext.cs" />
+    <Compile Include="Driver\FirefoxDriverContext.cs" />
+    <Compile Include="Driver\FirefoxPortableDriverContext.cs" />
+    <Compile Include="Driver\IEDriverContext.cs" />
+    <Compile Include="Driver\RemoteDriverContext.cs" />
+    <Compile Include="Driver\SafariDriverContext.cs" />
     <Compile Include="Exceptions\WaitTimeoutException.cs" />
     <Compile Include="Exceptions\DataDrivenReadException.cs" />
     <Compile Include="Helpers\PrintPerformanceResultsHelper.cs" />

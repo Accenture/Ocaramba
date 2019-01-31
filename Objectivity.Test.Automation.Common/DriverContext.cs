@@ -34,16 +34,12 @@ namespace Objectivity.Test.Automation.Common
     using System.Linq;
     using System.Text.RegularExpressions;
     using NLog;
+    using Objectivity.Test.Automation.Common.Driver;
     using Objectivity.Test.Automation.Common.Helpers;
     using Objectivity.Test.Automation.Common.Logger;
     using Objectivity.Test.Automation.Common.Types;
     using OpenQA.Selenium;
-    using OpenQA.Selenium.Chrome;
-    using OpenQA.Selenium.Edge;
     using OpenQA.Selenium.Firefox;
-    using OpenQA.Selenium.IE;
-    using OpenQA.Selenium.Remote;
-    using OpenQA.Selenium.Safari;
 
     /// <summary>
     /// Contains handle to driver and methods for web browser
@@ -53,6 +49,13 @@ namespace Objectivity.Test.Automation.Common
     {
         private static readonly NLog.Logger Logger = LogManager.GetLogger("DRIVER");
         private readonly Collection<ErrorDetail> verifyMessages = new Collection<ErrorDetail>();
+        private readonly FirefoxDriverContext ffContext = new FirefoxDriverContext();
+        private readonly FirefoxPortableDriverContext ffpContext = new FirefoxPortableDriverContext();
+        private readonly ChromeDriverContext chromeContext = new ChromeDriverContext();
+        private readonly SafariDriverContext safariContext = new SafariDriverContext();
+        private readonly IEDriverContext ieDriverContext = new IEDriverContext();
+        private readonly EdgeDriverContext edgeContext = new EdgeDriverContext();
+        private readonly RemoteDriverContext remoteDriverContext = new RemoteDriverContext();
 
         /// <summary>
         /// Gets or sets the handle to current driver.
@@ -176,283 +179,6 @@ namespace Objectivity.Test.Automation.Common
         /// </summary>
         public string CurrentDirectory { get; set; }
 
-        private FirefoxOptions FirefoxOptions
-        {
-            get
-            {
-                FirefoxOptions options = new FirefoxOptions();
-
-                if (BaseConfiguration.UseDefaultFirefoxProfile)
-                {
-                    try
-                    {
-                        var pathToCurrentUserProfiles = BaseConfiguration.PathToFirefoxProfile; // Path to profile
-                        var pathsToProfiles = Directory.GetDirectories(pathToCurrentUserProfiles, "*.default", SearchOption.TopDirectoryOnly);
-
-                        options.Profile = new FirefoxProfile(pathsToProfiles[0]);
-                    }
-                    catch (DirectoryNotFoundException e)
-                    {
-                        Logger.Info(CultureInfo.CurrentCulture, "problem with loading firefox profile {0}", e.Message);
-                    }
-                }
-
-                options.SetPreference("toolkit.startup.max_resumed_crashes", "999999");
-                options.SetPreference("network.automatic-ntlm-auth.trusted-uris", BaseConfiguration.Host ?? string.Empty);
-
-                // retrieving settings from config file
-                var firefoxPreferences = ConfigurationManager.GetSection("FirefoxPreferences") as NameValueCollection;
-                var firefoxExtensions = ConfigurationManager.GetSection("FirefoxExtensions") as NameValueCollection;
-
-                // preference for downloading files
-                options.SetPreference("browser.download.dir", this.DownloadFolder);
-                options.SetPreference("browser.download.folderList", 2);
-                options.SetPreference("browser.download.managershowWhenStarting", false);
-                options.SetPreference("browser.helperApps.neverAsk.saveToDisk", "application/vnd.ms-excel, application/x-msexcel, application/pdf, text/csv, text/html, application/octet-stream");
-
-                // disable Firefox's built-in PDF viewer
-                options.SetPreference("pdfjs.disabled", true);
-
-                // disable Adobe Acrobat PDF preview plugin
-                options.SetPreference("plugin.scan.Acrobat", "99.0");
-                options.SetPreference("plugin.scan.plid.all", false);
-
-                options.UseLegacyImplementation = BaseConfiguration.FirefoxUseLegacyImplementation;
-
-                // set browser proxy for Firefox
-                if (!string.IsNullOrEmpty(BaseConfiguration.Proxy))
-                {
-                    options.Proxy = this.CurrentProxy();
-                }
-
-                // if there are any extensions
-                if (firefoxExtensions != null)
-                {
-                    // loop through all of them
-                    for (var i = 0; i < firefoxExtensions.Count; i++)
-                    {
-                        Logger.Trace(CultureInfo.CurrentCulture, "Installing extension {0}", firefoxExtensions.GetKey(i));
-                        options.Profile.AddExtension(firefoxExtensions.GetKey(i));
-                    }
-                }
-
-                // custom preferences
-                // if there are any settings
-                if (firefoxPreferences == null)
-                {
-                    return options;
-                }
-
-                // loop through all of them
-                for (var i = 0; i < firefoxPreferences.Count; i++)
-                {
-                    Logger.Trace(CultureInfo.CurrentCulture, "Set custom preference '{0},{1}'", firefoxPreferences.GetKey(i), firefoxPreferences[i]);
-
-                    // and verify all of them
-                    switch (firefoxPreferences[i])
-                    {
-                        // if current settings value is "true"
-                        case "true":
-                            options.SetPreference(firefoxPreferences.GetKey(i), true);
-                            break;
-
-                        // if "false"
-                        case "false":
-                            options.SetPreference(firefoxPreferences.GetKey(i), false);
-                            break;
-
-                        // otherwise
-                        default:
-                            int temp;
-
-                            // an attempt to parse current settings value to an integer. Method TryParse returns True if the attempt is successful (the string is integer) or return False (if the string is just a string and cannot be cast to a number)
-                            if (int.TryParse(firefoxPreferences.Get(i), out temp))
-                            {
-                                options.SetPreference(firefoxPreferences.GetKey(i), temp);
-                            }
-                            else
-                            {
-                                options.SetPreference(firefoxPreferences.GetKey(i), firefoxPreferences[i]);
-                            }
-
-                            break;
-                    }
-                }
-
-                return options;
-            }
-        }
-
-        private ChromeOptions ChromeOptions
-        {
-            get
-            {
-                ChromeOptions options = new ChromeOptions();
-
-                // retrieving settings from config file
-                var chromePreferences = ConfigurationManager.GetSection("ChromePreferences") as NameValueCollection;
-                var chromeExtensions = ConfigurationManager.GetSection("ChromeExtensions") as NameValueCollection;
-                var chromeArguments = ConfigurationManager.GetSection("ChromeArguments") as NameValueCollection;
-
-                options.AddUserProfilePreference("profile.default_content_settings.popups", 0);
-                options.AddUserProfilePreference("download.default_directory", this.DownloadFolder);
-                options.AddUserProfilePreference("download.prompt_for_download", false);
-
-                // set browser proxy for chrome
-                if (!string.IsNullOrEmpty(BaseConfiguration.Proxy))
-                {
-                    options.Proxy = this.CurrentProxy();
-                }
-
-                // if there are any extensions
-                if (chromeExtensions != null)
-                {
-                    // loop through all of them
-                    for (var i = 0; i < chromeExtensions.Count; i++)
-                    {
-                        Logger.Trace(CultureInfo.CurrentCulture, "Installing extension {0}", chromeExtensions.GetKey(i));
-                        options.AddExtension(chromeExtensions.GetKey(i));
-                    }
-                }
-
-                if (BaseConfiguration.ChromePath != null)
-                {
-                    Logger.Trace(CultureInfo.CurrentCulture, "Setting Chrome Path {0}", BaseConfiguration.ChromePath);
-                    options.BinaryLocation = BaseConfiguration.ChromePath;
-                }
-
-                // if there are any arguments
-                if (chromeArguments != null)
-                {
-                    // loop through all of them
-                    for (var i = 0; i < chromeArguments.Count; i++)
-                    {
-                        Logger.Trace(CultureInfo.CurrentCulture, "Setting Chrome Arguments {0}", chromeArguments.GetKey(i));
-                        options.AddArgument(chromeArguments.GetKey(i));
-                    }
-                }
-
-                // custom preferences
-                // if there are any settings
-                if (chromePreferences == null)
-                {
-                    return options;
-                }
-
-                // loop through all of them
-                for (var i = 0; i < chromePreferences.Count; i++)
-                {
-                    Logger.Trace(CultureInfo.CurrentCulture, "Set custom preference '{0},{1}'", chromePreferences.GetKey(i), chromePreferences[i]);
-
-                    // and verify all of them
-                    switch (chromePreferences[i])
-                    {
-                        // if current settings value is "true"
-                        case "true":
-                            options.AddUserProfilePreference(chromePreferences.GetKey(i), true);
-                            break;
-
-                        // if "false"
-                        case "false":
-                            options.AddUserProfilePreference(chromePreferences.GetKey(i), false);
-                            break;
-
-                        // otherwise
-                        default:
-                            int temp;
-
-                            // an attempt to parse current settings value to an integer. Method TryParse returns True if the attempt is successful (the string is integer) or return False (if the string is just a string and cannot be cast to a number)
-                            if (int.TryParse(chromePreferences.Get(i), out temp))
-                            {
-                                options.AddUserProfilePreference(chromePreferences.GetKey(i), temp);
-                            }
-                            else
-                            {
-                                options.AddUserProfilePreference(chromePreferences.GetKey(i), chromePreferences[i]);
-                            }
-
-                            break;
-                    }
-                }
-
-                return options;
-            }
-        }
-
-        private InternetExplorerOptions InternetExplorerOptions
-        {
-            get
-            {
-                // retrieving settings from config file
-                var internetExplorerPreferences = ConfigurationManager.GetSection("InternetExplorerPreferences") as NameValueCollection;
-                var options = new InternetExplorerOptions
-                {
-                    EnsureCleanSession = true,
-                    IgnoreZoomLevel = true,
-                };
-
-                // set browser proxy for IE
-                if (!string.IsNullOrEmpty(BaseConfiguration.Proxy))
-                {
-                    options.Proxy = this.CurrentProxy();
-                }
-
-                // custom preferences
-                // if there are any settings
-                if (internetExplorerPreferences == null)
-                {
-                    return options;
-                }
-
-                // loop through all of them
-                for (var i = 0; i < internetExplorerPreferences.Count; i++)
-                {
-                    Logger.Trace(CultureInfo.CurrentCulture, "Set custom preference '{0},{1}'", internetExplorerPreferences.GetKey(i), internetExplorerPreferences[i]);
-
-                    // and verify all of them
-                    switch (internetExplorerPreferences.GetKey(i))
-                    {
-                        case "EnsureCleanSession":
-                            options.EnsureCleanSession = Convert.ToBoolean(internetExplorerPreferences[i], CultureInfo.CurrentCulture);
-                            break;
-
-                        case "IgnoreZoomLevel":
-                            options.IgnoreZoomLevel = Convert.ToBoolean(internetExplorerPreferences[i], CultureInfo.CurrentCulture);
-                            break;
-                    }
-                }
-
-                return options;
-            }
-        }
-
-        private EdgeOptions EdgeOptions
-        {
-            get
-            {
-                var options = new EdgeOptions();
-
-                // set browser proxy for Edge
-                if (!string.IsNullOrEmpty(BaseConfiguration.Proxy))
-                {
-                    options.Proxy = this.CurrentProxy();
-                }
-
-                return options;
-            }
-        }
-
-        private SafariOptions SafariOptions
-        {
-            get
-            {
-                var options = new SafariOptions();
-                options.AddAdditionalCapability("cleanSession", true);
-
-                return options;
-            }
-        }
-
         /// <summary>
         /// Takes the screenshot.
         /// </summary>
@@ -478,76 +204,52 @@ namespace Objectivity.Test.Automation.Common
         }
 
         /// <summary>
+        /// Dictionary that contains references to all driver types.
+        /// </summary>
+        /// <returns>Dictionary with Selenium WebDriver reference.</returns>
+        public Dictionary<BrowserType, IWebDriver> CreateDictionary()
+        {
+            var dictionary = new Dictionary<BrowserType, IWebDriver>
+                {
+                    { BrowserType.Firefox, this.ffContext.GetDriver },
+                    { BrowserType.FirefoxPortable, this.ffpContext.GetDriver },
+                    { BrowserType.Chrome, this.chromeContext.GetDriver },
+                    { BrowserType.IE, this.ieDriverContext.GetDriver },
+                    { BrowserType.InternetExplorer, this.ieDriverContext.GetDriver },
+                    { BrowserType.Edge, this.edgeContext.GetDriver },
+                    { BrowserType.Safari, this.safariContext.GetDriver },
+                    { BrowserType.RemoteWebDriver, this.remoteDriverContext.GetDriver }
+                };
+
+            return dictionary;
+        }
+
+        /// <summary>
+        /// Handle choosing correct Selenium WebDriver.
+        /// </summary>
+        /// <param name="browserType">Browser type name.</param>
+        /// <returns>Selenium WebDriver instance.</returns>
+        public IWebDriver ReturnCurrentDriver(BrowserType browserType)
+        {
+            try
+            {
+                return this.CreateDictionary()[browserType];
+            }
+            catch
+            {
+                throw new NotSupportedException(
+                        string.Format(CultureInfo.CurrentCulture, "Driver {0} is not supported", BaseConfiguration.TestBrowser));
+            }
+        }
+
+        /// <summary>
         /// Starts the specified Driver.
         /// </summary>
         /// <exception cref="NotSupportedException">When driver not supported</exception>
         [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "Driver disposed later in stop method")]
         public void Start()
         {
-            switch (BaseConfiguration.TestBrowser)
-            {
-                case BrowserType.Firefox:
-                    this.driver = new FirefoxDriver(this.SetDriverOptions(this.FirefoxOptions));
-                    break;
-                case BrowserType.FirefoxPortable:
-                    this.FirefoxOptions.BrowserExecutableLocation = BaseConfiguration.FirefoxPath;
-                    this.driver = new FirefoxDriver(this.SetDriverOptions(this.FirefoxOptions));
-                    break;
-                case BrowserType.InternetExplorer:
-                case BrowserType.IE:
-                    this.driver = new InternetExplorerDriver(this.SetDriverOptions(this.InternetExplorerOptions));
-                    break;
-                case BrowserType.Chrome:
-                    this.driver = new ChromeDriver(this.SetDriverOptions(this.ChromeOptions));
-                    break;
-                case BrowserType.Safari:
-                    this.driver = new SafariDriver(this.SetDriverOptions(this.SafariOptions));
-                    this.CheckIfProxySetForSafari();
-                    break;
-                case BrowserType.RemoteWebDriver:
-                    var driverCapabilitiesConf = ConfigurationManager.GetSection("DriverCapabilities") as NameValueCollection;
-                    NameValueCollection settings = ConfigurationManager.GetSection("environments/" + this.CrossBrowserEnvironment) as NameValueCollection;
-                    switch (this.CrossBrowserEnvironment)
-                    {
-                        case BrowserType.Firefox:
-                            FirefoxOptions firefoxOptions = new FirefoxOptions();
-                            this.SetRemoteDriverFireFoxOptions(driverCapabilitiesConf, settings, firefoxOptions);
-                            this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(firefoxOptions).ToCapabilities());
-                            break;
-                        case BrowserType.Chrome:
-                            ChromeOptions chromeOptions = new ChromeOptions();
-                            this.SetRemoteDriverChromeOptions(driverCapabilitiesConf, settings, chromeOptions);
-                            this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(chromeOptions).ToCapabilities());
-                            break;
-                        case BrowserType.Safari:
-                            SafariOptions safariOptions = new SafariOptions();
-                            this.SetRemoteDriverOptions(driverCapabilitiesConf, settings, safariOptions);
-                            this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(safariOptions).ToCapabilities());
-                            break;
-                        case BrowserType.Edge:
-                            EdgeOptions egEdgeOptions = new EdgeOptions();
-                            this.SetRemoteDriverOptions(driverCapabilitiesConf, settings, egEdgeOptions);
-                            this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(egEdgeOptions).ToCapabilities());
-                            break;
-                        case BrowserType.IE:
-                        case BrowserType.InternetExplorer:
-                            InternetExplorerOptions internetExplorerOptions = new InternetExplorerOptions();
-                            this.SetRemoteDriverOptions(driverCapabilitiesConf, settings, internetExplorerOptions);
-                            this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(internetExplorerOptions).ToCapabilities());
-                            break;
-                        default:
-                            throw new NotSupportedException(
-                                string.Format(CultureInfo.CurrentCulture, "Driver {0} is not supported", BaseConfiguration.TestBrowser));
-                    }
-
-                    break;
-                case BrowserType.Edge:
-                    this.driver = new EdgeDriver(this.SetDriverOptions(this.EdgeOptions));
-                    break;
-                default:
-                    throw new NotSupportedException(
-                        string.Format(CultureInfo.CurrentCulture, "Driver {0} is not supported", BaseConfiguration.TestBrowser));
-            }
+            this.driver = this.ReturnCurrentDriver(BaseConfiguration.TestBrowser);
 
             this.driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(BaseConfiguration.LongTimeout);
             this.driver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(BaseConfiguration.ShortTimeout);
@@ -730,7 +432,7 @@ namespace Objectivity.Test.Automation.Common
                 SocksProxy = BaseConfiguration.Proxy
             };
             return proxy;
-         }
+        }
 
         private void CheckIfProxySetForSafari()
         {
@@ -757,75 +459,6 @@ namespace Objectivity.Test.Automation.Common
             }
 
             return option;
-        }
-
-        private T SetRemoteDriverOptions<T>(NameValueCollection driverCapabilitiesConf, NameValueCollection settings, T options)
-            where T : DriverOptions
-        {
-            // if there are any capability
-            if (driverCapabilitiesConf != null)
-            {
-                // loop through all of them
-                for (var i = 0; i < driverCapabilitiesConf.Count; i++)
-                {
-                    string value = driverCapabilitiesConf.GetValues(i)[0];
-                    Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0}", driverCapabilitiesConf.GetKey(i));
-                    options.AddAdditionalCapability(driverCapabilitiesConf.GetKey(i), value);
-                }
-            }
-
-            foreach (string key in settings.AllKeys)
-            {
-                Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0} from {1}", key, this.CrossBrowserEnvironment);
-
-                options.AddAdditionalCapability(key, settings[key]);
-            }
-
-            return options;
-        }
-
-        private void SetRemoteDriverFireFoxOptions(NameValueCollection driverCapabilitiesConf, NameValueCollection settings, FirefoxOptions firefoxOptions)
-        {
-            // if there are any capability
-            if (driverCapabilitiesConf != null)
-            {
-                // loop through all of them
-                for (var i = 0; i < driverCapabilitiesConf.Count; i++)
-                {
-                    string value = driverCapabilitiesConf.GetValues(i)[0];
-                    Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0}", driverCapabilitiesConf.GetKey(i));
-                    firefoxOptions.AddAdditionalCapability(driverCapabilitiesConf.GetKey(i), value, true);
-                }
-            }
-
-            foreach (string key in settings.AllKeys)
-            {
-                Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0} from {1}", key, this.CrossBrowserEnvironment);
-
-                firefoxOptions.AddAdditionalCapability(key, settings[key], true);
-            }
-        }
-
-        private void SetRemoteDriverChromeOptions(NameValueCollection driverCapabilitiesConf, NameValueCollection settings, ChromeOptions chromeOptions)
-        {
-            // if there are any capability
-            if (driverCapabilitiesConf != null)
-            {
-                // loop through all of them
-                for (var i = 0; i < driverCapabilitiesConf.Count; i++)
-                {
-                    string value = driverCapabilitiesConf.GetValues(i)[0];
-                    Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0}", driverCapabilitiesConf.GetKey(i));
-                    chromeOptions.AddAdditionalCapability(driverCapabilitiesConf.GetKey(i), value, true);
-                }
-            }
-
-            foreach (string key in settings.AllKeys)
-            {
-                Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0} from {1}", key, this.CrossBrowserEnvironment);
-
-                chromeOptions.AddAdditionalCapability(key, settings[key], true);
-            }
         }
     }
 }
