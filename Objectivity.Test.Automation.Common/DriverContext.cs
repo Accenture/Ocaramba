@@ -244,6 +244,8 @@ namespace Objectivity.Test.Automation.Common
                     }
                 }
 
+                options = this.AddFirefoxArguments(options);
+
                 // custom preferences
                 // if there are any settings
                 if (firefoxPreferences == null)
