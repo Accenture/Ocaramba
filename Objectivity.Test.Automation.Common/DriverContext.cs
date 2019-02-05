@@ -90,7 +90,7 @@ namespace Objectivity.Test.Automation.Common
         /// <summary>
         /// Gets or sets the Environment Browsers from App.config
         /// </summary>
-        public BrowserType CrossBrowserEnvironment { get; set; }
+        public string CrossBrowserEnvironment { get; set; }
 
         /// <summary>
         /// Gets Sets Folder name for ScreenShot
@@ -523,7 +523,9 @@ namespace Objectivity.Test.Automation.Common
                 case BrowserType.RemoteWebDriver:
                     var driverCapabilitiesConf = ConfigurationManager.GetSection("DriverCapabilities") as NameValueCollection;
                     NameValueCollection settings = ConfigurationManager.GetSection("environments/" + this.CrossBrowserEnvironment) as NameValueCollection;
-                    switch (this.CrossBrowserEnvironment)
+                    var browserType = this.GetBrowserTypeForRemoteDriver(settings);
+
+                    switch (browserType)
                     {
                         case BrowserType.Firefox:
                             FirefoxOptions firefoxOptions = new FirefoxOptions();
@@ -555,7 +557,7 @@ namespace Objectivity.Test.Automation.Common
                             break;
                         default:
                             throw new NotSupportedException(
-                                string.Format(CultureInfo.CurrentCulture, "Driver {0} is not supported", BaseConfiguration.TestBrowser));
+                                string.Format(CultureInfo.CurrentCulture, "Driver {0} is not supported", this.CrossBrowserEnvironment));
                     }
 
                     break;
@@ -869,6 +871,37 @@ namespace Objectivity.Test.Automation.Common
                     chromeOptions.AddAdditionalCapability(key, settings[key], true);
                 }
             }
+        }
+
+        private BrowserType GetBrowserTypeForRemoteDriver(NameValueCollection settings)
+        {
+            if (BaseConfiguration.TestBrowserCapabilities != BrowserType.CloudProvider)
+            {
+                return BaseConfiguration.TestBrowserCapabilities;
+            }
+
+            BrowserType browserType = BrowserType.None;
+            bool supportedBrowser = false;
+            if (settings != null)
+            {
+                string browser = settings.GetValues("browser")?[0];
+                supportedBrowser = Enum.TryParse(browser, out browserType);
+                Logger.Info(CultureInfo.CurrentCulture, "supportedBrowser {0} : {1}", supportedBrowser, browserType);
+            }
+
+            if (!supportedBrowser)
+            {
+                if (this.CrossBrowserEnvironment.ToLower(CultureInfo.CurrentCulture).Contains(BrowserType.Android.ToString().ToLower(CultureInfo.CurrentCulture)))
+                {
+                    browserType = BrowserType.Chrome;
+                }
+                else if (this.CrossBrowserEnvironment.ToLower(CultureInfo.CurrentCulture).Contains(BrowserType.Iphone.ToString().ToLower(CultureInfo.CurrentCulture)))
+                {
+                    browserType = BrowserType.Safari;
+                }
+            }
+
+            return browserType;
         }
     }
 }

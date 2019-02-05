@@ -25,13 +25,13 @@ namespace Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser.Tests
     using global::NUnit.Framework;
     using PageObjects.PageObjects.TheInternet;
 
-    [TestFixture("Chrome")]
+    [TestFixture("ChromeWindows")]
     [TestFixture("Android")]
     [TestFixture("Iphone")]
-    [TestFixture("Firefox")]
-    [TestFixture("Safari")]
-    [TestFixture("Edge")]
-    [TestFixture("IE")]
+    [TestFixture("FirefoxWindows")]
+    [TestFixture("SafariMac")]
+    [TestFixture("EdgeWindows")]
+    [TestFixture("IEWindows")]
     [Parallelizable(ParallelScope.Fixtures)]
     public class HerokuappTestsNUnit : ProjectTestBase
     {
