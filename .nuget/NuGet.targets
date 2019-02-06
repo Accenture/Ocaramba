@@ -55,60 +55,23 @@
         </ParameterGroup>
         <Task>
             <Reference Include="System.Core" />
-            <Reference Include="System.Xml" />
-            <Reference Include="WindowsBase" />
             <Using Namespace="System" />
             <Using Namespace="System.IO" />
-            <Using Namespace="System.IO.Packaging" />
-            <Using Namespace="System.Linq" />
             <Using Namespace="System.Net" />
-            <Using Namespace="System.Xml" />
             <Using Namespace="Microsoft.Build.Framework" />
             <Using Namespace="Microsoft.Build.Utilities" />
             <Code Type="Fragment" Language="cs">
                 <![CDATA[
-                string zipTempPath = null;
                 try {
                     OutputFilename = Path.GetFullPath(OutputFilename);
-                    if (File.Exists(OutputFilename)) {
-                        return true;
-                    }
-                    Log.LogMessage("Determining latest version of NuGet.CommandLine...");
+                    Log.LogMessage("Downloading latest version of NuGet.exe...");
                     WebClient webClient = new WebClient();
-                    XmlDocument xml = new XmlDocument();
-                    xml.LoadXml(webClient.DownloadString("http://nuget.org/v1/FeedService.svc/Packages()?$filter=tolower(Id)%20eq%20'nuget.commandline'&$top=1&$orderby=Version%20desc"));
-                    XmlNamespaceManager xns = new XmlNamespaceManager(xml.NameTable);
-                    xns.AddNamespace("atom", "http://www.w3.org/2005/Atom");
-                    xns.AddNamespace("d", "http://schemas.microsoft.com/ado/2007/08/dataservices");
-                    xns.AddNamespace("m", "http://schemas.microsoft.com/ado/2007/08/dataservices/metadata");
-                    string version = xml.SelectSingleNode("//atom:entry/m:properties/d:Version", xns).InnerText;
-                    string zipUrl = xml.SelectSingleNode("//atom:entry/atom:content", xns).Attributes["src"].Value;
-                    Log.LogMessage("Downloading NuGet.CommandLine v{0}...", version);
-                    zipTempPath = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
-                    webClient.DownloadFile(zipUrl, zipTempPath);
-                    Log.LogMessage("Copying to {0}...", OutputFilename);
-                    using (Package package = Package.Open(zipTempPath)) {
-                        PackagePart exePart = package.GetParts().Where(p => p.Uri.ToString().ToLowerInvariant() == "/tools/nuget.exe").Single();
-                        using (Stream inputStream = exePart.GetStream(FileMode.Open, FileAccess.Read))
-                        using (Stream outputStream = File.Create(OutputFilename)) {
-                            byte[] buffer = new byte[16384];
-                            while (true) {
-                                int read = inputStream.Read(buffer, 0, buffer.Length);
-                                if (read == 0) {
-                                    break;
-                                }
-                                outputStream.Write(buffer, 0, read);
-                            }
-                        }
-                    }
+                    webClient.DownloadFile("https://dist.nuget.org/win-x86-commandline/latest/nuget.exe", OutputFilename);
                     return true;
                 }
                 catch (Exception ex) {
                     Log.LogErrorFromException(ex);
                     return false;
-                }
-                finally {
-                    if (zipTempPath != null) File.Delete(zipTempPath);
                 }
             ]]>
             </Code>
