@@ -571,9 +571,6 @@ namespace Objectivity.Test.Automation.Common
                         string.Format(CultureInfo.CurrentCulture, "Driver {0} is not supported", BaseConfiguration.TestBrowser));
             }
 
-            this.driver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(BaseConfiguration.ShortTimeout);
-            this.driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(BaseConfiguration.ImplicitlyWaitMilliseconds);
-
             if (BaseConfiguration.EnableEventFiringWebDriver)
             {
                 this.driver = new MyEventFiringWebDriver(this.driver);
@@ -887,7 +884,7 @@ namespace Objectivity.Test.Automation.Common
             if (settings != null)
             {
                 string browser = settings.GetValues("browser")?[0];
-                supportedBrowser = Enum.TryParse(browser, out browserType);
+                supportedBrowser = Enum.TryParse(browser, true, out browserType);
                 Logger.Info(CultureInfo.CurrentCulture, "supportedBrowser {0} : {1}", supportedBrowser, browserType);
             }
 
