@@ -24,6 +24,8 @@ init:
       echo 'seleniumGridVersion' $env:seleniumGridVersion 
 
       echo 'seleniumGridUrl' $env:seleniumGridUrl 
+
+	  echo 'latestNugetUrl' $env:latestNugetUrl 
       
 
 assembly_info:
@@ -38,6 +40,7 @@ environment:
   frameworkVersion: 3.1.3
   seleniumGridVersion: selenium-server-standalone-3.141.59.jar
   seleniumGridUrl: http://selenium-release.storage.googleapis.com/3.141/selenium-server-standalone-3.141.59.jar
+  latestNugetUrl: https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
   GithubAuthToken:
     secure: x9uTnOFLUnZ6DiVhpBBxIJxij33Sz9uAIe+qef6M3sj9+J/AUmpfBmiGgqRabTqs
   COVERALLS_REPO_TOKEN:
@@ -64,26 +67,36 @@ build:
 after_build:
  - ps: >-
       echo '********************************************Creating nuget packages********************************************'
+
+	  $url = $env:latestNugetUrl
+
+	  echo "Downloading nuget from:" $url
+
+      $output = $env:APPVEYOR_BUILD_FOLDER + ".\.nuget\nuget.exe"
+
+      (New-Object System.Net.WebClient).DownloadFile($url, $output)
+
+      echo "nuget downloaded to:" $output
       
       Copy-Item .\.nuspec\Objectivity.Test.Automation.Nunit.nuspec .\\Objectivity.Test.Automation.Common\\Objectivity.Test.Automation.Common.nuspec
       
-      nuget pack .\Objectivity.Test.Automation.Common\Objectivity.Test.Automation.Common.csproj -symbols -properties Configuration=Release -Verbosity detailed
+      .\.nuget\nuget pack .\Objectivity.Test.Automation.Common\Objectivity.Test.Automation.Common.csproj -symbols -properties Configuration=Release -Verbosity detailed
       
       Copy-Item .\.nuspec\Objectivity.Test.Automation.MsTest.nuspec .\\Objectivity.Test.Automation.Common\\Objectivity.Test.Automation.Common.nuspec
       
-      nuget pack .\Objectivity.Test.Automation.Common\Objectivity.Test.Automation.Common.csproj -symbols -properties Configuration=Release -Verbosity detailed
+      .\.nuget\nuget pack .\Objectivity.Test.Automation.Common\Objectivity.Test.Automation.Common.csproj -symbols -properties Configuration=Release -Verbosity detailed
       
       Copy-Item .\.nuspec\Objectivity.Test.Automation.MsTest.nuspec .\\Objectivity.Test.Automation.Common\\Objectivity.Test.Automation.Common.nuspec
       
-      nuget pack .\Objectivity.Test.Automation.Common\Objectivity.Test.Automation.Common.csproj -symbols -properties Configuration=Release -Verbosity detailed
+      .\.nuget\nuget pack .\Objectivity.Test.Automation.Common\Objectivity.Test.Automation.Common.csproj -symbols -properties Configuration=Release -Verbosity detailed
       
       Copy-Item .\.nuspec\Objectivity.Test.Automation.Features.nuspec .\\Objectivity.Test.Automation.Common\\Objectivity.Test.Automation.Common.nuspec
       
-      nuget pack .\Objectivity.Test.Automation.Common\Objectivity.Test.Automation.Common.csproj -symbols -properties Configuration=Release -Verbosity detailed
+      .\.nuget\nuget pack .\Objectivity.Test.Automation.Common\Objectivity.Test.Automation.Common.csproj -symbols -properties Configuration=Release -Verbosity detailed
       
       Copy-Item .\.nuspec\Objectivity.Test.Automation.Xunit.nuspec .\\Objectivity.Test.Automation.Common\\Objectivity.Test.Automation.Common.nuspec
       
-      nuget pack .\Objectivity.Test.Automation.Common\Objectivity.Test.Automation.Common.csproj -symbols -properties Configuration=Release -Verbosity detailed
+      .\.nuget\nuget pack .\Objectivity.Test.Automation.Common\Objectivity.Test.Automation.Common.csproj -symbols -properties Configuration=Release -Verbosity detailed
       
       echo '********************************************Copying files for gh-pages********************************************'
       
@@ -286,8 +299,6 @@ test_script:
     $start_time = Get-Date
 
     echo "Downloading Selenium Grid from:" $url
-    
-    $wc = New-Object System.Net.WebClient
     
     (New-Object System.Net.WebClient).DownloadFile($url, $output)
     

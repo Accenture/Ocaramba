@@ -6,7 +6,7 @@
     <title>Objectivity.Test.Automation.Common.Features</title>
     <authors>Objectivity Bespoke Software Specialists</authors>
     <owners>Objectivity Bespoke Software Specialists</owners>
-    <licenseUrl>https://github.com/ObjectivityLtd/Test.Automation/blob/master/LICENSE</licenseUrl>
+    <license type="expression">MIT</license>
     <projectUrl>https://github.com/ObjectivityLtd/Test.Automation</projectUrl>
 	<iconUrl>https://github.com/ObjectivityLtd/Test.Automation/wiki/images/Objectivity_logo_avatar32.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
