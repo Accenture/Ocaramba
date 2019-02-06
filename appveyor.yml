@@ -67,14 +67,14 @@ after_build:
  - ps: >-
       echo '********************************************Creating nuget packages********************************************'
 
-	  $url = $env:latestNugetUrl
+      $url = $env:latestNugetUrl
 
-	  echo "Downloading nuget from:" $url
-
+      echo "Downloading nuget from:" $url
+      
       $output = $env:APPVEYOR_BUILD_FOLDER + ".\.nuget\nuget.exe"
-
+      
       (New-Object System.Net.WebClient).DownloadFile($url, $output)
-
+      
       echo "nuget downloaded to:" $output
       
       Copy-Item .\.nuspec\Objectivity.Test.Automation.Nunit.nuspec .\\Objectivity.Test.Automation.Common\\Objectivity.Test.Automation.Common.nuspec
