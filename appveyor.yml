@@ -57,18 +57,9 @@ environment:
   saucelabsaccessKey:
     secure: D6Yy/Ng4/rfzsqQmnzwmTtN/Knee3c8/NtI1HgKke2ybA/6WpqP38RQfSHENYECa
 before_build:
-- cmd: >-
-    nuget restore
-
-build:
-  project: TestFramework.sln
-  verbosity: minimal
-after_build:
- - ps: >-
-      echo '********************************************Creating nuget packages********************************************'
-
+- ps: >-
       $url = $env:latestNugetUrl
-
+      
       echo "Downloading nuget from:" $url
       
       $output = $env:APPVEYOR_BUILD_FOLDER + ".\.nuget\nuget.exe"
@@ -76,6 +67,15 @@ after_build:
       (New-Object System.Net.WebClient).DownloadFile($url, $output)
       
       echo "nuget downloaded to:" $output
+      
+     .\.nuget\nuget restore
+      
+build:
+  project: TestFramework.sln
+  verbosity: minimal
+after_build:
+ - ps: >-
+      echo '********************************************Creating nuget packages********************************************'
       
       Copy-Item .\.nuspec\Objectivity.Test.Automation.Nunit.nuspec .\\Objectivity.Test.Automation.Common\\Objectivity.Test.Automation.Common.nuspec
       
