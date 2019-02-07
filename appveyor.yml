@@ -6,6 +6,7 @@ branches:
   except:
   - gh-pages
 configuration: Release
+image: Visual Studio 2017
 init:
  - ps: >-
       if ($env:APPVEYOR_REPO_TAG -eq "true")
