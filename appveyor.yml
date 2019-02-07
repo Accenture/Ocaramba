@@ -68,7 +68,7 @@ before_build:
       
       echo "nuget downloaded to:" $output
       
-     .\.nuget\nuget restore
+      .\.nuget\nuget restore
       
 build:
   project: TestFramework.sln
