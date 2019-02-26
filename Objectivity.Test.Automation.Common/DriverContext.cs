@@ -90,7 +90,7 @@ namespace Objectivity.Test.Automation.Common
         /// <summary>
         /// Gets or sets the Environment Browsers from App.config
         /// </summary>
-        public BrowserType CrossBrowserEnvironment { get; set; }
+        public string CrossBrowserEnvironment { get; set; }
 
         /// <summary>
         /// Gets Sets Folder name for ScreenShot
@@ -243,6 +243,8 @@ namespace Objectivity.Test.Automation.Common
                         }
                     }
                 }
+
+                options = this.AddFirefoxArguments(options);
 
                 // custom preferences
                 // if there are any settings
@@ -523,17 +525,19 @@ namespace Objectivity.Test.Automation.Common
                 case BrowserType.RemoteWebDriver:
                     var driverCapabilitiesConf = ConfigurationManager.GetSection("DriverCapabilities") as NameValueCollection;
                     NameValueCollection settings = ConfigurationManager.GetSection("environments/" + this.CrossBrowserEnvironment) as NameValueCollection;
-                    switch (this.CrossBrowserEnvironment)
+                    var browserType = this.GetBrowserTypeForRemoteDriver(settings);
+
+                    switch (browserType)
                     {
                         case BrowserType.Firefox:
                             FirefoxOptions firefoxOptions = new FirefoxOptions();
-                            this.SetRemoteDriverFireFoxOptions(driverCapabilitiesConf, settings, firefoxOptions);
+                            this.SetRemoteDriverBrowserOptions(driverCapabilitiesConf, settings, firefoxOptions);
                             this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(firefoxOptions).ToCapabilities());
                             break;
                         case BrowserType.Android:
                         case BrowserType.Chrome:
                             ChromeOptions chromeOptions = new ChromeOptions();
-                            this.SetRemoteDriverChromeOptions(driverCapabilitiesConf, settings, chromeOptions);
+                            this.SetRemoteDriverBrowserOptions(driverCapabilitiesConf, settings, chromeOptions);
                             this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(chromeOptions).ToCapabilities());
                             break;
                         case BrowserType.Iphone:
@@ -550,12 +554,12 @@ namespace Objectivity.Test.Automation.Common
                         case BrowserType.IE:
                         case BrowserType.InternetExplorer:
                             InternetExplorerOptions internetExplorerOptions = new InternetExplorerOptions();
-                            this.SetRemoteDriverIEOptions(driverCapabilitiesConf, settings, internetExplorerOptions);
+                            this.SetRemoteDriverBrowserOptions(driverCapabilitiesConf, settings, internetExplorerOptions);
                             this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(internetExplorerOptions).ToCapabilities());
                             break;
                         default:
                             throw new NotSupportedException(
-                                string.Format(CultureInfo.CurrentCulture, "Driver {0} is not supported", BaseConfiguration.TestBrowser));
+                                string.Format(CultureInfo.CurrentCulture, "Driver {0} is not supported", this.CrossBrowserEnvironment));
                     }
 
                     break;
@@ -566,10 +570,6 @@ namespace Objectivity.Test.Automation.Common
                     throw new NotSupportedException(
                         string.Format(CultureInfo.CurrentCulture, "Driver {0} is not supported", BaseConfiguration.TestBrowser));
             }
-
-            this.driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(BaseConfiguration.LongTimeout);
-            this.driver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(BaseConfiguration.ShortTimeout);
-            this.driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(BaseConfiguration.ImplicitlyWaitMilliseconds);
 
             if (BaseConfiguration.EnableEventFiringWebDriver)
             {
@@ -792,39 +792,52 @@ namespace Objectivity.Test.Automation.Common
                 }
             }
 
-            foreach (string key in settings.AllKeys)
+            // if there are any capability
+            if (settings != null)
             {
-                Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0} from {1}", key, this.CrossBrowserEnvironment);
+                foreach (string key in settings.AllKeys)
+                {
+                    Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0} from {1}", key, this.CrossBrowserEnvironment);
 
-                options.AddAdditionalCapability(key, settings[key]);
+                    options.AddAdditionalCapability(key, settings[key]);
+                }
             }
 
             return options;
         }
 
-        private void SetRemoteDriverFireFoxOptions(NameValueCollection driverCapabilitiesConf, NameValueCollection settings, FirefoxOptions firefoxOptions)
+        private BrowserType GetBrowserTypeForRemoteDriver(NameValueCollection settings)
         {
-            // if there are any capability
-            if (driverCapabilitiesConf != null)
+            if (BaseConfiguration.TestBrowserCapabilities != BrowserType.CloudProvider)
             {
-                // loop through all of them
-                for (var i = 0; i < driverCapabilitiesConf.Count; i++)
+                return BaseConfiguration.TestBrowserCapabilities;
+            }
+
+            BrowserType browserType = BrowserType.None;
+            bool supportedBrowser = false;
+            if (settings != null)
+            {
+                string browser = settings.GetValues("browser")?[0];
+                supportedBrowser = Enum.TryParse(browser, true, out browserType);
+                Logger.Info(CultureInfo.CurrentCulture, "supportedBrowser {0} : {1}", supportedBrowser, browserType);
+            }
+
+            if (!supportedBrowser)
+            {
+                if (this.CrossBrowserEnvironment.ToLower(CultureInfo.CurrentCulture).Contains(BrowserType.Android.ToString().ToLower(CultureInfo.CurrentCulture)))
                 {
-                    string value = driverCapabilitiesConf.GetValues(i)[0];
-                    Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0}", driverCapabilitiesConf.GetKey(i));
-                    firefoxOptions.AddAdditionalCapability(driverCapabilitiesConf.GetKey(i), value, true);
+                    browserType = BrowserType.Chrome;
+                }
+                else if (this.CrossBrowserEnvironment.ToLower(CultureInfo.CurrentCulture).Contains(BrowserType.Iphone.ToString().ToLower(CultureInfo.CurrentCulture)))
+                {
+                    browserType = BrowserType.Safari;
                 }
             }
 
-            foreach (string key in settings.AllKeys)
-            {
-                Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0} from {1}", key, this.CrossBrowserEnvironment);
-
-                firefoxOptions.AddAdditionalCapability(key, settings[key], true);
-            }
+            return browserType;
         }
 
-        private void SetRemoteDriverIEOptions(NameValueCollection driverCapabilitiesConf, NameValueCollection settings, InternetExplorerOptions internetExplorerOptions)
+        private void SetRemoteDriverBrowserOptions(NameValueCollection driverCapabilitiesConf, NameValueCollection settings, dynamic browserOptions)
         {
             // if there are any capability
             if (driverCapabilitiesConf != null)
@@ -834,29 +847,7 @@ namespace Objectivity.Test.Automation.Common
                 {
                     string value = driverCapabilitiesConf.GetValues(i)[0];
                     Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0}", driverCapabilitiesConf.GetKey(i));
-                    internetExplorerOptions.AddAdditionalCapability(driverCapabilitiesConf.GetKey(i), value, true);
-                }
-            }
-
-            foreach (string key in settings.AllKeys)
-            {
-                Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0} from {1}", key, this.CrossBrowserEnvironment);
-
-                internetExplorerOptions.AddAdditionalCapability(key, settings[key], true);
-            }
-        }
-
-        private void SetRemoteDriverChromeOptions(NameValueCollection driverCapabilitiesConf, NameValueCollection settings, ChromeOptions chromeOptions)
-        {
-            // if there are any capability
-            if (driverCapabilitiesConf != null)
-            {
-                // loop through all of them
-                for (var i = 0; i < driverCapabilitiesConf.Count; i++)
-                {
-                    string value = driverCapabilitiesConf.GetValues(i)[0];
-                    Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0}", driverCapabilitiesConf.GetKey(i));
-                    chromeOptions.AddAdditionalCapability(driverCapabilitiesConf.GetKey(i), value, true);
+                    browserOptions.AddAdditionalCapability(driverCapabilitiesConf.GetKey(i), value, true);
                 }
             }
 
@@ -866,8 +857,7 @@ namespace Objectivity.Test.Automation.Common
                 foreach (string key in settings.AllKeys)
                 {
                     Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0} from {1}", key, this.CrossBrowserEnvironment);
-
-                    chromeOptions.AddAdditionalCapability(key, settings[key], true);
+                    browserOptions.AddAdditionalCapability(key, settings[key], true);
                 }
             }
         }
