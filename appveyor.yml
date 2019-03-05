@@ -70,7 +70,7 @@ before_build:
       
       .\.nuget\nuget restore
       
-      dotnet tool install coveralls.net --version 1.0.0 --tool-path packages
+      dotnet tool install coveralls.net --tool-path packages
       
 build:
   project: TestFramework.sln
