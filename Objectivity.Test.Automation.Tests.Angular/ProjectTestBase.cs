@@ -111,11 +111,15 @@ namespace Objectivity.Test.Automation.Tests.Angular
             this.LogTest.LogTestEnding(this.driverContext);
             this.LogTest.LogTestEnding(this.driverContext);
             var logs = this.driverContext.Driver.Manage().Logs;
-            var perfLogs = logs.GetLog("performance");
-            foreach (var perfLog in perfLogs)
+            if (BaseConfiguration.TestBrowser == BrowserType.Chrome)
             {
-                Logger.Info(perfLog.ToString);
+                var perfLogs = logs.GetLog("performance");
+                foreach (var perfLog in perfLogs)
+                {
+                    Logger.Info(perfLog.ToString);
+                }
             }
+
             if (this.IsVerifyFailedAndClearMessages(this.driverContext) && TestContext.CurrentContext.Result.Outcome.Status != TestStatus.Failed)
             {
                 Assert.Fail();
