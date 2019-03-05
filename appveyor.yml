@@ -224,6 +224,22 @@ test_script:
 
     7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.UnitTests\bin\Release\*.log
 
+    echo '********************************************Angular test for Internet Explorer********************************************'
+    
+    .\scripts\set_AppConfig_for_tests.ps1 ".\Objectivity.Test.Automation.Tests.Angular\bin\Release" "Objectivity.Test.Automation.Tests.Angular.dll.config" "//appSettings" "browser" "InternetExplorer"
+
+    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Objectivity.Test.Automation.Tests.Angular\bin\Release\Objectivity.Test.Automation.Tests.Angular.dll --result=myresults.xml`;format=AppVeyor" -filter:"+[Objectivity.Test.Automation.Common]*" -register:user -output:opencoverCoverage.xml
+
+    if($lastexitcode -ne 0)
+      {
+       echo $lastexitcode
+      }
+
+    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.Angular\bin\Release\**\*.png
+
+    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.Angular\bin\Release\**\*.html
+
+    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.Angular\bin\Release\*.log
 
     echo '********************************************MSTest tests********************************************'
 
