@@ -70,6 +70,8 @@ before_build:
       
       .\.nuget\nuget restore
       
+      dotnet tool install coveralls.net --version 1.0.0 --tool-path packages
+      
 build:
   project: TestFramework.sln
   verbosity: minimal
@@ -375,7 +377,7 @@ test_script:
       
     echo '********************************************Sending coverage test results********************************************'
     
-    $coveralls = (Resolve-Path ".\packages\coveralls.net.*\tools\csmacnz.coveralls.exe").ToString()
+    $coveralls = (Resolve-Path ".\packages\csmacnz.coveralls.exe").ToString()
     
     & $coveralls --opencover -i opencoverCoverage.xml --repoToken $env:COVERALLS_REPO_TOKEN --useRelativePaths --commitId $env:APPVEYOR_REPO_COMMIT --commitBranch $env:APPVEYOR_REPO_BRANCH --commitAuthor $env:APPVEYOR_REPO_COMMIT_AUTHOR --commitEmail $env:APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL --commitMessage $env:APPVEYOR_REPO_COMMIT_MESSAGE --jobId $env:APPVEYOR_BUILD_NUMBER --serviceName appveyor
 
