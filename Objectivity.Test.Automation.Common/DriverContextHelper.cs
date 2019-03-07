@@ -309,6 +309,7 @@ namespace Objectivity.Test.Automation.Common
             }
         }
 
+        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Loop through all internetExplorerPreferences")]
         private void GetInternetExplorerPreferences(NameValueCollection internetExplorerPreferences, InternetExplorerOptions options)
         {
             // loop through all of them
