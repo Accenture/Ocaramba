@@ -350,6 +350,26 @@ namespace Objectivity.Test.Automation.Common
                     case "InitialBrowserUrl":
                         options.InitialBrowserUrl = Convert.ToString(internetExplorerPreferences[i], CultureInfo.CurrentCulture);
                         break;
+
+                    case "BrowserAttachTimeout":
+                        options.BrowserAttachTimeout = TimeSpan.FromSeconds(Convert.ToDouble(internetExplorerPreferences[i], CultureInfo.CurrentCulture));
+                        break;
+
+                    case "ForceCreateProcessApi":
+                        options.ForceCreateProcessApi = Convert.ToBoolean(internetExplorerPreferences[i], CultureInfo.CurrentCulture);
+                        break;
+
+                    case "ForceShellWindowsApi":
+                        options.ForceShellWindowsApi = Convert.ToBoolean(internetExplorerPreferences[i], CultureInfo.CurrentCulture);
+                        break;
+
+                    case "UsePerProcessProxy":
+                        options.UsePerProcessProxy = Convert.ToBoolean(internetExplorerPreferences[i], CultureInfo.CurrentCulture);
+                        break;
+
+                    case "FileUploadDialogTimeout":
+                        options.FileUploadDialogTimeout = TimeSpan.FromSeconds(Convert.ToDouble(internetExplorerPreferences[i], CultureInfo.CurrentCulture));
+                        break;
                 }
             }
         }
