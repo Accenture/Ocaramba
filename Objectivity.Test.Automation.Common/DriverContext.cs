@@ -83,11 +83,6 @@ namespace Objectivity.Test.Automation.Common
         public string TestTitle { get; set; }
 
         /// <summary>
-        /// Gets or sets the CrossBrowserProfile from App.config
-        /// </summary>
-        public string CrossBrowserProfile { get; set; }
-
-        /// <summary>
         /// Gets or sets the Environment Browsers from App.config
         /// </summary>
         public string CrossBrowserEnvironment { get; set; }
