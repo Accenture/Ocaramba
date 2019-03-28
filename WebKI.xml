@@ -73,7 +73,6 @@
   <HelpKINode Title="CopyFile method" Url="html/6916c4e2-c1a0-ae64-1e9c-02ab6642765e.htm" />
   <HelpKINode Title="CountFiles method" Url="html/4e71690e-1128-1a7b-0908-5e283ac59cc8.htm" />
   <HelpKINode Title="CrossBrowserEnvironment property" Url="html/94e4921b-f4c7-e679-8840-40c23996e73f.htm" />
-  <HelpKINode Title="CrossBrowserProfile property" Url="html/982b371e-db1e-bc80-604d-2e685873e0bd.htm" />
   <HelpKINode Title="CssSelector enumeration member" Url="html/64a6eff1-1642-a6be-95f5-38c0ebf1f42e.htm" />
   <HelpKINode Title="Csv enumeration member" Url="html/24ea484b-208c-10a9-79d9-518c88c2b6e9.htm" />
   <HelpKINode Title="CurrentDate property" Url="html/7dcf6e15-ab9e-82e0-71b2-d13fb9e30009.htm" />
@@ -122,7 +121,6 @@
     <HelpKINode Title="properties" Url="html/f5975ac0-f16a-cca8-8614-61dfb52c5fed.htm" />
   </HelpKINode>
   <HelpKINode Title="DriverContext.CrossBrowserEnvironment property" Url="html/94e4921b-f4c7-e679-8840-40c23996e73f.htm" />
-  <HelpKINode Title="DriverContext.CrossBrowserProfile property" Url="html/982b371e-db1e-bc80-604d-2e685873e0bd.htm" />
   <HelpKINode Title="DriverContext.CurrentDirectory property" Url="html/a2043213-95fd-ac97-6f6c-c52429cb4220.htm" />
   <HelpKINode Title="DriverContext.DeleteAllCookies method" Url="html/c8f7c30b-01db-0fe7-1476-f3f02735e5dc.htm" />
   <HelpKINode Title="DriverContext.DownloadFolder property" Url="html/46a0e3d4-218d-2ae7-471d-0597e2010b07.htm" />
