@@ -166,8 +166,19 @@ namespace Objectivity.Test.Automation.Common.Helpers
 
             Logger.Debug(CultureInfo.CurrentCulture, "Cutting out screenshot of element locationX:{0} locationY:{1} elementWidth:{2} elementHeight:{3}", locationX, locationY, elementWidth, elementHeight);
 
-            var image = new Rectangle(locationX, locationY, elementWidth, elementHeight);
             var importFile = new Bitmap(filePath);
+            ////Check if new size of image is not bigger than imported.
+            if (importFile.Size.Height - locationY < elementHeight)
+            {
+                elementHeight = importFile.Size.Height - locationY;
+            }
+
+            if (importFile.Size.Width - locationX < elementWidth)
+            {
+                elementHeight = importFile.Size.Height - locationX;
+            }
+
+            var image = new Rectangle(locationX, locationY, elementWidth, elementHeight);
             string newFilePath;
             Bitmap cloneFile;
             try
