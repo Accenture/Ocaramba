@@ -234,6 +234,23 @@ namespace Objectivity.Test.Automation.Common
         }
 
         /// <summary>
+        /// Gets specified path to the directory containing ChromeDriver.
+        /// </summary>
+        public static string PathToChromeDriverDirectory
+        {
+            get
+            {
+                Logger.Trace(CultureInfo.CurrentCulture, "Path to the directory containing Chrome Driver from App.config '{0}'", ConfigurationManager.AppSettings["PathToChromeDriverDirectory"]);
+                if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["PathToChromeDriverDirectory"]))
+                {
+                    return string.Empty;
+                }
+
+                return ConfigurationManager.AppSettings["PathToChromeDriverDirectory"];
+            }
+        }
+
+        /// <summary>
         /// Gets a value indicating whether logs JavaScript errors from a browser. False by default.
         /// </summary>
         public static bool JavaScriptErrorLogging

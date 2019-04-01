@@ -495,7 +495,7 @@ namespace Objectivity.Test.Automation.Common
                     this.driver = new InternetExplorerDriver(this.SetDriverOptions(this.InternetExplorerOptions));
                     break;
                 case BrowserType.Chrome:
-                    this.driver = new ChromeDriver(this.SetDriverOptions(this.ChromeOptions));
+                    this.driver = string.IsNullOrEmpty(BaseConfiguration.PathToChromeDriverDirectory) ? new ChromeDriver(this.SetDriverOptions(this.ChromeOptions)) : new ChromeDriver(BaseConfiguration.PathToChromeDriverDirectory, this.SetDriverOptions(this.ChromeOptions));
                     break;
                 case BrowserType.Safari:
                     this.driver = new SafariDriver(this.SetDriverOptions(this.SafariOptions));
