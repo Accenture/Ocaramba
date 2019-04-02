@@ -33,11 +33,6 @@ namespace Objectivity.Test.Automation.Common
         Firefox,
 
         /// <summary>
-        /// Firefox portable
-        /// </summary>
-        FirefoxPortable,
-
-        /// <summary>
         /// InternetExplorer browser
         /// </summary>
         InternetExplorer,
