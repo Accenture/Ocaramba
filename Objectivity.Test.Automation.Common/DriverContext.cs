@@ -487,7 +487,7 @@ namespace Objectivity.Test.Automation.Common
                     break;
                 case BrowserType.InternetExplorer:
                 case BrowserType.IE:
-                    this.driver = new InternetExplorerDriver(this.SetDriverOptions(this.InternetExplorerOptions));
+                    this.driver = string.IsNullOrEmpty(BaseConfiguration.PathToInternetExplorerDriverDirectory) ? new InternetExplorerDriver(this.SetDriverOptions(this.InternetExplorerOptions)) : new InternetExplorerDriver(BaseConfiguration.PathToInternetExplorerDriverDirectory, this.SetDriverOptions(this.InternetExplorerOptions));
                     break;
                 case BrowserType.Chrome:
                     if (!string.IsNullOrEmpty(BaseConfiguration.ChromeBrowserExecutableLocation))
@@ -543,7 +543,7 @@ namespace Objectivity.Test.Automation.Common
 
                     break;
                 case BrowserType.Edge:
-                    this.driver = new EdgeDriver(this.SetDriverOptions(this.EdgeOptions));
+                    this.driver = string.IsNullOrEmpty(BaseConfiguration.PathToEdgeDriverDirectory) ? new EdgeDriver(this.SetDriverOptions(this.EdgeOptions)) : new EdgeDriver(BaseConfiguration.PathToEdgeDriverDirectory, this.SetDriverOptions(this.EdgeOptions));
                     break;
                 default:
                     throw new NotSupportedException(

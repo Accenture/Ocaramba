@@ -258,6 +258,40 @@ namespace Objectivity.Test.Automation.Common
         }
 
         /// <summary>
+        /// Gets specified path to the directory containing InternetExplorer Driver.
+        /// </summary>
+        public static string PathToInternetExplorerDriverDirectory
+        {
+            get
+            {
+                Logger.Trace(CultureInfo.CurrentCulture, "Path to the directory containing Internet Explorer Driver from App.config '{0}'", ConfigurationManager.AppSettings["PathToInternetExplorerDriverDirectory"]);
+                if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["PathToInternetExplorerDriverDirectory"]))
+                {
+                    return string.Empty;
+                }
+
+                return ConfigurationManager.AppSettings["PathToInternetExplorerDriverDirectory"];
+            }
+        }
+
+        /// <summary>
+        /// Gets specified path to the directory containing Edge Driver.
+        /// </summary>
+        public static string PathToEdgeDriverDirectory
+        {
+            get
+            {
+                Logger.Trace(CultureInfo.CurrentCulture, "Path to the directory containing Edge Driver from App.config '{0}'", ConfigurationManager.AppSettings["PathToEdgeDriverDirectory"]);
+                if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["PathToEdgeDriverDirectory"]))
+                {
+                    return string.Empty;
+                }
+
+                return ConfigurationManager.AppSettings["PathToEdgeDriverDirectory"];
+            }
+        }
+
+        /// <summary>
         /// Gets specified path to the directory containing ChromeDriver.
         /// </summary>
         public static string PathToChromeDriverDirectory
