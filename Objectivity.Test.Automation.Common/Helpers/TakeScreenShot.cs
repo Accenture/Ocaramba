@@ -164,14 +164,34 @@ namespace Objectivity.Test.Automation.Common.Helpers
             var elementWidth = element.Size.Width;
             var elementHeight = element.Size.Height;
 
-            Logger.Debug(CultureInfo.CurrentCulture, "Cutting out screenshot of element locationX:{0} locationY:{1} elementWidth:{2} elementHeight:{3}", locationX, locationY, elementWidth, elementHeight);
+            return CutOutScreenShot(folder, screenshotName, locationX, locationY, elementWidth, elementHeight, filePath);
+        }
+
+        /// <summary>
+        /// Cut out the screen shot by giving locationX, locationY, elementWidth, elementHeight.
+        /// </summary>
+        /// <param name="folder">Folder to save new screenshot</param>
+        /// <param name="newScreenShotName">Name of new screenshot</param>
+        /// <param name="locationX">The x-coordinate of the upper-left corner of the new rectangle.</param>
+        /// <param name="locationY">The y-coordinate of the upper-left corner of the new rectangle.</param>
+        /// <param name="elementWidth">The width of the new rectangle.</param>
+        /// <param name="elementHeight">The height of the new rectangle</param>
+        /// <param name="fullPathToScreenShotToCutOut">Full path to the screenshot to be cut out</param>
+        /// <returns>Full path of cutted out screenshot</returns>
+        /// <example>How to use it: <code>
+        /// var fullPath = CutOutScreenShot(folder, screenshotName, locationX, locationY, elementWidth, elementHeight, fullPathToScreenShotToCutOut);
+        /// </code></example>
+        public static string CutOutScreenShot(string folder, string newScreenShotName, int locationX, int locationY, int elementWidth, int elementHeight, string fullPathToScreenShotToCutOut)
+        {
+            Logger.Debug(CultureInfo.CurrentCulture, "Trying to cut out screenshot locationX:{0} locationY:{1} elementWidth:{2} elementHeight:{3}", locationX, locationY, elementWidth, elementHeight);
 
             string newFilePath;
             Bitmap importFile = null;
             Bitmap cloneFile;
             try
             {
-                importFile = new Bitmap(filePath);
+                importFile = new Bitmap(fullPathToScreenShotToCutOut);
+                Logger.Debug(CultureInfo.CurrentCulture, "Size of imported screenshot Width:{0} Height:{1}", importFile.Size.Width, importFile.Size.Height);
                 ////Check if new size of image is not bigger than imported.
                 if (importFile.Size.Height - locationY < elementHeight)
                 {
@@ -183,8 +203,15 @@ namespace Objectivity.Test.Automation.Common.Helpers
                     elementWidth = importFile.Size.Width - locationX;
                 }
 
+                if (locationY > importFile.Size.Height || locationX > importFile.Size.Width)
+                {
+                    Logger.Error(CultureInfo.CurrentCulture, "Cutting out screenshot locationX:{0} locationY:{1} elementWidth:{2} elementHeight:{3} is not possible", locationX, locationY, elementWidth, elementHeight);
+                    return null;
+                }
+
+                Logger.Debug(CultureInfo.CurrentCulture, "Cutting out screenshot locationX:{0} locationY:{1} elementWidth:{2} elementHeight:{3}", locationX, locationY, elementWidth, elementHeight);
                 var image = new Rectangle(locationX, locationY, elementWidth, elementHeight);
-                newFilePath = Path.Combine(folder, screenshotName + ".png");
+                newFilePath = Path.Combine(folder, newScreenShotName + ".png");
                 cloneFile = (Bitmap)importFile.Clone(image, importFile.PixelFormat);
             }
             finally
@@ -192,9 +219,9 @@ namespace Objectivity.Test.Automation.Common.Helpers
                 importFile?.Dispose();
             }
 
-            Logger.Debug(CultureInfo.CurrentCulture, "Saving screenshot of element {0}", newFilePath);
+            Logger.Debug(CultureInfo.CurrentCulture, "Saving new screenshot {0}", newFilePath);
             cloneFile.Save(newFilePath);
-            File.Delete(filePath);
+            File.Delete(fullPathToScreenShotToCutOut);
             return newFilePath;
         }
     }
