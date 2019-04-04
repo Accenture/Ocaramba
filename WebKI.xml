@@ -19,10 +19,10 @@
     <HelpKINode Title="BaseConfiguration Class" Url="html/f4719844-316f-7604-9f30-52e4cb9631e4.htm" />
     <HelpKINode Title="properties" Url="html/e1c3b808-daa8-2857-b97f-1b523bef97bc.htm" />
   </HelpKINode>
-  <HelpKINode Title="BaseConfiguration.ChromePath property" Url="html/555d3ba6-6e62-91aa-fb0c-2a742a55fe48.htm" />
+  <HelpKINode Title="BaseConfiguration.ChromeBrowserExecutableLocation property" Url="html/82d394ad-a047-e3ab-f096-448eda7fa68c.htm" />
   <HelpKINode Title="BaseConfiguration.DownloadFolder property" Url="html/ac1824c3-e57d-b245-e27e-eae41c49fefd.htm" />
   <HelpKINode Title="BaseConfiguration.EnableEventFiringWebDriver property" Url="html/f4edce29-3f26-89f8-037a-ff32030fbc52.htm" />
-  <HelpKINode Title="BaseConfiguration.FirefoxPath property" Url="html/62829289-389b-ef22-d436-19ac417327bf.htm" />
+  <HelpKINode Title="BaseConfiguration.FirefoxBrowserExecutableLocation property" Url="html/10b5d0d2-d147-2f30-2afb-6587222e355e.htm" />
   <HelpKINode Title="BaseConfiguration.FirefoxUseLegacyImplementation property" Url="html/89ba5621-fe1e-9603-676b-e0b6a71798e0.htm" />
   <HelpKINode Title="BaseConfiguration.FullDesktopScreenShotEnabled property" Url="html/30303342-db41-23bd-e106-0211ea44ebc6.htm" />
   <HelpKINode Title="BaseConfiguration.GetPageSourceEnabled property" Url="html/33eaa706-cb74-88b2-99cd-12b00ba02479.htm" />
@@ -36,7 +36,11 @@
   <HelpKINode Title="BaseConfiguration.MediumTimeout property" Url="html/80e04432-9686-d8c2-d6a7-c348412d4c68.htm" />
   <HelpKINode Title="BaseConfiguration.PageSourceFolder property" Url="html/94be23dd-73c0-bcd7-2792-0dcebe037f52.htm" />
   <HelpKINode Title="BaseConfiguration.Password property" Url="html/ebe26c1e-1314-0239-0079-3146f5c8398c.htm" />
+  <HelpKINode Title="BaseConfiguration.PathToChromeDriverDirectory property" Url="html/ec9558f2-7a8e-107e-b791-7d8d4dd09aff.htm" />
+  <HelpKINode Title="BaseConfiguration.PathToEdgeDriverDirectory property" Url="html/d327f536-c63c-9496-39ff-e082f9a349f2.htm" />
+  <HelpKINode Title="BaseConfiguration.PathToFirefoxDriverDirectory property" Url="html/f9b87c20-04d9-9bc7-346f-b25127bd3034.htm" />
   <HelpKINode Title="BaseConfiguration.PathToFirefoxProfile property" Url="html/e6056b97-fc5d-8643-da13-686cf2900170.htm" />
+  <HelpKINode Title="BaseConfiguration.PathToInternetExplorerDriverDirectory property" Url="html/29480aa6-7788-c553-3223-f6be2d13e433.htm" />
   <HelpKINode Title="BaseConfiguration.Protocol property" Url="html/2a59eb82-246e-11a2-e857-95483f98d1f7.htm" />
   <HelpKINode Title="BaseConfiguration.Proxy property" Url="html/f50d335c-f673-3296-79c4-62b45c78ecc9.htm" />
   <HelpKINode Title="BaseConfiguration.RemoteWebDriverHub property" Url="html/d8c0e0e3-fe56-c754-3448-1c36d8d28978.htm" />
@@ -48,7 +52,6 @@
   <HelpKINode Title="BaseConfiguration.TestBrowserCapabilities property" Url="html/1cc503ab-e714-8ef2-42a1-ac2bfffa7c5b.htm" />
   <HelpKINode Title="BaseConfiguration.Url property" Url="html/0b048082-e0b6-9950-7cc0-2d133cf5ae9a.htm" />
   <HelpKINode Title="BaseConfiguration.UseCurrentDirectory property" Url="html/6132d977-8f07-63da-f593-3cced2619c83.htm" />
-  <HelpKINode Title="BaseConfiguration.UseDefaultFirefoxProfile property" Url="html/2bf290b0-e753-6742-16b5-506bfc0bb792.htm" />
   <HelpKINode Title="BaseConfiguration.Username property" Url="html/a72078ab-40e0-06a3-836c-0c5e762e168b.htm" />
   <HelpKINode Title="Bmp enumeration member" Url="html/24ea484b-208c-10a9-79d9-518c88c2b6e9.htm" />
   <HelpKINode Title="Browser property" Url="html/d76bb42c-77f3-6115-eac5-e51f53aff2a0.htm" />
@@ -64,7 +67,7 @@
   <HelpKINode Title="Checkbox.TickCheckbox method" Url="html/cb2903b1-8378-326b-0a30-5104ffb83885.htm" />
   <HelpKINode Title="Checkbox.UntickCheckbox method" Url="html/9c38b78a-d89b-038d-1e4c-2669e847a00b.htm" />
   <HelpKINode Title="Chrome enumeration member" Url="html/fd8f95a4-1921-2ebe-a199-a6c1d3adcc8c.htm" />
-  <HelpKINode Title="ChromePath property" Url="html/555d3ba6-6e62-91aa-fb0c-2a742a55fe48.htm" />
+  <HelpKINode Title="ChromeBrowserExecutableLocation property" Url="html/82d394ad-a047-e3ab-f096-448eda7fa68c.htm" />
   <HelpKINode Title="ClassName enumeration member" Url="html/64a6eff1-1642-a6be-95f5-38c0ebf1f42e.htm" />
   <HelpKINode Title="Close method" Url="html/0f04e455-b1f4-fde2-334b-81200d069f7b.htm" />
   <HelpKINode Title="CloudProvider enumeration member" Url="html/fd8f95a4-1921-2ebe-a199-a6c1d3adcc8c.htm" />
@@ -78,6 +81,7 @@
   <HelpKINode Title="CurrentDate property" Url="html/7dcf6e15-ab9e-82e0-71b2-d13fb9e30009.htm" />
   <HelpKINode Title="CurrentDirectory property" Url="html/a2043213-95fd-ac97-6f6c-c52429cb4220.htm" />
   <HelpKINode Title="CurrentTimeStamp property" Url="html/dfc546eb-b84c-62d1-af7b-87f4ba8552ad.htm" />
+  <HelpKINode Title="CutOutScreenShot method" Url="html/341ad303-fad6-d4b4-68ca-a69aa2db4464.htm" />
   <HelpKINode Title="DataDrivenReadException class">
     <HelpKINode Title="DataDrivenReadException Class" Url="html/86e1000d-0226-4d8c-93bd-cc9324e9fe8b.htm" />
     <HelpKINode Title="constructor" Url="html/510e9c1d-0318-cec5-b3f5-cc7f9a02c2be.htm" />
@@ -211,8 +215,7 @@
   <HelpKINode Title="FileType enumeration" Url="html/24ea484b-208c-10a9-79d9-518c88c2b6e9.htm" />
   <HelpKINode Title="FindByText method" Url="html/b723ea55-5e5d-eeb4-290d-2fa749a544a1.htm" />
   <HelpKINode Title="Firefox enumeration member" Url="html/fd8f95a4-1921-2ebe-a199-a6c1d3adcc8c.htm" />
-  <HelpKINode Title="FirefoxPath property" Url="html/62829289-389b-ef22-d436-19ac417327bf.htm" />
-  <HelpKINode Title="FirefoxPortable enumeration member" Url="html/fd8f95a4-1921-2ebe-a199-a6c1d3adcc8c.htm" />
+  <HelpKINode Title="FirefoxBrowserExecutableLocation property" Url="html/10b5d0d2-d147-2f30-2afb-6587222e355e.htm" />
   <HelpKINode Title="FirefoxUseLegacyImplementation property" Url="html/89ba5621-fe1e-9603-676b-e0b6a71798e0.htm" />
   <HelpKINode Title="Format method" Url="html/bd5fa3b6-67a6-8c1e-e92b-78b63007864a.htm" />
   <HelpKINode Title="FullDesktopScreenShotEnabled property" Url="html/30303342-db41-23bd-e106-0211ea44ebc6.htm" />
@@ -415,7 +418,11 @@
   </HelpKINode>
   <HelpKINode Title="PartialLinkText enumeration member" Url="html/64a6eff1-1642-a6be-95f5-38c0ebf1f42e.htm" />
   <HelpKINode Title="Password property" Url="html/ebe26c1e-1314-0239-0079-3146f5c8398c.htm" />
+  <HelpKINode Title="PathToChromeDriverDirectory property" Url="html/ec9558f2-7a8e-107e-b791-7d8d4dd09aff.htm" />
+  <HelpKINode Title="PathToEdgeDriverDirectory property" Url="html/d327f536-c63c-9496-39ff-e082f9a349f2.htm" />
+  <HelpKINode Title="PathToFirefoxDriverDirectory property" Url="html/f9b87c20-04d9-9bc7-346f-b25127bd3034.htm" />
   <HelpKINode Title="PathToFirefoxProfile property" Url="html/e6056b97-fc5d-8643-da13-686cf2900170.htm" />
+  <HelpKINode Title="PathToInternetExplorerDriverDirectory property" Url="html/29480aa6-7788-c553-3223-f6be2d13e433.htm" />
   <HelpKINode Title="Pdf enumeration member" Url="html/24ea484b-208c-10a9-79d9-518c88c2b6e9.htm" />
   <HelpKINode Title="Percentile90 property" Url="html/b1145ff3-7b50-d8b2-9e87-084547235de1.htm" />
   <HelpKINode Title="PerformanceHelper class">
@@ -556,6 +563,7 @@
     <HelpKINode Title="methods" Url="html/75e4b875-d119-35f6-7a4d-69102e358c1b.htm" />
   </HelpKINode>
   <HelpKINode Title="TakeScreenshot method" Url="html/d45a1b28-cb0b-ffab-6ee7-cf4a76d8f4c5.htm" />
+  <HelpKINode Title="TakeScreenShot.CutOutScreenShot method" Url="html/341ad303-fad6-d4b4-68ca-a69aa2db4464.htm" />
   <HelpKINode Title="TakeScreenShot.DoIt method" Url="html/7b737e34-665d-473b-db45-c4e0afea7265.htm" />
   <HelpKINode Title="TakeScreenShot.Save method" Url="html/e825b701-75a4-97df-5e24-8fac345a9195.htm" />
   <HelpKINode Title="TakeScreenShot.TakeScreenShotOfElement method" Url="html/afe6705c-aa6b-dba3-fe6b-e9075ad2db41.htm" />
@@ -595,7 +603,6 @@
   <HelpKINode Title="UntickCheckbox method" Url="html/9c38b78a-d89b-038d-1e4c-2669e847a00b.htm" />
   <HelpKINode Title="Url property" Url="html/0b048082-e0b6-9950-7cc0-2d133cf5ae9a.htm" />
   <HelpKINode Title="UseCurrentDirectory property" Url="html/6132d977-8f07-63da-f593-3cced2619c83.htm" />
-  <HelpKINode Title="UseDefaultFirefoxProfile property" Url="html/2bf290b0-e753-6742-16b5-506bfc0bb792.htm" />
   <HelpKINode Title="Username property" Url="html/a72078ab-40e0-06a3-836c-0c5e762e168b.htm" />
   <HelpKINode Title="Value property" Url="html/a224d893-d284-8e18-ec65-227de03e7d4e.htm" />
   <HelpKINode Title="Verify class">
