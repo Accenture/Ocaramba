@@ -87,7 +87,19 @@ namespace Objectivity.Test.Automation.Common
         /// <summary>
         /// Gets the path to firefox profile.
         /// </summary>
-        public static string PathToFirefoxProfile => ConfigurationManager.AppSettings["PathToFirefoxProfile"];
+        public static string PathToFirefoxProfile
+        {
+            get
+            {
+                Logger.Trace(CultureInfo.CurrentCulture, "Gets the path to firefox profile from App.config '{0}'", ConfigurationManager.AppSettings["PathToFirefoxProfile"]);
+                if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["PathToFirefoxProfile"]))
+                {
+                    return string.Empty;
+                }
+
+                return ConfigurationManager.AppSettings["PathToFirefoxProfile"];
+            }
+        }
 
         /// <summary>
         /// Gets the application protocol (http or https).
@@ -179,24 +191,36 @@ namespace Objectivity.Test.Automation.Common
         }
 
         /// <summary>
-        /// Gets the firefox path
+        /// Gets the path and file name of the Firefox browser executable
         /// </summary>
-        public static string FirefoxPath
+        public static string FirefoxBrowserExecutableLocation
         {
             get
             {
-                return ConfigurationManager.AppSettings["FireFoxPath"];
+                Logger.Trace(CultureInfo.CurrentCulture, "Gets the path and file name of the Firefox browser executable from App.config '{0}'", ConfigurationManager.AppSettings["FirefoxBrowserExecutableLocation"]);
+                if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["FirefoxBrowserExecutableLocation"]))
+                {
+                    return string.Empty;
+                }
+
+                return ConfigurationManager.AppSettings["FirefoxBrowserExecutableLocation"];
             }
         }
 
         /// <summary>
-        /// Gets the chrome path
+        /// Gets the path and file name of the Chrome browser executable
         /// </summary>
-         public static string ChromePath
+        public static string ChromeBrowserExecutableLocation
         {
             get
             {
-                return ConfigurationManager.AppSettings["ChromePath"];
+                Logger.Trace(CultureInfo.CurrentCulture, "Gets the path and file name of the Chrome browser executable from App.config '{0}'", ConfigurationManager.AppSettings["FirefoxBrowserExecutableLocation"]);
+                if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["ChromeBrowserExecutableLocation"]))
+                {
+                    return string.Empty;
+                }
+
+                return ConfigurationManager.AppSettings["ChromeBrowserExecutableLocation"];
             }
         }
 
@@ -230,6 +254,74 @@ namespace Objectivity.Test.Automation.Common
                 }
 
                 return false;
+            }
+        }
+
+        /// <summary>
+        /// Gets specified path to the directory containing InternetExplorer Driver.
+        /// </summary>
+        public static string PathToInternetExplorerDriverDirectory
+        {
+            get
+            {
+                Logger.Trace(CultureInfo.CurrentCulture, "Path to the directory containing Internet Explorer Driver from App.config '{0}'", ConfigurationManager.AppSettings["PathToInternetExplorerDriverDirectory"]);
+                if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["PathToInternetExplorerDriverDirectory"]))
+                {
+                    return string.Empty;
+                }
+
+                return ConfigurationManager.AppSettings["PathToInternetExplorerDriverDirectory"];
+            }
+        }
+
+        /// <summary>
+        /// Gets specified path to the directory containing Edge Driver.
+        /// </summary>
+        public static string PathToEdgeDriverDirectory
+        {
+            get
+            {
+                Logger.Trace(CultureInfo.CurrentCulture, "Path to the directory containing Edge Driver from App.config '{0}'", ConfigurationManager.AppSettings["PathToEdgeDriverDirectory"]);
+                if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["PathToEdgeDriverDirectory"]))
+                {
+                    return string.Empty;
+                }
+
+                return ConfigurationManager.AppSettings["PathToEdgeDriverDirectory"];
+            }
+        }
+
+        /// <summary>
+        /// Gets specified path to the directory containing ChromeDriver.
+        /// </summary>
+        public static string PathToChromeDriverDirectory
+        {
+            get
+            {
+                Logger.Trace(CultureInfo.CurrentCulture, "Path to the directory containing Chrome Driver from App.config '{0}'", ConfigurationManager.AppSettings["PathToChromeDriverDirectory"]);
+                if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["PathToChromeDriverDirectory"]))
+                {
+                    return string.Empty;
+                }
+
+                return ConfigurationManager.AppSettings["PathToChromeDriverDirectory"];
+            }
+        }
+
+        /// <summary>
+        /// Gets specified path to the directory containing Firefox Driver.
+        /// </summary>
+        public static string PathToFirefoxDriverDirectory
+        {
+            get
+            {
+                Logger.Trace(CultureInfo.CurrentCulture, "Path to the directory containing Firefox Driver from App.config '{0}'", ConfigurationManager.AppSettings["PathToFirefoxDriverDirectory"]);
+                if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["PathToFirefoxDriverDirectory"]))
+                {
+                    return string.Empty;
+                }
+
+                return ConfigurationManager.AppSettings["PathToFirefoxDriverDirectory"];
             }
         }
 
@@ -297,28 +389,6 @@ namespace Objectivity.Test.Automation.Common
                 }
 
                 if (ConfigurationManager.AppSettings["FirefoxUseLegacyImplementation"].ToLower(CultureInfo.CurrentCulture).Equals("true"))
-                {
-                    return true;
-                }
-
-                return false;
-            }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether use firefox profile. False by default.
-        /// </summary>
-        public static bool UseDefaultFirefoxProfile
-        {
-            get
-            {
-                Logger.Trace(CultureInfo.CurrentCulture, "Use Default Firefox Profile value from App.config '{0}'", ConfigurationManager.AppSettings["UseDefaultFirefoxProfile"]);
-                if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["UseDefaultFirefoxProfile"]))
-                {
-                    return false;
-                }
-
-                if (ConfigurationManager.AppSettings["UseDefaultFirefoxProfile"].ToLower(CultureInfo.CurrentCulture).Equals("true"))
                 {
                     return true;
                 }

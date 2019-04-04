@@ -177,7 +177,7 @@ namespace Objectivity.Test.Automation.Common
             {
                 FirefoxOptions options = new FirefoxOptions();
 
-                if (BaseConfiguration.UseDefaultFirefoxProfile)
+                if (!string.IsNullOrEmpty(BaseConfiguration.PathToFirefoxProfile))
                 {
                     try
                     {
@@ -188,7 +188,7 @@ namespace Objectivity.Test.Automation.Common
                     }
                     catch (DirectoryNotFoundException e)
                     {
-                        Logger.Info(CultureInfo.CurrentCulture, "problem with loading firefox profile {0}", e.Message);
+                        Logger.Error(CultureInfo.CurrentCulture, "problem with loading firefox profile {0}", e.Message);
                     }
                 }
 
@@ -326,12 +326,6 @@ namespace Objectivity.Test.Automation.Common
                             options.AddExtension(this.CurrentDirectory + FilesHelper.Separator + chromeExtensions.GetKey(i));
                         }
                     }
-                }
-
-                if (BaseConfiguration.ChromePath != null)
-                {
-                    Logger.Trace(CultureInfo.CurrentCulture, "Setting Chrome Path {0}", BaseConfiguration.ChromePath);
-                    options.BinaryLocation = BaseConfiguration.ChromePath;
                 }
 
                 // if there are any arguments
@@ -484,18 +478,24 @@ namespace Objectivity.Test.Automation.Common
             switch (BaseConfiguration.TestBrowser)
             {
                 case BrowserType.Firefox:
-                    this.driver = new FirefoxDriver(this.SetDriverOptions(this.FirefoxOptions));
-                    break;
-                case BrowserType.FirefoxPortable:
-                    this.FirefoxOptions.BrowserExecutableLocation = BaseConfiguration.FirefoxPath;
-                    this.driver = new FirefoxDriver(this.SetDriverOptions(this.FirefoxOptions));
+                    if (!string.IsNullOrEmpty(BaseConfiguration.FirefoxBrowserExecutableLocation))
+                    {
+                        this.FirefoxOptions.BrowserExecutableLocation = BaseConfiguration.FirefoxBrowserExecutableLocation;
+                    }
+
+                    this.driver = string.IsNullOrEmpty(BaseConfiguration.PathToFirefoxDriverDirectory) ? new FirefoxDriver(this.SetDriverOptions(this.FirefoxOptions)) : new FirefoxDriver(BaseConfiguration.PathToFirefoxDriverDirectory, this.SetDriverOptions(this.FirefoxOptions));
                     break;
                 case BrowserType.InternetExplorer:
                 case BrowserType.IE:
-                    this.driver = new InternetExplorerDriver(this.SetDriverOptions(this.InternetExplorerOptions));
+                    this.driver = string.IsNullOrEmpty(BaseConfiguration.PathToInternetExplorerDriverDirectory) ? new InternetExplorerDriver(this.SetDriverOptions(this.InternetExplorerOptions)) : new InternetExplorerDriver(BaseConfiguration.PathToInternetExplorerDriverDirectory, this.SetDriverOptions(this.InternetExplorerOptions));
                     break;
                 case BrowserType.Chrome:
-                    this.driver = new ChromeDriver(this.SetDriverOptions(this.ChromeOptions));
+                    if (!string.IsNullOrEmpty(BaseConfiguration.ChromeBrowserExecutableLocation))
+                    {
+                        this.ChromeOptions.BinaryLocation = BaseConfiguration.ChromeBrowserExecutableLocation;
+                    }
+
+                    this.driver = string.IsNullOrEmpty(BaseConfiguration.PathToChromeDriverDirectory) ? new ChromeDriver(this.SetDriverOptions(this.ChromeOptions)) : new ChromeDriver(BaseConfiguration.PathToChromeDriverDirectory, this.SetDriverOptions(this.ChromeOptions));
                     break;
                 case BrowserType.Safari:
                     this.driver = new SafariDriver(this.SetDriverOptions(this.SafariOptions));
@@ -543,7 +543,7 @@ namespace Objectivity.Test.Automation.Common
 
                     break;
                 case BrowserType.Edge:
-                    this.driver = new EdgeDriver(this.SetDriverOptions(this.EdgeOptions));
+                    this.driver = string.IsNullOrEmpty(BaseConfiguration.PathToEdgeDriverDirectory) ? new EdgeDriver(this.SetDriverOptions(this.EdgeOptions)) : new EdgeDriver(BaseConfiguration.PathToEdgeDriverDirectory, this.SetDriverOptions(this.EdgeOptions));
                     break;
                 default:
                     throw new NotSupportedException(
