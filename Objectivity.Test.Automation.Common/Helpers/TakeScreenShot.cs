@@ -193,6 +193,12 @@ namespace Objectivity.Test.Automation.Common.Helpers
                 importFile = new Bitmap(fullPathToScreenShotToCutOut);
                 Logger.Debug(CultureInfo.CurrentCulture, "Size of imported screenshot Width:{0} Height:{1}", importFile.Size.Width, importFile.Size.Height);
                 ////Check if new size of image is not bigger than imported.
+                if (locationY > importFile.Size.Height || locationX > importFile.Size.Width)
+                {
+                    Logger.Error(CultureInfo.CurrentCulture, "Cutting out screenshot locationX:{0} locationY:{1} elementWidth:{2} elementHeight:{3} is not possible", locationX, locationY, elementWidth, elementHeight);
+                    return null;
+                }
+
                 if (importFile.Size.Height - locationY < elementHeight)
                 {
                     elementHeight = importFile.Size.Height - locationY;
@@ -201,12 +207,6 @@ namespace Objectivity.Test.Automation.Common.Helpers
                 if (importFile.Size.Width - locationX < elementWidth)
                 {
                     elementWidth = importFile.Size.Width - locationX;
-                }
-
-                if (locationY > importFile.Size.Height || locationX > importFile.Size.Width)
-                {
-                    Logger.Error(CultureInfo.CurrentCulture, "Cutting out screenshot locationX:{0} locationY:{1} elementWidth:{2} elementHeight:{3} is not possible", locationX, locationY, elementWidth, elementHeight);
-                    return null;
                 }
 
                 Logger.Debug(CultureInfo.CurrentCulture, "Cutting out screenshot locationX:{0} locationY:{1} elementWidth:{2} elementHeight:{3}", locationX, locationY, elementWidth, elementHeight);
