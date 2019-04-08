@@ -303,8 +303,15 @@ namespace Objectivity.Test.Automation.Common
             {
                 foreach (string key in settings.AllKeys)
                 {
-                    Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0} from {1}", key, this.CrossBrowserEnvironment);
-                    browserOptions.AddAdditionalCapability(key, settings[key], true);
+                    if (key == "name" && !string.IsNullOrEmpty(this.TestTitle))
+                    {
+                        browserOptions.AddAdditionalCapability(key, this.TestTitle, true);
+                    }
+                    else
+                    {
+                        Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0} from {1}", key, this.CrossBrowserEnvironment);
+                        browserOptions.AddAdditionalCapability(key, settings[key], true);
+                    }
                 }
             }
         }

@@ -85,7 +85,6 @@ namespace Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser
         public void BeforeClass()
         {
             this.DriverContext.CurrentDirectory = TestContext.CurrentContext.TestDirectory;
-            this.DriverContext.Start();
         }
 
         /// <summary>
@@ -94,7 +93,6 @@ namespace Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser
         [OneTimeTearDown]
         public void AfterClass()
         {
-            this.DriverContext.Stop();
         }
 
         /// <summary>
@@ -104,6 +102,7 @@ namespace Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser
         public void BeforeTest()
         {
             this.DriverContext.TestTitle = TestContext.CurrentContext.Test.Name;
+            this.DriverContext.Start();
             this.LogTest.LogTestStarting(this.driverContext);
 
             if (BaseConfiguration.RemoteWebDriverHub.ToString().ToLower(CultureInfo.CurrentCulture).Contains("testingbot"))
@@ -137,6 +136,8 @@ namespace Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser
             {
                 Assert.Fail();
             }
+
+            this.DriverContext.Stop();
         }
 
         private void SaveAttachmentsToTestContext(string[] filePaths)
