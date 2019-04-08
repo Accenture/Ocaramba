@@ -244,9 +244,16 @@ namespace Objectivity.Test.Automation.Common
             {
                 foreach (string key in settings.AllKeys)
                 {
-                    Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0} from {1}", key, this.CrossBrowserEnvironment);
+                    if (key == "name" && !string.IsNullOrEmpty(this.TestTitle))
+                    {
+                        options.AddAdditionalCapability(key, this.TestTitle);
+                    }
+                    else
+                    {
+                        Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0} from {1}", key, this.CrossBrowserEnvironment);
 
-                    options.AddAdditionalCapability(key, settings[key]);
+                        options.AddAdditionalCapability(key, settings[key]);
+                    }
                 }
             }
 
