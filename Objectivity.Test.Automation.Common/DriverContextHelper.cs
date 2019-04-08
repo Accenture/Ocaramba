@@ -224,6 +224,35 @@ namespace Objectivity.Test.Automation.Common
             return option;
         }
 
+        private T SetRemoteDriverOptions<T>(NameValueCollection driverCapabilitiesConf, NameValueCollection settings, T options)
+            where T : DriverOptions
+        {
+            // if there are any capability
+            if (driverCapabilitiesConf != null)
+            {
+                // loop through all of them
+                for (var i = 0; i < driverCapabilitiesConf.Count; i++)
+                {
+                    string value = driverCapabilitiesConf.GetValues(i)[0];
+                    Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0}", driverCapabilitiesConf.GetKey(i));
+                    options.AddAdditionalCapability(driverCapabilitiesConf.GetKey(i), value);
+                }
+            }
+
+            // if there are any capability
+            if (settings != null)
+            {
+                foreach (string key in settings.AllKeys)
+                {
+                    Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0} from {1}", key, this.CrossBrowserEnvironment);
+
+                    options.AddAdditionalCapability(key, settings[key]);
+                }
+            }
+
+            return options;
+        }
+
         private BrowserType GetBrowserTypeForRemoteDriver(NameValueCollection settings)
         {
             if (BaseConfiguration.TestBrowserCapabilities != BrowserType.CloudProvider)
