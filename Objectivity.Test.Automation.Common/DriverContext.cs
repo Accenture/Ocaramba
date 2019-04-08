@@ -522,12 +522,12 @@ namespace Objectivity.Test.Automation.Common
                         case BrowserType.Iphone:
                         case BrowserType.Safari:
                             SafariOptions safariOptions = new SafariOptions();
-                            this.SetRemoteDriverOptions(driverCapabilitiesConf, settings, safariOptions);
+                            this.SetRemoteDriverBrowserOptions(driverCapabilitiesConf, settings, safariOptions);
                             this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(safariOptions).ToCapabilities());
                             break;
                         case BrowserType.Edge:
                             EdgeOptions egEdgeOptions = new EdgeOptions();
-                            this.SetRemoteDriverOptions(driverCapabilitiesConf, settings, egEdgeOptions);
+                            this.SetRemoteDriverBrowserOptions(driverCapabilitiesConf, settings, egEdgeOptions);
                             this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(egEdgeOptions).ToCapabilities());
                             break;
                         case BrowserType.IE:
