@@ -239,6 +239,8 @@ namespace Objectivity.Test.Automation.Common
                 }
             }
 
+            var setName = false;
+
             // if there are any capability
             if (settings != null)
             {
@@ -247,6 +249,7 @@ namespace Objectivity.Test.Automation.Common
                     if (key == "name" && !string.IsNullOrEmpty(this.TestTitle))
                     {
                         options.AddAdditionalCapability(key, this.TestTitle);
+                        setName = true;
                     }
                     else
                     {
@@ -255,6 +258,11 @@ namespace Objectivity.Test.Automation.Common
                         options.AddAdditionalCapability(key, settings[key]);
                     }
                 }
+            }
+
+            if (!setName && !string.IsNullOrEmpty(this.TestTitle))
+            {
+                options.AddAdditionalCapability("name", this.TestTitle);
             }
 
             return options;
@@ -305,6 +313,8 @@ namespace Objectivity.Test.Automation.Common
                 }
             }
 
+            var setName = false;
+
             // if there are any capability
             if (settings != null)
             {
@@ -313,6 +323,7 @@ namespace Objectivity.Test.Automation.Common
                     if (key == "name" && !string.IsNullOrEmpty(this.TestTitle))
                     {
                         browserOptions.AddAdditionalCapability(key, this.TestTitle, true);
+                        setName = true;
                     }
                     else
                     {
@@ -320,6 +331,11 @@ namespace Objectivity.Test.Automation.Common
                         browserOptions.AddAdditionalCapability(key, settings[key], true);
                     }
                 }
+            }
+
+            if (!setName && !string.IsNullOrEmpty(this.TestTitle))
+            {
+                browserOptions.AddAdditionalCapability("name", this.TestTitle);
             }
         }
 
