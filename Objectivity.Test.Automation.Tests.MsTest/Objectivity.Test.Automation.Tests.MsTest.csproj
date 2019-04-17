@@ -112,7 +112,7 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Objectivity.Test.Automation.Common\Ocaramba.Common.csproj">
+    <ProjectReference Include="..\Ocaramba.Common\Ocaramba.Common.csproj">
       <Project>{46fa4edc-a114-4e8f-a545-996f99e31ea8}</Project>
       <Name>Ocaramba.Common</Name>
     </ProjectReference>

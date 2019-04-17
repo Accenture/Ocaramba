@@ -77,7 +77,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Objectivity.Test.Automation.Common\Ocaramba.Common.csproj">
+    <ProjectReference Include="..\Ocaramba.Common\Ocaramba.Common.csproj">
       <Project>{46fa4edc-a114-4e8f-a545-996f99e31ea8}</Project>
       <Name>Ocaramba.Common</Name>
     </ProjectReference>
