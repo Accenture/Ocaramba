@@ -94,13 +94,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Objectivity.Test.Automation.Tests.NUnit\Ocaramba.Tests.NUnit.csproj">
+      <Project>{74f9b9a8-0055-4c13-b3c9-faced546cb43}</Project>
+      <Name>Ocaramba.Tests.NUnit</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Ocaramba.Common\Ocaramba.Common.csproj">
       <Project>{46fa4edc-a114-4e8f-a545-996f99e31ea8}</Project>
       <Name>Ocaramba.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Objectivity.Test.Automation.Tests.NUnit\Ocaramba.Tests.NUnit.csproj">
-      <Project>{74F9B9A8-0055-4C13-B3C9-FACED546CB43}</Project>
-      <Name>Ocaramba.Tests.NUnit</Name>
     </ProjectReference>
     <ProjectReference Include="..\Objectivity.Test.Automation.Tests.PageObjects\Ocaramba.Tests.PageObjects.csproj">
       <Project>{1EA997E6-B873-469F-8685-17F73EBB0B92}</Project>
