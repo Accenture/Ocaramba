@@ -83,31 +83,31 @@ after_build:
       
       .\.nuget\nuget pack .\Ocaramba.Common\Ocaramba.Common.csproj -symbols -properties Configuration=Release -Verbosity detailed
       
-      Copy-Item .\.nuspec\Objectivity.Test.Automation.MsTest.nuspec .\\Objectivity.Test.Automation.Common\\Objectivity.Test.Automation.Common.nuspec
+      Copy-Item .\.nuspec\Ocaramba.MsTest.nuspec .\\Ocaramba.Common\\Ocaramba.Common.nuspec
       
-      .\.nuget\nuget pack .\Objectivity.Test.Automation.Common\Objectivity.Test.Automation.Common.csproj -symbols -properties Configuration=Release -Verbosity detailed
+      .\.nuget\nuget pack .\Ocaramba.Common\Ocaramba.Common.csproj -symbols -properties Configuration=Release -Verbosity detailed
       
-      Copy-Item .\.nuspec\Objectivity.Test.Automation.MsTest.nuspec .\\Objectivity.Test.Automation.Common\\Objectivity.Test.Automation.Common.nuspec
+      Copy-Item .\.nuspec\Ocaramba.MsTest.nuspec .\\Ocaramba.Common\\Ocaramba.Common.nuspec
       
-      .\.nuget\nuget pack .\Objectivity.Test.Automation.Common\Objectivity.Test.Automation.Common.csproj -symbols -properties Configuration=Release -Verbosity detailed
+      .\.nuget\nuget pack .\Ocaramba.Common\Ocaramba.Common.csproj -symbols -properties Configuration=Release -Verbosity detailed
       
-      Copy-Item .\.nuspec\Objectivity.Test.Automation.Features.nuspec .\\Objectivity.Test.Automation.Common\\Objectivity.Test.Automation.Common.nuspec
+      Copy-Item .\.nuspec\Ocaramba.Features.nuspec .\\Ocaramba.Common\\Ocaramba.Common.nuspec
       
-      .\.nuget\nuget pack .\Objectivity.Test.Automation.Common\Objectivity.Test.Automation.Common.csproj -symbols -properties Configuration=Release -Verbosity detailed
+      .\.nuget\nuget pack .\Ocaramba.Common\Ocaramba.Common.csproj -symbols -properties Configuration=Release -Verbosity detailed
       
-      Copy-Item .\.nuspec\Objectivity.Test.Automation.Xunit.nuspec .\\Objectivity.Test.Automation.Common\\Objectivity.Test.Automation.Common.nuspec
+      Copy-Item .\.nuspec\Ocaramba.Xunit.nuspec .\\Ocaramba.Common\\Ocaramba.Common.nuspec
       
-      .\.nuget\nuget pack .\Objectivity.Test.Automation.Common\Objectivity.Test.Automation.Common.csproj -symbols -properties Configuration=Release -Verbosity detailed
+      .\.nuget\nuget pack .\Ocaramba.Common\Ocaramba.Common.csproj -symbols -properties Configuration=Release -Verbosity detailed
       
       echo '********************************************Copying files for gh-pages********************************************'
       
-      Copy-Item -Path .\README.md -Destination .\Objectivity.Test.Automation.Common.Documentation\Help\ -recurse -force -verbose 
+      Copy-Item -Path .\README.md -Destination .\Ocaramba.Common.Documentation\Help\ -recurse -force -verbose 
       
-      New-Item .\Objectivity.Test.Automation.Common.Documentation\Help\Objectivity.Test.Automation.Common.Documentation\icons\ -Type Directory
+      New-Item .\Ocaramba.Common.Documentation\Help\Ocaramba.Common.Documentation\icons\ -Type Directory
       
-      Copy-Item -Path .\Objectivity.Test.Automation.Common.Documentation\icons\Objectivity_logo_avatar.png -Destination .\Objectivity.Test.Automation.Common.Documentation\Help\Objectivity.Test.Automation.Common.Documentation\icons\ -recurse -force -verbose
+      Copy-Item -Path .\Ocaramba.Common.Documentation\icons\Objectivity_logo_avatar.png -Destination .\Ocaramba.Common.Documentation\Help\Ocaramba.Common.Documentation\icons\ -recurse -force -verbose
       
-      Copy-Item -Path .\Objectivity.Test.Automation.Common.Documentation\icons\Help.png -Destination .\Objectivity.Test.Automation.Common.Documentation\Help\Objectivity.Test.Automation.Common.Documentation\icons\ -recurse -force -verbose
+      Copy-Item -Path .\Ocaramba.Common.Documentation\icons\Help.png -Destination .\Ocaramba.Common.Documentation\Help\Ocaramba.Common.Documentation\icons\ -recurse -force -verbose
       
       if ($env:APPVEYOR_REPO_TAG -eq "true")
       {
@@ -134,7 +134,7 @@ after_build:
         
       }
       
-      Copy-Item -Path .\Objectivity.Test.Automation.Common.Documentation\Help\** -Destination .\Help\ -recurse -force
+      Copy-Item -Path .\Ocaramba.Common.Documentation\Help\** -Destination .\Help\ -recurse -force
      
       if ($env:APPVEYOR_REPO_TAG -eq "true")
       {
@@ -167,22 +167,22 @@ test_script:
     
     $xunit = (Resolve-Path ".\packages\xunit.runner.console.*\tools\xunit.console.exe").ToString()
     
-    & $OpenCover -target:"$xunit" -mergeoutput -targetargs:".\Objectivity.Test.Automation.Tests.Xunit\bin\Release\Objectivity.Test.Automation.Tests.Xunit.dll -appveyor -noshadow" -filter:"+[Objectivity.Test.Automation.Common]*" -register:user -output:opencoverCoverage.xml
+    & $OpenCover -target:"$xunit" -mergeoutput -targetargs:".\Ocaramba.Tests.Xunit\bin\Release\Ocaramba.Tests.Xunit.dll -appveyor -noshadow" -filter:"+[Ocaramba.Common]*" -register:user -output:opencoverCoverage.xml
 
     if($lastexitcode -ne 0)
       {
        echo $lastexitcode
       }
 
-    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.Xunit\bin\Release\**\*.png
+    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Xunit\bin\Release\**\*.png
 
-    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.Xunit\bin\Release\**\*.html
+    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Xunit\bin\Release\**\*.html
 
-    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.Xunit\bin\Release\*.log
+    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Xunit\bin\Release\*.log
     
     echo '********************************************NUnit tests********************************************'
     
-    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Ocaramba.Tests.NUnit\bin\Release\Ocaramba.Tests.NUnit.dll .\Objectivity.Test.Automation.Tests.Angular\bin\Release\Objectivity.Test.Automation.Tests.Angular.dll .\Objectivity.Test.Automation.Tests.Features\bin\Release\Objectivity.Test.Automation.Tests.Features.dll .\Objectivity.Test.Automation.UnitTests\bin\Release\Objectivity.Test.Automation.UnitTests.dll --result=myresults.xml`;format=AppVeyor" -filter:"+[Objectivity.Test.Automation.Common]*" -register:user -output:opencoverCoverage.xml
+    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Ocaramba.Tests.NUnit\bin\Release\Ocaramba.Tests.NUnit.dll .\Ocaramba.Tests.Angular\bin\Release\Ocaramba.Tests.Angular.dll .\Ocaramba.Tests.Features\bin\Release\Ocaramba.Tests.Features.dll .\Ocaramba.UnitTests\bin\Release\Ocaramba.UnitTests.dll --result=myresults.xml`;format=AppVeyor" -filter:"+[Ocaramba.Common]*" -register:user -output:opencoverCoverage.xml
 
     if($lastexitcode -ne 0)
       {
@@ -196,56 +196,56 @@ test_script:
     7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.NUnit\bin\Release\*.log
 
 
-    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.Angular\bin\Release\**\*.png
+    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Angular\bin\Release\**\*.png
 
-    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.Angular\bin\Release\**\*.html
+    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Angular\bin\Release\**\*.html
 
-    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.Angular\bin\Release\*.log
+    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Angular\bin\Release\*.log
 
 
-    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.Features\bin\Release\**\*.png
+    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Features\bin\Release\**\*.png
 
-    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.Features\bin\Release\**\*.html
+    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Features\bin\Release\**\*.html
 
-    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.Features\bin\Release\*.log
+    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Features\bin\Release\*.log
 
     echo '********************************************Unit tests for Firefox********************************************'
     
-    .\scripts\set_AppConfig_for_tests.ps1 ".\Objectivity.Test.Automation.UnitTests\bin\Release" "Objectivity.Test.Automation.UnitTests.dll.config" "//appSettings" "browser" "Firefox"
+    .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.UnitTests\bin\Release" "Ocaramba.UnitTests.dll.config" "//appSettings" "browser" "Firefox"
 
-    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Objectivity.Test.Automation.UnitTests\bin\Release\Objectivity.Test.Automation.UnitTests.dll --where:cat=TakingScreehShots --result=myresults.xml`;format=AppVeyor" -filter:"+[Objectivity.Test.Automation.Common]*" -register:user -output:opencoverCoverage.xml
+    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Ocaramba.UnitTests\bin\Release\Ocaramba.UnitTests.dll --where:cat=TakingScreehShots --result=myresults.xml`;format=AppVeyor" -filter:"+[Ocaramba.Common]*" -register:user -output:opencoverCoverage.xml
 
     if($lastexitcode -ne 0)
       {
        echo $lastexitcode
       }
 
-    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.UnitTests\bin\Release\**\*.png
+    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.UnitTests\bin\Release\**\*.png
 
-    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.UnitTests\bin\Release\**\*.html
+    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.UnitTests\bin\Release\**\*.html
 
-    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.UnitTests\bin\Release\*.log
+    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.UnitTests\bin\Release\*.log
 
     echo '********************************************Angular test for Internet Explorer********************************************'
     
-    .\scripts\set_AppConfig_for_tests.ps1 ".\Objectivity.Test.Automation.Tests.Angular\bin\Release" "Objectivity.Test.Automation.Tests.Angular.dll.config" "//appSettings" "browser" "InternetExplorer"
+    .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.Angular\bin\Release" "Ocaramba.Tests.Angular.dll.config" "//appSettings" "browser" "InternetExplorer"
 
-    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Objectivity.Test.Automation.Tests.Angular\bin\Release\Objectivity.Test.Automation.Tests.Angular.dll --result=myresults.xml`;format=AppVeyor" -filter:"+[Objectivity.Test.Automation.Common]*" -register:user -output:opencoverCoverage.xml
+    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Ocaramba.Tests.Angular\bin\Release\Ocaramba.Tests.Angular.dll --result=myresults.xml`;format=AppVeyor" -filter:"+[Ocaramba.Common]*" -register:user -output:opencoverCoverage.xml
 
     if($lastexitcode -ne 0)
       {
        echo $lastexitcode
       }
 
-    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.Angular\bin\Release\**\*.png
+    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Angular\bin\Release\**\*.png
 
-    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.Angular\bin\Release\**\*.html
+    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Angular\bin\Release\**\*.html
 
-    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.Angular\bin\Release\*.log
+    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Angular\bin\Release\*.log
 
     echo '********************************************MSTest tests********************************************'
 
-    & $OpenCover -target:vstest.console.exe -mergeoutput -targetargs:"/logger`:Appveyor .\Objectivity.Test.Automation.Tests.MSTest\bin\Release\Objectivity.Test.Automation.Tests.MsTest.dll /Settings`:.\Objectivity.Test.Automation.Tests.MSTest\bin\Release\Runsettings.runsettings" -filter:"+[Objectivity.Test.Automation.Common]*" -register:user -output:opencoverCoverage.xml
+    & $OpenCover -target:vstest.console.exe -mergeoutput -targetargs:"/logger`:Appveyor .\Ocaramba.Tests.MSTest\bin\Release\Ocaramba.Tests.MsTest.dll /Settings`:.\Ocaramba.Tests.MSTest\bin\Release\Runsettings.runsettings" -filter:"+[Ocaramba.Common]*" -register:user -output:opencoverCoverage.xml
 
 
     if($lastexitcode -ne 0)
@@ -253,11 +253,11 @@ test_script:
        echo $lastexitcode
       }
 
-    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.MSTest\bin\Release\**\*.png
+    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.MSTest\bin\Release\**\*.png
 
-    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.MSTest\bin\Release\**\*.html
+    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.MSTest\bin\Release\**\*.html
 
-    7z a testresults_$env:appveyor_build_version.zip .\Objectivity.Test.Automation.Tests.MSTest\bin\Release\*.log
+    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.MSTest\bin\Release\*.log
     
     echo '********************************************CloudProviderCrossBrowser tests********************************************'
     
@@ -265,9 +265,9 @@ test_script:
     
     .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release" "Ocaramba.Tests.CloudProviderCrossBrowser.dll.config" "//appSettings" "RemoteWebDriverHub" "http://$($env:browserstackuser):$($env:browserstackkey)@hub-cloud.browserstack.com/wd/hub"
     
-    .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release" "Ocaramba.Tests.CloudProviderCrossBrowser.dll.config" "//DriverCapabilities" "build" "Objectivity.Test.Automation.Tests.BrowserStackCrossBrowser$env:appveyor_build_version" $true
+    .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release" "Ocaramba.Tests.CloudProviderCrossBrowser.dll.config" "//DriverCapabilities" "build" "Ocaramba.Tests.BrowserStackCrossBrowser$env:appveyor_build_version" $true
     
-    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\Ocaramba.Tests.CloudProviderCrossBrowser.dll --workers=5 --result=myresults.xml`;format=AppVeyor" -filter:"+[Objectivity.Test.Automation.Common]*" -register:user -output:opencoverCoverage.xml
+    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\Ocaramba.Tests.CloudProviderCrossBrowser.dll --workers=5 --result=myresults.xml`;format=AppVeyor" -filter:"+[Ocaramba.Common]*" -register:user -output:opencoverCoverage.xml
 
     if($lastexitcode -ne 0)
       {
@@ -278,7 +278,7 @@ test_script:
     
     .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release" "Ocaramba.Tests.CloudProviderCrossBrowser.dll.config" "//appSettings" "RemoteWebDriverHub" "https://$($env:testingbotkey):$($env:testingbotsecret)@hub.testingbot.com/wd/hub/"
     
-    .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release" "Ocaramba.Tests.CloudProviderCrossBrowser.dll.config" "//DriverCapabilities" "build" "$Objectivity.Test.Automation.Tests.TestingBotCrossBrowser$env:appveyor_build_version" $true
+    .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release" "Ocaramba.Tests.CloudProviderCrossBrowser.dll.config" "//DriverCapabilities" "build" "$Ocaramba.Tests.TestingBotCrossBrowser$env:appveyor_build_version" $true
 
     
     & nunit3-console.exe .\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\Ocaramba.Tests.CloudProviderCrossBrowser.dll --workers=1 --where "test =~ Chrome" --result=myresults.xml`;format=AppVeyor
@@ -292,7 +292,7 @@ test_script:
     
     .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release" "Ocaramba.Tests.CloudProviderCrossBrowser.dll.config" "//appSettings" "RemoteWebDriverHub" "http://$($env:saucelabsusername):$($env:saucelabsaccessKey)@ondemand.saucelabs.com:80/wd/hub"
     
-    .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release" "Ocaramba.Tests.CloudProviderCrossBrowser.dll.config" "//DriverCapabilities" "build" "Objectivity.Test.Automation.Tests.SauceLabsCrossBrowser$env:appveyor_build_version" $true
+    .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release" "Ocaramba.Tests.CloudProviderCrossBrowser.dll.config" "//DriverCapabilities" "build" "Ocaramba.Tests.SauceLabsCrossBrowser$env:appveyor_build_version" $true
     
     .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release" "Ocaramba.Tests.CloudProviderCrossBrowser.dll.config" "//environments/SafariMac" "platform" "macOS 10.14" $true
     
@@ -341,7 +341,7 @@ test_script:
     
     .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.NUnit\bin\Release\" "Ocaramba.Tests.NUnit.dll.config" "//appSettings" "browser|RemoteWebDriverHub" "RemoteWebDriver|http://localhost:4444/wd/hub" $true
     
-    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Ocaramba.Tests.NUnit\bin\Release\Ocaramba.Tests.NUnit.dll --where (cat==BasicNUnit) --result=myresults.xml`;format=AppVeyor" -filter:"+[Objectivity.Test.Automation.Common]*" -register:user -output:opencoverCoverage.xml
+    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Ocaramba.Tests.NUnit\bin\Release\Ocaramba.Tests.NUnit.dll --where (cat==BasicNUnit) --result=myresults.xml`;format=AppVeyor" -filter:"+[Ocaramba.Common]*" -register:user -output:opencoverCoverage.xml
 
     if($lastexitcode -ne 0)
       {
@@ -393,7 +393,7 @@ test_script:
     
     appveyor PushArtifact testresults_$env:appveyor_build_version.zip
 artifacts:
-- path: .\Objectivity.Test.Automation.Common.*.nupkg
+- path: .\Ocaramba.Common.*.nupkg
   name: NuGet
 deploy:
 - provider: NuGet

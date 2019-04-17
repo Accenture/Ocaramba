@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>Objectivity.Test.Automation.Common.NUnit</id>
+    <id>Ocaramba.Common.NUnit</id>
     <version>$version$</version>
-    <title>Objectivity.Test.Automation.Common.NUnit</title>
+    <title>Ocaramba.Common.NUnit</title>
     <authors>Objectivity Bespoke Software Specialists</authors>
     <owners>Objectivity Bespoke Software Specialists</owners>
     <license type="expression">MIT</license>
@@ -13,7 +13,7 @@
     <description>Framework to automate tests using Ocaramba.Common with NUnit</description>
     <releaseNotes>You can find info about this release here: https://github.com/ObjectivityLtd/Test.Automation/releases</releaseNotes>
     <copyright>Copyright 2015</copyright>
-    <tags>selenium webdriver testautomation tests nunit Objectivity.Test.Automation.Common</tags>
+    <tags>selenium webdriver testautomation tests nunit Ocaramba.Common</tags>
 	<dependencies>
 	  <dependency id="NUnit" version="3.11.0" />
 	  <dependency id="NUnit.ConsoleRunner" version="3.9.0" />

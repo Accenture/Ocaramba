@@ -1,5 +1,5 @@
-## Objectivity.Test.Automation
-<img align="left" src="/Objectivity.Test.Automation.Common.Documentation/icons/Objectivity_logo_avatar.png">
+## Ocaramba
+<img align="left" src="/Ocaramba.Common.Documentation/icons/Objectivity_logo_avatar.png">
 
 **C# Framework to automate tests using Selenium WebDriver**
 
@@ -12,7 +12,7 @@
 
 Test Framework was designed in Objectivity to propose common way how people should create Selenium WebDriver tests.
 
-<img align="left" src="/Objectivity.Test.Automation.Common.Documentation/icons/Help.png">
+<img align="left" src="/Ocaramba.Common.Documentation/icons/Help.png">
 Project API documentation can be found here: http://objectivityltd.github.io/Test.Automation<br /><br />
 
 **It provides following features:**
@@ -43,24 +43,24 @@ Project API documentation can be found here: http://objectivityltd.github.io/Tes
 For all documentation, visit the [Test.Automation Wiki](https://github.com/ObjectivityLtd/Test.Automation/wiki).
 
 Projects examples of using Test Framework :
-- Objectivity.Test.Automation.Tests.Angular for AngularJS
-- Objectivity.Test.Automation.Tests.Features for Specflow
-- Objectivity.Test.Automation.Tests.MsTest for MsTest
-- Objectivity.Test.Automation.Tests.NUnit for NUnit
-- Objectivity.Test.Automation.Tests.xUnit for xUnit
-- Objectivity.Test.Automation.Tests.PageObjects for Page Object Pattern
-- Objectivity.Test.Automation.Common.Documentation.shfbproj for building API documentation
-- Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser for cross browser parallel test execution with BrowserStack\SauceLabs\TestingBot\SeleniumGrid
-- Objectivity.Test.Automation.UnitTests for unit test of framework
+- Ocaramba.Tests.Angular for AngularJS
+- Ocaramba.Tests.Features for Specflow
+- Ocaramba.Tests.MsTest for MsTest
+- Ocaramba.Tests.NUnit for NUnit
+- Ocaramba.Tests.xUnit for xUnit
+- Ocaramba.Tests.PageObjects for Page Object Pattern
+- Ocaramba.Common.Documentation.shfbproj for building API documentation
+- Ocaramba.Tests.CloudProviderCrossBrowser for cross browser parallel test execution with BrowserStack\SauceLabs\TestingBot\SeleniumGrid
+- Ocaramba.UnitTests for unit test of framework
 
 NUnit Example Test:
 
 ```csharp
-namespace Objectivity.Test.Automation.Tests.NUnit.Tests
+namespace Ocaramba.Tests.NUnit.Tests
 {
     using global::NUnit.Framework;
 
-    using Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet;
+    using Ocaramba.Tests.PageObjects.PageObjects.TheInternet;
 
     [Parallelizable(ParallelScope.Fixtures)]
     public class JavaScriptAlertsTestsNUnit : ProjectTestBase
@@ -82,7 +82,7 @@ namespace Objectivity.Test.Automation.Tests.NUnit.Tests
 NUnit Example Page Object:
 
 ```csharp
-namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
+namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
 {
     using System;
     using System.Globalization;
@@ -92,7 +92,7 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
     using Ocaramba.Common;
     using Ocaramba.Common.Extensions;
     using Ocaramba.Common.Types;
-    using Objectivity.Test.Automation.Tests.PageObjects;
+    using Ocaramba.Tests.PageObjects;
 
     public class InternetPage : ProjectPageBase
     {
@@ -121,8 +121,8 @@ namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
 -------------
 - See [Getting started](https://github.com/ObjectivityLtd/Test.Automation/wiki/Getting%20started).
 
-Checkout the code or get it from [nuget.org](https://www.nuget.org/packages?q=Objectivity.Test.Automation.Common)
-- Objectivity.Test.Automation.Common.NUnit [![NuGet Badge](https://buildstats.info/nuget/Objectivity.Test.Automation.Common.NUnit)](https://www.nuget.org/packages/Objectivity.Test.Automation.Common.NUnit/)
-- Objectivity.Test.Automation.Common.Features [![NuGet Badge](https://buildstats.info/nuget/Objectivity.Test.Automation.Common.Features)](https://www.nuget.org/packages/Objectivity.Test.Automation.Common.Features/)
-- Objectivity.Test.Automation.Common.MsTest [![NuGet Badge](https://buildstats.info/nuget/Objectivity.Test.Automation.Common.MsTest)](https://www.nuget.org/packages/Objectivity.Test.Automation.Common.MsTest/)
-- Objectivity.Test.Automation.Common.xUnit [![NuGet Badge](https://buildstats.info/nuget/Objectivity.Test.Automation.Common.xUnit)](https://www.nuget.org/packages/Objectivity.Test.Automation.Common.xUnit/)
+Checkout the code or get it from [nuget.org](https://www.nuget.org/packages?q=Ocaramba.Common)
+- Ocaramba.Common.NUnit [![NuGet Badge](https://buildstats.info/nuget/Ocaramba.Common.NUnit)](https://www.nuget.org/packages/Ocaramba.Common.NUnit/)
+- Ocaramba.Common.Features [![NuGet Badge](https://buildstats.info/nuget/Ocaramba.Common.Features)](https://www.nuget.org/packages/Ocaramba.Common.Features/)
+- Ocaramba.Common.MsTest [![NuGet Badge](https://buildstats.info/nuget/Ocaramba.Common.MsTest)](https://www.nuget.org/packages/Ocaramba.Common.MsTest/)
+- Ocaramba.Common.xUnit [![NuGet Badge](https://buildstats.info/nuget/Ocaramba.Common.xUnit)](https://www.nuget.org/packages/Ocaramba.Common.xUnit/)

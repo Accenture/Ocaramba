@@ -1,32 +1,32 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27428.2037
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ocaramba.Common", "Ocaramba.Common\Ocaramba.Common.csproj", "{46FA4EDC-A114-4E8F-A545-996F99E31EA8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{AF2EBD4E-C7A9-4151-A868-02C60EEA8628}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Objectivity.Test.Automation.Tests.MSTest", "Objectivity.Test.Automation.Tests.MSTest\Objectivity.Test.Automation.Tests.MSTest.csproj", "{00D2DBBC-8C05-45B7-956E-9F01DEB9BACA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ocaramba.Tests.MSTest", "Ocaramba.Tests.MSTest\Ocaramba.Tests.MSTest.csproj", "{00D2DBBC-8C05-45B7-956E-9F01DEB9BACA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ocaramba.Tests.NUnit", "Objectivity.Test.Automation.Tests.NUnit\Ocaramba.Tests.NUnit.csproj", "{74F9B9A8-0055-4C13-B3C9-FACED546CB43}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ocaramba.Tests.NUnit", "Ocaramba.Tests.NUnit\Ocaramba.Tests.NUnit.csproj", "{74F9B9A8-0055-4C13-B3C9-FACED546CB43}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ocaramba.Tests.PageObjects", "Objectivity.Test.Automation.Tests.PageObjects\Ocaramba.Tests.PageObjects.csproj", "{1EA997E6-B873-469F-8685-17F73EBB0B92}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ocaramba.Tests.PageObjects", "Ocaramba.Tests.PageObjects\Ocaramba.Tests.PageObjects.csproj", "{1EA997E6-B873-469F-8685-17F73EBB0B92}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Objectivity.Test.Automation.Tests.Features", "Objectivity.Test.Automation.Tests.Features\Objectivity.Test.Automation.Tests.Features.csproj", "{B97FEA9E-C131-4850-BC6D-563F60EE41FA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ocaramba.Tests.Features", "Ocaramba.Tests.Features\Ocaramba.Tests.Features.csproj", "{B97FEA9E-C131-4850-BC6D-563F60EE41FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Objectivity.Test.Automation.Tests.Xunit", "Objectivity.Test.Automation.Tests.Xunit\Objectivity.Test.Automation.Tests.Xunit.csproj", "{8DAC5471-0F43-42F2-8C98-8C0FF3C58A4B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ocaramba.Tests.Xunit", "Ocaramba.Tests.Xunit\Ocaramba.Tests.Xunit.csproj", "{8DAC5471-0F43-42F2-8C98-8C0FF3C58A4B}"
 EndProject
-Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Objectivity.Test.Automation.Common.Documentation", "Objectivity.Test.Automation.Common.Documentation\Objectivity.Test.Automation.Common.Documentation.shfbproj", "{2E753223-59F7-47ED-9E1A-D539A462226D}"
+Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Ocaramba.Common.Documentation", "Ocaramba.Common.Documentation\Ocaramba.Common.Documentation.shfbproj", "{2E753223-59F7-47ED-9E1A-D539A462226D}"
 	ProjectSection(ProjectDependencies) = postProject
 		{46FA4EDC-A114-4E8F-A545-996F99E31EA8} = {46FA4EDC-A114-4E8F-A545-996F99E31EA8}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Objectivity.Test.Automation.Tests.Angular", "Objectivity.Test.Automation.Tests.Angular\Objectivity.Test.Automation.Tests.Angular.csproj", "{EE625CF5-B283-44A9-A35F-0BFBBF4D409E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ocaramba.Tests.Angular", "Ocaramba.Tests.Angular\Ocaramba.Tests.Angular.csproj", "{EE625CF5-B283-44A9-A35F-0BFBBF4D409E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Objectivity.Test.Automation.UnitTests", "Objectivity.Test.Automation.UnitTests\Objectivity.Test.Automation.UnitTests.csproj", "{4F7A9D54-779A-4F45-91DC-4C8B81B4A9C9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ocaramba.UnitTests", "Ocaramba.UnitTests\Ocaramba.UnitTests.csproj", "{4F7A9D54-779A-4F45-91DC-4C8B81B4A9C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ocaramba.Tests.CloudProviderCrossBrowser", "Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser\Ocaramba.Tests.CloudProviderCrossBrowser.csproj", "{F5B79C58-AC3B-448A-8325-5EF9A962B4A3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ocaramba.Tests.CloudProviderCrossBrowser", "Ocaramba.Tests.CloudProviderCrossBrowser\Ocaramba.Tests.CloudProviderCrossBrowser.csproj", "{F5B79C58-AC3B-448A-8325-5EF9A962B4A3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2CF5AF89-028E-4D81-B39E-A021B5C01C11}"
 	ProjectSection(SolutionItems) = preProject
@@ -36,9 +36,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuspec", ".nuspec", "{1A98C4E2-FE6C-4E95-BA56-5F6B4F088A44}"
 	ProjectSection(SolutionItems) = preProject
-		.nuspec\Objectivity.Test.Automation.Features.nuspec = .nuspec\Objectivity.Test.Automation.Features.nuspec
-		.nuspec\Objectivity.Test.Automation.MsTest.nuspec = .nuspec\Objectivity.Test.Automation.MsTest.nuspec
-		.nuspec\Objectivity.Test.Automation.Xunit.nuspec = .nuspec\Objectivity.Test.Automation.Xunit.nuspec
+		.nuspec\Ocaramba.Features.nuspec = .nuspec\Ocaramba.Features.nuspec
+		.nuspec\Ocaramba.MsTest.nuspec = .nuspec\Ocaramba.MsTest.nuspec
+		.nuspec\Ocaramba.Xunit.nuspec = .nuspec\Ocaramba.Xunit.nuspec
 		.nuspec\Ocaramba.Nunit.nuspec = .nuspec\Ocaramba.Nunit.nuspec
 	EndProjectSection
 EndProject
