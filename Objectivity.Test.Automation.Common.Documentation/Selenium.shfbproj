@@ -9,9 +9,9 @@
     <ProjectGuid>{2911b385-a412-48d1-8e17-ededb98d353c}</ProjectGuid>
     <SHFBSchemaVersion>2017.9.26.0</SHFBSchemaVersion>
     <!-- AssemblyName, Name, and RootNamespace are not used by SHFB but Visual Studio adds them anyway -->
-    <AssemblyName>Objectivity.Test.Automation.Common.Documentation</AssemblyName>
-    <RootNamespace>Objectivity.Test.Automation.Common.Documentation</RootNamespace>
-    <Name>Objectivity.Test.Automation.Common.Documentation</Name>
+    <AssemblyName>Ocaramba.Common.Documentation</AssemblyName>
+    <RootNamespace>Ocaramba.Common.Documentation</RootNamespace>
+    <Name>Ocaramba.Common.Documentation</Name>
     <!-- SHFB properties -->
     <FrameworkVersion>.NET Framework 4.6</FrameworkVersion>
     <OutputPath>HelpSelenium\</OutputPath>

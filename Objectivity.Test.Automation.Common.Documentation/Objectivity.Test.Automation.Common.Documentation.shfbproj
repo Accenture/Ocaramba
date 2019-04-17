@@ -9,13 +9,13 @@
     <ProjectGuid>2e753223-59f7-47ed-9e1a-d539a462226d</ProjectGuid>
     <SHFBSchemaVersion>2017.9.26.0</SHFBSchemaVersion>
     <!-- AssemblyName, Name, and RootNamespace are not used by SHFB but Visual Studio adds them anyway -->
-    <AssemblyName>Objectivity.Test.Automation.Common.Documentation</AssemblyName>
-    <RootNamespace>Objectivity.Test.Automation.Common.Documentation</RootNamespace>
-    <Name>Objectivity.Test.Automation.Common.Documentation</Name>
+    <AssemblyName>Ocaramba.Common.Documentation</AssemblyName>
+    <RootNamespace>Ocaramba.Common.Documentation</RootNamespace>
+    <Name>Ocaramba.Common.Documentation</Name>
     <!-- SHFB properties -->
     <FrameworkVersion>.NET Framework 4.6</FrameworkVersion>
     <OutputPath>Help\</OutputPath>
-    <HtmlHelpName>Objectivity.Test.Automation.Common</HtmlHelpName>
+    <HtmlHelpName>Ocaramba.Common</HtmlHelpName>
     <Language>en-US</Language>
     <TransformComponentArguments>
       <Argument Key="logoFile" Value="Help.png" xmlns="" />
@@ -25,11 +25,11 @@
       <Argument Key="logoPlacement" Value="left" xmlns="" />
       <Argument Key="logoAlignment" Value="left" xmlns="" />
       <Argument Key="maxVersionParts" Value="" xmlns="" />
-      <Argument Key="baseSourceCodeUrl" Value="https://github.com/ObjectivityLtd/Test.Automation/tree/master/Objectivity.Test.Automation.Common/" />
+      <Argument Key="baseSourceCodeUrl" Value="https://github.com/ObjectivityLtd/Test.Automation/tree/master/Ocaramba.Common/" />
       <Argument Key="requestExampleUrl" Value="https://github.com/ObjectivityLtd/Test.Automation/issues/new" />
     </TransformComponentArguments>
     <DocumentationSources>
-      <DocumentationSource sourceFile="..\Objectivity.Test.Automation.Common\Objectivity.Test.Automation.Common.csproj" xmlns="" />
+      <DocumentationSource sourceFile="..\Ocaramba.Common\Ocaramba.Common.csproj" xmlns="" />
     </DocumentationSources>
     <SaveComponentCacheCapacity>100</SaveComponentCacheCapacity>
     <BuildAssemblerVerbosity>OnlyWarningsAndErrors</BuildAssemblerVerbosity>
