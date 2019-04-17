@@ -8,8 +8,8 @@
     <ProjectGuid>{4F7A9D54-779A-4F45-91DC-4C8B81B4A9C9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Objectivity.Test.Automation.UnitTests</RootNamespace>
-    <AssemblyName>Objectivity.Test.Automation.UnitTests</AssemblyName>
+    <RootNamespace>Ocaramba.UnitTests</RootNamespace>
+    <AssemblyName>Ocaramba.UnitTests</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
