@@ -24,7 +24,7 @@ namespace Ocaramba.Tests.Features.StepDefinitions
 {
     using System;
     using System.Globalization;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
     using Ocaramba.Common;
     using Ocaramba.Tests.PageObjects.PageObjects.TheInternet;
     using TechTalk.SpecFlow;
