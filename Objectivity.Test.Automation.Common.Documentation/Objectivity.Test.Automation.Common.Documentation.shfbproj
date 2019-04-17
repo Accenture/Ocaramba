@@ -47,7 +47,7 @@
     <PresentationStyle>VS2013</PresentationStyle>
     <Preliminary>False</Preliminary>
     <NamingMethod>Guid</NamingMethod>
-    <HelpTitle>Objectivity.Test.Automation.Common Framework</HelpTitle>
+    <HelpTitle>Ocaramba.Common Framework</HelpTitle>
     <ContentPlacement>AboveNamespaces</ContentPlacement>
     <FooterText>Objectivity Bespoke Software Specialists</FooterText>
     <HeaderText>Framework to automate tests using Selenium WebDriver</HeaderText>
@@ -66,13 +66,13 @@
       </PlugInConfig>
     </PlugInConfigurations>
     <ApiFilter>
-      <Filter entryType="Namespace" fullName="Objectivity.Test.Automation.Common.Logger" isExposed="False" xmlns="">
-        <Filter entryType="Class" fullName="Objectivity.Test.Automation.Common.Logger.TestLogger" filterName="TestLogger" isExposed="True" />
+      <Filter entryType="Namespace" fullName="Ocaramba.Common.Logger" isExposed="False" xmlns="">
+        <Filter entryType="Class" fullName="Ocaramba.Common.Logger.TestLogger" filterName="TestLogger" isExposed="True" />
       </Filter>
     </ApiFilter>
     <VisibleItems>InheritedMembers, InheritedFrameworkMembers, Protected, ProtectedInternalAsProtected, EditorBrowsableNever, NonBrowsable</VisibleItems>
     <WarnOnMissingSourceContext>False</WarnOnMissingSourceContext>
-    <SourceCodeBasePath>..\Objectivity.Test.Automation.Common\</SourceCodeBasePath>
+    <SourceCodeBasePath>..\Ocaramba.Common\</SourceCodeBasePath>
   </PropertyGroup>
   <PropertyGroup>
     <!-- NOTE: Update the version number in the path (YYYY.M.D.R) to match the package version -->
