@@ -23,8 +23,8 @@
 namespace Objectivity.Test.Automation.Tests.Xunit
 {
     using System;
-    using Common;
     using global::Xunit;
+    using Ocaramba.Common;
 
     /// <summary>
     /// The base class for all tests <see href="https://github.com/ObjectivityLtd/Test.Automation/wiki/ProjectTestBase-class">More details on wiki</see>

@@ -20,11 +20,11 @@
 //     SOFTWARE.
 // </license>
 
-namespace Objectivity.Test.Automation.Common.WebElements
+namespace Ocaramba.Common.WebElements
 {
     using NLog;
-    using Objectivity.Test.Automation.Common.Extensions;
-    using Objectivity.Test.Automation.Common.Types;
+    using Ocaramba.Common.Extensions;
+    using Ocaramba.Common.Types;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Remote;
 

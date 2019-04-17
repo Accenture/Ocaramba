@@ -20,13 +20,12 @@
 //     SOFTWARE.
 // </license>
 
-namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
+namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
 {
-    using Common.Types;
     using NLog;
-    using Objectivity.Test.Automation.Common;
-    using Objectivity.Test.Automation.Common.Extensions;
-    using Objectivity.Test.Automation.Tests.PageObjects;
+    using Ocaramba.Common;
+    using Ocaramba.Common.Extensions;
+    using Ocaramba.Common.Types;
 
     public class DynamicLoadingPage : ProjectPageBase
     {

@@ -20,7 +20,7 @@
 //     SOFTWARE.
 // </license>
 
-namespace Objectivity.Test.Automation.Common.Extensions
+namespace Ocaramba.Common.Extensions
 {
     using System;
     using System.Collections.Generic;
@@ -28,8 +28,9 @@ namespace Objectivity.Test.Automation.Common.Extensions
     using System.Globalization;
     using System.Linq;
     using System.Runtime.InteropServices;
-    using Objectivity.Test.Automation.Common.Helpers;
-    using Objectivity.Test.Automation.Common.Types;
+    using Ocaramba.Common;
+    using Ocaramba.Common.Helpers;
+    using Ocaramba.Common.Types;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Internal;
     using OpenQA.Selenium.Support.UI;

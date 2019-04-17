@@ -23,7 +23,7 @@
 namespace Objectivity.Test.Automation.Tests.Xunit
 {
     using System;
-    using Common;
+    using Ocaramba.Common;
 
     /// <summary>
     /// The test fixture class for all tests

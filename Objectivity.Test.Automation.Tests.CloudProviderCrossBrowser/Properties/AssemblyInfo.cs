@@ -27,11 +27,11 @@ using NUnit.Framework;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Objectivity.Test.Automation.Common.Sample")]
+[assembly: AssemblyTitle("Ocaramba.Common.Sample")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Objectivity.Test.Automation.Common.Sample")]
+[assembly: AssemblyProduct("Ocaramba.Common.Sample")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

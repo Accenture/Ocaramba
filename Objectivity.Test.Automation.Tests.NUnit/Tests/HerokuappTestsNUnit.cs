@@ -20,13 +20,11 @@
 //     SOFTWARE.
 // </license>
 
-namespace Objectivity.Test.Automation.Tests.NUnit.Tests
+namespace Ocaramba.Tests.NUnit.Tests
 {
-    using System.Collections.Generic;
-    using Automation.Tests.PageObjects.PageObjects.TheInternet;
-    using Common;
-    using DataDriven;
     using global::NUnit.Framework;
+    using Ocaramba.Common;
+    using Ocaramba.Tests.PageObjects.PageObjects.TheInternet;
     using OpenQA.Selenium;
 
     [TestFixture]

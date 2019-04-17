@@ -20,10 +20,10 @@
 //     SOFTWARE.
 // </license>
 
-namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
+namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
 {
-    using Common;
-    using Common.Extensions;
+    using Ocaramba.Common;
+    using Ocaramba.Common.Extensions;
     using OpenQA.Selenium;
 
     public class HoversPage : ProjectPageBase

@@ -20,13 +20,12 @@
 //     SOFTWARE.
 // </license>
 
-namespace Objectivity.Test.Automation.Tests.NUnit.DataDriven
+namespace Ocaramba.Tests.NUnit.DataDriven
 {
-    using System;
     using System.Collections;
     using System.Globalization;
-    using System.IO;
     using global::NUnit.Framework;
+    using Objectivity.Test.Automation.Tests.NUnit.DataDriven;
 
     /// <summary>
     /// DataDriven methods for NUnit test framework

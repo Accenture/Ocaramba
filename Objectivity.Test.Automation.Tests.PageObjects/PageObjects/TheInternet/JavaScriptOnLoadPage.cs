@@ -20,9 +20,9 @@
 //     SOFTWARE.
 // </license>
 
-namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
+namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
 {
-    using Objectivity.Test.Automation.Common;
+    using Ocaramba.Common;
 
     public class JavaScriptOnLoadPage : ProjectPageBase
     {

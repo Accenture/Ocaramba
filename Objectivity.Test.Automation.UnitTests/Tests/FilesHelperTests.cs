@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
 using NUnit.Framework;
-using Objectivity.Test.Automation.Common;
-using Objectivity.Test.Automation.Common.Exceptions;
-using Objectivity.Test.Automation.Common.Helpers;
+using Ocaramba.Common;
+using Ocaramba.Common.Exceptions;
+using Ocaramba.Common.Helpers;
 
 namespace Objectivity.Test.Automation.UnitTests.Tests
 {

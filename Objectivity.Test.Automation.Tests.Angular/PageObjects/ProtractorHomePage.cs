@@ -1,12 +1,12 @@
-﻿using Objectivity.Test.Automation.Common.Types;
+﻿using Ocaramba.Common;
+using Ocaramba.Common.Extensions;
+using Ocaramba.Common.Types;
+using Ocaramba.Tests.PageObjects;
 
 namespace Objectivity.Test.Automation.Tests.Angular.PageObjects
 {
     using System.Globalization;
     using NLog;
-    using Objectivity.Test.Automation.Common;
-    using Objectivity.Test.Automation.Common.Extensions;
-    using Objectivity.Test.Automation.Tests.PageObjects;
     using System;
 
     public class ProtractorHomePage : ProjectPageBase

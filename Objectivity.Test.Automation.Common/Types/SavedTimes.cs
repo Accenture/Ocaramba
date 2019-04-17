@@ -20,8 +20,10 @@
 //     SOFTWARE.
 // </license>
 
-namespace Objectivity.Test.Automation.Common.Types
+namespace Ocaramba.Common.Types
 {
+    using Ocaramba.Common;
+
     /// <summary>
     /// SavedTimes class.
     /// </summary>

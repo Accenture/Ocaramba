@@ -20,7 +20,7 @@
 //     SOFTWARE.
 // </license>
 
-namespace Objectivity.Test.Automation.Common.WebElements.Kendo
+namespace Ocaramba.Common.WebElements.Kendo
 {
     using OpenQA.Selenium;
 

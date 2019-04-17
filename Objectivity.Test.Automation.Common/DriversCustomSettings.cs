@@ -20,7 +20,7 @@
 //     SOFTWARE.
 // </license>
 
-namespace Objectivity.Test.Automation.Common
+namespace Ocaramba.Common
 {
     using System.Collections.Generic;
     using OpenQA.Selenium;

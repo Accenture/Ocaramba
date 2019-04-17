@@ -20,16 +20,11 @@
 //     SOFTWARE.
 // </license>
 
-namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
+namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
 {
-    using System;
-    using System.Threading;
-    using Common.Types;
-    using Objectivity.Test.Automation.Common;
-    using Objectivity.Test.Automation.Common.Extensions;
-    using Objectivity.Test.Automation.Tests.PageObjects;
-    using OpenQA.Selenium;
-    using OpenQA.Selenium.Support.UI;
+    using Ocaramba.Common;
+    using Ocaramba.Common.Extensions;
+    using Ocaramba.Common.Types;
 
     public class DynamicControlsPage : ProjectPageBase
     {

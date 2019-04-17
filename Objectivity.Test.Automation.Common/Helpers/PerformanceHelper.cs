@@ -20,7 +20,7 @@
 //     SOFTWARE.
 // </license>
 
-namespace Objectivity.Test.Automation.Common.Helpers
+namespace Ocaramba.Common.Helpers
 {
     using System;
     using System.Collections.Generic;
@@ -28,7 +28,7 @@ namespace Objectivity.Test.Automation.Common.Helpers
     using System.Globalization;
     using System.Linq;
     using NLog;
-    using Objectivity.Test.Automation.Common.Types;
+    using Ocaramba.Common.Types;
 
     /// <summary>
     /// Class which support performance tests. <see href="https://github.com/ObjectivityLtd/Test.Automation/wiki/Performance%20measures">More details on wiki</see>

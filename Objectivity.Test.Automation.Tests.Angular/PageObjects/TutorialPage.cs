@@ -1,12 +1,11 @@
-﻿namespace Objectivity.Test.Automation.Tests.Angular.PageObjects
+﻿using Ocaramba.Tests.PageObjects;
+
+namespace Objectivity.Test.Automation.Tests.Angular.PageObjects
 {
-    using System.Globalization;
     using NLog;
-    using Objectivity.Test.Automation.Common.Types;
-    using Objectivity.Test.Automation.Common;
-    using Objectivity.Test.Automation.Common.Extensions;
-    using Objectivity.Test.Automation.Tests.PageObjects;
-    using System;
+    using Ocaramba.Common.Types;
+    using Ocaramba.Common;
+    using Ocaramba.Common.Extensions;
 
     public class TutorialPage : ProjectPageBase
     {

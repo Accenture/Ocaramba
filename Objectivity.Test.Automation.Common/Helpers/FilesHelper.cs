@@ -20,7 +20,7 @@
 //     SOFTWARE.
 // </license>
 
-namespace Objectivity.Test.Automation.Common.Helpers
+namespace Ocaramba.Common.Helpers
 {
     using System;
     using System.Collections.Generic;
@@ -29,10 +29,8 @@ namespace Objectivity.Test.Automation.Common.Helpers
     using System.IO;
     using System.Linq;
     using System.Threading;
-
     using NLog;
-
-    using Objectivity.Test.Automation.Common;
+    using Ocaramba.Common.Helpers;
 
     /// <summary>
     /// Class for handling downloading files <see href="https://github.com/ObjectivityLtd/Test.Automation/wiki/Downloading%20files">More details on wiki</see>

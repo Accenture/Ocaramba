@@ -1,5 +1,5 @@
 ﻿using NUnit.Framework;
-using Objectivity.Test.Automation.Common.Helpers;
+using Ocaramba.Common.Helpers;
 
 namespace Objectivity.Test.Automation.UnitTests.Tests
 {

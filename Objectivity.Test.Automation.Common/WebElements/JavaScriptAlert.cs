@@ -20,7 +20,7 @@
 //     SOFTWARE.
 // </license>
 
-namespace Objectivity.Test.Automation.Common.WebElements
+namespace Ocaramba.Common.WebElements
 {
     using OpenQA.Selenium;
 

@@ -22,11 +22,8 @@
 
 namespace Objectivity.Test.Automation.Tests.MsTest.Tests.KendoTests
 {
-    using System.Diagnostics.CodeAnalysis;
-
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-    using Objectivity.Test.Automation.Tests.PageObjects.PageObjects.Kendo;
+    using Ocaramba.Tests.PageObjects.PageObjects.Kendo;
 
     [TestClass]
     public class KendoGridTests : ProjectTestBase

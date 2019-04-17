@@ -26,8 +26,8 @@ namespace Objectivity.Test.Automation.Tests.MsTest
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    using Objectivity.Test.Automation.Common;
-    using Objectivity.Test.Automation.Common.Logger;
+    using Ocaramba.Common;
+    using Ocaramba.Common.Logger;
 
     /// <summary>
     /// The base class for all tests <see href="https://github.com/ObjectivityLtd/Test.Automation/wiki/ProjectTestBase-class">More details on wiki</see>
@@ -35,7 +35,7 @@ namespace Objectivity.Test.Automation.Tests.MsTest
     [TestClass]
     public class ProjectTestBase : TestBase
     {
-        private readonly DriverContext driverContext = new DriverContext();
+        private readonly DriverContext driverContext = new Ocaramba.Common.DriverContext();
 
         /// <summary>
         /// Gets or sets logger instance for driver

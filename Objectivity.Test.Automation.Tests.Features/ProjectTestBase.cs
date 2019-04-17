@@ -25,8 +25,8 @@ namespace Objectivity.Test.Automation.Tests.Features
     using System;
 
     using NUnit.Framework;
-    using Objectivity.Test.Automation.Common;
-    using Objectivity.Test.Automation.Common.Logger;
+    using Ocaramba.Common;
+    using Ocaramba.Common.Logger;
 
     using TechTalk.SpecFlow;
 
@@ -37,7 +37,7 @@ namespace Objectivity.Test.Automation.Tests.Features
     public class ProjectTestBase : TestBase
     {
         private readonly ScenarioContext scenarioContext;
-        private readonly DriverContext driverContext = new DriverContext();
+        private readonly DriverContext driverContext = new Ocaramba.Common.DriverContext();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ProjectTestBase"/> class.

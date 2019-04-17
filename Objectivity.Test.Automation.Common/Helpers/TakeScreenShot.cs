@@ -20,7 +20,7 @@
 //     SOFTWARE.
 // </license>
 
-namespace Objectivity.Test.Automation.Common.Helpers
+namespace Ocaramba.Common.Helpers
 {
     using System;
     using System.ComponentModel;
@@ -31,7 +31,8 @@ namespace Objectivity.Test.Automation.Common.Helpers
     using System.Text.RegularExpressions;
     using System.Windows.Forms;
     using NLog;
-    using Objectivity.Test.Automation.Common.Extensions;
+    using Ocaramba.Common.Extensions;
+    using Ocaramba.Common.Helpers;
     using OpenQA.Selenium;
 
     /// <summary>

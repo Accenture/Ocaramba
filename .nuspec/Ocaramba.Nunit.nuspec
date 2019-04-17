@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Objectivity.Test.Automation.Common.NUnit</id>
+    <version>$version$</version>
+    <title>Objectivity.Test.Automation.Common.NUnit</title>
+    <authors>Objectivity Bespoke Software Specialists</authors>
+    <owners>Objectivity Bespoke Software Specialists</owners>
+    <license type="expression">MIT</license>
+    <projectUrl>https://github.com/ObjectivityLtd/Test.Automation</projectUrl>
+	<iconUrl>https://github.com/ObjectivityLtd/Test.Automation/wiki/images/Objectivity_logo_avatar32.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Framework to automate tests using Ocaramba.Common with NUnit</description>
+    <releaseNotes>You can find info about this release here: https://github.com/ObjectivityLtd/Test.Automation/releases</releaseNotes>
+    <copyright>Copyright 2015</copyright>
+    <tags>selenium webdriver testautomation tests nunit Objectivity.Test.Automation.Common</tags>
+	<dependencies>
+	  <dependency id="NUnit" version="3.11.0" />
+	  <dependency id="NUnit.ConsoleRunner" version="3.9.0" />
+	  <dependency id="NUnit.Runners" version="3.9.0" />
+	  <dependency id="NUnit.Extension.NUnitProjectLoader" version="3.6.0" />
+	  <dependency id="NUnit.Extension.NUnitV2Driver" version="3.7.0" />
+	  <dependency id="NUnit.Extension.NUnitV2ResultWriter" version="3.6.0" />
+	  <dependency id="NUnit.Extension.VSProjectLoader" version="3.7.0" />
+	  <dependency id="NUnit.Extension.TeamCityEventListener" version="1.0.4" />
+	  <dependency id="NUnit3TestAdapter" version="3.12.0" />
+	  <dependency id="NPOI" version="2.3.0" />
+	  <dependency id="SharpZipLib" version="0.86.0" />
+    </dependencies> 
+	<frameworkAssemblies>
+		<frameworkAssembly assemblyName="System.Configuration" />
+	</frameworkAssemblies>
+  </metadata>
+  <files>
+	<file src="..\Ocaramba.Tests.NUnit\ProjectTestBase.cs" target="content" />
+	<file src="..\Ocaramba.Tests.NUnit\App.config" target="content" />
+	<file src="..\Ocaramba.Tests.PageObjects\ProjectPageBase.cs" target="content" />
+	<file src="..\Ocaramba.Tests.NUnit\DataDriven\DataDrivenHelper.cs" target="content\DataDriven" />
+	<file src="..\Ocaramba.Tests.NUnit\DataDriven\TestData.cs" target="content\DataDriven" />
+	<file src="..\Ocaramba.Tests.NUnit\ProjectBaseConfiguration.cs" target="content" />
+  </files>
+</package>

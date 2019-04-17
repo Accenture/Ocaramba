@@ -20,23 +20,19 @@
 //     SOFTWARE.
 // </license>
 
-namespace Objectivity.Test.Automation.Common
+namespace Ocaramba.Common
 {
     using System;
-    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Collections.Specialized;
     using System.Configuration;
     using System.Diagnostics.CodeAnalysis;
-    using System.Drawing.Imaging;
     using System.Globalization;
     using System.IO;
-    using System.Linq;
-    using System.Text.RegularExpressions;
     using NLog;
-    using Objectivity.Test.Automation.Common.Helpers;
-    using Objectivity.Test.Automation.Common.Logger;
-    using Objectivity.Test.Automation.Common.Types;
+    using Ocaramba.Common.Helpers;
+    using Ocaramba.Common.Logger;
+    using Ocaramba.Common.Types;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Chrome;
     using OpenQA.Selenium.Edge;

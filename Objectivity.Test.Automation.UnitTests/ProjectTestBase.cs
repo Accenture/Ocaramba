@@ -22,8 +22,9 @@
 
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
-using Objectivity.Test.Automation.Common;
-using Objectivity.Test.Automation.Common.Logger;
+using Ocaramba.Common;
+using Ocaramba.Common.Logger;
+using DriverContext = Ocaramba.Common.DriverContext;
 
 namespace Objectivity.Test.Automation.UnitTests
 {

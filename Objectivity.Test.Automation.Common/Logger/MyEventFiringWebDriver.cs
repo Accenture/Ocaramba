@@ -20,7 +20,7 @@
 //     SOFTWARE.
 // </license>
 
-namespace Objectivity.Test.Automation.Common.Logger
+namespace Ocaramba.Common.Logger
 {
     using System.Globalization;
     using NLog;

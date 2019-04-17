@@ -20,15 +20,15 @@
 //     SOFTWARE.
 // </license>
 
-namespace Objectivity.Test.Automation.Tests.NUnit.DataDriven
+namespace Ocaramba.Tests.NUnit.DataDriven
 {
     using System.Collections;
     using System.Collections.Generic;
     using System.IO;
     using System.Text.RegularExpressions;
-    using Common.Helpers;
     using global::NUnit.Framework;
     using NLog;
+    using Ocaramba.Common.Helpers;
 
     /// <summary>
     /// DataDriven comparing files  methods for NUnit test framework <see href="https://github.com/ObjectivityLtd/Test.Automation/wiki/Comparing-files-by-NUnit-DataDriven-tests">More details on wiki</see>

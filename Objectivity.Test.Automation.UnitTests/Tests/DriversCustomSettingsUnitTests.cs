@@ -20,11 +20,12 @@
 //     SOFTWARE.
 // </license>
 
+using Ocaramba.Common;
+using Ocaramba.Common.Extensions;
+
 namespace Objectivity.Test.Automation.UnitTests.Tests
 {
     using NUnit.Framework;
-    using Common;
-    using Common.Extensions;
 
     [TestFixture, Parallelizable(ParallelScope.Fixtures)]
     public class DriversCustomSettingsUnitTests
@@ -32,7 +33,7 @@ namespace Objectivity.Test.Automation.UnitTests.Tests
         [Test]
         public void CheckSynchronizationWithAngularFuctionality()
         {
-            var driverContext = new DriverContext {CurrentDirectory = TestContext.CurrentContext.TestDirectory};
+            var driverContext = new Ocaramba.Common.DriverContext {CurrentDirectory = TestContext.CurrentContext.TestDirectory};
             driverContext.Start();
             var Default_false = DriversCustomSettings.IsDriverSynchronizationWithAngular(driverContext.Driver);
             driverContext.Driver.SynchronizeWithAngular(true);

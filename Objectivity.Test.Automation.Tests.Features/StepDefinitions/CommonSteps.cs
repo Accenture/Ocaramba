@@ -25,8 +25,8 @@ namespace Objectivity.Test.Automation.Tests.Features.StepDefinitions
     using System;
     using System.Globalization;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Objectivity.Test.Automation.Common;
-    using Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet;
+    using Ocaramba.Common;
+    using Ocaramba.Tests.PageObjects.PageObjects.TheInternet;
     using TechTalk.SpecFlow;
 
     [Binding]
@@ -44,7 +44,7 @@ namespace Objectivity.Test.Automation.Tests.Features.StepDefinitions
 
             this.scenarioContext = scenarioContext;
 
-            this.driverContext = this.scenarioContext["DriverContext"] as DriverContext;
+            this.driverContext = this.scenarioContext["DriverContext"] as Ocaramba.Common.DriverContext;
         }
 
         [Given(@"Default page is opened")]

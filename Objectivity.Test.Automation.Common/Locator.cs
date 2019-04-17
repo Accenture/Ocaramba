@@ -20,7 +20,7 @@
 //     SOFTWARE.
 // </license>
 
-namespace Objectivity.Test.Automation.Common
+namespace Ocaramba.Common
 {
     /// <summary>
     /// The page element locator type. Needs to be translated to automation framework specific locators

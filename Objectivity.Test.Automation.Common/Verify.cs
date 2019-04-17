@@ -20,14 +20,14 @@
 //     SOFTWARE.
 // </license>
 
-namespace Objectivity.Test.Automation.Common
+namespace Ocaramba.Common
 {
     using System;
     using System.Globalization;
 
     using NLog;
 
-    using Objectivity.Test.Automation.Common.Types;
+    using Ocaramba.Common.Types;
 
     /// <summary>
     /// Class for assert without stop tests <see href="https://github.com/ObjectivityLtd/Test.Automation/wiki/Verify-asserts-without-stop-tests">More details on wiki</see>

@@ -22,14 +22,10 @@
 
 namespace Objectivity.Test.Automation.Tests.MsTest.Tests
 {
-    using System;
     using System.Diagnostics.CodeAnalysis;
-
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-    using Objectivity.Test.Automation.Common;
-    using Objectivity.Test.Automation.Common.Extensions;
-    using Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet;
+    using Ocaramba.Common;
+    using Ocaramba.Tests.PageObjects.PageObjects.TheInternet;
 
     /// <summary>
     /// Tests to verify checkboxes tick and Untick.

@@ -23,8 +23,8 @@
 namespace Objectivity.Test.Automation.Tests.Xunit.Tests
 {
     using global::Xunit;
-    using PageObjects.PageObjects.Kendo;
-    using PageObjects.PageObjects.TheInternet;
+    using Ocaramba.Tests.PageObjects.PageObjects.Kendo;
+    using Ocaramba.Tests.PageObjects.PageObjects.TheInternet;
 
     public class ExampleTest2 : ProjectTestBase
     {

@@ -20,14 +20,13 @@
 //     SOFTWARE.
 // </license>
 
-namespace Objectivity.Test.Automation.Tests.NUnit
+namespace Ocaramba.Tests.NUnit
 {
     using System.Configuration;
     using System.IO;
-    using System.Reflection;
-    using Common;
-    using Common.Helpers;
     using global::NUnit.Framework;
+    using Ocaramba.Common;
+    using Ocaramba.Common.Helpers;
 
     /// <summary>
     /// SeleniumConfiguration that consume app.config file

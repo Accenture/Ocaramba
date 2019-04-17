@@ -20,13 +20,13 @@
 //     SOFTWARE.
 // </license>
 
-namespace Objectivity.Test.Automation.Tests.NUnit.Tests
+namespace Ocaramba.Tests.NUnit.Tests
 {
     using System.Drawing.Imaging;
     using System.Globalization;
-    using Automation.Tests.PageObjects.PageObjects.TheInternet;
-    using Common.Helpers;
     using global::NUnit.Framework;
+    using Ocaramba.Common.Helpers;
+    using Ocaramba.Tests.PageObjects.PageObjects.TheInternet;
 
     [TestFixture]
     public class SaveScreenShotsPageSourceTestsNUnit : ProjectTestBase

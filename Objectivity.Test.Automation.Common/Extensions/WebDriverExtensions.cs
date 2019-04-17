@@ -20,16 +20,15 @@
 //     SOFTWARE.
 // </license>
 
-namespace Objectivity.Test.Automation.Common.Extensions
+namespace Ocaramba.Common.Extensions
 {
     using System;
     using System.Globalization;
     using Helpers;
     using NLog;
-
-    using Objectivity.Test.Automation.Common.Types;
-    using Objectivity.Test.Automation.Common.WebElements;
-
+    using Ocaramba.Common;
+    using Ocaramba.Common.Types;
+    using Ocaramba.Common.WebElements;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Interactions;
     using OpenQA.Selenium.Support.UI;

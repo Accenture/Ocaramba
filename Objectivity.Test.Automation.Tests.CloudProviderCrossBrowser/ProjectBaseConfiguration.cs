@@ -25,8 +25,8 @@ namespace Objectivity.Test.Automation.Tests.NUnit
     using System.Configuration;
     using System.IO;
     using System.Reflection;
-    using Common;
-    using Common.Helpers;
+    using Ocaramba.Common;
+    using Ocaramba.Common.Helpers;
 
     /// <summary>
     /// SeleniumConfiguration that consume app.config file

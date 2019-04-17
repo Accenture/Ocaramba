@@ -20,10 +20,10 @@
 //     SOFTWARE.
 // </license>
 
-namespace Objectivity.Test.Automation.Common
+namespace Ocaramba.Common
 {
     using System.Collections.Generic;
-    using Objectivity.Test.Automation.Common.Helpers;
+    using Ocaramba.Common.Helpers;
 
     /// <summary>
     /// Class contains method for all tests, should be used in project test base

@@ -20,13 +20,14 @@
 //     SOFTWARE.
 // </license>
 
-namespace Objectivity.Test.Automation.Common
+namespace Ocaramba.Common
 {
     using System;
     using System.Collections.ObjectModel;
     using System.Configuration;
     using System.Globalization;
     using NLog;
+    using Ocaramba.Common;
 
     /// <summary>
     /// SeleniumConfiguration that consume app.config file <see href="https://github.com/ObjectivityLtd/Test.Automation/wiki/Description%20of%20App.config%20file">More details on wiki</see>

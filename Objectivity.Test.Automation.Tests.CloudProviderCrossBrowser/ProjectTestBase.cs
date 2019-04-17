@@ -29,8 +29,8 @@ namespace Objectivity.Test.Automation.Tests.CloudProviderCrossBrowser
     using global::NUnit.Framework;
     using global::NUnit.Framework.Interfaces;
     using NLog;
-    using Objectivity.Test.Automation.Common;
-    using Objectivity.Test.Automation.Common.Logger;
+    using Ocaramba.Common;
+    using Ocaramba.Common.Logger;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Remote;
 

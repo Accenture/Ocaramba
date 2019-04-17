@@ -22,9 +22,8 @@
 
 using ImageMagick;
 using NUnit.Framework;
-using Objectivity.Test.Automation.Common;
-using Objectivity.Test.Automation.Tests.NUnit;
-using Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet;
+using Ocaramba.Common;
+using Ocaramba.Tests.PageObjects.PageObjects.TheInternet;
 
 namespace Objectivity.Test.Automation.UnitTests.Tests
 {

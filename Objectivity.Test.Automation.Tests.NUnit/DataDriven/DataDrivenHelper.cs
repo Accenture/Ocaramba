@@ -30,11 +30,11 @@ namespace Objectivity.Test.Automation.Tests.NUnit.DataDriven
     using System.Runtime.InteropServices;
     using System.Text.RegularExpressions;
     using System.Xml.Linq;
-    using Common.Exceptions;
     using global::NUnit.Framework;
     using NLog;
     using NPOI.SS.UserModel;
     using NPOI.XSSF.UserModel;
+    using Ocaramba.Common.Exceptions;
 
     /// <summary>
     /// XML DataDriven methods for NUnit test framework <see href="https://github.com/ObjectivityLtd/Test.Automation/wiki/DataDriven-tests-from-Xml-files">More details on wiki</see>

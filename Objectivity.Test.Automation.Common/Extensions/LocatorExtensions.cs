@@ -20,11 +20,10 @@
 //     SOFTWARE.
 // </license>
 
-namespace Objectivity.Test.Automation.Common.Extensions
+namespace Ocaramba.Common.Extensions
 {
-    using Objectivity.Test.Automation.Common.Types;
-
     using OpenQA.Selenium;
+    using Types;
 
     /// <summary>
     /// Locator extensions methods for selenium

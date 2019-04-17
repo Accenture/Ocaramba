@@ -20,10 +20,9 @@
 //     SOFTWARE.
 // </license>
 
-namespace Objectivity.Test.Automation.Tests.PageObjects
+namespace Ocaramba.Tests.PageObjects
 {
-    using Objectivity.Test.Automation.Common;
-
+    using Ocaramba.Common;
     using OpenQA.Selenium;
 
     public partial class ProjectPageBase

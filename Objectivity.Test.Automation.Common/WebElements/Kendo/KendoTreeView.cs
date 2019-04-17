@@ -20,13 +20,13 @@
 //     SOFTWARE.
 // </license>
 
-namespace Objectivity.Test.Automation.Common.WebElements.Kendo
+namespace Ocaramba.Common.WebElements.Kendo
 {
     using System.Collections.ObjectModel;
     using System.Globalization;
     using System.Linq;
 
-    using Objectivity.Test.Automation.Common.Extensions;
+    using Ocaramba.Common.Extensions;
 
     using OpenQA.Selenium;
     using OpenQA.Selenium.Remote;

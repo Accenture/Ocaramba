@@ -23,8 +23,7 @@
 namespace Objectivity.Test.Automation.Tests.MsTest.Tests
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-    using Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet;
+    using Ocaramba.Tests.PageObjects.PageObjects.TheInternet;
 
     /// <summary>
     /// Tests to test framework

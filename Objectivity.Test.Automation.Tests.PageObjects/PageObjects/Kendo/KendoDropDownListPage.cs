@@ -20,15 +20,15 @@
 //     SOFTWARE.
 // </license>
 
-namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.Kendo
+namespace Ocaramba.Tests.PageObjects.PageObjects.Kendo
 {
     using System;
     using System.Collections.ObjectModel;
-
-    using Objectivity.Test.Automation.Common;
-    using Objectivity.Test.Automation.Common.Extensions;
-    using Objectivity.Test.Automation.Common.Types;
-    using Objectivity.Test.Automation.Common.WebElements.Kendo;
+    using Ocaramba.Common;
+    using Ocaramba.Common.Extensions;
+    using Ocaramba.Common.Types;
+    using Ocaramba.Common.WebElements.Kendo;
+    using Ocaramba.Tests.PageObjects;
     using OpenQA.Selenium;
 
     public class KendoDropDownListPage : ProjectPageBase

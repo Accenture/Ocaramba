@@ -19,7 +19,7 @@
 //     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //     SOFTWARE.
 // </license>
-namespace Objectivity.Test.Automation.Common.Extensions
+namespace Ocaramba.Common.Extensions
 {
     using System;
 

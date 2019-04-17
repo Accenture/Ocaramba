@@ -24,9 +24,10 @@ using System;
 using NLog;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
-using Objectivity.Test.Automation.Common;
-using Objectivity.Test.Automation.Common.Logger;
+using Ocaramba.Common;
+using Ocaramba.Common.Logger;
 using OpenQA.Selenium;
+using DriverContext = Ocaramba.Common.DriverContext;
 
 namespace Objectivity.Test.Automation.Tests.Angular
 {

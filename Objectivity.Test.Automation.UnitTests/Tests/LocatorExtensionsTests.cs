@@ -1,5 +1,5 @@
 ﻿using NUnit.Framework;
-using Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet;
+using Ocaramba.Tests.PageObjects.PageObjects.TheInternet;
 
 namespace Objectivity.Test.Automation.UnitTests.Tests
 {

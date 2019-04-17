@@ -20,13 +20,13 @@
 //     SOFTWARE.
 // </license>
 
-namespace Objectivity.Test.Automation.Tests.NUnit
+namespace Ocaramba.Tests.NUnit
 {
-    using Common;
-    using Common.Logger;
     using global::NUnit.Framework;
     using global::NUnit.Framework.Interfaces;
-    using Objectivity.Test.Automation.Common.Helpers;
+    using Ocaramba.Common;
+    using Ocaramba.Common.Helpers;
+    using Ocaramba.Common.Logger;
 
     /// <summary>
     /// The base class for all tests <see href="https://github.com/ObjectivityLtd/Test.Automation/wiki/ProjectTestBase-class">More details on wiki</see>

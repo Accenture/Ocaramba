@@ -20,7 +20,7 @@
 //     SOFTWARE.
 // </license>
 
-namespace Objectivity.Test.Automation.Common.Helpers
+namespace Ocaramba.Common.Helpers
 {
     using System;
     using System.Globalization;

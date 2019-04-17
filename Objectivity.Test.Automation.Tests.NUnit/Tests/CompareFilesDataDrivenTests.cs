@@ -20,12 +20,12 @@
 //     SOFTWARE.
 // </license>
 
-namespace Objectivity.Test.Automation.Tests.NUnit.Tests
+namespace Ocaramba.Tests.NUnit.Tests
 {
     using System.IO;
-    using DataDriven;
     using global::NUnit.Framework;
     using NLog;
+    using Ocaramba.Tests.NUnit.DataDriven;
 
     [TestFixture]
     public class CompareFilesDataDrivenTests

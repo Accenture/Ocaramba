@@ -20,14 +20,12 @@
 //     SOFTWARE.
 // </license>
 
-namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
+namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
 {
-    using Common;
-    using Common.Extensions;
-    using NLog;
-    using Objectivity.Test.Automation.Common.Types;
-    using Objectivity.Test.Automation.Common.WebElements;
-    using OpenQA.Selenium;
+    using Ocaramba.Common;
+    using Ocaramba.Common.Extensions;
+    using Ocaramba.Common.Types;
+    using Ocaramba.Common.WebElements;
 
     public class TablesPage : ProjectPageBase
     {

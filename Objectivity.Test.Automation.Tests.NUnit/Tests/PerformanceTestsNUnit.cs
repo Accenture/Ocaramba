@@ -20,10 +20,10 @@
 //     SOFTWARE.
 // </license>
 
-namespace Objectivity.Test.Automation.Tests.NUnit.Tests
+namespace Ocaramba.Tests.NUnit.Tests
 {
-    using Automation.Tests.PageObjects.PageObjects.TheInternet;
     using global::NUnit.Framework;
+    using Ocaramba.Tests.PageObjects.PageObjects.TheInternet;
 
     /// <summary>
     /// Tests to test framework

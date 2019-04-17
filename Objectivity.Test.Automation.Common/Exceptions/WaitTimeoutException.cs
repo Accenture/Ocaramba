@@ -20,7 +20,7 @@
 //     SOFTWARE.
 // </license>
 
-namespace Objectivity.Test.Automation.Common.Exceptions
+namespace Ocaramba.Common.Exceptions
 {
     using System;
     using System.Runtime.Serialization;

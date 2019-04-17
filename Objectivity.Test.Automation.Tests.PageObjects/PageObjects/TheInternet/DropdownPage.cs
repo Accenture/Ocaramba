@@ -20,12 +20,12 @@
 //     SOFTWARE.
 // </license>
 
-namespace Objectivity.Test.Automation.Tests.PageObjects.PageObjects.TheInternet
+namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
 {
-    using Common;
-    using Common.Extensions;
-    using Common.Types;
-    using Common.WebElements;
+    using Ocaramba.Common;
+    using Ocaramba.Common.Extensions;
+    using Ocaramba.Common.Types;
+    using Ocaramba.Common.WebElements;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Support.UI;
 

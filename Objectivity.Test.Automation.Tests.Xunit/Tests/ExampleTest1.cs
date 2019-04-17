@@ -22,9 +22,9 @@
 
 namespace Objectivity.Test.Automation.Tests.Xunit.Tests
 {
-    using Common;
     using global::Xunit;
-    using PageObjects.PageObjects.TheInternet;
+    using Ocaramba.Common;
+    using Ocaramba.Tests.PageObjects.PageObjects.TheInternet;
 
     public class ExampleTest1 : ProjectTestBase
     {

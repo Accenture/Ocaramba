@@ -20,14 +20,14 @@
 //     SOFTWARE.
 // </license>
 
-namespace Objectivity.Test.Automation.Common.Helpers
+namespace Ocaramba.Common.Helpers
 {
     using System;
     using System.Globalization;
     using System.Threading;
     using System.Threading.Tasks;
 
-    using Objectivity.Test.Automation.Common.Exceptions;
+    using Ocaramba.Common.Exceptions;
 
     /// <summary>
     /// Contains wait methods with timeouts
