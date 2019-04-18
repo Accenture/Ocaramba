@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ocaramba.Common", "Ocaramba.Common\Ocaramba.Common.csproj", "{46FA4EDC-A114-4E8F-A545-996F99E31EA8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ocaramba", "Ocaramba\Ocaramba.csproj", "{46FA4EDC-A114-4E8F-A545-996F99E31EA8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{AF2EBD4E-C7A9-4151-A868-02C60EEA8628}"
 EndProject
@@ -17,7 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ocaramba.Tests.Features", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ocaramba.Tests.Xunit", "Ocaramba.Tests.Xunit\Ocaramba.Tests.Xunit.csproj", "{8DAC5471-0F43-42F2-8C98-8C0FF3C58A4B}"
 EndProject
-Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Ocaramba.Common.Documentation", "Ocaramba.Common.Documentation\Ocaramba.Common.Documentation.shfbproj", "{2E753223-59F7-47ED-9E1A-D539A462226D}"
+Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Ocaramba.Documentation", "Ocaramba.Documentation\Ocaramba.Documentation.shfbproj", "{2E753223-59F7-47ED-9E1A-D539A462226D}"
 	ProjectSection(ProjectDependencies) = postProject
 		{46FA4EDC-A114-4E8F-A545-996F99E31EA8} = {46FA4EDC-A114-4E8F-A545-996F99E31EA8}
 	EndProjectSection
@@ -38,8 +38,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuspec", ".nuspec", "{1A98
 	ProjectSection(SolutionItems) = preProject
 		.nuspec\Ocaramba.Features.nuspec = .nuspec\Ocaramba.Features.nuspec
 		.nuspec\Ocaramba.MsTest.nuspec = .nuspec\Ocaramba.MsTest.nuspec
-		.nuspec\Ocaramba.Xunit.nuspec = .nuspec\Ocaramba.Xunit.nuspec
 		.nuspec\Ocaramba.Nunit.nuspec = .nuspec\Ocaramba.Nunit.nuspec
+		.nuspec\Ocaramba.Xunit.nuspec = .nuspec\Ocaramba.Xunit.nuspec
 	EndProjectSection
 EndProject
 Global

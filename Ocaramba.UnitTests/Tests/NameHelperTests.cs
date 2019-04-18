@@ -1,5 +1,5 @@
 ﻿using NUnit.Framework;
-using Ocaramba.Common.Helpers;
+using Ocaramba.Helpers;
 
 namespace Ocaramba.Test.Automation.UnitTests.Tests
 {

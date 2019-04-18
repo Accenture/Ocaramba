@@ -22,8 +22,8 @@
 
 namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
 {
-    using Ocaramba.Common;
-    using Ocaramba.Common.Extensions;
+    using Ocaramba;
+    using Ocaramba.Extensions;
 
     public class SlowResourcesPage : ProjectPageBase
     {

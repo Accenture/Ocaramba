@@ -25,7 +25,7 @@ namespace Ocaramba.Tests.NUnit.Tests
     using System.Drawing.Imaging;
     using System.Globalization;
     using global::NUnit.Framework;
-    using Ocaramba.Common.Helpers;
+    using Ocaramba.Helpers;
     using Ocaramba.Tests.PageObjects.PageObjects.TheInternet;
 
     [TestFixture]

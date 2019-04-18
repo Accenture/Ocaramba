@@ -24,11 +24,10 @@ namespace Ocaramba.Tests.PageObjects.PageObjects.Kendo
 {
     using System;
     using System.Collections.ObjectModel;
-    using Ocaramba.Common;
-    using Ocaramba.Common.Extensions;
-    using Ocaramba.Common.Types;
-    using Ocaramba.Common.WebElements.Kendo;
-    using Ocaramba.Tests.PageObjects;
+    using Extensions;
+    using Tests.PageObjects;
+    using Types;
+    using WebElements.Kendo;
 
     public class KendoTreeViewPage : ProjectPageBase
     {

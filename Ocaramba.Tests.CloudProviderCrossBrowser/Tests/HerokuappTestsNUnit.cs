@@ -23,7 +23,7 @@
 namespace Ocaramba.Tests.CloudProviderCrossBrowser.Tests
 {
     using global::NUnit.Framework;
-    using Ocaramba.Common;
+    using Ocaramba;
     using Ocaramba.Tests.PageObjects.PageObjects.TheInternet;
 
     [TestFixture("ChromeWindows")]

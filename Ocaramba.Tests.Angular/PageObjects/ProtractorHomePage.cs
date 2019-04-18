@@ -1,6 +1,6 @@
-﻿using Ocaramba.Common;
-using Ocaramba.Common.Extensions;
-using Ocaramba.Common.Types;
+﻿using Ocaramba;
+using Ocaramba.Extensions;
+using Ocaramba.Types;
 using Ocaramba.Tests.PageObjects;
 
 namespace Ocaramba.Tests.Angular.PageObjects

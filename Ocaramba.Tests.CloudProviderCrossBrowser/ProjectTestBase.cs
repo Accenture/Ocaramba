@@ -29,8 +29,8 @@ namespace Ocaramba.Tests.CloudProviderCrossBrowser
     using global::NUnit.Framework;
     using global::NUnit.Framework.Interfaces;
     using NLog;
-    using Ocaramba.Common;
-    using Ocaramba.Common.Logger;
+    using Ocaramba;
+    using Ocaramba.Logger;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Remote;
 

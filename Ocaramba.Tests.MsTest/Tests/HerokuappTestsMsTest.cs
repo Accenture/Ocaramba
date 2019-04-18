@@ -24,7 +24,7 @@ namespace Ocaramba.Tests.MsTest.Tests
 {
     using System.Diagnostics.CodeAnalysis;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Ocaramba.Common;
+    using Ocaramba;
     using Ocaramba.Tests.PageObjects.PageObjects.TheInternet;
 
     /// <summary>

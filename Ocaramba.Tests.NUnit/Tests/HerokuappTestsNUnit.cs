@@ -23,7 +23,7 @@
 namespace Ocaramba.Tests.NUnit.Tests
 {
     using global::NUnit.Framework;
-    using Ocaramba.Common;
+    using Ocaramba;
     using Ocaramba.Tests.PageObjects.PageObjects.TheInternet;
     using OpenQA.Selenium;
 

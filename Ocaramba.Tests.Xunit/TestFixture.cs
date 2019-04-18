@@ -23,7 +23,7 @@
 namespace Ocaramba.Tests.Xunit
 {
     using System;
-    using Ocaramba.Common;
+    using Ocaramba;
 
     /// <summary>
     /// The test fixture class for all tests

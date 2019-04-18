@@ -24,9 +24,9 @@ namespace Ocaramba.Tests.NUnit
 {
     using global::NUnit.Framework;
     using global::NUnit.Framework.Interfaces;
-    using Ocaramba.Common;
-    using Ocaramba.Common.Helpers;
-    using Ocaramba.Common.Logger;
+    using Ocaramba;
+    using Ocaramba.Helpers;
+    using Ocaramba.Logger;
 
     /// <summary>
     /// The base class for all tests <see href="https://github.com/ObjectivityLtd/Test.Automation/wiki/ProjectTestBase-class">More details on wiki</see>

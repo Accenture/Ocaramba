@@ -22,9 +22,9 @@
 
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
-using Ocaramba.Common;
-using Ocaramba.Common.Logger;
-using DriverContext = Ocaramba.Common.DriverContext;
+using Ocaramba;
+using Ocaramba.Logger;
+using DriverContext = Ocaramba.DriverContext;
 
 namespace Ocaramba.Test.Automation.UnitTests
 {

@@ -1,7 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
-using Ocaramba.Common.Exceptions;
-using Ocaramba.Common.Helpers;
+using Ocaramba.Exceptions;
+using Ocaramba.Helpers;
 
 namespace Ocaramba.Test.Automation.UnitTests.Tests
 {

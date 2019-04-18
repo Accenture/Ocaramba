@@ -23,7 +23,7 @@
 namespace Ocaramba.Tests.Xunit.Tests
 {
     using global::Xunit;
-    using Ocaramba.Common;
+    using Ocaramba;
     using Ocaramba.Tests.PageObjects.PageObjects.TheInternet;
 
     public class ExampleTest1 : ProjectTestBase

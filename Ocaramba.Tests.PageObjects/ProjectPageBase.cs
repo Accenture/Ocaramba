@@ -22,7 +22,7 @@
 
 namespace Ocaramba.Tests.PageObjects
 {
-    using Ocaramba.Common;
+    using Ocaramba;
     using OpenQA.Selenium;
 
     public partial class ProjectPageBase

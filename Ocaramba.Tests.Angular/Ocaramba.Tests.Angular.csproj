@@ -94,9 +94,9 @@
   <ItemGroup>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Ocaramba.Common\Ocaramba.Common.csproj">
+    <ProjectReference Include="..\Ocaramba\Ocaramba.csproj">
       <Project>{46fa4edc-a114-4e8f-a545-996f99e31ea8}</Project>
-      <Name>Ocaramba.Common</Name>
+      <Name>Ocaramba</Name>
     </ProjectReference>
     <ProjectReference Include="..\Ocaramba.Tests.PageObjects\Ocaramba.Tests.PageObjects.csproj">
       <Project>{1ea997e6-b873-469f-8685-17f73ebb0b92}</Project>

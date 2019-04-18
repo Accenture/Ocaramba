@@ -98,9 +98,9 @@
       <Project>{74f9b9a8-0055-4c13-b3c9-faced546cb43}</Project>
       <Name>Ocaramba.Tests.NUnit</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Ocaramba.Common\Ocaramba.Common.csproj">
+    <ProjectReference Include="..\Ocaramba\Ocaramba.csproj">
       <Project>{46fa4edc-a114-4e8f-a545-996f99e31ea8}</Project>
-      <Name>Ocaramba.Common</Name>
+      <Name>Ocaramba</Name>
     </ProjectReference>
     <ProjectReference Include="..\Ocaramba.Tests.PageObjects\Ocaramba.Tests.PageObjects.csproj">
       <Project>{1EA997E6-B873-469F-8685-17F73EBB0B92}</Project>

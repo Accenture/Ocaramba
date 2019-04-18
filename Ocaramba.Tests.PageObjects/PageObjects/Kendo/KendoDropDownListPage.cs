@@ -24,11 +24,11 @@ namespace Ocaramba.Tests.PageObjects.PageObjects.Kendo
 {
     using System;
     using System.Collections.ObjectModel;
-    using Ocaramba.Common;
-    using Ocaramba.Common.Extensions;
-    using Ocaramba.Common.Types;
-    using Ocaramba.Common.WebElements.Kendo;
+    using Ocaramba;
+    using Ocaramba.Extensions;
     using Ocaramba.Tests.PageObjects;
+    using Ocaramba.Types;
+    using Ocaramba.WebElements.Kendo;
     using OpenQA.Selenium;
 
     public class KendoDropDownListPage : ProjectPageBase

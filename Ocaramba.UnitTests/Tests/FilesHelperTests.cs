@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
 using NUnit.Framework;
-using Ocaramba.Common;
-using Ocaramba.Common.Exceptions;
-using Ocaramba.Common.Helpers;
+using Ocaramba;
+using Ocaramba.Exceptions;
+using Ocaramba.Helpers;
 
 namespace Ocaramba.Test.Automation.UnitTests.Tests
 {

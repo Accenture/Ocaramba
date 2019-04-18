@@ -34,7 +34,7 @@ namespace Ocaramba.Tests.NUnit.DataDriven
     using NLog;
     using NPOI.SS.UserModel;
     using NPOI.XSSF.UserModel;
-    using Ocaramba.Common.Exceptions;
+    using Ocaramba.Exceptions;
 
     /// <summary>
     /// XML DataDriven methods for NUnit test framework <see href="https://github.com/ObjectivityLtd/Test.Automation/wiki/DataDriven-tests-from-Xml-files">More details on wiki</see>

@@ -26,12 +26,11 @@ namespace Ocaramba.Tests.PageObjects.PageObjects.Kendo
     using System.Collections.ObjectModel;
     using System.Globalization;
     using NLog;
-    using Ocaramba.Common;
-    using Ocaramba.Common.Extensions;
-    using Ocaramba.Common.Helpers;
-    using Ocaramba.Common.Types;
-    using Ocaramba.Common.WebElements.Kendo;
-    using Ocaramba.Tests.PageObjects;
+    using Ocaramba;
+    using Ocaramba.Extensions;
+    using Ocaramba.Helpers;
+    using Ocaramba.WebElements.Kendo;
+    using Types;
 
     public class KendoComboBoxPage : ProjectPageBase
     {

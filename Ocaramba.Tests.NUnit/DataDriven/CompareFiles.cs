@@ -28,7 +28,7 @@ namespace Ocaramba.Tests.NUnit.DataDriven
     using System.Text.RegularExpressions;
     using global::NUnit.Framework;
     using NLog;
-    using Ocaramba.Common.Helpers;
+    using Ocaramba.Helpers;
 
     /// <summary>
     /// DataDriven comparing files  methods for NUnit test framework <see href="https://github.com/ObjectivityLtd/Test.Automation/wiki/Comparing-files-by-NUnit-DataDriven-tests">More details on wiki</see>

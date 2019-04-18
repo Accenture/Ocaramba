@@ -3,9 +3,9 @@
 namespace Ocaramba.Tests.Angular.PageObjects
 {
     using NLog;
-    using Ocaramba.Common.Types;
-    using Ocaramba.Common;
-    using Ocaramba.Common.Extensions;
+    using Ocaramba.Types;
+    using Ocaramba;
+    using Ocaramba.Extensions;
 
     public class TableOfContentsPage : ProjectPageBase
     {

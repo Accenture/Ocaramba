@@ -22,7 +22,7 @@
 
 namespace Ocaramba.Tests.PageObjects
 {
-    using Ocaramba.Common.Extensions;
+    using Ocaramba.Extensions;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Remote;
 

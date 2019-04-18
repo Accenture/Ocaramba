@@ -79,35 +79,35 @@ after_build:
  - ps: >-
       echo '********************************************Creating nuget packages********************************************'
       
-      Copy-Item .\.nuspec\Ocaramba.Nunit.nuspec .\\Ocaramba.Common\\Ocaramba.Common.nuspec
+      Copy-Item .\.nuspec\Ocaramba.Nunit.nuspec .\\Ocaramba\\Ocaramba.nuspec
       
-      .\.nuget\nuget pack .\Ocaramba.Common\Ocaramba.Common.csproj -symbols -properties Configuration=Release -Verbosity detailed
+      .\.nuget\nuget pack .\Ocaramba\Ocaramba.csproj -symbols -properties Configuration=Release -Verbosity detailed
       
-      Copy-Item .\.nuspec\Ocaramba.MsTest.nuspec .\\Ocaramba.Common\\Ocaramba.Common.nuspec
+      Copy-Item .\.nuspec\Ocaramba.MsTest.nuspec .\\Ocaramba\\Ocaramba.nuspec
       
-      .\.nuget\nuget pack .\Ocaramba.Common\Ocaramba.Common.csproj -symbols -properties Configuration=Release -Verbosity detailed
+      .\.nuget\nuget pack .\Ocaramba\Ocaramba.csproj -symbols -properties Configuration=Release -Verbosity detailed
       
-      Copy-Item .\.nuspec\Ocaramba.MsTest.nuspec .\\Ocaramba.Common\\Ocaramba.Common.nuspec
+      Copy-Item .\.nuspec\Ocaramba.MsTest.nuspec .\\Ocaramba\\Ocaramba.nuspec
       
-      .\.nuget\nuget pack .\Ocaramba.Common\Ocaramba.Common.csproj -symbols -properties Configuration=Release -Verbosity detailed
+      .\.nuget\nuget pack .\Ocaramba\Ocaramba.csproj -symbols -properties Configuration=Release -Verbosity detailed
       
-      Copy-Item .\.nuspec\Ocaramba.Features.nuspec .\\Ocaramba.Common\\Ocaramba.Common.nuspec
+      Copy-Item .\.nuspec\Ocaramba.Features.nuspec .\\Ocaramba\\Ocaramba.nuspec
       
-      .\.nuget\nuget pack .\Ocaramba.Common\Ocaramba.Common.csproj -symbols -properties Configuration=Release -Verbosity detailed
+      .\.nuget\nuget pack .\Ocaramba\Ocaramba.csproj -symbols -properties Configuration=Release -Verbosity detailed
       
-      Copy-Item .\.nuspec\Ocaramba.Xunit.nuspec .\\Ocaramba.Common\\Ocaramba.Common.nuspec
+      Copy-Item .\.nuspec\Ocaramba.Xunit.nuspec .\\Ocaramba\\Ocaramba.nuspec
       
-      .\.nuget\nuget pack .\Ocaramba.Common\Ocaramba.Common.csproj -symbols -properties Configuration=Release -Verbosity detailed
+      .\.nuget\nuget pack .\Ocaramba\Ocaramba.csproj -symbols -properties Configuration=Release -Verbosity detailed
       
       echo '********************************************Copying files for gh-pages********************************************'
       
-      Copy-Item -Path .\README.md -Destination .\Ocaramba.Common.Documentation\Help\ -recurse -force -verbose 
+      Copy-Item -Path .\README.md -Destination .\Ocaramba.Documentation\Help\ -recurse -force -verbose 
       
-      New-Item .\Ocaramba.Common.Documentation\Help\Ocaramba.Common.Documentation\icons\ -Type Directory
+      New-Item .\Ocaramba.Documentation\Help\Ocaramba.Documentation\icons\ -Type Directory
       
-      Copy-Item -Path .\Ocaramba.Common.Documentation\icons\Objectivity_logo_avatar.png -Destination .\Ocaramba.Common.Documentation\Help\Ocaramba.Common.Documentation\icons\ -recurse -force -verbose
+      Copy-Item -Path .\Ocaramba.Documentation\icons\Objectivity_logo_avatar.png -Destination .\Ocaramba.Documentation\Help\Ocaramba.Documentation\icons\ -recurse -force -verbose
       
-      Copy-Item -Path .\Ocaramba.Common.Documentation\icons\Help.png -Destination .\Ocaramba.Common.Documentation\Help\Ocaramba.Common.Documentation\icons\ -recurse -force -verbose
+      Copy-Item -Path .\Ocaramba.Documentation\icons\Help.png -Destination .\Ocaramba.Documentation\Help\Ocaramba.Documentation\icons\ -recurse -force -verbose
       
       if ($env:APPVEYOR_REPO_TAG -eq "true")
       {
@@ -134,7 +134,7 @@ after_build:
         
       }
       
-      Copy-Item -Path .\Ocaramba.Common.Documentation\Help\** -Destination .\Help\ -recurse -force
+      Copy-Item -Path .\Ocaramba.Documentation\Help\** -Destination .\Help\ -recurse -force
      
       if ($env:APPVEYOR_REPO_TAG -eq "true")
       {
@@ -167,7 +167,7 @@ test_script:
     
     $xunit = (Resolve-Path ".\packages\xunit.runner.console.*\tools\xunit.console.exe").ToString()
     
-    & $OpenCover -target:"$xunit" -mergeoutput -targetargs:".\Ocaramba.Tests.Xunit\bin\Release\Ocaramba.Tests.Xunit.dll -appveyor -noshadow" -filter:"+[Ocaramba.Common]*" -register:user -output:opencoverCoverage.xml
+    & $OpenCover -target:"$xunit" -mergeoutput -targetargs:".\Ocaramba.Tests.Xunit\bin\Release\Ocaramba.Tests.Xunit.dll -appveyor -noshadow" -filter:"+[Ocaramba]*" -register:user -output:opencoverCoverage.xml
 
     if($lastexitcode -ne 0)
       {
@@ -182,7 +182,7 @@ test_script:
     
     echo '********************************************NUnit tests********************************************'
     
-    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Ocaramba.Tests.NUnit\bin\Release\Ocaramba.Tests.NUnit.dll .\Ocaramba.Tests.Angular\bin\Release\Ocaramba.Tests.Angular.dll .\Ocaramba.Tests.Features\bin\Release\Ocaramba.Tests.Features.dll .\Ocaramba.UnitTests\bin\Release\Ocaramba.UnitTests.dll --result=myresults.xml`;format=AppVeyor" -filter:"+[Ocaramba.Common]*" -register:user -output:opencoverCoverage.xml
+    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Ocaramba.Tests.NUnit\bin\Release\Ocaramba.Tests.NUnit.dll .\Ocaramba.Tests.Angular\bin\Release\Ocaramba.Tests.Angular.dll .\Ocaramba.Tests.Features\bin\Release\Ocaramba.Tests.Features.dll .\Ocaramba.UnitTests\bin\Release\Ocaramba.UnitTests.dll --result=myresults.xml`;format=AppVeyor" -filter:"+[Ocaramba]*" -register:user -output:opencoverCoverage.xml
 
     if($lastexitcode -ne 0)
       {
@@ -213,7 +213,7 @@ test_script:
     
     .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.UnitTests\bin\Release" "Ocaramba.UnitTests.dll.config" "//appSettings" "browser" "Firefox"
 
-    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Ocaramba.UnitTests\bin\Release\Ocaramba.UnitTests.dll --where:cat=TakingScreehShots --result=myresults.xml`;format=AppVeyor" -filter:"+[Ocaramba.Common]*" -register:user -output:opencoverCoverage.xml
+    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Ocaramba.UnitTests\bin\Release\Ocaramba.UnitTests.dll --where:cat=TakingScreehShots --result=myresults.xml`;format=AppVeyor" -filter:"+[Ocaramba]*" -register:user -output:opencoverCoverage.xml
 
     if($lastexitcode -ne 0)
       {
@@ -230,7 +230,7 @@ test_script:
     
     .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.Angular\bin\Release" "Ocaramba.Tests.Angular.dll.config" "//appSettings" "browser" "InternetExplorer"
 
-    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Ocaramba.Tests.Angular\bin\Release\Ocaramba.Tests.Angular.dll --result=myresults.xml`;format=AppVeyor" -filter:"+[Ocaramba.Common]*" -register:user -output:opencoverCoverage.xml
+    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Ocaramba.Tests.Angular\bin\Release\Ocaramba.Tests.Angular.dll --result=myresults.xml`;format=AppVeyor" -filter:"+[Ocaramba]*" -register:user -output:opencoverCoverage.xml
 
     if($lastexitcode -ne 0)
       {
@@ -245,7 +245,7 @@ test_script:
 
     echo '********************************************MSTest tests********************************************'
 
-    & $OpenCover -target:vstest.console.exe -mergeoutput -targetargs:"/logger`:Appveyor .\Ocaramba.Tests.MSTest\bin\Release\Ocaramba.Tests.MsTest.dll /Settings`:.\Ocaramba.Tests.MSTest\bin\Release\Runsettings.runsettings" -filter:"+[Ocaramba.Common]*" -register:user -output:opencoverCoverage.xml
+    & $OpenCover -target:vstest.console.exe -mergeoutput -targetargs:"/logger`:Appveyor .\Ocaramba.Tests.MSTest\bin\Release\Ocaramba.Tests.MsTest.dll /Settings`:.\Ocaramba.Tests.MSTest\bin\Release\Runsettings.runsettings" -filter:"+[Ocaramba]*" -register:user -output:opencoverCoverage.xml
 
 
     if($lastexitcode -ne 0)
@@ -267,7 +267,7 @@ test_script:
     
     .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release" "Ocaramba.Tests.CloudProviderCrossBrowser.dll.config" "//DriverCapabilities" "build" "Ocaramba.Tests.BrowserStackCrossBrowser$env:appveyor_build_version" $true
     
-    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\Ocaramba.Tests.CloudProviderCrossBrowser.dll --workers=5 --result=myresults.xml`;format=AppVeyor" -filter:"+[Ocaramba.Common]*" -register:user -output:opencoverCoverage.xml
+    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\Ocaramba.Tests.CloudProviderCrossBrowser.dll --workers=5 --result=myresults.xml`;format=AppVeyor" -filter:"+[Ocaramba]*" -register:user -output:opencoverCoverage.xml
 
     if($lastexitcode -ne 0)
       {
@@ -341,7 +341,7 @@ test_script:
     
     .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.NUnit\bin\Release\" "Ocaramba.Tests.NUnit.dll.config" "//appSettings" "browser|RemoteWebDriverHub" "RemoteWebDriver|http://localhost:4444/wd/hub" $true
     
-    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Ocaramba.Tests.NUnit\bin\Release\Ocaramba.Tests.NUnit.dll --where (cat==BasicNUnit) --result=myresults.xml`;format=AppVeyor" -filter:"+[Ocaramba.Common]*" -register:user -output:opencoverCoverage.xml
+    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Ocaramba.Tests.NUnit\bin\Release\Ocaramba.Tests.NUnit.dll --where (cat==BasicNUnit) --result=myresults.xml`;format=AppVeyor" -filter:"+[Ocaramba]*" -register:user -output:opencoverCoverage.xml
 
     if($lastexitcode -ne 0)
       {
@@ -393,7 +393,7 @@ test_script:
     
     appveyor PushArtifact testresults_$env:appveyor_build_version.zip
 artifacts:
-- path: .\Ocaramba.Common.*.nupkg
+- path: .\Ocaramba.*.nupkg
   name: NuGet
 deploy:
 - provider: NuGet

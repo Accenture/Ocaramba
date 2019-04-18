@@ -25,7 +25,7 @@ namespace Ocaramba.Tests.Features.StepDefinitions
     using System;
     using System.Globalization;
     using NUnit.Framework;
-    using Ocaramba.Common;
+    using Ocaramba;
     using Ocaramba.Tests.PageObjects.PageObjects.TheInternet;
     using TechTalk.SpecFlow;
 
@@ -44,7 +44,7 @@ namespace Ocaramba.Tests.Features.StepDefinitions
 
             this.scenarioContext = scenarioContext;
 
-            this.driverContext = this.scenarioContext["DriverContext"] as Ocaramba.Common.DriverContext;
+            this.driverContext = this.scenarioContext["DriverContext"] as Ocaramba.DriverContext;
         }
 
         [Given(@"Default page is opened")]

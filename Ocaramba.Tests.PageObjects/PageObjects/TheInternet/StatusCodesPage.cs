@@ -23,9 +23,9 @@
 namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
 {
     using NLog;
-    using Ocaramba.Common;
-    using Ocaramba.Common.Extensions;
-    using Ocaramba.Common.Types;
+    using Ocaramba;
+    using Ocaramba.Extensions;
+    using Ocaramba.Types;
 
     /// <summary>
     /// The status codes page object.

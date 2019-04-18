@@ -1,19 +1,19 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>Ocaramba.Common.MsTest</id>
+    <id>Ocaramba.MsTest</id>
     <version>$version$</version>
-    <title>Ocaramba.Common.MsTest</title>
+    <title>Ocaramba.MsTest</title>
     <authors>Objectivity Bespoke Software Specialists</authors>
     <owners>Objectivity Bespoke Software Specialists</owners>
     <license type="expression">MIT</license>
     <projectUrl>https://github.com/ObjectivityLtd/Test.Automation</projectUrl>
 	<iconUrl>https://github.com/ObjectivityLtd/Test.Automation/wiki/images/Objectivity_logo_avatar32.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Template of framework to automate tests using Ocaramba.Common with MsTest</description>
+    <description>Template of framework to automate tests using Ocaramba with MsTest</description>
     <releaseNotes>You can find info about this release here: https://github.com/ObjectivityLtd/Test.Automation/releases</releaseNotes>
     <copyright>Copyright 2015</copyright>
-    <tags>selenium webdriver testautomation tests mstest Ocaramba.Common template</tags>
+    <tags>selenium webdriver testautomation tests mstest Ocaramba template</tags>
 	<dependencies>
     </dependencies> 
 	</metadata>

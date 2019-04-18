@@ -22,7 +22,7 @@
 
 namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
 {
-    using Ocaramba.Common;
+    using Ocaramba;
 
     public class JavaScriptOnLoadPage : ProjectPageBase
     {

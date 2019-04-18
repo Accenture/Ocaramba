@@ -22,7 +22,7 @@
 
 using ImageMagick;
 using NUnit.Framework;
-using Ocaramba.Common;
+using Ocaramba;
 using Ocaramba.Tests.PageObjects.PageObjects.TheInternet;
 
 namespace Ocaramba.Test.Automation.UnitTests.Tests

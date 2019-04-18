@@ -25,8 +25,8 @@ namespace Ocaramba.Tests.NUnit
     using System.Configuration;
     using System.IO;
     using System.Reflection;
-    using Ocaramba.Common;
-    using Ocaramba.Common.Helpers;
+    using Ocaramba;
+    using Ocaramba.Helpers;
 
     /// <summary>
     /// SeleniumConfiguration that consume app.config file

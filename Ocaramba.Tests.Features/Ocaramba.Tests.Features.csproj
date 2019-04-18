@@ -101,9 +101,9 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Ocaramba.Common\Ocaramba.Common.csproj">
+    <ProjectReference Include="..\Ocaramba\Ocaramba.csproj">
       <Project>{46fa4edc-a114-4e8f-a545-996f99e31ea8}</Project>
-      <Name>Ocaramba.Common</Name>
+      <Name>Ocaramba</Name>
     </ProjectReference>
     <ProjectReference Include="..\Ocaramba.Tests.PageObjects\Ocaramba.Tests.PageObjects.csproj">
       <Project>{1ea997e6-b873-469f-8685-17f73ebb0b92}</Project>
@@ -115,7 +115,7 @@
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\SpecFlow.2.2.0\tools\TechTalk.SpecFlow.targets" />																				 
+  <Import Project="..\packages\SpecFlow.2.2.0\tools\TechTalk.SpecFlow.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

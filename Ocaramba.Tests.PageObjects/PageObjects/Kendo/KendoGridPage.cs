@@ -23,10 +23,10 @@
 namespace Ocaramba.Tests.PageObjects.PageObjects.Kendo
 {
     using System;
-    using Ocaramba.Common;
-    using Ocaramba.Common.Extensions;
-    using Ocaramba.Common.Types;
-    using Ocaramba.Common.WebElements.Kendo;
+    using Ocaramba;
+    using Ocaramba.Extensions;
+    using Ocaramba.Types;
+    using Ocaramba.WebElements.Kendo;
 
     public class KendoGridPage : ProjectPageBase
     {

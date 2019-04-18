@@ -1,5 +1,5 @@
 ## Ocaramba
-<img align="left" src="/Ocaramba.Common.Documentation/icons/Objectivity_logo_avatar.png">
+<img align="left" src="/Ocaramba.Documentation/icons/Objectivity_logo_avatar.png">
 
 **C# Framework to automate tests using Selenium WebDriver**
 
@@ -12,7 +12,7 @@
 
 Test Framework was designed in Objectivity to propose common way how people should create Selenium WebDriver tests.
 
-<img align="left" src="/Ocaramba.Common.Documentation/icons/Help.png">
+<img align="left" src="/Ocaramba.Documentation/icons/Help.png">
 Project API documentation can be found here: http://objectivityltd.github.io/Test.Automation<br /><br />
 
 **It provides following features:**
@@ -49,7 +49,7 @@ Projects examples of using Test Framework :
 - Ocaramba.Tests.NUnit for NUnit
 - Ocaramba.Tests.xUnit for xUnit
 - Ocaramba.Tests.PageObjects for Page Object Pattern
-- Ocaramba.Common.Documentation.shfbproj for building API documentation
+- Ocaramba.Documentation.shfbproj for building API documentation
 - Ocaramba.Tests.CloudProviderCrossBrowser for cross browser parallel test execution with BrowserStack\SauceLabs\TestingBot\SeleniumGrid
 - Ocaramba.UnitTests for unit test of framework
 
@@ -89,9 +89,9 @@ namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
 
     using NLog;
 
-    using Ocaramba.Common;
-    using Ocaramba.Common.Extensions;
-    using Ocaramba.Common.Types;
+    using Ocaramba;
+    using Ocaramba.Extensions;
+    using Ocaramba.Types;
     using Ocaramba.Tests.PageObjects;
 
     public class InternetPage : ProjectPageBase
@@ -121,8 +121,8 @@ namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
 -------------
 - See [Getting started](https://github.com/ObjectivityLtd/Test.Automation/wiki/Getting%20started).
 
-Checkout the code or get it from [nuget.org](https://www.nuget.org/packages?q=Ocaramba.Common)
-- Ocaramba.Common.NUnit [![NuGet Badge](https://buildstats.info/nuget/Ocaramba.Common.NUnit)](https://www.nuget.org/packages/Ocaramba.Common.NUnit/)
-- Ocaramba.Common.Features [![NuGet Badge](https://buildstats.info/nuget/Ocaramba.Common.Features)](https://www.nuget.org/packages/Ocaramba.Common.Features/)
-- Ocaramba.Common.MsTest [![NuGet Badge](https://buildstats.info/nuget/Ocaramba.Common.MsTest)](https://www.nuget.org/packages/Ocaramba.Common.MsTest/)
-- Ocaramba.Common.xUnit [![NuGet Badge](https://buildstats.info/nuget/Ocaramba.Common.xUnit)](https://www.nuget.org/packages/Ocaramba.Common.xUnit/)
+Checkout the code or get it from [nuget.org](https://www.nuget.org/packages?q=Ocaramba)
+- Ocaramba.NUnit [![NuGet Badge](https://buildstats.info/nuget/Ocaramba.NUnit)](https://www.nuget.org/packages/Ocaramba.NUnit/)
+- Ocaramba.Features [![NuGet Badge](https://buildstats.info/nuget/Ocaramba.Features)](https://www.nuget.org/packages/Ocaramba.Features/)
+- Ocaramba.MsTest [![NuGet Badge](https://buildstats.info/nuget/Ocaramba.MsTest)](https://www.nuget.org/packages/Ocaramba.MsTest/)
+- Ocaramba.xUnit [![NuGet Badge](https://buildstats.info/nuget/Ocaramba.xUnit)](https://www.nuget.org/packages/Ocaramba.xUnit/)

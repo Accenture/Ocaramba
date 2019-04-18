@@ -24,7 +24,7 @@ namespace Ocaramba.Tests.NUnit.Tests
 {
     using System.Collections.Generic;
     using global::NUnit.Framework;
-    using Ocaramba.Common;
+    using Ocaramba;
     using Ocaramba.Tests.NUnit.DataDriven;
     using Ocaramba.Tests.PageObjects.PageObjects.TheInternet;
 

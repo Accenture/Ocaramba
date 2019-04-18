@@ -20,8 +20,8 @@
 //     SOFTWARE.
 // </license>
 
-using Ocaramba.Common;
-using Ocaramba.Common.Extensions;
+using Ocaramba;
+using Ocaramba.Extensions;
 
 namespace Ocaramba.Test.Automation.UnitTests.Tests
 {
@@ -33,7 +33,7 @@ namespace Ocaramba.Test.Automation.UnitTests.Tests
         [Test]
         public void CheckSynchronizationWithAngularFuctionality()
         {
-            var driverContext = new Ocaramba.Common.DriverContext {CurrentDirectory = TestContext.CurrentContext.TestDirectory};
+            var driverContext = new Ocaramba.DriverContext {CurrentDirectory = TestContext.CurrentContext.TestDirectory};
             driverContext.Start();
             var Default_false = DriversCustomSettings.IsDriverSynchronizationWithAngular(driverContext.Driver);
             driverContext.Driver.SynchronizeWithAngular(true);

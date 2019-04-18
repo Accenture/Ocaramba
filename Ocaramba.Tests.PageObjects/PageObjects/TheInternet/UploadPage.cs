@@ -24,10 +24,10 @@ namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
 {
     using System.Globalization;
     using NLog;
-    using Ocaramba.Common;
-    using Ocaramba.Common.Extensions;
-    using Ocaramba.Common.Helpers;
-    using Ocaramba.Common.Types;
+    using Ocaramba;
+    using Ocaramba.Extensions;
+    using Ocaramba.Helpers;
+    using Ocaramba.Types;
 
     public class UploadPage : ProjectPageBase
     {

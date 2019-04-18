@@ -20,17 +20,15 @@
 //     SOFTWARE.
 // </license>
 
-using System;
-using NLog;
-using NUnit.Framework;
-using NUnit.Framework.Interfaces;
-using Ocaramba.Common;
-using Ocaramba.Common.Logger;
-using OpenQA.Selenium;
-using DriverContext = Ocaramba.Common.DriverContext;
-
 namespace Ocaramba.Tests.Angular
 {
+    using System;
+    using NLog;
+    using NUnit.Framework;
+    using NUnit.Framework.Interfaces;
+    using OpenQA.Selenium;
+    using Logger;
+
     /// <summary>
     /// The base class for all tests <see href="https://github.com/ObjectivityLtd/Test.Automation/wiki/ProjectTestBase-class">More details on wiki</see>
     /// </summary>

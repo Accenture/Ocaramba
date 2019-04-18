@@ -25,8 +25,8 @@ namespace Ocaramba.Tests.Features
     using System;
 
     using NUnit.Framework;
-    using Ocaramba.Common;
-    using Ocaramba.Common.Logger;
+    using Ocaramba;
+    using Ocaramba.Logger;
 
     using TechTalk.SpecFlow;
 
@@ -37,7 +37,7 @@ namespace Ocaramba.Tests.Features
     public class ProjectTestBase : TestBase
     {
         private readonly ScenarioContext scenarioContext;
-        private readonly DriverContext driverContext = new Ocaramba.Common.DriverContext();
+        private readonly DriverContext driverContext = new Ocaramba.DriverContext();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ProjectTestBase"/> class.
