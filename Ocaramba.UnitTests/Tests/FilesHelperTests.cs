@@ -39,7 +39,7 @@ namespace Ocaramba.Test.Automation.UnitTests.Tests
         public void GetAllFilesFromAllSubFoldersPrefixTest()
         {
             var files = FilesHelper.GetAllFilesFromAllSubFolders(TestContext.CurrentContext.TestDirectory,
-                "Common.dll");
+                "*.dll");
             Assert.IsTrue(files.Count > 0);
             File.Create(TestContext.CurrentContext.TestDirectory + "\\" + "testfile.txt");
 
