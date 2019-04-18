@@ -9,13 +9,13 @@
     <ProjectGuid>2e753223-59f7-47ed-9e1a-d539a462226d</ProjectGuid>
     <SHFBSchemaVersion>2017.9.26.0</SHFBSchemaVersion>
     <!-- AssemblyName, Name, and RootNamespace are not used by SHFB but Visual Studio adds them anyway -->
-    <AssemblyName>Ocaramba.Common.Documentation</AssemblyName>
-    <RootNamespace>Ocaramba.Common.Documentation</RootNamespace>
-    <Name>Ocaramba.Common.Documentation</Name>
+    <AssemblyName>Ocaramba.Documentation</AssemblyName>
+    <RootNamespace>Ocaramba.Documentation</RootNamespace>
+    <Name>Ocaramba.Documentation</Name>
     <!-- SHFB properties -->
     <FrameworkVersion>.NET Framework 4.6</FrameworkVersion>
     <OutputPath>Help\</OutputPath>
-    <HtmlHelpName>Ocaramba.Common</HtmlHelpName>
+    <HtmlHelpName>Ocaramba</HtmlHelpName>
     <Language>en-US</Language>
     <TransformComponentArguments>
       <Argument Key="logoFile" Value="Help.png" xmlns="" />
@@ -25,11 +25,11 @@
       <Argument Key="logoPlacement" Value="left" xmlns="" />
       <Argument Key="logoAlignment" Value="left" xmlns="" />
       <Argument Key="maxVersionParts" Value="" xmlns="" />
-      <Argument Key="baseSourceCodeUrl" Value="https://github.com/ObjectivityLtd/Test.Automation/tree/master/Ocaramba.Common/" />
+      <Argument Key="baseSourceCodeUrl" Value="https://github.com/ObjectivityLtd/Test.Automation/tree/master/Ocaramba/" />
       <Argument Key="requestExampleUrl" Value="https://github.com/ObjectivityLtd/Test.Automation/issues/new" />
     </TransformComponentArguments>
     <DocumentationSources>
-      <DocumentationSource sourceFile="..\Ocaramba.Common\Ocaramba.Common.csproj" xmlns="" />
+      <DocumentationSource sourceFile="..\Ocaramba\Ocaramba.csproj" xmlns="" />
     </DocumentationSources>
     <SaveComponentCacheCapacity>100</SaveComponentCacheCapacity>
     <BuildAssemblerVerbosity>OnlyWarningsAndErrors</BuildAssemblerVerbosity>
@@ -47,7 +47,7 @@
     <PresentationStyle>VS2013</PresentationStyle>
     <Preliminary>False</Preliminary>
     <NamingMethod>Guid</NamingMethod>
-    <HelpTitle>Ocaramba.Common Framework</HelpTitle>
+    <HelpTitle>Ocaramba Framework</HelpTitle>
     <ContentPlacement>AboveNamespaces</ContentPlacement>
     <FooterText>Objectivity Bespoke Software Specialists</FooterText>
     <HeaderText>Framework to automate tests using Selenium WebDriver</HeaderText>
@@ -66,13 +66,13 @@
       </PlugInConfig>
     </PlugInConfigurations>
     <ApiFilter>
-      <Filter entryType="Namespace" fullName="Ocaramba.Common.Logger" isExposed="False" xmlns="">
-        <Filter entryType="Class" fullName="Ocaramba.Common.Logger.TestLogger" filterName="TestLogger" isExposed="True" />
+      <Filter entryType="Namespace" fullName="Ocaramba.Logger" isExposed="False" xmlns="">
+        <Filter entryType="Class" fullName="Ocaramba.Logger.TestLogger" filterName="TestLogger" isExposed="True" />
       </Filter>
     </ApiFilter>
     <VisibleItems>InheritedMembers, InheritedFrameworkMembers, Protected, ProtectedInternalAsProtected, EditorBrowsableNever, NonBrowsable</VisibleItems>
     <WarnOnMissingSourceContext>False</WarnOnMissingSourceContext>
-    <SourceCodeBasePath>..\Ocaramba.Common\</SourceCodeBasePath>
+    <SourceCodeBasePath>..\Ocaramba\</SourceCodeBasePath>
   </PropertyGroup>
   <PropertyGroup>
     <!-- NOTE: Update the version number in the path (YYYY.M.D.R) to match the package version -->

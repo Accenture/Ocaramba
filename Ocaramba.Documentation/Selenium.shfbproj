@@ -9,13 +9,13 @@
     <ProjectGuid>{2911b385-a412-48d1-8e17-ededb98d353c}</ProjectGuid>
     <SHFBSchemaVersion>2017.9.26.0</SHFBSchemaVersion>
     <!-- AssemblyName, Name, and RootNamespace are not used by SHFB but Visual Studio adds them anyway -->
-    <AssemblyName>Ocaramba.Common.Documentation</AssemblyName>
-    <RootNamespace>Ocaramba.Common.Documentation</RootNamespace>
-    <Name>Ocaramba.Common.Documentation</Name>
+    <AssemblyName>Ocaramba.Documentation</AssemblyName>
+    <RootNamespace>Ocaramba.Documentation</RootNamespace>
+    <Name>Ocaramba.Documentation</Name>
     <!-- SHFB properties -->
     <FrameworkVersion>.NET Framework 4.6</FrameworkVersion>
     <OutputPath>HelpSelenium\</OutputPath>
-    <HtmlHelpName>Ocaramba.Common</HtmlHelpName>
+    <HtmlHelpName>Ocaramba</HtmlHelpName>
     <Language>en-US</Language>
     <TransformComponentArguments>
       <Argument Key="logoFile" Value="Help.png" xmlns="" />
@@ -47,7 +47,7 @@
     <PresentationStyle>VS2013</PresentationStyle>
     <Preliminary>False</Preliminary>
     <NamingMethod>Guid</NamingMethod>
-    <HelpTitle>Ocaramba.Common Framework</HelpTitle>
+    <HelpTitle>Ocaramba Framework</HelpTitle>
     <ContentPlacement>AboveNamespaces</ContentPlacement>
     <FooterText>Objectivity Bespoke Software Specialists</FooterText>
     <HeaderText>Framework to automate tests using Selenium WebDriver</HeaderText>
