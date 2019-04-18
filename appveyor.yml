@@ -43,7 +43,7 @@ environment:
   GithubAuthToken:
     secure: x9uTnOFLUnZ6DiVhpBBxIJxij33Sz9uAIe+qef6M3sj9+J/AUmpfBmiGgqRabTqs
   COVERALLS_REPO_TOKEN:
-    secure: ast5HH2v0jAME1tKDxPMw3TExnMxNp1+wXBea5zIzGNaKBm8ojTzv6YB03eQtEi+
+    secure: L2Iowto/q2CJlWL0/7Noa1FZzGjye93jGokldOse3mgVnFzEvJOHzmWqzUaH1qG3
   browserstackuser:
     secure: 0JGVozUyY/OYBuPZk2Pbgw==
   browserstackkey:
