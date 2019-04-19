@@ -10,7 +10,7 @@ namespace Ocaramba.UnitTests.Tests
         [Test()]
         public void ShortenFileNameTest()
         {
-            var name = "verylongfilename 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0.txt";
+            var name = "verylongfilename3 4 5 6 7 8 9 0 1 2 3 4 1 2 31 2 3 4 5 6 7 8 9 0 1 2 3 4 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0.txt";
             var text = NameHelper.ShortenFileName(TestContext.CurrentContext.TestDirectory, name, "_", 255);
             Assert.IsTrue((TestContext.CurrentContext.TestDirectory + name).Length > 255);
             text = NameHelper.ShortenFileName(TestContext.CurrentContext.TestDirectory, name, " ", 255);

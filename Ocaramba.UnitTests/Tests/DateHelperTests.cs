@@ -24,7 +24,7 @@ namespace Ocaramba.UnitTests.Tests
         [Test()]
         public void CurrentTimeStampTest()
         {
-            Assert.AreEqual(DateTime.Now.ToString("ddMMyyyyHHmmss", CultureInfo.CurrentCulture), DateHelper.CurrentTimeStamp);
+            Assert.LessOrEqual(DateTime.ParseExact(DateHelper.CurrentTimeStamp, "ddMMyyyyHHmmss", null), DateTime.Now);
         }
 
         [Test()]
