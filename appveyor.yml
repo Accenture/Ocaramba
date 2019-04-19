@@ -171,7 +171,7 @@ test_script:
 
     if($lastexitcode -ne 0)
       {
-       echo $lastexitcode
+       echo 'lastexitcode' $lastexitcode
       }
 
     7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Xunit\bin\Release\**\*.png
@@ -186,7 +186,7 @@ test_script:
 
     if($lastexitcode -ne 0)
       {
-       echo $lastexitcode
+       echo 'lastexitcode' $lastexitcode
       }
 
     7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.NUnit\bin\Release\**\*.png
@@ -217,7 +217,7 @@ test_script:
 
     if($lastexitcode -ne 0)
       {
-       echo $lastexitcode
+       echo 'lastexitcode' $lastexitcode
       }
 
     7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.UnitTests\bin\Release\**\*.png
@@ -234,7 +234,7 @@ test_script:
 
     if($lastexitcode -ne 0)
       {
-       echo $lastexitcode
+       echo 'lastexitcode' $lastexitcode
       }
 
     7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Angular\bin\Release\**\*.png
@@ -250,7 +250,7 @@ test_script:
 
     if($lastexitcode -ne 0)
       {
-       echo $lastexitcode
+       echo 'lastexitcode' $lastexitcode
       }
 
     7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.MSTest\bin\Release\**\*.png
@@ -271,7 +271,7 @@ test_script:
 
     if($lastexitcode -ne 0)
       {
-       echo $lastexitcode
+       echo 'lastexitcode' $lastexitcode
       }
       
     echo '********************************************testingbot.com tests********************************************'  
@@ -285,7 +285,7 @@ test_script:
 
     if($lastexitcode -ne 0)
       {
-       echo $lastexitcode
+       echo 'lastexitcode' $lastexitcode
       }
       
     echo '********************************************saucelabs tests********************************************'
@@ -300,7 +300,7 @@ test_script:
 
     if($lastexitcode -ne 0)
       {
-       echo $lastexitcode
+       echo 'lastexitcode' $lastexitcode
       }
       
     echo '********************************************Downloading Selenium Grid********************************************' 
@@ -345,7 +345,7 @@ test_script:
 
     if($lastexitcode -ne 0)
       {
-       echo $lastexitcode
+       echo 'lastexitcode' $lastexitcode
       }
       
     echo '*****************************Run CloudProviderCrossBrowser tests with Selenium Grid****************************'
@@ -356,7 +356,7 @@ test_script:
 
     if($lastexitcode -ne 0)
       {
-       echo $lastexitcode
+       echo 'lastexitcode' $lastexitcode
       }
      
     echo '*****************************Stop Selenium Grid****************************'
