@@ -21,7 +21,6 @@
 // </license>
 
 using NUnit.Framework;
-using Ocaramba.Tests.Angular.PageObjects;
 
 namespace Ocaramba.Tests.Angular.Tests
 {

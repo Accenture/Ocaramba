@@ -31,7 +31,7 @@ namespace Ocaramba.Tests.NUnit.DataDriven
     using Ocaramba.Helpers;
 
     /// <summary>
-    /// DataDriven comparing files  methods for NUnit test framework <see href="https://github.com/ObjectivityLtd/Test.Automation/wiki/Comparing-files-by-NUnit-DataDriven-tests">More details on wiki</see>
+    /// DataDriven comparing files  methods for NUnit test framework <see href="https://github.com/ObjectivityLtd/Ocaramba/wiki/Comparing-files-by-NUnit-DataDriven-tests">More details on wiki</see>
     /// </summary>
     public static class CompareFiles
     {

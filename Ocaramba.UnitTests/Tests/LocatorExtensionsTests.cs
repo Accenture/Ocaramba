@@ -1,7 +1,8 @@
 ﻿using NUnit.Framework;
+using Ocaramba.Test.Automation.UnitTests;
 using Ocaramba.Tests.PageObjects.PageObjects.TheInternet;
 
-namespace Ocaramba.Test.Automation.UnitTests.Tests
+namespace Ocaramba.UnitTests.Tests
 {
     [TestFixture]
     [Parallelizable(ParallelScope.Fixtures)]

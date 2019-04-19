@@ -30,7 +30,7 @@ namespace Ocaramba.Tests.Angular
     using Logger;
 
     /// <summary>
-    /// The base class for all tests <see href="https://github.com/ObjectivityLtd/Test.Automation/wiki/ProjectTestBase-class">More details on wiki</see>
+    /// The base class for all tests <see href="https://github.com/ObjectivityLtd/Ocaramba/wiki/ProjectTestBase-class">More details on wiki</see>
     /// </summary>
     public class ProjectTestBase : TestBase
     {

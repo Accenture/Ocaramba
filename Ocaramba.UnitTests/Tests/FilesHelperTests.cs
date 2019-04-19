@@ -1,11 +1,10 @@
 ﻿using System;
 using System.IO;
 using NUnit.Framework;
-using Ocaramba;
 using Ocaramba.Exceptions;
 using Ocaramba.Helpers;
 
-namespace Ocaramba.Test.Automation.UnitTests.Tests
+namespace Ocaramba.UnitTests.Tests
 {
     [TestFixture()]
     [TestFixture, Parallelizable(ParallelScope.Self)]

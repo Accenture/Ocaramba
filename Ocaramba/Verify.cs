@@ -30,7 +30,7 @@ namespace Ocaramba
     using Ocaramba.Types;
 
     /// <summary>
-    /// Class for assert without stop tests <see href="https://github.com/ObjectivityLtd/Test.Automation/wiki/Verify-asserts-without-stop-tests">More details on wiki</see>
+    /// Class for assert without stop tests <see href="https://github.com/ObjectivityLtd/Ocaramba/wiki/Verify-asserts-without-stop-tests">More details on wiki</see>
     /// </summary>
     public static class Verify
     {

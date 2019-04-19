@@ -20,13 +20,11 @@
 //     SOFTWARE.
 // </license>
 
-using Ocaramba;
+using NUnit.Framework;
 using Ocaramba.Extensions;
 
-namespace Ocaramba.Test.Automation.UnitTests.Tests
+namespace Ocaramba.UnitTests.Tests
 {
-    using NUnit.Framework;
-
     [TestFixture, Parallelizable(ParallelScope.Fixtures)]
     public class DriversCustomSettingsUnitTests
     {

@@ -31,7 +31,7 @@ namespace Ocaramba.Helpers
     using Ocaramba.Types;
 
     /// <summary>
-    /// Class which support performance tests. <see href="https://github.com/ObjectivityLtd/Test.Automation/wiki/Performance%20measures">More details on wiki</see>
+    /// Class which support performance tests. <see href="https://github.com/ObjectivityLtd/Ocaramba/wiki/Performance%20measures">More details on wiki</see>
     /// </summary>
     public class PerformanceHelper
     {

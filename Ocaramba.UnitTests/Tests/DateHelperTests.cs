@@ -3,7 +3,7 @@ using System.Globalization;
 using NUnit.Framework;
 using Ocaramba.Helpers;
 
-namespace Ocaramba.Test.Automation.UnitTests.Tests
+namespace Ocaramba.UnitTests.Tests
 {
     [TestFixture()]
     [TestFixture, Parallelizable(ParallelScope.Self)]

@@ -37,7 +37,7 @@ namespace Ocaramba.Tests.NUnit.DataDriven
     using Ocaramba.Exceptions;
 
     /// <summary>
-    /// XML DataDriven methods for NUnit test framework <see href="https://github.com/ObjectivityLtd/Test.Automation/wiki/DataDriven-tests-from-Xml-files">More details on wiki</see>
+    /// XML DataDriven methods for NUnit test framework <see href="https://github.com/ObjectivityLtd/Ocaramba/wiki/DataDriven-tests-from-Xml-files">More details on wiki</see>
     /// </summary>
     public static class DataDrivenHelper
     {

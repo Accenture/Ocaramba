@@ -33,7 +33,7 @@ namespace Ocaramba.Helpers
     using Ocaramba.Helpers;
 
     /// <summary>
-    /// Class for handling downloading files <see href="https://github.com/ObjectivityLtd/Test.Automation/wiki/Downloading%20files">More details on wiki</see>
+    /// Class for handling downloading files <see href="https://github.com/ObjectivityLtd/Ocaramba/wiki/Downloading%20files">More details on wiki</see>
     /// </summary>
     public static class FilesHelper
     {

@@ -28,7 +28,7 @@ namespace Ocaramba.Helpers
     using NLog;
 
     /// <summary>
-    /// Class which support displaying performance test results. <see href="https://github.com/ObjectivityLtd/Test.Automation/wiki/Performance%20measures">More details on wiki</see>
+    /// Class which support displaying performance test results. <see href="https://github.com/ObjectivityLtd/Ocaramba/wiki/Performance%20measures">More details on wiki</see>
     /// </summary>
     public static class PrintPerformanceResultsHelper
     {
