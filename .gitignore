@@ -6,15 +6,18 @@
 StyleCop.Cache
 *.suo
 *.GhostDoc.xml
-TestFramework.sln.DotSettings.user
+Ocaramba.sln.DotSettings.user
 
-/Objectivity.Test.Automation.Tests.Features/TestFeatures/*.feature.cs
 *.user
 LastBuild.log
-/Objectivity.Test.Automation.Common.Documentation/Help
+/Ocaramba.Documentation/Help
 /TestResult.xml
 /myresults.xml
 /opencoverCoverage.xml
 /.nuget/NuGet.exe
 /.vs/TestFramework/v15/Server/sqlite3
 /*.htm
+/.vs/Ocaramba/v15/Server/sqlite3
+/.nuget/*.nupkg
+/*.DotSettings
+/Ocaramba.Tests.Features/TestFeatures/*.feature.cs

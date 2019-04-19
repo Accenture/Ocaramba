@@ -50,8 +50,8 @@ Function set_AppConfig_for_tests([string]$OutDir,[string]$configName,[string]$se
     .PARAMETER values
     Values of keys for update separated by |, in same order as keys.
     .EXAMPLE
-    .\set_AppConfig_for_tests "..\Objectivity.Test.Automation.Tests.BrowserStackCrossBrowser\bin\Debug" "Objectivity.Test.Automation.Tests.NUnit.dll.config" "//DriverCapabilities" "browserstack.user|browserstack.key" "key1value|key2value"
-    .\set_AppConfig_for_tests.ps1 "..\Objectivity.Test.Automation.Tests.BrowserStackCrossBrowser\bin\Debug" "Objectivity.Test.Automation.Tests.NUnit.dll.config" "//DriverCapabilities" "browserstack.user|browserstack.key" "key1value|key2value" $true
+    .\set_AppConfig_for_tests "..\Ocaramba.Tests.BrowserStackCrossBrowser\bin\Debug" "Ocaramba.Tests.NUnit.dll.config" "//DriverCapabilities" "browserstack.user|browserstack.key" "key1value|key2value"
+    .\set_AppConfig_for_tests.ps1 "..\Ocaramba.Tests.BrowserStackCrossBrowser\bin\Debug" "Ocaramba.Tests.NUnit.dll.config" "//DriverCapabilities" "browserstack.user|browserstack.key" "key1value|key2value" $true
     #>
 
 
