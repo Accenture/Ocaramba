@@ -247,6 +247,24 @@ test_script:
       {
        echo 'lastexitcode' $lastexitcode
       }
+      
+     .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.Angular\bin\Release" "Ocaramba.Tests.Angular.dll.config" "//appSettings" "browser|PathToChromeDriverDirectory|ChromeBrowserExecutableLocation" "Chrome|C:\Tools\WebDriver|C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
+
+    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Ocaramba.Tests.Angular\bin\Release\Ocaramba.Tests.Angular.dll --result=myresults.xml`;format=AppVeyor" -filter:"+[Ocaramba]*" -register:user -output:opencoverCoverage.xml
+
+    if($lastexitcode -ne 0)
+      {
+       echo 'lastexitcode' $lastexitcode
+      }
+      
+    .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.Angular\bin\Release" "Ocaramba.Tests.Angular.dll.config" "//appSettings" "browser|PathToFirefoxDriverDirectory" "Firefox|C:\Tools\WebDriver"
+
+    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Ocaramba.Tests.Angular\bin\Release\Ocaramba.Tests.Angular.dll --result=myresults.xml`;format=AppVeyor" -filter:"+[Ocaramba]*" -register:user -output:opencoverCoverage.xml
+
+    if($lastexitcode -ne 0)
+      {
+       echo 'lastexitcode' $lastexitcode
+      }
 
     7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Angular\bin\Release\**\*.png
 
