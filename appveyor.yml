@@ -72,9 +72,6 @@ before_build:
       
       dotnet tool install coveralls.net --tool-path packages
 
-- cmd: >-      
-      DISM.exe /Online /Add-Capability /CapabilityName:Microsoft.WebDriver~~~~0.0.1.0
-
 build:
   project: Ocaramba.sln
   verbosity: minimal
@@ -240,9 +237,9 @@ test_script:
        echo 'lastexitcode' $lastexitcode
       }
 
-    echo '********************************************Angular test for Edge********************************************'
+    echo '********************************************Angular test for setting path to folder with drivers********************************************'
     
-    .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.Angular\bin\Release" "Ocaramba.Tests.Angular.dll.config" "//appSettings" "browser" "Edge"
+    .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.Angular\bin\Release" "Ocaramba.Tests.Angular.dll.config" "//appSettings" "browser|PathToInternetExplorerDriverDirectory" "InternetExplorer|C:\Tools\WebDriver"
 
     & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Ocaramba.Tests.Angular\bin\Release\Ocaramba.Tests.Angular.dll --result=myresults.xml`;format=AppVeyor" -filter:"+[Ocaramba]*" -register:user -output:opencoverCoverage.xml
 
