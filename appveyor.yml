@@ -71,8 +71,10 @@ before_build:
       .\.nuget\nuget restore
       
       dotnet tool install coveralls.net --tool-path packages
-      
+
+- cmd: >-      
       DISM.exe /Online /Add-Capability /CapabilityName:Microsoft.WebDriver~~~~0.0.1.0
+
 build:
   project: Ocaramba.sln
   verbosity: minimal
