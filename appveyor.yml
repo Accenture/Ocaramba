@@ -26,6 +26,8 @@ init:
       echo 'seleniumGridUrl' $env:seleniumGridUrl 
 
       echo 'latestNugetUrl' $env:latestNugetUrl 
+      
+      echo Windows: [System.Environment]::OSVersion.Version
 
 assembly_info:
   patch: true
