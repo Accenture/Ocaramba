@@ -6,7 +6,6 @@ branches:
   except:
   - gh-pages
 configuration: Release
-image: Visual Studio 2017
 init:
  - ps: >-
       if ($env:APPVEYOR_REPO_TAG -eq "true")
@@ -76,8 +75,6 @@ before_build:
       .\.nuget\nuget restore
       
       dotnet tool install coveralls.net --tool-path packages
-      
-      choco install selenium-edge-driver
 
 build:
   project: Ocaramba.sln
@@ -245,16 +242,6 @@ test_script:
       }
 
     echo '********************************************Angular test for setting path to folder with drivers********************************************'
-    
-    .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.Angular\bin\Release" "Ocaramba.Tests.Angular.dll.config" "//appSettings" "browser|PathToEdgeDriverDirectory" "Edge|c:\tools\selenium"
-    
-    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Ocaramba.Tests.Angular\bin\Release\Ocaramba.Tests.Angular.dll --result=myresults.xml`;format=AppVeyor" -filter:"+[Ocaramba]*" -register:user -output:opencoverCoverage.xml
-    
-        if($lastexitcode -ne 0)
-      {
-       echo 'lastexitcode' $lastexitcode
-      }
-      
     
     .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.Angular\bin\Release" "Ocaramba.Tests.Angular.dll.config" "//appSettings" "browser|PathToInternetExplorerDriverDirectory" "InternetExplorer|C:\Tools\WebDriver"
 
