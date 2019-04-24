@@ -29,7 +29,7 @@ init:
       
       echo Windows: 
       
-     [System.Environment]::OSVersion.Version
+      [System.Environment]::OSVersion.Version
 
 assembly_info:
   patch: true
