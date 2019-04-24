@@ -53,7 +53,7 @@
     <HeaderText>Framework to automate tests using Selenium WebDriver</HeaderText>
     <FeedbackEMailAddress>TestAutomationGroup%40objectivity.co.uk</FeedbackEMailAddress>
     <CopyrightHref>http://www.objectivity.co.uk/</CopyrightHref>
-    <HtmlHelp1xCompilerPath>..\packages\EWSoftware.SHFB.2018.7.8.1\tools\</HtmlHelp1xCompilerPath>
+    <HtmlHelp1xCompilerPath>..\packages\EWSoftware.SHFB.2019.4.14\tools\</HtmlHelp1xCompilerPath>
     <ComponentPath>..\packages\</ComponentPath>
     <MissingTags>Summary, Parameter, Returns, AutoDocumentCtors, TypeParameter, AutoDocumentDispose</MissingTags>
     <PlugInConfigurations>
