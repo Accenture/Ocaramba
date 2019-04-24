@@ -40,7 +40,7 @@ Project API documentation can be found here: http://objectivityltd.github.io/Oca
 - AngularJS support, more details [here](https://github.com/ObjectivityLtd/Ocaramba/wiki/Angular-support).
 - Possiblity to check for JavaScript errors from browser, more details [here](https://github.com/ObjectivityLtd/Ocaramba/wiki/Verifying-Javascript-Errors-from-browser).
 
-For all documentation, visit the [Test.Automation Wiki](https://github.com/ObjectivityLtd/Ocaramba/wiki).
+For all documentation, visit the [Ocaramba Wiki](https://github.com/ObjectivityLtd/Ocaramba/wiki).
 
 Projects examples of using Test Framework :
 - Ocaramba.Tests.Angular for AngularJS
