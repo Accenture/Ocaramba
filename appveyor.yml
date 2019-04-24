@@ -27,7 +27,9 @@ init:
 
       echo 'latestNugetUrl' $env:latestNugetUrl 
       
-      echo Windows: [System.Environment]::OSVersion.Version
+      echo Windows: 
+      
+     [System.Environment]::OSVersion.Version
 
 assembly_info:
   patch: true
