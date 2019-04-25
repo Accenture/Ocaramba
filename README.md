@@ -23,8 +23,8 @@ Project API documentation can be found here: http://objectivityltd.github.io/Oca
 - Contains example projects how to use it
 - Allows to use Chrome, Firefox, Safari or Internet Explorer
 - Overrides browser profile preferences, pass arguments to browsers,  installs browser extensions, loading default firefox profile, more details [here](https://github.com/ObjectivityLtd/Ocaramba/wiki/Override%20browser%20profile%20preferences,%20install%20browser%20extensions)
-- Extends Webdriver by additional methods like JavaScriptClick, WaitForAjax, WaitForAngular, etc., more details [here](http://objectivityltd.github.io/Ocaramba/html/0872cc4d-63cc-c3d2-30e5-1f8debf56860.htm)
-- Automatically waits when locating element for specified time and conditions,GetElement method instead of Selenium FindElement, more details [here](http://objectivityltd.github.io/Ocaramba/html/6b3a28a9-75c6-bda7-e44e-962f1e91c477.htm)
+- Extends Webdriver by additional methods like JavaScriptClick, WaitForAjax, WaitForAngular, etc., more details [here](http://objectivityltd.github.io/Ocaramba/html/d51aa97e-08b5-c0b6-6987-c10545a64ebd.htm)
+- Automatically waits when locating element for specified time and conditions,GetElement method instead of Selenium FindElement, more details [here](http://objectivityltd.github.io/Ocaramba/html/3c09ca99-f931-c6c9-98fc-194eff6500ff.htm)
 - Page Object Pattern
 - Support for [SeleniumGrid](https://github.com/SeleniumHQ/selenium/wiki/Grid2), [Cross browser parallel test execution](https://github.com/ObjectivityLtd/Ocaramba/wiki/Cross-browser-parallel-test-execution-with-SeleniumGrid-or-testing-Cloud-Providers) with [SauceLab](https://saucelabs.com/), [TestingBot](https://testingbot.com) and [Browserstack](https://www.browserstack.com/) more details [here](https://github.com/ObjectivityLtd/Ocaramba/wiki/Selenium-Grid-support), Advanced Browser Capabilities and Options more details [here](https://github.com/ObjectivityLtd/Ocaramba/wiki/Advanced-Browser-Capabilities-and-options)
 - More common locators, e.g: ```"//*[@title='{0}' and @ms.title='{1}']"```, more details [here](https://github.com/ObjectivityLtd/Ocaramba/wiki/More%20common%20locators)
@@ -35,7 +35,7 @@ Project API documentation can be found here: http://objectivityltd.github.io/Oca
 - Possibility to take full desktop, browser screen shot or screenshot of element - Visual Testing, save page source, more details [here](https://github.com/ObjectivityLtd/Ocaramba/wiki/Screen-shots:-full-desktop,-selenium.-PageSource-saving)
 - Logging with NLog, EventFiringWebDriver logs, more details [here](https://github.com/ObjectivityLtd/Ocaramba/wiki/Logging)
 - Files downloading (Firefox, Chrome), more details [here](https://github.com/ObjectivityLtd/Ocaramba/wiki/Downloading%20files)
-- Possibility to send [SQL](http://objectivityltd.github.io/Ocaramba/html/e339b346-66a4-70e6-4c54-f9c30cb3131a.htm) or [MDX](http://objectivityltd.github.io/Ocaramba/html/39ae874a-89a0-c435-c701-f20b26f1695e.htm) queries
+- Possibility to send [SQL](http://objectivityltd.github.io/Ocaramba/html/730c92c7-831a-4449-3938-16540cf259b8.htm) or [MDX](http://objectivityltd.github.io/Ocaramba/html/7de319df-06eb-1c79-8c2d-9c60aaf3ab85.htm) queries
 - Possibility of debugging framework installed from nuget package, more details [here](https://github.com/ObjectivityLtd/Ocaramba/wiki/Debugging-Test.Automation-framework).
 - AngularJS support, more details [here](https://github.com/ObjectivityLtd/Ocaramba/wiki/Angular-support).
 - Possiblity to check for JavaScript errors from browser, more details [here](https://github.com/ObjectivityLtd/Ocaramba/wiki/Verifying-Javascript-Errors-from-browser).
