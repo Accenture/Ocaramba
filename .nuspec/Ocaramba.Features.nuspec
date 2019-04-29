@@ -7,7 +7,7 @@
     <authors>Objectivity Bespoke Software Specialists</authors>
     <owners>Objectivity Bespoke Software Specialists</owners>
     <license type="expression">MIT</license>
-    <projectUrl>https://github.com/ObjectivityLtd/Test.Automation</projectUrl>
+    <projectUrl>https://github.com/ObjectivityLtd/Ocaramba</projectUrl>
 	<iconUrl>https://github.com/ObjectivityLtd/Ocaramba/wiki/images/Objectivity_logo_avatar32.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Template of the framework to automate tests using Ocaramba with Features</description>
@@ -17,8 +17,8 @@
     <dependencies>
 	  <dependency id="SpecFlow" version="2.2.0"/>
 	  <dependency id="NUnit" version="3.11.0" />
-	  <dependency id="NUnit.ConsoleRunner" version="3.9.0" />
-	  <dependency id="NUnit3TestAdapter" version="3.12.0" />
+	  <dependency id="NUnit.ConsoleRunner" version="3.10.0" />
+	  <dependency id="NUnit3TestAdapter" version="3.13.0" />
     </dependencies> 
 	</metadata>
   <files>

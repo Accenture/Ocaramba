@@ -425,6 +425,8 @@ namespace Ocaramba
                     options.Proxy = this.CurrentProxy();
                 }
 
+                options.UseInPrivateBrowsing = true;
+
                 return options;
             }
         }
@@ -539,7 +541,7 @@ namespace Ocaramba
 
                     break;
                 case BrowserType.Edge:
-                    this.driver = string.IsNullOrEmpty(BaseConfiguration.PathToEdgeDriverDirectory) ? new EdgeDriver(this.SetDriverOptions(this.EdgeOptions)) : new EdgeDriver(BaseConfiguration.PathToEdgeDriverDirectory, this.SetDriverOptions(this.EdgeOptions));
+                    this.driver = new EdgeDriver(EdgeDriverService.CreateDefaultService(BaseConfiguration.PathToEdgeDriverDirectory, "MicrosoftWebDriver.exe", 52296), this.SetDriverOptions(this.EdgeOptions));
                     break;
                 default:
                     throw new NotSupportedException(

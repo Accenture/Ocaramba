@@ -26,6 +26,12 @@ init:
       echo 'seleniumGridUrl' $env:seleniumGridUrl 
 
       echo 'latestNugetUrl' $env:latestNugetUrl 
+      
+      echo Windows: 
+
+      (Get-WmiObject -class Win32_OperatingSystem).Caption
+      
+      [System.Environment]::OSVersion.Version
 
 assembly_info:
   patch: true
@@ -71,7 +77,7 @@ before_build:
       .\.nuget\nuget restore
       
       dotnet tool install coveralls.net --tool-path packages
-      
+
 build:
   project: Ocaramba.sln
   verbosity: minimal
@@ -229,6 +235,35 @@ test_script:
     echo '********************************************Angular test for Internet Explorer********************************************'
     
     .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.Angular\bin\Release" "Ocaramba.Tests.Angular.dll.config" "//appSettings" "browser" "InternetExplorer"
+
+    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Ocaramba.Tests.Angular\bin\Release\Ocaramba.Tests.Angular.dll --result=myresults.xml`;format=AppVeyor" -filter:"+[Ocaramba]*" -register:user -output:opencoverCoverage.xml
+
+    if($lastexitcode -ne 0)
+      {
+       echo 'lastexitcode' $lastexitcode
+      }
+
+    echo '********************************************Angular test for setting path to folder with drivers********************************************'
+    
+    .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.Angular\bin\Release" "Ocaramba.Tests.Angular.dll.config" "//appSettings" "browser|PathToInternetExplorerDriverDirectory" "InternetExplorer|C:\Tools\WebDriver"
+
+    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Ocaramba.Tests.Angular\bin\Release\Ocaramba.Tests.Angular.dll --result=myresults.xml`;format=AppVeyor" -filter:"+[Ocaramba]*" -register:user -output:opencoverCoverage.xml
+
+    if($lastexitcode -ne 0)
+      {
+       echo 'lastexitcode' $lastexitcode
+      }
+      
+     .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.Angular\bin\Release" "Ocaramba.Tests.Angular.dll.config" "//appSettings" "browser|PathToChromeDriverDirectory|ChromeBrowserExecutableLocation" "Chrome|C:\Tools\WebDriver|C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
+
+    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Ocaramba.Tests.Angular\bin\Release\Ocaramba.Tests.Angular.dll --result=myresults.xml`;format=AppVeyor" -filter:"+[Ocaramba]*" -register:user -output:opencoverCoverage.xml
+
+    if($lastexitcode -ne 0)
+      {
+       echo 'lastexitcode' $lastexitcode
+      }
+      
+    .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.Angular\bin\Release" "Ocaramba.Tests.Angular.dll.config" "//appSettings" "browser|PathToFirefoxDriverDirectory" "Firefox|C:\Tools\WebDriver"
 
     & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Ocaramba.Tests.Angular\bin\Release\Ocaramba.Tests.Angular.dll --result=myresults.xml`;format=AppVeyor" -filter:"+[Ocaramba]*" -register:user -output:opencoverCoverage.xml
 

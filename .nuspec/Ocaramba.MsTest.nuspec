@@ -7,7 +7,7 @@
     <authors>Objectivity Bespoke Software Specialists</authors>
     <owners>Objectivity Bespoke Software Specialists</owners>
     <license type="expression">MIT</license>
-    <projectUrl>https://github.com/ObjectivityLtd/Test.Automation</projectUrl>
+    <projectUrl>https://github.com/ObjectivityLtd/Ocaramba</projectUrl>
 	<iconUrl>https://github.com/ObjectivityLtd/Ocaramba/wiki/images/Objectivity_logo_avatar32.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Template of framework to automate tests using Ocaramba with MsTest</description>
