@@ -85,6 +85,8 @@ after_build:
  - ps: >-
       echo '********************************************Creating nuget packages********************************************'
       
+      .\.nuget\nuget pack .\Ocaramba\Ocaramba.csproj -symbols -properties Configuration=Release -Verbosity detailed
+      
       Copy-Item .\.nuspec\Ocaramba.Nunit.nuspec .\\Ocaramba\\Ocaramba.nuspec
       
       .\.nuget\nuget pack .\Ocaramba\Ocaramba.csproj -symbols -properties Configuration=Release -Verbosity detailed

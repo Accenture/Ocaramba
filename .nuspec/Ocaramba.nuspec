@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Ocaramba</id>
+    <version>$version$</version>
+    <title>Ocaramba.NUnit</title>
+    <authors>Objectivity Bespoke Software Specialists</authors>
+    <owners>Objectivity Bespoke Software Specialists</owners>
+    <license type="expression">MIT</license>
+    <projectUrl>https://github.com/ObjectivityLtd/Ocaramba</projectUrl>
+	<iconUrl>https://github.com/ObjectivityLtd/Ocaramba/wiki/images/Objectivity_logo_avatar32.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Framework to automate tests using Selenium WebDriver </description>
+    <releaseNotes>You can find info about this release here: https://github.com/ObjectivityLtd/Ocaramba/releases</releaseNotes>
+    <copyright>Copyright 2015</copyright>
+    <tags>selenium webdriver testautomation tests nunit Ocaramba</tags>
+	<dependencies>
+    </dependencies> 
+	<frameworkAssemblies>
+	</frameworkAssemblies>
+  </metadata>
+  <files>
+  </files>
+</package>
