@@ -83,27 +83,7 @@ build:
   verbosity: minimal
 after_build:
  - ps: >-
-      echo '********************************************Creating nuget packages********************************************'
-      
-      .\.nuget\nuget pack .\Ocaramba\Ocaramba.csproj -symbols -properties Configuration=Release -Verbosity detailed
-      
-      Copy-Item .\.nuspec\Ocaramba.Nunit.nuspec .\\Ocaramba\\Ocaramba.nuspec
-      
-      .\.nuget\nuget pack .\Ocaramba\Ocaramba.csproj -symbols -properties Configuration=Release -Verbosity detailed
-      
-      Copy-Item .\.nuspec\Ocaramba.MsTest.nuspec .\\Ocaramba\\Ocaramba.nuspec
-      
-      .\.nuget\nuget pack .\Ocaramba\Ocaramba.csproj -symbols -properties Configuration=Release -Verbosity detailed
-      
-      Copy-Item .\.nuspec\Ocaramba.MsTest.nuspec .\\Ocaramba\\Ocaramba.nuspec
-      
-      .\.nuget\nuget pack .\Ocaramba\Ocaramba.csproj -symbols -properties Configuration=Release -Verbosity detailed
-      
-      Copy-Item .\.nuspec\Ocaramba.Features.nuspec .\\Ocaramba\\Ocaramba.nuspec
-      
-      .\.nuget\nuget pack .\Ocaramba\Ocaramba.csproj -symbols -properties Configuration=Release -Verbosity detailed
-      
-      Copy-Item .\.nuspec\Ocaramba.Xunit.nuspec .\\Ocaramba\\Ocaramba.nuspec
+      echo '********************************************Creating nuget package********************************************'
       
       .\.nuget\nuget pack .\Ocaramba\Ocaramba.csproj -symbols -properties Configuration=Release -Verbosity detailed
       
