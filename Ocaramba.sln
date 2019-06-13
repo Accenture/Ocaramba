@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.329
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ocaramba", "Ocaramba\Ocaramba.csproj", "{46FA4EDC-A114-4E8F-A545-996F99E31EA8}"
 EndProject
@@ -36,10 +36,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuspec", ".nuspec", "{1A98C4E2-FE6C-4E95-BA56-5F6B4F088A44}"
 	ProjectSection(SolutionItems) = preProject
-		.nuspec\Ocaramba.Features.nuspec = .nuspec\Ocaramba.Features.nuspec
-		.nuspec\Ocaramba.MsTest.nuspec = .nuspec\Ocaramba.MsTest.nuspec
-		.nuspec\Ocaramba.Nunit.nuspec = .nuspec\Ocaramba.Nunit.nuspec
-		.nuspec\Ocaramba.Xunit.nuspec = .nuspec\Ocaramba.Xunit.nuspec
+		.nuspec\Ocaramba.nuspec = .nuspec\Ocaramba.nuspec
 	EndProjectSection
 EndProject
 Global

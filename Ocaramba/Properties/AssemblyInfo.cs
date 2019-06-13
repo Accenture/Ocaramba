@@ -27,11 +27,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Ocaramba.Common")]
-[assembly: AssemblyDescription("Selenium Test Automation Framework")]
+[assembly: AssemblyTitle("Ocaramba")]
+[assembly: AssemblyDescription("Framework to automate tests using Selenium WebDriver")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Objectivity")]
-[assembly: AssemblyProduct("Ocaramba.Common")]
+[assembly: AssemblyCompany("Objectivity Bespoke Software Specialists")]
+[assembly: AssemblyProduct("Ocaramba")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
