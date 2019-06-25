@@ -36,7 +36,6 @@ assembly_info:
   file: '**\*.csproj'
   assembly_version: $(frameworkVersion)
   assembly_file_version: '{version}'
-  package_version: $(frameworkVersion) 
   assembly_informational_version: $(frameworkVersion)
   
 environment:
