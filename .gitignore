@@ -6,3 +6,5 @@
 /*.user
 /*.nupkg
 /Ocaramba/bin/Release/netcoreapp2.2
+/Ocaramba.Tests.PageObjects/bin/Release/netcoreapp2.2
+/Ocaramba.Tests.PageObjects/obj
