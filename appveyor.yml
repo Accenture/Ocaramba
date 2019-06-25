@@ -62,7 +62,7 @@ before_build:
       
       echo "Downloading nuget from:" $url
       
-      $output = $env:APPVEYOR_BUILD_FOLDER + ".\.nuget\nuget.exe"
+      $output = $env:APPVEYOR_BUILD_FOLDER + "\.nuget\nuget.exe"
       
       (New-Object System.Net.WebClient).DownloadFile($url, $output)
       
