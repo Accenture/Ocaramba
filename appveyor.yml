@@ -55,10 +55,9 @@ environment:
   saucelabsaccessKey:
     secure: D6Yy/Ng4/rfzsqQmnzwmTtN/Knee3c8/NtI1HgKke2ybA/6WpqP38RQfSHENYECa
 before_build:
-- ps: >-   
-      dotnet tool install coveralls.net --tool-path packages
-      dotnet --version
-      dotnet restore
+ - dotnet tool install coveralls.net --tool-path packages
+ - dotnet --version
+ - dotnet restore
 
 build_script:
  - dotnet build /verbosity:quiet "Ocaramba.sln"
