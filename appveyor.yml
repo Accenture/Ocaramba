@@ -24,8 +24,6 @@ init:
       echo 'seleniumGridVersion' $env:seleniumGridVersion 
 
       echo 'seleniumGridUrl' $env:seleniumGridUrl 
-
-      echo 'latestNugetUrl' $env:latestNugetUrl 
       
       echo Windows: 
 
@@ -57,20 +55,10 @@ environment:
   saucelabsaccessKey:
     secure: D6Yy/Ng4/rfzsqQmnzwmTtN/Knee3c8/NtI1HgKke2ybA/6WpqP38RQfSHENYECa
 before_build:
-- ps: >-
-      $url = $env:latestNugetUrl
-      
-      echo "Downloading nuget from:" $url
-      
-      $output = $env:APPVEYOR_BUILD_FOLDER + "\.nuget\nuget.exe"
-      
-      (New-Object System.Net.WebClient).DownloadFile($url, $output)
-      
-      echo "nuget downloaded to:" $output
-      
-      .\.nuget\nuget restore
-      
+- ps: >-   
       dotnet tool install coveralls.net --tool-path packages
+      dotnet --version
+      dotnet restore
 
 build_script:
  - dotnet build /verbosity:quiet "Ocaramba.sln"
@@ -78,7 +66,7 @@ after_build:
  - ps: >-
       echo '********************************************Creating nuget package********************************************'
       
-      \.nuget\nuget pack .\Ocaramba\Ocaramba.csproj -symbols -properties Configuration=Release -Verbosity detailed
+      nuget pack .\Ocaramba\Ocaramba.csproj -symbols -properties Configuration=Release -Verbosity detailed
       
       <#
       echo '********************************************Copying files for gh-pages********************************************'
