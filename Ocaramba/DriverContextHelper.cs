@@ -115,7 +115,8 @@ namespace Ocaramba
             List<string> filePaths = new List<string>();
             if (BaseConfiguration.FullDesktopScreenShotEnabled)
             {
-                filePaths.Add(TakeScreenShot.Save(TakeScreenShot.DoIt(), ImageFormat.Png, this.ScreenShotFolder, this.TestTitle));
+                //to do TakeScreenShot
+                //filePaths.Add(TakeScreenShot.Save(TakeScreenShot.DoIt(), ImageFormat.Png, this.ScreenShotFolder, this.TestTitle));
             }
 
             if (BaseConfiguration.SeleniumScreenShotEnabled)

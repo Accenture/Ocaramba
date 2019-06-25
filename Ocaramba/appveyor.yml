@@ -42,7 +42,7 @@ assembly_info:
 environment:
   APPVEYOR_RDP_PASSWORD:
     secure: 3OiDAcFLoSt3UCnmEU+XgM2d541PAqCNJAPqoiRqwRI=
-  frameworkVersion: 3.1.15
+  frameworkVersion: 3.1.16
   seleniumGridVersion: selenium-server-standalone-3.141.59.jar
   seleniumGridUrl: http://selenium-release.storage.googleapis.com/3.141/selenium-server-standalone-3.141.59.jar
   latestNugetUrl: https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
@@ -85,8 +85,9 @@ after_build:
  - ps: >-
       echo '********************************************Creating nuget package********************************************'
       
-      .\.nuget\nuget pack .\Ocaramba\Ocaramba.csproj -symbols -properties Configuration=Release -Verbosity detailed
+      nuget pack .\Ocaramba\Ocaramba.csproj -symbols -properties Configuration=Release -Verbosity detailed
       
+      <#
       echo '********************************************Copying files for gh-pages********************************************'
       
       Copy-Item -Path .\README.md -Destination .\Ocaramba.Documentation\Help\ -recurse -force -verbose 
@@ -144,10 +145,10 @@ after_build:
       
       7z a gh-pages_$env:appveyor_build_version.zip .\\Help\\** 
       
-      appveyor PushArtifact gh-pages_$env:appveyor_build_version.zip
+      appveyor PushArtifact gh-pages_$env:appveyor_build_version.zip #>
 test_script:
 - ps: >-
-    echo '********************************************Executing tests********************************************'
+    <#echo '********************************************Executing tests********************************************'
 
     $OpenCover = (Resolve-Path ".\packages\OpenCover.*\tools\OpenCover.Console.exe").ToString()
     
@@ -408,7 +409,7 @@ test_script:
 
     7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\*.log
     
-    appveyor PushArtifact testresults_$env:appveyor_build_version.zip
+    appveyor PushArtifact testresults_$env:appveyor_build_version.zip #>
 artifacts:
 - path: .\Ocaramba.*.nupkg
   name: NuGet
