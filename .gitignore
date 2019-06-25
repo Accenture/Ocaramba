@@ -4,3 +4,5 @@
 /Ocaramba/obj/Debug/netcoreapp2.2
 /Ocaramba/obj
 /*.user
+/*.nupkg
+/Ocaramba/bin/Release/netcoreapp2.2
