@@ -6,7 +6,6 @@ version: $(frameworkVersion).{build}
 branches:
   except:
   - gh-pages
-configuration: Release
 init:
  - ps: >-
       if ($env:APPVEYOR_REPO_TAG -eq "true")
@@ -34,12 +33,6 @@ init:
       
       [System.Environment]::OSVersion.Version
 
-assembly_info:
-  patch: true
-  file: '**\AssemblyInfo.*'
-  assembly_version: $(frameworkVersion)
-  assembly_file_version: '{version}'
-  assembly_informational_version: $(frameworkVersion)
 environment:
   APPVEYOR_RDP_PASSWORD:
     secure: 3OiDAcFLoSt3UCnmEU+XgM2d541PAqCNJAPqoiRqwRI=
@@ -79,14 +72,13 @@ before_build:
       
       dotnet tool install coveralls.net --tool-path packages
 
-build:
-  project: Ocaramba.sln
-  verbosity: minimal
+build_script:
+ - dotnet build /verbosity:quiet "Ocaramba.sln"
 after_build:
  - ps: >-
       echo '********************************************Creating nuget package********************************************'
       
-      nuget pack .\Ocaramba\Ocaramba.csproj -symbols -properties Configuration=Release -Verbosity detailed
+      \.nuget\nuget pack .\Ocaramba\Ocaramba.csproj -symbols -properties Configuration=Release -Verbosity detailed
       
       <#
       echo '********************************************Copying files for gh-pages********************************************'
