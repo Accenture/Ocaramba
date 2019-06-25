@@ -5,7 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include=".nuspec\Ocaramba.nuspec" />
+    <Compile Remove=".nuspec\**" />
+    <EmbeddedResource Remove=".nuspec\**" />
+    <None Remove=".nuspec\**" />
   </ItemGroup>
 
   <ItemGroup>
