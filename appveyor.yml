@@ -60,7 +60,7 @@ before_build:
  - dotnet restore
 
 build_script:
- - dotnet build /verbosity:quiet "Ocaramba.sln"
+ - dotnet build --configuration Release /verbosity:quiet "Ocaramba.sln"
 after_build:
  - ps: >-
       <#echo '********************************************Creating nuget package********************************************'
