@@ -10,7 +10,7 @@
     <RepositoryUrl>https://github.com/ObjectivityLtd/Ocaramba</RepositoryUrl>
     <PackageReleaseNotes>You can find info about this release here: https://github.com/ObjectivityLtd/Ocaramba/releases</PackageReleaseNotes>
     <PackageLicenseUrl>https://github.com/ObjectivityLtd/Ocaramba/blob/master/LICENSE</PackageLicenseUrl>
-    <Version>3.1.16</Version>
+    <Version>1.0.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
