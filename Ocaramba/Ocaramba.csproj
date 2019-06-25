@@ -2,6 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
+    <Description>Framework to automate tests using Selenium WebDriver</Description>
+    <Copyright>Copyright ©  2015</Copyright>
+    <Company>Objectivity Bespoke Software Specialists</Company>
+    <PackageProjectUrl>https://github.com/ObjectivityLtd/Ocaramba</PackageProjectUrl>
+    <PackageIconUrl>https://github.com/ObjectivityLtd/Ocaramba/wiki/images/Objectivity_logo_avatar32.png</PackageIconUrl>
+    <RepositoryUrl>https://github.com/ObjectivityLtd/Ocaramba</RepositoryUrl>
+    <PackageReleaseNotes>You can find info about this release here: https://github.com/ObjectivityLtd/Ocaramba/releases</PackageReleaseNotes>
+    <PackageLicenseUrl>https://github.com/ObjectivityLtd/Ocaramba/blob/master/LICENSE</PackageLicenseUrl>
+    <Version>3.1.16</Version>
   </PropertyGroup>
 
   <ItemGroup>
