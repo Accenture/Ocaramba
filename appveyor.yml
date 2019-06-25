@@ -30,16 +30,15 @@ init:
       (Get-WmiObject -class Win32_OperatingSystem).Caption
       
       [System.Environment]::OSVersion.Version   
-
- dotnet_csproj:
-  patch: true
-  file: '**\*.csproj'
-  version: $(frameworkVersion)
-  package_version: $(frameworkVersion)
-  assembly_version: $(frameworkVersion)
-  file_version: '{version}'
-  informational_version: '{version}'
- 
+dotnet_csproj:
+   patch: true
+   file: '**\*.csproj'
+   version: $(frameworkVersion)
+   package_version: $(frameworkVersion)
+   assembly_version: $(frameworkVersion)
+   file_version: '{version}'
+   informational_version: '{version}'
+  
 environment:
   APPVEYOR_RDP_PASSWORD:
     secure: 3OiDAcFLoSt3UCnmEU+XgM2d541PAqCNJAPqoiRqwRI=
