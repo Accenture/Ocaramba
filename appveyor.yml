@@ -135,7 +135,17 @@ test_script:
     
     & nunit3-console.exe .\Ocaramba.Tests.Angular\bin\Release\net45\Ocaramba.Tests.Angular.dll
 
+      if($lastexitcode -ne 0)
+      {
+       echo 'lastexitcode' $lastexitcode
+      }
+
     & nunit3-console.exe .\Ocaramba.Tests.Angular\bin\Release\netcoreapp2.2\Ocaramba.Tests.Angular.dll
+
+      if($lastexitcode -ne 0)
+      {
+       echo 'lastexitcode' $lastexitcode
+      }
 
     <#$OpenCover = (Resolve-Path ".\packages\OpenCover.*\tools\OpenCover.Console.exe").ToString()
 
