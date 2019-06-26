@@ -68,7 +68,7 @@ before_build:
  - dotnet restore
 
 build_script:
- - dotnet build --configuration Release /verbosity:quiet "Ocaramba.sln"
+ - dotnet build --configuration Release /verbosity:normal "Ocaramba.sln"
 after_build:
  - ps: >-
       <#echo '********************************************Copying files for gh-pages********************************************'
