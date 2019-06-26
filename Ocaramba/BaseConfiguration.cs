@@ -27,7 +27,6 @@ namespace Ocaramba
     using System.Configuration;
     using System.Globalization;
     using NLog;
-    using Ocaramba;
 
     /// <summary>
     /// SeleniumConfiguration that consume app.config file <see href="https://github.com/ObjectivityLtd/Ocaramba/wiki/Description%20of%20App.config%20file">More details on wiki</see>

@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFrameworks>netcoreapp2.2;net45</TargetFrameworks>
     <Description>Framework to automate tests using Selenium WebDriver</Description>
     <Copyright>Copyright ©  2015</Copyright>
     <Company>Objectivity Bespoke Software Specialists</Company>
@@ -21,7 +21,23 @@
     <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="75.0.3770.90" />
     <PackageReference Include="Selenium.WebDriver.GeckoDriver.Win64" Version="0.24.0" />
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0" />
   </ItemGroup>
+  
+  <ItemGroup Condition="'$(TargetFramework)' == 'net45'">
+	<Reference Include="System.Configuration" />
+ </ItemGroup>
+  
+  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp2.2'">
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0"/>
+   <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.1.1" />
+  </ItemGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='netcoreapp2.2'">
+    <DefineConstants>netcoreapp2_2</DefineConstants>
+</PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='net45'">
+    <DefineConstants>net45</DefineConstants>
+</PropertyGroup>
 
 </Project>
