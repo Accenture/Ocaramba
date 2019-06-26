@@ -133,14 +133,14 @@ test_script:
 - ps: >-
     echo '********************************************Executing tests********************************************'
     
-    & nunit3-console.exe .\Ocaramba.Tests.Angular\bin\Release\net45\Ocaramba.Tests.Angular.dll
+    & nunit3-console.exe .\Ocaramba.Tests.Angular\bin\Release\net45\Ocaramba.Tests.Angular.dll .\Ocaramba.Tests.NUnit\bin\Release\net45\Ocaramba.Tests.NUnit.dll 
 
       if($lastexitcode -ne 0)
       {
        echo 'lastexitcode' $lastexitcode
       }
 
-    & nunit3-console.exe .\Ocaramba.Tests.Angular\bin\Release\netcoreapp2.2\Ocaramba.Tests.Angular.dll
+    & nunit3-console.exe .\Ocaramba.Tests.Angular\bin\Release\netcoreapp2.2\Ocaramba.Tests.Angular.dll .\Ocaramba.Tests.NUnit\bin\Release\netcoreapp2.2\Ocaramba.Tests.NUnit.dll 
 
       if($lastexitcode -ne 0)
       {
