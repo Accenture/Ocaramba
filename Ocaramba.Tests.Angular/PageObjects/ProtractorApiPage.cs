@@ -16,7 +16,7 @@ namespace Ocaramba.Tests.Angular.PageObjects
         /// </summary>
         private readonly ElementLocator
             ElementToBeSelected = new ElementLocator(Locator.CssSelector, "a[href*='elementToBeSelected']"),
-            ElementToBeSelectedHeader = new ElementLocator(Locator.XPath,"//h3[contains(text(),'ExpectedConditions.elementToBeSelected')]");
+            ElementToBeSelectedHeader = new ElementLocator(Locator.XPath, "//h3[@class='api-title ng-binding'][contains(text(),'ExpectedConditions.elementToBeSelected')]");
 
         public ProtractorApiPage(DriverContext driverContext) : base(driverContext)
         {

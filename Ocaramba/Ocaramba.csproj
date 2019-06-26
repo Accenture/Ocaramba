@@ -25,6 +25,7 @@
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net45'">
 	<Reference Include="System.Configuration" />
+	<Reference Include="System.Windows.Forms" />
  </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp2.2'">

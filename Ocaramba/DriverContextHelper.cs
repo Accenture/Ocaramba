@@ -116,7 +116,9 @@ namespace Ocaramba
             if (BaseConfiguration.FullDesktopScreenShotEnabled)
             {
                 //to do TakeScreenShot
-                //filePaths.Add(TakeScreenShot.Save(TakeScreenShot.DoIt(), ImageFormat.Png, this.ScreenShotFolder, this.TestTitle));
+#if net45
+                filePaths.Add(TakeScreenShot.Save(TakeScreenShot.DoIt(), ImageFormat.Png, this.ScreenShotFolder, this.TestTitle));
+#endif
             }
 
             if (BaseConfiguration.SeleniumScreenShotEnabled)
