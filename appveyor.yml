@@ -132,10 +132,14 @@ after_build:
 test_script:
 - ps: >-
     echo '********************************************Executing tests********************************************'
-
-    $OpenCover = (Resolve-Path ".\packages\OpenCover.*\tools\OpenCover.Console.exe").ToString()
     
-    <#echo '********************************************XUnit tests********************************************'
+    & nunit3-console.exe .\Ocaramba.Tests.Angular\bin\Release\net45\Ocaramba.Tests.Angular.dll
+
+    & nunit3-console.exe .\Ocaramba.Tests.Angular\bin\Release\netcoreapp2.2\Ocaramba.Tests.Angular.dll
+
+    <#$OpenCover = (Resolve-Path ".\packages\OpenCover.*\tools\OpenCover.Console.exe").ToString()
+
+    echo '********************************************XUnit tests********************************************'
     
     $xunit = (Resolve-Path ".\packages\xunit.runner.console.*\tools\xunit.console.exe").ToString()
     
@@ -392,11 +396,7 @@ test_script:
 
     7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\*.log
     
-    appveyor PushArtifact testresults_$env:appveyor_build_version.zip #>
-
-    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Ocaramba.Tests.Angular\bin\Release\net45\Ocaramba.Tests.Angular.dll --result=myresults.xml`;format=AppVeyor" -filter:"+[Ocaramba]*" -register:user -output:opencoverCoverage.xml
-
-    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Ocaramba.Tests.Angular\bin\Release\netcoreapp2.2\Ocaramba.Tests.Angular.dll --result=myresults.xml`;format=AppVeyor" -filter:"+[Ocaramba]*" -register:user -output:opencoverCoverage.xml
+    appveyor PushArtifact testresults_$env:appveyor_build_version.zip#>
 artifacts:
 - path: .\**\Ocaramba.*.nupkg
   name: NuGet
