@@ -29,6 +29,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="DataDriven\DataDriven.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="DataDriven\DataDriven.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="DataDriven\TestDataCsv.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="TestOutput\filetocompare_branch.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
