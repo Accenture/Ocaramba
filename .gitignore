@@ -1,10 +1,5 @@
 /.vs/Ocaramba/v15
-/Ocaramba/bin/Debug/netcoreapp2.2
-/Ocaramba/obj/Debug/netcoreapp2.0
-/Ocaramba/obj/Debug/netcoreapp2.2
-/Ocaramba/obj
 /*.user
-/*.nupkg
-/Ocaramba/bin/Release/netcoreapp2.2
-/Ocaramba.Tests.PageObjects/bin/Release/netcoreapp2.2
-/Ocaramba.Tests.PageObjects/obj
+/**/*.nupkg
+/**/bin/**/*.*
+/**/obj/**/*.*
