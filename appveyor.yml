@@ -71,11 +71,6 @@ build_script:
  - dotnet build --configuration Release /verbosity:quiet "Ocaramba.sln"
 after_build:
  - ps: >-
-      echo '********************************************Creating nuget package********************************************'
-      
-      nuget pack .\Ocaramba\Ocaramba.csproj -symbols -properties Configuration=Release -Verbosity detailed
-      
-      
       <#echo '********************************************Copying files for gh-pages********************************************'
       
       Copy-Item -Path .\README.md -Destination .\Ocaramba.Documentation\Help\ -recurse -force -verbose 
@@ -399,7 +394,7 @@ test_script:
     
     appveyor PushArtifact testresults_$env:appveyor_build_version.zip #>
 artifacts:
-- path: .\Ocaramba.*.nupkg
+- path: .\**\Ocaramba.*.nupkg
   name: NuGet
 deploy:
 - provider: NuGet

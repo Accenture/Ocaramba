@@ -11,13 +11,9 @@
     <PackageReleaseNotes>You can find info about this release here: https://github.com/ObjectivityLtd/Ocaramba/releases</PackageReleaseNotes>
     <PackageLicenseUrl>https://github.com/ObjectivityLtd/Ocaramba/blob/master/LICENSE</PackageLicenseUrl>
     <Version>1.0.0</Version>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Objectivity Bespoke Software Specialists</Authors>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove=".nuspec\**" />
-    <EmbeddedResource Remove=".nuspec\**" />
-    <None Remove=".nuspec\**" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="NLog" Version="4.6.5" />
