@@ -133,11 +133,11 @@ test_script:
 - ps: >-
     echo '********************************************Executing tests********************************************'
     
-    $OpenCover = (Resolve-Path "$ENV:USERPROFILE +.\packages\OpenCover.*\tools\OpenCover.Console.exe").ToString()
+    $OpenCover = (Resolve-Path "$ENV:USERPROFILE + \.nuget\packages\opencover\*\tools\OpenCover.Console.exe")[0].ToString()
 
     <#echo '********************************************XUnit tests********************************************'
     
-    $xunit = (Resolve-Path "$ENV:USERPROFILE + .\packages\xunit.runner.console.*\tools\xunit.console.exe").ToString()
+    $xunit = (Resolve-Path "$ENV:USERPROFILE + \.nuget\packages\xunit.runner.console.*\tools\xunit.console.exe")[0].ToString()
     
     & $OpenCover -target:"$xunit" -mergeoutput -targetargs:".\Ocaramba.Tests.Xunit\bin\Release\Ocaramba.Tests.Xunit.dll -appveyor -noshadow" -filter:"+[Ocaramba]*" -register:user -output:opencoverCoverage.xml
 
