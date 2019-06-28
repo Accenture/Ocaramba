@@ -66,6 +66,7 @@ before_build:
  - dotnet tool install coveralls.net --tool-path packages
  - dotnet --version
  - dotnet restore
+ - choco install opencover.portable
 
 build_script:
  - dotnet build --configuration Release /verbosity:normal "Ocaramba.sln"
@@ -132,14 +133,12 @@ after_build:
 test_script:
 - ps: >-
     echo '********************************************Executing tests********************************************'
-    
-    $OpenCover = (Resolve-Path "$ENV:USERPROFILE + \.nuget\packages\opencover\*\tools\OpenCover.Console.exe")[0].ToString()
 
     <#echo '********************************************XUnit tests********************************************'
     
     $xunit = (Resolve-Path "$ENV:USERPROFILE + \.nuget\packages\xunit.runner.console.*\tools\xunit.console.exe")[0].ToString()
     
-    & $OpenCover -target:"$xunit" -mergeoutput -targetargs:".\Ocaramba.Tests.Xunit\bin\Release\Ocaramba.Tests.Xunit.dll -appveyor -noshadow" -filter:"+[Ocaramba]*" -register:user -output:opencoverCoverage.xml
+    & OpenCover.Console.exe -target:"$xunit" -mergeoutput -targetargs:".\Ocaramba.Tests.Xunit\bin\Release\Ocaramba.Tests.Xunit.dll -appveyor -noshadow" -filter:"+[Ocaramba]*" -register:user -output:opencoverCoverage.xml
 
     if($lastexitcode -ne 0)
       {
@@ -154,7 +153,7 @@ test_script:
     
     echo '********************************************NUnit tests********************************************'
     
-    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Ocaramba.Tests.Angular\bin\Release\net45\Ocaramba.Tests.Angular.dll .\Ocaramba.Tests.NUnit\bin\Release\net45\Ocaramba.Tests.NUnit.dll .\Ocaramba.Tests.Angular\bin\Release\netcoreapp2.2\Ocaramba.Tests.Angular.dll .\Ocaramba.Tests.NUnit\bin\Release\netcoreapp2.2\Ocaramba.Tests.NUnit.dll --result=myresults.xml`;format=AppVeyor" -filter:"+[Ocaramba]*" -register:user -output:opencoverCoverage.xml
+    & OpenCover.Console.exe -target:nunit3-console.exe -mergeoutput -targetargs:".\Ocaramba.Tests.Angular\bin\Release\net45\Ocaramba.Tests.Angular.dll .\Ocaramba.Tests.NUnit\bin\Release\net45\Ocaramba.Tests.NUnit.dll .\Ocaramba.Tests.Angular\bin\Release\netcoreapp2.2\Ocaramba.Tests.Angular.dll .\Ocaramba.Tests.NUnit\bin\Release\netcoreapp2.2\Ocaramba.Tests.NUnit.dll --result=myresults.xml`;format=AppVeyor" -filter:"+[Ocaramba]*" -register:user -output:opencoverCoverage.xml
 
     if($lastexitcode -ne 0)
       {
@@ -185,7 +184,7 @@ test_script:
     
     .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.UnitTests\bin\Release" "Ocaramba.UnitTests.dll.config" "//appSettings" "browser" "Firefox"
 
-    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Ocaramba.UnitTests\bin\Release\Ocaramba.UnitTests.dll --where:cat=TakingScreehShots --result=myresults.xml`;format=AppVeyor" -filter:"+[Ocaramba]*" -register:user -output:opencoverCoverage.xml
+    & OpenCover.Console.exe -target:nunit3-console.exe -mergeoutput -targetargs:".\Ocaramba.UnitTests\bin\Release\Ocaramba.UnitTests.dll --where:cat=TakingScreehShots --result=myresults.xml`;format=AppVeyor" -filter:"+[Ocaramba]*" -register:user -output:opencoverCoverage.xml
 
     if($lastexitcode -ne 0)
       {
@@ -202,7 +201,7 @@ test_script:
     
     .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.Angular\bin\Release" "Ocaramba.Tests.Angular.dll.config" "//appSettings" "browser" "InternetExplorer"
 
-    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Ocaramba.Tests.Angular\bin\Release\Ocaramba.Tests.Angular.dll --result=myresults.xml`;format=AppVeyor" -filter:"+[Ocaramba]*" -register:user -output:opencoverCoverage.xml
+    & OpenCover.Console.exe -target:nunit3-console.exe -mergeoutput -targetargs:".\Ocaramba.Tests.Angular\bin\Release\Ocaramba.Tests.Angular.dll --result=myresults.xml`;format=AppVeyor" -filter:"+[Ocaramba]*" -register:user -output:opencoverCoverage.xml
 
     if($lastexitcode -ne 0)
       {
@@ -213,7 +212,7 @@ test_script:
     
     .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.Angular\bin\Release" "Ocaramba.Tests.Angular.dll.config" "//appSettings" "browser|PathToInternetExplorerDriverDirectory" "InternetExplorer|C:\Tools\WebDriver"
 
-    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Ocaramba.Tests.Angular\bin\Release\Ocaramba.Tests.Angular.dll --result=myresults.xml`;format=AppVeyor" -filter:"+[Ocaramba]*" -register:user -output:opencoverCoverage.xml
+    & OpenCover.Console.exe -target:nunit3-console.exe -mergeoutput -targetargs:".\Ocaramba.Tests.Angular\bin\Release\Ocaramba.Tests.Angular.dll --result=myresults.xml`;format=AppVeyor" -filter:"+[Ocaramba]*" -register:user -output:opencoverCoverage.xml
 
     if($lastexitcode -ne 0)
       {
@@ -222,7 +221,7 @@ test_script:
       
      .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.Angular\bin\Release" "Ocaramba.Tests.Angular.dll.config" "//appSettings" "browser|PathToChromeDriverDirectory|ChromeBrowserExecutableLocation" "Chrome|C:\Tools\WebDriver|C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
 
-    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Ocaramba.Tests.Angular\bin\Release\Ocaramba.Tests.Angular.dll --result=myresults.xml`;format=AppVeyor" -filter:"+[Ocaramba]*" -register:user -output:opencoverCoverage.xml
+    & OpenCover.Console.exe -target:nunit3-console.exe -mergeoutput -targetargs:".\Ocaramba.Tests.Angular\bin\Release\Ocaramba.Tests.Angular.dll --result=myresults.xml`;format=AppVeyor" -filter:"+[Ocaramba]*" -register:user -output:opencoverCoverage.xml
 
     if($lastexitcode -ne 0)
       {
@@ -231,7 +230,7 @@ test_script:
       
     .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.Angular\bin\Release" "Ocaramba.Tests.Angular.dll.config" "//appSettings" "browser|PathToFirefoxDriverDirectory" "Firefox|C:\Tools\WebDriver"
 
-    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Ocaramba.Tests.Angular\bin\Release\Ocaramba.Tests.Angular.dll --result=myresults.xml`;format=AppVeyor" -filter:"+[Ocaramba]*" -register:user -output:opencoverCoverage.xml
+    & OpenCover.Console.exe -target:nunit3-console.exe -mergeoutput -targetargs:".\Ocaramba.Tests.Angular\bin\Release\Ocaramba.Tests.Angular.dll --result=myresults.xml`;format=AppVeyor" -filter:"+[Ocaramba]*" -register:user -output:opencoverCoverage.xml
 
     if($lastexitcode -ne 0)
       {
@@ -246,7 +245,7 @@ test_script:
 
     echo '********************************************MSTest tests********************************************'
 
-    & $OpenCover -target:vstest.console.exe -mergeoutput -targetargs:"/logger`:Appveyor .\Ocaramba.Tests.MSTest\bin\Release\Ocaramba.Tests.MsTest.dll /Settings`:.\Ocaramba.Tests.MSTest\bin\Release\Runsettings.runsettings" -filter:"+[Ocaramba]*" -register:user -output:opencoverCoverage.xml
+    & OpenCover.Console.exe -target:vstest.console.exe -mergeoutput -targetargs:"/logger`:Appveyor .\Ocaramba.Tests.MSTest\bin\Release\Ocaramba.Tests.MsTest.dll /Settings`:.\Ocaramba.Tests.MSTest\bin\Release\Runsettings.runsettings" -filter:"+[Ocaramba]*" -register:user -output:opencoverCoverage.xml
 
 
     if($lastexitcode -ne 0)
@@ -268,7 +267,7 @@ test_script:
     
     .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release" "Ocaramba.Tests.CloudProviderCrossBrowser.dll.config" "//DriverCapabilities" "build" "Ocaramba.Tests.BrowserStackCrossBrowser$env:appveyor_build_version" $true
     
-    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\Ocaramba.Tests.CloudProviderCrossBrowser.dll --workers=5 --result=myresults.xml`;format=AppVeyor" -filter:"+[Ocaramba]*" -register:user -output:opencoverCoverage.xml
+    & OpenCover.Console.exe -target:nunit3-console.exe -mergeoutput -targetargs:".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\Ocaramba.Tests.CloudProviderCrossBrowser.dll --workers=5 --result=myresults.xml`;format=AppVeyor" -filter:"+[Ocaramba]*" -register:user -output:opencoverCoverage.xml
 
     if($lastexitcode -ne 0)
       {
@@ -342,7 +341,7 @@ test_script:
     
     .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.NUnit\bin\Release\" "Ocaramba.Tests.NUnit.dll.config" "//appSettings" "browser|RemoteWebDriverHub" "RemoteWebDriver|http://localhost:4444/wd/hub" $true
     
-    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Ocaramba.Tests.NUnit\bin\Release\Ocaramba.Tests.NUnit.dll --where (cat==BasicNUnit) --result=myresults.xml`;format=AppVeyor" -filter:"+[Ocaramba]*" -register:user -output:opencoverCoverage.xml
+    & OpenCover.Console.exe -target:nunit3-console.exe -mergeoutput -targetargs:".\Ocaramba.Tests.NUnit\bin\Release\Ocaramba.Tests.NUnit.dll --where (cat==BasicNUnit) --result=myresults.xml`;format=AppVeyor" -filter:"+[Ocaramba]*" -register:user -output:opencoverCoverage.xml
 
     if($lastexitcode -ne 0)
       {
