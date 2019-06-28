@@ -133,25 +133,11 @@ test_script:
 - ps: >-
     echo '********************************************Executing tests********************************************'
     
-    & nunit3-console.exe .\Ocaramba.Tests.Angular\bin\Release\net45\Ocaramba.Tests.Angular.dll .\Ocaramba.Tests.NUnit\bin\Release\net45\Ocaramba.Tests.NUnit.dll 
+    $OpenCover = (Resolve-Path "$ENV:USERPROFILE +.\packages\OpenCover.*\tools\OpenCover.Console.exe").ToString()
 
-      if($lastexitcode -ne 0)
-      {
-       echo 'lastexitcode' $lastexitcode
-      }
-
-    & nunit3-console.exe .\Ocaramba.Tests.Angular\bin\Release\netcoreapp2.2\Ocaramba.Tests.Angular.dll .\Ocaramba.Tests.NUnit\bin\Release\netcoreapp2.2\Ocaramba.Tests.NUnit.dll 
-
-      if($lastexitcode -ne 0)
-      {
-       echo 'lastexitcode' $lastexitcode
-      }
-
-    <#$OpenCover = (Resolve-Path ".\packages\OpenCover.*\tools\OpenCover.Console.exe").ToString()
-
-    echo '********************************************XUnit tests********************************************'
+    <#echo '********************************************XUnit tests********************************************'
     
-    $xunit = (Resolve-Path ".\packages\xunit.runner.console.*\tools\xunit.console.exe").ToString()
+    $xunit = (Resolve-Path "$ENV:USERPROFILE + .\packages\xunit.runner.console.*\tools\xunit.console.exe").ToString()
     
     & $OpenCover -target:"$xunit" -mergeoutput -targetargs:".\Ocaramba.Tests.Xunit\bin\Release\Ocaramba.Tests.Xunit.dll -appveyor -noshadow" -filter:"+[Ocaramba]*" -register:user -output:opencoverCoverage.xml
 
@@ -164,11 +150,11 @@ test_script:
 
     7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Xunit\bin\Release\**\*.html
 
-    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Xunit\bin\Release\*.log
+    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Xunit\bin\Release\*.log#>
     
     echo '********************************************NUnit tests********************************************'
     
-    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Ocaramba.Tests.NUnit\bin\Release\Ocaramba.Tests.NUnit.dll .\Ocaramba.Tests.Angular\bin\Release\Ocaramba.Tests.Angular.dll .\Ocaramba.Tests.Features\bin\Release\Ocaramba.Tests.Features.dll .\Ocaramba.UnitTests\bin\Release\Ocaramba.UnitTests.dll --result=myresults.xml`;format=AppVeyor" -filter:"+[Ocaramba]*" -register:user -output:opencoverCoverage.xml
+    & $OpenCover -target:nunit3-console.exe -mergeoutput -targetargs:".\Ocaramba.Tests.Angular\bin\Release\net45\Ocaramba.Tests.Angular.dll .\Ocaramba.Tests.NUnit\bin\Release\net45\Ocaramba.Tests.NUnit.dll .\Ocaramba.Tests.Angular\bin\Release\netcoreapp2.2\Ocaramba.Tests.Angular.dll .\Ocaramba.Tests.NUnit\bin\Release\netcoreapp2.2\Ocaramba.Tests.NUnit.dll --result=myresults.xml`;format=AppVeyor" -filter:"+[Ocaramba]*" -register:user -output:opencoverCoverage.xml
 
     if($lastexitcode -ne 0)
       {
@@ -179,23 +165,23 @@ test_script:
 
     7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.NUnit\bin\Release\**\*.html
 
-    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.NUnit\bin\Release\*.log
+    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.NUnit\bin\Release\**\*.log
 
 
     7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Angular\bin\Release\**\*.png
 
     7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Angular\bin\Release\**\*.html
 
-    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Angular\bin\Release\*.log
+    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Angular\bin\Release\**\*.log
 
 
     7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Features\bin\Release\**\*.png
 
     7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Features\bin\Release\**\*.html
 
-    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Features\bin\Release\*.log
+    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Features\bin\Release\**\*.log
 
-    echo '********************************************Unit tests for Firefox********************************************'
+    <#echo '********************************************Unit tests for Firefox********************************************'
     
     .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.UnitTests\bin\Release" "Ocaramba.UnitTests.dll.config" "//appSettings" "browser" "Firefox"
 
@@ -388,7 +374,7 @@ test_script:
     
     7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.NUnit\bin\Release\*.err
     
-    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.NUnit\bin\Release\*.out
+    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.NUnit\bin\Release\*.out#>
       
     echo '********************************************Sending coverage test results********************************************'
     
@@ -404,9 +390,9 @@ test_script:
 
     7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\**\*.html
 
-    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\*.log
+    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\**\*.log
     
-    appveyor PushArtifact testresults_$env:appveyor_build_version.zip#>
+    appveyor PushArtifact testresults_$env:appveyor_build_version.zip
 artifacts:
 - path: .\**\Ocaramba.*.nupkg
   name: NuGet

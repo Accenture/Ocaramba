@@ -51,8 +51,12 @@ namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
             int y = iFrame.Location.Y;
             this.Driver.SwitchTo().Frame(0);
             var el = this.Driver.GetElement(this.elelemtInIFrame);
-            //return TakeScreenShot.TakeScreenShotOfElement(x, y, el, folder, name);
-            return "";
+#if net45
+            return TakeScreenShot.TakeScreenShotOfElement(x, y, el, folder, name);
+#endif
+#if netcoreapp2_2
+            return "to_be_implemented_in_netcore";
+#endif
         }
 
         public string TakeScreenShotsOfMenu(string folder, string name)

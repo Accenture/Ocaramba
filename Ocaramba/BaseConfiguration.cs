@@ -37,7 +37,12 @@ namespace Ocaramba
         /// <summary>
         /// The logger
         /// </summary>
+#if net45
         private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
+#endif
+#if netcoreapp2_2
+        private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+#endif
 
         /// <summary>
         /// Gets the Driver.
@@ -61,7 +66,7 @@ namespace Ocaramba
                     return browserType;
                 }
 
-                return BrowserType.None;
+                return BrowserType.Firefox;
             }
         }
 
@@ -299,6 +304,7 @@ namespace Ocaramba
         {
             get
             {
+                return "C:\\SVN\\branch\\master\\Ocaramba - Copy\\Ocaramba.Tests.Angular\\bin\\Debug\\netcoreapp2.2";
                 Logger.Trace(CultureInfo.CurrentCulture, "Path to the directory containing Chrome Driver from App.config '{0}'", ConfigurationManager.AppSettings["PathToChromeDriverDirectory"]);
                 if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["PathToChromeDriverDirectory"]))
                 {
@@ -316,6 +322,7 @@ namespace Ocaramba
         {
             get
             {
+                return "C:\\SVN\\branch\\master\\Ocaramba - Copy\\Ocaramba.Tests.Angular\\bin\\Debug\\netcoreapp2.2";
                 Logger.Trace(CultureInfo.CurrentCulture, "Path to the directory containing Firefox Driver from App.config '{0}'", ConfigurationManager.AppSettings["PathToFirefoxDriverDirectory"]);
                 if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["PathToFirefoxDriverDirectory"]))
                 {

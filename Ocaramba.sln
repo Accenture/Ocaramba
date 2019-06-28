@@ -16,7 +16,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ocaramba.Tests.PageObjects"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ocaramba.Tests.Angular", "Ocaramba.Tests.Angular\Ocaramba.Tests.Angular.csproj", "{C86D2425-E4F9-484D-B4E8-C9E3BE4078B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ocaramba.Tests.NUnit", "Ocaramba.Tests.NUnit\Ocaramba.Tests.NUnit.csproj", "{088A0655-E4BF-4EC9-9755-A3EF2219BCEC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ocaramba.Tests.NUnit", "Ocaramba.Tests.NUnit\Ocaramba.Tests.NUnit.csproj", "{088A0655-E4BF-4EC9-9755-A3EF2219BCEC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ocaramba.UnitTests", "Ocaramba.UnitTests\Ocaramba.UnitTests.csproj", "{4F98F98A-B51C-4138-9383-CC57A0A31E12}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,6 +42,10 @@ Global
 		{088A0655-E4BF-4EC9-9755-A3EF2219BCEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{088A0655-E4BF-4EC9-9755-A3EF2219BCEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{088A0655-E4BF-4EC9-9755-A3EF2219BCEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F98F98A-B51C-4138-9383-CC57A0A31E12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F98F98A-B51C-4138-9383-CC57A0A31E12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F98F98A-B51C-4138-9383-CC57A0A31E12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F98F98A-B51C-4138-9383-CC57A0A31E12}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
