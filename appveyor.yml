@@ -153,14 +153,28 @@ test_script:
     
     echo '********************************************NUnit tests********************************************'
     
-    & OpenCover.Console.exe -target:nunit3-console.exe -mergeoutput -targetargs:".\Ocaramba.Tests.Angular\bin\Release\netcoreapp2.2\Ocaramba.Tests.Angular.dll .\Ocaramba.Tests.NUnit\bin\Release\netcoreapp2.2\Ocaramba.Tests.NUnit.dll --result=myresults.xml`;format=AppVeyor" -filter:"+[Ocaramba]*" -register:user -output:opencoverCoverage.xml
+    dotnet test .\Ocaramba.Tests.Angular\Ocaramba.Tests.Angular.csproj
+
+     if($lastexitcode -ne 0)
+      {
+       echo 'lastexitcode' $lastexitcode
+      }
+
+    dotnet test .\Ocaramba.Tests.NUnit\Ocaramba.Tests.NUnit.csproj
+
+      if($lastexitcode -ne 0)
+      {
+       echo 'lastexitcode' $lastexitcode
+      }
+
+    dotnet test .\Ocaramba.UnitTests\Ocaramba.UnitTests.csproj
 
     if($lastexitcode -ne 0)
       {
        echo 'lastexitcode' $lastexitcode
       }
       
-    & OpenCover.Console.exe -target:nunit3-console.exe -mergeoutput -targetargs:".\Ocaramba.Tests.Angular\bin\Release\net45\Ocaramba.Tests.Angular.dll .\Ocaramba.Tests.NUnit\bin\Release\net45\Ocaramba.Tests.NUnit.dll --result=myresults.xml`;format=AppVeyor" -filter:"+[Ocaramba]*" -register:user -output:opencoverCoverage.xml
+    & nunit3-console.exe .\Ocaramba.Tests.Angular\bin\Release\net45\Ocaramba.Tests.Angular.dll .\Ocaramba.Tests.NUnit\bin\Release\net45\Ocaramba.Tests.NUnit.dll
 
     if($lastexitcode -ne 0)
       {
