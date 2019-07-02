@@ -20,6 +20,8 @@
 //     SOFTWARE.
 // </license>
 
+using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IO;
 #if netcoreapp2_2
 using Microsoft.Extensions.Configuration;
@@ -804,5 +806,22 @@ namespace Ocaramba
                 return false;
             }
         }
+#if  netcoreapp2_2
+        public static NameValueCollection GetNameValueCollectionFromAppsettings(string preferences)
+        {
+            NameValueCollection preferencesCollection = new NameValueCollection();
+            var jsnonSettings = Builder.GetSection(preferences).Get<Dictionary<string, string>>();
+            foreach (var kvp in jsnonSettings)
+            {
+                string value = null;
+                if (kvp.Value != null)
+                    value = kvp.Value.ToString();
+
+                preferencesCollection.Add(kvp.Key.ToString(), value);
+            }
+
+            return preferencesCollection;
+        }
+#endif
     }
 }

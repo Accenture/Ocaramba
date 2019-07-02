@@ -204,9 +204,13 @@ namespace Ocaramba
 
         private FirefoxOptions AddFirefoxArguments(FirefoxOptions option)
         {
+            NameValueCollection firefoxArguments = new NameValueCollection();
 #if net45
-            var firefoxArguments = ConfigurationManager.GetSection("FirefoxArguments") as NameValueCollection;
-
+            firefoxArguments = ConfigurationManager.GetSection("FirefoxArguments") as NameValueCollection;
+#endif
+#if netcoreapp2_2
+            firefoxArguments = BaseConfiguration.GetNameValueCollectionFromAppsettings("FirefoxArguments");
+#endif
             // if there are any arguments
             if (firefoxArguments != null)
             {
@@ -217,7 +221,6 @@ namespace Ocaramba
                     option.AddArgument(firefoxArguments.GetKey(i));
                 }
             }
-#endif
             return option;
         }
 

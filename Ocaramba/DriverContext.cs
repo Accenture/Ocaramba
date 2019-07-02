@@ -202,21 +202,16 @@ namespace Ocaramba
                 options.SetPreference("network.automatic-ntlm-auth.trusted-uris", BaseConfiguration.Host ?? string.Empty);
 
                 // retrieving settings from config file
-                NameValueCollection firefoxPreferences = null;
+                NameValueCollection firefoxPreferences = new NameValueCollection();
                
-                NameValueCollection firefoxExtensions = null;
-                // to do 
+                NameValueCollection firefoxExtensions = new NameValueCollection();
 #if net45
-
                 firefoxPreferences = ConfigurationManager.GetSection("FirefoxPreferences") as NameValueCollection;
-            //    foreach (var k in firefoxPreferencesCollection.AllKeys)
-            //{
-            //    firefoxPreferences.Add(k, firefoxPreferencesCollection[k]);
-            //} 
                 firefoxExtensions = ConfigurationManager.GetSection("FirefoxExtensions") as NameValueCollection;
 #endif
 #if netcoreapp2_2
-                var aa = BaseConfiguration.Builder.GetSection("FirefoxPreferences").Get<Dictionary<string, string>>();
+                firefoxPreferences = BaseConfiguration.GetNameValueCollectionFromAppsettings("FirefoxPreferences");
+                firefoxExtensions = BaseConfiguration.GetNameValueCollectionFromAppsettings("FirefoxExtensions");
 #endif
                 // preference for downloading files
                 options.SetPreference("browser.download.dir", this.DownloadFolder);
@@ -322,6 +317,11 @@ namespace Ocaramba
                 chromeExtensions = ConfigurationManager.GetSection("ChromeExtensions") as NameValueCollection;
                 chromeArguments = ConfigurationManager.GetSection("ChromeArguments") as NameValueCollection;
 #endif
+#if netcoreapp2_2
+                chromePreferences = BaseConfiguration.GetNameValueCollectionFromAppsettings("ChromePreferences");
+                chromeExtensions = BaseConfiguration.GetNameValueCollectionFromAppsettings("ChromeExtensions");
+                chromeArguments = BaseConfiguration.GetNameValueCollectionFromAppsettings("chromeArguments");
+#endif
                 options.AddUserProfilePreference("profile.default_content_settings.popups", 0);
                 options.AddUserProfilePreference("download.default_directory", this.DownloadFolder);
                 options.AddUserProfilePreference("download.prompt_for_download", false);
@@ -417,6 +417,9 @@ namespace Ocaramba
                 NameValueCollection internetExplorerPreferences = null;
 #if net45
                 internetExplorerPreferences = ConfigurationManager.GetSection("InternetExplorerPreferences") as NameValueCollection;
+#endif
+#if netcoreapp2_2
+                internetExplorerPreferences = BaseConfiguration.GetNameValueCollectionFromAppsettings("InternetExplorerPreferences");
 #endif
                 var options = new InternetExplorerOptions
                 {
@@ -535,6 +538,10 @@ namespace Ocaramba
 #if net45
                     driverCapabilitiesConf = ConfigurationManager.GetSection("DriverCapabilities") as NameValueCollection;
                     settings = ConfigurationManager.GetSection("environments/" + this.CrossBrowserEnvironment) as NameValueCollection;
+#endif
+#if netcoreapp2_2
+                    driverCapabilitiesConf = BaseConfiguration.GetNameValueCollectionFromAppsettings("DriverCapabilities");
+                    // to do settings
 #endif
                     var browserType = this.GetBrowserTypeForRemoteDriver(settings);
 
