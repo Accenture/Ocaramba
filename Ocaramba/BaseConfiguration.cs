@@ -20,6 +20,10 @@
 //     SOFTWARE.
 // </license>
 
+using System.IO;
+#if netcoreapp2_2
+using Microsoft.Extensions.Configuration;
+#endif
 namespace Ocaramba
 {
     using System;
@@ -34,6 +38,8 @@ namespace Ocaramba
     /// </summary>
     public static class BaseConfiguration
     {
+
+
         /// <summary>
         /// The logger
         /// </summary>
@@ -41,6 +47,9 @@ namespace Ocaramba
         private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
 #endif
 #if netcoreapp2_2
+        public static readonly IConfigurationRoot Builder = new ConfigurationBuilder()
+            .AddJsonFile("appsettings.json", true, true)
+            .Build();
         private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
 #endif
 
@@ -57,15 +66,22 @@ namespace Ocaramba
         {
             get
             {
-                Logger.Trace(CultureInfo.CurrentCulture, "Browser value from App.config '{0}'", ConfigurationManager.AppSettings["browser"]);
                 BrowserType browserType;
-                bool supportedBrowser = Enum.TryParse(ConfigurationManager.AppSettings["browser"], out browserType);
+                bool supportedBrowser = false;
+                string setting = null;
+#if netcoreapp2_2
+                setting = Builder["appSettings:browser"];
+#endif
+#if net45
+                setting = ConfigurationManager.AppSettings["browser"];
 
+#endif
+                Logger.Trace(CultureInfo.CurrentCulture, "Browser value from AppConfig '{0}'", setting);
+                supportedBrowser = Enum.TryParse(setting, out browserType);
                 if (supportedBrowser)
                 {
                     return browserType;
                 }
-
                 return BrowserType.None;
             }
         }
@@ -77,10 +93,19 @@ namespace Ocaramba
         {
             get
             {
-                Logger.Trace(CultureInfo.CurrentCulture, "Driver Capabilities value from App.config '{0}'", ConfigurationManager.AppSettings["DriverCapabilities"]);
-                BrowserType browserType;
-                bool supportedBrowser = Enum.TryParse(ConfigurationManager.AppSettings["DriverCapabilities"], out browserType);
+                BrowserType browserType = BrowserType.None;
+                bool supportedBrowser = false;
+                string setting = null;
+#if net45
+                setting = ConfigurationManager.AppSettings["DriverCapabilities"];
+#endif
+#if netcoreapp2_2
+                setting = Builder["appSettings:DriverCapabilities"];
+#endif
 
+                Logger.Trace(CultureInfo.CurrentCulture, "Driver Capabilities value from App.config '{0}'", setting);
+
+                supportedBrowser = Enum.TryParse(setting, out browserType);
                 if (supportedBrowser)
                 {
                     return browserType;
@@ -97,13 +122,19 @@ namespace Ocaramba
         {
             get
             {
-                Logger.Trace(CultureInfo.CurrentCulture, "Gets the path to firefox profile from App.config '{0}'", ConfigurationManager.AppSettings["PathToFirefoxProfile"]);
-                if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["PathToFirefoxProfile"]))
+                string setting = null;
+#if net45
+                setting = ConfigurationManager.AppSettings["PathToFirefoxProfile"];
+#endif
+#if netcoreapp2_2
+                setting = Builder["appSettings:DriverCapabilities"];
+#endif
+                Logger.Trace(CultureInfo.CurrentCulture, "Gets the path to firefox profile from App.config '{0}'", setting);
+                if (string.IsNullOrEmpty(setting))
                 {
                     return string.Empty;
                 }
-
-                return ConfigurationManager.AppSettings["PathToFirefoxProfile"];
+                return setting;
             }
         }
 
@@ -112,7 +143,15 @@ namespace Ocaramba
         /// </summary>
         public static string Protocol
         {
-            get { return ConfigurationManager.AppSettings["protocol"]; }
+            get
+            {
+#if net45
+                return ConfigurationManager.AppSettings["protocol"];
+#endif
+#if  netcoreapp2_2
+                return Builder["appSettings:protocol"];          
+#endif
+            }
         }
 
         /// <summary>
@@ -120,7 +159,15 @@ namespace Ocaramba
         /// </summary>
         public static string Host
         {
-            get { return ConfigurationManager.AppSettings["host"]; }
+            get
+            {
+#if net45
+                return ConfigurationManager.AppSettings["host"];
+#endif
+#if  netcoreapp2_2
+                return Builder["appSettings:host"];
+#endif
+            }
         }
 
         /// <summary>
@@ -128,7 +175,15 @@ namespace Ocaramba
         /// </summary>
         public static string Url
         {
-            get { return ConfigurationManager.AppSettings["url"]; }
+            get
+            {
+#if net45
+                return ConfigurationManager.AppSettings["url"];
+#endif
+#if netcoreapp2_2
+                return Builder["appSettings:url"];
+#endif
+            }
         }
 
         /// <summary>
@@ -136,7 +191,15 @@ namespace Ocaramba
         /// </summary>
         public static string Proxy
         {
-            get { return ConfigurationManager.AppSettings["proxy"]; }
+            get
+            {
+#if net45
+                return ConfigurationManager.AppSettings["proxy"];
+#endif
+#if netcoreapp2_2
+                return Builder["appSettings:proxy"];
+#endif
+            }
         }
 
         /// <summary>
@@ -144,7 +207,15 @@ namespace Ocaramba
         /// </summary>
         public static string Username
         {
-            get { return ConfigurationManager.AppSettings["username"]; }
+            get
+            {
+#if net45
+                return ConfigurationManager.AppSettings["username"];
+#endif
+#if netcoreapp2_2
+                return Builder["appSettings:username"];
+#endif
+            }
         }
 
         /// <summary>
@@ -152,7 +223,15 @@ namespace Ocaramba
         /// </summary>
         public static string Password
         {
-            get { return ConfigurationManager.AppSettings["password"]; }
+            get
+            {
+#if net45
+                return ConfigurationManager.AppSettings["password"];
+#endif
+#if netcoreapp2_2
+                return Builder["appSettings:password"];
+#endif
+            }
         }
 
         /// <summary>
@@ -163,7 +242,15 @@ namespace Ocaramba
         /// </code></example>
         public static double MediumTimeout
         {
-            get { return Convert.ToDouble(ConfigurationManager.AppSettings["mediumTimeout"], CultureInfo.CurrentCulture); }
+            get
+            {
+#if net45
+                return Convert.ToDouble(ConfigurationManager.AppSettings["mediumTimeout"], CultureInfo.CurrentCulture);
+#endif
+#if netcoreapp2_2
+                return Convert.ToDouble(Builder["appSettings:mediumTimeout"]);
+#endif
+            }
         }
 
         /// <summary>
@@ -174,7 +261,15 @@ namespace Ocaramba
         /// </code></example>
         public static double LongTimeout
         {
-            get { return Convert.ToDouble(ConfigurationManager.AppSettings["longTimeout"], CultureInfo.CurrentCulture); }
+            get
+            {
+#if net45
+                return Convert.ToDouble(ConfigurationManager.AppSettings["longTimeout"], CultureInfo.CurrentCulture);
+#endif
+#if netcoreapp2_2
+                return Convert.ToDouble(Builder["appSettings:longTimeout"]);
+#endif
+            }
         }
 
         /// <summary>
@@ -185,7 +280,15 @@ namespace Ocaramba
         /// </code></example>
         public static double ShortTimeout
         {
-            get { return Convert.ToDouble(ConfigurationManager.AppSettings["shortTimeout"], CultureInfo.CurrentCulture); }
+            get
+            {
+#if net45
+                return Convert.ToDouble(ConfigurationManager.AppSettings["shortTimeout"], CultureInfo.CurrentCulture);
+#endif
+#if netcoreapp2_2
+                return Convert.ToDouble(Builder["appSettings:shortTimeout"]);
+#endif
+            }
         }
 
         /// <summary>
@@ -193,7 +296,15 @@ namespace Ocaramba
         /// </summary>
         public static double ImplicitlyWaitMilliseconds
         {
-            get { return Convert.ToDouble(ConfigurationManager.AppSettings["ImplicitlyWaitMilliseconds"], CultureInfo.CurrentCulture); }
+            get
+            {
+#if net45
+                return Convert.ToDouble(ConfigurationManager.AppSettings["ImplicitlyWaitMilliseconds"], CultureInfo.CurrentCulture);
+#endif
+#if netcoreapp2_2
+                return Convert.ToDouble(Builder["appSettings:ImplicitlyWaitMilliseconds"]);
+#endif
+            }
         }
 
         /// <summary>
@@ -203,13 +314,20 @@ namespace Ocaramba
         {
             get
             {
-                Logger.Trace(CultureInfo.CurrentCulture, "Gets the path and file name of the Firefox browser executable from App.config '{0}'", ConfigurationManager.AppSettings["FirefoxBrowserExecutableLocation"]);
-                if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["FirefoxBrowserExecutableLocation"]))
+                string setting = null;
+#if net45
+                setting = ConfigurationManager.AppSettings["FirefoxBrowserExecutableLocation"];
+#endif
+#if netcoreapp2_2
+                setting = Builder["appSettings:FirefoxBrowserExecutableLocation"];
+#endif
+                Logger.Trace(CultureInfo.CurrentCulture, "Gets the path and file name of the Firefox browser executable from App.config '{0}'", setting);
+                if (string.IsNullOrEmpty(setting))
                 {
                     return string.Empty;
                 }
 
-                return ConfigurationManager.AppSettings["FirefoxBrowserExecutableLocation"];
+                return setting;
             }
         }
 
@@ -220,6 +338,7 @@ namespace Ocaramba
         {
             get
             {
+#if net45
                 Logger.Trace(CultureInfo.CurrentCulture, "Gets the path and file name of the Chrome browser executable from App.config '{0}'", ConfigurationManager.AppSettings["FirefoxBrowserExecutableLocation"]);
                 if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["ChromeBrowserExecutableLocation"]))
                 {
@@ -227,6 +346,10 @@ namespace Ocaramba
                 }
 
                 return ConfigurationManager.AppSettings["ChromeBrowserExecutableLocation"];
+#endif
+#if netcoreapp2_2
+                return Builder["appSettings:ChromeBrowserExecutableLocation"];
+#endif
             }
         }
 
@@ -237,7 +360,12 @@ namespace Ocaramba
         {
             get
             {
+#if  net45
                 return new Uri(ConfigurationManager.AppSettings["RemoteWebDriverHub"]);
+#endif
+#if netcoreapp2_2
+                return new Uri(Builder["appSettings:RemoteWebDriverHub"]);
+#endif
             }
         }
 
@@ -248,6 +376,7 @@ namespace Ocaramba
         {
             get
             {
+#if net45
                 Logger.Trace(CultureInfo.CurrentCulture, "Full Desktop Screen Shot Enabled value from App.config '{0}'", ConfigurationManager.AppSettings["FullDesktopScreenShotEnabled"]);
                 if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["FullDesktopScreenShotEnabled"]))
                 {
@@ -258,7 +387,7 @@ namespace Ocaramba
                 {
                     return true;
                 }
-
+#endif
                 return false;
             }
         }
@@ -270,6 +399,7 @@ namespace Ocaramba
         {
             get
             {
+#if net45
                 Logger.Trace(CultureInfo.CurrentCulture, "Path to the directory containing Internet Explorer Driver from App.config '{0}'", ConfigurationManager.AppSettings["PathToInternetExplorerDriverDirectory"]);
                 if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["PathToInternetExplorerDriverDirectory"]))
                 {
@@ -277,6 +407,10 @@ namespace Ocaramba
                 }
 
                 return ConfigurationManager.AppSettings["PathToInternetExplorerDriverDirectory"];
+#endif
+#if netcoreapp2_2
+                return Builder["appSettings:PathToInternetExplorerDriverDirectory"];
+#endif
             }
         }
 
@@ -287,6 +421,7 @@ namespace Ocaramba
         {
             get
             {
+#if net45
                 Logger.Trace(CultureInfo.CurrentCulture, "Path to the directory containing Edge Driver from App.config '{0}'", ConfigurationManager.AppSettings["PathToEdgeDriverDirectory"]);
                 if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["PathToEdgeDriverDirectory"]))
                 {
@@ -294,6 +429,10 @@ namespace Ocaramba
                 }
 
                 return ConfigurationManager.AppSettings["PathToEdgeDriverDirectory"];
+#endif
+#if netcoreapp2_2
+                return Builder["appSettings:PathToEdgeDriverDirectory"];
+#endif
             }
         }
 
@@ -304,6 +443,7 @@ namespace Ocaramba
         {
             get
             {
+#if net45
                 Logger.Trace(CultureInfo.CurrentCulture, "Path to the directory containing Chrome Driver from App.config '{0}'", ConfigurationManager.AppSettings["PathToChromeDriverDirectory"]);
                 if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["PathToChromeDriverDirectory"]))
                 {
@@ -311,6 +451,10 @@ namespace Ocaramba
                 }
 
                 return ConfigurationManager.AppSettings["PathToChromeDriverDirectory"];
+#endif
+#if netcoreapp2_2
+                return Builder["appSettings:PathToChromeDriverDirectory"];
+#endif
             }
         }
 
@@ -321,6 +465,9 @@ namespace Ocaramba
         {
             get
             {
+#if net45
+                
+
                 Logger.Trace(CultureInfo.CurrentCulture, "Path to the directory containing Firefox Driver from App.config '{0}'", ConfigurationManager.AppSettings["PathToFirefoxDriverDirectory"]);
                 if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["PathToFirefoxDriverDirectory"]))
                 {
@@ -328,6 +475,10 @@ namespace Ocaramba
                 }
 
                 return ConfigurationManager.AppSettings["PathToFirefoxDriverDirectory"];
+#endif
+#if netcoreapp2_2
+                return Builder["appSettings:PathToFirefoxDriverDirectory"];
+#endif
             }
         }
 
@@ -338,6 +489,7 @@ namespace Ocaramba
         {
             get
             {
+#if net45
                 Logger.Trace(CultureInfo.CurrentCulture, "JavaScript error logging value from App.config '{0}'", ConfigurationManager.AppSettings["JavaScriptErrorLogging"]);
                 if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["JavaScriptErrorLogging"]))
                 {
@@ -348,7 +500,7 @@ namespace Ocaramba
                 {
                     return true;
                 }
-
+#endif
                 return false;
             }
         }
@@ -360,6 +512,7 @@ namespace Ocaramba
         {
             get
             {
+#if net45
                 Logger.Trace(CultureInfo.CurrentCulture, "JavaScript error logging value from App.config '{0}'", ConfigurationManager.AppSettings["JavaScriptErrorTypes"]);
                 if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["JavaScriptErrorTypes"]))
                 {
@@ -378,6 +531,21 @@ namespace Ocaramba
                 }
 
                 return new Collection<string>(ConfigurationManager.AppSettings["JavaScriptErrorTypes"].Split(new char[] { ',' }));
+#endif
+#if netcoreapp2_2
+                return new Collection<string>
+                {
+                    "SyntaxError",
+                    "EvalError",
+                    "ReferenceError",
+                    "RangeError",
+                    "TypeError",
+                    "URIError",
+                    "Refused to display",
+                    "Internal Server Error",
+                    "Cannot read property"
+                };
+#endif
             }
         }
 
@@ -388,6 +556,7 @@ namespace Ocaramba
         {
             get
             {
+#if net45
                 Logger.Trace(CultureInfo.CurrentCulture, "Firefox Use Legacy Implementation Enabled value from App.config '{0}'", ConfigurationManager.AppSettings["FirefoxUseLegacyImplementation"]);
                 if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["FirefoxUseLegacyImplementation"]))
                 {
@@ -398,7 +567,7 @@ namespace Ocaramba
                 {
                     return true;
                 }
-
+#endif
                 return false;
             }
         }
@@ -410,6 +579,7 @@ namespace Ocaramba
         {
             get
             {
+#if net45
                 Logger.Trace(CultureInfo.CurrentCulture, "Selenium Screen Shot Enabled value from App.config '{0}'", ConfigurationManager.AppSettings["SeleniumScreenShotEnabled"]);
                 if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["SeleniumScreenShotEnabled"]))
                 {
@@ -420,7 +590,7 @@ namespace Ocaramba
                 {
                     return true;
                 }
-
+#endif
                 return false;
             }
         }
@@ -432,6 +602,7 @@ namespace Ocaramba
         {
             get
             {
+#if net45
                 Logger.Trace(CultureInfo.CurrentCulture, "Enable EventFiringWebDriver from App.config '{0}'", ConfigurationManager.AppSettings["Enable EventFiringWebDriver"]);
                 if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["EnableEventFiringWebDriver"]))
                 {
@@ -442,7 +613,7 @@ namespace Ocaramba
                 {
                     return true;
                 }
-
+#endif
                 return false;
             }
         }
@@ -454,6 +625,7 @@ namespace Ocaramba
         {
             get
             {
+#if net45
                 Logger.Trace(CultureInfo.CurrentCulture, "Use Current Directory value from App.config '{0}'", ConfigurationManager.AppSettings["UseCurrentDirectory"]);
                 if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["UseCurrentDirectory"]))
                 {
@@ -464,7 +636,7 @@ namespace Ocaramba
                 {
                     return true;
                 }
-
+#endif
                 return false;
             }
         }
@@ -479,6 +651,7 @@ namespace Ocaramba
         {
             get
             {
+#if net45
                 Logger.Trace(CultureInfo.CurrentCulture, "Get Page Source Enabled value from App.config '{0}'", ConfigurationManager.AppSettings["GetPageSourceEnabled"]);
                 if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["GetPageSourceEnabled"]))
                 {
@@ -489,7 +662,7 @@ namespace Ocaramba
                 {
                     return true;
                 }
-
+#endif
                 return false;
             }
         }
@@ -499,7 +672,15 @@ namespace Ocaramba
         /// </summary>
         public static string DownloadFolder
         {
-            get { return ConfigurationManager.AppSettings["DownloadFolder"]; }
+            get
+            {
+#if net45
+                return ConfigurationManager.AppSettings["DownloadFolder"];
+#endif
+#if netcoreapp2_2
+                return Builder["appSettings:DownloadFolder"];
+#endif
+            }
         }
 
         /// <summary>
@@ -507,7 +688,15 @@ namespace Ocaramba
         /// </summary>
         public static string ScreenShotFolder
         {
-            get { return ConfigurationManager.AppSettings["ScreenShotFolder"]; }
+            get
+            {
+#if net45
+                return ConfigurationManager.AppSettings["ScreenShotFolder"];
+#endif
+#if netcoreapp2_2
+                return Builder["appSettings:ScreenShotFolder"];
+#endif
+            }
         }
 
         /// <summary>
@@ -515,7 +704,15 @@ namespace Ocaramba
         /// </summary>
         public static string PageSourceFolder
         {
-            get { return ConfigurationManager.AppSettings["PageSourceFolder"]; }
+            get
+            {
+#if net45
+                return ConfigurationManager.AppSettings["PageSourceFolder"];
+#endif
+#if netcoreapp2_2
+                return Builder["appSettings:PageSourceFolder"];
+#endif
+            }
         }
 
         /// <summary>
@@ -560,17 +757,23 @@ namespace Ocaramba
         {
             get
             {
-                Logger.Trace(CultureInfo.CurrentCulture, "Angular synchronization Enabled value from App.config '{0}'", ConfigurationManager.AppSettings["SynchronizationWithAngularEnabled"]);
-                if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["SynchronizationWithAngularEnabled"]))
+                string setting = null;
+#if net45
+                setting = ConfigurationManager.AppSettings["SynchronizationWithAngularEnabled"];
+#endif
+#if  netcoreapp2_2
+                setting = Builder["appSettings:SynchronizationWithAngularEnabled"];
+#endif
+                Logger.Trace(CultureInfo.CurrentCulture, "Angular synchronization Enabled value from App.config '{0}'", setting);
+                if (string.IsNullOrEmpty(setting))
                 {
                     return false;
                 }
 
-                if (ConfigurationManager.AppSettings["SynchronizationWithAngularEnabled"].ToLower(CultureInfo.CurrentCulture).Equals("true"))
+                if (setting.ToLower(CultureInfo.CurrentCulture).Equals("true"))
                 {
                     return true;
                 }
-
                 return false;
             }
         }

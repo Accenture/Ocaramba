@@ -20,6 +20,11 @@
 //     SOFTWARE.
 // </license>
 
+using System.Collections.Generic;
+#if netcoreapp2_2
+using Microsoft.Extensions.Configuration;
+#endif
+
 namespace Ocaramba
 {
     using System;
@@ -192,9 +197,22 @@ namespace Ocaramba
                 options.SetPreference("network.automatic-ntlm-auth.trusted-uris", BaseConfiguration.Host ?? string.Empty);
 
                 // retrieving settings from config file
-                var firefoxPreferences = ConfigurationManager.GetSection("FirefoxPreferences") as NameValueCollection;
-                var firefoxExtensions = ConfigurationManager.GetSection("FirefoxExtensions") as NameValueCollection;
+                NameValueCollection firefoxPreferences = null;
+               
+                NameValueCollection firefoxExtensions = null;
+                // to do 
+#if net45
 
+                firefoxPreferences = ConfigurationManager.GetSection("FirefoxPreferences") as NameValueCollection;
+            //    foreach (var k in firefoxPreferencesCollection.AllKeys)
+            //{
+            //    firefoxPreferences.Add(k, firefoxPreferencesCollection[k]);
+            //} 
+                firefoxExtensions = ConfigurationManager.GetSection("FirefoxExtensions") as NameValueCollection;
+#endif
+#if netcoreapp2_2
+                var aa = BaseConfiguration.Builder.GetSection("FirefoxPreferences").Get<Dictionary<string, string>>();
+#endif
                 // preference for downloading files
                 options.SetPreference("browser.download.dir", this.DownloadFolder);
                 options.SetPreference("browser.download.folderList", 2);
@@ -291,10 +309,14 @@ namespace Ocaramba
                 ChromeOptions options = new ChromeOptions();
 
                 // retrieving settings from config file
-                var chromePreferences = ConfigurationManager.GetSection("ChromePreferences") as NameValueCollection;
-                var chromeExtensions = ConfigurationManager.GetSection("ChromeExtensions") as NameValueCollection;
-                var chromeArguments = ConfigurationManager.GetSection("ChromeArguments") as NameValueCollection;
-
+                NameValueCollection chromePreferences = null;
+                NameValueCollection chromeExtensions = null;
+                NameValueCollection chromeArguments = null;
+#if net45
+                chromePreferences = ConfigurationManager.GetSection("ChromePreferences") as NameValueCollection;
+                chromeExtensions = ConfigurationManager.GetSection("ChromeExtensions") as NameValueCollection;
+                chromeArguments = ConfigurationManager.GetSection("ChromeArguments") as NameValueCollection;
+#endif
                 options.AddUserProfilePreference("profile.default_content_settings.popups", 0);
                 options.AddUserProfilePreference("download.default_directory", this.DownloadFolder);
                 options.AddUserProfilePreference("download.prompt_for_download", false);
@@ -387,7 +409,10 @@ namespace Ocaramba
             get
             {
                 // retrieving settings from config file
-                var internetExplorerPreferences = ConfigurationManager.GetSection("InternetExplorerPreferences") as NameValueCollection;
+                NameValueCollection internetExplorerPreferences = null;
+#if net45
+                internetExplorerPreferences = ConfigurationManager.GetSection("InternetExplorerPreferences") as NameValueCollection;
+#endif
                 var options = new InternetExplorerOptions
                 {
                     EnsureCleanSession = true,
@@ -500,8 +525,12 @@ namespace Ocaramba
                     this.CheckIfProxySetForSafari();
                     break;
                 case BrowserType.RemoteWebDriver:
-                    var driverCapabilitiesConf = ConfigurationManager.GetSection("DriverCapabilities") as NameValueCollection;
-                    NameValueCollection settings = ConfigurationManager.GetSection("environments/" + this.CrossBrowserEnvironment) as NameValueCollection;
+                    NameValueCollection driverCapabilitiesConf = null;
+                    NameValueCollection settings = null;
+#if net45
+                    driverCapabilitiesConf = ConfigurationManager.GetSection("DriverCapabilities") as NameValueCollection;
+                    settings = ConfigurationManager.GetSection("environments/" + this.CrossBrowserEnvironment) as NameValueCollection;
+#endif
                     var browserType = this.GetBrowserTypeForRemoteDriver(settings);
 
                     switch (browserType)
