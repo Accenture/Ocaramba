@@ -27,6 +27,9 @@ namespace Ocaramba.Tests.NUnit
     using global::NUnit.Framework;
     using Ocaramba;
     using Ocaramba.Helpers;
+#if netcoreapp2_2
+    using Microsoft.Extensions.Configuration;
+#endif
 
     /// <summary>
     /// SeleniumConfiguration that consume app.config file
@@ -45,12 +48,19 @@ namespace Ocaramba.Tests.NUnit
         {
             get
             {
+                string setting = null;
+#if net45
+                setting = ConfigurationManager.AppSettings["DataDrivenFile"];
+#endif
+#if netcoreapp2_2
+                setting = BaseConfiguration.Builder["appSettings:DataDrivenFile"];
+#endif
                 if (BaseConfiguration.UseCurrentDirectory)
                 {
-                    return Path.Combine(CurrentDirectory + ConfigurationManager.AppSettings["DataDrivenFile"]);
+                    return Path.Combine(CurrentDirectory + setting);
                 }
 
-                return ConfigurationManager.AppSettings["DataDrivenFile"];
+                return setting;
             }
         }
 
@@ -64,12 +74,19 @@ namespace Ocaramba.Tests.NUnit
         {
             get
             {
+                string setting = null;
+#if net45
+                setting = ConfigurationManager.AppSettings["DataDrivenFileXlsx"];
+#endif
+#if netcoreapp2_2
+                setting = BaseConfiguration.Builder["appSettings:DataDrivenFileXlsx"];
+#endif
                 if (BaseConfiguration.UseCurrentDirectory)
                 {
-                    return Path.Combine(CurrentDirectory + ConfigurationManager.AppSettings["DataDrivenFileXlsx"]);
+                    return Path.Combine(CurrentDirectory + setting);
                 }
 
-                return ConfigurationManager.AppSettings["DataDrivenFileXlsx"];
+                return setting;
             }
         }
 
@@ -78,7 +95,17 @@ namespace Ocaramba.Tests.NUnit
         /// </summary>
         public static string DownloadFolderPath
         {
-            get { return FilesHelper.GetFolder(ConfigurationManager.AppSettings["DownloadFolder"], CurrentDirectory); }
+            get
+            {
+                string setting = null;
+#if net45
+                setting = ConfigurationManager.AppSettings["DownloadFolder"];
+#endif
+#if netcoreapp2_2
+                setting = BaseConfiguration.Builder["appSettings:DownloadFolder"];
+#endif
+                return FilesHelper.GetFolder(setting, CurrentDirectory);
+            }
         }
     }
 }

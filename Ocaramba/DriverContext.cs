@@ -533,15 +533,15 @@ namespace Ocaramba
                     this.CheckIfProxySetForSafari();
                     break;
                 case BrowserType.RemoteWebDriver:
-                    NameValueCollection driverCapabilitiesConf = null;
-                    NameValueCollection settings = null;
+                    NameValueCollection driverCapabilitiesConf = new NameValueCollection();
+                    NameValueCollection settings = new NameValueCollection();
 #if net45
                     driverCapabilitiesConf = ConfigurationManager.GetSection("DriverCapabilities") as NameValueCollection;
                     settings = ConfigurationManager.GetSection("environments/" + this.CrossBrowserEnvironment) as NameValueCollection;
 #endif
 #if netcoreapp2_2
                     driverCapabilitiesConf = BaseConfiguration.GetNameValueCollectionFromAppsettings("DriverCapabilities");
-                    // to do settings
+                    settings = BaseConfiguration.GetNameValueCollectionFromAppsettings("environments:" + this.CrossBrowserEnvironment);
 #endif
                     var browserType = this.GetBrowserTypeForRemoteDriver(settings);
 

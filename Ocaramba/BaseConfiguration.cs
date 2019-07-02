@@ -22,7 +22,6 @@
 
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.IO;
 #if netcoreapp2_2
 using Microsoft.Extensions.Configuration;
 #endif
@@ -811,6 +810,11 @@ namespace Ocaramba
         {
             NameValueCollection preferencesCollection = new NameValueCollection();
             var jsnonSettings = Builder.GetSection(preferences).Get<Dictionary<string, string>>();
+            if (jsnonSettings == null)
+            {
+                return preferencesCollection;
+            }
+
             foreach (var kvp in jsnonSettings)
             {
                 string value = null;
