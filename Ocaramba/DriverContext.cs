@@ -52,7 +52,12 @@ namespace Ocaramba
     [SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable", Justification = "Driver is disposed on test end")]
     public partial class DriverContext
     {
-        private static readonly NLog.Logger Logger = LogManager.GetLogger("DRIVER");
+#if net45
+        private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
+#endif
+#if netcoreapp2_2
+        private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+#endif
         private readonly Collection<ErrorDetail> verifyMessages = new Collection<ErrorDetail>();
 
         /// <summary>

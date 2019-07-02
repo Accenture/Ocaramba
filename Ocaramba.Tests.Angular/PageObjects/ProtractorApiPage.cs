@@ -1,15 +1,18 @@
-﻿using Ocaramba;
-using Ocaramba.Extensions;
+﻿using Ocaramba.Extensions;
 using Ocaramba.Types;
 using Ocaramba.Tests.PageObjects;
+using NLog;
 
 namespace Ocaramba.Tests.Angular.PageObjects
 {
-    using NLog;
-
     public class ProtractorApiPage : ProjectPageBase
     {
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+#if net45
+        private readonly NLog.Logger logger = LogManager.GetCurrentClassLogger();
+#endif
+#if netcoreapp2_2
+        private readonly NLog.Logger logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+#endif
 
         /// <summary>
         /// Locators for elements

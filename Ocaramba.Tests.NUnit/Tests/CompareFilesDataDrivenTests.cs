@@ -20,11 +20,12 @@
 //     SOFTWARE.
 // </license>
 
+using NLog;
+
 namespace Ocaramba.Tests.NUnit.Tests
 {
     using System.IO;
     using global::NUnit.Framework;
-    using NLog;
     using Ocaramba.Tests.NUnit.DataDriven;
 
     [TestFixture]

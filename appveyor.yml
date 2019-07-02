@@ -153,21 +153,21 @@ test_script:
     
     echo '********************************************NUnit tests********************************************'
     
-    dotnet test .\Ocaramba.Tests.Angular\Ocaramba.Tests.Angular.csproj
+    dotnet test .\Ocaramba.Tests.Angular\Ocaramba.Tests.Angular.csproj --test-adapter-path:. --logger:Appveyor
 
      if($lastexitcode -ne 0)
       {
        echo 'lastexitcode' $lastexitcode
       }
 
-    dotnet test .\Ocaramba.Tests.NUnit\Ocaramba.Tests.NUnit.csproj
+    dotnet test .\Ocaramba.Tests.NUnit\Ocaramba.Tests.NUnit.csproj --test-adapter-path:. --logger:Appveyor
 
       if($lastexitcode -ne 0)
       {
        echo 'lastexitcode' $lastexitcode
       }
 
-    dotnet test .\Ocaramba.UnitTests\Ocaramba.UnitTests.csproj
+    dotnet test .\Ocaramba.UnitTests\Ocaramba.UnitTests.csproj --test-adapter-path:. --logger:Appveyor
 
     if($lastexitcode -ne 0)
       {
