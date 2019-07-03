@@ -23,6 +23,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ocaramba.Tests.CloudProviderCrossBrowser", "Ocaramba.Tests.CloudProviderCrossBrowser\Ocaramba.Tests.CloudProviderCrossBrowser.csproj", "{85FA1DBA-1EF6-4336-BD68-24E25B6111D0}"
 EndProject
 Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Ocaramba.Documentation", "Ocaramba.Documentation\Ocaramba.Documentation.shfbproj", "{B0B045E8-F54F-43AD-BFF9-8F2935D4653E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4F98F98A-B51C-4138-9383-CC57A0A31E12} = {4F98F98A-B51C-4138-9383-CC57A0A31E12}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
