@@ -6,6 +6,8 @@
   
   <ItemGroup>
     <PackageReference Include="Appveyor.TestLogger" Version="2.0.0" />
+    <PackageReference Include="EWSoftware.SHFB" Version="2019.6.24" />
+    <PackageReference Include="EWSoftware.SHFB.NETFramework" Version="4.8.0" />
     <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="7.14.0.2" />
     <PackageReference Include="NUnit" Version="3.12.0" />
     <PackageReference Include="NUnit.Runners" Version="3.10.0" />

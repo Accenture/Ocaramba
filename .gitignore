@@ -5,3 +5,5 @@
 /**/obj/**/*.*
 /packages/**/*.*
 /.vs/config/applicationhost.config
+/Ocaramba.Documentation/Help
+/Ocaramba/Ocaramba.xml
