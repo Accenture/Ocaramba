@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-  <SHFBROOT Condition=" '$(SHFBROOT)' == '' ">C:\Users\appveyor\.nuget\packages\ewsoftware.shfb\2019.6.24\tools</SHFBROOT>
+    <SHFBROOT Condition=" '$(SHFBROOT)' == '' ">C:\Users\appveyor\.nuget\packages\ewsoftware.shfb\2019.6.24\tools</SHFBROOT>
     <!-- The configuration and platform will be used to determine which assemblies to include from solution and
 				 project documentation sources -->
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -55,13 +55,13 @@
     <SdkLinkTarget>Blank</SdkLinkTarget>
     <MissingTags>Summary, Parameter, Returns, AutoDocumentCtors, TypeParameter, AutoDocumentDispose</MissingTags>
     <DocumentationSources>
-      <DocumentationSource sourceFile="..\Ocaramba\Ocaramba.csproj" xmlns="" />
+      <DocumentationSource sourceFile="..\Ocaramba\Ocaramba.csproj" />
     </DocumentationSources>
     <VisibleItems>InheritedMembers, InheritedFrameworkMembers, Protected, ProtectedInternalAsProtected, NonBrowsable</VisibleItems>
     <ApiFilter>
       <Filter entryType="Namespace" fullName="Ocaramba.Logger" isExposed="False" xmlns="">
-  <Filter entryType="Class" fullName="Ocaramba.Logger.TestLogger" filterName="TestLogger" isExposed="True" />
-</Filter>
+        <Filter entryType="Class" fullName="Ocaramba.Logger.TestLogger" filterName="TestLogger" isExposed="True" />
+      </Filter>
     </ApiFilter>
     <PlugInConfigurations>
       <PlugInConfig id="Additional Reference Links" enabled="True" xmlns="">
