@@ -91,6 +91,11 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|Win32' ">
   </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="EWSoftware.SHFB" Version="2019.6.24" />
+    <PackageReference Include="EWSoftware.SHFB.NETCore" Version="4.5.1" />
+    <PackageReference Include="EWSoftware.SHFB.NETFramework" Version="4.8.0" />
+  </ItemGroup>
   <ItemGroup>
     <Folder Include="Content" />
     <Folder Include="Content\VersionHistory" />
