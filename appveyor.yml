@@ -65,7 +65,7 @@ environment:
 before_build:
  - dotnet tool install coveralls.net --tool-path packages
  - dotnet --version
- - NuGet.exe restore
+ - dotnet restore
 
 build_script:
  - dotnet build --configuration Release /verbosity:normal "Ocaramba.sln"
@@ -424,4 +424,4 @@ deploy:
     branch: master
     appveyor_repo_tag: true
 on_finish:
-  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+  - ps: #$blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))

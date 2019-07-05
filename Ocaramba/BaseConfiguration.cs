@@ -806,6 +806,11 @@ namespace Ocaramba
             }
         }
 #if  netcoreapp2_2
+        /// <summary>
+        /// Converting settings from appsettings.json into the NameValueCollection, key - value pairs 
+        /// </summary>
+        /// <param name="preferences">Section name in appsettings.json file</param>
+        /// <returns></returns>
         public static NameValueCollection GetNameValueCollectionFromAppsettings(string preferences)
         {
             NameValueCollection preferencesCollection = new NameValueCollection();
