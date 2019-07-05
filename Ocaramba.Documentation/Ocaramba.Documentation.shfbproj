@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-     <SHFBROOT Condition=" '$(SHFBROOT)' == '' ">$(MSBuildThisFileDirectory)..\packages\EWSoftware.SHFB.2019.6.24\tools</SHFBROOT>
     <!-- The configuration and platform will be used to determine which assemblies to include from solution and
 				 project documentation sources -->
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -14,7 +13,7 @@
     <RootNamespace>Ocaramba.Documentation</RootNamespace>
     <Name>Ocaramba.Documentation</Name>
     <!-- SHFB properties -->
-    <FrameworkVersion>Cross-platform (.NET Core/.NET Standard)</FrameworkVersion>
+    <FrameworkVersion>.NET Framework 4.6</FrameworkVersion>
     <OutputPath>.\Help\</OutputPath>
     <HtmlHelpName>Ocaramba</HtmlHelpName>
     <Language>en-US</Language>
@@ -72,6 +71,10 @@
         </configuration>
       </PlugInConfig>
     </PlugInConfigurations>
+  </PropertyGroup>
+    <PropertyGroup>
+    <!-- NOTE: Update the version number in the path (YYYY.M.D.R) to match the package version -->
+    <SHFBROOT Condition=" '$(SHFBROOT)' == '' ">$(UserProfile).nuget\packages\ewsoftware.shfb\2019.6.24\tools</SHFBROOT>
   </PropertyGroup>
   <!-- There are no properties for these groups.  AnyCPU needs to appear in order for Visual Studio to perform
 			 the build.  The others are optional common platform types that may appear. -->
