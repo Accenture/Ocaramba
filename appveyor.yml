@@ -30,6 +30,8 @@ init:
       (Get-WmiObject -class Win32_OperatingSystem).Caption
       
       [System.Environment]::OSVersion.Version   
+
+      $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 dotnet_csproj:
    patch: true
    file: '**\*.csproj'
@@ -66,9 +68,11 @@ before_build:
  - dotnet tool install coveralls.net --tool-path packages
  - dotnet --version
  - dotnet restore
+ - docker version
 
 build_script:
  - dotnet build --configuration Release /verbosity:normal "Ocaramba.sln"
+ - docker build -t ocaramba/selenium .
 after_build:
  - ps: >-
       <#echo '********************************************Copying files for gh-pages********************************************'
@@ -413,6 +417,11 @@ test_script:
     7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\**\*.log
     
     appveyor PushArtifact testresults_$env:appveyor_build_version.zip
+    
+    echo '********************************************Running Docker********************************************'
+    
+    docker run -it -v $env:APPVEYOR_BUILD_FOLDER\:/data ocaramba/selenium /bin/bash
+    
 artifacts:
 - path: .\**\Ocaramba.*.nupkg
   name: NuGet
@@ -423,5 +432,3 @@ deploy:
   on:
     branch: master
     appveyor_repo_tag: true
-on_finish:
-  - ps: #$blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))

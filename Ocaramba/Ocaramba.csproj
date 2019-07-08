@@ -1,7 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp2.2;net45</TargetFrameworks>
+	<TargetFrameworks>netcoreapp2.2</TargetFrameworks>
+	<TargetFrameworks Condition="'$(OS)' != 'Unix'">net45;netcoreapp2.2</TargetFrameworks>
     <Description>Framework to automate tests using Selenium WebDriver</Description>
     <Copyright>Copyright ©  2015</Copyright>
     <Company>Objectivity Bespoke Software Specialists</Company>
