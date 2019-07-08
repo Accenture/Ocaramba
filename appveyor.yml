@@ -1,4 +1,6 @@
-image: Visual Studio 2017
+image: 
+ - Visual Studio 2017
+ - Ubuntu
 skip_commits:
   files:
     - README.md
@@ -415,7 +417,7 @@ test_script:
     appveyor PushArtifact testresults_$env:appveyor_build_version.zip
     
     echo '********************************************Running Docker********************************************'
-    #docker-switch-linux
+    #Switch-DockerLinux
 
     docker version
 
