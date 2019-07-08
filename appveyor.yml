@@ -26,11 +26,11 @@ init:
       echo 'seleniumGridVersion' $env:seleniumGridVersion 
 
       echo 'seleniumGridUrl' $env:seleniumGridUrl 
-      
-      echo Windows: 
+      if ($isWindows) {
+          echo Windows: 
 
-      (Get-WmiObject -class Win32_OperatingSystem).Caption
-      
+          (Get-WmiObject -class Win32_OperatingSystem).Caption
+      }
       [System.Environment]::OSVersion.Version   
 dotnet_csproj:
    patch: true
@@ -134,23 +134,6 @@ after_build:
 test_script:
 - ps: >-
     echo '********************************************Executing tests********************************************'
-
-    <#echo '********************************************XUnit tests********************************************'
-    
-    $xunit = (Resolve-Path "$ENV:USERPROFILE + \.nuget\packages\xunit.runner.console.*\tools\xunit.console.exe")[0].ToString()
-    
-    & OpenCover.Console.exe -target:"$xunit" -targetargs:".\Ocaramba.Tests.Xunit\bin\Release\Ocaramba.Tests.Xunit.dll -appveyor -noshadow" -filter:"+[Ocaramba]*" -register:user -output:opencoverCoverage.xml
-
-    if($lastexitcode -ne 0)
-      {
-       echo 'lastexitcode' $lastexitcode
-      }
-
-    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Xunit\bin\Release\**\*.png
-
-    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Xunit\bin\Release\**\*.html
-
-    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Xunit\bin\Release\*.log#>
     
     echo '********************************************NUnit tests********************************************'
     
@@ -175,13 +158,15 @@ test_script:
        echo 'lastexitcode' $lastexitcode
       }
       
-    & nunit3-console.exe .\Ocaramba.Tests.Angular\bin\Release\net45\Ocaramba.Tests.Angular.dll .\Ocaramba.Tests.NUnit\bin\Release\net45\Ocaramba.Tests.NUnit.dll
+      
+    if ($isWindows) {  
+        & nunit3-console.exe .\Ocaramba.Tests.Angular\bin\Release\net45\Ocaramba.Tests.Angular.dll .\Ocaramba.Tests.NUnit\bin\Release\net45\Ocaramba.Tests.NUnit.dll .\Ocaramba.UnitTests\bin\Release\net45\Ocaramba.UnitTests.dll
 
-    if($lastexitcode -ne 0)
-      {
-       echo 'lastexitcode' $lastexitcode
-      }
-
+        if($lastexitcode -ne 0)
+          {
+           echo 'lastexitcode' $lastexitcode
+          }
+    }
 
     7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.NUnit\bin\Release\**\*.png
 
@@ -189,241 +174,13 @@ test_script:
 
     7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.NUnit\bin\Release\**\*.log
 
-
     7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Angular\bin\Release\**\*.png
 
     7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Angular\bin\Release\**\*.html
 
     7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Angular\bin\Release\**\*.log
-
-
-    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Features\bin\Release\**\*.png
-
-    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Features\bin\Release\**\*.html
-
-    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Features\bin\Release\**\*.log
-
-    <#echo '********************************************Unit tests for Firefox********************************************'
-    
-    .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.UnitTests\bin\Release" "Ocaramba.UnitTests.dll.config" "//appSettings" "browser" "Firefox"
-
-    & OpenCover.Console.exe -target:nunit3-console.exe -targetargs:".\Ocaramba.UnitTests\bin\Release\Ocaramba.UnitTests.dll --where:cat=TakingScreehShots --result=myresults.xml`;format=AppVeyor" -filter:"+[Ocaramba]*" -register:user -output:opencoverCoverage.xml
-
-    if($lastexitcode -ne 0)
-      {
-       echo 'lastexitcode' $lastexitcode
-      }
-
-    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.UnitTests\bin\Release\**\*.png
-
-    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.UnitTests\bin\Release\**\*.html
-
-    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.UnitTests\bin\Release\*.log
-
-    echo '********************************************Angular test for Internet Explorer********************************************'
-    
-    .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.Angular\bin\Release" "Ocaramba.Tests.Angular.dll.config" "//appSettings" "browser" "InternetExplorer"
-
-    & OpenCover.Console.exe -target:nunit3-console.exe -targetargs:".\Ocaramba.Tests.Angular\bin\Release\Ocaramba.Tests.Angular.dll --result=myresults.xml`;format=AppVeyor" -filter:"+[Ocaramba]*" -register:user -output:opencoverCoverage.xml
-
-    if($lastexitcode -ne 0)
-      {
-       echo 'lastexitcode' $lastexitcode
-      }
-
-    echo '********************************************Angular test for setting path to folder with drivers********************************************'
-    
-    .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.Angular\bin\Release" "Ocaramba.Tests.Angular.dll.config" "//appSettings" "browser|PathToInternetExplorerDriverDirectory" "InternetExplorer|C:\Tools\WebDriver"
-
-    & OpenCover.Console.exe -target:nunit3-console.exe -targetargs:".\Ocaramba.Tests.Angular\bin\Release\Ocaramba.Tests.Angular.dll --result=myresults.xml`;format=AppVeyor" -filter:"+[Ocaramba]*" -register:user -output:opencoverCoverage.xml
-
-    if($lastexitcode -ne 0)
-      {
-       echo 'lastexitcode' $lastexitcode
-      }
-      
-     .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.Angular\bin\Release" "Ocaramba.Tests.Angular.dll.config" "//appSettings" "browser|PathToChromeDriverDirectory|ChromeBrowserExecutableLocation" "Chrome|C:\Tools\WebDriver|C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
-
-    & OpenCover.Console.exe -target:nunit3-console.exe -targetargs:".\Ocaramba.Tests.Angular\bin\Release\Ocaramba.Tests.Angular.dll --result=myresults.xml`;format=AppVeyor" -filter:"+[Ocaramba]*" -register:user -output:opencoverCoverage.xml
-
-    if($lastexitcode -ne 0)
-      {
-       echo 'lastexitcode' $lastexitcode
-      }
-      
-    .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.Angular\bin\Release" "Ocaramba.Tests.Angular.dll.config" "//appSettings" "browser|PathToFirefoxDriverDirectory" "Firefox|C:\Tools\WebDriver"
-
-    & OpenCover.Console.exe -target:nunit3-console.exe -targetargs:".\Ocaramba.Tests.Angular\bin\Release\Ocaramba.Tests.Angular.dll --result=myresults.xml`;format=AppVeyor" -filter:"+[Ocaramba]*" -register:user -output:opencoverCoverage.xml
-
-    if($lastexitcode -ne 0)
-      {
-       echo 'lastexitcode' $lastexitcode
-      }
-
-    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Angular\bin\Release\**\*.png
-
-    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Angular\bin\Release\**\*.html
-
-    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Angular\bin\Release\*.log
-
-    echo '********************************************MSTest tests********************************************'
-
-    & OpenCover.Console.exe -target:vstest.console.exe -targetargs:"/logger`:Appveyor .\Ocaramba.Tests.MSTest\bin\Release\Ocaramba.Tests.MsTest.dll /Settings`:.\Ocaramba.Tests.MSTest\bin\Release\Runsettings.runsettings" -filter:"+[Ocaramba]*" -register:user -output:opencoverCoverage.xml
-
-
-    if($lastexitcode -ne 0)
-      {
-       echo 'lastexitcode' $lastexitcode
-      }
-
-    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.MSTest\bin\Release\**\*.png
-
-    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.MSTest\bin\Release\**\*.html
-
-    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.MSTest\bin\Release\*.log
-    
-    echo '********************************************CloudProviderCrossBrowser tests********************************************'
-    
-    echo '********************************************BrowserStack tests********************************************'
-    
-    .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release" "Ocaramba.Tests.CloudProviderCrossBrowser.dll.config" "//appSettings" "RemoteWebDriverHub" "http://$($env:browserstackuser):$($env:browserstackkey)@hub-cloud.browserstack.com/wd/hub"
-    
-    .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release" "Ocaramba.Tests.CloudProviderCrossBrowser.dll.config" "//DriverCapabilities" "build" "Ocaramba.Tests.BrowserStackCrossBrowser$env:appveyor_build_version" $true
-    
-    & OpenCover.Console.exe -target:nunit3-console.exe -targetargs:".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\Ocaramba.Tests.CloudProviderCrossBrowser.dll --workers=5 --result=myresults.xml`;format=AppVeyor" -filter:"+[Ocaramba]*" -register:user -output:opencoverCoverage.xml
-
-    if($lastexitcode -ne 0)
-      {
-       echo 'lastexitcode' $lastexitcode
-      }
-      
-    echo '********************************************testingbot.com tests********************************************'  
-    
-    .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release" "Ocaramba.Tests.CloudProviderCrossBrowser.dll.config" "//appSettings" "RemoteWebDriverHub" "https://$($env:testingbotkey):$($env:testingbotsecret)@hub.testingbot.com/wd/hub/"
-    
-    .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release" "Ocaramba.Tests.CloudProviderCrossBrowser.dll.config" "//DriverCapabilities" "build" "$Ocaramba.Tests.TestingBotCrossBrowser$env:appveyor_build_version" $true
-
-    
-    & nunit3-console.exe .\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\Ocaramba.Tests.CloudProviderCrossBrowser.dll --workers=1 --where "test =~ Chrome" --result=myresults.xml`;format=AppVeyor
-
-    if($lastexitcode -ne 0)
-      {
-       echo 'lastexitcode' $lastexitcode
-      }
-      
-    echo '********************************************saucelabs tests********************************************'
-    
-    .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release" "Ocaramba.Tests.CloudProviderCrossBrowser.dll.config" "//appSettings" "RemoteWebDriverHub" "http://$($env:saucelabsusername):$($env:saucelabsaccessKey)@ondemand.saucelabs.com:80/wd/hub"
-    
-    .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release" "Ocaramba.Tests.CloudProviderCrossBrowser.dll.config" "//DriverCapabilities" "build" "Ocaramba.Tests.SauceLabsCrossBrowser$env:appveyor_build_version" $true
-    
-    .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release" "Ocaramba.Tests.CloudProviderCrossBrowser.dll.config" "//environments/SafariMac" "platform" "macOS 10.14" $true
-    
-    & nunit3-console.exe .\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\Ocaramba.Tests.CloudProviderCrossBrowser.dll --workers=5 --where "test =~ Chrome || test =~ IE || test =~ Safari || test =~ Firefox" --result=myresults.xml`;format=AppVeyor
-
-    if($lastexitcode -ne 0)
-      {
-       echo 'lastexitcode' $lastexitcode
-      }
-      
-    echo '********************************************Downloading Selenium Grid********************************************' 
-    
-    $url = $env:seleniumGridUrl
-    
-    $grid = $env:seleniumGridVersion
-    
-    $output = $env:APPVEYOR_BUILD_FOLDER + "\Ocaramba.Tests.NUnit\bin\Release\$grid"
-    
-    $outputLogs = $env:APPVEYOR_BUILD_FOLDER + "\Ocaramba.Tests.NUnit\bin\Release\"
-    
-    $start_time = Get-Date
-
-    echo "Downloading Selenium Grid from:" $url
-    
-    (New-Object System.Net.WebClient).DownloadFile($url, $output)
-    
-    echo "Selenium Grid downloaded to:" $output
-    
-    echo "Time taken to download $($grid): $((Get-Date).Subtract($start_time).Seconds) second(s)"
-    
-    echo '********************************************Start Selenium Grid in background****************************************' 
-    
-    $appHub=Start-Process java -ArgumentList '-jar', $output' -role hub' -RedirectStandardOutput $outputLogs'console_hub.out' -RedirectStandardError $outputLogs'console_hub.err' -passthru
-
-    Start-Sleep -s 5
-    
-    echo "Selenium Grid hub started"
-
-    $appNode=Start-Process java -ArgumentList '-jar', $output' -role node  -hub http://localhost:4444/grid/register' -RedirectStandardOutput $outputLogs'console_node.out' -RedirectStandardError $outputLogs'console_node.err' -passthru 
-    
-    Start-Sleep -s 5
-    
-    echo "Selenium Grid node started"
-    
-    echo '********************************************Run tests with Selenium Grid ****************************************' 
-    
-    .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.NUnit\bin\Release\" "Ocaramba.Tests.NUnit.dll.config" "//appSettings" "browser|RemoteWebDriverHub" "RemoteWebDriver|http://localhost:4444/wd/hub" $true
-    
-    & OpenCover.Console.exe -target:nunit3-console.exe -targetargs:".\Ocaramba.Tests.NUnit\bin\Release\Ocaramba.Tests.NUnit.dll --where (cat==BasicNUnit) --result=myresults.xml`;format=AppVeyor" -filter:"+[Ocaramba]*" -register:user -output:opencoverCoverage.xml
-
-    if($lastexitcode -ne 0)
-      {
-       echo 'lastexitcode' $lastexitcode
-      }
-      
-    echo '*****************************Run CloudProviderCrossBrowser tests with Selenium Grid****************************'
-    
-    .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release" "Ocaramba.Tests.CloudProviderCrossBrowser.dll.config" "//appSettings" "RemoteWebDriverHub" "http://localhost:4444/wd/hub" $true
-    
-    & nunit3-console.exe .\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\Ocaramba.Tests.CloudProviderCrossBrowser.dll --where "test =~ Chrome" --result=myresults.xml`;format=AppVeyor
-
-    if($lastexitcode -ne 0)
-      {
-       echo 'lastexitcode' $lastexitcode
-      }
-     
-    echo '*****************************Stop Selenium Grid****************************'
-      
-    echo "Stop Selenium Grid node" 
-      
-    Stop-Process -Id $appNode.Id
-    
-    echo "Stop Selenium Grid hub" 
-    
-    Stop-Process -Id $appHub.Id
-    
-    echo '*****************************Add Selenium Grid logs to testresults****************************'
-    
-    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.NUnit\bin\Release\*.err
-    
-    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.NUnit\bin\Release\*.out#>
-      
-    echo '********************************************Sending coverage test results********************************************'
-    
-    $coveralls = (Resolve-Path ".\packages\csmacnz.coveralls.exe").ToString()
-    
-    & $coveralls --opencover -i opencoverCoverage.xml --repoToken $env:COVERALLS_REPO_TOKEN --useRelativePaths --commitId $env:APPVEYOR_REPO_COMMIT --commitBranch $env:APPVEYOR_REPO_BRANCH --commitAuthor $env:APPVEYOR_REPO_COMMIT_AUTHOR --commitEmail $env:APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL --commitMessage $env:APPVEYOR_REPO_COMMIT_MESSAGE --jobId $env:APPVEYOR_BUILD_NUMBER --serviceName appveyor
-
-    7z a testresults_$env:appveyor_build_version.zip opencoverCoverage.xml
-    
-    echo '********************************************Uploading test results artifact********************************************'
-  
-    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\**\*.png
-
-    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\**\*.html
-
-    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\**\*.log
-    
+   
     appveyor PushArtifact testresults_$env:appveyor_build_version.zip
-    
-    echo '********************************************Running Docker********************************************'
-    #Switch-DockerLinux
-
-    docker version
-
-    #docker build -t ocaramba/selenium .
-    
-    #docker run -it -v $env:APPVEYOR_BUILD_FOLDER\:/data ocaramba/selenium /bin/bash
  
 artifacts:
 - path: .\**\Ocaramba.*.nupkg
@@ -436,5 +193,8 @@ deploy:
     branch: master
     appveyor_repo_tag: true
 on_finish:
-  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+- ps: >-
+    if ($isWindows) {
+        #$blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+    }
 
