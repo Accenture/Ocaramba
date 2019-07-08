@@ -31,7 +31,7 @@ init:
       
       [System.Environment]::OSVersion.Version   
 
-      $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+      iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 dotnet_csproj:
    patch: true
    file: '**\*.csproj'
@@ -432,3 +432,6 @@ deploy:
   on:
     branch: master
     appveyor_repo_tag: true
+on_finish:
+  - ps: $blockRdp = $true;
+
