@@ -68,12 +68,9 @@ before_build:
  - dotnet tool install coveralls.net --tool-path packages
  - dotnet --version
  - dotnet restore
- - docker version
 
 build_script:
  - dotnet build --configuration Release /verbosity:normal "Ocaramba.sln"
- - docker-switch-linux
- - docker build -t ocaramba/selenium .
 after_build:
  - ps: >-
       <#echo '********************************************Copying files for gh-pages********************************************'
@@ -420,10 +417,14 @@ test_script:
     appveyor PushArtifact testresults_$env:appveyor_build_version.zip
     
     echo '********************************************Running Docker********************************************'
-   
+    docker-switch-linux
+
+    docker version
+
+    docker build -t ocaramba/selenium .
     
-    docker run -it -v $env:APPVEYOR_BUILD_FOLDER\:/data ocaramba/selenium /bin/bash
-    
+    #docker run -it -v $env:APPVEYOR_BUILD_FOLDER\:/data ocaramba/selenium /bin/bash
+ 
 artifacts:
 - path: .\**\Ocaramba.*.nupkg
   name: NuGet
