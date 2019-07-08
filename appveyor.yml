@@ -182,16 +182,21 @@ test_script:
    
     appveyor PushArtifact testresults_$env:appveyor_build_version.zip
  
-artifacts:
-- path: .\**\Ocaramba.*.nupkg
-  name: NuGet
-deploy:
-- provider: NuGet
-  api_key:
-    secure: 3oOPQoiQEcO33c/fxjAMdvjTlmB3dHrc/uwV9ehKYjNARfzrBT+xmuLCjTtKrI9F
-  on:
-    branch: master
-    appveyor_repo_tag: true
+for:
+-
+  matrix:
+    only:
+      - image: Visual Studio 2017
+    artifacts:
+    - path: .\**\Ocaramba.*.nupkg
+      name: NuGet
+    deploy:
+    - provider: NuGet
+      api_key:
+        secure: 3oOPQoiQEcO33c/fxjAMdvjTlmB3dHrc/uwV9ehKYjNARfzrBT+xmuLCjTtKrI9F
+      on:
+        branch: master
+        appveyor_repo_tag: true
 on_finish:
 - ps: >-
     if ($isWindows) {
