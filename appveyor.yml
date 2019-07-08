@@ -420,6 +420,8 @@ test_script:
     
     echo '********************************************Running Docker********************************************'
     
+    docker-switch-linux
+    
     docker run -it -v $env:APPVEYOR_BUILD_FOLDER\:/data ocaramba/selenium /bin/bash
     
 artifacts:
