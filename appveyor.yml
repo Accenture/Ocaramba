@@ -8,6 +8,10 @@ version: $(frameworkVersion).{build}
 branches:
   except:
   - gh-pages
+environment:
+  matrix:
+    - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
+      ASPNETCORE_ENVIRONMENT: Linux
 init:
  - ps: >-
       if ($env:APPVEYOR_REPO_TAG -eq "true")
@@ -30,6 +34,8 @@ init:
           echo Windows: 
 
           (Get-WmiObject -class Win32_OperatingSystem).Caption
+      } else{
+        echo 'ASPNETCORE_ENVIRONMENT' $env:ASPNETCORE_ENVIRONMENT
       }
       [System.Environment]::OSVersion.Version   
 dotnet_csproj:

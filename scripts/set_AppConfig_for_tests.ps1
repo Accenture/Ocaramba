@@ -28,10 +28,12 @@ SOFTWARE.
     
     [string]$values,
 	
-	[bool]$logValues=$false
+	[bool]$logValues=$false,
+	
+	[bool]$json=$false
     )
 
-Function set_AppConfig_for_tests([string]$OutDir,[string]$configName,[string]$section,[string]$keys,[string]$values, [bool]$logValues)
+Function set_AppConfig_for_tests([string]$OutDir,[string]$configName,[string]$section,[string]$keys,[string]$values, [bool]$logValues, [bool]$json)
 {
 	    <#
     .SYNOPSIS
@@ -66,29 +68,46 @@ Function set_AppConfig_for_tests([string]$OutDir,[string]$configName,[string]$se
 	{
 		Write-Host values $values
 	}
-
+    Write-Host json $json
     $configFile = "$workingDir\$configName"
     Write-Host configFile $configFile
 	[string[]]$keysArray=$keys.Split('|')
 	[string[]]$valueArray=$values.Split('|')
-    
-	[xml]$config = Get-Content -Path $configFile
+    if($json -eq $false)
+	{
+			[xml]$config = Get-Content -Path $configFile
 
 
-	for($i=0; $i -lt $keysArray.length; $i++)
-	  {
+			for($i=0; $i -lt $keysArray.length; $i++)
+			  {
 
-        $key=$keysArray[$i]
-        Write-Host  "key:" $i $key
-        $value=$valueArray[$i]
-		if($logValues -eq $true)
-		{
-			Write-Host "value:" $i $value
-        }
-        $config.SelectSingleNode("/configuration$section//add[@key='$key']/@value").value = $value
+				$key=$keysArray[$i]
+				Write-Host  "key:" $i $key
+				$value=$valueArray[$i]
+				if($logValues -eq $true)
+				{
+					Write-Host "value:" $i $value
+				}
+				$config.SelectSingleNode("/configuration$section//add[@key='$key']/@value").value = $value
 
-	  }	
-    $config.Save($configFile)
-    }
+			  }	
+			$config.Save($configFile)
+	} else
+	{
+			$appsettings = Get-Content $configFile -raw | ConvertFrom-Json 
+            for($i=0; $i -lt $keysArray.length; $i++)
+			  {
 
-set_AppConfig_for_tests $OutDir $configName $section $keys $values $logValues
+				$key=$keysArray[$i]
+				Write-Host  "key:" $i $key
+				$value=$valueArray[$i]
+				if($logValues -eq $true)
+				{
+					Write-Host "value:" $i $value
+				}
+				$appsettings.$section.$key= $value
+			  }
+			$appsettings | ConvertTo-Json -depth 32| set-content $configFile
+	}
+}
+set_AppConfig_for_tests $OutDir $configName $section $keys $values $logValues $json

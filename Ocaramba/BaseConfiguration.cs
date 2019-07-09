@@ -48,8 +48,10 @@ namespace Ocaramba
         private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
 #endif
 #if netcoreapp2_2
+        static string env = System.Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
         public static readonly IConfigurationRoot Builder = new ConfigurationBuilder()
             .AddJsonFile("appsettings.json", true, true)
+            .AddJsonFile($"appsettings.{env}.json", true, true)
             .Build();
         private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
 #endif
