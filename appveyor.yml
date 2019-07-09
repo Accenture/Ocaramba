@@ -8,10 +8,6 @@ version: $(frameworkVersion).{build}
 branches:
   except:
   - gh-pages
-environment:
-  matrix:
-    - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
-      ASPNETCORE_ENVIRONMENT: Linux
 init:
  - ps: >-
       if ($env:APPVEYOR_REPO_TAG -eq "true")
@@ -70,6 +66,9 @@ environment:
     secure: DlenWuQD9Ml7NAMwOkaHcA==
   saucelabsaccessKey:
     secure: D6Yy/Ng4/rfzsqQmnzwmTtN/Knee3c8/NtI1HgKke2ybA/6WpqP38RQfSHENYECa
+  matrix:
+    - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
+      ASPNETCORE_ENVIRONMENT: Linux
 before_build:
  - dotnet tool install coveralls.net --tool-path packages
  - dotnet --version
