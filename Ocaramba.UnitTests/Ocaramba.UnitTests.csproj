@@ -39,6 +39,9 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="appsettings.Linux.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="TestOutput\TextWithinIFrameChromeError.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
