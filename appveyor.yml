@@ -140,21 +140,21 @@ test_script:
     
     echo '********************************************NUnit tests********************************************'
     
-    dotnet test .\Ocaramba.Tests.Angular\Ocaramba.Tests.Angular.csproj --test-adapter-path:. --logger:Appveyor
+    dotnet vstest .\Ocaramba.Tests.Angular\bin\Release\netcoreapp2.2\Ocaramba.Tests.Angular.dll --test-adapter-path:. --logger:Appveyor
 
      if($lastexitcode -ne 0)
       {
        echo 'lastexitcode' $lastexitcode
       }
 
-    dotnet test .\Ocaramba.Tests.NUnit\Ocaramba.Tests.NUnit.csproj --test-adapter-path:. --logger:Appveyor
+    dotnet vstest .\Ocaramba.Tests.NUnit\bin\Release\netcoreapp2.2\Ocaramba.Tests.NUnit.dll --test-adapter-path:. --logger:Appveyor
 
       if($lastexitcode -ne 0)
       {
        echo 'lastexitcode' $lastexitcode
       }
 
-    dotnet test .\Ocaramba.UnitTests\Ocaramba.UnitTests.csproj --test-adapter-path:. --logger:Appveyor 
+    dotnet vstest .\Ocaramba.UnitTests\bin\Release\netcoreapp2.2\Ocaramba.UnitTests.dll --test-adapter-path:. --logger:Appveyor 
 
     if($lastexitcode -ne 0)
       {
@@ -182,6 +182,24 @@ test_script:
     7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Angular\bin\Release\**\*.html
 
     7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Angular\bin\Release\**\*.log
+    
+    echo '********************************************CloudProviderCrossBrowser tests********************************************'
+    
+    echo '********************************************BrowserStack tests********************************************'
+    
+    .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\net45" "Ocaramba.Tests.CloudProviderCrossBrowser.dll.config" "//appSettings" "RemoteWebDriverHub" "http://$($env:browserstackuser):$($env:browserstackkey)@hub-cloud.browserstack.com/wd/hub"
+    
+    .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\net45" "Ocaramba.Tests.CloudProviderCrossBrowser.dll.config" "//DriverCapabilities" "build" "Ocaramba.Tests.BrowserStackCrossBrowser$env:appveyor_build_version" $true
+    
+    if ($isWindows) { 
+    & nunit3-console.exe .\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\Ocaramba.Tests.CloudProviderCrossBrowser.dll --workers=5
+
+    if($lastexitcode -ne 0)
+      {
+       echo 'lastexitcode' $lastexitcode
+      }
+    }
+      
    
     appveyor PushArtifact testresults_$env:appveyor_build_version.zip
 
