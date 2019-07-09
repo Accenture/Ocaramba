@@ -36,7 +36,7 @@ namespace Ocaramba.Tests.NUnit
     /// </summary>
     public static class ProjectBaseConfiguration
     {
-        private static readonly string CurrentDirectory = TestContext.CurrentContext.TestDirectory;
+        private static readonly string CurrentDirectory = Directory.GetCurrentDirectory();
 
         /// <summary>
         /// Gets the data driven file.

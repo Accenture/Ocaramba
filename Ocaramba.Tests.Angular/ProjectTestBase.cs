@@ -20,6 +20,8 @@
 //     SOFTWARE.
 // </license>
 
+using System.IO;
+
 namespace Ocaramba.Tests.Angular
 {
     using System;
@@ -76,7 +78,7 @@ namespace Ocaramba.Tests.Angular
         [OneTimeSetUp]
         public void BeforeClass()
         {
-            this.DriverContext.CurrentDirectory = TestContext.CurrentContext.TestDirectory;
+            this.DriverContext.CurrentDirectory = Directory.GetCurrentDirectory();
             this.DriverContext.Start();
         }
 

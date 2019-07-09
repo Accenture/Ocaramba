@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.IO;
+using NUnit.Framework;
 using Ocaramba.Helpers;
 
 namespace Ocaramba.UnitTests.Tests
@@ -11,10 +12,10 @@ namespace Ocaramba.UnitTests.Tests
         public void ShortenFileNameTest()
         {
             var name = "verylongfilename3 4 5 6 7 8 9 0 1 2 3 4 1 2 31 2 3 4 5 6 7 8 9 0 1 2 3 4 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0.txt";
-            var text = NameHelper.ShortenFileName(TestContext.CurrentContext.TestDirectory, name, "_", 255);
-            Assert.IsTrue((TestContext.CurrentContext.TestDirectory + name).Length > 255);
-            text = NameHelper.ShortenFileName(TestContext.CurrentContext.TestDirectory, name, " ", 255);
-            Assert.AreEqual(255, (TestContext.CurrentContext.TestDirectory + text).Length);
+            var text = NameHelper.ShortenFileName(Directory.GetCurrentDirectory(), name, "_", 255);
+            Assert.IsTrue((Directory.GetCurrentDirectory() + name).Length > 255);
+            text = NameHelper.ShortenFileName(Directory.GetCurrentDirectory(), name, " ", 255);
+            Assert.AreEqual(255, (Directory.GetCurrentDirectory() + text).Length);
         }
 
         [Test()]

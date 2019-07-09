@@ -113,7 +113,7 @@ namespace Ocaramba.Helpers
         /// <returns>Full path to taken screenshot</returns>
         /// <example>How to use it: <code>
         /// var el = this.Driver.GetElement(this.menu);
-        /// var fullPath = TakeScreenShot.TakeScreenShotOfElement(el, TestContext.CurrentContext.TestDirectory + BaseConfiguration.ScreenShotFolder, "MenuOutSideTheIFrame");
+        /// var fullPath = TakeScreenShot.TakeScreenShotOfElement(el, Directory.GetCurrentDirectory() + BaseConfiguration.ScreenShotFolder, "MenuOutSideTheIFrame");
         /// </code></example>
         public static string TakeScreenShotOfElement(IWebElement element, string folder, string screenshotName)
         {
@@ -136,7 +136,7 @@ namespace Ocaramba.Helpers
         /// int y = iFrame.Location.Y;
         /// this.Driver.SwitchTo().Frame(0);
         /// var el = this.Driver.GetElement(this.elelemtInIFrame);
-        /// var fullPath = TakeScreenShot.TakeScreenShotOfElement(x, y, el, TestContext.CurrentContext.TestDirectory + BaseConfiguration.ScreenShotFolder, "MenuOutSideTheIFrame");
+        /// var fullPath = TakeScreenShot.TakeScreenShotOfElement(x, y, el, Directory.GetCurrentDirectory() + BaseConfiguration.ScreenShotFolder, "MenuOutSideTheIFrame");
         /// </code></example>
         public static string TakeScreenShotOfElement(int iframeLocationX, int iframeLocationY, IWebElement element, string folder, string screenshotName)
         {

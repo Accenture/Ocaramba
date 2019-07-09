@@ -20,11 +20,10 @@
 //     SOFTWARE.
 // </license>
 
+using System.IO;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
-using Ocaramba;
 using Ocaramba.Logger;
-using DriverContext = Ocaramba.DriverContext;
 
 namespace Ocaramba.Test.Automation.UnitTests
 {
@@ -68,7 +67,7 @@ namespace Ocaramba.Test.Automation.UnitTests
         [OneTimeSetUp]
         public void BeforeClass()
         {
-            this.DriverContext.CurrentDirectory = TestContext.CurrentContext.TestDirectory;
+            this.DriverContext.CurrentDirectory = Directory.GetCurrentDirectory();
             this.DriverContext.Start();
             this.DriverContext.WindowMaximize();
             this.DriverContext.DeleteAllCookies();

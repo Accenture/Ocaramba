@@ -20,8 +20,10 @@
 //     SOFTWARE.
 // </license>
 
+using System.IO;
 using ImageMagick;
 using NUnit.Framework;
+using Ocaramba.Helpers;
 using Ocaramba.Test.Automation.UnitTests;
 using Ocaramba.Tests.PageObjects.PageObjects.TheInternet;
 
@@ -39,8 +41,8 @@ namespace Ocaramba.UnitTests.Tests
             internetPage.GoToIFramePage();
             
             IFramePage page = new IFramePage(this.DriverContext);
-            var path = page.TakeScreenShotsOfTextInIFrame(TestContext.CurrentContext.TestDirectory + BaseConfiguration.ScreenShotFolder, "TextWithinIFrame" + BaseConfiguration.TestBrowser);
-            var path2 = TestContext.CurrentContext.TestDirectory + BaseConfiguration.ScreenShotFolder + "\\TextWithinIFrameChromeError.png";
+            var path = page.TakeScreenShotsOfTextInIFrame(Directory.GetCurrentDirectory() + BaseConfiguration.ScreenShotFolder, "TextWithinIFrame" + BaseConfiguration.TestBrowser);
+            var path2 = Directory.GetCurrentDirectory() + BaseConfiguration.ScreenShotFolder + FilesHelper.Separator + "TextWithinIFrameChromeError.png";
             bool flag = true;
             using (var img1 = new MagickImage(path))
             {
@@ -51,7 +53,7 @@ namespace Ocaramba.UnitTests.Tests
                         img1.Compose = CompositeOperator.Src;
                         img1.Compare(img2, new ErrorMetric(), imgDiff);
                         flag = img1.Equals(img2);
-                        imgDiff.Write(TestContext.CurrentContext.TestDirectory + BaseConfiguration.ScreenShotFolder + "\\" + BaseConfiguration.TestBrowser + "TextWithinIFrameDIFF.png");
+                        imgDiff.Write(Directory.GetCurrentDirectory() + BaseConfiguration.ScreenShotFolder + FilesHelper.Separator + BaseConfiguration.TestBrowser + "TextWithinIFrameDIFF.png");
                     }
                 }
             }
@@ -66,7 +68,7 @@ namespace Ocaramba.UnitTests.Tests
             internetPage.GoToIFramePage();
 
             IFramePage page = new IFramePage(this.DriverContext);
-            page.TakeScreenShotsOfMenu(TestContext.CurrentContext.TestDirectory + BaseConfiguration.ScreenShotFolder, "MenuOutSideTheIFrame" + BaseConfiguration.TestBrowser);
+            page.TakeScreenShotsOfMenu(Directory.GetCurrentDirectory() + BaseConfiguration.ScreenShotFolder, "MenuOutSideTheIFrame" + BaseConfiguration.TestBrowser);
         }
     }
 }

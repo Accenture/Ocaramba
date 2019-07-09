@@ -20,6 +20,8 @@
 //     SOFTWARE.
 // </license>
 
+using System.IO;
+
 namespace Ocaramba.Tests.CloudProviderCrossBrowser
 {
     using System;
@@ -89,7 +91,7 @@ namespace Ocaramba.Tests.CloudProviderCrossBrowser
         [OneTimeSetUp]
         public void BeforeClass()
         {
-            this.DriverContext.CurrentDirectory = TestContext.CurrentContext.TestDirectory;
+            this.DriverContext.CurrentDirectory = Directory.GetCurrentDirectory();
         }
 
         /// <summary>

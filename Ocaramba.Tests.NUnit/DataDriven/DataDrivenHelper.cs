@@ -110,7 +110,7 @@ namespace Ocaramba.Tests.NUnit.DataDriven
         /// <exception cref="DataDrivenReadException">Exception when parameter not found in row</exception>
         /// <example>How to use it: <code>
         ///  {
-        ///  var path = TestContext.CurrentContext.TestDirectory;
+        ///  var path = Directory.GetCurrentDirectory();
         ///  path = string.Format(CultureInfo.CurrentCulture, "{0}{1}", path, @"\DataDriven\TestDataCsv.csv");
         ///  return DataDrivenHelper.ReadDataDriveFileCsv(path, new[] { "user", "password" }, "credentialCsv");
         ///  }

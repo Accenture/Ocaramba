@@ -13,7 +13,7 @@ namespace Ocaramba.UnitTests.Tests
         [Test()]
         public void GetFilesOfGivenTypeFromAllSubFolderTest()
         {
-            var files = FilesHelper.GetFilesOfGivenTypeFromAllSubFolders(TestContext.CurrentContext.TestDirectory,
+            var files = FilesHelper.GetFilesOfGivenTypeFromAllSubFolders(Directory.GetCurrentDirectory(),
                 FileType.Xls);
             Assert.IsTrue(files.Count > 0);
         }
@@ -21,7 +21,7 @@ namespace Ocaramba.UnitTests.Tests
         [Test()]
         public void GetFilesOfGivenTypeFromAllSubFoldersTest()
         {
-            var files = FilesHelper.GetFilesOfGivenTypeFromAllSubFolders(TestContext.CurrentContext.TestDirectory,
+            var files = FilesHelper.GetFilesOfGivenTypeFromAllSubFolders(Directory.GetCurrentDirectory(),
                 FileType.Xml, "Driven");
             Assert.IsTrue(files.Count > 0);
         }
@@ -29,7 +29,7 @@ namespace Ocaramba.UnitTests.Tests
         [Test()]
         public void GetAllFilesFromAllSubFoldersTest()
         {
-            var files = FilesHelper.GetAllFilesFromAllSubFolders(TestContext.CurrentContext.TestDirectory);
+            var files = FilesHelper.GetAllFilesFromAllSubFolders(Directory.GetCurrentDirectory());
             Assert.IsTrue(files.Count > 0);
         }
 
@@ -37,40 +37,40 @@ namespace Ocaramba.UnitTests.Tests
         [Test()]
         public void GetAllFilesFromAllSubFoldersPrefixTest()
         {
-            var files = FilesHelper.GetAllFilesFromAllSubFolders(TestContext.CurrentContext.TestDirectory,
+            var files = FilesHelper.GetAllFilesFromAllSubFolders(Directory.GetCurrentDirectory(),
                 "*.dll");
             Assert.IsTrue(files.Count > 0);
-            File.Create(TestContext.CurrentContext.TestDirectory + "\\" + "testfile.txt");
+            File.Create(Directory.GetCurrentDirectory() + FilesHelper.Separator + "testfile.txt");
 
         }
 
         [Test()]
         public void RenameDeleteFileTest()
         {
-            string path = Path.Combine(TestContext.CurrentContext.TestDirectory, "testfile1.txt");
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "testfile1.txt");
             File.Create(path).Close();
-            path = Path.Combine(TestContext.CurrentContext.TestDirectory, "testfile2.txt");
+            path = Path.Combine(Directory.GetCurrentDirectory(), "testfile2.txt");
             File.Create(path).Close();
             FilesHelper.RenameFile(BaseConfiguration.ShortTimeout, "testfile1.txt", "testfile2.txt",
-                TestContext.CurrentContext.TestDirectory);
+                Directory.GetCurrentDirectory());
         }
 
         [Test()]
         public void CopyDeleteFileTest()
         {
-            string path = Path.Combine(TestContext.CurrentContext.TestDirectory, "testfile3.txt");
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "testfile3.txt");
             File.Create(path).Close();
-            path = Path.Combine(TestContext.CurrentContext.TestDirectory, "testfile4.txt");
+            path = Path.Combine(Directory.GetCurrentDirectory(), "testfile4.txt");
             File.Create(path).Close();
             FilesHelper.CopyFile(BaseConfiguration.ShortTimeout, "testfile3.txt", "testfile4.txt",
-                TestContext.CurrentContext.TestDirectory);
+                Directory.GetCurrentDirectory());
         }
 
         [Test()]
         public void WaitForFileOfGivenNameExceptionTest()
         {
             var start = DateTime.Now;
-            Assert.Throws<WaitTimeoutException>(() => FilesHelper.WaitForFileOfGivenName("nofile.txt", TestContext.CurrentContext.TestDirectory));
+            Assert.Throws<WaitTimeoutException>(() => FilesHelper.WaitForFileOfGivenName("nofile.txt", Directory.GetCurrentDirectory()));
             var stop = DateTime.Now;
             Assert.True(stop - start <= TimeSpan.FromSeconds(BaseConfiguration.LongTimeout + 2));
         }
