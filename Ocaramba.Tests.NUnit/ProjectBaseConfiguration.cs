@@ -36,7 +36,13 @@ namespace Ocaramba.Tests.NUnit
     /// </summary>
     public static class ProjectBaseConfiguration
     {
+#if netcoreapp2_2
         private static readonly string CurrentDirectory = Directory.GetCurrentDirectory();
+#endif
+
+#if net45
+        private static readonly string CurrentDirectory = TestContext.CurrentContext.TestDirectory;
+#endif
 
         /// <summary>
         /// Gets the data driven file.
@@ -80,6 +86,32 @@ namespace Ocaramba.Tests.NUnit
 #endif
 #if netcoreapp2_2
                 setting = BaseConfiguration.Builder["appSettings:DataDrivenFileXlsx"];
+#endif
+                if (BaseConfiguration.UseCurrentDirectory)
+                {
+                    return Path.Combine(CurrentDirectory + setting);
+                }
+
+                return setting;
+            }
+        }
+
+        /// <summary>
+        /// Gets the CSV data driven file.
+        /// </summary>
+        /// <value>
+        /// The CSV data driven file.
+        /// </value>
+        public static string DataDrivenFileCSV
+        {
+            get
+            {
+                string setting = null;
+#if net45
+                setting = ConfigurationManager.AppSettings["DataDrivenFileCSV"];
+#endif
+#if netcoreapp2_2
+                setting = BaseConfiguration.Builder["appSettings:DataDrivenFileCSV"];
 #endif
                 if (BaseConfiguration.UseCurrentDirectory)
                 {

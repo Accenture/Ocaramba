@@ -67,7 +67,13 @@ namespace Ocaramba.Test.Automation.UnitTests
         [OneTimeSetUp]
         public void BeforeClass()
         {
+#if netcoreapp2_2
             this.DriverContext.CurrentDirectory = Directory.GetCurrentDirectory();
+#endif
+
+#if net45
+            this.DriverContext.CurrentDirectory = TestContext.CurrentContext.TestDirectory;
+#endif
             this.DriverContext.Start();
             this.DriverContext.WindowMaximize();
             this.DriverContext.DeleteAllCookies();

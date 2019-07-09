@@ -529,18 +529,10 @@ namespace Ocaramba.Helpers
                 File.Delete(fullPath);
             }
 
-            // Use ProcessStartInfo class
-            string command = "/c ren " + '\u0022' + oldName + '\u0022' + " " + '\u0022' + newName +
-                             '\u0022';
-            ProcessStartInfo cmdsi = new ProcessStartInfo("cmd.exe")
-                                         {
-                                             WorkingDirectory = subFolder,
-                                             Arguments = command
-                                         };
-            Thread.Sleep(1000);
-
+            CopyFile(waitTime, oldName, newName, subFolder);
+            File.Delete(Path.Combine(subFolder, oldName));
             var timeoutMessage = string.Format(CultureInfo.CurrentCulture, "Waiting till file will be renamed {0}", subFolder);
-            Process.Start(cmdsi);
+
             WaitHelper.Wait(() => File.Exists(subFolder + Separator + newName), TimeSpan.FromSeconds(waitTime), TimeSpan.FromSeconds(1), timeoutMessage);
             return newName;
         }
@@ -584,18 +576,10 @@ namespace Ocaramba.Helpers
                 File.Delete(newSubFolder + Separator + newName);
             }
 
-            // Use ProcessStartInfo class
-            string command = "/c copy " + '\u0022' + oldName + '\u0022' + " " + '\u0022' + newSubFolder + Separator + newName +
-                             '\u0022';
-            ProcessStartInfo cmdsi = new ProcessStartInfo("cmd.exe")
-            {
-                WorkingDirectory = oldSubFolder,
-                Arguments = command
-            };
             Thread.Sleep(1000);
+            File.Copy(oldSubFolder + Separator + oldName, newSubFolder + Separator + newName);
 
             var timeoutMessage = string.Format(CultureInfo.CurrentCulture, "Waiting till file will be copied {0}", newSubFolder);
-            Process.Start(cmdsi);
             WaitHelper.Wait(() => File.Exists(newSubFolder + Separator + newName), TimeSpan.FromSeconds(waitTime), TimeSpan.FromSeconds(1), timeoutMessage);
             return newName;
         }

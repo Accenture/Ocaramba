@@ -189,7 +189,7 @@ for:
 -
   matrix:
     only:
-      - image: Visual Studio 2017
+      - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
 
   artifacts:
   - path: .\**\Ocaramba.*.nupkg

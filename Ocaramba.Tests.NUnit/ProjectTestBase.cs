@@ -70,7 +70,13 @@ namespace Ocaramba.Tests.NUnit
         [OneTimeSetUp]
         public void BeforeClass()
         {
-            this.DriverContext.CurrentDirectory = Directory.GetCurrentDirectory();
+#if netcoreapp2_2
+        this.DriverContext.CurrentDirectory = Directory.GetCurrentDirectory();
+#endif
+
+#if net45
+            this.DriverContext.CurrentDirectory = TestContext.CurrentContext.TestDirectory;
+#endif
             this.DriverContext.Start();
         }
 

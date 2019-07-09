@@ -34,15 +34,22 @@ namespace Ocaramba.UnitTests.Tests
     [Category("TakingScreehShots")]
     public class TakingScreehShotsOfElementsTests : ProjectTestBase
     {
+#if netcoreapp2_2
+        string folder = Directory.GetCurrentDirectory();
+#endif
+
+#if net45
+        string folder = TestContext.CurrentContext.TestDirectory;
+#endif
+
         [Test]
         public void TakingScreehShotsOfElementInIFrameTest()
         {
             var internetPage = new InternetPage(this.DriverContext).OpenHomePage();
             internetPage.GoToIFramePage();
-            
             IFramePage page = new IFramePage(this.DriverContext);
-            var path = page.TakeScreenShotsOfTextInIFrame(Directory.GetCurrentDirectory() + BaseConfiguration.ScreenShotFolder, "TextWithinIFrame" + BaseConfiguration.TestBrowser);
-            var path2 = Directory.GetCurrentDirectory() + BaseConfiguration.ScreenShotFolder + FilesHelper.Separator + "TextWithinIFrameChromeError.png";
+            var path = page.TakeScreenShotsOfTextInIFrame(folder + BaseConfiguration.ScreenShotFolder, "TextWithinIFrame" + BaseConfiguration.TestBrowser);
+            var path2 = folder + BaseConfiguration.ScreenShotFolder + FilesHelper.Separator + "TextWithinIFrameChromeError.png";
             bool flag = true;
             using (var img1 = new MagickImage(path))
             {
@@ -53,7 +60,7 @@ namespace Ocaramba.UnitTests.Tests
                         img1.Compose = CompositeOperator.Src;
                         img1.Compare(img2, new ErrorMetric(), imgDiff);
                         flag = img1.Equals(img2);
-                        imgDiff.Write(Directory.GetCurrentDirectory() + BaseConfiguration.ScreenShotFolder + FilesHelper.Separator + BaseConfiguration.TestBrowser + "TextWithinIFrameDIFF.png");
+                        imgDiff.Write(folder + BaseConfiguration.ScreenShotFolder + FilesHelper.Separator + BaseConfiguration.TestBrowser + "TextWithinIFrameDIFF.png");
                     }
                 }
             }
@@ -68,7 +75,7 @@ namespace Ocaramba.UnitTests.Tests
             internetPage.GoToIFramePage();
 
             IFramePage page = new IFramePage(this.DriverContext);
-            page.TakeScreenShotsOfMenu(Directory.GetCurrentDirectory() + BaseConfiguration.ScreenShotFolder, "MenuOutSideTheIFrame" + BaseConfiguration.TestBrowser);
+            page.TakeScreenShotsOfMenu(folder + BaseConfiguration.ScreenShotFolder, "MenuOutSideTheIFrame" + BaseConfiguration.TestBrowser);
         }
     }
 }

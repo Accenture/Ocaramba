@@ -61,9 +61,7 @@ namespace Ocaramba.Tests.NUnit.DataDriven
 
         public static IEnumerable CredentialsCSV()
         {
-            var path = Directory.GetCurrentDirectory();
-            path = string.Format(CultureInfo.CurrentCulture, "{0}{1}", path, @"\DataDriven\TestDataCsv.csv");
-            return DataDrivenHelper.ReadDataDriveFileCsv(path, new[] { "user", "password" }, "credentialCsv");
+            return DataDrivenHelper.ReadDataDriveFileCsv(ProjectBaseConfiguration.DataDrivenFileCSV, new[] { "user", "password" }, "credentialCsv");
         }
     }
 }
