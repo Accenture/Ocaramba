@@ -30,9 +30,8 @@ init:
           echo Windows: 
 
           (Get-WmiObject -class Win32_OperatingSystem).Caption
-      } else{
-        echo 'ASPNETCORE_ENVIRONMENT' $env:ASPNETCORE_ENVIRONMENT
       }
+      echo 'ASPNETCORE_ENVIRONMENT' $env:ASPNETCORE_ENVIRONMENT
       [System.Environment]::OSVersion.Version   
 dotnet_csproj:
    patch: true
@@ -69,6 +68,8 @@ environment:
   matrix:
     - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
       ASPNETCORE_ENVIRONMENT: Linux
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      ASPNETCORE_ENVIRONMENT: Windows
 before_build:
  - dotnet tool install coveralls.net --tool-path packages
  - dotnet --version
