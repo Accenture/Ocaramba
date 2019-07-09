@@ -27,9 +27,10 @@ init:
           echo Windows: 
 
           (Get-WmiObject -class Win32_OperatingSystem).Caption
+          [System.Environment]::OSVersion.Version   
       }
       echo 'ASPNETCORE_ENVIRONMENT' $env:ASPNETCORE_ENVIRONMENT
-      [System.Environment]::OSVersion.Version   
+
 dotnet_csproj:
    patch: true
    file: '**\*.csproj'
@@ -140,21 +141,43 @@ test_script:
     
     echo '********************************************NUnit tests********************************************'
     
-    dotnet vstest .\Ocaramba.Tests.Angular\bin\Release\netcoreapp2.2\Ocaramba.Tests.Angular.dll --test-adapter-path:. --logger:Appveyor
-
+    if ($isWindows) {
+        cd .\Ocaramba.Tests.Angular\bin\Release\netcoreapp2.2
+     
+    } else{
+        cd ./Ocaramba.Tests.Angular/bin/Release/netcoreapp2.2
+    }
+    
+    dotnet vstest Ocaramba.Tests.Angular.dll --test-adapter-path:. --logger:Appveyor
      if($lastexitcode -ne 0)
       {
        echo 'lastexitcode' $lastexitcode
       }
-
-    dotnet vstest .\Ocaramba.Tests.NUnit\bin\Release\netcoreapp2.2\Ocaramba.Tests.NUnit.dll --test-adapter-path:. --logger:Appveyor
+    
+     if ($isWindows) {
+        cd ..\..\..\..
+        cd .\Ocaramba.Tests.NUnit\bin\Release\netcoreapp2.2
+     
+    } else{
+        cd ../../../..
+        cd ./Ocaramba.Tests.NUnit/bin/Release/netcoreapp2.2
+    }
+    dotnet vstest Ocaramba.Tests.NUnit.dll --test-adapter-path:. --logger:Appveyor
 
       if($lastexitcode -ne 0)
       {
        echo 'lastexitcode' $lastexitcode
       }
-
-    dotnet vstest .\Ocaramba.UnitTests\bin\Release\netcoreapp2.2\Ocaramba.UnitTests.dll --test-adapter-path:. --logger:Appveyor 
+    
+    if ($isWindows) {
+        cd ..\..\..\..
+        cd .\Ocaramba.UnitTests\bin\Release\netcoreapp2.2
+     
+    } else{
+        cd ../../../..
+        cd ./Ocaramba.UnitTests/bin/Release/netcoreapp2.2
+    }
+    dotnet vstest Ocaramba.UnitTests.dll --test-adapter-path:. --logger:Appveyor 
 
     if($lastexitcode -ne 0)
       {
@@ -163,13 +186,13 @@ test_script:
       
       
     if ($isWindows) {  
+        cd ..\..\..\..
         & nunit3-console.exe .\Ocaramba.Tests.Angular\bin\Release\net45\Ocaramba.Tests.Angular.dll .\Ocaramba.Tests.NUnit\bin\Release\net45\Ocaramba.Tests.NUnit.dll .\Ocaramba.UnitTests\bin\Release\net45\Ocaramba.UnitTests.dll
 
         if($lastexitcode -ne 0)
           {
            echo 'lastexitcode' $lastexitcode
           }
-    }
 
     7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.NUnit\bin\Release\**\*.png
 
@@ -182,22 +205,36 @@ test_script:
     7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Angular\bin\Release\**\*.html
 
     7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Angular\bin\Release\**\*.log
+    } else {
+    7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.Tests.NUnit/bin/Release/**/*.png
+
+    7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.Tests.NUnit/bin/Release/**/*.html
+
+    7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.Tests.NUnit/bin/Release/**/*.log
+
+    7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.Tests.Angular/bin/Release/**/*.png
+
+    7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.Tests.Angular/bin/Release/**/*.html
+
+    7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.Tests.Angular/bin/Release/**/*.log
+    
+    }
     
     echo '********************************************CloudProviderCrossBrowser tests********************************************'
     
     echo '********************************************BrowserStack tests********************************************'
     
-    .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\net45" "Ocaramba.Tests.CloudProviderCrossBrowser.dll.config" "//appSettings" "RemoteWebDriverHub" "http://$($env:browserstackuser):$($env:browserstackkey)@hub-cloud.browserstack.com/wd/hub"
-    
-    .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\net45" "Ocaramba.Tests.CloudProviderCrossBrowser.dll.config" "//DriverCapabilities" "build" "Ocaramba.Tests.BrowserStackCrossBrowser$env:appveyor_build_version" $true
-    
-    if ($isWindows) { 
-    & nunit3-console.exe .\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\Ocaramba.Tests.CloudProviderCrossBrowser.dll --workers=5
+    if ($isWindows) {
+        .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\net45" "Ocaramba.Tests.CloudProviderCrossBrowser.dll.config" "//appSettings" "RemoteWebDriverHub" "http://$($env:browserstackuser):$($env:browserstackkey)@hub-cloud.browserstack.com/wd/hub"
+        
+        .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\net45" "Ocaramba.Tests.CloudProviderCrossBrowser.dll.config" "//DriverCapabilities" "build" "Ocaramba.Tests.BrowserStackCrossBrowser$env:appveyor_build_version" $true
+         
+        & nunit3-console.exe .\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\Ocaramba.Tests.CloudProviderCrossBrowser.dll --workers=5
 
-    if($lastexitcode -ne 0)
-      {
-       echo 'lastexitcode' $lastexitcode
-      }
+        if($lastexitcode -ne 0)
+          {
+           echo 'lastexitcode' $lastexitcode
+          }
     }
       
    
@@ -222,6 +259,6 @@ for:
 on_finish:
 - ps: >-
     if ($isWindows) {
-        #$blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+        $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
     }
 
