@@ -35,7 +35,12 @@ namespace Ocaramba.Logger
         /// <summary>
         /// The logger
         /// </summary>
-        private readonly Logger log = LogManager.GetCurrentClassLogger();
+#if net45
+        private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
+#endif
+#if netcoreapp2_2
+        private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+#endif
 
         /// <summary>
         /// The start test time
@@ -72,7 +77,7 @@ namespace Ocaramba.Logger
         /// <param name="args">The arguments.</param>
         public void Info(string message, params object[] args)
         {
-            this.log.Info(CultureInfo.CurrentCulture, message, args);
+            Logger.Info(CultureInfo.CurrentCulture, message, args);
         }
 
         /// <summary>
@@ -82,7 +87,7 @@ namespace Ocaramba.Logger
         /// <param name="args">The arguments.</param>
         public void Warn(string message, params object[] args)
         {
-            this.log.Warn(CultureInfo.CurrentCulture, message, args);
+            Logger.Warn(CultureInfo.CurrentCulture, message, args);
         }
 
         /// <summary>
@@ -92,7 +97,7 @@ namespace Ocaramba.Logger
         /// <param name="args">The arguments.</param>
         public void Error(string message, params object[] args)
         {
-            this.log.Error(CultureInfo.CurrentCulture, message, args);
+            Logger.Error(CultureInfo.CurrentCulture, message, args);
         }
 
         /// <summary>

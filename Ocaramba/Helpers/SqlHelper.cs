@@ -37,7 +37,12 @@ namespace Ocaramba.Helpers
         /// <summary>
         /// NLog logger handle
         /// </summary>
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+#if net45
+        private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
+#endif
+#if netcoreapp2_2
+        private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+#endif
 
         /// <summary>
         /// Method is used for execution SQL query (select) and reading each row from column.

@@ -9,7 +9,12 @@ namespace Ocaramba.Tests.Angular.PageObjects
 
     public class TutorialPage : ProjectPageBase
     {
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+#if net45
+        private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
+#endif
+#if netcoreapp2_2
+        private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+#endif
 
         /// <summary>
         /// Locators for elements

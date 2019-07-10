@@ -32,7 +32,12 @@ namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
     /// </summary>
     public class StatusCodesPage : ProjectPageBase
     {
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+#if net45
+        private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
+#endif
+#if netcoreapp2_2
+        private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+#endif
 
         private readonly ElementLocator
             statusCodeHeader = new ElementLocator(Locator.XPath, "//h3[text()='Status Codes']"),

@@ -41,7 +41,12 @@ namespace Ocaramba.Tests.NUnit.DataDriven
     /// </summary>
     public static class DataDrivenHelper
     {
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+#if net45
+        private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
+#endif
+#if netcoreapp2_2
+        private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+#endif
 
         /// <summary>
         /// Reads the data drive file and set test name.

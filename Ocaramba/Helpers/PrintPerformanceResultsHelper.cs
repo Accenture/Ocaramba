@@ -32,7 +32,12 @@ namespace Ocaramba.Helpers
     /// </summary>
     public static class PrintPerformanceResultsHelper
     {
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+#if net45
+        private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
+#endif
+#if netcoreapp2_2
+        private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+#endif
 
         /// <summary>
         /// Prints the performance summary of percentiles 90 duration in millisecond in Teamcity.

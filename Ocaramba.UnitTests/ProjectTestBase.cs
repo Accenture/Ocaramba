@@ -32,6 +32,7 @@ namespace Ocaramba.Test.Automation.UnitTests
     /// </summary>
     public class ProjectTestBase : TestBase
     {
+
         private readonly DriverContext driverContext = new DriverContext();
 
         /// <summary>
