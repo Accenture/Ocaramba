@@ -148,14 +148,23 @@ test_script:
        echo 'lastexitcode' $lastexitcode
       }
     
-    dotnet test --configuration Release --no-build --no-restore Ocaramba.Tests.NUnit -maxCpuCount --test-adapter-path:. --logger:Appveyor
+    if ($isWindows) { 
+    dotnet test --configuration Release --filter TestCategory!=TakingScreehShots --no-build --no-restore Ocaramba.Tests.NUnit -maxCpuCount --test-adapter-path:. --logger:Appveyor
+    } else {
+    dotnet test --configuration Release --filter TestCategory!=NotImplementedInCoreOrUploadDownload --no-build --no-restore Ocaramba.Tests.NUnit -maxCpuCount --test-adapter-path:. --logger:Appveyor
+    }
 
     if($lastexitcode -ne 0)
       {
        echo 'lastexitcode' $lastexitcode
       }
       
-    dotnet test --configuration Release --no-build --no-restore Ocaramba.UnitTests -maxCpuCount --test-adapter-path:. --logger:Appveyor
+    if ($isWindows) {
+    dotnet test --configuration Release TestCategory!=TakingScreehShots --no-build --no-restore Ocaramba.UnitTests -maxCpuCount --test-adapter-path:. --logger:Appveyor
+    } else {
+    
+    dotnet test --configuration Release TestCategory!=NotImplementedInCoreOrUploadDownload --no-build --no-restore Ocaramba.UnitTests -maxCpuCount --test-adapter-path:. --logger:Appveyor
+    }
 
     if($lastexitcode -ne 0)
       {
@@ -266,7 +275,7 @@ test_script:
     
     .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.NUnit\bin\Release\net45\" "Ocaramba.Tests.NUnit.dll.config" "//appSettings" "browser|RemoteWebDriverHub" "RemoteWebDriver|http://localhost:4444/wd/hub" $true
     
-    & nunit3-console.exe .\Ocaramba.Tests.NUnit\bin\Release\net45\Ocaramba.Tests.NUnit.dll --where (cat==BasicNUnit) --result=myresults.xml`;format=AppVeyor
+    & nunit3-console.exe .\Ocaramba.Tests.NUnit\bin\Release\net45\Ocaramba.Tests.NUnit.dll --where:(cat==BasicNUnit) --result=myresults.xml`;format=AppVeyor
 
     if($lastexitcode -ne 0)
       {

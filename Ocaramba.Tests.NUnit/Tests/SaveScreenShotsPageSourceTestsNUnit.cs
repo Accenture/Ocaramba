@@ -32,6 +32,8 @@ namespace Ocaramba.Tests.NUnit.Tests
     public class SaveScreenShotsPageSourceTestsNUnit : ProjectTestBase
     {
         [Test]
+        [Category("TakingScreehShots")]
+        [Category("NotImplementedInCoreOrUploadDownload")]
         public void SaveFullScreenShotTest()
         {
             var downloadPage = new InternetPage(this.DriverContext).OpenHomePage().GoToFileDownloader();

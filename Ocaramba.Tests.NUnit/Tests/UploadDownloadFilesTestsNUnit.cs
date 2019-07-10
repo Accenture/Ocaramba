@@ -29,7 +29,7 @@ namespace Ocaramba.Tests.NUnit.Tests
     /// Tests to test framework, downloading files, must be exexuted after UploadFilesTestsNUnit.
     /// </summary>
     [TestFixture]
-    [Category("herokuapp")]
+    [Category("herokuapp"), Category("NotImplementedInCoreOrUploadDownload")]
     [Parallelizable(ParallelScope.Fixtures)]
     public class UploadDownloadFilesTestsNUnit : ProjectTestBase
     {
