@@ -141,21 +141,21 @@ test_script:
     
     echo '********************************************NUnit tests********************************************'
     
-    dotnet test --configuration Release --no-build --no-restore Ocaramba.Tests.Angular --test-adapter-path:. --logger:Appveyor
+    dotnet test --configuration Release --no-build --no-restore Ocaramba.Tests.Angular -maxCpuCount --test-adapter-path:. --logger:Appveyor
     
      if($lastexitcode -ne 0)
       {
        echo 'lastexitcode' $lastexitcode
       }
     
-    dotnet test --configuration Release --no-build --no-restore Ocaramba.Tests.NUnit --test-adapter-path:. --logger:Appveyor
+    dotnet test --configuration Release --no-build --no-restore Ocaramba.Tests.NUnit -maxCpuCount --test-adapter-path:. --logger:Appveyor
 
     if($lastexitcode -ne 0)
       {
        echo 'lastexitcode' $lastexitcode
       }
-    dotnet test --configuration Release --no-build --no-restore Ocaramba.UnitTests --test-adapter-path:. --logger:Appveyor
-
+      
+    dotnet test --configuration Release --no-build --no-restore Ocaramba.UnitTests -maxCpuCount --test-adapter-path:. --logger:Appveyor
 
     if($lastexitcode -ne 0)
       {
@@ -212,9 +212,20 @@ test_script:
           {
            echo 'lastexitcode' $lastexitcode
           }
+
+    
+        .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\netcoreapp2.2" "appsettings.json" "appSettings" "RemoteWebDriverHub" "http://$($env:browserstackuser):$($env:browserstackkey)@hub-cloud.browserstack.com/wd/hub" $false $true
+        
+        .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\netcoreapp2.2" "appsettings.json" "DriverCapabilities" "build" "Ocaramba.Tests.BrowserStackCrossBrowser$env:appveyor_build_version" $true $true
+    
+        dotnet test --configuration Release --no-build --no-restore Ocaramba.Tests.CloudProviderCrossBrowser -maxCpuCount --test-adapter-path:. --logger:Appveyor
+        
+        if($lastexitcode -ne 0)
+          {
+           echo 'lastexitcode' $lastexitcode
+          }
     }
-      
-   
+        
     appveyor PushArtifact testresults_$env:appveyor_build_version.zip
 
 for:
