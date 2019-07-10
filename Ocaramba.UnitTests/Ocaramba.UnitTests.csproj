@@ -42,6 +42,9 @@
     <None Update="appsettings.Linux.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="nlog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="TestOutput\TextWithinIFrameChromeError.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

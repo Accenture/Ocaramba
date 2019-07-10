@@ -164,7 +164,6 @@ test_script:
       
       
     if ($isWindows) {  
-        cd ..\..\..\..
         & nunit3-console.exe .\Ocaramba.Tests.Angular\bin\Release\net45\Ocaramba.Tests.Angular.dll .\Ocaramba.Tests.NUnit\bin\Release\net45\Ocaramba.Tests.NUnit.dll .\Ocaramba.UnitTests\bin\Release\net45\Ocaramba.UnitTests.dll
 
         if($lastexitcode -ne 0)
@@ -207,7 +206,7 @@ test_script:
         
         .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\net45" "Ocaramba.Tests.CloudProviderCrossBrowser.dll.config" "//DriverCapabilities" "build" "Ocaramba.Tests.BrowserStackCrossBrowser$env:appveyor_build_version" $true
          
-        & nunit3-console.exe .\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\Ocaramba.Tests.CloudProviderCrossBrowser.dll --workers=5
+        & nunit3-console.exe .\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\net45\Ocaramba.Tests.CloudProviderCrossBrowser.dll --workers=5
 
         if($lastexitcode -ne 0)
           {
@@ -237,6 +236,6 @@ for:
 on_finish:
 - ps: >-
     if ($isWindows) {
-        $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+        #$blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
     }
 
