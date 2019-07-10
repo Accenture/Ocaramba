@@ -161,8 +161,7 @@ test_script:
       {
        echo 'lastexitcode' $lastexitcode
       }
-      
-      
+          
     if ($isWindows) {  
         & nunit3-console.exe .\Ocaramba.Tests.Angular\bin\Release\net45\Ocaramba.Tests.Angular.dll .\Ocaramba.Tests.NUnit\bin\Release\net45\Ocaramba.Tests.NUnit.dll .\Ocaramba.UnitTests\bin\Release\net45\Ocaramba.UnitTests.dll
 
@@ -170,31 +169,6 @@ test_script:
           {
            echo 'lastexitcode' $lastexitcode
           }
-
-    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.NUnit\bin\Release\**\*.png
-
-    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.NUnit\bin\Release\**\*.html
-
-    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.NUnit\bin\Release\**\*.log
-
-    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Angular\bin\Release\**\*.png
-
-    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Angular\bin\Release\**\*.html
-
-    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Angular\bin\Release\**\*.log
-    } else {
-    7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.Tests.NUnit/bin/Release/**/*.png
-
-    7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.Tests.NUnit/bin/Release/**/*.html
-
-    7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.Tests.NUnit/bin/Release/**/*.log
-
-    7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.Tests.Angular/bin/Release/**/*.png
-
-    7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.Tests.Angular/bin/Release/**/*.html
-
-    7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.Tests.Angular/bin/Release/**/*.log
-    
     }
     
     echo '********************************************CloudProviderCrossBrowser tests********************************************'
@@ -224,6 +198,45 @@ test_script:
           {
            echo 'lastexitcode' $lastexitcode
           }
+    }
+    
+     if ($isWindows) { 
+    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.NUnit\bin\Release\**\*.png
+
+    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.NUnit\bin\Release\**\*.html
+
+    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.NUnit\bin\Release\**\*.log
+
+    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Angular\bin\Release\**\*.png
+
+    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Angular\bin\Release\**\*.html
+
+    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Angular\bin\Release\**\*.log
+    
+    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.UnitTests\bin\Release\**\*.png
+
+    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.UnitTests\bin\Release\**\*.html
+
+    7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.UnitTests\bin\Release\**\*.log
+    } else {
+    7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.Tests.NUnit/bin/Release/**/*.png
+
+    7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.Tests.NUnit/bin/Release/**/*.html
+
+    7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.Tests.NUnit/bin/Release/**/*.log
+
+    7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.Tests.Angular/bin/Release/**/*.png
+
+    7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.Tests.Angular/bin/Release/**/*.html
+
+    7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.Tests.Angular/bin/Release/**/*.log
+    
+    7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.UnitTests/bin/Release/**/*.png
+
+    7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.UnitTests/bin/Release/**/*.html
+
+    7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.UnitTests/bin/Release/**/*.log
+    
     }
         
     appveyor PushArtifact testresults_$env:appveyor_build_version.zip
