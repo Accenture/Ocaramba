@@ -141,43 +141,21 @@ test_script:
     
     echo '********************************************NUnit tests********************************************'
     
-    if ($isWindows) {
-        cd .\Ocaramba.Tests.Angular\bin\Release\netcoreapp2.2
-     
-    } else{
-        cd ./Ocaramba.Tests.Angular/bin/Release/netcoreapp2.2
-    }
+    dotnet test --configuration Release --no-build --no-restore Ocaramba.Tests.Angular --test-adapter-path:. --logger:Appveyor
     
-    dotnet vstest Ocaramba.Tests.Angular.dll --test-adapter-path:. --logger:Appveyor
      if($lastexitcode -ne 0)
       {
        echo 'lastexitcode' $lastexitcode
       }
     
-     if ($isWindows) {
-        cd ..\..\..\..
-        cd .\Ocaramba.Tests.NUnit\bin\Release\netcoreapp2.2
-     
-    } else{
-        cd ../../../..
-        cd ./Ocaramba.Tests.NUnit/bin/Release/netcoreapp2.2
-    }
-    dotnet vstest Ocaramba.Tests.NUnit.dll --test-adapter-path:. --logger:Appveyor
+    dotnet test --configuration Release --no-build --no-restore Ocaramba.Tests.NUnit --test-adapter-path:. --logger:Appveyor
 
-      if($lastexitcode -ne 0)
+    if($lastexitcode -ne 0)
       {
        echo 'lastexitcode' $lastexitcode
       }
-    
-    if ($isWindows) {
-        cd ..\..\..\..
-        cd .\Ocaramba.UnitTests\bin\Release\netcoreapp2.2
-     
-    } else{
-        cd ../../../..
-        cd ./Ocaramba.UnitTests/bin/Release/netcoreapp2.2
-    }
-    dotnet vstest Ocaramba.UnitTests.dll --test-adapter-path:. --logger:Appveyor 
+    dotnet test --configuration Release --no-build --no-restore Ocaramba.UnitTests --test-adapter-path:. --logger:Appveyor
+
 
     if($lastexitcode -ne 0)
       {
