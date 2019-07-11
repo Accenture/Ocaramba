@@ -115,6 +115,7 @@ namespace Ocaramba.Helpers
             }
 
             canceller.Cancel();
+            canceller.Dispose();
             return result;
         }
     }

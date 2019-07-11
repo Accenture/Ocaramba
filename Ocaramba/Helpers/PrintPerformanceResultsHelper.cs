@@ -25,6 +25,9 @@ namespace Ocaramba.Helpers
     using System.ComponentModel;
     using System.Diagnostics;
     using System.Linq;
+#if netcoreapp2_2
+    using System.Management.Automation;
+#endif
     using NLog;
 
     /// <summary>
@@ -109,16 +112,24 @@ namespace Ocaramba.Helpers
         /// <param name="measuresToPrint">Average load times for particular scenarios and browsers.</param>
         public static void PrintResultsInAppVeyor(IOrderedEnumerable<string> measuresToPrint)
         {
+#if net45
             // Use ProcessStartInfo class
-            ProcessStartInfo startInfo = new ProcessStartInfo();
+            ProcessStartInfo startInfo = new ProcessStartInfo
+            {
+                CreateNoWindow = false,
+                UseShellExecute = false,
+                FileName = "appveyor",
+                WindowStyle = ProcessWindowStyle.Hidden,
+            };
 
-            startInfo.CreateNoWindow = false;
-            startInfo.UseShellExecute = false;
-            startInfo.FileName = "appveyor";
-            startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+#endif
+
             for (int i = 0; i < measuresToPrint.Count(); i++)
             {
-                startInfo.Arguments = "AddTest " + measuresToPrint.ElementAt(i);
+                var text = "AddTest " + measuresToPrint.ElementAt(i);
+
+#if net45
+                startInfo.Arguments = text;
 
                 // Start the process with the info we specified.
                 // Call WaitForExit and then the using statement will close.
@@ -137,6 +148,19 @@ namespace Ocaramba.Helpers
                     Logger.Info("AppVeyor app not found");
                     break;
                 }
+#endif
+
+#if netcoreapp2_2
+                text = "Add-AppveyorTest -Name " + measuresToPrint.ElementAt(i);
+                using (var ps = PowerShell.Create())
+                {
+                    var results = ps.AddScript(text).Invoke();
+                    foreach (var result in results)
+                    {
+                        Debug.Write(result.ToString());
+                    }
+                }
+#endif
             }
         }
     }

@@ -620,7 +620,7 @@ namespace Ocaramba.Helpers
         /// </code></example>
         public static string RenameFile(string oldName, string newName, string subFolder, FileType type)
         {
-            newName = newName + ReturnFileExtension(type);
+            newName += ReturnFileExtension(type);
             return RenameFile(BaseConfiguration.ShortTimeout, oldName, newName, subFolder);
         }
 

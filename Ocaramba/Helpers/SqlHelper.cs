@@ -153,9 +153,7 @@ namespace Ocaramba.Helpers
 
             foreach (string column in columns)
             {
-                string keyValue;
-
-                if (resultTemp.TryGetValue(column, out keyValue))
+                if (resultTemp.TryGetValue(column, out var keyValue))
                 {
                     resultList[column] = keyValue;
                 }

@@ -72,7 +72,6 @@ namespace Ocaramba
         {
             get
             {
-                BrowserType browserType;
                 bool supportedBrowser = false;
                 string setting = null;
 #if netcoreapp2_2
@@ -83,7 +82,7 @@ namespace Ocaramba
 
 #endif
                 Logger.Trace(CultureInfo.CurrentCulture, "Browser value from AppConfig '{0}'", setting);
-                supportedBrowser = Enum.TryParse(setting, out browserType);
+                supportedBrowser = Enum.TryParse(setting, out BrowserType browserType);
                 if (supportedBrowser)
                 {
                     return browserType;
@@ -100,7 +99,6 @@ namespace Ocaramba
         {
             get
             {
-                BrowserType browserType;
                 bool supportedBrowser = false;
                 string setting = null;
 #if net45
@@ -112,7 +110,7 @@ namespace Ocaramba
 
                 Logger.Trace(CultureInfo.CurrentCulture, "Driver Capabilities value from App.config '{0}'", setting);
 
-                supportedBrowser = Enum.TryParse(setting, out browserType);
+                supportedBrowser = Enum.TryParse(setting, out BrowserType browserType);
                 if (supportedBrowser)
                 {
                     return browserType;
@@ -819,6 +817,7 @@ namespace Ocaramba
             }
         }
 #if  netcoreapp2_2
+
         /// <summary>
         /// Converting settings from appsettings.json into the NameValueCollection, key - value pairs.
         /// </summary>
