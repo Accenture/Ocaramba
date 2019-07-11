@@ -31,7 +31,8 @@ namespace Ocaramba.UnitTests.Tests
 {
     [TestFixture]
     [Parallelizable(ParallelScope.Fixtures)]
-    [Category("TakingScreehShots")]
+    [Category("TakingScreehShots")] 
+    [Category("NotImplementedInCoreOrUploadDownload")]
     public class TakingScreehShotsOfElementsTests : ProjectTestBase
     {
 #if netcoreapp2_2
