@@ -50,7 +50,7 @@ namespace Ocaramba.UnitTests.Tests
 #if netcoreapp2_2
             if (BaseConfiguration.Env == "Linux")
             {
-                Assert.AreEqual("Drag and Drop\\nA\\nB", titleByCssSelector);
+                Assert.AreEqual("Drag and Drop\nA\nB", titleByCssSelector);
             }
             else
             {

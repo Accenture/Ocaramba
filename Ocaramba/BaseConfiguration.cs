@@ -20,13 +20,13 @@
 //     SOFTWARE.
 // </license>
 
-using System.Collections.Generic;
-using System.Collections.Specialized;
-#if netcoreapp2_2
-using Microsoft.Extensions.Configuration;
-#endif
 namespace Ocaramba
 {
+    using System.Collections.Generic;
+    using System.Collections.Specialized;
+#if netcoreapp2_2
+    using Microsoft.Extensions.Configuration;
+#endif
     using System;
     using System.Collections.ObjectModel;
     using System.Configuration;
@@ -35,14 +35,12 @@ namespace Ocaramba
     using Ocaramba;
 
     /// <summary>
-    /// SeleniumConfiguration that consume app.config file <see href="https://github.com/ObjectivityLtd/Ocaramba/wiki/Description%20of%20App.config%20file">More details on wiki</see>
+    /// SeleniumConfiguration that consume app.config file <see href="https://github.com/ObjectivityLtd/Ocaramba/wiki/Description%20of%20App.config%20file">More details on wiki</see>.
     /// </summary>
     public static class BaseConfiguration
     {
-
-
         /// <summary>
-        /// The logger
+        /// The logger.
         /// </summary>
 #if net45
         private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
@@ -51,12 +49,13 @@ namespace Ocaramba
         public static readonly string Env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
         /// <summary>
-        /// Getting appsettings.json file
+        /// Getting appsettings.json file.
         /// </summary>
         public static readonly IConfigurationRoot Builder = new ConfigurationBuilder()
             .AddJsonFile("appsettings.json", true, true)
             .AddJsonFile($"appsettings.{Env}.json", true, true)
             .Build();
+
         private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
 #endif
 
@@ -89,6 +88,7 @@ namespace Ocaramba
                 {
                     return browserType;
                 }
+
                 return BrowserType.None;
             }
         }
@@ -141,6 +141,7 @@ namespace Ocaramba
                 {
                     return string.Empty;
                 }
+
                 return setting;
             }
         }
@@ -156,7 +157,7 @@ namespace Ocaramba
                 return ConfigurationManager.AppSettings["protocol"];
 #endif
 #if  netcoreapp2_2
-                return Builder["appSettings:protocol"];          
+                return Builder["appSettings:protocol"];
 #endif
             }
         }
@@ -315,7 +316,7 @@ namespace Ocaramba
         }
 
         /// <summary>
-        /// Gets the path and file name of the Firefox browser executable
+        /// Gets the path and file name of the Firefox browser executable.
         /// </summary>
         public static string FirefoxBrowserExecutableLocation
         {
@@ -339,7 +340,7 @@ namespace Ocaramba
         }
 
         /// <summary>
-        /// Gets the path and file name of the Chrome browser executable
+        /// Gets the path and file name of the Chrome browser executable.
         /// </summary>
         public static string ChromeBrowserExecutableLocation
         {
@@ -363,7 +364,7 @@ namespace Ocaramba
         }
 
         /// <summary>
-        /// Gets the Remote Web Driver hub url
+        /// Gets the Remote Web Driver hub url.
         /// </summary>
         public static Uri RemoteWebDriverHub
         {
@@ -518,6 +519,7 @@ namespace Ocaramba
                 {
                     return true;
                 }
+
                 return false;
             }
         }
@@ -549,7 +551,7 @@ namespace Ocaramba
                         "URIError",
                         "Refused to display",
                         "Internal Server Error",
-                        "Cannot read property"
+                        "Cannot read property",
                     };
                 }
 
@@ -581,6 +583,7 @@ namespace Ocaramba
                 {
                     return true;
                 }
+
                 return false;
             }
         }
@@ -609,6 +612,7 @@ namespace Ocaramba
                 {
                     return true;
                 }
+
                 return false;
             }
         }
@@ -637,6 +641,7 @@ namespace Ocaramba
                 {
                     return true;
                 }
+
                 return false;
             }
         }
@@ -697,12 +702,13 @@ namespace Ocaramba
                 {
                     return true;
                 }
+
                 return false;
             }
         }
 
         /// <summary>
-        /// Gets the download folder key value
+        /// Gets the download folder key value.
         /// </summary>
         public static string DownloadFolder
         {
@@ -718,7 +724,7 @@ namespace Ocaramba
         }
 
         /// <summary>
-        /// Gets the screen shot folder key value
+        /// Gets the screen shot folder key value.
         /// </summary>
         public static string ScreenShotFolder
         {
@@ -734,7 +740,7 @@ namespace Ocaramba
         }
 
         /// <summary>
-        /// Gets the page source folder key value
+        /// Gets the page source folder key value.
         /// </summary>
         public static string PageSourceFolder
         {
@@ -808,15 +814,16 @@ namespace Ocaramba
                 {
                     return true;
                 }
+
                 return false;
             }
         }
 #if  netcoreapp2_2
         /// <summary>
-        /// Converting settings from appsettings.json into the NameValueCollection, key - value pairs 
+        /// Converting settings from appsettings.json into the NameValueCollection, key - value pairs.
         /// </summary>
-        /// <param name="preferences">Section name in appsettings.json file</param>
-        /// <returns></returns>
+        /// <param name="preferences">Section name in appsettings.json file.</param>
+        /// <returns>Settings.</returns>
         public static NameValueCollection GetNameValueCollectionFromAppsettings(string preferences)
         {
             NameValueCollection preferencesCollection = new NameValueCollection();
@@ -830,7 +837,9 @@ namespace Ocaramba
             {
                 string value = null;
                 if (kvp.Value != null)
+                {
                     value = kvp.Value.ToString();
+                }
 
                 preferencesCollection.Add(kvp.Key.ToString(), value);
             }

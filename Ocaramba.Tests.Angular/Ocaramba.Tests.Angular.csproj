@@ -56,4 +56,12 @@
     <DefineConstants>net45</DefineConstants>
 </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net45|AnyCPU'">
+    <CodeAnalysisRuleSet>..\Ocaramba\fxcop-sonarqube.tests.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net45|AnyCPU'">
+    <CodeAnalysisRuleSet>..\Ocaramba\fxcop-sonarqube.tests.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+
 </Project>

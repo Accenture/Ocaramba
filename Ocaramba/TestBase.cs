@@ -26,7 +26,7 @@ namespace Ocaramba
     using Ocaramba.Helpers;
 
     /// <summary>
-    /// Class contains method for all tests, should be used in project test base
+    /// Class contains method for all tests, should be used in project test base.
     /// </summary>
     public class TestBase
     {
@@ -56,22 +56,22 @@ namespace Ocaramba
         }
 
         /// <summary>
-        /// Save Page Source
+        /// Save Page Source.
         /// </summary>
         /// <param name="driverContext">
-        /// Driver context includes
+        /// Driver context includes.
         /// </param>
-        /// <returns>Path to the page source</returns>
+        /// <returns>Path to the page source.</returns>
         public string SavePageSource(DriverContext driverContext)
         {
             return driverContext.SavePageSource(driverContext.TestTitle);
         }
 
         /// <summary>
-        /// Fail Test If Verify Failed and clear verify messages
+        /// Fail Test If Verify Failed and clear verify messages.
         /// </summary>
-        /// <param name="driverContext">Driver context includes</param>
-        /// <returns>True if test failed</returns>
+        /// <param name="driverContext">Driver context includes.</param>
+        /// <returns>True if test failed.</returns>
         public bool IsVerifyFailedAndClearMessages(DriverContext driverContext)
         {
             if (driverContext.VerifyMessages.Count.Equals(0))

@@ -28,7 +28,7 @@ namespace Ocaramba.Helpers
     using NLog;
 
     /// <summary>
-    /// Class which support displaying performance test results. <see href="https://github.com/ObjectivityLtd/Ocaramba/wiki/Performance%20measures">More details on wiki</see>
+    /// Class which support displaying performance test results. <see href="https://github.com/ObjectivityLtd/Ocaramba/wiki/Performance%20measures">More details on wiki</see>.
     /// </summary>
     public static class PrintPerformanceResultsHelper
     {
@@ -104,9 +104,9 @@ namespace Ocaramba.Helpers
         }
 
         /// <summary>
-        /// Prints test results in AppVeyor
+        /// Prints test results in AppVeyor.
         /// </summary>
-        /// <param name="measuresToPrint">Average load times for particular scenarios and browsers</param>
+        /// <param name="measuresToPrint">Average load times for particular scenarios and browsers.</param>
         public static void PrintResultsInAppVeyor(IOrderedEnumerable<string> measuresToPrint)
         {
             // Use ProcessStartInfo class

@@ -23,7 +23,7 @@
 namespace Ocaramba
 {
     /// <summary>
-    /// The page element locator type. Needs to be translated to automation framework specific locators
+    /// The page element locator type. Needs to be translated to automation framework specific locators.
     /// </summary>
     public enum Locator
     {
@@ -65,6 +65,6 @@ namespace Ocaramba
         /// <summary>
         /// The XPath selector
         /// </summary>
-        XPath
+        XPath,
     }
 }

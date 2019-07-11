@@ -30,7 +30,7 @@ namespace Ocaramba.Helpers
     using Ocaramba.Exceptions;
 
     /// <summary>
-    /// Contains wait methods with timeouts
+    /// Contains wait methods with timeouts.
     /// </summary>
     public static class WaitHelper
     {
@@ -39,8 +39,8 @@ namespace Ocaramba.Helpers
         /// </summary>
         /// <param name="condition">The condition to be met.</param>
         /// <param name="timeout">The timeout value [seconds] indicating how long to wait for the condition.</param>
-        /// <param name="message">The exception message</param>
-        /// <exception cref="WaitTimeoutException">Timeout exception when condition is not met</exception>
+        /// <param name="message">The exception message.</param>
+        /// <exception cref="WaitTimeoutException">Timeout exception when condition is not met.</exception>
         /// <example>How to use it: <code>
         /// WaitHelper.Wait(() => CountFiles(folder, type) > filesNumber, TimeSpan.FromSeconds(waitTime), timeoutMessage);
         /// </code></example>
@@ -55,8 +55,8 @@ namespace Ocaramba.Helpers
         /// <param name="condition">The condition to be met.</param>
         /// <param name="timeout">The timeout value [seconds] indicating how long to wait for the condition.</param>
         /// <param name="sleepInterval">The value [seconds] indicating how often to check for the condition to be true.</param>
-        /// <param name="message">The exception message</param>
-        /// <exception cref="WaitTimeoutException">Timeout exception when condition is not met</exception>
+        /// <param name="message">The exception message.</param>
+        /// <exception cref="WaitTimeoutException">Timeout exception when condition is not met.</exception>
         /// <example>How to use it: <code>
         /// WaitHelper.Wait(() => CountFiles(folder, type) > filesNumber, TimeSpan.FromSeconds(waitTime), TimeSpan.FromSeconds(1), timeoutMessage);
         /// </code></example>
@@ -77,7 +77,7 @@ namespace Ocaramba.Helpers
         /// <param name="timeout">The timeout value [seconds] indicating how long to wait for the condition.</param>
         /// <param name="sleepInterval">The value [seconds] indicating how often to check for the condition to be true.</param>
         /// <returns>
-        /// True if condition is met in given timeout
+        /// True if condition is met in given timeout.
         /// </returns>
         /// <example>How to use it: <code>
         /// bool result = WaitHelper.Wait(() => CountFiles(folder, type) > filesNumber, TimeSpan.FromSeconds(waitTime), TimeSpan.FromSeconds(1));
@@ -108,7 +108,7 @@ namespace Ocaramba.Helpers
                                     return condition();
                                 }
                             },
-                              canceller.Token);
+                        canceller.Token);
                 }
 
                 Thread.Sleep(sleepInterval);

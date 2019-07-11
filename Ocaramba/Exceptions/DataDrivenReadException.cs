@@ -26,7 +26,7 @@ namespace Ocaramba.Exceptions
     using System.Runtime.Serialization;
 
     /// <summary>
-    /// Exception to throw when problem with setting the test case name from parameters
+    /// Exception to throw when problem with setting the test case name from parameters.
     /// </summary>
     public class DataDrivenReadException : Exception
     {

@@ -20,11 +20,6 @@
 //     SOFTWARE.
 // </license>
 
-using System.Collections.Generic;
-#if netcoreapp2_2
-using Microsoft.Extensions.Configuration;
-#endif
-
 namespace Ocaramba
 {
     using System;
@@ -34,9 +29,10 @@ namespace Ocaramba
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.IO;
-    using Helpers;
-    using Logger;
     using NLog;
+    using Ocaramba.Helpers;
+    using Ocaramba.Logger;
+    using Ocaramba.Types;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Chrome;
     using OpenQA.Selenium.Edge;
@@ -44,10 +40,9 @@ namespace Ocaramba
     using OpenQA.Selenium.IE;
     using OpenQA.Selenium.Remote;
     using OpenQA.Selenium.Safari;
-    using Types;
 
     /// <summary>
-    /// Contains handle to driver and methods for web browser
+    /// Contains handle to driver and methods for web browser.
     /// </summary>
     [SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable", Justification = "Driver is disposed on test end")]
     public partial class DriverContext
@@ -76,7 +71,7 @@ namespace Ocaramba
         public event EventHandler<DriverOptionsSetEventArgs> DriverOptionsSet;
 
         /// <summary>
-        /// Gets instance of Performance PerformanceMeasures class
+        /// Gets instance of Performance PerformanceMeasures class.
         /// </summary>
         public PerformanceHelper PerformanceMeasures { get; } = new PerformanceHelper();
 
@@ -89,12 +84,12 @@ namespace Ocaramba
         public string TestTitle { get; set; }
 
         /// <summary>
-        /// Gets or sets the Environment Browsers from App.config
+        /// Gets or sets the Environment Browsers from App.config.
         /// </summary>
         public string CrossBrowserEnvironment { get; set; }
 
         /// <summary>
-        /// Gets Sets Folder name for ScreenShot
+        /// Gets Sets Folder name for ScreenShot.
         /// </summary>
         public string ScreenShotFolder
         {
@@ -105,7 +100,7 @@ namespace Ocaramba
         }
 
         /// <summary>
-        /// Gets Sets Folder name for Download
+        /// Gets Sets Folder name for Download.
         /// </summary>
         public string DownloadFolder
         {
@@ -116,7 +111,7 @@ namespace Ocaramba
         }
 
         /// <summary>
-        /// Gets Sets Folder name for PageSource
+        /// Gets Sets Folder name for PageSource.
         /// </summary>
         public string PageSourceFolder
         {
@@ -135,7 +130,7 @@ namespace Ocaramba
         public bool IsTestFailed { get; set; }
 
         /// <summary>
-        /// Gets or sets test logger
+        /// Gets or sets test logger.
         /// </summary>
         public TestLogger LogTest
         {
@@ -151,7 +146,7 @@ namespace Ocaramba
         }
 
         /// <summary>
-        /// Gets driver Handle
+        /// Gets driver Handle.
         /// </summary>
         public IWebDriver Driver
         {
@@ -162,7 +157,7 @@ namespace Ocaramba
         }
 
         /// <summary>
-        /// Gets all verify messages
+        /// Gets all verify messages.
         /// </summary>
         public Collection<ErrorDetail> VerifyMessages
         {
@@ -173,7 +168,7 @@ namespace Ocaramba
         }
 
         /// <summary>
-        /// Gets or sets directory where assembly files are located
+        /// Gets or sets directory where assembly files are located.
         /// </summary>
         public string CurrentDirectory { get; set; }
 
@@ -203,7 +198,7 @@ namespace Ocaramba
 
                 // retrieving settings from config file
                 NameValueCollection firefoxPreferences = new NameValueCollection();
-               
+
                 NameValueCollection firefoxExtensions = new NameValueCollection();
 #if net45
                 firefoxPreferences = ConfigurationManager.GetSection("FirefoxPreferences") as NameValueCollection;
@@ -213,6 +208,7 @@ namespace Ocaramba
                 firefoxPreferences = BaseConfiguration.GetNameValueCollectionFromAppsettings("FirefoxPreferences");
                 firefoxExtensions = BaseConfiguration.GetNameValueCollectionFromAppsettings("FirefoxExtensions");
 #endif
+
                 // preference for downloading files
                 options.SetPreference("browser.download.dir", this.DownloadFolder);
                 options.SetPreference("browser.download.folderList", 2);
@@ -502,7 +498,7 @@ namespace Ocaramba
         /// <summary>
         /// Starts the specified Driver.
         /// </summary>
-        /// <exception cref="NotSupportedException">When driver not supported</exception>
+        /// <exception cref="NotSupportedException">When driver not supported.</exception>
         [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "Driver disposed later in stop method")]
         public void Start()
         {

@@ -39,7 +39,7 @@ namespace Ocaramba
     using OpenQA.Selenium.IE;
 
     /// <summary>
-    /// Contains handle to driver and methods for web browser
+    /// Contains handle to driver and methods for web browser.
     /// </summary>
     [SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable", Justification = "Driver is disposed on test end")]
     public partial class DriverContext
@@ -50,7 +50,7 @@ namespace Ocaramba
         /// <param name="errorDetail">The error detail.</param>
         /// <param name="folder">The folder.</param>
         /// <param name="title">The title.</param>
-        /// <returns>Path to the screenshot</returns>
+        /// <returns>Path to the screenshot.</returns>
         public string SaveScreenshot(ErrorDetail errorDetail, string folder, string title)
         {
             var fileName = string.Format(CultureInfo.CurrentCulture, "{0}_{1}_{2}.png", title, errorDetail.DateTime.ToString("yyyy-MM-dd HH-mm-ss-fff", CultureInfo.CurrentCulture), "browser");
@@ -80,7 +80,7 @@ namespace Ocaramba
         /// Saves the page source.
         /// </summary>
         /// <param name="fileName">Name of the file.</param>
-        /// <returns>The saved source file</returns>
+        /// <returns>The saved source file.</returns>
         public string SavePageSource(string fileName)
         {
             if (BaseConfiguration.GetPageSourceEnabled)
@@ -107,15 +107,15 @@ namespace Ocaramba
         }
 
         /// <summary>
-        /// Takes and saves screen shot
+        /// Takes and saves screen shot.
         /// </summary>
-        /// <returns>Array of filepaths</returns>
+        /// <returns>Array of filepaths.</returns>
         public string[] TakeAndSaveScreenshot()
         {
             List<string> filePaths = new List<string>();
             if (BaseConfiguration.FullDesktopScreenShotEnabled)
             {
-                //to do TakeScreenShot
+                // to do TakeScreenShot
 #if net45
                 filePaths.Add(TakeScreenShot.Save(TakeScreenShot.DoIt(), ImageFormat.Png, this.ScreenShotFolder, this.TestTitle));
 #endif
@@ -130,9 +130,9 @@ namespace Ocaramba
         }
 
         /// <summary>
-        /// Logs JavaScript errors
+        /// Logs JavaScript errors.
         /// </summary>
-        /// <returns>True if JavaScript errors found</returns>
+        /// <returns>True if JavaScript errors found.</returns>
         public bool LogJavaScriptErrors()
         {
             IEnumerable<LogEntry> jsErrors = null;
@@ -169,10 +169,10 @@ namespace Ocaramba
         /// <summary>
         /// Sets the driver options.
         /// </summary>
-        /// <typeparam name="T">The type of DriverOptions for the specific Browser</typeparam>
+        /// <typeparam name="T">The type of DriverOptions for the specific Browser.</typeparam>
         /// <param name="options">The options.</param>
         /// <returns>
-        /// The Driver Options
+        /// The Driver Options.
         /// </returns>
         private T SetDriverOptions<T>(T options)
             where T : DriverOptions
@@ -188,7 +188,7 @@ namespace Ocaramba
                 HttpProxy = BaseConfiguration.Proxy,
                 FtpProxy = BaseConfiguration.Proxy,
                 SslProxy = BaseConfiguration.Proxy,
-                SocksProxy = BaseConfiguration.Proxy
+                SocksProxy = BaseConfiguration.Proxy,
             };
             return proxy;
          }
@@ -211,6 +211,7 @@ namespace Ocaramba
 #if netcoreapp2_2
             firefoxArguments = BaseConfiguration.GetNameValueCollectionFromAppsettings("FirefoxArguments");
 #endif
+
             // if there are any arguments
             if (firefoxArguments != null)
             {
@@ -221,6 +222,7 @@ namespace Ocaramba
                     option.AddArgument(firefoxArguments.GetKey(i));
                 }
             }
+
             return option;
         }
 

@@ -28,12 +28,12 @@ namespace Ocaramba.Logger
     using NLog;
 
     /// <summary>
-    /// Class for test logger
+    /// Class for test logger.
     /// </summary>
     public class TestLogger
     {
         /// <summary>
-        /// The logger
+        /// The logger.
         /// </summary>
 #if net45
         private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
@@ -43,7 +43,7 @@ namespace Ocaramba.Logger
 #endif
 
         /// <summary>
-        /// The start test time
+        /// The start test time.
         /// </summary>
         private DateTime startTestTime;
 

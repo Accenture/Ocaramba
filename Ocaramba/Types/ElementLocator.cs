@@ -61,11 +61,11 @@ namespace Ocaramba.Types
         public string Value { get; set; }
 
         /// <summary>
-        /// Formats the generic element locator definition and create the instance
+        /// Formats the generic element locator definition and create the instance.
         /// </summary>
         /// <param name="parameters">The parameters.</param>
         /// <returns>
-        /// New element locator with value changed by injected parameters
+        /// New element locator with value changed by injected parameters.
         /// </returns>
         /// <example>How we can replace parts of defined locator: <code>
         /// private readonly ElementLocator menuLink = new ElementLocator(Locator.XPath, "//*[@title='{0}' and @ms.title='{1}']");

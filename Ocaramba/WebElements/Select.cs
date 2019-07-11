@@ -44,7 +44,7 @@ namespace Ocaramba.WebElements
 #endif
 
         /// <summary>
-        /// The web element
+        /// The web element.
         /// </summary>
         private readonly IWebElement webElement;
 
@@ -64,7 +64,7 @@ namespace Ocaramba.WebElements
         /// <example>Simple use of SelectElement: <code>
         /// this.Driver.GetElement&lt;Select&gt;(WebElement).SelectElement().SelectedOption;
         /// </code></example>
-        /// <returns>Return new SelectElement handle</returns>
+        /// <returns>Return new SelectElement handle.</returns>
         public SelectElement SelectElement()
         {
             return new SelectElement(this.webElement);
@@ -170,7 +170,7 @@ namespace Ocaramba.WebElements
         /// </summary>
         /// <param name="option">The text.</param>
         /// <returns>
-        /// True or False depends if text is available in dropdown
+        /// True or False depends if text is available in dropdown.
         /// </returns>
         public bool IsSelectOptionAvailable(string option)
         {
@@ -183,7 +183,7 @@ namespace Ocaramba.WebElements
         /// <param name="option">The text.</param>
         /// <param name="timeout">The timeout.</param>
         /// <returns>
-        /// True or False depends if text is available in dropdown
+        /// True or False depends if text is available in dropdown.
         /// </returns>
         public bool IsSelectOptionAvailable(string option, double timeout)
         {
@@ -197,7 +197,7 @@ namespace Ocaramba.WebElements
         /// Waits the until dropdown is populated.
         /// </summary>
         /// <param name="timeout">The timeout.</param>
-        /// <returns>Web element when dropdown populated</returns>
+        /// <returns>Web element when dropdown populated.</returns>
         private IWebElement WaitUntilDropdownIsPopulated(double timeout)
         {
             var selectElement = new SelectElement(this.webElement);

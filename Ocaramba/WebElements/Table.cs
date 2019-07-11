@@ -41,7 +41,7 @@ namespace Ocaramba.WebElements
 #endif
 
         /// <summary>
-        /// The web element
+        /// The web element.
         /// </summary>
         private readonly IWebElement webElement;
 
@@ -56,12 +56,12 @@ namespace Ocaramba.WebElements
         }
 
         /// <summary>
-        /// Returns a text representation of the grid or table html like element
+        /// Returns a text representation of the grid or table html like element.
         /// </summary>
         /// <param name="rowLocator">The row locator.</param>
-        /// <param name="columnLocator">The column locator</param>
+        /// <param name="columnLocator">The column locator.</param>
         /// <returns>
-        /// Text representation of the grid or table html like element
+        /// Text representation of the grid or table html like element.
         /// </returns>
         public string[][] GetTable(ElementLocator rowLocator, ElementLocator columnLocator)
         {

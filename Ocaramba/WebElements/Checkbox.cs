@@ -33,7 +33,7 @@ namespace Ocaramba.WebElements
     public class Checkbox : RemoteWebElement
     {
         /// <summary>
-        /// The web element
+        /// The web element.
         /// </summary>
         private readonly IWebElement webElement;
 

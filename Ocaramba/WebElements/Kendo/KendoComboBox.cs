@@ -29,14 +29,14 @@ namespace Ocaramba.WebElements.Kendo
     using OpenQA.Selenium;
 
     /// <summary>
-    ///     Kendo Combo Box element
+    ///     Kendo Combo Box element.
     /// </summary>
     public class KendoComboBox : KendoSelect
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="KendoComboBox" /> class.
         /// </summary>
-        /// <param name="webElement">The webElement</param>
+        /// <param name="webElement">The webElement.</param>
         public KendoComboBox(IWebElement webElement)
             : base(webElement)
         {
@@ -72,9 +72,9 @@ namespace Ocaramba.WebElements.Kendo
         }
 
         /// <summary>
-        ///     Types text into KendoComboBox input
+        /// Types text into KendoComboBox input.
         /// </summary>
-        /// <param name="text">Text to type</param>
+        /// <param name="text">Text to type.</param>
         public new void SendKeys(string text)
         {
             this.Input.Clear();

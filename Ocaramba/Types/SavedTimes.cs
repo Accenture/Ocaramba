@@ -30,17 +30,17 @@ namespace Ocaramba.Types
     public class SavedTimes
     {
         /// <summary>
-        /// The scenario
+        /// The scenario.
         /// </summary>
         private readonly string scenario;
 
         /// <summary>
-        /// The browser name
+        /// The browser name.
         /// </summary>
         private readonly string browserName;
 
         /// <summary>
-        /// The duration
+        /// The duration.
         /// </summary>
         private long duration;
 

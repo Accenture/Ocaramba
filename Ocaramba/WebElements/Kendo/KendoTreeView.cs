@@ -32,7 +32,7 @@ namespace Ocaramba.WebElements.Kendo
     using OpenQA.Selenium.Remote;
 
     /// <summary>
-    ///     Kendo Tree View element
+    ///     Kendo Tree View element.
     /// </summary>
     public class KendoTreeView : RemoteWebElement
     {
@@ -43,7 +43,7 @@ namespace Ocaramba.WebElements.Kendo
         /// <summary>
         ///     Initializes a new instance of the <see cref="KendoTreeView" /> class.
         /// </summary>
-        /// <param name="webElement">The webElement</param>
+        /// <param name="webElement">The webElement.</param>
         public KendoTreeView(IWebElement webElement)
             : base(webElement.ToDriver() as RemoteWebDriver, null)
         {
@@ -64,7 +64,7 @@ namespace Ocaramba.WebElements.Kendo
         }
 
         /// <summary>
-        ///     Gets selected webElement or null
+        ///     Gets selected webElement or null.
         /// </summary>
         public IWebElement SelectedOption
         {
