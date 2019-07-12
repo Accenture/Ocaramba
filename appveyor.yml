@@ -280,7 +280,7 @@ test_script:
     
     .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.NUnit\bin\Release\net45\" "Ocaramba.Tests.NUnit.dll.config" "//appSettings" "browser|RemoteWebDriverHub" "RemoteWebDriver|http://localhost:4444/wd/hub" $true
     
-    & nunit3-console.exe .\Ocaramba.Tests.NUnit\bin\Release\net45\Ocaramba.Tests.NUnit.dll --where:(cat==BasicNUnit) --result=myresults.xml`;format=AppVeyor
+    & nunit3-console.exe .\Ocaramba.Tests.NUnit\bin\Release\net45\Ocaramba.Tests.NUnit.dll --where:cat==BasicNUnit --result=myresults.xml`;format=AppVeyor
 
     if($lastexitcode -ne 0)
       {
