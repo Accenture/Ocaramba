@@ -2,6 +2,7 @@
 
   <PropertyGroup>
 	<TargetFrameworks>netcoreapp2.2</TargetFrameworks>
+	<DebugType>full</DebugType>
 	<TargetFrameworks Condition="'$(OS)' != 'Unix'">net45;netcoreapp2.2</TargetFrameworks>
     <Description>Framework to automate tests using Selenium WebDriver</Description>
     <Copyright>Copyright ©  2015</Copyright>

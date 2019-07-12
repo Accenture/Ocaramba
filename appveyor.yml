@@ -142,7 +142,11 @@ test_script:
     
     echo '********************************************NUnit tests********************************************'
     
+    if ($isWindows) {
+    & "C:\Users\appveyor\.nuget\packages\opencover\4.7.922\tools\OpenCover.Console.exe" -target:"dotnet.exe" -targetargs:"test --configuration Release --no-build --no-restore Ocaramba.Tests.Angular -maxCpuCount --test-adapter-path:. --logger:Appveyor" -filter:"+[Ocaramba]*" -oldStyle -register:user -output:opencoverCoverage.xml
+    } else {
     dotnet test --configuration Release --no-build --no-restore Ocaramba.Tests.Angular -maxCpuCount --test-adapter-path:. --logger:Appveyor
+    }
     
      if($lastexitcode -ne 0)
       {
@@ -150,7 +154,7 @@ test_script:
       }
     
     if ($isWindows) { 
-    dotnet test --configuration Release --filter TestCategory!=TakingScreehShots --no-build --no-restore Ocaramba.Tests.NUnit -maxCpuCount --test-adapter-path:. --logger:Appveyor
+    & "C:\Users\appveyor\.nuget\packages\opencover\4.7.922\tools\OpenCover.Console.exe" -target:"dotnet.exe" -mergeoutput -targetargs:"test --configuration Release --filter TestCategory!=TakingScreehShots --no-build --no-restore Ocaramba.Tests.NUnit -maxCpuCount --test-adapter-path:. --logger:Appveyor" -filter:"+[Ocaramba]*" -oldStyle -register:user -output:opencoverCoverage.xml
     } else {
     dotnet test --configuration Release --filter TestCategory!=NotImplementedInCoreOrUploadDownload --no-build --no-restore Ocaramba.Tests.NUnit -maxCpuCount --test-adapter-path:. --logger:Appveyor
     }
@@ -161,7 +165,7 @@ test_script:
       }
       
     if ($isWindows) {
-    dotnet test --configuration Release --filter TestCategory!=TakingScreehShots --no-build --no-restore Ocaramba.UnitTests -maxCpuCount --test-adapter-path:. --logger:Appveyor
+    & "C:\Users\appveyor\.nuget\packages\opencover\4.7.922\tools\OpenCover.Console.exe" -target:"dotnet.exe" -mergeoutput -targetargs:"test --configuration Release --filter TestCategory!=TakingScreehShots --no-build --no-restore Ocaramba.UnitTests -maxCpuCount --test-adapter-path:. --logger:Appveyor" -filter:"+[Ocaramba]*" -oldStyle -register:user -output:opencoverCoverage.xml
     } else {
     
     dotnet test --configuration Release --filter TestCategory!=NotImplementedInCoreOrUploadDownload --no-build --no-restore Ocaramba.UnitTests -maxCpuCount --test-adapter-path:. --logger:Appveyor
@@ -202,7 +206,7 @@ test_script:
         
         .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\netcoreapp2.2" "appsettings.json" "DriverCapabilities" "build" "Ocaramba.Tests.BrowserStackCrossBrowser$env:appveyor_build_version" $true $true
     
-        dotnet test --configuration Release --no-build --no-restore Ocaramba.Tests.CloudProviderCrossBrowser -maxCpuCount --test-adapter-path:. --logger:Appveyor
+         & "C:\Users\appveyor\.nuget\packages\opencover\4.7.922\tools\OpenCover.Console.exe" -target:"dotnet.exe" -mergeoutput -targetargs:"test --configuration Release --no-build --no-restore Ocaramba.Tests.CloudProviderCrossBrowser -maxCpuCount --test-adapter-path:. --logger:Appveyor" -filter:"+[Ocaramba]*" -oldStyle -register:user -output:opencoverCoverage.xml
         
         if($lastexitcode -ne 0)
           {
@@ -258,7 +262,7 @@ test_script:
     
     echo "Time taken to download $($grid): $((Get-Date).Subtract($start_time).Seconds) second(s)"
     
-    echo '********************************************Start Selenium Grid in background****************************************' 
+    echo '******************************************Start Selenium Grid in background****************************************' 
     
     $appHub=Start-Process java -ArgumentList '-jar', $output' -role hub' -RedirectStandardOutput $outputLogs'console_hub.out' -RedirectStandardError $outputLogs'console_hub.err' -passthru
 
@@ -303,6 +307,12 @@ test_script:
     echo "Stop Selenium Grid hub" 
     
     Stop-Process -Id $appHub.Id
+    
+    echo '*******************************************Sending coverage test results********************************************'
+    
+    & .\packages\csmacnz.Coveralls.exe --opencover -i opencoverCoverage.xml --repoToken $env:COVERALLS_REPO_TOKEN --useRelativePaths --commitId $env:APPVEYOR_REPO_COMMIT --commitBranch $env:APPVEYOR_REPO_BRANCH --commitAuthor $env:APPVEYOR_REPO_COMMIT_AUTHOR --commitEmail $env:APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL --commitMessage $env:APPVEYOR_REPO_COMMIT_MESSAGE --jobId $env:APPVEYOR_BUILD_NUMBER --serviceName appveyor
+
+    7z a testresults_$env:appveyor_build_version.zip opencoverCoverage.xml
     
     echo '*****************************Add Selenium Grid logs to testresults****************************'
     
