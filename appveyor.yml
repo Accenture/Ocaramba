@@ -179,11 +179,22 @@ for:
               }
  
          echo '********************************************XUnit tests********************************************'   
-         & $OpenCover -target:"dotnet.exe" -targetargs:"test --configuration Release --no-build --no-restore Ocaramba.Tests.Xunit -maxCpuCount --test-adapter-path:. --logger:Appveyor" -filter:"+[Ocaramba]*" -oldStyle -register:user -output:opencoverCoverage.xml
-         if($lastexitcode -ne 0)
+         
+         $xunit = (Resolve-Path "C:\Users\appveyor\.nuget\packages\xunit.runner.console\*\tools\netcoreapp2.0\xunit.console.exe").ToString()
+         
+         & "C:\Users\appveyor\.nuget\packages\opencover\4.7.922\tools\OpenCover.Console.exe" -target:"dotnet.exe" -targetargs:"test --configuration Release --no-build --no-restore Ocaramba.Tests.Xunit -maxCpuCount --test-adapter-path:. --logger:Appveyor" -filter:"+[Ocaramba]*" -oldStyle -register:user -output:opencoverCoverage.xml
+        
+          if($lastexitcode -ne 0)
           {
            echo 'lastexitcode' $lastexitcode
           }
+          
+          & $xunit .\Ocaramba.Tests.Xunit\bin\Release\net45\Ocaramba.Tests.Xunit.dll -appveyor -noshadow
+
+          if($lastexitcode -ne 0)
+              {
+               echo 'lastexitcode' $lastexitcode
+              }
           
          echo '********************************************CloudProviderCrossBrowser tests********************************************'
         
@@ -331,6 +342,12 @@ for:
          7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Angular\bin\Release\**\*.html
 
          7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Angular\bin\Release\**\*.log
+         
+        7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Xunit\bin\Release\**\*.png
+
+         7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Xunit\bin\Release\**\*.html
+
+         7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Xunit\bin\Release\**\*.log
         
          7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.UnitTests\bin\Release\**\*.png
 
@@ -360,7 +377,7 @@ for:
 -
   matrix:
     only:
-      - APPVEYOR_BUILD_WORKER_IMAGE: Linux
+      - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
       
   test_script:
     - ps: >-
@@ -392,6 +409,32 @@ for:
           {
            echo 'lastexitcode' $lastexitcode
           } 
+          
+         7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.Tests.NUnit/bin/Release/**/*.png
+
+         7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.Tests.NUnit/bin/Release/**/*.html
+
+         7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.Tests.NUnit/bin/Release/**/*.log
+
+         7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.Tests.Angular/bin/Release/**/*.png
+
+         7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.Tests.Angular/bin/Release/**/*.html
+
+         7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.Tests.Angular/bin/Release/**/*.log
+            
+         7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.UnitTests/bin/Release/**/*.png
+
+         7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.UnitTests/bin/Release/**/*.html
+
+         7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.UnitTests/bin/Release/**/*.log 
+         
+         7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.Tests.Xunit/bin/Release/**/*.png
+
+         7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.Tests.Xunit/bin/Release/**/*.html
+
+         7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.Tests.Xunit/bin/Release/**/*.log
+         
+        appveyor PushArtifact testresults_$env:appveyor_build_version.zip   
 on_finish:
 - ps: >-
     if ($isWindows) {
