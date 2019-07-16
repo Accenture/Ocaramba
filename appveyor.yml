@@ -149,22 +149,24 @@ for:
          echo '********************************************Executing tests********************************************'
         
          echo '********************************************NUnit tests********************************************'
+         
+         $OpenCover = (Resolve-Path "C:\Users\appveyor\.nuget\packages\opencover\*\tools\OpenCover.Console.exe").ToString()
     
-         & "C:\Users\appveyor\.nuget\packages\opencover\4.7.922\tools\OpenCover.Console.exe" -target:"dotnet.exe" -targetargs:"test --configuration Release --no-build --no-restore Ocaramba.Tests.Angular -maxCpuCount --test-adapter-path:. --logger:Appveyor" -filter:"+[Ocaramba]*" -oldStyle -register:user -output:opencoverCoverage.xml   
+         & $OpenCover -target:"dotnet.exe" -targetargs:"test --configuration Release --no-build --no-restore Ocaramba.Tests.Angular -maxCpuCount --test-adapter-path:. --logger:Appveyor" -filter:"+[Ocaramba]*" -oldStyle -register:user -output:opencoverCoverage.xml   
 
          if($lastexitcode -ne 0)
           {
            echo 'lastexitcode' $lastexitcode
           }
 
-         & "C:\Users\appveyor\.nuget\packages\opencover\4.7.922\tools\OpenCover.Console.exe" -target:"dotnet.exe" -mergeoutput -targetargs:"test --configuration Release --filter TestCategory!=TakingScreehShots --no-build --no-restore Ocaramba.Tests.NUnit -maxCpuCount --test-adapter-path:. --logger:Appveyor" -filter:"+[Ocaramba]*" -oldStyle -register:user -output:opencoverCoverage.xml
+         & $OpenCover -target:"dotnet.exe" -mergeoutput -targetargs:"test --configuration Release --filter TestCategory!=TakingScreehShots --no-build --no-restore Ocaramba.Tests.NUnit -maxCpuCount --test-adapter-path:. --logger:Appveyor" -filter:"+[Ocaramba]*" -oldStyle -register:user -output:opencoverCoverage.xml
     
          if($lastexitcode -ne 0)
           {
            echo 'lastexitcode' $lastexitcode
           }
       
-         & "C:\Users\appveyor\.nuget\packages\opencover\4.7.922\tools\OpenCover.Console.exe" -target:"dotnet.exe" -mergeoutput -targetargs:"test --configuration Release --filter TestCategory!=TakingScreehShots --no-build --no-restore Ocaramba.UnitTests -maxCpuCount --test-adapter-path:. --logger:Appveyor" -filter:"+[Ocaramba]*" -oldStyle -register:user -output:opencoverCoverage.xml
+         & $OpenCover -target:"dotnet.exe" -mergeoutput -targetargs:"test --configuration Release --filter TestCategory!=TakingScreehShots --no-build --no-restore Ocaramba.UnitTests -maxCpuCount --test-adapter-path:. --logger:Appveyor" -filter:"+[Ocaramba]*" -oldStyle -register:user -output:opencoverCoverage.xml
     
          if($lastexitcode -ne 0)
           {
@@ -180,9 +182,9 @@ for:
  
          echo '********************************************XUnit tests********************************************'   
          
-         $xunit = (Resolve-Path "C:\Users\appveyor\.nuget\packages\xunit.runner.console\*\tools\netcoreapp2.0\xunit.console.exe").ToString()
+         $xunit = (Resolve-Path "C:\Users\appveyor\.nuget\packages\xunit.runner.console\*\tools\net452\xunit.console.exe").ToString()
          
-         & "C:\Users\appveyor\.nuget\packages\opencover\4.7.922\tools\OpenCover.Console.exe" -target:"dotnet.exe" -targetargs:"test --configuration Release --no-build --no-restore Ocaramba.Tests.Xunit -maxCpuCount --test-adapter-path:. --logger:Appveyor" -filter:"+[Ocaramba]*" -oldStyle -register:user -output:opencoverCoverage.xml
+         & $OpenCover -target:"dotnet.exe" -targetargs:"test --configuration Release --no-build --no-restore Ocaramba.Tests.Xunit -maxCpuCount --test-adapter-path:. --logger:Appveyor" -filter:"+[Ocaramba]*" -oldStyle -register:user -output:opencoverCoverage.xml
         
           if($lastexitcode -ne 0)
           {
@@ -217,7 +219,7 @@ for:
         
          .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\netcoreapp2.2" "appsettings.json" "DriverCapabilities" "build" "Ocaramba.Tests.BrowserStackCrossBrowser$env:appveyor_build_version" $true $true
     
-         & "C:\Users\appveyor\.nuget\packages\opencover\4.7.922\tools\OpenCover.Console.exe" -target:"dotnet.exe" -mergeoutput -targetargs:"test --configuration Release --no-build --no-restore Ocaramba.Tests.CloudProviderCrossBrowser -maxCpuCount --test-adapter-path:. --logger:Appveyor" -filter:"+[Ocaramba]*" -oldStyle -register:user -output:opencoverCoverage.xml
+         & $OpenCover -target:"dotnet.exe" -mergeoutput -targetargs:"test --configuration Release --no-build --no-restore Ocaramba.Tests.CloudProviderCrossBrowser -maxCpuCount --test-adapter-path:. --logger:Appveyor" -filter:"+[Ocaramba]*" -oldStyle -register:user -output:opencoverCoverage.xml
         
          if($lastexitcode -ne 0)
           {
