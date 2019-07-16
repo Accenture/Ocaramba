@@ -7,6 +7,7 @@
   
     <ItemGroup>
     <PackageReference Include="Appveyor.TestLogger" Version="2.0.0" />
+    <PackageReference Include="MSTest.TestFramework" Version="1.4.0" />
     <PackageReference Include="NLog" Version="4.6.5" />
 	<PackageReference Include="Selenium.Support" Version="3.141.0" />
     <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
@@ -37,9 +38,19 @@
       <None Update="appsettings.Linux.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+      <None Update="DDT.csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="DDT.xml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
       <None Update="nlog.config">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+    </ItemGroup>
+  
+    <ItemGroup>
+      <Folder Include="Tests\KendoTests\" />
     </ItemGroup>
   
     <PropertyGroup Condition="'$(TargetFramework)'=='netcoreapp2.2'">
