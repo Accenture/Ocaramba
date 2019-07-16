@@ -114,7 +114,12 @@ namespace Ocaramba.Tests.MsTest
                 foreach (var filePath in filePaths)
                 {
                     this.LogTest.Info("Uploading file [{0}] to test context", filePath);
-                    //this.TestContext.AddResultFile(filePath);
+#if net45
+                    this.TestContext.AddResultFile(filePath);
+#endif
+#if netcoreapp2_2
+                    //https://github.com/Microsoft/testfx/issues/394
+#endif
                 }
             }
         }

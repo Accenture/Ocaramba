@@ -97,13 +97,24 @@ namespace Ocaramba.Tests.MsTest.Tests
             var formFormAuthentication = new InternetPage(this.DriverContext)
                 .OpenHomePage()
                 .GoToFormAuthenticationPage();
-
+#if net45
+            formFormAuthentication.EnterUserName((string)this.TestContext.DataRow["user"]);
+            formFormAuthentication.EnterPassword((string)this.TestContext.DataRow["password"]);
+#endif
+#if netcoreapp2_2
             formFormAuthentication.EnterUserName((string)this.TestContext.Properties["user"]);
             formFormAuthentication.EnterPassword((string)this.TestContext.Properties["password"]);
+#endif
             formFormAuthentication.LogOn();
             Verify.That(
                 this.DriverContext,
-                () => Assert.AreEqual((string)this.TestContext.Properties["message"], formFormAuthentication.GetMessage));
+#if net45
+                () => Assert.AreEqual((string)this.TestContext.DataRow["message"], formFormAuthentication.GetMessage));
+#endif
+#if netcoreapp2_2
+            () => Assert.AreEqual((string)this.TestContext.Properties["message"], formFormAuthentication.GetMessage));
+#endif
+
         }
 
         [DeploymentItem("Ocaramba.Tests.MsTest\\DDT.csv")]
@@ -114,13 +125,23 @@ namespace Ocaramba.Tests.MsTest.Tests
             var formFormAuthentication = new InternetPage(this.DriverContext)
                 .OpenHomePage()
                 .GoToFormAuthenticationPage();
-
+#if net45
+            formFormAuthentication.EnterUserName((string)this.TestContext.DataRow["user"]);
+            formFormAuthentication.EnterPassword((string)this.TestContext.DataRow["password"]);
+#endif
+#if netcoreapp2_2
             formFormAuthentication.EnterUserName((string)this.TestContext.Properties["user"]);
             formFormAuthentication.EnterPassword((string)this.TestContext.Properties["password"]);
+#endif
             formFormAuthentication.LogOn();
             Verify.That(
                 this.DriverContext,
-                () => Assert.AreEqual((string)this.TestContext.Properties["message"], formFormAuthentication.GetMessage));
+#if net45
+                () => Assert.AreEqual((string)this.TestContext.DataRow["message"], formFormAuthentication.GetMessage));
+#endif
+#if netcoreapp2_2
+            () => Assert.AreEqual((string)this.TestContext.Properties["message"], formFormAuthentication.GetMessage));
+#endif
         }
 
         [TestMethod]
