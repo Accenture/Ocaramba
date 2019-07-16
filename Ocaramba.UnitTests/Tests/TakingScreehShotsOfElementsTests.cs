@@ -24,7 +24,6 @@ using System.IO;
 using ImageMagick;
 using NUnit.Framework;
 using Ocaramba.Helpers;
-using Ocaramba.Test.Automation.UnitTests;
 using Ocaramba.Tests.PageObjects.PageObjects.TheInternet;
 
 namespace Ocaramba.UnitTests.Tests

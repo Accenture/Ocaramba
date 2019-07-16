@@ -24,13 +24,12 @@ namespace Ocaramba.Helpers
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Globalization;
     using System.IO;
     using System.Linq;
+    using System.Text.RegularExpressions;
     using System.Threading;
     using NLog;
-    using Ocaramba.Helpers;
 
     /// <summary>
     /// Class for handling downloading files <see href="https://github.com/ObjectivityLtd/Ocaramba/wiki/Downloading%20files">More details on wiki</see>.
@@ -648,7 +647,9 @@ namespace Ocaramba.Helpers
             {
                 if (BaseConfiguration.UseCurrentDirectory)
                 {
-                    folder = currentFolder + appConfigValue;
+                    Regex pattern = new Regex("[\\]|[\\\\]|[/]|[//]");
+                    appConfigValue = pattern.Replace(appConfigValue, string.Empty);
+                    folder = currentFolder + FilesHelper.Separator + appConfigValue;
                 }
                 else
                 {
