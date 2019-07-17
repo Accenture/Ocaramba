@@ -59,7 +59,7 @@
 	</PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)'=='net45'">
-    <DefineConstants>netcoreapp2_2</DefineConstants>
+    <DefineConstants>net45</DefineConstants>
 </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net45|AnyCPU'">
