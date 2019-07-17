@@ -23,7 +23,8 @@
 namespace Ocaramba.Tests.MsTest
 {
     using System;
-
+    using System.Collections.Generic;
+    using System.IO;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using Ocaramba;
@@ -116,9 +117,6 @@ namespace Ocaramba.Tests.MsTest
                     this.LogTest.Info("Uploading file [{0}] to test context", filePath);
 #if net45
                     this.TestContext.AddResultFile(filePath);
-#endif
-#if netcoreapp2_2
-                    //https://github.com/Microsoft/testfx/issues/394
 #endif
                 }
             }

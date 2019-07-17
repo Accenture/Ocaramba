@@ -26,7 +26,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ocaramba.Tests.MsTest", "Oc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ocaramba.Tests.Features", "Ocaramba.Tests.Features\Ocaramba.Tests.Features.csproj", "{110A82E1-F2A1-4BA9-B808-D2FBE2EAD94A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ocaramba.Tests.Xunit", "Ocaramba.Tests.Xunit\Ocaramba.Tests.Xunit.csproj", "{6714E541-3DF3-4836-BCB7-17F12993E185}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ocaramba.Tests.Xunit", "Ocaramba.Tests.Xunit\Ocaramba.Tests.Xunit.csproj", "{6714E541-3DF3-4836-BCB7-17F12993E185}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
