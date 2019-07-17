@@ -179,6 +179,15 @@ for:
               {
                echo 'lastexitcode' $lastexitcode
               }
+
+		 echo '********************************************MsTest tests********************************************'   
+
+		 & $OpenCover -target:"dotnet.exe" -mergeoutput -targetargs:"test --configuration Release --filter TestCategory!=TakingScreehShots --no-build --no-restore Ocaramba.Tests.MsTest -maxCpuCount --test-adapter-path:. --logger:Appveyor" -filter:"+[Ocaramba]*" -oldStyle -register:user -output:opencoverCoverage.xml
+    
+         if($lastexitcode -ne 0)
+          {
+           echo 'lastexitcode' $lastexitcode
+          }
  
          echo '********************************************XUnit tests********************************************'   
          
@@ -363,7 +372,13 @@ for:
 
          7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\**\*.log
             
-         appveyor PushArtifact testresults_$env:appveyor_build_version.zip   
+         7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.MsTest\bin\Release\**\*.png
+
+         7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.MsTest\bin\Release\**\*.html
+
+         7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.MsTest\bin\Release\**\*.log
+
+		 appveyor PushArtifact testresults_$env:appveyor_build_version.zip   
 
   artifacts:
   - path: .\**\Ocaramba.*.nupkg
@@ -411,6 +426,15 @@ for:
           {
            echo 'lastexitcode' $lastexitcode
           } 
+
+		echo '********************************************MsTest tests********************************************'   
+
+		dotnet test --configuration Release --no-build --no-restore Ocaramba.Tests.MsTest -maxCpuCount --test-adapter-path:. --logger:Appveyor
+    
+         if($lastexitcode -ne 0)
+          {
+           echo 'lastexitcode' $lastexitcode
+          }
           
          7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.Tests.NUnit/bin/Release/**/*.png
 
@@ -435,6 +459,12 @@ for:
          7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.Tests.Xunit/bin/Release/**/*.html
 
          7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.Tests.Xunit/bin/Release/**/*.log
+
+		 7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.Tests.MsTest/bin/Release/**/*.png
+
+         7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.Tests.MsTest/bin/Release/**/*.html
+
+         7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.Tests.MsTest/bin/Release/**/*.log
          
         appveyor PushArtifact testresults_$env:appveyor_build_version.zip   
 on_finish:
