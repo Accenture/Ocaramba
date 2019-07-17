@@ -14,6 +14,7 @@
     <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="74.0.3729.6" />
     <PackageReference Include="Selenium.WebDriver.GeckoDriver.Win64" Version="0.24.0" />
+    <PackageReference Include="Selenium.WebDriver.IEDriver" Version="3.141.59" />
   </ItemGroup>
   
     <ItemGroup Condition="'$(TargetFramework)' == 'net45'">
