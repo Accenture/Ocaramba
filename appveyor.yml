@@ -180,9 +180,9 @@ for:
                echo 'lastexitcode' $lastexitcode
               }
 
-		 echo '********************************************MsTest tests********************************************'   
+         echo '********************************************MsTest tests********************************************'   
 
-		 & $OpenCover -target:"dotnet.exe" -mergeoutput -targetargs:"test --configuration Release --filter TestCategory!=TakingScreehShots --no-build --no-restore Ocaramba.Tests.MsTest -maxCpuCount --test-adapter-path:. --logger:Appveyor" -filter:"+[Ocaramba]*" -oldStyle -register:user -output:opencoverCoverage.xml
+         & $OpenCover -target:"dotnet.exe" -mergeoutput -targetargs:"test --configuration Release --filter TestCategory!=TakingScreehShots --no-build --no-restore Ocaramba.Tests.MsTest -maxCpuCount --test-adapter-path:. --logger:Appveyor" -filter:"+[Ocaramba]*" -oldStyle -register:user -output:opencoverCoverage.xml
     
          if($lastexitcode -ne 0)
           {
