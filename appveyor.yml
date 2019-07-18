@@ -338,45 +338,15 @@ for:
         
          echo '*****************************Add Selenium Grid logs to testresults****************************'
         
-         7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.NUnit\bin\Release\**\*.err
+         7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.*\bin\Release\**\*.err
         
-         7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.NUnit\bin\Release\**\*.out
+         7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.*\bin\Release\**\*.out
        
-         7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.NUnit\bin\Release\**\*.png
+         7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.*\bin\Release\**\*.png
 
-         7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.NUnit\bin\Release\**\*.html
+         7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.*\bin\Release\**\*.html
 
-         7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.NUnit\bin\Release\**\*.log
-
-         7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Angular\bin\Release\**\*.png
-
-         7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Angular\bin\Release\**\*.html
-
-         7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Angular\bin\Release\**\*.log
-         
-         7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Xunit\bin\Release\**\*.png
-
-         7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Xunit\bin\Release\**\*.html
-
-         7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.Xunit\bin\Release\**\*.log
-        
-         7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.UnitTests\bin\Release\**\*.png
-
-         7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.UnitTests\bin\Release\**\*.html
-
-         7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.UnitTests\bin\Release\**\*.log
-        
-         7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\**\*.png
-
-         7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\**\*.html
-
-         7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\**\*.log
-            
-         7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.MsTest\bin\Release\**\*.png
-
-         7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.MsTest\bin\Release\**\*.html
-
-         7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.Tests.MsTest\bin\Release\**\*.log
+         7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.*\bin\Release\**\*.log       
 
          appveyor PushArtifact testresults_$env:appveyor_build_version.zip
 
@@ -436,35 +406,11 @@ for:
            echo 'lastexitcode' $lastexitcode
           }
           
-         7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.Tests.NUnit/bin/Release/**/*.png
+         7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.*/bin/Release/**/*.png
 
-         7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.Tests.NUnit/bin/Release/**/*.html
+         7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.*/bin/Release/**/*.html
 
-         7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.Tests.NUnit/bin/Release/**/*.log
-
-         7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.Tests.Angular/bin/Release/**/*.png
-
-         7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.Tests.Angular/bin/Release/**/*.html
-
-         7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.Tests.Angular/bin/Release/**/*.log
-            
-         7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.UnitTests/bin/Release/**/*.png
-
-         7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.UnitTests/bin/Release/**/*.html
-
-         7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.UnitTests/bin/Release/**/*.log 
-         
-         7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.Tests.Xunit/bin/Release/**/*.png
-
-         7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.Tests.Xunit/bin/Release/**/*.html
-
-         7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.Tests.Xunit/bin/Release/**/*.log
-
-         7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.Tests.MsTest/bin/Release/**/*.png
-
-         7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.Tests.MsTest/bin/Release/**/*.html
-
-         7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.Tests.MsTest/bin/Release/**/*.log
+         7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.*/bin/Release/**/*.log
          
          appveyor PushArtifact testresults_$env:appveyor_build_version.zip   
 on_finish:
