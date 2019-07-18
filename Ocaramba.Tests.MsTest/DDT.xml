@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Rows>
+  <Links>
+    <number>5</number>
+  </Links>
+  <credential>
+    <user>tomsmith</user>
+    <password>SuperSecretPassword!</password>
+    <message>You logged into a secure area!</message>
+  </credential>
+  <credential>
+    <user>wronguser</user>
+    <password>wrongpassword</password>
+    <message>Your username is invalid!</message>
+  </credential>
+</Rows>
