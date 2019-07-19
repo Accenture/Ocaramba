@@ -396,8 +396,10 @@ for:
           {
            echo 'lastexitcode' $lastexitcode
           }
-        echo '********************************************XUnit tests********************************************'  
+        echo '********************************************XUnit tests********************************************' 
+
         dotnet test --configuration Release --no-build --no-restore Ocaramba.Tests.Xunit -maxCpuCount --test-adapter-path:. --logger:Appveyor
+        
         if($lastexitcode -ne 0)
           {
            echo 'lastexitcode' $lastexitcode
