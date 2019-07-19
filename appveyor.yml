@@ -188,6 +188,12 @@ for:
           {
            echo 'lastexitcode' $lastexitcode
           }
+         & vstest.console.exe .\Ocaramba.Tests.MsTest\bin\Release\net45\Ocaramba.Tests.MsTest.dll /Settings:.\Ocaramba.Tests.MsTest\bin\Release\net45\Runsettings.runsettings
+          if($lastexitcode -ne 0)
+          {
+               echo 'lastexitcode' $lastexitcode
+          }
+
  
          echo '********************************************XUnit tests********************************************'   
          
