@@ -139,5 +139,3 @@ echo '*****************************Add Selenium Grid logs to testresults********
 7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.*\bin\Release\**\*.html
 
 7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.*\bin\Release\**\*.log       
-
-appveyor PushArtifact testresults_$env:appveyor_build_version.zip

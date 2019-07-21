@@ -78,7 +78,7 @@ build_script:
  - dotnet build --configuration Release /verbosity:minimal "Ocaramba.sln"
 after_build:
  - ps: >-
-      .\PublishingApiDocumentationOn_gh-pages.ps1
+      #.\PublishingApiDocumentationOn_gh-pages.ps1
 for:
 -
   matrix:
@@ -110,6 +110,7 @@ for:
         ./ExecutingTestsOnLinux.ps1 
 on_finish:
 - ps: >-
+    appveyor PushArtifact testresults_$env:appveyor_build_version.zip
     if ($isWindows) {
         #$blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
     }
