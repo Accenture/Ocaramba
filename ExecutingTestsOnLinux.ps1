@@ -20,8 +20,8 @@ if($lastexitcode -ne 0)
    echo 'lastexitcode' $lastexitcode
   }
   
-7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.*/bin/Release/**/*.png
+7z a testresults_Ubuntu.zip ./Ocaramba.*/bin/Release/**/TestOutput/*.png
 
-7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.*/bin/Release/**/*.html
+7z a testresults_Ubuntu.zip ./Ocaramba.*/bin/Release/**/TestOutput/*.html
 
-7z a testresults_$env:appveyor_build_version.zip ./Ocaramba.*/bin/Release/**/*.log 
+7z a testresults_Ubuntu.zip ./Ocaramba.*/bin/Release/**/*.log 
