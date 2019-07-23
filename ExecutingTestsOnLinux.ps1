@@ -24,4 +24,6 @@ if($lastexitcode -ne 0)
 
 7z a testresults_Ubuntu.zip ./Ocaramba.*/bin/Release/**/TestOutput/*.html
 
-7z a testresults_Ubuntu.zip ./Ocaramba.*/bin/Release/**/*.log 
+7z a testresults_Ubuntu.zip ./Ocaramba.*/bin/Release/**/*.log
+
+appveyor PushArtifact testresults_Ubuntu.zip
