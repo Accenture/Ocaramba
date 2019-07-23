@@ -59,6 +59,7 @@ namespace Ocaramba.Tests.NUnit.Tests
         }
 
         [Test]
+        [Category("NotImplementedInCoreOrUploadDownload")]
         public void SaveSourcePageTest()
         {
             var basicAuthPage = new InternetPage(this.DriverContext).OpenHomePageWithUserCredentials().GoToBasicAuthPage();
