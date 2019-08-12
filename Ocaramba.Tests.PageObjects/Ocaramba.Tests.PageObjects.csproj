@@ -9,7 +9,7 @@
 	<PackageReference Include="NLog" Version="4.6.5" />
 	<PackageReference Include="Selenium.Support" Version="3.141.0" />
     <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
-    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="74.0.3729.6" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="76.0.3809.6801" />
     <PackageReference Include="Selenium.WebDriver.GeckoDriver.Win64" Version="0.24.0" />
   </ItemGroup>
 
