@@ -37,7 +37,7 @@ namespace Ocaramba.Helpers
     using OpenQA.Selenium;
 
     /// <summary>
-    /// Custom screenshot solution
+    /// Custom screenshot solution.
     /// </summary>
     public static class TakeScreenShot
     {
@@ -46,7 +46,7 @@ namespace Ocaramba.Helpers
         /// <summary>
         /// Takes screen shot.
         /// </summary>
-        /// <returns>Image contains desktop screenshot</returns>
+        /// <returns>Image contains desktop screenshot.</returns>
         public static Bitmap DoIt()
         {
             Logger.Info("****************************Taking*Screenshot***************************************");
@@ -107,10 +107,10 @@ namespace Ocaramba.Helpers
         /// <summary>
         /// Takes screen shot of specific element.
         /// </summary>
-        /// <param name="element">Element to take screenshot</param>
-        /// <param name="folder">Folder to save screenshot</param>
-        /// <param name="screenshotName">Name of screenshot</param>
-        /// <returns>Full path to taken screenshot</returns>
+        /// <param name="element">Element to take screenshot.</param>
+        /// <param name="folder">Folder to save screenshot.</param>
+        /// <param name="screenshotName">Name of screenshot.</param>
+        /// <returns>Full path to taken screenshot.</returns>
         /// <example>How to use it: <code>
         /// var el = this.Driver.GetElement(this.menu);
         /// var fullPath = TakeScreenShot.TakeScreenShotOfElement(el, Directory.GetCurrentDirectory() + BaseConfiguration.ScreenShotFolder, "MenuOutSideTheIFrame");
@@ -124,12 +124,12 @@ namespace Ocaramba.Helpers
         /// <summary>
         /// Takes screen shot of specific element within iframe.
         /// </summary>
-        /// <param name="iframeLocationX">X coordinate of iframe</param>
-        /// <param name="iframeLocationY">Y coordinate of iframe</param>
-        /// <param name="element">Element to take screenshot</param>
-        /// <param name="folder">Folder to save screenshot</param>
-        /// <param name="screenshotName">Name of screenshot</param>
-        /// <returns>Full path to taken screenshot</returns>
+        /// <param name="iframeLocationX">X coordinate of iframe.</param>
+        /// <param name="iframeLocationY">Y coordinate of iframe.</param>
+        /// <param name="element">Element to take screenshot.</param>
+        /// <param name="folder">Folder to save screenshot.</param>
+        /// <param name="screenshotName">Name of screenshot.</param>
+        /// <returns>Full path to taken screenshot.</returns>
         /// <example>How to use it: <code>
         /// var iFrame = this.Driver.GetElement(this.iframe);
         /// int x = iFrame.Location.X;
@@ -172,14 +172,14 @@ namespace Ocaramba.Helpers
         /// <summary>
         /// Cut out the screen shot by giving locationX, locationY, elementWidth, elementHeight.
         /// </summary>
-        /// <param name="folder">Folder to save new screenshot</param>
-        /// <param name="newScreenShotName">Name of new screenshot</param>
+        /// <param name="folder">Folder to save new screenshot.</param>
+        /// <param name="newScreenShotName">Name of new screenshot.</param>
         /// <param name="locationX">The x-coordinate of the upper-left corner of the new rectangle.</param>
         /// <param name="locationY">The y-coordinate of the upper-left corner of the new rectangle.</param>
         /// <param name="elementWidth">The width of the new rectangle.</param>
-        /// <param name="elementHeight">The height of the new rectangle</param>
-        /// <param name="fullPathToScreenShotToCutOut">Full path to the screenshot to be cut out</param>
-        /// <returns>Full path of cutted out screenshot</returns>
+        /// <param name="elementHeight">The height of the new rectangle.</param>
+        /// <param name="fullPathToScreenShotToCutOut">Full path to the screenshot to be cut out.</param>
+        /// <returns>Full path of cutted out screenshot.</returns>
         /// <example>How to use it: <code>
         /// var fullPath = CutOutScreenShot(folder, screenshotName, locationX, locationY, elementWidth, elementHeight, fullPathToScreenShotToCutOut);
         /// </code></example>
