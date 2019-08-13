@@ -3,7 +3,7 @@
   <PropertyGroup>
 	<TargetFrameworks>netcoreapp2.2</TargetFrameworks>
 	<DebugType>full</DebugType>
-	<TargetFrameworks Condition="'$(OS)' != 'Unix'">net45;netcoreapp2.2</TargetFrameworks>
+	<TargetFrameworks Condition="'$(OS)' != 'Unix'">net451;netcoreapp2.2</TargetFrameworks>
     <Description>Framework to automate tests using Selenium WebDriver</Description>
     <Copyright>Copyright ©  2015</Copyright>
     <Company>Objectivity Bespoke Software Specialists</Company>
@@ -20,7 +20,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NLog" Version="4.6.5" />
+    <PackageReference Include="NLog" Version="4.6.6" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="4.8.4" />
     <PackageReference Include="Selenium.Support" Version="3.141.0" />
     <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="75.0.3770.90" />
@@ -31,7 +32,7 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'net45'">
+  <ItemGroup Condition="'$(TargetFramework)' == 'net451'">
 	<Reference Include="System.Configuration" />
 	<Reference Include="System.Windows.Forms" />
 	<PackageReference Include="Microsoft.AnalysisServices.AdomdClient" Version="12.0.2000.8" />
@@ -74,7 +75,7 @@
     <DefineConstants>netcoreapp2_2</DefineConstants>
 </PropertyGroup>
 
-  <PropertyGroup Condition="'$(TargetFramework)'=='net45'">
+  <PropertyGroup Condition="'$(TargetFramework)'=='net451'">
     <DefineConstants>net45</DefineConstants>
 </PropertyGroup>
 
