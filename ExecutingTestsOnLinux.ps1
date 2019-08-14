@@ -11,6 +11,10 @@ echo '********************************************XUnit tests*******************
 
 dotnet test --configuration Release --no-build --no-restore Ocaramba.Tests.Xunit -maxCpuCount --test-adapter-path:. --logger:Appveyor
 
+echo '********************************************Specflow tests********************************************' 
+
+dotnet test --configuration Release --no-build --no-restore Ocaramba.Tests.Features -maxCpuCount --test-adapter-path:. --logger:Appveyor
+
 echo '********************************************MsTest tests********************************************'   
 
 dotnet test --configuration Release --no-build --no-restore Ocaramba.Tests.MsTest -maxCpuCount --test-adapter-path:. --logger:Appveyor
