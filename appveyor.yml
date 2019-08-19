@@ -105,6 +105,10 @@ after_build:
       
       .\.nuget\nuget pack .\Ocaramba\Ocaramba.csproj -symbols -properties Configuration=Release -Verbosity detailed
       
+      Copy-Item .\.nuspec\Ocaramba.nuspec .\\Ocaramba\\Ocaramba.nuspec
+      
+      .\.nuget\nuget pack .\Ocaramba\Ocaramba.csproj -symbols -properties Configuration=Release -Verbosity detailed
+      
       echo '********************************************Copying files for gh-pages********************************************'
       
       Copy-Item -Path .\README.md -Destination .\Ocaramba.Documentation\Help\ -recurse -force -verbose 
