@@ -13,7 +13,7 @@ dotnet test --configuration Release --no-build --no-restore Ocaramba.Tests.Xunit
 
 echo '********************************************Specflow tests********************************************' 
 
-dotnet test --configuration Release --no-build --no-restore Ocaramba.Tests.Features -maxCpuCount --test-adapter-path:. --logger:Appveyor
+dotnet test Ocaramba.Tests.Features --no-build --no-restore --test-adapter-path:. --logger:Appveyor
 
 echo '********************************************MsTest tests********************************************'   
 
