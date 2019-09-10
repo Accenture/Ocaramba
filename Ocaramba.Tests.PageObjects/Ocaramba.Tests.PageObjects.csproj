@@ -9,8 +9,8 @@
 	<PackageReference Include="NLog" Version="4.6.6" />
   <PackageReference Include="Selenium.Support" Version="3.141.0" />
     <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
-    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="75.0.3770.90" />
-    <PackageReference Include="Selenium.WebDriver.GeckoDriver.Win64" Version="0.24.0" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="76.0.3809.12600" />
+    <PackageReference Include="Selenium.WebDriver.GeckoDriver.Win64" Version="0.25.0" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net451'">
@@ -19,7 +19,7 @@
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp2.2'">
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
-    <PackageReference Include="NLog.Web.AspNetCore" Version="4.8.4"/>
+    <PackageReference Include="NLog.Web.AspNetCore" Version="4.8.4" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0" />
   </ItemGroup>
 
