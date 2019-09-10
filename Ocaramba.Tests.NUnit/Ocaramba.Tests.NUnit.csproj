@@ -8,7 +8,6 @@
     <PackageReference Include="Appveyor.TestLogger" Version="2.0.0" />
     <PackageReference Include="Microsoft.TestPlatform.TestHost" Version="16.2.0" />
 	<PackageReference Include="NLog" Version="4.6.6" />
-	<PackageReference Include="NLog.Web.AspNetCore" Version="4.8.4" />
     <PackageReference Include="NPOI" Version="2.4.1" />
     <PackageReference Include="NUnit" Version="3.12.0" />
     <PackageReference Include="NUnit.Runners" Version="3.10.0" />
@@ -28,9 +27,7 @@
       <Version>2.2.0</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
-    <PackageReference Include="NLog.Web.AspNetCore">
-      <Version>4.8.3</Version>
-    </PackageReference>
+    <PackageReference Include="NLog.Web.AspNetCore" Version="4.8.4"/>
   </ItemGroup>
 
   <ItemGroup>

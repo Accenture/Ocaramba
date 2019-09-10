@@ -8,8 +8,7 @@
     <ItemGroup>
     <PackageReference Include="Appveyor.TestLogger" Version="2.0.0" />
 	<PackageReference Include="NLog" Version="4.6.6" />
-	<PackageReference Include="NLog.Web.AspNetCore" Version="4.8.4" />
-	<PackageReference Include="Selenium.Support" Version="3.141.0" />
+    <PackageReference Include="Selenium.Support" Version="3.141.0" />
     <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="75.0.3770.90" />
     <PackageReference Include="Selenium.WebDriver.GeckoDriver.Win64" Version="0.24.0" />
@@ -33,9 +32,7 @@
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp2.2'">
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
-    <PackageReference Include="NLog.Web.AspNetCore">
-      <Version>4.8.3</Version>
-    </PackageReference>
+    <PackageReference Include="NLog.Web.AspNetCore" Version="4.8.4"/>
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0" />
   </ItemGroup>
 
