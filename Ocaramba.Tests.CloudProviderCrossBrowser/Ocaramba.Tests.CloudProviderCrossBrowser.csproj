@@ -2,30 +2,28 @@
 
   <PropertyGroup>
 	<TargetFrameworks>netcoreapp2.2</TargetFrameworks>
-	<TargetFrameworks Condition="'$(OS)' != 'Unix'">net45;netcoreapp2.2</TargetFrameworks>
+	<TargetFrameworks Condition="'$(OS)' != 'Unix'">net451;netcoreapp2.2</TargetFrameworks>
   </PropertyGroup>
   
   <ItemGroup>
     <PackageReference Include="Appveyor.TestLogger" Version="2.0.0" />
     <PackageReference Include="NUnit" Version="3.12.0" />
     <PackageReference Include="NUnit.Runners" Version="3.10.0" />
-    <PackageReference Include="NUnit3TestAdapter" Version="3.13.0" />
-	<PackageReference Include="NLog" Version="4.6.5" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.14.0" />
+	<PackageReference Include="NLog" Version="4.6.6" />
 	<PackageReference Include="Selenium.Support" Version="3.141.0" />
     <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="75.0.3770.90" />
     <PackageReference Include="Selenium.WebDriver.GeckoDriver.Win64" Version="0.24.0" />
   </ItemGroup>
   
-    <ItemGroup Condition="'$(TargetFramework)' == 'net45'">
+    <ItemGroup Condition="'$(TargetFramework)' == 'net451'">
 	<Reference Include="System.Configuration" />
  </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp2.2'">
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
-    <PackageReference Include="NLog.Web.AspNetCore">
-      <Version>4.8.3</Version>
-    </PackageReference>
+    <PackageReference Include="NLog.Web.AspNetCore" Version="4.8.4" />
   </ItemGroup>
 
   <ItemGroup>
@@ -49,15 +47,15 @@
     <DefineConstants>netcoreapp2_2</DefineConstants>
 </PropertyGroup>
 
-  <PropertyGroup Condition="'$(TargetFramework)'=='net45'">
+  <PropertyGroup Condition="'$(TargetFramework)'=='net451'">
     <DefineConstants>net45</DefineConstants>
 </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net45|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net451|AnyCPU'">
     <CodeAnalysisRuleSet>..\Ocaramba\fxcop-sonarqube.tests.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net45|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net451|AnyCPU'">
     <CodeAnalysisRuleSet>..\Ocaramba\fxcop-sonarqube.tests.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
