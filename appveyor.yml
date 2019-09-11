@@ -67,7 +67,7 @@ environment:
   matrix:
     - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
       ASPNETCORE_ENVIRONMENT: Linux
-    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
       ASPNETCORE_ENVIRONMENT: Windows
 before_build:
  - dotnet tool install coveralls.net --tool-path packages
@@ -85,11 +85,11 @@ for:
 -
   matrix:
     only:
-      - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
       
   test_script:
     - ps: >-
-         .\ExecutingTestsOnWindows.ps1
+         #.\ExecutingTestsOnWindows.ps1
 
   artifacts:
   - path: .\**\Ocaramba.*.nupkg
@@ -113,7 +113,7 @@ for:
 on_finish:
 - ps: >-
     if ($isWindows) {
-        #$blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+        $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
     }
 - sh: #export APPVEYOR_SSH_BLOCK=true
 - sh: #curl -sflL 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh' | bash -e -
