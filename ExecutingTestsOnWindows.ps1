@@ -26,6 +26,12 @@ $xunit = (Resolve-Path "C:\Users\appveyor\.nuget\packages\xunit.runner.console\*
  
 & $xunit .\Ocaramba.Tests.Xunit\bin\Release\net451\Ocaramba.Tests.Xunit.dll -appveyor -noshadow
 
+echo '********************************************Specflow tests********************************************'   
+      
+& $OpenCover -target:"dotnet.exe" -mergeoutput -targetargs:"test --configuration Release --filter TestCategory!=TakingScreehShots --no-build --no-restore Ocaramba.Tests.Features -maxCpuCount --test-adapter-path:. --logger:Appveyor" -filter:"+[Ocaramba]*" -oldStyle -register:user -output:opencoverCoverage.xml
+ 
+& nunit3-console.exe .\Ocaramba.Tests.Features\bin\Release\net45\Ocaramba.Tests.Features.dll 
+
 echo '********************************************CloudProviderCrossBrowser tests********************************************'
         
 echo '********************************************BrowserStack tests********************************************'

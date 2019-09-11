@@ -11,11 +11,13 @@ echo '********************************************XUnit tests*******************
 
 dotnet test --configuration Release --no-build --no-restore Ocaramba.Tests.Xunit -maxCpuCount --test-adapter-path:. --logger:Appveyor
 
+<<<<<<< HEAD
 echo '********************************************Specflow tests********************************************' 
 
-dotnet test --configuration Release --filter TestCategory!=NotImplementedInCoreOrUploadDownload --no-build --no-restore Ocaramba.Tests.Features -maxCpuCount --test-adapter-path:. --logger:Appveyor  
+dotnet test Ocaramba.Tests.Features --no-build --no-restore --test-adapter-path:. --logger:Appveyor
 
-
+=======
+>>>>>>> parent of fb9fb8cc... appveyor scrips are updated with specflow
 echo '********************************************MsTest tests********************************************'   
 
 dotnet test --configuration Release --no-build --no-restore Ocaramba.Tests.MsTest -maxCpuCount --test-adapter-path:. --logger:Appveyor
