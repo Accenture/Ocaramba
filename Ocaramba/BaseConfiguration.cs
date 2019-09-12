@@ -133,7 +133,27 @@ namespace Ocaramba
         {
             get { return ConfigurationManager.AppSettings["proxy"]; }
         }
+        
+        public static string HttpProxy
+        {
+            get { return ConfigurationManager.AppSettings["httpProxy"]; }
+        }
+        
+        
+        public static string FtpProxy
+        {
+            get { return ConfigurationManager.AppSettings["sslProxy"]; }
+        }
+        
+        public static string SslProxy
+        {
+            get { return ConfigurationManager.AppSettings["socksproxy"]; }
+        }
 
+        public static string SocksProxy
+        {
+            get { return ConfigurationManager.AppSettings["proxy"]; }
+        }
         /// <summary>
         /// Gets the username.
         /// </summary>
