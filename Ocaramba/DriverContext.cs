@@ -501,7 +501,7 @@ namespace Ocaramba
                     this.CheckIfProxySetForSafari();
                     break;
                 case BrowserType.RemoteWebDriver:
-                    SetupRemoteWebDriver();
+                    this.SetupRemoteWebDriver();
                     break;
                 case BrowserType.Edge:
                     this.driver = new EdgeDriver(EdgeDriverService.CreateDefaultService(BaseConfiguration.PathToEdgeDriverDirectory, "MicrosoftWebDriver.exe", 52296), this.SetDriverOptions(this.EdgeOptions));
@@ -540,9 +540,7 @@ namespace Ocaramba
                 ConfigurationManager.GetSection("environments/" + this.CrossBrowserEnvironment) as NameValueCollection;
             var browserType = this.GetBrowserTypeForRemoteDriver(settings);
 
-            //seting up default value
-            dynamic browserOptions = new FirefoxOptions();
-            ;
+            dynamic browserOptions = null;
             switch (browserType)
             {
                 case BrowserType.Firefox:
@@ -572,9 +570,7 @@ namespace Ocaramba
 
             browserOptions.Proxy = this.CurrentProxy();
             this.SetRemoteDriverBrowserOptions(driverCapabilitiesConf, settings, browserOptions);
-            this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub,
-                this.SetDriverOptions(browserOptions).ToCapabilities());
-            return;
+            this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(browserOptions).ToCapabilities(), BaseConfiguration.RemoteWebDriverTimeout);
         }
 
         /// <summary>
