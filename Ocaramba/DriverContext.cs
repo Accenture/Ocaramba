@@ -533,6 +533,17 @@ namespace Ocaramba
             this.driver.Manage().Cookies.DeleteAllCookies();
         }
 
+        /// <summary>
+        /// Stop browser instance.
+        /// </summary>
+        public void Stop()
+        {
+            if (this.driver != null)
+            {
+                this.driver.Quit();
+            }
+        }
+
         private void SetupRemoteWebDriver()
         {
             var driverCapabilitiesConf = ConfigurationManager.GetSection("DriverCapabilities") as NameValueCollection;
@@ -571,17 +582,6 @@ namespace Ocaramba
             browserOptions.Proxy = this.CurrentProxy();
             this.SetRemoteDriverBrowserOptions(driverCapabilitiesConf, settings, browserOptions);
             this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(browserOptions).ToCapabilities(), BaseConfiguration.RemoteWebDriverTimeout);
-        }
-
-        /// <summary>
-        /// Stop browser instance.
-        /// </summary>
-        public void Stop()
-        {
-            if (this.driver != null)
-            {
-                this.driver.Quit();
-            }
         }
     }
 }

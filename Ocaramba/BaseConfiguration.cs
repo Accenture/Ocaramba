@@ -52,7 +52,9 @@ namespace Ocaramba
         {
             get
             {
-                Logger.Trace(CultureInfo.CurrentCulture, "Browser value from App.config '{0}'",
+                Logger.Trace(
+                    CultureInfo.CurrentCulture,
+                    "Browser value from App.config '{0}'",
                     ConfigurationManager.AppSettings["browser"]);
                 BrowserType browserType;
                 bool supportedBrowser = Enum.TryParse(ConfigurationManager.AppSettings["browser"], out browserType);
@@ -73,7 +75,9 @@ namespace Ocaramba
         {
             get
             {
-                Logger.Trace(CultureInfo.CurrentCulture, "Driver Capabilities value from App.config '{0}'",
+                Logger.Trace(
+                    CultureInfo.CurrentCulture,
+                    "Driver Capabilities value from App.config '{0}'",
                     ConfigurationManager.AppSettings["DriverCapabilities"]);
                 BrowserType browserType;
                 bool supportedBrowser =
@@ -95,7 +99,9 @@ namespace Ocaramba
         {
             get
             {
-                Logger.Trace(CultureInfo.CurrentCulture, "Gets the path to firefox profile from App.config '{0}'",
+                Logger.Trace(
+                    CultureInfo.CurrentCulture,
+                    "Gets the path to firefox profile from App.config '{0}'",
                     ConfigurationManager.AppSettings["PathToFirefoxProfile"]);
                 if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["PathToFirefoxProfile"]))
                 {
@@ -139,7 +145,7 @@ namespace Ocaramba
         }
 
         /// <summary>
-        /// Get the http proxy
+        /// Gets the http proxy
         /// </summary>
         public static string HttpProxy
         {
@@ -147,7 +153,7 @@ namespace Ocaramba
         }
 
         /// <summary>
-        /// Get the ftp proxy
+        /// Gets the ftp proxy
         /// </summary>
         public static string FtpProxy
         {
@@ -155,7 +161,7 @@ namespace Ocaramba
         }
 
         /// <summary>
-        /// Get the ssl proxy
+        /// Gets the ssl proxy
         /// </summary>
         public static string SslProxy
         {
@@ -163,7 +169,7 @@ namespace Ocaramba
         }
 
         /// <summary>
-        /// Get the socket proxy
+        /// Gets the socket proxy
         /// </summary>
         public static string SocksProxy
         {
@@ -171,13 +177,14 @@ namespace Ocaramba
         }
 
         /// <summary>
-        /// Return time used by remote web driver to wait for connection  
+        /// Gets time used by remote web driver to wait for connection.
         /// </summary>
         public static TimeSpan RemoteWebDriverTimeout
         {
             get
             {
-                return new TimeSpan(0,
+                return new TimeSpan(
+                    0,
                     0,
                     int.Parse(ConfigurationManager.AppSettings["remoteTimeout"], CultureInfo.InvariantCulture));
             }
@@ -248,7 +255,8 @@ namespace Ocaramba
         {
             get
             {
-                return Convert.ToDouble(ConfigurationManager.AppSettings["ImplicitlyWaitMilliseconds"],
+                return Convert.ToDouble(
+                    ConfigurationManager.AppSettings["ImplicitlyWaitMilliseconds"],
                     CultureInfo.CurrentCulture);
             }
         }
@@ -260,7 +268,8 @@ namespace Ocaramba
         {
             get
             {
-                Logger.Trace(CultureInfo.CurrentCulture,
+                Logger.Trace(
+                    CultureInfo.CurrentCulture,
                     "Gets the path and file name of the Firefox browser executable from App.config '{0}'",
                     ConfigurationManager.AppSettings["FirefoxBrowserExecutableLocation"]);
                 if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["FirefoxBrowserExecutableLocation"]))
@@ -279,7 +288,8 @@ namespace Ocaramba
         {
             get
             {
-                Logger.Trace(CultureInfo.CurrentCulture,
+                Logger.Trace(
+                    CultureInfo.CurrentCulture,
                     "Gets the path and file name of the Chrome browser executable from App.config '{0}'",
                     ConfigurationManager.AppSettings["FirefoxBrowserExecutableLocation"]);
                 if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["ChromeBrowserExecutableLocation"]))
@@ -306,7 +316,9 @@ namespace Ocaramba
         {
             get
             {
-                Logger.Trace(CultureInfo.CurrentCulture, "Full Desktop Screen Shot Enabled value from App.config '{0}'",
+                Logger.Trace(
+                    CultureInfo.CurrentCulture,
+                    "Full Desktop Screen Shot Enabled value from App.config '{0}'",
                     ConfigurationManager.AppSettings["FullDesktopScreenShotEnabled"]);
                 if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["FullDesktopScreenShotEnabled"]))
                 {
@@ -330,7 +342,8 @@ namespace Ocaramba
         {
             get
             {
-                Logger.Trace(CultureInfo.CurrentCulture,
+                Logger.Trace(
+                    CultureInfo.CurrentCulture,
                     "Path to the directory containing Internet Explorer Driver from App.config '{0}'",
                     ConfigurationManager.AppSettings["PathToInternetExplorerDriverDirectory"]);
                 if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["PathToInternetExplorerDriverDirectory"]))
@@ -349,7 +362,8 @@ namespace Ocaramba
         {
             get
             {
-                Logger.Trace(CultureInfo.CurrentCulture,
+                Logger.Trace(
+                    CultureInfo.CurrentCulture,
                     "Path to the directory containing Edge Driver from App.config '{0}'",
                     ConfigurationManager.AppSettings["PathToEdgeDriverDirectory"]);
                 if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["PathToEdgeDriverDirectory"]))
@@ -368,7 +382,8 @@ namespace Ocaramba
         {
             get
             {
-                Logger.Trace(CultureInfo.CurrentCulture,
+                Logger.Trace(
+                    CultureInfo.CurrentCulture,
                     "Path to the directory containing Chrome Driver from App.config '{0}'",
                     ConfigurationManager.AppSettings["PathToChromeDriverDirectory"]);
                 if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["PathToChromeDriverDirectory"]))
@@ -387,7 +402,8 @@ namespace Ocaramba
         {
             get
             {
-                Logger.Trace(CultureInfo.CurrentCulture,
+                Logger.Trace(
+                    CultureInfo.CurrentCulture,
                     "Path to the directory containing Firefox Driver from App.config '{0}'",
                     ConfigurationManager.AppSettings["PathToFirefoxDriverDirectory"]);
                 if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["PathToFirefoxDriverDirectory"]))
@@ -406,7 +422,9 @@ namespace Ocaramba
         {
             get
             {
-                Logger.Trace(CultureInfo.CurrentCulture, "JavaScript error logging value from App.config '{0}'",
+                Logger.Trace(
+                    CultureInfo.CurrentCulture,
+                    "JavaScript error logging value from App.config '{0}'",
                     ConfigurationManager.AppSettings["JavaScriptErrorLogging"]);
                 if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["JavaScriptErrorLogging"]))
                 {
@@ -430,7 +448,9 @@ namespace Ocaramba
         {
             get
             {
-                Logger.Trace(CultureInfo.CurrentCulture, "JavaScript error logging value from App.config '{0}'",
+                Logger.Trace(
+                    CultureInfo.CurrentCulture,
+                    "JavaScript error logging value from App.config '{0}'",
                     ConfigurationManager.AppSettings["JavaScriptErrorTypes"]);
                 if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["JavaScriptErrorTypes"]))
                 {
@@ -449,7 +469,7 @@ namespace Ocaramba
                 }
 
                 return new Collection<string>(ConfigurationManager.AppSettings["JavaScriptErrorTypes"]
-                    .Split(new char[] {','}));
+                    .Split(new char[] { ',' }));
             }
         }
 
@@ -460,7 +480,8 @@ namespace Ocaramba
         {
             get
             {
-                Logger.Trace(CultureInfo.CurrentCulture,
+                Logger.Trace(
+                    CultureInfo.CurrentCulture,
                     "Firefox Use Legacy Implementation Enabled value from App.config '{0}'",
                     ConfigurationManager.AppSettings["FirefoxUseLegacyImplementation"]);
                 if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["FirefoxUseLegacyImplementation"]))
@@ -485,7 +506,9 @@ namespace Ocaramba
         {
             get
             {
-                Logger.Trace(CultureInfo.CurrentCulture, "Selenium Screen Shot Enabled value from App.config '{0}'",
+                Logger.Trace(
+                    CultureInfo.CurrentCulture,
+                    "Selenium Screen Shot Enabled value from App.config '{0}'",
                     ConfigurationManager.AppSettings["SeleniumScreenShotEnabled"]);
                 if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["SeleniumScreenShotEnabled"]))
                 {
@@ -509,7 +532,9 @@ namespace Ocaramba
         {
             get
             {
-                Logger.Trace(CultureInfo.CurrentCulture, "Enable EventFiringWebDriver from App.config '{0}'",
+                Logger.Trace(
+                    CultureInfo.CurrentCulture,
+                    "Enable EventFiringWebDriver from App.config '{0}'",
                     ConfigurationManager.AppSettings["Enable EventFiringWebDriver"]);
                 if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["EnableEventFiringWebDriver"]))
                 {
@@ -533,7 +558,9 @@ namespace Ocaramba
         {
             get
             {
-                Logger.Trace(CultureInfo.CurrentCulture, "Use Current Directory value from App.config '{0}'",
+                Logger.Trace(
+                    CultureInfo.CurrentCulture,
+                    "Use Current Directory value from App.config '{0}'",
                     ConfigurationManager.AppSettings["UseCurrentDirectory"]);
                 if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["UseCurrentDirectory"]))
                 {
@@ -560,7 +587,9 @@ namespace Ocaramba
         {
             get
             {
-                Logger.Trace(CultureInfo.CurrentCulture, "Get Page Source Enabled value from App.config '{0}'",
+                Logger.Trace(
+                    CultureInfo.CurrentCulture,
+                    "Get Page Source Enabled value from App.config '{0}'",
                     ConfigurationManager.AppSettings["GetPageSourceEnabled"]);
                 if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["GetPageSourceEnabled"]))
                 {
@@ -640,7 +669,9 @@ namespace Ocaramba
         {
             get
             {
-                Logger.Trace(CultureInfo.CurrentCulture, "Angular synchronization Enabled value from App.config '{0}'",
+                Logger.Trace(
+                    CultureInfo.CurrentCulture,
+                    "Angular synchronization Enabled value from App.config '{0}'",
                     ConfigurationManager.AppSettings["SynchronizationWithAngularEnabled"]);
                 if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["SynchronizationWithAngularEnabled"]))
                 {

@@ -182,10 +182,10 @@ namespace Ocaramba
         {
             Proxy proxy = new Proxy
             {
-                HttpProxy =  BaseConfiguration.HttpProxy ?? BaseConfiguration.Proxy,
-                FtpProxy =  BaseConfiguration.FtpProxy ?? BaseConfiguration.Proxy,
-                SslProxy =  BaseConfiguration.SslProxy ?? BaseConfiguration.Proxy,
-                SocksProxy =  BaseConfiguration.SocksProxy ?? BaseConfiguration.Proxy
+                HttpProxy = BaseConfiguration.HttpProxy ?? BaseConfiguration.Proxy,
+                FtpProxy = BaseConfiguration.FtpProxy ?? BaseConfiguration.Proxy,
+                SslProxy = BaseConfiguration.SslProxy ?? BaseConfiguration.Proxy,
+                SocksProxy = BaseConfiguration.SocksProxy ?? BaseConfiguration.Proxy
             };
             return proxy;
          }
