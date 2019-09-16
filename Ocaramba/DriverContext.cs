@@ -471,6 +471,7 @@ namespace Ocaramba
         /// </summary>
         /// <exception cref="NotSupportedException">When driver not supported</exception>
         [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "Driver disposed later in stop method")]
+
         public void Start()
         {
             switch (BaseConfiguration.TestBrowser)
@@ -500,45 +501,7 @@ namespace Ocaramba
                     this.CheckIfProxySetForSafari();
                     break;
                 case BrowserType.RemoteWebDriver:
-                    var driverCapabilitiesConf = ConfigurationManager.GetSection("DriverCapabilities") as NameValueCollection;
-                    NameValueCollection settings = ConfigurationManager.GetSection("environments/" + this.CrossBrowserEnvironment) as NameValueCollection;
-                    var browserType = this.GetBrowserTypeForRemoteDriver(settings);
-
-                    switch (browserType)
-                    {
-                        case BrowserType.Firefox:
-                            FirefoxOptions firefoxOptions = new FirefoxOptions();
-                            this.SetRemoteDriverBrowserOptions(driverCapabilitiesConf, settings, firefoxOptions);
-                            this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(firefoxOptions).ToCapabilities());
-                            break;
-                        case BrowserType.Android:
-                        case BrowserType.Chrome:
-                            ChromeOptions chromeOptions = new ChromeOptions();
-                            this.SetRemoteDriverBrowserOptions(driverCapabilitiesConf, settings, chromeOptions);
-                            this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(chromeOptions).ToCapabilities());
-                            break;
-                        case BrowserType.Iphone:
-                        case BrowserType.Safari:
-                            SafariOptions safariOptions = new SafariOptions();
-                            this.SetRemoteDriverOptions(driverCapabilitiesConf, settings, safariOptions);
-                            this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(safariOptions).ToCapabilities());
-                            break;
-                        case BrowserType.Edge:
-                            EdgeOptions egEdgeOptions = new EdgeOptions();
-                            this.SetRemoteDriverOptions(driverCapabilitiesConf, settings, egEdgeOptions);
-                            this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(egEdgeOptions).ToCapabilities());
-                            break;
-                        case BrowserType.IE:
-                        case BrowserType.InternetExplorer:
-                            InternetExplorerOptions internetExplorerOptions = new InternetExplorerOptions();
-                            this.SetRemoteDriverBrowserOptions(driverCapabilitiesConf, settings, internetExplorerOptions);
-                            this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(internetExplorerOptions).ToCapabilities());
-                            break;
-                        default:
-                            throw new NotSupportedException(
-                                string.Format(CultureInfo.CurrentCulture, "Driver {0} is not supported", this.CrossBrowserEnvironment));
-                    }
-
+                    this.SetupRemoteWebDriver();
                     break;
                 case BrowserType.Edge:
                     this.driver = new EdgeDriver(EdgeDriverService.CreateDefaultService(BaseConfiguration.PathToEdgeDriverDirectory, "MicrosoftWebDriver.exe", 52296), this.SetDriverOptions(this.EdgeOptions));
@@ -579,6 +542,46 @@ namespace Ocaramba
             {
                 this.driver.Quit();
             }
+        }
+
+        private void SetupRemoteWebDriver()
+        {
+            var driverCapabilitiesConf = ConfigurationManager.GetSection("DriverCapabilities") as NameValueCollection;
+            NameValueCollection settings =
+                ConfigurationManager.GetSection("environments/" + this.CrossBrowserEnvironment) as NameValueCollection;
+            var browserType = this.GetBrowserTypeForRemoteDriver(settings);
+
+            dynamic browserOptions = null;
+            switch (browserType)
+            {
+                case BrowserType.Firefox:
+                    browserOptions = new FirefoxOptions();
+
+                    break;
+                case BrowserType.Android:
+                case BrowserType.Chrome:
+                    browserOptions = new ChromeOptions();
+                    break;
+                case BrowserType.Iphone:
+                case BrowserType.Safari:
+                    browserOptions = new SafariOptions();
+                    break;
+                case BrowserType.Edge:
+                    browserOptions = new EdgeOptions();
+                    break;
+                case BrowserType.IE:
+                case BrowserType.InternetExplorer:
+                    browserOptions = new InternetExplorerOptions();
+
+                    break;
+                default:
+                    throw new NotSupportedException(
+                        string.Format(CultureInfo.CurrentCulture, "Driver {0} is not supported", this.CrossBrowserEnvironment));
+            }
+
+            browserOptions.Proxy = this.CurrentProxy();
+            this.SetRemoteDriverBrowserOptions(driverCapabilitiesConf, settings, browserOptions);
+            this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(browserOptions).ToCapabilities(), BaseConfiguration.RemoteWebDriverTimeout);
         }
     }
 }
