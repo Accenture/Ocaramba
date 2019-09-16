@@ -217,10 +217,7 @@ namespace Ocaramba
             return option;
         }
 
-        
-        /// <summary>
-        ///  Merthod for safari, iphone and  edge (before webkit)
-        /// </summary>
+        // Merthod for safari, iphone and  edge (before webkit)
         private T SetRemoteDriverOptions<T>(NameValueCollection driverCapabilitiesConf, NameValueCollection settings, T options)
             where T : DriverOptions
         {
@@ -296,9 +293,7 @@ namespace Ocaramba
             return browserType;
         }
 
-        /// <summary>
-        ///  Used by firefox , chrome,  androdin, internet explorer
-        /// </summary>
+        // Used by firefox , chrome,  androdin, internet explorer
         private void SetRemoteDriverBrowserOptions(NameValueCollection driverCapabilitiesConf, NameValueCollection settings, dynamic browserOptions)
         {
             // if there are any capability

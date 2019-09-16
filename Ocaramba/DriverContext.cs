@@ -568,7 +568,7 @@ namespace Ocaramba
                 case BrowserType.Iphone:
                 case BrowserType.Safari:
                     SafariOptions safariOptions = new SafariOptions();
-                    safariOptions.Proxy =this.CurrentProxy();
+                    safariOptions.Proxy = this.CurrentProxy();
                     this.SetRemoteDriverOptions(driverCapabilitiesConf, settings, safariOptions);
                     this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(safariOptions).ToCapabilities());
                     break;
@@ -582,7 +582,7 @@ namespace Ocaramba
                     InternetExplorerOptions internetExplorerOptions = new InternetExplorerOptions();
                     internetExplorerOptions.Proxy = this.CurrentProxy();
                     this.SetRemoteDriverBrowserOptions(driverCapabilitiesConf, settings, internetExplorerOptions);
-                    this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub,this.SetDriverOptions(internetExplorerOptions).ToCapabilities());
+                    this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(internetExplorerOptions).ToCapabilities());
                     break;
                 default:
                     throw new NotSupportedException(
