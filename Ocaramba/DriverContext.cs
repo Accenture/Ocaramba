@@ -568,7 +568,6 @@ namespace Ocaramba
                 case BrowserType.Iphone:
                 case BrowserType.Safari:
                     SafariOptions safariOptions = new SafariOptions();
-                    safariOptions.Proxy = this.CurrentProxy();
                     this.SetRemoteDriverOptions(driverCapabilitiesConf, settings, safariOptions);
                     this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(safariOptions).ToCapabilities());
                     break;
