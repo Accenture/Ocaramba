@@ -130,8 +130,7 @@ namespace Ocaramba
                 string setting = null;
 #if net45
                 setting = ConfigurationManager.AppSettings["PathToFirefoxProfile"];
-#endif
-#if netcoreapp2_2
+#elif netcoreapp2_2
                 setting = Builder["appSettings:PathToFirefoxProfile"];
 #endif
                 Logger.Trace(CultureInfo.CurrentCulture, "Gets the path to firefox profile from settings file '{0}'", setting);
@@ -225,7 +224,18 @@ namespace Ocaramba
         /// </summary>
         public static string HttpProxy
         {
-            get { return ConfigurationManager.AppSettings["httpProxy"]; }
+            get
+            {
+                string setting = null;
+#if net45
+                setting = ConfigurationManager.AppSettings["httpProxy"];
+#endif
+#if netcoreapp2_2
+                setting = Builder["appSettings:httpProxy"];
+#endif
+                Logger.Trace(CultureInfo.CurrentCulture, "Gets the httpProxy from settings file '{0}'", setting);
+                return setting;
+            }
         }
 
         /// <summary>
@@ -233,7 +243,18 @@ namespace Ocaramba
         /// </summary>
         public static string FtpProxy
         {
-            get { return ConfigurationManager.AppSettings["sslProxy"]; }
+            get
+            {
+                string setting = null;
+#if net45
+                setting = ConfigurationManager.AppSettings["ftpProxy"];
+#endif
+#if netcoreapp2_2
+                setting = Builder["appSettings:ftpProxy"];
+#endif
+                Logger.Trace(CultureInfo.CurrentCulture, "Gets the ftpProxy from settings file '{0}'", setting);
+                return setting;
+            }
         }
 
         /// <summary>
@@ -241,7 +262,18 @@ namespace Ocaramba
         /// </summary>
         public static string SslProxy
         {
-            get { return ConfigurationManager.AppSettings["socksproxy"]; }
+            get
+            {
+                string setting = null;
+#if net45
+                setting = ConfigurationManager.AppSettings["sslProxy"];
+#endif
+#if netcoreapp2_2
+                setting = Builder["appSettings:sslProxy"];
+#endif
+                Logger.Trace(CultureInfo.CurrentCulture, "Gets the sslProxy from settings file '{0}'", setting);
+                return setting;
+            }
         }
 
         /// <summary>
@@ -249,7 +281,18 @@ namespace Ocaramba
         /// </summary>
         public static string SocksProxy
         {
-            get { return ConfigurationManager.AppSettings["proxy"]; }
+            get
+            {
+                string setting = null;
+#if net45
+                setting = ConfigurationManager.AppSettings["socksproxy"];
+#endif
+#if netcoreapp2_2
+                setting = Builder["appSettings:socksproxy"];
+#endif
+                Logger.Trace(CultureInfo.CurrentCulture, "Gets the socksproxy from settings file '{0}'", setting);
+                return setting;
+            }
         }
 
         /// <summary>
@@ -259,10 +302,16 @@ namespace Ocaramba
         {
             get
             {
-                return new TimeSpan(
-                    0,
-                    0,
-                    int.Parse(ConfigurationManager.AppSettings["remoteTimeout"], CultureInfo.InvariantCulture));
+
+                int setting = 0;
+#if net45
+                setting = int.Parse(ConfigurationManager.AppSettings["remoteTimeout"], CultureInfo.InvariantCulture);
+#endif
+#if netcoreapp2_2
+                setting = int.Parse(Builder["appSettings:remoteTimeout"], CultureInfo.InvariantCulture);
+#endif
+                Logger.Trace(CultureInfo.CurrentCulture, "Gets the remote timeout from settings file '{0}'", setting);
+                return new TimeSpan(0, 0, setting);
             }
         }
 
@@ -442,10 +491,11 @@ namespace Ocaramba
         /// </summary>
         public static Uri RemoteWebDriverHub
         {
-            get { return new Uri(ConfigurationManager.AppSettings["RemoteWebDriverHub"]); }
+            get
+            {
                 string setting = null;
 
-#if  net45
+#if net45
                 setting = ConfigurationManager.AppSettings["RemoteWebDriverHub"];
 #endif
 #if netcoreapp2_2
@@ -453,6 +503,7 @@ namespace Ocaramba
 #endif
                 Logger.Trace(CultureInfo.CurrentCulture, "RemoteWebDriverHub from settings file '{0}'", setting);
                 return new Uri(setting);
+            }
         }
 
         /// <summary>
@@ -463,7 +514,8 @@ namespace Ocaramba
             get
             {
 #if net45
-                Logger.Trace(CultureInfo.CurrentCulture, "Full Desktop Screen Shot Enabled value from settings file '{0}'", ConfigurationManager.AppSettings["FullDesktopScreenShotEnabled"]);
+                Logger.Trace(
+                    CultureInfo.CurrentCulture, 
                     "Full Desktop Screen Shot Enabled value from App.config '{0}'",
                     ConfigurationManager.AppSettings["FullDesktopScreenShotEnabled"]);
                 if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["FullDesktopScreenShotEnabled"]))
@@ -600,7 +652,6 @@ namespace Ocaramba
                 }
 
                 if (setting.ToLower(CultureInfo.CurrentCulture).Equals("true"))
-                    .Equals("true"))
                 {
                     return true;
                 }
@@ -641,7 +692,6 @@ namespace Ocaramba
                 }
 
                 return new Collection<string>(setting.Split(new char[] { ',' }));
-                    .Split(new char[] { ',' }));
             }
         }
 
@@ -666,7 +716,6 @@ namespace Ocaramba
                 }
 
                 if (setting.ToLower(CultureInfo.CurrentCulture).Equals("true"))
-                    .ToLower(CultureInfo.CurrentCulture).Equals("true"))
                 {
                     return true;
                 }
@@ -696,7 +745,6 @@ namespace Ocaramba
                 }
 
                 if (setting.ToLower(CultureInfo.CurrentCulture).Equals("true"))
-                    .Equals("true"))
                 {
                     return true;
                 }
@@ -726,7 +774,6 @@ namespace Ocaramba
                 }
 
                 if (setting.ToLower(CultureInfo.CurrentCulture).Equals("true"))
-                    .Equals("true"))
                 {
                     return true;
                 }
@@ -756,7 +803,6 @@ namespace Ocaramba
                 }
 
                 if (setting.ToLower(CultureInfo.CurrentCulture).Equals("true"))
-                    .Equals("true"))
                 {
                     return true;
                 }
@@ -789,7 +835,6 @@ namespace Ocaramba
                 }
 
                 if (setting.ToLower(CultureInfo.CurrentCulture).Equals("true"))
-                    .Equals("true"))
                 {
                     return true;
                 }
@@ -863,8 +908,11 @@ namespace Ocaramba
         /// </code></example>
         public static string GetUrlValue
         {
-            get { return string.Format(CultureInfo.CurrentCulture, "{0}://{1}{2}", Protocol, Host, Url); }
+            get
+            {
                 Logger.Trace(CultureInfo.CurrentCulture, "Get Url value from settings file '{0}://{1}{2}'", Protocol, Host, Url);
+                return string.Format(CultureInfo.CurrentCulture, "{0}://{1}{2}", Protocol, Host, Url);
+            }
         }
 
         /// <summary>
@@ -910,7 +958,6 @@ namespace Ocaramba
                 }
 
                 if (setting.ToLower(CultureInfo.CurrentCulture).Equals("true"))
-                    .ToLower(CultureInfo.CurrentCulture).Equals("true"))
                 {
                     return true;
                 }
