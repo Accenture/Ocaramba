@@ -24,11 +24,13 @@
   <HelpKINode Title="BaseConfiguration.EnableEventFiringWebDriver property" Url="html/b66b9c03-3ed1-078e-c794-b8305a1c5a86.htm" />
   <HelpKINode Title="BaseConfiguration.FirefoxBrowserExecutableLocation property" Url="html/980ae751-66d1-9ccb-b7cf-37e83bd8f6e8.htm" />
   <HelpKINode Title="BaseConfiguration.FirefoxUseLegacyImplementation property" Url="html/0e237274-191f-879c-c30b-fde82fe54f20.htm" />
+  <HelpKINode Title="BaseConfiguration.FtpProxy property" Url="html/b160ca43-55e4-592e-37a5-c599f9d23c69.htm" />
   <HelpKINode Title="BaseConfiguration.FullDesktopScreenShotEnabled property" Url="html/28048497-9486-063f-7410-e6d99113bd47.htm" />
   <HelpKINode Title="BaseConfiguration.GetPageSourceEnabled property" Url="html/728f35d3-c740-1b4d-eeac-5a5f6cc6081d.htm" />
   <HelpKINode Title="BaseConfiguration.GetUrlValue property" Url="html/a4c1cc54-0611-e849-bb95-ae8b7f8f30df.htm" />
   <HelpKINode Title="BaseConfiguration.GetUrlValueWithUserCredentials property" Url="html/826f2d2b-90b1-5347-0ca2-614e35361dd9.htm" />
   <HelpKINode Title="BaseConfiguration.Host property" Url="html/de75907d-305b-27b8-3069-d68b76db7e27.htm" />
+  <HelpKINode Title="BaseConfiguration.HttpProxy property" Url="html/18e4ad0d-0cb1-fa44-295f-ab3eb3e36c38.htm" />
   <HelpKINode Title="BaseConfiguration.ImplicitlyWaitMilliseconds property" Url="html/bba0df23-2393-164a-c87f-37c8761351d9.htm" />
   <HelpKINode Title="BaseConfiguration.JavaScriptErrorLogging property" Url="html/b455d56f-d375-d1bf-8543-6a4a4c2fd602.htm" />
   <HelpKINode Title="BaseConfiguration.JavaScriptErrorTypes property" Url="html/bbd686cf-a3b5-d584-56d5-5eb57ace9663.htm" />
@@ -44,9 +46,12 @@
   <HelpKINode Title="BaseConfiguration.Protocol property" Url="html/1182e402-4604-cae4-b44b-5ba9106ed75a.htm" />
   <HelpKINode Title="BaseConfiguration.Proxy property" Url="html/0389ae27-1d45-ab48-f219-dc4875afc5dd.htm" />
   <HelpKINode Title="BaseConfiguration.RemoteWebDriverHub property" Url="html/2f74ce74-f4fe-d242-d557-5bcb24497fb0.htm" />
+  <HelpKINode Title="BaseConfiguration.RemoteWebDriverTimeout property" Url="html/dd1e0f2d-ca36-a3d0-3949-3645a957b7db.htm" />
   <HelpKINode Title="BaseConfiguration.ScreenShotFolder property" Url="html/a3899821-83cc-de67-79dd-118e5c697a7c.htm" />
   <HelpKINode Title="BaseConfiguration.SeleniumScreenShotEnabled property" Url="html/917c250d-c24e-ba85-b37c-88fdc0236b2c.htm" />
   <HelpKINode Title="BaseConfiguration.ShortTimeout property" Url="html/d812e443-5ae5-c42d-d616-1509d89f9bcb.htm" />
+  <HelpKINode Title="BaseConfiguration.SocksProxy property" Url="html/1b11947d-1c5e-f25d-220c-f12e0b24da80.htm" />
+  <HelpKINode Title="BaseConfiguration.SslProxy property" Url="html/1fb08c64-61cc-34a6-d93e-94b4c44a58be.htm" />
   <HelpKINode Title="BaseConfiguration.SynchronizationWithAngularEnabled property" Url="html/03c01bd4-04f1-bb2f-497d-114d3107ffc1.htm" />
   <HelpKINode Title="BaseConfiguration.TestBrowser property" Url="html/851e1726-9e85-c9b5-976a-66955dcd96b1.htm" />
   <HelpKINode Title="BaseConfiguration.TestBrowserCapabilities property" Url="html/807e16c5-8e7a-8064-b459-ee5a2009ce27.htm" />
@@ -218,6 +223,7 @@
   <HelpKINode Title="FirefoxBrowserExecutableLocation property" Url="html/980ae751-66d1-9ccb-b7cf-37e83bd8f6e8.htm" />
   <HelpKINode Title="FirefoxUseLegacyImplementation property" Url="html/0e237274-191f-879c-c30b-fde82fe54f20.htm" />
   <HelpKINode Title="Format method" Url="html/a1be07cd-b004-c99b-5d47-23b35275513d.htm" />
+  <HelpKINode Title="FtpProxy property" Url="html/b160ca43-55e4-592e-37a5-c599f9d23c69.htm" />
   <HelpKINode Title="FullDesktopScreenShotEnabled property" Url="html/28048497-9486-063f-7410-e6d99113bd47.htm" />
   <HelpKINode Title="GetAllFiles method" Url="html/8278856d-6c0d-6563-111e-5f3e5c2d810c.htm" />
   <HelpKINode Title="GetAllFilesFromAllSubFolders method" Url="html/9937b788-b320-8d41-5f5c-abce43d63895.htm" />
@@ -238,6 +244,7 @@
   <HelpKINode Title="Gif enumeration member" Url="html/1c5aba28-7b21-9b53-ea89-4baa3b095d0f.htm" />
   <HelpKINode Title="Host property" Url="html/de75907d-305b-27b8-3069-d68b76db7e27.htm" />
   <HelpKINode Title="Html enumeration member" Url="html/1c5aba28-7b21-9b53-ea89-4baa3b095d0f.htm" />
+  <HelpKINode Title="HttpProxy property" Url="html/18e4ad0d-0cb1-fa44-295f-ab3eb3e36c38.htm" />
   <HelpKINode Title="Id enumeration member" Url="html/ec36fc3e-e193-ab06-4851-8d92537c820c.htm" />
   <HelpKINode Title="IE enumeration member" Url="html/e3630b09-627d-e606-a2b8-1b57cb5d17a1.htm" />
   <HelpKINode Title="ImplicitlyWaitMilliseconds property" Url="html/bba0df23-2393-164a-c87f-37c8761351d9.htm" />
@@ -459,6 +466,7 @@
   <HelpKINode Title="RandomName method" Url="html/ece1c267-b00d-4f45-a1a8-811f8dc9fa34.htm" />
   <HelpKINode Title="RemoteWebDriver enumeration member" Url="html/e3630b09-627d-e606-a2b8-1b57cb5d17a1.htm" />
   <HelpKINode Title="RemoteWebDriverHub property" Url="html/2f74ce74-f4fe-d242-d557-5bcb24497fb0.htm" />
+  <HelpKINode Title="RemoteWebDriverTimeout property" Url="html/dd1e0f2d-ca36-a3d0-3949-3645a957b7db.htm" />
   <HelpKINode Title="RemoveSpecialCharacters method" Url="html/2a0bd474-866b-32d6-4e51-369dbbff3f52.htm" />
   <HelpKINode Title="RenameFile method" Url="html/dd3eaf06-a672-f4ea-3b2c-708f6c79f156.htm" />
   <HelpKINode Title="ReturnFileExtension method" Url="html/f0e2d3a7-2d0b-7fe9-222b-a537f9e015f6.htm" />
@@ -535,11 +543,13 @@
   <HelpKINode Title="SetPage method" Url="html/76480070-d7c1-6412-8276-2cb122ae79db.htm" />
   <HelpKINode Title="ShortenFileName method" Url="html/3dfca492-f59e-a332-1d3c-25543f89a8b0.htm" />
   <HelpKINode Title="ShortTimeout property" Url="html/d812e443-5ae5-c42d-d616-1509d89f9bcb.htm" />
+  <HelpKINode Title="SocksProxy property" Url="html/1b11947d-1c5e-f25d-220c-f12e0b24da80.htm" />
   <HelpKINode Title="SqlHelper class">
     <HelpKINode Title="SqlHelper Class" Url="html/234fb062-9b1d-ae0b-5ee2-570dd79ab7b8.htm" />
     <HelpKINode Title="methods" Url="html/730c92c7-831a-4449-3938-16540cf259b8.htm" />
   </HelpKINode>
   <HelpKINode Title="SqlHelper.ExecuteSqlCommand method" Url="html/3a658a3d-fdda-ef80-ad45-b37e26a84839.htm" />
+  <HelpKINode Title="SslProxy property" Url="html/1fb08c64-61cc-34a6-d93e-94b4c44a58be.htm" />
   <HelpKINode Title="Start method" Url="html/a0905e36-ae5b-04a9-3cb4-cb82ea6c966f.htm" />
   <HelpKINode Title="StartMeasure method" Url="html/fec76f79-a566-7262-c118-a28fbe023079.htm" />
   <HelpKINode Title="StepName property" Url="html/b6092259-f1b5-f79d-5a9f-dd1b8ae5789b.htm" />
