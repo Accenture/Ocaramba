@@ -43,7 +43,7 @@ dotnet_csproj:
 environment:
   APPVEYOR_RDP_PASSWORD:
     secure: 3OiDAcFLoSt3UCnmEU+XgM2d541PAqCNJAPqoiRqwRI=
-  frameworkVersion: 3.2.2-alpha
+  frameworkVersion: 3.2.3-beta
   seleniumGridVersion: selenium-server-standalone-3.141.59.jar
   seleniumGridUrl: http://selenium-release.storage.googleapis.com/3.141/selenium-server-standalone-3.141.59.jar
   latestNugetUrl: https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
