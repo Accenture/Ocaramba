@@ -185,10 +185,10 @@ namespace Ocaramba
         {
             Proxy proxy = new Proxy
             {
-                HttpProxy = BaseConfiguration.Proxy,
-                FtpProxy = BaseConfiguration.Proxy,
-                SslProxy = BaseConfiguration.Proxy,
-                SocksProxy = BaseConfiguration.Proxy,
+                HttpProxy = BaseConfiguration.HttpProxy ?? BaseConfiguration.Proxy,
+                FtpProxy = BaseConfiguration.FtpProxy ?? BaseConfiguration.Proxy,
+                SslProxy = BaseConfiguration.SslProxy ?? BaseConfiguration.Proxy,
+                SocksProxy = BaseConfiguration.SocksProxy ?? BaseConfiguration.Proxy,
             };
             return proxy;
          }
@@ -226,6 +226,7 @@ namespace Ocaramba
             return option;
         }
 
+        // Merthod for safari, iphone and  edge (before webkit)
         private T SetRemoteDriverOptions<T>(NameValueCollection driverCapabilitiesConf, NameValueCollection settings, T options)
             where T : DriverOptions
         {
@@ -301,6 +302,7 @@ namespace Ocaramba
             return browserType;
         }
 
+        // Used by firefox , chrome,  androdin, internet explorer
         private void SetRemoteDriverBrowserOptions(NameValueCollection driverCapabilitiesConf, NameValueCollection settings, dynamic browserOptions)
         {
             // if there are any capability

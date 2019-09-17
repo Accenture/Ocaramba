@@ -48,9 +48,9 @@
     <MaximumGroupParts>2</MaximumGroupParts>
     <Preliminary>False</Preliminary>
     <HeaderText>Framework to automate tests using Selenium WebDriver</HeaderText>
-    <FooterText>Objectivity Bespoke Software Specialists</FooterText>
+    <FeedbackEMailAddress>ocaramba%40objectivity.co.uk</FeedbackEMailAddress>
     <CopyrightHref>http://www.objectivity.co.uk/</CopyrightHref>
-    <FeedbackEMailAddress>TestAutomationGroup%40objectivity.co.uk</FeedbackEMailAddress>
+    <FeedbackEMailAddress>ocarmaba%40objectivity.co.uk</FeedbackEMailAddress>
     <SdkLinkTarget>Blank</SdkLinkTarget>
     <MissingTags>Summary, Parameter, Returns, AutoDocumentCtors, TypeParameter, AutoDocumentDispose</MissingTags>
     <DocumentationSources>
