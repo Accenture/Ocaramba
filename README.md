@@ -1,5 +1,5 @@
 ## Ocaramba
-<img align="left" src="/Ocaramba.Documentation/icons/Objectivity_logo_avatar.png">
+<img align="left" src="/Ocaramba.Documentation/icons/Ocaramba-logo-64x64.png">
 
 **Cross-Platform C# Framework to automate tests using Selenium WebDriver**
 
