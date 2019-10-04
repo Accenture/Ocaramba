@@ -116,7 +116,7 @@ namespace Ocaramba
             if (BaseConfiguration.FullDesktopScreenShotEnabled)
             {
                 // to do TakeScreenShot
-#if net45
+#if net47
                 filePaths.Add(TakeScreenShot.Save(TakeScreenShot.DoIt(), ImageFormat.Png, this.ScreenShotFolder, this.TestTitle));
 #endif
             }
@@ -205,7 +205,7 @@ namespace Ocaramba
         private FirefoxOptions AddFirefoxArguments(FirefoxOptions option)
         {
             NameValueCollection firefoxArguments = new NameValueCollection();
-#if net45
+#if net47
             firefoxArguments = ConfigurationManager.GetSection("FirefoxArguments") as NameValueCollection;
 #endif
 #if netcoreapp2_2

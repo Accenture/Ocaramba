@@ -35,7 +35,7 @@ namespace Ocaramba.Helpers
     /// </summary>
     public static class PrintPerformanceResultsHelper
     {
-#if net45
+#if net47
         private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
 #endif
 #if netcoreapp2_2
@@ -112,7 +112,7 @@ namespace Ocaramba.Helpers
         /// <param name="measuresToPrint">Average load times for particular scenarios and browsers.</param>
         public static void PrintResultsInAppVeyor(IOrderedEnumerable<string> measuresToPrint)
         {
-#if net45
+#if net47
             // Use ProcessStartInfo class
             ProcessStartInfo startInfo = new ProcessStartInfo
             {
@@ -128,7 +128,7 @@ namespace Ocaramba.Helpers
             {
                 var text = "AddTest " + measuresToPrint.ElementAt(i);
 
-#if net45
+#if net47
                 startInfo.Arguments = text;
 
                 // Start the process with the info we specified.

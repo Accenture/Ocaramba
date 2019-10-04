@@ -38,7 +38,7 @@ namespace Ocaramba.Tests.NUnit.Tests
         {
             var downloadPage = new InternetPage(this.DriverContext).OpenHomePage().GoToFileDownloader();
             var screenShotNumber = FilesHelper.CountFiles(this.DriverContext.ScreenShotFolder, FileType.Png);
-#if net45
+#if net47
             Assert.IsNotNull(TakeScreenShot.Save(TakeScreenShot.DoIt(), ImageFormat.Png, this.DriverContext.ScreenShotFolder, string.Format(CultureInfo.CurrentCulture, this.DriverContext.TestTitle + "_first")));
 #endif
             var nameOfScreenShot = downloadPage.CheckIfScreenShotIsSaved(screenShotNumber);

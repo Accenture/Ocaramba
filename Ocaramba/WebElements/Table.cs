@@ -33,7 +33,7 @@ namespace Ocaramba.WebElements
     /// </summary>
     public class Table : RemoteWebElement
     {
-#if net45
+#if net47
         private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
 #endif
 #if netcoreapp2_2

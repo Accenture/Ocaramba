@@ -7,7 +7,7 @@ namespace Ocaramba.Tests.Angular.PageObjects
 {
     public class ProtractorApiPage : ProjectPageBase
     {
-#if net45
+#if net47
         private readonly NLog.Logger logger = LogManager.GetCurrentClassLogger();
 #endif
 #if netcoreapp2_2

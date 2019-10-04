@@ -31,7 +31,7 @@ namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
 
     public class IFramePage : ProjectPageBase
     {
-#if net45
+#if net47
         private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
 #endif
 #if netcoreapp2_2
@@ -56,7 +56,7 @@ namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
             int y = iFrame.Location.Y;
             this.Driver.SwitchTo().Frame(0);
             var el = this.Driver.GetElement(this.elelemtInIFrame);
-#if net45
+#if net47
             return TakeScreenShot.TakeScreenShotOfElement(x, y, el, folder, name);
 #endif
 #if netcoreapp2_2

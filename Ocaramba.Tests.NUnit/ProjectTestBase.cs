@@ -74,7 +74,7 @@ namespace Ocaramba.Tests.NUnit
         this.DriverContext.CurrentDirectory = Directory.GetCurrentDirectory();
 #endif
 
-#if net45
+#if net47
             this.DriverContext.CurrentDirectory = TestContext.CurrentContext.TestDirectory;
 #endif
             this.DriverContext.Start();

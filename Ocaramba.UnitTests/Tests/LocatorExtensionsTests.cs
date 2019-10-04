@@ -35,7 +35,7 @@ namespace Ocaramba.UnitTests.Tests
                 Assert.AreEqual("Drag and Drop\r\nA\r\nB", titleByClassName);
             }
 #endif
-#if net45
+#if net47
              Assert.AreEqual("Drag and Drop\r\nA\r\nB", titleByClassName);
 #endif
         }
@@ -56,7 +56,7 @@ namespace Ocaramba.UnitTests.Tests
                 Assert.AreEqual("Drag and Drop\r\nA\r\nB", titleByCssSelector);
             }
 #endif
-#if net45
+#if net47
             Assert.AreEqual("Drag and Drop\r\nA\r\nB", titleByCssSelector);
 #endif
         }
@@ -88,7 +88,7 @@ namespace Ocaramba.UnitTests.Tests
                 Assert.AreEqual("Username\r\nPassword\r\nLogin", columnA);
             }
 #endif
-#if net45
+#if net47
             Assert.AreEqual("Username\r\nPassword\r\nLogin", columnA);
 #endif
         }

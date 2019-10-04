@@ -40,7 +40,7 @@ namespace Ocaramba.Tests.NUnit
         private static readonly string CurrentDirectory = Directory.GetCurrentDirectory();
 #endif
 
-#if net45
+#if net47
         private static readonly string CurrentDirectory = TestContext.CurrentContext.TestDirectory;
 #endif
 
@@ -55,7 +55,7 @@ namespace Ocaramba.Tests.NUnit
             get
             {
                 string setting = null;
-#if net45
+#if net47
                 setting = ConfigurationManager.AppSettings["DataDrivenFile"];
 #endif
 #if netcoreapp2_2
@@ -81,7 +81,7 @@ namespace Ocaramba.Tests.NUnit
             get
             {
                 string setting = null;
-#if net45
+#if net47
                 setting = ConfigurationManager.AppSettings["DataDrivenFileXlsx"];
 #endif
 #if netcoreapp2_2
@@ -107,7 +107,7 @@ namespace Ocaramba.Tests.NUnit
             get
             {
                 string setting = null;
-#if net45
+#if net47
                 setting = ConfigurationManager.AppSettings["DataDrivenFileCSV"];
 #endif
 #if netcoreapp2_2
@@ -130,7 +130,7 @@ namespace Ocaramba.Tests.NUnit
             get
             {
                 string setting = null;
-#if net45
+#if net47
                 setting = ConfigurationManager.AppSettings["DownloadFolder"];
 #endif
 #if netcoreapp2_2

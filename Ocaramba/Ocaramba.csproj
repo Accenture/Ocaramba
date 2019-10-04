@@ -3,7 +3,7 @@
   <PropertyGroup>
 	<TargetFrameworks>netcoreapp2.2</TargetFrameworks>
 	<DebugType>full</DebugType>
-	<TargetFrameworks Condition="'$(OS)' != 'Unix'">net451;netcoreapp2.2</TargetFrameworks>
+	<TargetFrameworks Condition="'$(OS)' != 'Unix'">net472;netcoreapp2.2</TargetFrameworks>
     <Description>Framework to automate tests using Selenium WebDriver</Description>
     <Copyright>Copyright ©  2015</Copyright>
     <Company>Objectivity Bespoke Software Specialists</Company>
@@ -30,7 +30,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)' == 'net451'">
+  <ItemGroup Condition="'$(TargetFramework)' == 'net472'">
 	<Reference Include="System.Configuration" />
 	<Reference Include="System.Windows.Forms" />
 	<PackageReference Include="Microsoft.AnalysisServices.AdomdClient.retail.amd64" Version="18.0.2" />
@@ -73,8 +73,8 @@
     <DefineConstants>netcoreapp2_2</DefineConstants>
 </PropertyGroup>
 
-  <PropertyGroup Condition="'$(TargetFramework)'=='net451'">
-    <DefineConstants>net45</DefineConstants>
+  <PropertyGroup Condition="'$(TargetFramework)'=='net472'">
+    <DefineConstants>net47</DefineConstants>
 </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netcoreapp2.2|AnyCPU'">

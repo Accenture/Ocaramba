@@ -47,7 +47,7 @@ namespace Ocaramba
     [SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable", Justification = "Driver is disposed on test end")]
     public partial class DriverContext
     {
-#if net45
+#if net47
         private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
 #endif
 #if netcoreapp2_2
@@ -200,7 +200,7 @@ namespace Ocaramba
                 NameValueCollection firefoxPreferences = new NameValueCollection();
 
                 NameValueCollection firefoxExtensions = new NameValueCollection();
-#if net45
+#if net47
                 firefoxPreferences = ConfigurationManager.GetSection("FirefoxPreferences") as NameValueCollection;
                 firefoxExtensions = ConfigurationManager.GetSection("FirefoxExtensions") as NameValueCollection;
 #endif
@@ -308,7 +308,7 @@ namespace Ocaramba
                 NameValueCollection chromePreferences = null;
                 NameValueCollection chromeExtensions = null;
                 NameValueCollection chromeArguments = null;
-#if net45
+#if net47
                 chromePreferences = ConfigurationManager.GetSection("ChromePreferences") as NameValueCollection;
                 chromeExtensions = ConfigurationManager.GetSection("ChromeExtensions") as NameValueCollection;
                 chromeArguments = ConfigurationManager.GetSection("ChromeArguments") as NameValueCollection;
@@ -411,7 +411,7 @@ namespace Ocaramba
             {
                 // retrieving settings from config file
                 NameValueCollection internetExplorerPreferences = null;
-#if net45
+#if net47
                 internetExplorerPreferences = ConfigurationManager.GetSection("InternetExplorerPreferences") as NameValueCollection;
 #endif
 #if netcoreapp2_2
@@ -577,7 +577,7 @@ namespace Ocaramba
         {
             NameValueCollection driverCapabilitiesConf = new NameValueCollection();
             NameValueCollection settings = new NameValueCollection();
-#if net45
+#if net47
             driverCapabilitiesConf = ConfigurationManager.GetSection("DriverCapabilities") as NameValueCollection;
             settings = ConfigurationManager.GetSection("environments/" + this.CrossBrowserEnvironment) as NameValueCollection;
 #endif

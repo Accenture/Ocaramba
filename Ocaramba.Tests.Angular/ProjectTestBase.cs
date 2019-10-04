@@ -38,7 +38,7 @@ namespace Ocaramba.Tests.Angular
     {
         private readonly DriverContext driverContext = new DriverContext();
 
-#if net45
+#if net47
         private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
 #endif
 #if netcoreapp2_2
@@ -87,7 +87,7 @@ namespace Ocaramba.Tests.Angular
             this.DriverContext.CurrentDirectory = Directory.GetCurrentDirectory();
 #endif
 
-#if net45
+#if net47
             this.DriverContext.CurrentDirectory = TestContext.CurrentContext.TestDirectory;
 #endif
             this.DriverContext.Start();

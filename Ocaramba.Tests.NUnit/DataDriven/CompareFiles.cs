@@ -35,7 +35,7 @@ namespace Ocaramba.Tests.NUnit.DataDriven
     /// </summary>
     public static class CompareFiles
     {
-#if net45
+#if net47
         private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
 #endif
 #if netcoreapp2_2

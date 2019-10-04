@@ -90,7 +90,7 @@ namespace Ocaramba.Tests.MsTest.Tests
             Assert.IsTrue(floatingMenuPage.IsUrlEndsWith("#home"), "URL does not end with #home - probably 'Home' floating menu button was not clicked properly");
         }
 
-#if net45
+#if net47
         [DeploymentItem("Ocaramba.Tests.MsTest\\DDT.xml")]
         [DeploymentItem("Ocaramba.Tests.MsTest\\IEDriverServer.exe")]
         [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "|DataDirectory|\\DDT.xml", "credential", DataAccessMethod.Sequential)]
@@ -112,7 +112,7 @@ namespace Ocaramba.Tests.MsTest.Tests
         }
 #endif
 
-#if net45
+#if net47
         [DeploymentItem("Ocaramba.Tests.MsTest\\DDT.csv")]
         [DataSource("Microsoft.VisualStudio.TestTools.DataSource.CSV", "|DataDirectory|\\DDT.csv", "DDT#csv", DataAccessMethod.Sequential)]
         [TestMethod]

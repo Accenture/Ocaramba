@@ -42,7 +42,7 @@ namespace Ocaramba
         /// <summary>
         /// The logger.
         /// </summary>
-#if net45
+#if net47
         private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
 #endif
 #if netcoreapp2_2
@@ -77,7 +77,7 @@ namespace Ocaramba
 #if netcoreapp2_2
                 setting = Builder["appSettings:browser"];
 #endif
-#if net45
+#if net47
                 setting = ConfigurationManager.AppSettings["browser"];
 
 #endif
@@ -101,7 +101,7 @@ namespace Ocaramba
             {
                 bool supportedBrowser = false;
                 string setting = null;
-#if net45
+#if net47
                 setting = ConfigurationManager.AppSettings["DriverCapabilities"];
 #endif
 #if netcoreapp2_2
@@ -128,7 +128,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net45
+#if net47
                 setting = ConfigurationManager.AppSettings["PathToFirefoxProfile"];
 #elif netcoreapp2_2
                 setting = Builder["appSettings:PathToFirefoxProfile"];
@@ -151,7 +151,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net45
+#if net47
                 setting = ConfigurationManager.AppSettings["protocol"];
 #endif
 #if  netcoreapp2_2
@@ -170,7 +170,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net45
+#if net47
                 setting = ConfigurationManager.AppSettings["host"];
 #endif
 #if  netcoreapp2_2
@@ -189,7 +189,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net45
+#if net47
                 setting = ConfigurationManager.AppSettings["url"];
 #endif
 #if netcoreapp2_2
@@ -208,7 +208,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net45
+#if net47
                 setting = ConfigurationManager.AppSettings["proxy"];
 #endif
 #if netcoreapp2_2
@@ -227,7 +227,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net45
+#if net47
                 setting = ConfigurationManager.AppSettings["httpProxy"];
 #endif
 #if netcoreapp2_2
@@ -246,7 +246,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net45
+#if net47
                 setting = ConfigurationManager.AppSettings["ftpProxy"];
 #endif
 #if netcoreapp2_2
@@ -265,7 +265,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net45
+#if net47
                 setting = ConfigurationManager.AppSettings["sslProxy"];
 #endif
 #if netcoreapp2_2
@@ -284,7 +284,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net45
+#if net47
                 setting = ConfigurationManager.AppSettings["socksproxy"];
 #endif
 #if netcoreapp2_2
@@ -304,7 +304,7 @@ namespace Ocaramba
             {
 
                 int setting = 0;
-#if net45
+#if net47
                 setting = int.Parse(ConfigurationManager.AppSettings["remoteTimeout"], CultureInfo.InvariantCulture);
 #endif
 #if netcoreapp2_2
@@ -323,7 +323,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net45
+#if net47
                 setting = ConfigurationManager.AppSettings["username"];
 #endif
 #if netcoreapp2_2
@@ -342,7 +342,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net45
+#if net47
                 setting = ConfigurationManager.AppSettings["password"];
 #endif
 #if netcoreapp2_2
@@ -364,7 +364,7 @@ namespace Ocaramba
             get
             {
                 double setting;
-#if net45
+#if net47
                 setting = Convert.ToDouble(ConfigurationManager.AppSettings["mediumTimeout"], CultureInfo.CurrentCulture);
 #endif
 #if netcoreapp2_2
@@ -386,7 +386,7 @@ namespace Ocaramba
             get
             {
                 double setting;
-#if net45
+#if net47
                 setting = Convert.ToDouble(ConfigurationManager.AppSettings["longTimeout"], CultureInfo.CurrentCulture);
 #endif
 #if netcoreapp2_2
@@ -408,7 +408,7 @@ namespace Ocaramba
             get
             {
                 double setting;
-#if net45
+#if net47
                 setting = Convert.ToDouble(ConfigurationManager.AppSettings["shortTimeout"], CultureInfo.CurrentCulture);
 #endif
 #if netcoreapp2_2
@@ -427,7 +427,7 @@ namespace Ocaramba
             get
             {
                 double setting;
-#if net45
+#if net47
                 setting = Convert.ToDouble(ConfigurationManager.AppSettings["ImplicitlyWaitMilliseconds"], CultureInfo.CurrentCulture);
 #endif
 #if netcoreapp2_2
@@ -446,7 +446,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net45
+#if net47
                 setting = ConfigurationManager.AppSettings["FirefoxBrowserExecutableLocation"];
 #endif
 #if netcoreapp2_2
@@ -470,7 +470,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net45
+#if net47
                 setting = ConfigurationManager.AppSettings["ChromeBrowserExecutableLocation"];
 #endif
 #if netcoreapp2_2
@@ -495,7 +495,7 @@ namespace Ocaramba
             {
                 string setting = null;
 
-#if net45
+#if net47
                 setting = ConfigurationManager.AppSettings["RemoteWebDriverHub"];
 #endif
 #if netcoreapp2_2
@@ -513,7 +513,7 @@ namespace Ocaramba
         {
             get
             {
-#if net45
+#if net47
                 Logger.Trace(
                     CultureInfo.CurrentCulture, 
                     "Full Desktop Screen Shot Enabled value from App.config '{0}'",
@@ -542,7 +542,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net45
+#if net47
                 setting = ConfigurationManager.AppSettings["PathToInternetExplorerDriverDirectory"];
 #endif
 #if netcoreapp2_2
@@ -566,7 +566,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net45
+#if net47
                 setting = ConfigurationManager.AppSettings["PathToEdgeDriverDirectory"];
 #endif
 #if netcoreapp2_2
@@ -590,7 +590,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net45
+#if net47
                 setting = ConfigurationManager.AppSettings["PathToChromeDriverDirectory"];
 #endif
 #if netcoreapp2_2
@@ -615,7 +615,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net45
+#if net47
                 setting = ConfigurationManager.AppSettings["PathToFirefoxDriverDirectory"];
 #endif
 #if netcoreapp2_2
@@ -639,7 +639,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net45
+#if net47
                 setting = ConfigurationManager.AppSettings["JavaScriptErrorLogging"];
 #endif
 #if netcoreapp2_2
@@ -668,7 +668,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net45
+#if net47
                 setting = ConfigurationManager.AppSettings["JavaScriptErrorTypes"];
 #endif
 #if netcoreapp2_2
@@ -703,7 +703,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net45
+#if net47
                 setting = ConfigurationManager.AppSettings["FirefoxUseLegacyImplementation"];
 #endif
 #if netcoreapp2_2
@@ -732,7 +732,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net45
+#if net47
                 setting = ConfigurationManager.AppSettings["SeleniumScreenShotEnabled"];
 #endif
 #if netcoreapp2_2
@@ -761,7 +761,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net45
+#if net47
                 setting = ConfigurationManager.AppSettings["EnableEventFiringWebDriver"];
 #endif
 #if netcoreapp2_2
@@ -790,7 +790,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net45
+#if net47
                 setting = ConfigurationManager.AppSettings["UseCurrentDirectory"];
 #endif
 #if netcoreapp2_2
@@ -822,7 +822,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net45
+#if net47
                 setting = ConfigurationManager.AppSettings["GetPageSourceEnabled"];
 #endif
 #if netcoreapp2_2
@@ -851,7 +851,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net45
+#if net47
                 setting = ConfigurationManager.AppSettings["DownloadFolder"];
 #endif
 #if netcoreapp2_2
@@ -870,7 +870,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net45
+#if net47
                 setting = ConfigurationManager.AppSettings["ScreenShotFolder"];
 #endif
 #if netcoreapp2_2
@@ -889,7 +889,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net45
+#if net47
                 setting = ConfigurationManager.AppSettings["PageSourceFolder"];
 #endif
 #if netcoreapp2_2
@@ -945,7 +945,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net45
+#if net47
                 setting = ConfigurationManager.AppSettings["SynchronizationWithAngularEnabled"];
 #endif
 #if  netcoreapp2_2

@@ -13,10 +13,10 @@ namespace Ocaramba.UnitTests.Tests
         string folder = Directory.GetCurrentDirectory();
 #endif
 
-#if net45
+#if net47
         string folder = TestContext.CurrentContext.TestDirectory;
 #endif
-#if net45
+#if net47
         private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
 #endif
 #if netcoreapp2_2

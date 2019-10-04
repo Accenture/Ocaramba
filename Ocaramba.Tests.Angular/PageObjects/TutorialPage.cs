@@ -9,7 +9,7 @@ namespace Ocaramba.Tests.Angular.PageObjects
 
     public class TutorialPage : ProjectPageBase
     {
-#if net45
+#if net47
         private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
 #endif
 #if netcoreapp2_2

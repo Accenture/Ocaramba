@@ -31,7 +31,7 @@ namespace Ocaramba.Tests.NUnit.Tests
     [TestFixture]
     public class CompareFilesDataDrivenTests
     {
-#if net45
+#if net47
         private readonly NLog.Logger logger = LogManager.GetCurrentClassLogger();
 #endif
 #if netcoreapp2_2

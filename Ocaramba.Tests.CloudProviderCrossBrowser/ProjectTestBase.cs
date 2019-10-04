@@ -41,7 +41,7 @@ namespace Ocaramba.Tests.CloudProviderCrossBrowser
     /// </summary>
     public class ProjectTestBase : TestBase
     {
-#if net45
+#if net47
         private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
 #endif
 #if netcoreapp2_2
@@ -95,7 +95,7 @@ namespace Ocaramba.Tests.CloudProviderCrossBrowser
             this.DriverContext.CurrentDirectory = Directory.GetCurrentDirectory();
 #endif
 
-#if net45
+#if net47
             this.DriverContext.CurrentDirectory = TestContext.CurrentContext.TestDirectory;
 #endif
         }

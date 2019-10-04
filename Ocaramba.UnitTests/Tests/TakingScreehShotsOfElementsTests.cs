@@ -38,7 +38,7 @@ namespace Ocaramba.UnitTests.Tests
         string folder = Directory.GetCurrentDirectory();
 #endif
 
-#if net45
+#if net47
         string folder = TestContext.CurrentContext.TestDirectory;
 #endif
 
