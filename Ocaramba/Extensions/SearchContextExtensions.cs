@@ -28,15 +28,14 @@ namespace Ocaramba.Extensions
     using System.Globalization;
     using System.Linq;
     using System.Runtime.InteropServices;
-    using Helpers;
-    using Ocaramba;
+    using Ocaramba.Helpers;
+    using Ocaramba.Types;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Internal;
     using OpenQA.Selenium.Support.UI;
-    using Types;
 
     /// <summary>
-    /// Extensions methods for both IWebDriver and IWebElement
+    /// Extensions methods for both IWebDriver and IWebElement.
     /// </summary>
     public static class SearchContextExtensions
     {
@@ -45,9 +44,9 @@ namespace Ocaramba.Extensions
         /// </summary>
         /// <param name="element">The element.</param>
         /// <param name="locator">The locator.</param>
-        /// <param name="customMessage">Custom message to be displayed when there is no possible to get element</param>
+        /// <param name="customMessage">Custom message to be displayed when there is no possible to get element.</param>
         /// <returns>
-        /// Found element
+        /// Found element.
         /// </returns>
         /// <example>How to use it: <code>
         /// this.Driver.GetElement(this.loginButton);
@@ -63,9 +62,9 @@ namespace Ocaramba.Extensions
         /// <param name="element">The element.</param>
         /// <param name="locator">The locator.</param>
         /// <param name="timeout">Specified time to wait.</param>
-        /// <param name="customMessage">Custom message to be displayed when there is no possible to get element</param>
+        /// <param name="customMessage">Custom message to be displayed when there is no possible to get element.</param>
         /// <returns>
-        /// Found element
+        /// Found element.
         /// </returns>
         /// <example>How to use it: <code>
         /// this.Driver.GetElement(this.loginButton, timeout);
@@ -82,7 +81,7 @@ namespace Ocaramba.Extensions
         /// <param name="locator">The locator.</param>
         /// <param name="timeout">Specified time to wait.</param>
         /// <returns>
-        /// Found element
+        /// Found element.
         /// </returns>
         /// <example>How to use it: <code>
         /// this.Driver.GetElement(this.loginButton, timeout);
@@ -98,9 +97,9 @@ namespace Ocaramba.Extensions
         /// <param name="element">The element.</param>
         /// <param name="locator">The locator.</param>
         /// <param name="condition">Wait until condition met.</param>
-        /// <param name="customMessage">Custom message to be displayed when there is no possible to get element</param>
+        /// <param name="customMessage">Custom message to be displayed when there is no possible to get element.</param>
         /// <returns>
-        /// Found element
+        /// Found element.
         /// </returns>
         /// <example>How to use it: <code>
         /// this.Driver.GetElement(this.loginButton, e =&gt; e.Displayed);
@@ -117,9 +116,9 @@ namespace Ocaramba.Extensions
         /// <param name="locator">The locator.</param>
         /// <param name="timeout">The timeout.</param>
         /// <param name="condition">The condition to be met.</param>
-        /// <param name="customMessage">Custom message to be displayed when there is no possible to get element</param>
+        /// <param name="customMessage">Custom message to be displayed when there is no possible to get element.</param>
         /// <returns>
-        /// Return found element
+        /// Return found element.
         /// </returns>
         /// <example>How to use it: <code>
         /// this.Driver.GetElement(this.loginButton, timeout, e =&gt; e.Displayed);
@@ -155,9 +154,9 @@ namespace Ocaramba.Extensions
         /// <param name="timeout">The timeout.</param>
         /// <param name="timeInterval">The value indicating how often to check for the condition to be true..</param>
         /// <param name="condition">The condition to be met.</param>
-        /// <param name="customMessage">Custom message to be displayed when there is no possible to get element</param>
+        /// <param name="customMessage">Custom message to be displayed when there is no possible to get element.</param>
         /// <returns>
-        /// Return found element
+        /// Return found element.
         /// </returns>
         /// <example>How to use it: <code>
         /// this.Driver.GetElement(this.loginButton, timeout, timeInterval, e =&gt; e.Displayed &amp; e.Enabled);
@@ -185,9 +184,9 @@ namespace Ocaramba.Extensions
         /// <typeparam name="T">IWebComponent like ICheckbox, ISelect, etc.</typeparam>
         /// <param name="searchContext">The search context.</param>
         /// <param name="locator">The locator.</param>
-        /// <param name="customMessage">Custom message to be displayed when there is no possible to get element</param>
+        /// <param name="customMessage">Custom message to be displayed when there is no possible to get element.</param>
         /// <returns>
-        /// Located and displayed element
+        /// Located and displayed element.
         /// </returns>
         /// <example>How to specify element type to get additional actions for it: <code>
         /// var checkbox = this.Driver.GetElement&lt;Checkbox&gt;(this.stackOverFlowCheckbox);
@@ -208,7 +207,7 @@ namespace Ocaramba.Extensions
         /// <param name="locator">The locator.</param>
         /// <param name="timeout">Specified time to wait.</param>
         /// <returns>
-        /// Located and displayed element
+        /// Located and displayed element.
         /// </returns>
         /// <example>How to specify element type to get additional actions for it: <code>
         /// var checkbox = this.Driver.GetElement&lt;Checkbox&gt;(this.stackOverFlowCheckbox, timeout);
@@ -228,9 +227,9 @@ namespace Ocaramba.Extensions
         /// <param name="searchContext">The search context.</param>
         /// <param name="locator">The locator.</param>
         /// <param name="condition">The condition to be met.</param>
-        /// <param name="customMessage">Custom message to be displayed when there is no possible to get element</param>
+        /// <param name="customMessage">Custom message to be displayed when there is no possible to get element.</param>
         /// <returns>
-        /// Located and displayed element
+        /// Located and displayed element.
         /// </returns>
         /// <example>How to find hidden element, specify element type to get additional actions for it and specify condition : <code>
         /// var checkbox = this.Driver.GetElement&lt;Checkbox&gt;(this.stackOverFlowCheckbox, e =&gt; e.Displayed == false);
@@ -251,9 +250,9 @@ namespace Ocaramba.Extensions
         /// <param name="locator">The locator.</param>
         /// <param name="timeout">Specified time to wait.</param>
         /// <param name="condition">The condition to be met.</param>
-        /// <param name="customMessage">Custom message to be displayed when there is no possible to get element</param>
+        /// <param name="customMessage">Custom message to be displayed when there is no possible to get element.</param>
         /// <returns>
-        /// Located and displayed element
+        /// Located and displayed element.
         /// </returns>
         /// <example>How to specify element type to get additional actions for it and specify time and condition to find this element: <code>
         /// var checkbox = this.Driver.GetElement&lt;Checkbox&gt;(this.stackOverFlowCheckbox, timeout, e =&gt; e.Displayed);
@@ -272,7 +271,7 @@ namespace Ocaramba.Extensions
         /// <param name="element">The element.</param>
         /// <param name="locator">The locator.</param>
         /// <returns>
-        /// Return all found and displayed and enabled elements
+        /// Return all found and displayed and enabled elements..
         /// </returns>
         /// <example>How to find elements : <code>
         /// var checkboxes = this.Driver.GetElements(this.stackOverFlowCheckbox);
@@ -288,10 +287,10 @@ namespace Ocaramba.Extensions
         /// <param name="element">The element.</param>
         /// <param name="locator">The locator.</param>
         /// <param name="timeout">Specified time to wait.</param>
-        /// <param name="condition">Condition to be fulfilled by elements</param>
-        /// <param name="minNumberOfElements">The minimum number of elements to get</param>
+        /// <param name="condition">Condition to be fulfilled by elements.</param>
+        /// <param name="minNumberOfElements">The minimum number of elements to get.</param>
         /// <returns>
-        /// Return all found and displayed and enabled elements
+        /// Return all found and displayed and enabled elements.
         /// </returns>
         /// <example>How to find elements : <code>
         /// var checkboxes = this.Driver.GetElements(this.stackOverFlowCheckbox, timeout, e =&gt; e.Displayed &amp;&amp; e.Enabled, 1);
@@ -311,9 +310,9 @@ namespace Ocaramba.Extensions
         /// </summary>
         /// <param name="element">The element.</param>
         /// <param name="locator">The locator.</param>
-        /// <param name="minNumberOfElements">The minimum number of elements to get</param>
+        /// <param name="minNumberOfElements">The minimum number of elements to get.</param>
         /// <returns>
-        /// Return all found and displayed and enabled elements
+        /// Return all found and displayed and enabled elements.
         /// </returns>
         /// <example>How to find elements : <code>
         /// var checkboxes = this.Driver.GetElements(this.stackOverFlowCheckbox, 1);
@@ -333,9 +332,9 @@ namespace Ocaramba.Extensions
         /// </summary>
         /// <param name="element">The element.</param>
         /// <param name="locator">The locator.</param>
-        /// <param name="condition">Condition to be fulfilled by elements</param>
+        /// <param name="condition">Condition to be fulfilled by elements.</param>
         /// <returns>
-        /// Return all found elements for specified conditions
+        /// Return all found elements for specified conditions.
         /// </returns>
         /// <example>How to find disabled elements : <code>
         /// var checkboxes = this.Driver.GetElements(this.stackOverFlowCheckbox, e =&gt; e.Enabled == false);
@@ -352,7 +351,7 @@ namespace Ocaramba.Extensions
         /// <param name="searchContext">The search context.</param>
         /// <param name="locator">The locator.</param>
         /// <returns>
-        /// Located elements
+        /// Located elements.
         /// </returns>
         /// <example>How to find elements and specify element type to get additional actions for them : <code>
         /// var checkboxes = this.Driver.GetElements&lt;Checkbox&gt;(this.stackOverFlowCheckbox);
@@ -375,7 +374,7 @@ namespace Ocaramba.Extensions
         /// <param name="locator">The locator.</param>
         /// <param name="condition">The condition to be met.</param>
         /// <returns>
-        /// Located elements
+        /// Located elements.
         /// </returns>
         /// <example>How to find displayed elements and specify element type to get additional actions for them : <code>
         /// var checkboxes = this.Driver.GetElements&lt;Checkbox&gt;(this.stackOverFlowCheckbox, e =&gt; e.Displayed);
@@ -395,9 +394,9 @@ namespace Ocaramba.Extensions
         /// </summary>
         /// <param name="webElement">The web element.</param>
         /// <returns>
-        /// Driver from element
+        /// Driver from element.
         /// </returns>
-        /// <exception cref="System.ArgumentException">Element must wrap a web driver</exception>
+        /// <exception cref="System.ArgumentException">Element must wrap a web driver.</exception>
         public static IWebDriver ToDriver(this ISearchContext webElement)
         {
             var wrappedElement = webElement as IWrapsDriver;
@@ -417,7 +416,7 @@ namespace Ocaramba.Extensions
         /// <summary>
         /// Converts generic IWebElement into specified web element (Checkbox, Table, etc.) .
         /// </summary>
-        /// <typeparam name="T">Specified web element class</typeparam>
+        /// <typeparam name="T">Specified web element class.</typeparam>
         /// <param name="webElement">Generic IWebElement.</param>
         /// <returns>
         /// Specified web element (Checkbox, Table, etc.)

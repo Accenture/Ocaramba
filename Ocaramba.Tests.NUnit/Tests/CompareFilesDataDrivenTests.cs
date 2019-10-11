@@ -20,17 +20,23 @@
 //     SOFTWARE.
 // </license>
 
+using NLog;
+
 namespace Ocaramba.Tests.NUnit.Tests
 {
     using System.IO;
     using global::NUnit.Framework;
-    using NLog;
     using Ocaramba.Tests.NUnit.DataDriven;
 
     [TestFixture]
     public class CompareFilesDataDrivenTests
     {
-        private readonly Logger logger = LogManager.GetCurrentClassLogger();
+#if net47
+        private readonly NLog.Logger logger = LogManager.GetCurrentClassLogger();
+#endif
+#if netcoreapp2_2
+        private readonly NLog.Logger logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+#endif
 
         private readonly char separator = Path.DirectorySeparatorChar;
 

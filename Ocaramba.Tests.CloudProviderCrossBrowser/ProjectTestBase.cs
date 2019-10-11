@@ -20,6 +20,8 @@
 //     SOFTWARE.
 // </license>
 
+using System.IO;
+
 namespace Ocaramba.Tests.CloudProviderCrossBrowser
 {
     using System;
@@ -39,7 +41,12 @@ namespace Ocaramba.Tests.CloudProviderCrossBrowser
     /// </summary>
     public class ProjectTestBase : TestBase
     {
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+#if net47
+        private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
+#endif
+#if netcoreapp2_2
+        private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+#endif
 
         private readonly DriverContext
             driverContext = new DriverContext();
@@ -84,7 +91,13 @@ namespace Ocaramba.Tests.CloudProviderCrossBrowser
         [OneTimeSetUp]
         public void BeforeClass()
         {
+#if netcoreapp2_2
+            this.DriverContext.CurrentDirectory = Directory.GetCurrentDirectory();
+#endif
+
+#if net47
             this.DriverContext.CurrentDirectory = TestContext.CurrentContext.TestDirectory;
+#endif
         }
 
         /// <summary>

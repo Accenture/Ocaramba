@@ -32,11 +32,15 @@ namespace Ocaramba.Tests.NUnit.Tests
     public class SaveScreenShotsPageSourceTestsNUnit : ProjectTestBase
     {
         [Test]
+        [Category("TakingScreehShots")]
+        [Category("NotImplementedInCoreOrUploadDownload")]
         public void SaveFullScreenShotTest()
         {
             var downloadPage = new InternetPage(this.DriverContext).OpenHomePage().GoToFileDownloader();
             var screenShotNumber = FilesHelper.CountFiles(this.DriverContext.ScreenShotFolder, FileType.Png);
+#if net47
             Assert.IsNotNull(TakeScreenShot.Save(TakeScreenShot.DoIt(), ImageFormat.Png, this.DriverContext.ScreenShotFolder, string.Format(CultureInfo.CurrentCulture, this.DriverContext.TestTitle + "_first")));
+#endif
             var nameOfScreenShot = downloadPage.CheckIfScreenShotIsSaved(screenShotNumber);
             TestContext.AddTestAttachment(nameOfScreenShot);
             Assert.IsTrue(nameOfScreenShot.Contains(this.DriverContext.TestTitle), "Name of screenshot doesn't contain Test Title");
@@ -55,6 +59,7 @@ namespace Ocaramba.Tests.NUnit.Tests
         }
 
         [Test]
+        [Category("NotImplementedInCoreOrUploadDownload")]
         public void SaveSourcePageTest()
         {
             var basicAuthPage = new InternetPage(this.DriverContext).OpenHomePageWithUserCredentials().GoToBasicAuthPage();

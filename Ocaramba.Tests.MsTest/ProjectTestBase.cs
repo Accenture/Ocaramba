@@ -23,7 +23,8 @@
 namespace Ocaramba.Tests.MsTest
 {
     using System;
-
+    using System.Collections.Generic;
+    using System.IO;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using Ocaramba;
@@ -114,7 +115,9 @@ namespace Ocaramba.Tests.MsTest
                 foreach (var filePath in filePaths)
                 {
                     this.LogTest.Info("Uploading file [{0}] to test context", filePath);
+#if net47
                     this.TestContext.AddResultFile(filePath);
+#endif
                 }
             }
         }

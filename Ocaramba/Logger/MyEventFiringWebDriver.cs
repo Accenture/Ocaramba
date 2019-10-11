@@ -28,11 +28,16 @@ namespace Ocaramba.Logger
     using OpenQA.Selenium.Support.Events;
 
     /// <summary>
-    /// Override selenium methods to add event logs
+    /// Override selenium methods to add event logs.
     /// </summary>
     public class MyEventFiringWebDriver : EventFiringWebDriver
     {
-        private static readonly NLog.Logger Logger = LogManager.GetLogger("DRIVER");
+#if net47
+        private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
+#endif
+#if netcoreapp2_2
+        private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+#endif
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MyEventFiringWebDriver"/> class.
@@ -117,7 +122,7 @@ namespace Ocaramba.Logger
         /// To the string element.
         /// </summary>
         /// <param name="e">The <see cref="WebElementEventArgs"/> instance containing the event data.</param>
-        /// <returns>Formated issue</returns>
+        /// <returns>Formated issue.</returns>
         private static string ToStringElement(WebElementEventArgs e)
         {
             return string.Format(
@@ -139,7 +144,7 @@ namespace Ocaramba.Logger
         /// </summary>
         /// <param name="e">The <see cref="WebElementEventArgs"/> instance containing the event data.</param>
         /// <param name="attribute">The attribute.</param>
-        /// <returns>Atribute and value</returns>
+        /// <returns>Atribute and value.</returns>
         private static string AppendAttribute(WebElementEventArgs e, string attribute)
         {
             var attrValue = attribute == "text" ? e.Element.Text : e.Element.GetAttribute(attribute);

@@ -19,7 +19,7 @@
 //     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //     SOFTWARE.
 // </license>
-
+#if net47
 namespace Ocaramba.Helpers
 {
     using System.Collections.Generic;
@@ -35,7 +35,7 @@ namespace Ocaramba.Helpers
     public static class MdxHelper
     {
         /// <summary>
-        /// NLog logger handle
+        /// NLog logger handle.
         /// </summary>
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
@@ -45,7 +45,7 @@ namespace Ocaramba.Helpers
         /// <param name="command">MDX query string.</param>
         /// <param name="connectionString">The Analysis Services connection string.</param>
         /// <param name="index">The index of column.</param>
-        /// <returns>Collection of MDX query results</returns>
+        /// <returns>Collection of MDX query results.</returns>
         /// <example>How to use it: <code>
         /// var connectionString = "Provider=MSOLAP.5;Password=password;Persist Security Info=True;User ID=username;Initial Catalog=AdventureWorks;Data Source=servername;MDX Compatibility=1;Safety Options=2;MDX Missing Member Mode=Error";
         /// const string SqlQuery = "Select [Measures].[Internet Average Sales Amount] on Columns, [Product].[Category].members on Rows From [AdventureWorks];";
@@ -81,3 +81,4 @@ namespace Ocaramba.Helpers
         }
     }
 }
+#endif

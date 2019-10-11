@@ -25,6 +25,7 @@ namespace Ocaramba.Tests.Xunit
     using System;
     using global::Xunit;
     using Ocaramba;
+    using NLog;
 
     /// <summary>
     /// The base class for all tests <see href="https://github.com/ObjectivityLtd/Ocaramba/wiki/ProjectTestBase-class">More details on wiki</see>
@@ -33,12 +34,20 @@ namespace Ocaramba.Tests.Xunit
     {
         private bool disposed;
 
+#if net47
+        private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
+#endif
+#if netcoreapp2_2
+        private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+#endif
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ProjectTestBase"/> class.
         /// </summary>
         protected ProjectTestBase()
         {
             this.DriverContext.CurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            Logger.Info("new test");
             this.DriverContext.Start();
         }
 

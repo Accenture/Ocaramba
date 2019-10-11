@@ -1,5 +1,4 @@
 ﻿using NUnit.Framework;
-using Ocaramba.Test.Automation.UnitTests;
 using Ocaramba.Tests.PageObjects.PageObjects.TheInternet;
 
 namespace Ocaramba.UnitTests.Tests
@@ -26,8 +25,19 @@ namespace Ocaramba.UnitTests.Tests
             var titleByClassName = new InternetPage(DriverContext)
                 .OpenHomePage()
                 .GoToDragAndDropPage().GetByClassName;
-
-            Assert.AreEqual("Drag and Drop\r\nA\r\nB", titleByClassName);
+#if netcoreapp2_2
+            if (BaseConfiguration.Env == "Linux")
+            {
+                Assert.AreEqual("Drag and Drop\nA\nB", titleByClassName);
+            }
+            else
+            {
+                Assert.AreEqual("Drag and Drop\r\nA\r\nB", titleByClassName);
+            }
+#endif
+#if net47
+             Assert.AreEqual("Drag and Drop\r\nA\r\nB", titleByClassName);
+#endif
         }
 
         [Test]
@@ -36,8 +46,19 @@ namespace Ocaramba.UnitTests.Tests
             var titleByCssSelector = new InternetPage(DriverContext)
                 .OpenHomePage()
                 .GoToDragAndDropPage().GetByCssSelectorLocator;
-            
+#if netcoreapp2_2
+            if (BaseConfiguration.Env == "Linux")
+            {
+                Assert.AreEqual("Drag and Drop\nA\nB", titleByCssSelector);
+            }
+            else
+            {
+                Assert.AreEqual("Drag and Drop\r\nA\r\nB", titleByCssSelector);
+            }
+#endif
+#if net47
             Assert.AreEqual("Drag and Drop\r\nA\r\nB", titleByCssSelector);
+#endif
         }
 
         [Test]
@@ -57,8 +78,19 @@ namespace Ocaramba.UnitTests.Tests
                 .OpenHomePage()
                 .GoToFormAuthenticationPage()
                 .GetUsernameByNameLocator;
-
+#if netcoreapp2_2
+            if (BaseConfiguration.Env == "Linux")
+            {
+                Assert.AreEqual("Username\nPassword\nLogin", columnA);
+            }
+            else
+            {
+                Assert.AreEqual("Username\r\nPassword\r\nLogin", columnA);
+            }
+#endif
+#if net47
             Assert.AreEqual("Username\r\nPassword\r\nLogin", columnA);
+#endif
         }
 
 

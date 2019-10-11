@@ -20,6 +20,7 @@
 //     SOFTWARE.
 // </license>
 
+using System.IO;
 using NUnit.Framework;
 using Ocaramba.Extensions;
 
@@ -31,7 +32,14 @@ namespace Ocaramba.UnitTests.Tests
         [Test]
         public void CheckSynchronizationWithAngularFuctionality()
         {
-            var driverContext = new Ocaramba.DriverContext {CurrentDirectory = TestContext.CurrentContext.TestDirectory};
+#if netcoreapp2_2
+        string folder = Directory.GetCurrentDirectory();
+#endif
+
+#if net47
+            string folder = TestContext.CurrentContext.TestDirectory;
+#endif
+            var driverContext = new Ocaramba.DriverContext {CurrentDirectory = folder };
             driverContext.Start();
             var Default_false = DriversCustomSettings.IsDriverSynchronizationWithAngular(driverContext.Driver);
             driverContext.Driver.SynchronizeWithAngular(true);

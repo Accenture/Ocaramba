@@ -30,7 +30,7 @@ namespace Ocaramba.WebElements
     public class JavaScriptAlert
     {
         /// <summary>
-        /// The web driver
+        /// The web driver.
         /// </summary>
         private readonly IWebDriver webDriver;
 
@@ -44,7 +44,7 @@ namespace Ocaramba.WebElements
         }
 
         /// <summary>
-        /// Gets java script popup text
+        /// Gets java script popup text.
         /// </summary>
         public string JavaScriptText
         {
@@ -70,9 +70,9 @@ namespace Ocaramba.WebElements
         }
 
         /// <summary>
-        /// Method sends text to Java Script Alert
+        /// Method sends text to Java Script Alert.
         /// </summary>
-        /// <param name="text">Text to be sent</param>
+        /// <param name="text">Text to be sent.</param>
         public void SendTextToJavaScript(string text)
         {
             this.webDriver.SwitchTo().Alert().SendKeys(text);

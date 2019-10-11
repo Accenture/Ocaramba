@@ -26,7 +26,7 @@ namespace Ocaramba.Extensions
     using OpenQA.Selenium;
 
     /// <summary>
-    /// Extension methods for IWebElement
+    /// Extension methods for IWebElement.
     /// </summary>
     public static class WebElementExtensions
     {
@@ -54,7 +54,7 @@ namespace Ocaramba.Extensions
         /// <param name="attributeValue">The attribute value.</param>
         /// <exception cref="System.ArgumentException">Element must wrap a web driver
         /// or
-        /// Element must wrap a web driver that supports java script execution</exception>
+        /// Element must wrap a web driver that supports java script execution.</exception>
         public static void SetAttribute(this IWebElement webElement, string attribute, string attributeValue)
         {
             var javascript = webElement.ToDriver() as IJavaScriptExecutor;
@@ -88,11 +88,11 @@ namespace Ocaramba.Extensions
         /// <summary>
         /// Returns the textual content of the specified node, and all its descendants regardless element is visible or not.
         /// </summary>
-        /// <param name="webElement">The web element</param>
-        /// <returns>The attribute</returns>
+        /// <param name="webElement">The web element.</param>
+        /// <returns>The attribute.</returns>
         /// <exception cref="ArgumentException">Element must wrap a web driver
         /// or
-        /// Element must wrap a web driver that supports java script execution</exception>
+        /// Element must wrap a web driver that supports java script execution.</exception>
         public static string GetTextContent(this IWebElement webElement)
         {
             var javascript = webElement.ToDriver() as IJavaScriptExecutor;

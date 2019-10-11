@@ -41,7 +41,12 @@ namespace Ocaramba.Tests.NUnit.DataDriven
     /// </summary>
     public static class DataDrivenHelper
     {
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+#if net47
+        private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
+#endif
+#if netcoreapp2_2
+        private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+#endif
 
         /// <summary>
         /// Reads the data drive file and set test name.
@@ -110,7 +115,7 @@ namespace Ocaramba.Tests.NUnit.DataDriven
         /// <exception cref="DataDrivenReadException">Exception when parameter not found in row</exception>
         /// <example>How to use it: <code>
         ///  {
-        ///  var path = TestContext.CurrentContext.TestDirectory;
+        ///  var path = Directory.GetCurrentDirectory();
         ///  path = string.Format(CultureInfo.CurrentCulture, "{0}{1}", path, @"\DataDriven\TestDataCsv.csv");
         ///  return DataDrivenHelper.ReadDataDriveFileCsv(path, new[] { "user", "password" }, "credentialCsv");
         ///  }

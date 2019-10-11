@@ -20,6 +20,8 @@
 //     SOFTWARE.
 // </license>
 
+using System.IO;
+
 namespace Ocaramba.Tests.NUnit.DataDriven
 {
     using System.Collections;
@@ -59,9 +61,7 @@ namespace Ocaramba.Tests.NUnit.DataDriven
 
         public static IEnumerable CredentialsCSV()
         {
-            var path = TestContext.CurrentContext.TestDirectory;
-            path = string.Format(CultureInfo.CurrentCulture, "{0}{1}", path, @"\DataDriven\TestDataCsv.csv");
-            return DataDrivenHelper.ReadDataDriveFileCsv(path, new[] { "user", "password" }, "credentialCsv");
+            return DataDrivenHelper.ReadDataDriveFileCsv(ProjectBaseConfiguration.DataDrivenFileCSV, new[] { "user", "password" }, "credentialCsv");
         }
     }
 }

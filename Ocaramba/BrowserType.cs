@@ -23,7 +23,7 @@
 namespace Ocaramba
 {
     /// <summary>
-    /// Supported browsers
+    /// Supported browsers.
     /// </summary>
     public enum BrowserType
     {
@@ -80,6 +80,6 @@ namespace Ocaramba
         /// <summary>
         /// Not supported browser
         /// </summary>
-        None
+        None,
     }
 }

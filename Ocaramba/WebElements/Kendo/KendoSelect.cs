@@ -33,7 +33,7 @@ namespace Ocaramba.WebElements.Kendo
     using OpenQA.Selenium.Remote;
 
     /// <summary>
-    ///     Kendo Select element
+    ///     Kendo Select element.
     /// </summary>
     public abstract class KendoSelect : RemoteWebElement
     {
@@ -46,7 +46,7 @@ namespace Ocaramba.WebElements.Kendo
         /// <summary>
         ///     Initializes a new instance of the <see cref="KendoSelect" /> class.
         /// </summary>
-        /// <param name="webElement">The webElement</param>
+        /// <param name="webElement">The webElement.</param>
         protected KendoSelect(IWebElement webElement)
             : base(webElement.ToDriver() as RemoteWebDriver, null)
         {

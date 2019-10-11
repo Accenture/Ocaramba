@@ -20,6 +20,8 @@
 //     SOFTWARE.
 // </license>
 
+using System.IO;
+
 namespace Ocaramba.Tests.NUnit
 {
     using global::NUnit.Framework;
@@ -68,7 +70,13 @@ namespace Ocaramba.Tests.NUnit
         [OneTimeSetUp]
         public void BeforeClass()
         {
+#if netcoreapp2_2
+        this.DriverContext.CurrentDirectory = Directory.GetCurrentDirectory();
+#endif
+
+#if net47
             this.DriverContext.CurrentDirectory = TestContext.CurrentContext.TestDirectory;
+#endif
             this.DriverContext.Start();
         }
 

@@ -29,9 +29,10 @@ namespace Ocaramba
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.IO;
-    using Helpers;
-    using Logger;
     using NLog;
+    using Ocaramba.Helpers;
+    using Ocaramba.Logger;
+    using Ocaramba.Types;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Chrome;
     using OpenQA.Selenium.Edge;
@@ -39,15 +40,19 @@ namespace Ocaramba
     using OpenQA.Selenium.IE;
     using OpenQA.Selenium.Remote;
     using OpenQA.Selenium.Safari;
-    using Types;
 
     /// <summary>
-    /// Contains handle to driver and methods for web browser
+    /// Contains handle to driver and methods for web browser.
     /// </summary>
     [SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable", Justification = "Driver is disposed on test end")]
     public partial class DriverContext
     {
-        private static readonly NLog.Logger Logger = LogManager.GetLogger("DRIVER");
+#if net47
+        private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
+#endif
+#if netcoreapp2_2
+        private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+#endif
         private readonly Collection<ErrorDetail> verifyMessages = new Collection<ErrorDetail>();
 
         /// <summary>
@@ -66,7 +71,7 @@ namespace Ocaramba
         public event EventHandler<DriverOptionsSetEventArgs> DriverOptionsSet;
 
         /// <summary>
-        /// Gets instance of Performance PerformanceMeasures class
+        /// Gets instance of Performance PerformanceMeasures class.
         /// </summary>
         public PerformanceHelper PerformanceMeasures { get; } = new PerformanceHelper();
 
@@ -79,12 +84,12 @@ namespace Ocaramba
         public string TestTitle { get; set; }
 
         /// <summary>
-        /// Gets or sets the Environment Browsers from App.config
+        /// Gets or sets the Environment Browsers from App.config.
         /// </summary>
         public string CrossBrowserEnvironment { get; set; }
 
         /// <summary>
-        /// Gets Sets Folder name for ScreenShot
+        /// Gets Sets Folder name for ScreenShot.
         /// </summary>
         public string ScreenShotFolder
         {
@@ -95,7 +100,7 @@ namespace Ocaramba
         }
 
         /// <summary>
-        /// Gets Sets Folder name for Download
+        /// Gets Sets Folder name for Download.
         /// </summary>
         public string DownloadFolder
         {
@@ -106,7 +111,7 @@ namespace Ocaramba
         }
 
         /// <summary>
-        /// Gets Sets Folder name for PageSource
+        /// Gets Sets Folder name for PageSource.
         /// </summary>
         public string PageSourceFolder
         {
@@ -125,7 +130,7 @@ namespace Ocaramba
         public bool IsTestFailed { get; set; }
 
         /// <summary>
-        /// Gets or sets test logger
+        /// Gets or sets test logger.
         /// </summary>
         public TestLogger LogTest
         {
@@ -141,7 +146,7 @@ namespace Ocaramba
         }
 
         /// <summary>
-        /// Gets driver Handle
+        /// Gets driver Handle.
         /// </summary>
         public IWebDriver Driver
         {
@@ -152,7 +157,7 @@ namespace Ocaramba
         }
 
         /// <summary>
-        /// Gets all verify messages
+        /// Gets all verify messages.
         /// </summary>
         public Collection<ErrorDetail> VerifyMessages
         {
@@ -163,7 +168,7 @@ namespace Ocaramba
         }
 
         /// <summary>
-        /// Gets or sets directory where assembly files are located
+        /// Gets or sets directory where assembly files are located.
         /// </summary>
         public string CurrentDirectory { get; set; }
 
@@ -192,8 +197,17 @@ namespace Ocaramba
                 options.SetPreference("network.automatic-ntlm-auth.trusted-uris", BaseConfiguration.Host ?? string.Empty);
 
                 // retrieving settings from config file
-                var firefoxPreferences = ConfigurationManager.GetSection("FirefoxPreferences") as NameValueCollection;
-                var firefoxExtensions = ConfigurationManager.GetSection("FirefoxExtensions") as NameValueCollection;
+                NameValueCollection firefoxPreferences = new NameValueCollection();
+
+                NameValueCollection firefoxExtensions = new NameValueCollection();
+#if net47
+                firefoxPreferences = ConfigurationManager.GetSection("FirefoxPreferences") as NameValueCollection;
+                firefoxExtensions = ConfigurationManager.GetSection("FirefoxExtensions") as NameValueCollection;
+#endif
+#if netcoreapp2_2
+                firefoxPreferences = BaseConfiguration.GetNameValueCollectionFromAppsettings("FirefoxPreferences");
+                firefoxExtensions = BaseConfiguration.GetNameValueCollectionFromAppsettings("FirefoxExtensions");
+#endif
 
                 // preference for downloading files
                 options.SetPreference("browser.download.dir", this.DownloadFolder);
@@ -291,10 +305,19 @@ namespace Ocaramba
                 ChromeOptions options = new ChromeOptions();
 
                 // retrieving settings from config file
-                var chromePreferences = ConfigurationManager.GetSection("ChromePreferences") as NameValueCollection;
-                var chromeExtensions = ConfigurationManager.GetSection("ChromeExtensions") as NameValueCollection;
-                var chromeArguments = ConfigurationManager.GetSection("ChromeArguments") as NameValueCollection;
-
+                NameValueCollection chromePreferences = null;
+                NameValueCollection chromeExtensions = null;
+                NameValueCollection chromeArguments = null;
+#if net47
+                chromePreferences = ConfigurationManager.GetSection("ChromePreferences") as NameValueCollection;
+                chromeExtensions = ConfigurationManager.GetSection("ChromeExtensions") as NameValueCollection;
+                chromeArguments = ConfigurationManager.GetSection("ChromeArguments") as NameValueCollection;
+#endif
+#if netcoreapp2_2
+                chromePreferences = BaseConfiguration.GetNameValueCollectionFromAppsettings("ChromePreferences");
+                chromeExtensions = BaseConfiguration.GetNameValueCollectionFromAppsettings("ChromeExtensions");
+                chromeArguments = BaseConfiguration.GetNameValueCollectionFromAppsettings("chromeArguments");
+#endif
                 options.AddUserProfilePreference("profile.default_content_settings.popups", 0);
                 options.AddUserProfilePreference("download.default_directory", this.DownloadFolder);
                 options.AddUserProfilePreference("download.prompt_for_download", false);
@@ -387,7 +410,13 @@ namespace Ocaramba
             get
             {
                 // retrieving settings from config file
-                var internetExplorerPreferences = ConfigurationManager.GetSection("InternetExplorerPreferences") as NameValueCollection;
+                NameValueCollection internetExplorerPreferences = null;
+#if net47
+                internetExplorerPreferences = ConfigurationManager.GetSection("InternetExplorerPreferences") as NameValueCollection;
+#endif
+#if netcoreapp2_2
+                internetExplorerPreferences = BaseConfiguration.GetNameValueCollectionFromAppsettings("InternetExplorerPreferences");
+#endif
                 var options = new InternetExplorerOptions
                 {
                     EnsureCleanSession = true,
@@ -469,7 +498,7 @@ namespace Ocaramba
         /// <summary>
         /// Starts the specified Driver.
         /// </summary>
-        /// <exception cref="NotSupportedException">When driver not supported</exception>
+        /// <exception cref="NotSupportedException">When driver not supported.</exception>
         [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "Driver disposed later in stop method")]
 
         public void Start()
@@ -546,9 +575,16 @@ namespace Ocaramba
 
         private void SetupRemoteWebDriver()
         {
-            var driverCapabilitiesConf = ConfigurationManager.GetSection("DriverCapabilities") as NameValueCollection;
-            NameValueCollection settings =
-                ConfigurationManager.GetSection("environments/" + this.CrossBrowserEnvironment) as NameValueCollection;
+            NameValueCollection driverCapabilitiesConf = new NameValueCollection();
+            NameValueCollection settings = new NameValueCollection();
+#if net47
+            driverCapabilitiesConf = ConfigurationManager.GetSection("DriverCapabilities") as NameValueCollection;
+            settings = ConfigurationManager.GetSection("environments/" + this.CrossBrowserEnvironment) as NameValueCollection;
+#endif
+#if netcoreapp2_2
+                    driverCapabilitiesConf = BaseConfiguration.GetNameValueCollectionFromAppsettings("DriverCapabilities");
+                    settings = BaseConfiguration.GetNameValueCollectionFromAppsettings("environments:" + this.CrossBrowserEnvironment);
+#endif
             var browserType = this.GetBrowserTypeForRemoteDriver(settings);
             switch (browserType)
             {

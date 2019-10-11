@@ -1,7 +1,7 @@
 ## Ocaramba
-<img align="left" src="/Ocaramba.Documentation/icons/Objectivity_logo_avatar.png">
+<img align="left" src="/Ocaramba.Documentation/icons/Ocaramba-logo-64x64.png">
 
-**C# Framework to automate tests using Selenium WebDriver**
+**Cross-Platform C# Framework to automate tests using Selenium WebDriver**
 
 [![Build status](https://ci.appveyor.com/api/projects/status/p8p3bndotyknv7rk/branch/master?svg=true)](https://ci.appveyor.com/project/ObjectivityAdminsTeam/ocaramba/branch/master)
 [![Build status](https://ci.appveyor.com/api/projects/status/p8p3bndotyknv7rk?svg=true)](https://ci.appveyor.com/project/ObjectivityAdminsTeam/ocaramba)
@@ -16,6 +16,8 @@ Test Framework was designed in Objectivity to propose common way how people shou
 Project API documentation can be found here: http://objectivityltd.github.io/Ocaramba<br /><br />
 
 **It provides following features:**
+- .NET Framework 4.7.2 and .NET Core 2.2 supported
+- Cross-Platform  Windows, Linux and macOS systems supported
 - Ready for parallel tests execution, more details [here](https://github.com/ObjectivityLtd/Ocaramba/wiki/Selenium%20Parallel%20tests%20execution)
 - Possibility to use MSTest, NUnit or xUNIT framework
 - Specflow ready
@@ -32,10 +34,10 @@ Project API documentation can be found here: http://objectivityltd.github.io/Oca
 - Verify - asserts without stop tests, more details [here](https://github.com/ObjectivityLtd/Ocaramba/wiki/Verify-asserts-without-stop-tests)
 - Measures average and 90 Percentile action times, more details [here](https://github.com/ObjectivityLtd/Ocaramba/wiki/Performance%20measures)
 - DataDriven tests from Xml, Csv and Excel files for NUnit and  Xml, Csv for MSTest with examples, more details [NUnit](https://github.com/ObjectivityLtd/Ocaramba/wiki/NUnit-DataDriven-tests-from-Xml,-CSV-and-Excel-files), [MsTest](https://github.com/ObjectivityLtd/Ocaramba/wiki/MsTest-DataDriven-tests-from-Xml-and-CSV-files)
-- Possibility to take full desktop, browser screen shot or screenshot of element - Visual Testing, save page source, more details [here](https://github.com/ObjectivityLtd/Ocaramba/wiki/Screen-shots:-full-desktop,-selenium.-PageSource-saving)
+- Possibility to take full desktop (only .NET Framework), browser screen shot or screenshot of element - Visual Testing (only .NET Framework), save page source, more details [here](https://github.com/ObjectivityLtd/Ocaramba/wiki/Screen-shots:-full-desktop,-selenium.-PageSource-saving)
 - Logging with NLog, EventFiringWebDriver logs, more details [here](https://github.com/ObjectivityLtd/Ocaramba/wiki/Logging)
 - Files downloading (Firefox, Chrome), more details [here](https://github.com/ObjectivityLtd/Ocaramba/wiki/Downloading%20files)
-- Possibility to send [SQL](http://objectivityltd.github.io/Ocaramba/html/730c92c7-831a-4449-3938-16540cf259b8.htm) or [MDX](http://objectivityltd.github.io/Ocaramba/html/7de319df-06eb-1c79-8c2d-9c60aaf3ab85.htm) queries
+- Possibility to send [SQL](http://objectivityltd.github.io/Ocaramba/html/730c92c7-831a-4449-3938-16540cf259b8.htm) or [MDX](http://objectivityltd.github.io/Ocaramba/html/7de319df-06eb-1c79-8c2d-9c60aaf3ab85.htm) queries (only .NET Framework)
 - Possibility of debugging framework installed from nuget package, more details [here](https://github.com/ObjectivityLtd/Ocaramba/wiki/Debugging-Test.Automation-framework).
 - AngularJS support, more details [here](https://github.com/ObjectivityLtd/Ocaramba/wiki/Angular-support).
 - Possiblity to check for JavaScript errors from browser, more details [here](https://github.com/ObjectivityLtd/Ocaramba/wiki/Verifying-Javascript-Errors-from-browser).

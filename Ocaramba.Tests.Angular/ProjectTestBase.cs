@@ -20,6 +20,8 @@
 //     SOFTWARE.
 // </license>
 
+using System.IO;
+
 namespace Ocaramba.Tests.Angular
 {
     using System;
@@ -36,7 +38,12 @@ namespace Ocaramba.Tests.Angular
     {
         private readonly DriverContext driverContext = new DriverContext();
 
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+#if net47
+        private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
+#endif
+#if netcoreapp2_2
+        private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+#endif
 
         public ProjectTestBase()
         {
@@ -76,7 +83,13 @@ namespace Ocaramba.Tests.Angular
         [OneTimeSetUp]
         public void BeforeClass()
         {
+#if netcoreapp2_2
+            this.DriverContext.CurrentDirectory = Directory.GetCurrentDirectory();
+#endif
+
+#if net47
             this.DriverContext.CurrentDirectory = TestContext.CurrentContext.TestDirectory;
+#endif
             this.DriverContext.Start();
         }
 

@@ -24,32 +24,36 @@ namespace Ocaramba.Helpers
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Globalization;
     using System.IO;
     using System.Linq;
+    using System.Text.RegularExpressions;
     using System.Threading;
     using NLog;
-    using Ocaramba.Helpers;
 
     /// <summary>
-    /// Class for handling downloading files <see href="https://github.com/ObjectivityLtd/Ocaramba/wiki/Downloading%20files">More details on wiki</see>
+    /// Class for handling downloading files <see href="https://github.com/ObjectivityLtd/Ocaramba/wiki/Downloading%20files">More details on wiki</see>.
     /// </summary>
     public static class FilesHelper
     {
         /// <summary>
-        /// Directory separator
+        /// Directory separator.
         /// </summary>
         public static readonly char Separator = Path.DirectorySeparatorChar;
 
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+#if net47
+        private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
+#endif
+#if netcoreapp2_2
+        private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+#endif
 
         /// <summary>
         /// Returns the file extension.
         /// </summary>
         /// <param name="type">The type.</param>
         /// <returns>
-        /// Files extension
+        /// Files extension.
         /// </returns>
         /// <example>How to use it: <code>
         /// FilesHelper.ReturnFileExtension(FileType.Html);
@@ -99,7 +103,7 @@ namespace Ocaramba.Helpers
         /// <param name="folder">The folder.</param>
         /// <param name="type">The type.</param>
         /// <returns>
-        /// Collection of files
+        /// Collection of files.
         /// </returns>
         /// <example>How to use it: <code>
         /// var files = GetFilesOfGivenType(folder, FileType.Txt);
@@ -116,7 +120,7 @@ namespace Ocaramba.Helpers
         /// <param name="type">The type of files.</param>
         /// <param name="postfixFilesName">Postfix name of files for search pattern.</param>
         /// <returns>
-        /// Collection of files
+        /// Collection of files.
         /// </returns>
         /// <example>How to use it: <code>
         /// var files = GetFilesOfGivenType(folder, FileType.Txt, "live");
@@ -137,7 +141,7 @@ namespace Ocaramba.Helpers
         /// <param name="folder">The folder.</param>
         /// <param name="type">The type of files.</param>
         /// <returns>
-        /// Collection of files
+        /// Collection of files.
         /// </returns>
         /// <example>How to use it: <code>
         /// var files = GetFilesOfGivenTypeFromAllSubFolders(folder, FileType.Txt);
@@ -154,7 +158,7 @@ namespace Ocaramba.Helpers
         /// <param name="type">The type of files.</param>
         /// <param name="postfixFilesName">Postfix name of files for search pattern.</param>
         /// <returns>
-        /// Collection of files
+        /// Collection of files.
         /// </returns>
         /// <example>How to use it: <code>
         /// var files = GetFilesOfGivenTypeFromAllSubFolders(folder, FileType.Txt, "live");
@@ -175,7 +179,7 @@ namespace Ocaramba.Helpers
         /// <param name="folder">The folder.</param>
         /// <param name="postfixFilesName">Postfix name of files for search pattern.</param>
         /// <returns>
-        /// Collection of files
+        /// Collection of files.
         /// </returns>
         /// <example>How to use it: <code>
         /// var files = GetAllFiles(folder, "live");
@@ -196,7 +200,7 @@ namespace Ocaramba.Helpers
         /// <param name="folder">The folder.</param>
         /// <param name="postfixFilesName">Postfix name of files for search pattern.</param>
         /// <returns>
-        /// Collection of files
+        /// Collection of files.
         /// </returns>
         /// <example>How to use it: <code>
         /// var files = GetAllFilesFromAllSubFolders(folder, "live");
@@ -216,7 +220,7 @@ namespace Ocaramba.Helpers
         /// </summary>
         /// <param name="folder">The folder.</param>
         /// <returns>
-        /// Collection of files
+        /// Collection of files.
         /// </returns>
         /// <example>How to use it: <code>
         /// var files = GetAllFilesFromAllSubFolders(folder);
@@ -231,7 +235,7 @@ namespace Ocaramba.Helpers
         /// </summary>
         /// <param name="folder">The folder.</param>
         /// <returns>
-        /// Collection of files
+        /// Collection of files.
         /// </returns>
         /// <example>How to use it: <code>
         /// var files = GetAllFiles(folder);
@@ -242,11 +246,11 @@ namespace Ocaramba.Helpers
         }
 
         /// <summary>
-        /// Get file by its name in given folder
+        /// Get file by its name in given folder.
         /// </summary>
-        /// <param name="folder">The folder</param>
-        /// <param name="fileName">The file name</param>
-        /// <returns>FileInfo of file</returns>
+        /// <param name="folder">The folder.</param>
+        /// <param name="fileName">The file name.</param>
+        /// <returns>FileInfo of file.</returns>
         public static FileInfo GetFileByName(string folder, string fileName)
         {
             Logger.Debug("Get File '{0}' from '{1}'", fileName, folder);
@@ -263,7 +267,7 @@ namespace Ocaramba.Helpers
         /// <param name="folder">The folder.</param>
         /// <param name="type">The type.</param>
         /// <returns>
-        /// Number of files in subfolder
+        /// Number of files in subfolder.
         /// </returns>
         /// <example>How to use it: <code>
         /// var filesNumber = FilesHelper.CountFiles(this.DriverContext.DownloadFolder, FileType.Txt);
@@ -281,7 +285,7 @@ namespace Ocaramba.Helpers
         /// </summary>
         /// <param name="folder">The folder.</param>
         /// <returns>
-        /// Number of files in subfolder
+        /// Number of files in subfolder.
         /// </returns>
         /// <example>How to use it: <code>
         /// var filesNumber = FilesHelper.CountFiles(this.DriverContext.DownloadFolder);
@@ -299,7 +303,7 @@ namespace Ocaramba.Helpers
         /// </summary>
         /// <param name="folder">The folder.</param>
         /// <param name="type">The type of file.</param>
-        /// <returns>Last file of given type</returns>
+        /// <returns>Last file of given type.</returns>
         /// <example>How to use it: <code>
         /// FilesHelper.GetLastFile(this.DriverContext.ScreenShotFolder, FileType.Png);
         /// </code></example>
@@ -320,7 +324,7 @@ namespace Ocaramba.Helpers
         /// </summary>
         /// <param name="folder">The folder.</param>
         /// <returns>
-        /// Last file of given type
+        /// Last file of given type.
         /// </returns>
         /// <example>How to use it: <code>
         /// FilesHelper.GetLastFile(this.DriverContext.ScreenShotFolder);
@@ -339,7 +343,7 @@ namespace Ocaramba.Helpers
         /// Waits for file of given type for given timeout till number of files increase in sub folder,checks  the size of the current file.
         /// </summary>
         /// <param name="type">The type of file.</param>
-        /// <param name="waitTime">Wait timeout</param>
+        /// <param name="waitTime">Wait timeout.</param>
         /// <param name="filesNumber">The initial files number.</param>
         /// <param name="folder">The folder.</param>
         /// <param name="checkSize">Check if  the size, in bytes, of the current file > 0.</param>
@@ -386,7 +390,7 @@ namespace Ocaramba.Helpers
         /// <summary>
         /// Waits for file with given name with given timeout, checks  the size of the current file.
         /// </summary>
-        /// <param name="waitTime">Wait timeout</param>
+        /// <param name="waitTime">Wait timeout.</param>
         /// <param name="filesName">Name of the files.</param>
         /// <param name="folder">The folder.</param>
         /// <param name="checkSize">If true, check the size, in bytes, of the current file > 0.</param>
@@ -415,7 +419,7 @@ namespace Ocaramba.Helpers
         /// <summary>
         /// Waits for file with given name with given timeout, checks  the size of the current file.
         /// </summary>
-        /// <param name="waitTime">Wait timeout</param>
+        /// <param name="waitTime">Wait timeout.</param>
         /// <param name="filesName">Name of the files.</param>
         /// <param name="folder">The folder.</param>
         /// <example>How to use it: <code>
@@ -462,7 +466,7 @@ namespace Ocaramba.Helpers
         /// <summary>
         /// Waits for file for given timeout till number of files increase in sub folder, checks  the size of the current file.
         /// </summary>
-        /// <param name="waitTime">Wait timeout</param>
+        /// <param name="waitTime">Wait timeout.</param>
         /// <param name="filesNumber">The initial files number.</param>
         /// <param name="folder">The folder.</param>
         /// <param name="checkSize">Check if  the size, in bytes, of the current file > 0.</param>
@@ -508,11 +512,11 @@ namespace Ocaramba.Helpers
         /// <summary>
         /// Rename the file and check if file was renamed with given timeout, shorten the name of file if needed be removing "_".
         /// </summary>
-        /// <param name="waitTime">Timeout for checking if file was removed</param>
+        /// <param name="waitTime">Timeout for checking if file was removed.</param>
         /// <param name="oldName">The old name.</param>
         /// <param name="newName">The new name.</param>
         /// <param name="subFolder">The subFolder.</param>
-        /// <returns>The new name in case its shorten</returns>
+        /// <returns>The new name in case its shorten.</returns>
         /// <example>How to use it: <code>
         /// string newName = FilesHelper.RenameFile(BaseConfiguration.ShortTimeout, "filename.txt", "newname.txt", this.DriverContext.DownloadFolder);
         /// </code></example>
@@ -529,18 +533,10 @@ namespace Ocaramba.Helpers
                 File.Delete(fullPath);
             }
 
-            // Use ProcessStartInfo class
-            string command = "/c ren " + '\u0022' + oldName + '\u0022' + " " + '\u0022' + newName +
-                             '\u0022';
-            ProcessStartInfo cmdsi = new ProcessStartInfo("cmd.exe")
-                                         {
-                                             WorkingDirectory = subFolder,
-                                             Arguments = command
-                                         };
-            Thread.Sleep(1000);
-
+            CopyFile(waitTime, oldName, newName, subFolder);
+            File.Delete(Path.Combine(subFolder, oldName));
             var timeoutMessage = string.Format(CultureInfo.CurrentCulture, "Waiting till file will be renamed {0}", subFolder);
-            Process.Start(cmdsi);
+
             WaitHelper.Wait(() => File.Exists(subFolder + Separator + newName), TimeSpan.FromSeconds(waitTime), TimeSpan.FromSeconds(1), timeoutMessage);
             return newName;
         }
@@ -548,11 +544,11 @@ namespace Ocaramba.Helpers
         /// <summary>
         /// Copy the file and check if file was copied with given timeout, shorten the name of file if needed be removing "_".
         /// </summary>
-        /// <param name="waitTime">Timeout for checking if file was removed</param>
+        /// <param name="waitTime">Timeout for checking if file was removed.</param>
         /// <param name="oldName">The old name.</param>
         /// <param name="newName">The new name.</param>
         /// <param name="workingDirectory">The working folder.</param>
-        /// <returns>The new name in case its shorten</returns>
+        /// <returns>The new name in case its shorten.</returns>
         /// <example>How to use it: <code>
         /// FilesHelper.CopyFile(BaseConfiguration.ShortTimeout, fileName, newName, this.DriverContext.DownloadFolder);
         /// </code></example>
@@ -564,12 +560,12 @@ namespace Ocaramba.Helpers
         /// <summary>
         /// Copy the file and check if file was copied with given timeout, shorten the name of file if needed be removing "_".
         /// </summary>
-        /// <param name="waitTime">Timeout for checking if file was removed</param>
+        /// <param name="waitTime">Timeout for checking if file was removed.</param>
         /// <param name="oldName">The old name.</param>
         /// <param name="newName">The new name.</param>
         /// <param name="oldSubFolder">The old subFolder.</param>
         /// <param name="newSubFolder">The new subFolder.</param>
-        /// <returns>The new name in case its shorten</returns>
+        /// <returns>The new name in case its shorten.</returns>
         /// <example>How to use it: <code>
         /// FilesHelper.CopyFile(BaseConfiguration.ShortTimeout, fileName, newName, this.DriverContext.DownloadFolder + "\\", this.DriverContext.DownloadFolder + "\\");
         /// </code></example>
@@ -584,18 +580,10 @@ namespace Ocaramba.Helpers
                 File.Delete(newSubFolder + Separator + newName);
             }
 
-            // Use ProcessStartInfo class
-            string command = "/c copy " + '\u0022' + oldName + '\u0022' + " " + '\u0022' + newSubFolder + Separator + newName +
-                             '\u0022';
-            ProcessStartInfo cmdsi = new ProcessStartInfo("cmd.exe")
-            {
-                WorkingDirectory = oldSubFolder,
-                Arguments = command
-            };
             Thread.Sleep(1000);
+            File.Copy(oldSubFolder + Separator + oldName, newSubFolder + Separator + newName);
 
             var timeoutMessage = string.Format(CultureInfo.CurrentCulture, "Waiting till file will be copied {0}", newSubFolder);
-            Process.Start(cmdsi);
             WaitHelper.Wait(() => File.Exists(newSubFolder + Separator + newName), TimeSpan.FromSeconds(waitTime), TimeSpan.FromSeconds(1), timeoutMessage);
             return newName;
         }
@@ -625,13 +613,13 @@ namespace Ocaramba.Helpers
         /// <param name="newName">The new name.</param>
         /// <param name="subFolder">The subFolder.</param>
         /// <param name="type">The type of file.</param>
-        /// <returns>The new name in case its shorten</returns>
+        /// <returns>The new name in case its shorten.</returns>
         /// <example>How to use it: <code>
         /// string newName = FilesHelper.RenameFile("filename.txt", "newname", this.DriverContext.DownloadFolder, FileType.Csv);
         /// </code></example>
         public static string RenameFile(string oldName, string newName, string subFolder, FileType type)
         {
-            newName = newName + ReturnFileExtension(type);
+            newName += ReturnFileExtension(type);
             return RenameFile(BaseConfiguration.ShortTimeout, oldName, newName, subFolder);
         }
 
@@ -639,9 +627,9 @@ namespace Ocaramba.Helpers
         /// Gets the folder from app.config as value of given key.
         /// </summary>
         /// <param name="appConfigValue">The application configuration value.</param>
-        /// <param name="currentFolder">Directory where assembly files are located</param>
+        /// <param name="currentFolder">Directory where assembly files are located.</param>
         /// <returns>
-        /// The path to folder
+        /// The path to folder.
         /// </returns>
         /// <example>How to use it: <code>
         ///   FilesHelper.GetFolder(BaseConfiguration.DownloadFolder, this.CurrentDirectory);
@@ -659,7 +647,9 @@ namespace Ocaramba.Helpers
             {
                 if (BaseConfiguration.UseCurrentDirectory)
                 {
-                    folder = currentFolder + appConfigValue;
+                    Regex pattern = new Regex("[\\]|[\\\\]|[/]|[//]");
+                    appConfigValue = pattern.Replace(appConfigValue, string.Empty);
+                    folder = currentFolder + FilesHelper.Separator + appConfigValue;
                 }
                 else
                 {

@@ -22,11 +22,11 @@
 
 namespace Ocaramba.Extensions
 {
+    using Ocaramba.Types;
     using OpenQA.Selenium;
-    using Types;
 
     /// <summary>
-    /// Locator extensions methods for selenium
+    /// Locator extensions methods for selenium.
     /// </summary>
     public static class LocatorExtensions
     {
@@ -38,7 +38,7 @@ namespace Ocaramba.Extensions
         /// this.Driver.FindElement(searchTextbox.ToBy());
         /// </code> </example>
         /// <param name="locator">The element locator.</param>
-        /// <returns>The Selenium By</returns>
+        /// <returns>The Selenium By.</returns>
         public static By ToBy(this ElementLocator locator)
         {
             By by;

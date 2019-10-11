@@ -29,20 +29,25 @@ namespace Ocaramba.Helpers
     using NLog;
 
     /// <summary>
-    /// Contains useful actions connected with test data
+    /// Contains useful actions connected with test data.
     /// </summary>
     public static class NameHelper
     {
         /// <summary>
-        /// NLog logger handle
+        /// NLog logger handle.
         /// </summary>
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+#if net47
+        private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
+#endif
+#if netcoreapp2_2
+        private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+#endif
 
         /// <summary>
         /// Create random name.
         /// </summary>
         /// <param name="length">The length.</param>
-        /// <returns>Random name</returns>
+        /// <returns>Random name.</returns>
         public static string RandomName(int length)
         {
             const string Chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -63,9 +68,9 @@ namespace Ocaramba.Helpers
         /// </summary>
         /// <param name="folder">The folder.</param>
         /// <param name="fileName">The fileName.</param>
-        /// <param name="pattern">The regular expression pattern to match</param>
-        /// <param name="maxLength">Max length</param>
-        /// <returns>String with removed all patterns</returns>
+        /// <param name="pattern">The regular expression pattern to match.</param>
+        /// <param name="maxLength">Max length.</param>
+        /// <returns>String with removed all patterns.</returns>
         /// <example>How to use it: <code>
         /// NameHelper.ShortenFileName(folder, correctFileName, "_", 255);
         /// </code></example>
@@ -93,7 +98,7 @@ namespace Ocaramba.Helpers
         /// Remove all special characters except digit and letters.
         /// </summary>
         /// <param name="name">The string to remove special chracters.</param>
-        /// <returns>String with removed all special chracters</returns>
+        /// <returns>String with removed all special chracters.</returns>
         /// <example>How to use it: <code>
         /// var name = NameHelper.RemoveSpecialCharacters("country/region");
         /// </code></example>

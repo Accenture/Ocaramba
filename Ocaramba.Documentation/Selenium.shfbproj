@@ -27,10 +27,8 @@
       <Argument Key="maxVersionParts" Value="" xmlns="" />
     </TransformComponentArguments>
     <DocumentationSources>
-      <DocumentationSource sourceFile="..\packages\Selenium.WebDriver.3.141.0\lib\net45\WebDriver.dll" />
-<DocumentationSource sourceFile="..\packages\Selenium.WebDriver.3.141.0\lib\net45\WebDriver.xml" />
-<DocumentationSource sourceFile="..\packages\Selenium.Support.3.141.0\lib\net45\WebDriver.Support.dll" />
-<DocumentationSource sourceFile="..\packages\Selenium.Support.3.141.0\lib\net45\WebDriver.Support.xml" /></DocumentationSources>
+      <DocumentationSource sourceFile="..\Ocaramba\bin\Release\net45\WebDriver.dll" />
+<DocumentationSource sourceFile="..\Ocaramba\bin\Release\net45\WebDriver.Support.dll" /></DocumentationSources>
     <SaveComponentCacheCapacity>100</SaveComponentCacheCapacity>
     <BuildAssemblerVerbosity>OnlyWarningsAndErrors</BuildAssemblerVerbosity>
     <HelpFileFormat>Website</HelpFileFormat>
@@ -101,7 +99,4 @@
     </PostBuildEvent>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
-  <ItemGroup>
-    <Content Include="packages.config" />
-  </ItemGroup>
 </Project>

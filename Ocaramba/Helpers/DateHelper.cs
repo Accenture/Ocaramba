@@ -26,7 +26,7 @@ namespace Ocaramba.Helpers
     using System.Globalization;
 
     /// <summary>
-    /// Contains useful actions connected with dates
+    /// Contains useful actions connected with dates.
     /// </summary>
     public static class DateHelper
     {
@@ -76,7 +76,7 @@ namespace Ocaramba.Helpers
         /// Gets the future date.
         /// </summary>
         /// <param name="numberDaysToAddToNow">The number days to add from current date.</param>
-        /// <returns>Date in future depends on parameter: numberDaysToAddToNow</returns>
+        /// <returns>Date in future depends on parameter: numberDaysToAddToNow.</returns>
         public static string GetFutureDate(int numberDaysToAddToNow)
         {
             return DateTime.Now.AddDays(numberDaysToAddToNow).ToString("ddMMyyyy", CultureInfo.CurrentCulture);

@@ -20,19 +20,19 @@
 //     SOFTWARE.
 // </license>
 
+using System.IO;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
-using Ocaramba;
 using Ocaramba.Logger;
-using DriverContext = Ocaramba.DriverContext;
 
-namespace Ocaramba.Test.Automation.UnitTests
+namespace Ocaramba.UnitTests
 {
     /// <summary>
     /// The base class for all tests <see href="https://github.com/ObjectivityLtd/Ocaramba/wiki/ProjectTestBase-class">More details on wiki</see>
     /// </summary>
     public class ProjectTestBase : TestBase
     {
+
         private readonly DriverContext driverContext = new DriverContext();
 
         /// <summary>
@@ -68,7 +68,13 @@ namespace Ocaramba.Test.Automation.UnitTests
         [OneTimeSetUp]
         public void BeforeClass()
         {
+#if netcoreapp2_2
+            this.DriverContext.CurrentDirectory = Directory.GetCurrentDirectory();
+#endif
+
+#if net47
             this.DriverContext.CurrentDirectory = TestContext.CurrentContext.TestDirectory;
+#endif
             this.DriverContext.Start();
             this.DriverContext.WindowMaximize();
             this.DriverContext.DeleteAllCookies();

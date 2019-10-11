@@ -30,17 +30,22 @@ namespace Ocaramba
     using Ocaramba.Types;
 
     /// <summary>
-    /// Class for assert without stop tests <see href="https://github.com/ObjectivityLtd/Ocaramba/wiki/Verify-asserts-without-stop-tests">More details on wiki</see>
+    /// Class for assert without stop tests <see href="https://github.com/ObjectivityLtd/Ocaramba/wiki/Verify-asserts-without-stop-tests">More details on wiki</see>.
     /// </summary>
     public static class Verify
     {
-        private static readonly NLog.Logger Logger = LogManager.GetLogger("TEST");
+#if net47
+        private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
+#endif
+#if netcoreapp2_2
+        private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+#endif
 
         /// <summary>
-        /// Verify group of assets
+        /// Verify group of assets.
         /// </summary>
-        /// <param name="driverContext">Container for driver</param>
-        /// <param name="myAsserts">Group asserts</param>
+        /// <param name="driverContext">Container for driver.</param>
+        /// <param name="myAsserts">Group asserts.</param>
         /// <example>How to use it: <code>
         /// Verify.That(
         ///     this.DriverContext,
@@ -53,12 +58,12 @@ namespace Ocaramba
         }
 
         /// <summary>
-        /// Verify group of assets
+        /// Verify group of assets.
         /// </summary>
-        /// <param name="driverContext">Container for driver</param>
-        /// <param name="enableScreenShot">Enable screenshot</param>
-        /// <param name="enableSavePageSource">Enable save page source</param>
-        /// <param name="myAsserts">Group asserts</param>
+        /// <param name="driverContext">Container for driver.</param>
+        /// <param name="enableScreenShot">Enable screenshot.</param>
+        /// <param name="enableSavePageSource">Enable save page source.</param>
+        /// <param name="myAsserts">Group asserts.</param>
         /// <example>How to use it: <code>
         /// Verify.That(
         ///     this.DriverContext,
@@ -86,12 +91,12 @@ namespace Ocaramba
         }
 
         /// <summary>
-        /// Verify assert conditions
+        /// Verify assert conditions.
         /// </summary>
-        /// <param name="driverContext">Container for driver</param>
-        /// <param name="myAssert">Assert condition</param>
-        /// <param name="enableScreenShot">Enabling screenshot</param>
-        /// <param name="enableSavePageSource">Enable save page source</param>
+        /// <param name="driverContext">Container for driver.</param>
+        /// <param name="myAssert">Assert condition.</param>
+        /// <param name="enableScreenShot">Enabling screenshot.</param>
+        /// <param name="enableSavePageSource">Enable save page source.</param>
         /// <example>How to use it: <code>
         /// Verify.That(this.DriverContext, () => Assert.IsFalse(flag), true);
         /// </code></example>
@@ -121,10 +126,10 @@ namespace Ocaramba
         }
 
         /// <summary>
-        /// Verify assert conditions
+        /// Verify assert conditions.
         /// </summary>
-        /// <param name="driverContext">Container for driver</param>
-        /// <param name="myAssert">Assert condition</param>
+        /// <param name="driverContext">Container for driver.</param>
+        /// <param name="myAssert">Assert condition.</param>
         /// <example>How to use it: <code>
         /// Verify.That(this.DriverContext, () => Assert.AreEqual(parameters["number"], links.CountLinks()));
         /// </code></example>

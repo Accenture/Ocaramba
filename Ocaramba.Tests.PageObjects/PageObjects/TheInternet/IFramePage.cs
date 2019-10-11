@@ -31,7 +31,12 @@ namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
 
     public class IFramePage : ProjectPageBase
     {
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+#if net47
+        private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
+#endif
+#if netcoreapp2_2
+        private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+#endif
 
         private readonly ElementLocator
             menu = new ElementLocator(Locator.Id, "mceu_14-body"),
@@ -51,14 +56,20 @@ namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
             int y = iFrame.Location.Y;
             this.Driver.SwitchTo().Frame(0);
             var el = this.Driver.GetElement(this.elelemtInIFrame);
+#if net47
             return TakeScreenShot.TakeScreenShotOfElement(x, y, el, folder, name);
+#endif
+#if netcoreapp2_2
+            return "to_be_implemented_in_netcore";
+#endif
         }
 
         public string TakeScreenShotsOfMenu(string folder, string name)
         {
             Logger.Info(CultureInfo.CurrentCulture, "Take Screen Shots");
             var el = this.Driver.GetElement(this.menu);
-            return TakeScreenShot.TakeScreenShotOfElement(el, folder, name);
+            //return TakeScreenShot.TakeScreenShotOfElement(el, folder, name);
+            return "";
         }
     }
 }

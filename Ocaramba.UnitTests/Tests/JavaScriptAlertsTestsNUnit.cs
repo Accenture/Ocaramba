@@ -21,7 +21,6 @@
 // </license>
 
 using NUnit.Framework;
-using Ocaramba.Test.Automation.UnitTests;
 using Ocaramba.Tests.PageObjects.PageObjects.TheInternet;
 
 namespace Ocaramba.UnitTests.Tests
@@ -37,7 +36,7 @@ namespace Ocaramba.UnitTests.Tests
             var internetPage = new InternetPage(this.DriverContext).OpenHomePage();
             internetPage.GoToJavaScriptOnLoad();
 
-            if (!this.DriverContext.LogJavaScriptErrors())
+            if (!this.DriverContext.LogJavaScriptErrors() && BaseConfiguration.TestBrowser == BrowserType.Chrome)
             {
                 Assert.Fail("JavaScript errors were not found.");
             }

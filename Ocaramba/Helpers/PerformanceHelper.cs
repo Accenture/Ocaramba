@@ -31,19 +31,24 @@ namespace Ocaramba.Helpers
     using Ocaramba.Types;
 
     /// <summary>
-    /// Class which support performance tests. <see href="https://github.com/ObjectivityLtd/Ocaramba/wiki/Performance%20measures">More details on wiki</see>
+    /// Class which support performance tests. <see href="https://github.com/ObjectivityLtd/Ocaramba/wiki/Performance%20measures">More details on wiki</see>.
     /// </summary>
     public class PerformanceHelper
     {
-        private static readonly Logger Logger = LogManager.GetLogger("DRIVER");
+#if net47
+        private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
+#endif
+#if netcoreapp2_2
+        private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+#endif
 
         /// <summary>
-        /// The timer
+        /// The timer.
         /// </summary>
         private readonly Stopwatch timer;
 
         /// <summary>
-        /// The scenario list
+        /// The scenario list.
         /// </summary>
         private readonly List<SavedTimes> loadTimeList;
 
@@ -57,7 +62,7 @@ namespace Ocaramba.Helpers
         }
 
         /// <summary>
-        /// Gets the scenario list
+        /// Gets the scenario list.
         /// </summary>
         public IList<SavedTimes> GetloadTimeList => this.loadTimeList;
 
@@ -80,7 +85,7 @@ namespace Ocaramba.Helpers
                                 StepName = key.Scenario,
                                 Browser = key.BName,
                                 AverageDuration = Math.Round(savedTimeses.Average(dur => dur.Duration)),
-                                Percentile90 = savedTimeses[(int)(Math.Ceiling(savedTimeses.Count * 0.9) - 1)].Duration
+                                Percentile90 = savedTimeses[(int)(Math.Ceiling(savedTimeses.Count * 0.9) - 1)].Duration,
                             };
                         }).ToList().OrderBy(listElement => listElement.StepName);
                 return groupedList;

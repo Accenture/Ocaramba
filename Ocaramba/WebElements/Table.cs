@@ -33,10 +33,15 @@ namespace Ocaramba.WebElements
     /// </summary>
     public class Table : RemoteWebElement
     {
-        private static readonly NLog.Logger Logger = LogManager.GetLogger("DRIVER");
+#if net47
+        private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
+#endif
+#if netcoreapp2_2
+        private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+#endif
 
         /// <summary>
-        /// The web element
+        /// The web element.
         /// </summary>
         private readonly IWebElement webElement;
 
@@ -51,12 +56,12 @@ namespace Ocaramba.WebElements
         }
 
         /// <summary>
-        /// Returns a text representation of the grid or table html like element
+        /// Returns a text representation of the grid or table html like element.
         /// </summary>
         /// <param name="rowLocator">The row locator.</param>
-        /// <param name="columnLocator">The column locator</param>
+        /// <param name="columnLocator">The column locator.</param>
         /// <returns>
-        /// Text representation of the grid or table html like element
+        /// Text representation of the grid or table html like element.
         /// </returns>
         public string[][] GetTable(ElementLocator rowLocator, ElementLocator columnLocator)
         {

@@ -26,18 +26,23 @@ namespace Ocaramba.Extensions
     using System.Globalization;
     using NLog;
     using Ocaramba;
+    using Ocaramba.Types;
+    using Ocaramba.WebElements;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Interactions;
     using OpenQA.Selenium.Support.UI;
-    using Types;
-    using WebElements;
 
     /// <summary>
-    /// Extension methods for IWebDriver
+    /// Extension methods for IWebDriver.
     /// </summary>
     public static class WebDriverExtensions
     {
-        private static readonly Logger Logger = LogManager.GetLogger("DRIVER");
+#if net47
+        private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
+#endif
+#if netcoreapp2_2
+        private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+#endif
 
         /// <summary>
         /// Handler for simple use JavaScriptAlert.
@@ -46,7 +51,7 @@ namespace Ocaramba.Extensions
         /// this.Driver.JavaScriptAlert().ConfirmJavaScriptAlert();
         /// </code></example>
         /// <param name="webDriver">The web driver.</param>
-        /// <returns>JavaScriptAlert Handle</returns>
+        /// <returns>JavaScriptAlert Handle.</returns>
         public static JavaScriptAlert JavaScriptAlert(this IWebDriver webDriver)
         {
             return new JavaScriptAlert(webDriver);
@@ -97,7 +102,7 @@ namespace Ocaramba.Extensions
         }
 
         /// <summary>
-        /// Wait for element to be displayed for specified time
+        /// Wait for element to be displayed for specified time.
         /// </summary>
         /// <example>Example code to wait for login Button: <code>
         /// this.Driver.IsElementPresent(this.loginButton, BaseConfiguration.ShortTimeout);
@@ -135,7 +140,7 @@ namespace Ocaramba.Extensions
         /// <param name="pageTitle">The page title.</param>
         /// <param name="timeout">The timeout.</param>
         /// <returns>
-        /// Returns title of page
+        /// Returns title of page.
         /// </returns>
         public static bool IsPageTitle(this IWebDriver webDriver, string pageTitle, double timeout)
         {
@@ -219,7 +224,7 @@ namespace Ocaramba.Extensions
         /// this.Driver.Actions().SendKeys(Keys.Return).Perform();
         /// </code></example>
         /// <param name="webDriver">The web driver.</param>
-        /// <returns>Return new Action handle</returns>
+        /// <returns>Return new Action handle.</returns>
         public static Actions Actions(this IWebDriver webDriver)
         {
             return new Actions(webDriver);
@@ -311,9 +316,9 @@ namespace Ocaramba.Extensions
         /// <summary>
         /// Javascript drag and drop function.
         /// </summary>
-        /// <param name="webDriver">The WebDriver</param>
-        /// <param name="source">Source element</param>
-        /// <param name="destination">Destination element</param>
+        /// <param name="webDriver">The WebDriver.</param>
+        /// <param name="source">Source element.</param>
+        /// <param name="destination">Destination element.</param>
         public static void DragAndDropJs(this IWebDriver webDriver, IWebElement source, IWebElement destination)
         {
             var script =

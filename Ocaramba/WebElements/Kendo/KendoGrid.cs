@@ -32,7 +32,7 @@ namespace Ocaramba.WebElements.Kendo
     using OpenQA.Selenium.Support.UI;
 
     /// <summary>
-    /// Kendo Grid element
+    /// Kendo Grid element.
     /// </summary>
     public class KendoGrid : RemoteWebElement
     {
@@ -43,7 +43,7 @@ namespace Ocaramba.WebElements.Kendo
         /// <summary>
         /// Initializes a new instance of the <see cref="KendoGrid"/> class.
         /// </summary>
-        /// <param name="webElement">The webElement</param>
+        /// <param name="webElement">The webElement.</param>
         public KendoGrid(IWebElement webElement)
             : base(webElement.ToDriver() as RemoteWebDriver, null)
         {
@@ -151,7 +151,7 @@ namespace Ocaramba.WebElements.Kendo
         /// The <see cref="IWebElement"/>.
         /// </returns>
         /// <exception cref="NotFoundException">
-        /// When row with text was not found in specific time
+        /// When row with text was not found in specific time.
         /// </exception>
         public IWebElement SearchRowWithText(string text, double timeoutInSeconds)
         {

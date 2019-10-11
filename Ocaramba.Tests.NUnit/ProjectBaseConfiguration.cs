@@ -27,13 +27,22 @@ namespace Ocaramba.Tests.NUnit
     using global::NUnit.Framework;
     using Ocaramba;
     using Ocaramba.Helpers;
+#if netcoreapp2_2
+    using Microsoft.Extensions.Configuration;
+#endif
 
     /// <summary>
     /// SeleniumConfiguration that consume app.config file
     /// </summary>
     public static class ProjectBaseConfiguration
     {
+#if netcoreapp2_2
+        private static readonly string CurrentDirectory = Directory.GetCurrentDirectory();
+#endif
+
+#if net47
         private static readonly string CurrentDirectory = TestContext.CurrentContext.TestDirectory;
+#endif
 
         /// <summary>
         /// Gets the data driven file.
@@ -45,12 +54,19 @@ namespace Ocaramba.Tests.NUnit
         {
             get
             {
+                string setting = null;
+#if net47
+                setting = ConfigurationManager.AppSettings["DataDrivenFile"];
+#endif
+#if netcoreapp2_2
+                setting = BaseConfiguration.Builder["appSettings:DataDrivenFile"];
+#endif
                 if (BaseConfiguration.UseCurrentDirectory)
                 {
-                    return Path.Combine(CurrentDirectory + ConfigurationManager.AppSettings["DataDrivenFile"]);
+                    return Path.Combine(CurrentDirectory + setting);
                 }
 
-                return ConfigurationManager.AppSettings["DataDrivenFile"];
+                return setting;
             }
         }
 
@@ -64,12 +80,45 @@ namespace Ocaramba.Tests.NUnit
         {
             get
             {
+                string setting = null;
+#if net47
+                setting = ConfigurationManager.AppSettings["DataDrivenFileXlsx"];
+#endif
+#if netcoreapp2_2
+                setting = BaseConfiguration.Builder["appSettings:DataDrivenFileXlsx"];
+#endif
                 if (BaseConfiguration.UseCurrentDirectory)
                 {
-                    return Path.Combine(CurrentDirectory + ConfigurationManager.AppSettings["DataDrivenFileXlsx"]);
+                    return Path.Combine(CurrentDirectory + setting);
                 }
 
-                return ConfigurationManager.AppSettings["DataDrivenFileXlsx"];
+                return setting;
+            }
+        }
+
+        /// <summary>
+        /// Gets the CSV data driven file.
+        /// </summary>
+        /// <value>
+        /// The CSV data driven file.
+        /// </value>
+        public static string DataDrivenFileCSV
+        {
+            get
+            {
+                string setting = null;
+#if net47
+                setting = ConfigurationManager.AppSettings["DataDrivenFileCSV"];
+#endif
+#if netcoreapp2_2
+                setting = BaseConfiguration.Builder["appSettings:DataDrivenFileCSV"];
+#endif
+                if (BaseConfiguration.UseCurrentDirectory)
+                {
+                    return Path.Combine(CurrentDirectory + setting);
+                }
+
+                return setting;
             }
         }
 
@@ -78,7 +127,17 @@ namespace Ocaramba.Tests.NUnit
         /// </summary>
         public static string DownloadFolderPath
         {
-            get { return FilesHelper.GetFolder(ConfigurationManager.AppSettings["DownloadFolder"], CurrentDirectory); }
+            get
+            {
+                string setting = null;
+#if net47
+                setting = ConfigurationManager.AppSettings["DownloadFolder"];
+#endif
+#if netcoreapp2_2
+                setting = BaseConfiguration.Builder["appSettings:DownloadFolder"];
+#endif
+                return FilesHelper.GetFolder(setting, CurrentDirectory);
+            }
         }
     }
 }

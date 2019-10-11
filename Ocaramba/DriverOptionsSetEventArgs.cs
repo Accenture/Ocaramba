@@ -26,7 +26,7 @@ namespace Ocaramba
     using OpenQA.Selenium;
 
     /// <summary>
-    /// Before Capabilities Set Handler. <see href="https://github.com/ObjectivityLtd/Ocaramba/wiki/Advanced-Browser-Capabilities-and-options">More details on wiki</see>
+    /// Before Capabilities Set Handler. <see href="https://github.com/ObjectivityLtd/Ocaramba/wiki/Advanced-Browser-Capabilities-and-options">More details on wiki</see>.
     /// </summary>
     public class DriverOptionsSetEventArgs : EventArgs
     {
@@ -40,7 +40,7 @@ namespace Ocaramba
         }
 
         /// <summary>
-        /// Gets the current capabilities
+        /// Gets the current capabilities.
         /// </summary>
         public DriverOptions DriverOptions { get; }
     }

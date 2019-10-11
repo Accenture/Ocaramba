@@ -35,16 +35,21 @@ namespace Ocaramba.Helpers
     public static class SqlHelper
     {
         /// <summary>
-        /// NLog logger handle
+        /// NLog logger handle.
         /// </summary>
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+#if net47
+        private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
+#endif
+#if netcoreapp2_2
+        private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+#endif
 
         /// <summary>
         /// Method is used for execution SQL query (select) and reading each row from column.
         /// </summary>
-        /// <param name="command">SQL query</param>
-        /// <param name="connectionString">Server, user, pass</param>
-        /// <param name="column">Name of column</param>
+        /// <param name="command">SQL query.</param>
+        /// <param name="connectionString">Server, user, pass.</param>
+        /// <param name="column">Name of column.</param>
         /// <returns>
         /// Collection of each row existed in column.
         /// </returns>
@@ -98,9 +103,9 @@ namespace Ocaramba.Helpers
         /// <summary>
         /// Method is used for execution SQL query (select) and reading each column from row.
         /// </summary>
-        /// <param name="command">SQL query</param>
-        /// <param name="connectionString">Server, user, pass</param>
-        /// <param name="columns">Name of columns</param>
+        /// <param name="command">SQL query.</param>
+        /// <param name="connectionString">Server, user, pass.</param>
+        /// <param name="columns">Name of columns.</param>
         /// <returns>
         /// Dictionary of each column existed in raw.
         /// </returns>
@@ -112,7 +117,7 @@ namespace Ocaramba.Helpers
         /// const string SqlQuery = "SELECT [NationalIDNumber] as " + column.ElementAt(0) + " , [ContactID] as " + column.ElementAt(1) + " from [AdventureWorks].[HumanResources].[Employee] where EmployeeID=1";
         /// Dictionary&lt;string, string&gt; results = SqlHelper.ExecuteSqlCommand(command, GetConnectionString(server), column);
         /// </code></example>
-        /// <exception cref="System.Collections.Generic.KeyNotFoundException">Exception when there is not given column in results from SQL query</exception>
+        /// <exception cref="System.Collections.Generic.KeyNotFoundException">Exception when there is not given column in results from SQL query.</exception>
         [SuppressMessage("Microsoft.Security", "CA2100:Review SQL queries for security vulnerabilities", Justification = "SQL injection is in this case expected.")]
         public static Dictionary<string, string> ExecuteSqlCommand(string command, string connectionString, IEnumerable<string> columns)
         {
@@ -148,9 +153,7 @@ namespace Ocaramba.Helpers
 
             foreach (string column in columns)
             {
-                string keyValue;
-
-                if (resultTemp.TryGetValue(column, out keyValue))
+                if (resultTemp.TryGetValue(column, out var keyValue))
                 {
                     resultList[column] = keyValue;
                 }
