@@ -126,4 +126,5 @@ namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
 Checkout the code or get it from [nuget.org](https://www.nuget.org/packages?q=Ocaramba)
 - Ocaramba [![NuGet Badge](https://buildstats.info/nuget/Ocaramba)](https://www.nuget.org/packages/Ocaramba/)
 
-or download Visual Studio templates [here](https://github.com/ObjectivityLtd/Ocaramba.templates)
+or download Ocaramba Visual Studio templates [from marketplace](https://marketplace.visualstudio.com/items?itemName=Ocaramba.Ocaramba1)
+
