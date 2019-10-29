@@ -3,7 +3,7 @@
 
 **Cross-Platform C# Framework to automate tests using Selenium WebDriver**
 
-[![Build status](https://ci.appveyor.com/api/projects/status/p8p3bndotyknv7rk/branch/master?svg=true)](https://ci.appveyor.com/project/ObjectivityAdminsTeam/ocaramba/branch/master)
+[![Ocaramba Templates](https://img.shields.io/badge/get-Ocaramba_Templates-green.svg?color=4BC21F)](https://marketplace.visualstudio.com/items?itemName=Ocaramba.Ocaramba1)
 [![Build status](https://ci.appveyor.com/api/projects/status/p8p3bndotyknv7rk?svg=true)](https://ci.appveyor.com/project/ObjectivityAdminsTeam/ocaramba)
 [![Coverage Status](https://img.shields.io/coveralls/github/ObjectivityLtd/Ocaramba.svg)](https://coveralls.io/github/ObjectivityLtd/Ocaramba)
 [![AppVeyor tests](https://img.shields.io/appveyor/tests/ObjectivityAdminsTeam/ocaramba.svg)](https://ci.appveyor.com/project/ObjectivityAdminsTeam/ocaramba/build/tests)
@@ -126,5 +126,5 @@ namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
 Checkout the code or get it from [nuget.org](https://www.nuget.org/packages?q=Ocaramba)
 - Ocaramba [![NuGet Badge](https://buildstats.info/nuget/Ocaramba)](https://www.nuget.org/packages/Ocaramba/)
 
-or download Ocaramba Visual Studio templates [from marketplace](https://marketplace.visualstudio.com/items?itemName=Ocaramba.Ocaramba1)
+or download Ocaramba Visual Studio templates [![Ocaramba Templates](https://img.shields.io/badge/get-Ocaramba_Templates-green.svg?color=4BC21F)](https://marketplace.visualstudio.com/items?itemName=Ocaramba.Ocaramba1)
 
