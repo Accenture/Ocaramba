@@ -511,11 +511,11 @@ namespace Ocaramba
                         this.FirefoxOptions.BrowserExecutableLocation = BaseConfiguration.FirefoxBrowserExecutableLocation;
                     }
 
-                    this.driver = string.IsNullOrEmpty(BaseConfiguration.PathToFirefoxDriverDirectory) ? new FirefoxDriver(this.SetDriverOptions(this.FirefoxOptions)) : new FirefoxDriver(BaseConfiguration.PathToFirefoxDriverDirectory, this.SetDriverOptions(this.FirefoxOptions));
+                    this.driver = string.IsNullOrEmpty(this.GetBrowserDriversFolder(BaseConfiguration.PathToFirefoxDriverDirectory)) ? new FirefoxDriver(this.SetDriverOptions(this.FirefoxOptions)) : new FirefoxDriver(this.GetBrowserDriversFolder(BaseConfiguration.PathToFirefoxDriverDirectory), this.SetDriverOptions(this.FirefoxOptions));
                     break;
                 case BrowserType.InternetExplorer:
                 case BrowserType.IE:
-                    this.driver = string.IsNullOrEmpty(BaseConfiguration.PathToInternetExplorerDriverDirectory) ? new InternetExplorerDriver(this.SetDriverOptions(this.InternetExplorerOptions)) : new InternetExplorerDriver(BaseConfiguration.PathToInternetExplorerDriverDirectory, this.SetDriverOptions(this.InternetExplorerOptions));
+                    this.driver = string.IsNullOrEmpty(this.GetBrowserDriversFolder(BaseConfiguration.PathToInternetExplorerDriverDirectory)) ? new InternetExplorerDriver(this.SetDriverOptions(this.InternetExplorerOptions)) : new InternetExplorerDriver(this.GetBrowserDriversFolder(this.GetBrowserDriversFolder(BaseConfiguration.PathToInternetExplorerDriverDirectory)), this.SetDriverOptions(this.InternetExplorerOptions));
                     break;
                 case BrowserType.Chrome:
                     if (!string.IsNullOrEmpty(BaseConfiguration.ChromeBrowserExecutableLocation))
@@ -523,7 +523,7 @@ namespace Ocaramba
                         this.ChromeOptions.BinaryLocation = BaseConfiguration.ChromeBrowserExecutableLocation;
                     }
 
-                    this.driver = string.IsNullOrEmpty(BaseConfiguration.PathToChromeDriverDirectory) ? new ChromeDriver(this.SetDriverOptions(this.ChromeOptions)) : new ChromeDriver(BaseConfiguration.PathToChromeDriverDirectory, this.SetDriverOptions(this.ChromeOptions));
+                    this.driver = string.IsNullOrEmpty(this.GetBrowserDriversFolder(BaseConfiguration.PathToChromeDriverDirectory)) ? new ChromeDriver(this.SetDriverOptions(this.ChromeOptions)) : new ChromeDriver(this.GetBrowserDriversFolder(BaseConfiguration.PathToChromeDriverDirectory), this.SetDriverOptions(this.ChromeOptions));
                     break;
                 case BrowserType.Safari:
                     this.driver = new SafariDriver(this.SetDriverOptions(this.SafariOptions));
@@ -533,7 +533,7 @@ namespace Ocaramba
                     this.SetupRemoteWebDriver();
                     break;
                 case BrowserType.Edge:
-                    this.driver = new EdgeDriver(EdgeDriverService.CreateDefaultService(BaseConfiguration.PathToEdgeDriverDirectory, "MicrosoftWebDriver.exe", 52296), this.SetDriverOptions(this.EdgeOptions));
+                    this.driver = new EdgeDriver(EdgeDriverService.CreateDefaultService(this.GetBrowserDriversFolder(BaseConfiguration.PathToEdgeDriverDirectory), "MicrosoftWebDriver.exe", 52296), this.SetDriverOptions(this.EdgeOptions));
                     break;
                 default:
                     throw new NotSupportedException(
@@ -582,8 +582,8 @@ namespace Ocaramba
             settings = ConfigurationManager.GetSection("environments/" + this.CrossBrowserEnvironment) as NameValueCollection;
 #endif
 #if netcoreapp2_2
-                    driverCapabilitiesConf = BaseConfiguration.GetNameValueCollectionFromAppsettings("DriverCapabilities");
-                    settings = BaseConfiguration.GetNameValueCollectionFromAppsettings("environments:" + this.CrossBrowserEnvironment);
+            driverCapabilitiesConf = BaseConfiguration.GetNameValueCollectionFromAppsettings("DriverCapabilities");
+            settings = BaseConfiguration.GetNameValueCollectionFromAppsettings("environments:" + this.CrossBrowserEnvironment);
 #endif
             var browserType = this.GetBrowserTypeForRemoteDriver(settings);
             switch (browserType)

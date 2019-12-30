@@ -220,7 +220,7 @@ namespace Ocaramba
         }
 
         /// <summary>
-        /// Gets the http proxy
+        /// Gets the http proxy.
         /// </summary>
         public static string HttpProxy
         {
@@ -239,7 +239,7 @@ namespace Ocaramba
         }
 
         /// <summary>
-        /// Gets the ftp proxy
+        /// Gets the ftp proxy.
         /// </summary>
         public static string FtpProxy
         {
@@ -258,7 +258,7 @@ namespace Ocaramba
         }
 
         /// <summary>
-        /// Gets the ssl proxy
+        /// Gets the ssl proxy.
         /// </summary>
         public static string SslProxy
         {
@@ -277,7 +277,7 @@ namespace Ocaramba
         }
 
         /// <summary>
-        /// Gets the socket proxy
+        /// Gets the socket proxy.
         /// </summary>
         public static string SocksProxy
         {
@@ -302,7 +302,6 @@ namespace Ocaramba
         {
             get
             {
-
                 int setting = 0;
 #if net47
                 setting = int.Parse(ConfigurationManager.AppSettings["remoteTimeout"], CultureInfo.InvariantCulture);
@@ -515,7 +514,7 @@ namespace Ocaramba
             {
 #if net47
                 Logger.Trace(
-                    CultureInfo.CurrentCulture, 
+                    CultureInfo.CurrentCulture,
                     "Full Desktop Screen Shot Enabled value from App.config '{0}'",
                     ConfigurationManager.AppSettings["FullDesktopScreenShotEnabled"]);
                 if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["FullDesktopScreenShotEnabled"]))
