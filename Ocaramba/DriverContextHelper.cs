@@ -415,6 +415,7 @@ namespace Ocaramba
             if (string.IsNullOrEmpty(folder))
             {
                 folder = this.CurrentDirectory;
+                Logger.Trace(CultureInfo.CurrentCulture, "Path to the directory containing driver {0}", folder);
             }
 #endif
             return folder;
