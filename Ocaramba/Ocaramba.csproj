@@ -8,15 +8,16 @@
     <Copyright>Copyright ©  2015</Copyright>
     <Company>Objectivity Bespoke Software Specialists</Company>
     <PackageProjectUrl>https://github.com/ObjectivityLtd/Ocaramba</PackageProjectUrl>
-    <icon>https://github.com/ObjectivityLtd/Ocaramba/wiki/images/Ocaramba-logo-64x64.png</icon>
+    <PackageIconUrl>https://raw.githubusercontent.com/ObjectivityLtd/Ocaramba/master/icon.png</PackageIconUrl>
     <RepositoryUrl>https://github.com/ObjectivityLtd/Ocaramba</RepositoryUrl>
-	<PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReleaseNotes>You can find info about this release here: https://github.com/ObjectivityLtd/Ocaramba/releases</PackageReleaseNotes>
     <Version>1.0.0</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Objectivity Bespoke Software Specialists</Authors>
     <PackageTags>selenium webdriver testautomation tests Ocaramba</PackageTags>
-	<CodeAnalysisRuleSet>fxcop-sonarqube.tests.ruleset</CodeAnalysisRuleSet>
+	 <CodeAnalysisRuleSet>fxcop-sonarqube.tests.ruleset</CodeAnalysisRuleSet>
+
   </PropertyGroup>
 
   <ItemGroup>
