@@ -41,6 +41,7 @@ Project API documentation can be found here: http://objectivityltd.github.io/Oca
 - Possibility of debugging framework installed from nuget package, more details [here](https://github.com/ObjectivityLtd/Ocaramba/wiki/Debugging-Test.Automation-framework).
 - AngularJS support, more details [here](https://github.com/ObjectivityLtd/Ocaramba/wiki/Angular-support).
 - Possiblity to check for JavaScript errors from browser, more details [here](https://github.com/ObjectivityLtd/Ocaramba/wiki/Verifying-Javascript-Errors-from-browser).
+- Instruction how to run Ocaramba tests with Docker container, more details [here](https://github.com/ObjectivityLtd/Ocaramba/wiki/Run-Ocaramba-tests-with-Docker-container).
 
 For all documentation, visit the [Ocaramba Wiki](https://github.com/ObjectivityLtd/Ocaramba/wiki).
 

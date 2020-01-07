@@ -9,8 +9,8 @@
 	<PackageReference Include="NLog" Version="4.6.6" />
   <PackageReference Include="Selenium.Support" Version="3.141.0" />
     <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
-    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="77.0.3865.4000" />
-    <PackageReference Include="Selenium.WebDriver.GeckoDriver.Win64" Version="0.25.0" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="78.0.3904.10500" />
+    <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.26.0" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net472'">
