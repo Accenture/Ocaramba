@@ -24,7 +24,7 @@ Project API documentation can be found here: http://objectivityltd.github.io/Oca
 - Written entirely in C#
 - Contains example projects how to use it
 - Allows to use Chrome, Firefox, Safari or Internet Explorer
-- Overrides browser profile preferences, pass arguments to browsers,  installs browser extensions, loading default firefox profile, more details [here](https://github.com/ObjectivityLtd/Ocaramba/wiki/Override%20browser%20profile%20preferences,%20install%20browser%20extensions)
+- Overrides browser profile preferences, pass arguments to browsers,  installs browser extensions, loading default firefox profile, Headless mode, more details [here](https://github.com/ObjectivityLtd/Ocaramba/wiki/Override-browser-profile-preferences,-install-browser-extensions,-Headless-mode)
 - Extends Webdriver by additional methods like JavaScriptClick, WaitForAjax, WaitForAngular, etc., more details [here](http://objectivityltd.github.io/Ocaramba/html/d51aa97e-08b5-c0b6-6987-c10545a64ebd.htm)
 - Automatically waits when locating element for specified time and conditions,GetElement method instead of Selenium FindElement, more details [here](http://objectivityltd.github.io/Ocaramba/html/3c09ca99-f931-c6c9-98fc-194eff6500ff.htm)
 - Page Object Pattern
