@@ -77,8 +77,8 @@
     <DefineConstants>net47</DefineConstants>
 </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netcoreapp2.2|AnyCPU'">
-    <DocumentationFile>C:\SVN\branch\master\Ocaramba - Copy\Ocaramba\Ocaramba.xml</DocumentationFile>
-  </PropertyGroup>
+ <PropertyGroup>
+  <GenerateDocumentationFile>true</GenerateDocumentationFile>
+</PropertyGroup>
 
 </Project>

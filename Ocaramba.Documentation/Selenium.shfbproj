@@ -27,8 +27,8 @@
       <Argument Key="maxVersionParts" Value="" xmlns="" />
     </TransformComponentArguments>
     <DocumentationSources>
-      <DocumentationSource sourceFile="..\Ocaramba\bin\Release\net45\WebDriver.dll" />
-<DocumentationSource sourceFile="..\Ocaramba\bin\Release\net45\WebDriver.Support.dll" /></DocumentationSources>
+      <DocumentationSource sourceFile="..\Ocaramba\bin\Debug\net472\WebDriver.dll" />
+<DocumentationSource sourceFile="..\Ocaramba\bin\Debug\net472\WebDriver.Support.dll" /></DocumentationSources>
     <SaveComponentCacheCapacity>100</SaveComponentCacheCapacity>
     <BuildAssemblerVerbosity>OnlyWarningsAndErrors</BuildAssemblerVerbosity>
     <HelpFileFormat>Website</HelpFileFormat>
@@ -58,7 +58,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <!-- NOTE: Update the version number in the path (YYYY.M.D.R) to match the package version -->
-    <SHFBROOT Condition=" '$(SHFBROOT)' == '' ">$(MSBuildThisFileDirectory)..\packages\EWSoftware.SHFB.2019.4.14\tools\</SHFBROOT>
+    <SHFBROOT Condition=" '$(SHFBROOT)' == '' ">$(UserProfile).nuget\packages\ewsoftware.shfb\2019.6.24\tools</SHFBROOT>
   </PropertyGroup>
   <!-- There are no properties for these groups.  AnyCPU needs to appear in order for Visual Studio to perform
 			 the build.  The others are optional common platform types that may appear. -->
