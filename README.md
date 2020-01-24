@@ -1,5 +1,5 @@
 ## Ocaramba
-<img align="left" src="/Ocaramba.Documentation/icons/Ocaramba-logo-64x64.png">
+<img align="left" src="https://user-images.githubusercontent.com/12324498/73060034-43ff2580-3e97-11ea-9100-748d0716eba7.png">
 
 **Cross-Platform C# Framework to automate tests using Selenium WebDriver**
 
@@ -12,7 +12,7 @@
 
 Test Framework was designed in Objectivity to propose common way how people should create Selenium WebDriver tests.
 
-<img align="left" src="/Ocaramba.Documentation/icons/Help.png">
+<img align="left" src="https://user-images.githubusercontent.com/12324498/73060119-73159700-3e97-11ea-99d3-1b21584c6baa.png">
 Project API documentation can be found here: http://objectivityltd.github.io/Ocaramba<br /><br />
 
 **It provides following features:**
