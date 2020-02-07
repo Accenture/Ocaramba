@@ -23,9 +23,6 @@
   <ItemGroup>
     <PackageReference Include="NLog" Version="4.6.6" />
     <PackageReference Include="Selenium.Support" Version="3.141.0" />
-    <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
-    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="78.0.3904.10500" />
-    <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.26.0" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -62,8 +59,11 @@
       <Version>4.6.1</Version>
     </PackageReference>
   </ItemGroup>
+
   <ItemGroup>
-    <ProjectReference Include="..\OcarambaLite\OcarambaLite.csproj" />
+    <None Update="nlog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   
     <PropertyGroup Condition="'$(TargetFramework)'=='netcoreapp2.2'">

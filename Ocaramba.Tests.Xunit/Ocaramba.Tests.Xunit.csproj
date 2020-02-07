@@ -38,7 +38,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Ocaramba.Tests.PageObjects\Ocaramba.Tests.PageObjects.csproj" />
-    <ProjectReference Include="..\Ocaramba\Ocaramba.csproj" />
+    <ProjectReference Include="..\OcarambaLite\OcarambaLite.csproj" />
   </ItemGroup>
 
   <ItemGroup>
