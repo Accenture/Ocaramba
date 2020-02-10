@@ -16,7 +16,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Objectivity Bespoke Software Specialists</Authors>
     <PackageTags>selenium webdriver testautomation tests Ocaramba</PackageTags>
-	 <CodeAnalysisRuleSet></CodeAnalysisRuleSet>
+	 <CodeAnalysisRuleSet>fxcop-sonarqube.tests.ruleset</CodeAnalysisRuleSet>
 
   </PropertyGroup>
 
