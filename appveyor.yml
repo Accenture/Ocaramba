@@ -92,7 +92,7 @@ for:
          .\ExecutingTestsOnWindows.ps1
 
   artifacts:
-  - path: .\**\Ocaramba.*.nupkg
+  - path: .\**\Ocaramba*.nupkg
     name: NuGet
   deploy:
   - provider: NuGet

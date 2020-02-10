@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Ocaramba\Ocaramba.csproj" />
+    <ProjectReference Include="..\OcarambaLite\OcarambaLite.csproj" />
   </ItemGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)'=='netcoreapp2.2'">
