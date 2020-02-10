@@ -4,7 +4,7 @@
 	<TargetFrameworks>netcoreapp2.2</TargetFrameworks>
 	<DebugType>full</DebugType>
 	<TargetFrameworks Condition="'$(OS)' != 'Unix'">net472;netcoreapp2.2</TargetFrameworks>
-    <Description>Framework to automate tests using Selenium WebDriver</Description>
+    <Description>Framework to automate tests using Selenium WebDriver (lighten version without selenium drivers)</Description>
     <Copyright>Copyright ©  2015</Copyright>
     <Company>Objectivity Bespoke Software Specialists</Company>
     <PackageProjectUrl>https://github.com/ObjectivityLtd/Ocaramba</PackageProjectUrl>
