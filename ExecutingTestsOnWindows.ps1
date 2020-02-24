@@ -4,17 +4,17 @@ echo '********************************************NUnit tests*******************
 
 $OpenCover = (Resolve-Path "C:\Users\appveyor\.nuget\packages\opencover\*\tools\OpenCover.Console.exe").ToString()
 
-& $OpenCover -target:"dotnet.exe" -targetargs:"test --configuration Release --filter TestCategory!=TakingScreehShots --no-build --no-restore Ocaramba.Tests.NUnit -maxCpuCount --test-adapter-path:. --logger:Appveyor" -filter:"+[Ocaramba]*" -oldStyle -register:administrator -output:opencoverCoverage.xml
+& $OpenCover -target:"dotnet.exe" -targetargs:"test --configuration Release --filter TestCategory!=TakingScreehShots --no-build --no-restore Ocaramba.Tests.NUnit -maxCpuCount --test-adapter-path:. --logger:Appveyor" -filter:"+[Ocaramba]*" -oldStyle -register -output:opencoverCoverage.xml
 
-& $OpenCover -target:"dotnet.exe" -mergeoutput -targetargs:"test --configuration Release --no-build --no-restore Ocaramba.Tests.Angular -maxCpuCount --test-adapter-path:. --logger:Appveyor" -filter:"+[Ocaramba]*" -oldStyle -register:administrator -output:opencoverCoverage.xml   
+& $OpenCover -target:"dotnet.exe" -mergeoutput -targetargs:"test --configuration Release --no-build --no-restore Ocaramba.Tests.Angular -maxCpuCount --test-adapter-path:. --logger:Appveyor" -filter:"+[Ocaramba]*" -oldStyle -register -output:opencoverCoverage.xml   
       
-& $OpenCover -target:"dotnet.exe" -mergeoutput -targetargs:"test --configuration Release --filter TestCategory!=TakingScreehShots --no-build --no-restore Ocaramba.UnitTests -maxCpuCount --test-adapter-path:. --logger:Appveyor" -filter:"+[Ocaramba]*" -oldStyle -register:administrator -output:opencoverCoverage.xml
+& $OpenCover -target:"dotnet.exe" -mergeoutput -targetargs:"test --configuration Release --filter TestCategory!=TakingScreehShots --no-build --no-restore Ocaramba.UnitTests -maxCpuCount --test-adapter-path:. --logger:Appveyor" -filter:"+[Ocaramba]*" -oldStyle -register -output:opencoverCoverage.xml
  
 & nunit3-console.exe .\Ocaramba.Tests.Angular\bin\Release\net472\Ocaramba.Tests.Angular.dll .\Ocaramba.Tests.NUnit\bin\Release\net472\Ocaramba.Tests.NUnit.dll .\Ocaramba.UnitTests\bin\Release\net472\Ocaramba.UnitTests.dll
 
 echo '********************************************MsTest tests********************************************'
 
-& $OpenCover -target:"dotnet.exe" -mergeoutput -targetargs:"test --configuration Release --filter TestCategory!=TakingScreehShots --no-build --no-restore Ocaramba.Tests.MsTest -maxCpuCount --test-adapter-path:. --logger:Appveyor" -filter:"+[Ocaramba]*" -oldStyle -register:administrator -output:opencoverCoverage.xml
+& $OpenCover -target:"dotnet.exe" -mergeoutput -targetargs:"test --configuration Release --filter TestCategory!=TakingScreehShots --no-build --no-restore Ocaramba.Tests.MsTest -maxCpuCount --test-adapter-path:. --logger:Appveyor" -filter:"+[Ocaramba]*" -oldStyle -register -output:opencoverCoverage.xml
     
 & vstest.console.exe .\Ocaramba.Tests.MsTest\bin\Release\net472\Ocaramba.Tests.MsTest.dll /Settings:.\Ocaramba.Tests.MsTest\bin\Release\net472\Runsettings.runsettings
  
@@ -22,13 +22,13 @@ echo '********************************************XUnit tests*******************
 
 $xunit = (Resolve-Path "C:\Users\appveyor\.nuget\packages\xunit.runner.console\*\tools\net452\xunit.console.exe").ToString()
 
-& $OpenCover -target:"dotnet.exe" -mergeoutput -targetargs:"test --configuration Release --no-build --no-restore Ocaramba.Tests.Xunit -maxCpuCount --test-adapter-path:. --logger:Appveyor" -filter:"+[Ocaramba]*" -oldStyle -register:administrator -output:opencoverCoverage.xml
+& $OpenCover -target:"dotnet.exe" -mergeoutput -targetargs:"test --configuration Release --no-build --no-restore Ocaramba.Tests.Xunit -maxCpuCount --test-adapter-path:. --logger:Appveyor" -filter:"+[Ocaramba]*" -oldStyle -register -output:opencoverCoverage.xml
  
 & $xunit .\Ocaramba.Tests.Xunit\bin\Release\net472\Ocaramba.Tests.Xunit.dll -appveyor -noshadow
 
 echo '********************************************Specflow tests********************************************'   
       
-& $OpenCover -target:"dotnet.exe" -mergeoutput -targetargs:"test --configuration Release --filter TestCategory!=TakingScreehShots --no-build --no-restore Ocaramba.Tests.Features -maxCpuCount --test-adapter-path:. --logger:Appveyor" -filter:"+[Ocaramba]*" -oldStyle -register:administrator -output:opencoverCoverage.xml
+& $OpenCover -target:"dotnet.exe" -mergeoutput -targetargs:"test --configuration Release --filter TestCategory!=TakingScreehShots --no-build --no-restore Ocaramba.Tests.Features -maxCpuCount --test-adapter-path:. --logger:Appveyor" -filter:"+[Ocaramba]*" -oldStyle -register -output:opencoverCoverage.xml
  
 & nunit3-console.exe .\Ocaramba.Tests.Features\bin\Release\net45\Ocaramba.Tests.Features.dll 
 
@@ -47,7 +47,7 @@ echo '********************************************BrowserStack tests************
         
 .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\netcoreapp2.2" "appsettings.json" "DriverCapabilities" "build" "Ocaramba.Tests.BrowserStackCrossBrowser$env:appveyor_build_version" $true $true
     
-& $OpenCover -target:"dotnet.exe" -mergeoutput -targetargs:"test --configuration Release --no-build --no-restore Ocaramba.Tests.CloudProviderCrossBrowser -maxCpuCount --test-adapter-path:. --logger:Appveyor" -filter:"+[Ocaramba]*" -oldStyle -register:administrator -output:opencoverCoverage.xml
+& $OpenCover -target:"dotnet.exe" -mergeoutput -targetargs:"test --configuration Release --no-build --no-restore Ocaramba.Tests.CloudProviderCrossBrowser -maxCpuCount --test-adapter-path:. --logger:Appveyor" -filter:"+[Ocaramba]*" -oldStyle -register -output:opencoverCoverage.xml
  
 echo '********************************************testingbot.com tests********************************************'  
     
