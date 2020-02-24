@@ -4,7 +4,7 @@ echo '********************************************NUnit tests*******************
 
 $OpenCover = (Resolve-Path "C:\Users\appveyor\.nuget\packages\opencover\*\tools\OpenCover.Console.exe").ToString()
     
-& $OpenCover -target:"dotnet.exe" -targetargs:"test --configuration Release --no-build --no-restore Ocaramba.Tests.Angular -maxCpuCount --test-adapter-path:. --logger:Appveyor" -filter:"+[Ocaramba]*" -oldStyle -register:user -output:opencoverCoverage.xml   
+& $OpenCover -target:"dotnet.exe" -targetargs:"test --configuration Release --no-build --no-restore Ocaramba.Tests.Angular -maxCpuCount --test-adapter-path:. --logger:Appveyor" -filter:"+[Ocaramba]*" -oldStyle -register -output:opencoverCoverage.xml   
 
 & $OpenCover -target:"dotnet.exe" -mergeoutput -targetargs:"test --configuration Release --filter TestCategory!=TakingScreehShots --no-build --no-restore Ocaramba.Tests.NUnit -maxCpuCount --test-adapter-path:. --logger:Appveyor" -filter:"+[Ocaramba]*" -oldStyle -register:user -output:opencoverCoverage.xml
       
