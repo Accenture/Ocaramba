@@ -90,8 +90,11 @@ for:
   test_script:
     - ps: >-
          docker-switch-linux
+         
          docker info
+         
          docker ps -a
+         
          .\ExecutingTestsOnWindows.ps1
 
   artifacts:
