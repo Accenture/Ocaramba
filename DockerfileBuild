@@ -2,3 +2,4 @@ FROM ocaramba/selenium
 COPY ./ /Ocaramba
 WORKDIR /Ocaramba
 RUN dotnet build Ocaramba.sln
+RUN dotnet vstest Ocaramba.Tests.NUnit/bin/Debug/netcoreapp2.2/Ocaramba.Tests.NUnit.dll
