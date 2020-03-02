@@ -21,14 +21,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Dockerfile" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="Dockerfile" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="NLog" Version="4.6.6" />
     <PackageReference Include="Selenium.Support" Version="3.141.0" />
     <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />

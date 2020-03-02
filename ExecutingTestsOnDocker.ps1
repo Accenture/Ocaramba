@@ -3,10 +3,8 @@ docker-switch-linux
 docker info
          
 docker pull ocaramba/selenium
-
-cd .\Ocaramba
          
-docker build -t ocaramba/selenium . 
+docker build -t ocaramba/selenium -f DockerfileBuild .
          
 docker ps -a
 
