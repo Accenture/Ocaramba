@@ -54,7 +54,7 @@
     <SdkLinkTarget>Blank</SdkLinkTarget>
     <MissingTags>Summary, Parameter, Returns, AutoDocumentCtors, TypeParameter, AutoDocumentDispose</MissingTags>
     <DocumentationSources>
-      <DocumentationSource sourceFile="..\Ocaramba\Ocaramba.csproj" />
+      <DocumentationSource sourceFile="..\OcarambaLite\OcarambaLite.csproj" />
     </DocumentationSources>
     <VisibleItems>InheritedMembers, InheritedFrameworkMembers, Protected, ProtectedInternalAsProtected, NonBrowsable</VisibleItems>
     <ApiFilter>
@@ -63,7 +63,7 @@
       </Filter>
     </ApiFilter>
     <PlugInConfigurations>
-      <PlugInConfig id="Additional Reference Links" enabled="True" xmlns="">
+      <PlugInConfig id="Additional Reference Links" enabled="False">
         <configuration>
           <targets>
             <target htmlSdkLinkType="None" helpViewerSdkLinkType="Id" websiteSdkLinkType="None" helpFileProject="Selenium.shfbproj" />
@@ -72,7 +72,7 @@
       </PlugInConfig>
     </PlugInConfigurations>
   </PropertyGroup>
-    <PropertyGroup>
+  <PropertyGroup>
     <!-- NOTE: Update the version number in the path (YYYY.M.D.R) to match the package version -->
     <SHFBROOT Condition=" '$(SHFBROOT)' == '' ">$(UserProfile).nuget\packages\ewsoftware.shfb\2019.6.24\tools</SHFBROOT>
   </PropertyGroup>
@@ -94,7 +94,6 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|Win32' ">
   </PropertyGroup>
-
   <ItemGroup>
     <Folder Include="Content" />
     <Folder Include="Content\VersionHistory" />
