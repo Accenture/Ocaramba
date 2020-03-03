@@ -48,8 +48,8 @@ namespace Ocaramba.UnitTests.Tests
             var internetPage = new InternetPage(this.DriverContext).OpenHomePage();
             internetPage.GoToIFramePage();
             IFramePage page = new IFramePage(this.DriverContext);
-            var path = page.TakeScreenShotsOfTextInIFrame(folder + BaseConfiguration.ScreenShotFolder, "TextWithinIFrame" + BaseConfiguration.TestBrowser);
-            var path2 = folder + BaseConfiguration.ScreenShotFolder + FilesHelper.Separator + "TextWithinIFrameChromeError.png";
+            var path = page.TakeScreenShotsOfTextInIFrame(folder + FilesHelper.Separator + BaseConfiguration.ScreenShotFolder, "TextWithinIFrame" + BaseConfiguration.TestBrowser);
+            var path2 = folder + FilesHelper.Separator + BaseConfiguration.ScreenShotFolder + FilesHelper.Separator + "TextWithinIFrameChromeError.png";
             bool flag = true;
             using (var img1 = new MagickImage(path))
             {
@@ -60,7 +60,7 @@ namespace Ocaramba.UnitTests.Tests
                         img1.Compose = CompositeOperator.Src;
                         img1.Compare(img2, new ErrorMetric(), imgDiff);
                         flag = img1.Equals(img2);
-                        imgDiff.Write(folder + BaseConfiguration.ScreenShotFolder + FilesHelper.Separator + BaseConfiguration.TestBrowser + "TextWithinIFrameDIFF.png");
+                        imgDiff.Write(folder + FilesHelper.Separator + BaseConfiguration.ScreenShotFolder + FilesHelper.Separator + BaseConfiguration.TestBrowser + "TextWithinIFrameDIFF.png");
                     }
                 }
             }

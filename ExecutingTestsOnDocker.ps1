@@ -1,3 +1,5 @@
+echo '********************************************Executing tests on Docker********************************************'
+
 docker-switch-linux
          
 docker info
