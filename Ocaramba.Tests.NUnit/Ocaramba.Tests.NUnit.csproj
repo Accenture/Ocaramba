@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	<TargetFrameworks>netcoreapp2.2</TargetFrameworks>
-	<TargetFrameworks Condition="'$(OS)' != 'Unix'">net472;netcoreapp2.2</TargetFrameworks>
+	<TargetFrameworks>netcoreapp3.1</TargetFrameworks>
+	<TargetFrameworks Condition="'$(OS)' != 'Unix'">net472;netcoreapp3.1</TargetFrameworks>
   </PropertyGroup>
 <ItemGroup>
     <PackageReference Include="Appveyor.TestLogger" Version="2.0.0" />
@@ -22,7 +22,7 @@
 	<Reference Include="System.Configuration" />
  </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp2.2'">
+  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
     <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions">
       <Version>2.2.0</Version>
     </PackageReference>
@@ -68,8 +68,8 @@
     </None>
   </ItemGroup>
 
-    <PropertyGroup Condition="'$(TargetFramework)'=='netcoreapp2.2'">
-    <DefineConstants>netcoreapp2_2</DefineConstants>
+    <PropertyGroup Condition="'$(TargetFramework)'=='netcoreapp3.1'">
+    <DefineConstants>netcoreapp3_1</DefineConstants>
 </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)'=='net472'">

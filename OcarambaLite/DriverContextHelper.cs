@@ -208,7 +208,7 @@ namespace Ocaramba
 #if net47
             firefoxArguments = ConfigurationManager.GetSection("FirefoxArguments") as NameValueCollection;
 #endif
-#if netcoreapp2_2
+#if netcoreapp3_1
             firefoxArguments = BaseConfiguration.GetNameValueCollectionFromAppsettings("FirefoxArguments");
 #endif
 
@@ -411,7 +411,7 @@ namespace Ocaramba
 
         private string GetBrowserDriversFolder(string folder)
         {
-#if netcoreapp2_2
+#if netcoreapp3_1
             if (string.IsNullOrEmpty(folder))
             {
                 folder = this.CurrentDirectory;

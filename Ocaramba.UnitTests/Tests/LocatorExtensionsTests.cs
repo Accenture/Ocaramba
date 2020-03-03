@@ -25,7 +25,7 @@ namespace Ocaramba.UnitTests.Tests
             var titleByClassName = new InternetPage(DriverContext)
                 .OpenHomePage()
                 .GoToDragAndDropPage().GetByClassName;
-#if netcoreapp2_2
+#if netcoreapp3_1
             if (BaseConfiguration.Env == "Linux")
             {
                 Assert.AreEqual("Drag and Drop\nA\nB", titleByClassName);
@@ -46,7 +46,7 @@ namespace Ocaramba.UnitTests.Tests
             var titleByCssSelector = new InternetPage(DriverContext)
                 .OpenHomePage()
                 .GoToDragAndDropPage().GetByCssSelectorLocator;
-#if netcoreapp2_2
+#if netcoreapp3_1
             if (BaseConfiguration.Env == "Linux")
             {
                 Assert.AreEqual("Drag and Drop\nA\nB", titleByCssSelector);
@@ -78,7 +78,7 @@ namespace Ocaramba.UnitTests.Tests
                 .OpenHomePage()
                 .GoToFormAuthenticationPage()
                 .GetUsernameByNameLocator;
-#if netcoreapp2_2
+#if netcoreapp3_1
             if (BaseConfiguration.Env == "Linux")
             {
                 Assert.AreEqual("Username\nPassword\nLogin", columnA);

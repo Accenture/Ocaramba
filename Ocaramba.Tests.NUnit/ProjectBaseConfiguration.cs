@@ -27,7 +27,7 @@ namespace Ocaramba.Tests.NUnit
     using global::NUnit.Framework;
     using Ocaramba;
     using Ocaramba.Helpers;
-#if netcoreapp2_2
+#if netcoreapp3_1
     using Microsoft.Extensions.Configuration;
 #endif
 
@@ -36,7 +36,7 @@ namespace Ocaramba.Tests.NUnit
     /// </summary>
     public static class ProjectBaseConfiguration
     {
-#if netcoreapp2_2
+#if netcoreapp3_1
         private static readonly string CurrentDirectory = Directory.GetCurrentDirectory();
 #endif
 
@@ -58,7 +58,7 @@ namespace Ocaramba.Tests.NUnit
 #if net47
                 setting = ConfigurationManager.AppSettings["DataDrivenFile"];
 #endif
-#if netcoreapp2_2
+#if netcoreapp3_1
                 setting = BaseConfiguration.Builder["appSettings:DataDrivenFile"];
 #endif
                 if (BaseConfiguration.UseCurrentDirectory)
@@ -84,7 +84,7 @@ namespace Ocaramba.Tests.NUnit
 #if net47
                 setting = ConfigurationManager.AppSettings["DataDrivenFileXlsx"];
 #endif
-#if netcoreapp2_2
+#if netcoreapp3_1
                 setting = BaseConfiguration.Builder["appSettings:DataDrivenFileXlsx"];
 #endif
                 if (BaseConfiguration.UseCurrentDirectory)
@@ -110,7 +110,7 @@ namespace Ocaramba.Tests.NUnit
 #if net47
                 setting = ConfigurationManager.AppSettings["DataDrivenFileCSV"];
 #endif
-#if netcoreapp2_2
+#if netcoreapp3_1
                 setting = BaseConfiguration.Builder["appSettings:DataDrivenFileCSV"];
 #endif
                 if (BaseConfiguration.UseCurrentDirectory)
@@ -133,7 +133,7 @@ namespace Ocaramba.Tests.NUnit
 #if net47
                 setting = ConfigurationManager.AppSettings["DownloadFolder"];
 #endif
-#if netcoreapp2_2
+#if netcoreapp3_1
                 setting = BaseConfiguration.Builder["appSettings:DownloadFolder"];
 #endif
                 return FilesHelper.GetFolder(setting, CurrentDirectory);

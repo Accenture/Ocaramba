@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	<TargetFrameworks>netcoreapp2.2</TargetFrameworks>
-	<TargetFrameworks Condition="'$(OS)' != 'Unix'">net472;netcoreapp2.2</TargetFrameworks>
+	<TargetFrameworks>netcoreapp3.1</TargetFrameworks>
+	<TargetFrameworks Condition="'$(OS)' != 'Unix'">net472;netcoreapp3.1</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,7 +17,7 @@
 	<Reference Include="System.Configuration" />
  </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp2.2'">
+  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
     <PackageReference Include="NLog.Web.AspNetCore" Version="4.8.4" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0" />
@@ -27,8 +27,8 @@
     <ProjectReference Include="..\OcarambaLite\OcarambaLite.csproj" />
   </ItemGroup>
 
-  <PropertyGroup Condition="'$(TargetFramework)'=='netcoreapp2.2'">
-    <DefineConstants>netcoreapp2_2</DefineConstants>
+  <PropertyGroup Condition="'$(TargetFramework)'=='netcoreapp3.1'">
+    <DefineConstants>netcoreapp3_1</DefineConstants>
 </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)'=='net472'">

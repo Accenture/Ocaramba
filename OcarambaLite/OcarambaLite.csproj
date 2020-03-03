@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	<TargetFrameworks>netcoreapp2.2</TargetFrameworks>
+	<TargetFrameworks>netcoreapp3.1</TargetFrameworks>
 	<DebugType>full</DebugType>
-	<TargetFrameworks Condition="'$(OS)' != 'Unix'">net472;netcoreapp2.2</TargetFrameworks>
+	<TargetFrameworks Condition="'$(OS)' != 'Unix'">net472;netcoreapp3.1</TargetFrameworks>
     <Description>Framework to automate tests using Selenium WebDriver (lighten version without selenium drivers)</Description>
     <Copyright>Copyright ©  2015</Copyright>
     <Company>Objectivity Bespoke Software Specialists</Company>
@@ -32,7 +32,7 @@
 	<Reference Include="System.Configuration" />
 	<Reference Include="System.Windows.Forms" />
   </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp2.2'">
+  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
     <PackageReference Include="Microsoft.Extensions.Configuration">
       <Version>2.2.0</Version>
     </PackageReference>
@@ -59,8 +59,8 @@
     </None>
   </ItemGroup>
   
-    <PropertyGroup Condition="'$(TargetFramework)'=='netcoreapp2.2'">
-    <DefineConstants>netcoreapp2_2</DefineConstants>
+    <PropertyGroup Condition="'$(TargetFramework)'=='netcoreapp3.1'">
+    <DefineConstants>netcoreapp3_1</DefineConstants>
 </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)'=='net472'">

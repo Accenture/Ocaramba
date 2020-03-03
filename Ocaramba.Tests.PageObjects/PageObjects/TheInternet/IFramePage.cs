@@ -34,7 +34,7 @@ namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
 #if net47
         private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
 #endif
-#if netcoreapp2_2
+#if netcoreapp3_1
         private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
 #endif
 
@@ -59,7 +59,7 @@ namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
 #if net47
             return TakeScreenShot.TakeScreenShotOfElement(x, y, el, folder, name);
 #endif
-#if netcoreapp2_2
+#if netcoreapp3_1
             return "to_be_implemented_in_netcore";
 #endif
         }
