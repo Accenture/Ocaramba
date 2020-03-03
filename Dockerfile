@@ -1,4 +1,4 @@
-FROM microsoft/dotnet:2.2-sdk-stretch
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1
 LABEL maintainer "Ocaramba <ocaramba@objectivity.co.uk>"
 #=========
 # Midnight Commander, lbzip2
