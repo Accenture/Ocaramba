@@ -63,7 +63,7 @@ namespace Ocaramba.Tests.NUnit
 #endif
                 if (BaseConfiguration.UseCurrentDirectory)
                 {
-                    return Path.Combine(CurrentDirectory + setting);
+                    return Path.Combine(CurrentDirectory + FilesHelper.Separator + setting);
                 }
 
                 return setting;
@@ -89,7 +89,7 @@ namespace Ocaramba.Tests.NUnit
 #endif
                 if (BaseConfiguration.UseCurrentDirectory)
                 {
-                    return Path.Combine(CurrentDirectory + setting);
+                    return Path.Combine(CurrentDirectory + FilesHelper.Separator + setting);
                 }
 
                 return setting;
@@ -115,7 +115,7 @@ namespace Ocaramba.Tests.NUnit
 #endif
                 if (BaseConfiguration.UseCurrentDirectory)
                 {
-                    return Path.Combine(CurrentDirectory + setting);
+                    return Path.Combine(CurrentDirectory + FilesHelper.Separator + setting);
                 }
 
                 return setting;
