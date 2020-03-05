@@ -42,12 +42,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ocaramba.Tests.Xunit", "Oca
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OcarambaLite", "OcarambaLite\OcarambaLite.csproj", "{A3E0113A-9AB8-4294-B1E3-EFB17614972A}"
 EndProject
-Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Ocaramba.Documentation", "Ocaramba.Documentation\Ocaramba.Documentation.shfbproj", "{CF4B91CD-36F6-47BC-A55D-80998F89C404}"
-	ProjectSection(ProjectDependencies) = postProject
-		{A3E0113A-9AB8-4294-B1E3-EFB17614972A} = {A3E0113A-9AB8-4294-B1E3-EFB17614972A}
-		{A357D58B-61BF-4E84-94FF-39DE8D2B7834} = {A357D58B-61BF-4E84-94FF-39DE8D2B7834}
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -94,10 +88,6 @@ Global
 		{A3E0113A-9AB8-4294-B1E3-EFB17614972A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3E0113A-9AB8-4294-B1E3-EFB17614972A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3E0113A-9AB8-4294-B1E3-EFB17614972A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CF4B91CD-36F6-47BC-A55D-80998F89C404}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CF4B91CD-36F6-47BC-A55D-80998F89C404}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CF4B91CD-36F6-47BC-A55D-80998F89C404}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CF4B91CD-36F6-47BC-A55D-80998F89C404}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
