@@ -50,7 +50,7 @@ namespace Ocaramba
 #if net47
         private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
 #endif
-#if netcoreapp2_2
+#if netcoreapp3_1
         private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
 #endif
         private readonly Collection<ErrorDetail> verifyMessages = new Collection<ErrorDetail>();
@@ -204,7 +204,7 @@ namespace Ocaramba
                 firefoxPreferences = ConfigurationManager.GetSection("FirefoxPreferences") as NameValueCollection;
                 firefoxExtensions = ConfigurationManager.GetSection("FirefoxExtensions") as NameValueCollection;
 #endif
-#if netcoreapp2_2
+#if netcoreapp3_1
                 firefoxPreferences = BaseConfiguration.GetNameValueCollectionFromAppsettings("FirefoxPreferences");
                 firefoxExtensions = BaseConfiguration.GetNameValueCollectionFromAppsettings("FirefoxExtensions");
 #endif
@@ -313,7 +313,7 @@ namespace Ocaramba
                 chromeExtensions = ConfigurationManager.GetSection("ChromeExtensions") as NameValueCollection;
                 chromeArguments = ConfigurationManager.GetSection("ChromeArguments") as NameValueCollection;
 #endif
-#if netcoreapp2_2
+#if netcoreapp3_1
                 chromePreferences = BaseConfiguration.GetNameValueCollectionFromAppsettings("ChromePreferences");
                 chromeExtensions = BaseConfiguration.GetNameValueCollectionFromAppsettings("ChromeExtensions");
                 chromeArguments = BaseConfiguration.GetNameValueCollectionFromAppsettings("chromeArguments");
@@ -414,7 +414,7 @@ namespace Ocaramba
 #if net47
                 internetExplorerPreferences = ConfigurationManager.GetSection("InternetExplorerPreferences") as NameValueCollection;
 #endif
-#if netcoreapp2_2
+#if netcoreapp3_1
                 internetExplorerPreferences = BaseConfiguration.GetNameValueCollectionFromAppsettings("InternetExplorerPreferences");
 #endif
                 var options = new InternetExplorerOptions
@@ -581,7 +581,7 @@ namespace Ocaramba
             driverCapabilitiesConf = ConfigurationManager.GetSection("DriverCapabilities") as NameValueCollection;
             settings = ConfigurationManager.GetSection("environments/" + this.CrossBrowserEnvironment) as NameValueCollection;
 #endif
-#if netcoreapp2_2
+#if netcoreapp3_1
             driverCapabilitiesConf = BaseConfiguration.GetNameValueCollectionFromAppsettings("DriverCapabilities");
             settings = BaseConfiguration.GetNameValueCollectionFromAppsettings("environments:" + this.CrossBrowserEnvironment);
 #endif

@@ -65,8 +65,8 @@ environment:
     secure: D6Yy/Ng4/rfzsqQmnzwmTtN/Knee3c8/NtI1HgKke2ybA/6WpqP38RQfSHENYECa
   APPVEYOR_SSH_KEY: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDs6YyI6KMFUrjDkdvXZqRAFJzAU2WZo6wyodL+xl4erDJuVMnKPXfyec8OnFiCXElk2HDXorz/G6+5jo3j4u2dB5J3WXZtnUR/ZhQmoRi45tOgZP2pWUpWYwAVbNd4dvrqJRCEiRILSAxgZkDSbdRQP7ijp9ekb1E0s5YDr6VY+xSdY75u1QcOgO7dF84hsrbZnhjHIXYwSqffFuD/Occba6HaGMEz2EbD5ZxDZKdjMGobzWds2y6U7mMWBazeGG7iXx4JjlIDSfkOUgejHy669lwCDc+faFFGHRww9Tb2clhLq5MDYvH8oKr/mowi2TtvuLsO6aHaxlodq5O0hQgH appveyor
   matrix:
-    - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
-      ASPNETCORE_ENVIRONMENT: Linux
+    #- APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
+     # ASPNETCORE_ENVIRONMENT: Linux
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
       ASPNETCORE_ENVIRONMENT: Windows
 before_build:
@@ -89,6 +89,8 @@ for:
       
   test_script:
     - ps: >-
+         .\ExecutingTestsOnDocker.ps1
+    
          .\ExecutingTestsOnWindows.ps1
 
   artifacts:
@@ -97,23 +99,23 @@ for:
   deploy:
   - provider: NuGet
     api_key:
-           secure: ylGlPYR6ZGvMbgD6ImLebLe9Q1el/3T/j2ldRbhKXS202w8CG6Bguiazvdfyh5gp
+           secure: mZ24caKv/iXJvY54hwng51oLcxZ2/hnJRVW7Ab+bsyahcFYFVqNrhuxW3iT9I2S7
     on:
       branch: master
       appveyor_repo_tag: true
 
--
-  matrix:
-    only:
-      - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
+#-
+ # matrix:
+  #  only:
+   #   - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
       
-  test_script:
-    - ps: >-
-        ./ExecutingTestsOnLinux.ps1 
+  #test_script:
+   # - ps: >-
+    #    ./ExecutingTestsOnLinux.ps1 
 on_finish:
 - ps: >-
     if ($isWindows) {
         #$blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
     }
-- sh: #export APPVEYOR_SSH_BLOCK=true
-- sh: #curl -sflL 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh' | bash -e -
+#- sh: #export APPVEYOR_SSH_BLOCK=true
+#- sh: #curl -sflL 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh' | bash -e -

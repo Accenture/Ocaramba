@@ -44,7 +44,7 @@ namespace Ocaramba.Tests.CloudProviderCrossBrowser
 #if net47
         private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
 #endif
-#if netcoreapp2_2
+#if netcoreapp3_1
         private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
 #endif
 
@@ -91,7 +91,7 @@ namespace Ocaramba.Tests.CloudProviderCrossBrowser
         [OneTimeSetUp]
         public void BeforeClass()
         {
-#if netcoreapp2_2
+#if netcoreapp3_1
             this.DriverContext.CurrentDirectory = Directory.GetCurrentDirectory();
 #endif
 

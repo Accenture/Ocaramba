@@ -70,7 +70,7 @@ namespace Ocaramba.Tests.NUnit
         [OneTimeSetUp]
         public void BeforeClass()
         {
-#if netcoreapp2_2
+#if netcoreapp3_1
         this.DriverContext.CurrentDirectory = Directory.GetCurrentDirectory();
 #endif
 
