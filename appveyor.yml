@@ -72,10 +72,11 @@ environment:
 before_build:
  - dotnet tool install coveralls.net --tool-path packages
  - dotnet --version
- - dotnet restore
-
-build_script:
- - dotnet build --configuration Release /verbosity:minimal "Ocaramba.sln"
+ - nuget restore
+ 
+build:
+  project: TestFramework.sln
+  verbosity: minimal
 after_build:
  - ps: >-
       if ($isWindows) {
