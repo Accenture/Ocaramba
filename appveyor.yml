@@ -5,6 +5,7 @@ version: $(frameworkVersion).{build}
 branches:
   except:
   - gh-pages
+  - azure-pipelines
 init:
  - ps: >-
       if ($env:APPVEYOR_REPO_TAG -eq "true")
