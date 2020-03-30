@@ -12,7 +12,8 @@ dotnet vstest .\Ocaramba.Tests.Angular\bin\Release\netcoreapp3.1\Ocaramba.Tests.
 
 echo '********************************************netcoreapp3 tests********************************************'
 
-vstest.console.exe .\Ocaramba.Tests.Angular\bin\Release\net472\Ocaramba.Tests.Angular.dll `
+$vstest = (Resolve-Path "D:\a\_temp\VsTest\Microsoft.TestPlatform*\tools\net*\Common*\IDE\Extensions\TestPlatform\vstest.console.exe").ToString()
+& $vstest .\Ocaramba.Tests.Angular\bin\Release\net472\Ocaramba.Tests.Angular.dll `
 	          .\Ocaramba.Tests.NUnit\bin\Release\net472\Ocaramba.Tests.NUnit.dll `
 			  .\Ocaramba.Tests.Features\bin\Release\net472\Ocaramba.Tests.Features.dll `
 			  .\Ocaramba.Tests.Xunit\bin\Release\net472\Ocaramba.Tests.Xunit.dll `
