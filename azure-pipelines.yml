@@ -1,7 +1,7 @@
-# Maven
-# Build your Java project and run tests with Apache Maven.
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/java
+# ASP.NET Core (.NET Framework)
+# Build and test ASP.NET Core projects targeting the full .NET Framework.
+# Add steps that publish symbols, save build artifacts, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
 trigger:
   branches:
@@ -11,20 +11,14 @@ trigger:
     include:
     - '*'
 
-schedules:
-  - cron: "0 19 * * Sun"
-    displayName: Weekly build
-    branches:
-      include:
-      - master
-    always: true 
-    
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'windows-latest'
 
 variables:
-- name: dBTestCompareVersion
-  value: 1.6
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+  frameworkVersion: '3.2.6'
 
 steps:
 - task: PowerShell@2
@@ -34,75 +28,37 @@ steps:
     script: |
       $tags = git tag --sort=-creatordate   
       $tag = $tags[0]
-      Write-Host "##vso[task.setvariable variable=dBTestCompareVersion]$tag"
+      Write-Host "##vso[task.setvariable variable=frameworkVersion]$tag"
 
-- task: PowerShell@2
-  inputs:
-    filePath: './setDBTestCompareVersion.ps1'
+- task: NuGetToolInstaller@1
 
-- task: PowerShell@2
+- task: NuGetCommand@2
   inputs:
-    filePath: './downloadBackupAndJDBCDrivers.ps1'
+    restoreSolution: '$(solution)'
 
-- task: DockerCompose@0
+- task: Assembly-Info-NetCore@2
   inputs:
-    containerregistrytype: 'Container Registry'
-    dockerComposeFile: '**/docker-compose.yml'
-    action: 'Run a Docker Compose command'
-    dockerComposeCommand: 'up -d'
+    Path: '$(Build.SourcesDirectory)'
+    FileNames: '**/*.csproj'
+    InsertAttributes: false
+    FileEncoding: 'auto'
+    WriteBOM: false
+    VersionNumber: '$(frameworkVersion)'
+    FileVersionNumber: '$(frameworkVersion).$(Build.BuildId)'
+    InformationalVersion: '$(frameworkVersion)'
+    PackageVersion: '$(frameworkVersion)'
+    LogLevel: 'verbose'
+    FailOnWarning: false
+    DisableTelemetry: false
 
-- task: PowerShell@2
+- task: VSBuild@1
   inputs:
-    filePath: './restoreBackup.ps1'
-    errorActionPreference: 'silentlyContinue'
-    
-- task: Ant@1
-  inputs:
-    buildFile: './deploy/build.xml'
-    options: '-Dconfig=DEV02'
-    targets: 'compile tokens.copy.files testdbq.run'
-    publishJUnitResults: true
-    testResultsFiles: '**/TEST-*.xml'
-    javaHomeOption: 'JDKVersion'
+    solution: '$(solution)'
+    msbuildArgs: '/v:minimal'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
 
-- task: PowerShell@2
+- task: VSTest@2
   inputs:
-    filePath: './copyArtifact.ps1'
-
-- task: PublishPipelineArtifact@1
-  inputs:
-    targetPath: './target/test-output'
-    artifact: 'DBTestCompare$(dBTestCompareVersion).TestResults.$(Build.BuildNumber)'
-    publishLocation: 'pipeline'
-
-- task: PublishPipelineArtifact@1
-  inputs:
-      targetPath: './release'
-      artifact: 'DBTestCompare$(dBTestCompareVersion)'
-      publishLocation: 'pipeline'
-
-- task: PowerShell@2
-  inputs:
-    targetType: 'inline'
-    script: 'compress-archive -path "./release/**" ./release/DBTestCompare$(dBTestCompareVersion).zip'
-
-- task: CopyFiles@2
-  inputs:
-      sourceFolder: './release'
-      contents: 'DBTestCompare$(dBTestCompareVersion).zip'
-      targetFolder: $(Build.ArtifactStagingDirectory)
-
-- task: GitHubRelease@1
-  condition: and(succeeded(),startsWith(variables['Build.SourceBranch'], 'refs/tags/'))
-  inputs:
-    gitHubConnection: 'github.com_dbtestcompare'
-    repositoryName: '$(Build.Repository.Name)'
-    action: 'edit'
-    tagSource: 'gitTag'
-    tagPattern: '\d\.\d'
-    target: '$(Build.SourceVersion)'
-    tag: '$(dBTestCompareVersion)'
-    title: 'Version $(dBTestCompareVersion)'
-    changeLogCompareToRelease: 'lastNonDraftReleaseByTag'
-    changeLogType: 'commitBased'
-    assets: $(Build.ArtifactStagingDirectory)/DBTestCompare$(dBTestCompareVersion).zip
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
