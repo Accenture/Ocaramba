@@ -8,3 +8,5 @@ if($lastexitcode -ne 0)
  {
   echo 'lastexitcode' $lastexitcode
  }
+ 
+exit 0
