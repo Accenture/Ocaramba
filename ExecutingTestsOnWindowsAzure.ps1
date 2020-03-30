@@ -10,6 +10,12 @@ dotnet vstest .\Ocaramba.Tests.Angular\bin\Release\netcoreapp3.1\Ocaramba.Tests.
 	          .\Ocaramba.UnitTests\bin\Release\netcoreapp3.1\Ocaramba.UnitTests.dll `
 	          --logger:"trx;LogFileName=Ocaramba.Tests.netcoreapp3.xml"
 
+if($lastexitcode -ne 0)
+ {
+  echo 'lastexitcode' $lastexitcode
+ }
+ 
+
 dotnet vstest .\Ocaramba.Tests.Angular\bin\Release\net472\Ocaramba.Tests.Angular.dll `
 	          .\Ocaramba.Tests.NUnit\bin\Release\net472\Ocaramba.Tests.NUnit.dll `
 			  .\Ocaramba.Tests.Feature\bin\Release\net472\Ocaramba.Tests.Feature.dll `
