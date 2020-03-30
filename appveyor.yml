@@ -77,6 +77,8 @@ before_build:
 build:
   project: Ocaramba.sln
   verbosity: minimal
+  configuration: Release
+
 after_build:
  - ps: >-
       if ($isWindows) {
