@@ -15,13 +15,4 @@ if($lastexitcode -ne 0)
   echo 'lastexitcode' $lastexitcode
  }
  
-
-dotnet vstest .\Ocaramba.Tests.Angular\bin\Release\net472\Ocaramba.Tests.Angular.dll `
-			  --logger:"trx;LogFileName=Ocaramba.Tests.net472.xml"
-
-if($lastexitcode -ne 0)
- {
-  echo 'lastexitcode' $lastexitcode
- }
- 
 exit 0
