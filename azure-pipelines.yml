@@ -64,6 +64,7 @@ steps:
       **\Ocaramba.Tests.*.dll
       !**\*TestAdapter.dll
       !**\obj\**
+      !**\Ocaramba.Tests.PageObjects.dll
     searchFolder: '$(System.DefaultWorkingDirectory)'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
