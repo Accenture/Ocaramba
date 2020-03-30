@@ -1,0 +1,108 @@
+# Maven
+# Build your Java project and run tests with Apache Maven.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/java
+
+trigger:
+  branches:
+    include:
+    - '*'
+  tags:
+    include:
+    - '*'
+
+schedules:
+  - cron: "0 19 * * Sun"
+    displayName: Weekly build
+    branches:
+      include:
+      - master
+    always: true 
+    
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+- name: dBTestCompareVersion
+  value: 1.6
+
+steps:
+- task: PowerShell@2
+  condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/')
+  inputs:
+    targetType: 'inline'
+    script: |
+      $tags = git tag --sort=-creatordate   
+      $tag = $tags[0]
+      Write-Host "##vso[task.setvariable variable=dBTestCompareVersion]$tag"
+
+- task: PowerShell@2
+  inputs:
+    filePath: './setDBTestCompareVersion.ps1'
+
+- task: PowerShell@2
+  inputs:
+    filePath: './downloadBackupAndJDBCDrivers.ps1'
+
+- task: DockerCompose@0
+  inputs:
+    containerregistrytype: 'Container Registry'
+    dockerComposeFile: '**/docker-compose.yml'
+    action: 'Run a Docker Compose command'
+    dockerComposeCommand: 'up -d'
+
+- task: PowerShell@2
+  inputs:
+    filePath: './restoreBackup.ps1'
+    errorActionPreference: 'silentlyContinue'
+    
+- task: Ant@1
+  inputs:
+    buildFile: './deploy/build.xml'
+    options: '-Dconfig=DEV02'
+    targets: 'compile tokens.copy.files testdbq.run'
+    publishJUnitResults: true
+    testResultsFiles: '**/TEST-*.xml'
+    javaHomeOption: 'JDKVersion'
+
+- task: PowerShell@2
+  inputs:
+    filePath: './copyArtifact.ps1'
+
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: './target/test-output'
+    artifact: 'DBTestCompare$(dBTestCompareVersion).TestResults.$(Build.BuildNumber)'
+    publishLocation: 'pipeline'
+
+- task: PublishPipelineArtifact@1
+  inputs:
+      targetPath: './release'
+      artifact: 'DBTestCompare$(dBTestCompareVersion)'
+      publishLocation: 'pipeline'
+
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: 'compress-archive -path "./release/**" ./release/DBTestCompare$(dBTestCompareVersion).zip'
+
+- task: CopyFiles@2
+  inputs:
+      sourceFolder: './release'
+      contents: 'DBTestCompare$(dBTestCompareVersion).zip'
+      targetFolder: $(Build.ArtifactStagingDirectory)
+
+- task: GitHubRelease@1
+  condition: and(succeeded(),startsWith(variables['Build.SourceBranch'], 'refs/tags/'))
+  inputs:
+    gitHubConnection: 'github.com_dbtestcompare'
+    repositoryName: '$(Build.Repository.Name)'
+    action: 'edit'
+    tagSource: 'gitTag'
+    tagPattern: '\d\.\d'
+    target: '$(Build.SourceVersion)'
+    tag: '$(dBTestCompareVersion)'
+    title: 'Version $(dBTestCompareVersion)'
+    changeLogCompareToRelease: 'lastNonDraftReleaseByTag'
+    changeLogType: 'commitBased'
+    assets: $(Build.ArtifactStagingDirectory)/DBTestCompare$(dBTestCompareVersion).zip
