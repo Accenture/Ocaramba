@@ -78,3 +78,9 @@ steps:
     targetPath: './Ocaramba/bin/Release/Ocaramba.$(frameworkVersion).nupkg'
     artifact: 'Ocaramba$(frameworkVersion)'
     publishLocation: 'pipeline'
+
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: './Ocaramba/bin/Release/OcarambaLite.$(frameworkVersion).nupkg'
+    artifact: 'OcarambaLite$(frameworkVersion)'
+    publishLocation: 'pipeline'
