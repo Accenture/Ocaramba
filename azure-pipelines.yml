@@ -58,18 +58,16 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- task: VSTest@2
+- task: VisualStudioTestPlatformInstaller@1
   inputs:
-    testAssemblyVer2: |
-      **\Ocaramba.Tests.*.dll
-      !**\*TestAdapter.dll
-      !**\obj\**
-      !**\Ocaramba.Tests.PageObjects.dll
-    searchFolder: '$(System.DefaultWorkingDirectory)'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    packageFeedSelector: 'nugetOrg'
+    versionSelector: 'latestStable'
+
+- task: PowerShell@2
+  inputs:
+    filePath: './ExecutingTestsOnWindowsAzure.ps1'
 
 - task: PublishTestResults@2
   inputs:
     testResultsFormat: 'VSTest'
-    testResultsFiles: '**/TEST-*.xml'
+    testResultsFiles: '**/Ocaramba.Tests.*.xml'
