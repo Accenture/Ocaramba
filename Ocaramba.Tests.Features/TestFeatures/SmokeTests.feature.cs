@@ -19,7 +19,7 @@ namespace Ocaramba.Tests.Features.TestFeatures
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.1.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [NUnit.Framework.TestFixtureAttribute()]
+    [NUnit.Framework.TestFixtureAttribute(TestName="SmokeTests")]
     [NUnit.Framework.DescriptionAttribute("SmokeTests")]
     public partial class SmokeTestsFeature
     {
@@ -73,7 +73,7 @@ namespace Ocaramba.Tests.Features.TestFeatures
             testRunner.CollectScenarioErrors();
         }
         
-        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.TestCaseAttribute(TestName="Verify default option selected in dropdown")]
         [NUnit.Framework.DescriptionAttribute("Verify default option selected in dropdown")]
         [NUnit.Framework.CategoryAttribute("Dropdown")]
         public virtual void VerifyDefaultOptionSelectedInDropdown()
@@ -121,7 +121,7 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.TestCaseAttribute(TestName="Verify if dropdown option can be selected by text")]
         [NUnit.Framework.DescriptionAttribute("Verify if dropdown option can be selected by text")]
         [NUnit.Framework.CategoryAttribute("Dropdown")]
         public virtual void VerifyIfDropdownOptionCanBeSelectedByText()
@@ -172,7 +172,7 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.TestCaseAttribute(TestName="Verify if dropdown option can be selected by index with custom timeout")]
         [NUnit.Framework.DescriptionAttribute("Verify if dropdown option can be selected by index with custom timeout")]
         [NUnit.Framework.CategoryAttribute("Dropdown")]
         public virtual void VerifyIfDropdownOptionCanBeSelectedByIndexWithCustomTimeout()
@@ -223,7 +223,7 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.TestCaseAttribute(TestName="Verify if dropdown option can be selected by index")]
         [NUnit.Framework.DescriptionAttribute("Verify if dropdown option can be selected by index")]
         [NUnit.Framework.CategoryAttribute("Dropdown")]
         public virtual void VerifyIfDropdownOptionCanBeSelectedByIndex()
@@ -274,7 +274,7 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.TestCaseAttribute(TestName="Verify if dropdown option can be selected by value")]
         [NUnit.Framework.DescriptionAttribute("Verify if dropdown option can be selected by value")]
         [NUnit.Framework.CategoryAttribute("Dropdown")]
         public virtual void VerifyIfDropdownOptionCanBeSelectedByValue()
@@ -325,7 +325,7 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.TestCaseAttribute(TestName="Verify if dropdown option can be selected by value with custom timeout")]
         [NUnit.Framework.DescriptionAttribute("Verify if dropdown option can be selected by value with custom timeout")]
         [NUnit.Framework.CategoryAttribute("Dropdown")]
         public virtual void VerifyIfDropdownOptionCanBeSelectedByValueWithCustomTimeout()
@@ -376,22 +376,21 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Key Presses Test")]
-        [NUnit.Framework.TestCaseAttribute("\"ESC\"", "\"ESCAPE\"", null)]
-        [NUnit.Framework.TestCaseAttribute("\"F2\"", "\"F2\"", null)]
-        [NUnit.Framework.TestCaseAttribute("\"1\"", "\"NUMPAD1\"", null)]
-        [NUnit.Framework.TestCaseAttribute("\"TAB\"", "\"TAB\"", null)]
-        [NUnit.Framework.TestCaseAttribute("\"SPACE\"", "\"SPACE\"", null)]
-        [NUnit.Framework.TestCaseAttribute("\"ARROW DOWN\"", "\"DOWN\"", null)]
-        [NUnit.Framework.TestCaseAttribute("\"ARROW LEFT\"", "\"LEFT\"", null)]
-        [NUnit.Framework.TestCaseAttribute("\"ALT\"", "\"ALT\"", null)]
-        [NUnit.Framework.TestCaseAttribute("\"SHIFT\"", "\"SHIFT\"", null)]
-        [NUnit.Framework.TestCaseAttribute("\"PAGE UP\"", "\"PAGE_UP\"", null)]
-        [NUnit.Framework.TestCaseAttribute("\"PAGE DOWN\"", "\"PAGE_DOWN\"", null)]
-        [NUnit.Framework.TestCaseAttribute("\"DELETE\"", "\"DELETE\"", null)]
-        [NUnit.Framework.TestCaseAttribute("\"MULTIPLY\"", "\"MULTIPLY\"", null)]
-        [NUnit.Framework.TestCaseAttribute("\"SUBTRACT\"", "\"SUBTRACT\"", null)]
+        [NUnit.Framework.TestCaseAttribute("\"ESC\"", "\"ESCAPE\"", null, TestName="Key Presses Test(\"ESC\",\"ESCAPE\")")]
+        [NUnit.Framework.TestCaseAttribute("\"F2\"", "\"F2\"", null, TestName="Key Presses Test(\"F2\",\"F2\")")]
+        [NUnit.Framework.TestCaseAttribute("\"1\"", "\"NUMPAD1\"", null, TestName="Key Presses Test(\"1\",\"NUMPAD1\")")]
+        [NUnit.Framework.TestCaseAttribute("\"TAB\"", "\"TAB\"", null, TestName="Key Presses Test(\"TAB\",\"TAB\")")]
+        [NUnit.Framework.TestCaseAttribute("\"SPACE\"", "\"SPACE\"", null, TestName="Key Presses Test(\"SPACE\",\"SPACE\")")]
+        [NUnit.Framework.TestCaseAttribute("\"ARROW DOWN\"", "\"DOWN\"", null, TestName="Key Presses Test(\"ARROW DOWN\",\"DOWN\")")]
+        [NUnit.Framework.TestCaseAttribute("\"ARROW LEFT\"", "\"LEFT\"", null, TestName="Key Presses Test(\"ARROW LEFT\",\"LEFT\")")]
+        [NUnit.Framework.TestCaseAttribute("\"ALT\"", "\"ALT\"", null, TestName="Key Presses Test(\"ALT\",\"ALT\")")]
+        [NUnit.Framework.TestCaseAttribute("\"SHIFT\"", "\"SHIFT\"", null, TestName="Key Presses Test(\"SHIFT\",\"SHIFT\")")]
+        [NUnit.Framework.TestCaseAttribute("\"PAGE UP\"", "\"PAGE_UP\"", null, TestName="Key Presses Test(\"PAGE UP\",\"PAGE_UP\")")]
+        [NUnit.Framework.TestCaseAttribute("\"PAGE DOWN\"", "\"PAGE_DOWN\"", null, TestName="Key Presses Test(\"PAGE DOWN\",\"PAGE_DOWN\")")]
+        [NUnit.Framework.TestCaseAttribute("\"DELETE\"", "\"DELETE\"", null, TestName="Key Presses Test(\"DELETE\",\"DELETE\")")]
+        [NUnit.Framework.TestCaseAttribute("\"MULTIPLY\"", "\"MULTIPLY\"", null, TestName="Key Presses Test(\"MULTIPLY\",\"MULTIPLY\")")]
+        [NUnit.Framework.TestCaseAttribute("\"SUBTRACT\"", "\"SUBTRACT\"", null, TestName="Key Presses Test(\"SUBTRACT\",\"SUBTRACT\")")]
         public virtual void KeyPressesTest(string key, string message, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
@@ -432,9 +431,8 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Do not press any key")]
-        [NUnit.Framework.TestCaseAttribute("\"\"", null)]
+        [NUnit.Framework.TestCaseAttribute("\"\"", null, TestName="Do not press any key(\"\")")]
         public virtual void DoNotPressAnyKey(string key, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
