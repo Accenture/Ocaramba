@@ -72,3 +72,9 @@ steps:
   inputs:
     testResultsFormat: 'VSTest'
     testResultsFiles: '**/Ocaramba.Tests.*.xml'
+    
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: './Ocaramba/bin/Release/Ocaramba.$(frameworkVersion).nupkg'
+    artifact: 'Ocaramba$(frameworkVersion)'
+    publishLocation: 'pipeline'
