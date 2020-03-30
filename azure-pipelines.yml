@@ -43,6 +43,7 @@ steps:
     InsertAttributes: false
     FileEncoding: 'auto'
     WriteBOM: false
+    GeneratePackageOnBuild: true
     VersionNumber: '$(frameworkVersion)'
     FileVersionNumber: '$(frameworkVersion).$(Build.BuildId)'
     InformationalVersion: '$(frameworkVersion)'
