@@ -67,8 +67,8 @@ environment:
     secure: D6Yy/Ng4/rfzsqQmnzwmTtN/Knee3c8/NtI1HgKke2ybA/6WpqP38RQfSHENYECa
   APPVEYOR_SSH_KEY: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDs6YyI6KMFUrjDkdvXZqRAFJzAU2WZo6wyodL+xl4erDJuVMnKPXfyec8OnFiCXElk2HDXorz/G6+5jo3j4u2dB5J3WXZtnUR/ZhQmoRi45tOgZP2pWUpWYwAVbNd4dvrqJRCEiRILSAxgZkDSbdRQP7ijp9ekb1E0s5YDr6VY+xSdY75u1QcOgO7dF84hsrbZnhjHIXYwSqffFuD/Occba6HaGMEz2EbD5ZxDZKdjMGobzWds2y6U7mMWBazeGG7iXx4JjlIDSfkOUgejHy669lwCDc+faFFGHRww9Tb2clhLq5MDYvH8oKr/mowi2TtvuLsO6aHaxlodq5O0hQgH appveyor
   matrix:
-    #- APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
-     # ASPNETCORE_ENVIRONMENT: Linux
+    - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
+      ASPNETCORE_ENVIRONMENT: Linux
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
       ASPNETCORE_ENVIRONMENT: Windows
 before_build:
@@ -78,18 +78,12 @@ before_build:
     dotnet --version
     
     .\removeSubprojectFromSolution.ps1
-    
-    nuget restore
- 
-build:
-  project: Ocaramba.sln
-  verbosity: minimal
 
-after_build:
- - ps: >-
-      if ($isWindows) {
-        #.\PublishingApiDocumentationOn_gh-pages.ps1
-        }
+    dotnet restore
+  
+build_script:
+  - dotnet build --configuration Release /verbosity:minimal "Ocaramba.sln" 
+ 
 for:
 -
   matrix:
@@ -113,14 +107,20 @@ for:
       branch: master
       appveyor_repo_tag: true
 
-#-
- # matrix:
-  #  only:
-   #   - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
-      
-  #test_script:
-   # - ps: >-
-    #    ./ExecutingTestsOnLinux.ps1 
+-
+  matrix:
+    only:
+      - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
+ 
+  after_build:
+  - ps: >-
+      if ($isWindows) {
+        #.\PublishingApiDocumentationOn_gh-pages.ps1
+        }
+ 
+  test_script:
+    - ps: >-
+        ./ExecutingTestsOnLinux.ps1 
 on_finish:
 - ps: >-
     if ($isWindows) {
