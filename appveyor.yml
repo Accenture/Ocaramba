@@ -77,9 +77,9 @@ before_build:
     
     dotnet --version
     
-    nuget restore
-    
     .\removeSubprojectFromSolution.ps1
+    
+    nuget restore
  
 build:
   project: Ocaramba.sln
