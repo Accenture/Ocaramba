@@ -124,7 +124,7 @@ for:
 on_finish:
 - ps: >-
     if ($isWindows) {
-        $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+        #$blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
     }
 #- sh: #export APPVEYOR_SSH_BLOCK=true
 #- sh: #curl -sflL 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh' | bash -e -
