@@ -71,19 +71,33 @@ environment:
       ASPNETCORE_ENVIRONMENT: Linux
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
       ASPNETCORE_ENVIRONMENT: Windows
+
 before_build:
  - ps: >-
     dotnet tool install coveralls.net --tool-path packages
     
     dotnet --version
     
-    .\removeSubprojectFromSolution.ps1
-
+    if ($env:isLinux) {
+    echo "removing Features subprojects from .\Ocaramba.sln"
+    (Get-Content '.\Ocaramba.sln' -raw) -replace [regex]('.*?' + 'Features' + ('.*?\n' * (5 + 1))) | set-content  '.\Ocaramba.sln'
+        
+    } 
+    echo "removing Documentation subprojects from .\Ocaramba.sln"
+    (Get-Content '.\Ocaramba.sln' -raw) -replace [regex]('.*?' + 'Documentation' + ('.*?\n' * (5 + 1))) | set-content  '.\Ocaramba.sln'
+    
     dotnet restore
-  
-build_script:
-  - dotnet build --configuration Release /verbosity:minimal "Ocaramba.sln" 
- 
+   
+build:
+  project: Ocaramba.sln
+  verbosity: minimal
+
+after_build:
+  - ps: >-
+      if ($isWindows) {
+        #.\PublishingApiDocumentationOn_gh-pages.ps1
+        }
+
 for:
 -
   matrix:
@@ -112,11 +126,6 @@ for:
     only:
       - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
  
-  after_build:
-  - ps: >-
-      if ($isWindows) {
-        #.\PublishingApiDocumentationOn_gh-pages.ps1
-        }
  
   test_script:
     - ps: >-
