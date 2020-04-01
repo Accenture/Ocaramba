@@ -16,12 +16,7 @@ echo '********************************************net472 tests******************
 $vstest = (Resolve-Path "D:\a\_temp\VsTest\Microsoft.TestPlatform*\tools\net*\Common*\IDE\Extensions\TestPlatform\vstest.console.exe").ToString()
 
 docker info
-         
-docker pull ocaramba/selenium
-         
-docker build -t ocaramba/selenium -f DockerfileBuild .
-         
-docker run --rm -dit --name ocaramba_selenium ocaramba/selenium
+
 docker ps -a
 docker exec ocaramba_selenium sed -i '/Features/,+1 d' Ocaramba.sln
 docker exec ocaramba_selenium sed -i '/Documentation/,+5 d' Ocaramba.sln

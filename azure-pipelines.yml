@@ -69,10 +69,17 @@ steps:
     packageFeedSelector: 'nugetOrg'
     versionSelector: 'latestStable'
 
+- task: DockerCompose@0
+  inputs:
+    containerregistrytype: 'Container Registry'
+    dockerComposeFile: '**/docker-compose.yml'
+    action: 'Run a Docker Compose command'
+    dockerComposeCommand: 'up -d'
+
 - task: PowerShell@2
   inputs:
     filePath: './ExecutingTestsOnWindowsAzure.ps1'
-
+    
 - task: PublishTestResults@2
   inputs:
     testResultsFormat: 'VSTest'
