@@ -30,7 +30,7 @@ init:
           (Get-WmiObject -class Win32_OperatingSystem).Caption
           [System.Environment]::OSVersion.Version   
       }
-      
+      Get-Host | Select-Object Version
       echo 'ASPNETCORE_ENVIRONMENT' $env:ASPNETCORE_ENVIRONMENT
 
 dotnet_csproj:
