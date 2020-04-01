@@ -1,5 +1,3 @@
 FROM ocaramba/selenium
 COPY ./ /Ocaramba
 WORKDIR /Ocaramba
-RUN dotnet build Ocaramba.sln
-RUN dotnet vstest Ocaramba.Tests.NUnit/bin/Debug/netcoreapp3.1/Ocaramba.Tests.NUnit.dll

@@ -8,3 +8,6 @@
 /Ocaramba.Documentation/Help
 /Ocaramba/Ocaramba.xml
 /.vs
+/Ocaramba.Tests.Angular/TestResults/*.trx
+/Ocaramba.Tests.Docker.xml
+/nuget.exe
