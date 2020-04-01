@@ -31,7 +31,7 @@ init:
           [System.Environment]::OSVersion.Version   
       }
       
-      (Get-Content '.\Ocaramba.sln' -raw) -replace [regex]('.*?' + 'Documentation' + ('.*?\r\n' * (5 + 1))) | set-content  '.\Ocaramba.sln'
+      .\removeSubprojectFromSolution.ps1
       
       echo 'ASPNETCORE_ENVIRONMENT' $env:ASPNETCORE_ENVIRONMENT
 
