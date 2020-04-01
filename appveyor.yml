@@ -31,8 +31,6 @@ init:
           [System.Environment]::OSVersion.Version   
       }
       
-      .\removeSubprojectFromSolution.ps1
-      
       echo 'ASPNETCORE_ENVIRONMENT' $env:ASPNETCORE_ENVIRONMENT
 
 dotnet_csproj:
@@ -74,9 +72,14 @@ environment:
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
       ASPNETCORE_ENVIRONMENT: Windows
 before_build:
- - dotnet tool install coveralls.net --tool-path packages
- - dotnet --version
- - nuget restore
+ - ps: >-
+    dotnet tool install coveralls.net --tool-path packages
+    
+    dotnet --version
+    
+    nuget restore
+    
+    .\removeSubprojectFromSolution.ps1
  
 build:
   project: Ocaramba.sln
