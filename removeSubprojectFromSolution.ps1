@@ -7,4 +7,5 @@ if ($env:isWindows) {
 } else {
 
 	(Get-Content '.\Ocaramba.sln' -raw) -replace [regex]('.*?' + 'Documentation' + ('.*?\r\n' * (5 + 1))) | set-content  '.\Ocaramba.sln'
+	(Get-Content '.\Ocaramba.sln' -raw) -replace [regex]('.*?' + 'Features' + ('.*?\r\n' * (5 + 1))) | set-content  '.\Ocaramba.sln'
 }
