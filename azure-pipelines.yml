@@ -30,6 +30,11 @@ steps:
       $tag = $tags[0]
       Write-Host "##vso[task.setvariable variable=frameworkVersion]$tag"
 
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: '(Get-Content ''Ocaramba.sln'' -raw) -replace [regex](''.*?'' + ''Documentation'' + (''.*?\r\n'' * (5 + 1))) | set-content  ''Ocaramba.sln'''
+
 - task: NuGetToolInstaller@1
 
 - task: NuGetCommand@2
