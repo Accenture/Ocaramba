@@ -1,5 +1,7 @@
 echo '********************************************Executing tests********************************************'
 docker ps        
+docker exec ocaramba_selenium sed -i '/Features/,+1 d' Ocaramba.sln
+docker exec ocaramba_selenium sed -i '/Documentation/,+5 d' Ocaramba.sln
 echo 'build Ocaramba.sln'
 docker exec ocaramba_selenium dotnet build Ocaramba.sln
 echo 'execute Ocaramba.sln tests'
