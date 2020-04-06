@@ -18,7 +18,7 @@ variables:
   frameworkVersion: '3.2.6'
 
 jobs:
-- job: A
+- job: RunTestsOnWindows
   pool:
     vmImage: 'windows-latest'
   steps:
@@ -91,7 +91,7 @@ jobs:
         artifact: 'OcarambaLite$(frameworkVersion)'
         publishLocation: 'pipeline'
         
-- job: B
+- job: RunTestsOnDocker
   pool:
     vmImage: 'ubuntu-latest'
   steps:
@@ -100,11 +100,31 @@ jobs:
         containerregistrytype: 'Container Registry'
         dockerComposeFile: '**/docker-compose.yml'
         action: 'Run a Docker Compose command'
-        dockerComposeCommand: 'up -d'
+        dockerComposeCommand: 'up -d --build'
 
     - task: PowerShell@2
       inputs:
         filePath: './ExecutingTestsOnDockerAzure.ps1'
+        
+    - task: PublishTestResults@2
+      inputs:
+        testResultsFormat: 'VSTest'
+        testResultsFiles: '**/Ocaramba.Tests.*.xml'
+
+- job: RunTestsOnLinux
+  pool:
+    vmImage: 'ubuntu-latest'
+  steps:
+    - task: CmdLine@2
+      inputs:
+        script: |
+          sed -i '/Features/,+1 d' /Ocaramba/Ocaramba.sln
+          
+          sed -i '/Documentation/,+5 d' /Ocaramba/Ocaramba.sln
+    - script: dotnet build /Ocaramba/Ocaramba.sln --configuration $(buildConfiguration)
+    - task: PowerShell@2
+      inputs:
+        filePath: './ExecutingTestsOnLinuxAzure.ps1'
         
     - task: PublishTestResults@2
       inputs:
