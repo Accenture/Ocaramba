@@ -1,7 +1,8 @@
 echo '********************************************Executing tests on Docker********************************************'
+If($IsWindows){
+	docker-switch-linux
+}
 
-docker-switch-linux
-         
 docker info
          
 docker build -t ocaramba/selenium -f DockerfileBuild .
