@@ -122,6 +122,8 @@ jobs:
           
           export ASPNETCORE_ENVIRONMENT=Linux
           
+          echo $ASPNETCORE_ENVIRONMENT
+          
           sed -i '/Features/,+1 d' ./Ocaramba.sln
           
           sed -i '/Documentation/,+5 d' ./Ocaramba.sln
