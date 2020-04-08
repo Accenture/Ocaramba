@@ -11,3 +11,4 @@
 /Ocaramba.Tests.Angular/TestResults/*.trx
 /Ocaramba.Tests.Docker.xml
 /nuget.exe
+/TestResults
