@@ -34,7 +34,9 @@ jobs:
     - task: PowerShell@2
       inputs:
         targetType: 'inline'
-        script: '(Get-Content ''Ocaramba.sln'' -raw) -replace [regex](''.*?'' + ''Documentation'' + (''.*?\r\n'' * (5 + 1))) | set-content  ''Ocaramba.sln'''
+        script: |
+          ls
+          (Get-Content ''Ocaramba.sln'' -raw) -replace [regex](''.*?'' + ''Documentation'' + (''.*?\r\n'' * (5 + 1))) | set-content  ''Ocaramba.sln''
 
     - task: NuGetToolInstaller@1
 
