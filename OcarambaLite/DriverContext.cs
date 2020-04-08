@@ -511,6 +511,7 @@ namespace Ocaramba
                         this.FirefoxOptions.BrowserExecutableLocation = BaseConfiguration.FirefoxBrowserExecutableLocation;
                     }
 
+                    this.FirefoxOptions.LogLevel = FirefoxDriverLogLevel.Trace;
                     this.driver = string.IsNullOrEmpty(this.GetBrowserDriversFolder(BaseConfiguration.PathToFirefoxDriverDirectory)) ? new FirefoxDriver(this.SetDriverOptions(this.FirefoxOptions)) : new FirefoxDriver(this.GetBrowserDriversFolder(BaseConfiguration.PathToFirefoxDriverDirectory), this.SetDriverOptions(this.FirefoxOptions));
                     break;
                 case BrowserType.InternetExplorer:
