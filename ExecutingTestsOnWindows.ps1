@@ -2,19 +2,17 @@ echo '********************************************Executing tests***************
         
 echo '********************************************NUnit tests********************************************'
 
-$OpenCover = (Resolve-Path "C:\Users\appveyor\.nuget\packages\opencover\*\tools\OpenCover.Console.exe").ToString()
+& dotnet.exe test --configuration Debug --filter TestCategory!=TakingScreehShots --no-build --no-restore Ocaramba.Tests.NUnit -maxCpuCount --test-adapter-path:. --logger:Appveyor
 
-& $OpenCover -target:"dotnet.exe" -targetargs:"test --configuration Debug --filter TestCategory!=TakingScreehShots --no-build --no-restore Ocaramba.Tests.NUnit -maxCpuCount --test-adapter-path:. --logger:Appveyor" -filter:"+[Ocaramba]*" -oldStyle -register -output:opencoverCoverage.xml
-
-& $OpenCover -target:"dotnet.exe" -mergeoutput -targetargs:"test --configuration Debug --no-build --no-restore Ocaramba.Tests.Angular -maxCpuCount --test-adapter-path:. --logger:Appveyor" -filter:"+[Ocaramba]*" -oldStyle -register -output:opencoverCoverage.xml   
+& dotnet.exe test --configuration Debug --no-build --no-restore Ocaramba.Tests.Angular -maxCpuCount --test-adapter-path:. --logger:Appveyor
       
-& $OpenCover -target:"dotnet.exe" -mergeoutput -targetargs:"test --configuration Debug --filter TestCategory!=TakingScreehShots --no-build --no-restore Ocaramba.UnitTests -maxCpuCount --test-adapter-path:. --logger:Appveyor" -filter:"+[Ocaramba]*" -oldStyle -register -output:opencoverCoverage.xml
+& dotnet.exe test --configuration Debug --filter TestCategory!=TakingScreehShots --no-build --no-restore Ocaramba.UnitTests -maxCpuCount --test-adapter-path:. --logger:Appveyor
  
 & nunit3-console.exe .\Ocaramba.Tests.Angular\bin\Debug\net472\Ocaramba.Tests.Angular.dll .\Ocaramba.Tests.NUnit\bin\Debug\net472\Ocaramba.Tests.NUnit.dll .\Ocaramba.UnitTests\bin\Debug\net472\Ocaramba.UnitTests.dll
 
 echo '********************************************MsTest tests********************************************'
 
-& $OpenCover -target:"dotnet.exe" -mergeoutput -targetargs:"test --configuration Debug --filter TestCategory!=TakingScreehShots --no-build --no-restore Ocaramba.Tests.MsTest -maxCpuCount --test-adapter-path:. --logger:Appveyor" -filter:"+[Ocaramba]*" -oldStyle -register -output:opencoverCoverage.xml
+& dotnet.exe test --configuration Debug --filter TestCategory!=TakingScreehShots --no-build --no-restore Ocaramba.Tests.MsTest -maxCpuCount --test-adapter-path:. --logger:Appveyor
     
 & vstest.console.exe .\Ocaramba.Tests.MsTest\bin\Debug\net472\Ocaramba.Tests.MsTest.dll /Settings:.\Ocaramba.Tests.MsTest\bin\Debug\net472\Runsettings.runsettings
  
@@ -22,13 +20,13 @@ echo '********************************************XUnit tests*******************
 
 $xunit = (Resolve-Path "C:\Users\appveyor\.nuget\packages\xunit.runner.console\*\tools\net452\xunit.console.exe").ToString()
 
-& $OpenCover -target:"dotnet.exe" -mergeoutput -targetargs:"test --configuration Debug --no-build --no-restore Ocaramba.Tests.Xunit -maxCpuCount --test-adapter-path:. --logger:Appveyor" -filter:"+[Ocaramba]*" -oldStyle -register -output:opencoverCoverage.xml
+& dotnet.exe test --configuration Debug --no-build --no-restore Ocaramba.Tests.Xunit -maxCpuCount --test-adapter-path:. --logger:Appveyor
  
 & $xunit .\Ocaramba.Tests.Xunit\bin\Debug\net472\Ocaramba.Tests.Xunit.dll -appveyor -noshadow
 
 echo '********************************************Specflow tests********************************************'   
       
-& $OpenCover -target:"dotnet.exe" -mergeoutput -targetargs:"test --configuration Debug --filter TestCategory!=TakingScreehShots --no-build --no-restore Ocaramba.Tests.Features -maxCpuCount --test-adapter-path:. --logger:Appveyor" -filter:"+[Ocaramba]*" -oldStyle -register -output:opencoverCoverage.xml
+& dotnet.exe test --configuration Debug --filter TestCategory!=TakingScreehShots --no-build --no-restore Ocaramba.Tests.Features -maxCpuCount --test-adapter-path:. --logger:Appveyor
  
 & nunit3-console.exe .\Ocaramba.Tests.Features\bin\Debug\net45\Ocaramba.Tests.Features.dll 
 
@@ -47,7 +45,7 @@ echo '********************************************BrowserStack tests************
         
 .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Debug\netcoreapp3.1" "appsettings.json" "DriverCapabilities" "build" "Ocaramba.Tests.BrowserStackCrossBrowser$env:appveyor_build_version" $true $true
     
-& $OpenCover -target:"dotnet.exe" -mergeoutput -targetargs:"test --configuration Debug --no-build --no-restore Ocaramba.Tests.CloudProviderCrossBrowser -maxCpuCount --test-adapter-path:. --logger:Appveyor" -filter:"+[Ocaramba]*" -oldStyle -register -output:opencoverCoverage.xml
+& dotnet.exe test --configuration Debug --no-build --no-restore Ocaramba.Tests.CloudProviderCrossBrowser -maxCpuCount --test-adapter-path:. --logger:Appveyor
  
 echo '********************************************testingbot.com tests********************************************'  
     
@@ -126,13 +124,7 @@ Stop-Process -Id $appNode.Id
         
 echo "Stop Selenium Grid hub" 
         
-Stop-Process -Id $appHub.Id
-        
-echo '*******************************************Sending coverage test results********************************************'
-        
-& .\packages\csmacnz.Coveralls.exe --opencover -i opencoverCoverage.xml --repoToken $env:COVERALLS_REPO_TOKEN --useRelativePaths --commitId $env:APPVEYOR_REPO_COMMIT --commitBranch $env:APPVEYOR_REPO_BRANCH --commitAuthor $env:APPVEYOR_REPO_COMMIT_AUTHOR --commitEmail $env:APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL --commitMessage $env:APPVEYOR_REPO_COMMIT_MESSAGE --jobId $env:APPVEYOR_BUILD_NUMBER --serviceName appveyor
-
-7z a testresults_$env:appveyor_build_version.zip opencoverCoverage.xml
+Stop-Process -Id $appHub.Id   
         
 echo '*****************************Add Selenium Grid logs to testresults****************************'
         
