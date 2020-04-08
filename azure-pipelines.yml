@@ -123,7 +123,7 @@ jobs:
           sed -i '/Features/,+1 d' ./Ocaramba/Ocaramba.sln
           
           sed -i '/Documentation/,+5 d' ./Ocaramba/Ocaramba.sln
-    - script: dotnet build ./Ocaramba/Ocaramba.sln --configuration $(buildConfiguration)
+    - script: dotnet build ./Ocaramba.sln --configuration $(buildConfiguration)
     - task: PowerShell@2
       inputs:
         filePath: './ExecutingTestsOnLinuxAzure.ps1'
