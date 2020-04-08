@@ -120,9 +120,9 @@ jobs:
         script: |
           ls
           
-          sed -i '/Features/,+1 d' ./Ocaramba/Ocaramba.sln
+          sed -i '/Features/,+1 d' ./Ocaramba.sln
           
-          sed -i '/Documentation/,+5 d' ./Ocaramba/Ocaramba.sln
+          sed -i '/Documentation/,+5 d' ./Ocaramba.sln
     - script: dotnet build ./Ocaramba.sln --configuration $(buildConfiguration)
     - task: PowerShell@2
       inputs:
