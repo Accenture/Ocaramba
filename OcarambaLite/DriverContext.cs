@@ -47,7 +47,7 @@ namespace Ocaramba
     [SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable", Justification = "Driver is disposed on test end")]
     public partial class DriverContext
     {
-#if net47
+#if net47 || net45
         private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
 #endif
 #if netcoreapp3_1
@@ -523,7 +523,10 @@ namespace Ocaramba
                         this.ChromeOptions.BinaryLocation = BaseConfiguration.ChromeBrowserExecutableLocation;
                     }
 
-                    this.driver = string.IsNullOrEmpty(this.GetBrowserDriversFolder(BaseConfiguration.PathToChromeDriverDirectory)) ? new ChromeDriver(this.SetDriverOptions(this.ChromeOptions)) : new ChromeDriver(this.GetBrowserDriversFolder(BaseConfiguration.PathToChromeDriverDirectory), this.SetDriverOptions(this.ChromeOptions));
+                    var service = ChromeDriverService.CreateDefaultService();
+                    service.LogPath = BaseConfiguration.PathToChromeDriverLog;
+                    service.EnableVerboseLogging = BaseConfiguration.EnableVerboseLoggingChrome;
+                    this.driver = string.IsNullOrEmpty(this.GetBrowserDriversFolder(BaseConfiguration.PathToChromeDriverDirectory)) ? new ChromeDriver(service, this.SetDriverOptions(this.ChromeOptions)) : new ChromeDriver(this.GetBrowserDriversFolder(BaseConfiguration.PathToChromeDriverDirectory), this.SetDriverOptions(this.ChromeOptions));
                     break;
                 case BrowserType.Safari:
                     this.driver = new SafariDriver(this.SetDriverOptions(this.SafariOptions));

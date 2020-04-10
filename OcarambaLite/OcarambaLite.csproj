@@ -3,7 +3,7 @@
   <PropertyGroup>
 	<TargetFrameworks>netcoreapp3.1</TargetFrameworks>
 	<DebugType>full</DebugType>
-	<TargetFrameworks Condition="'$(OS)' != 'Unix'">net472;netcoreapp3.1</TargetFrameworks>
+	<TargetFrameworks Condition="'$(OS)' != 'Unix'">net45;net472;netcoreapp3.1</TargetFrameworks>
     <Description>Framework to automate tests using Selenium WebDriver (lighten version without selenium drivers)</Description>
     <Copyright>Copyright ©  2015</Copyright>
     <Company>Objectivity Bespoke Software Specialists</Company>
@@ -21,7 +21,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.2" />
     <PackageReference Include="NLog" Version="4.6.6" />
     <PackageReference Include="Selenium.Support" Version="3.141.0" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
@@ -29,7 +28,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)' == 'net472'">
+  <ItemGroup Condition="'$(TargetFramework)' == 'net472' Or '$(TargetFramework)' == 'net45'">
 	<Reference Include="System.Configuration" />
 	<Reference Include="System.Windows.Forms" />
   </ItemGroup>
@@ -67,6 +66,10 @@
   <PropertyGroup Condition="'$(TargetFramework)'=='net472'">
     <DefineConstants>net47</DefineConstants>
 </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='net45'">
+    <DefineConstants>net45</DefineConstants>
+  </PropertyGroup>
 
  <PropertyGroup>
   <GenerateDocumentationFile>true</GenerateDocumentationFile>

@@ -15,7 +15,7 @@ Test Framework was designed in Objectivity to propose common way how people shou
 Project API documentation can be found here: http://objectivityltd.github.io/Ocaramba<br /><br />
 
 **It provides following features:**
-- .NET Framework 4.7.2 and .NET Core 3.1 supported
+- .NET Frameworks 4.5, 4.7.2 and .NET Core 3.1 supported
 - Cross-Platform  Windows, Linux and macOS systems supported
 - Ready for parallel tests execution, more details [here](https://github.com/ObjectivityLtd/Ocaramba/wiki/Selenium%20Parallel%20tests%20execution)
 - Possibility to use MSTest, NUnit or xUNIT framework

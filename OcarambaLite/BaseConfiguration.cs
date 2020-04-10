@@ -42,7 +42,7 @@ namespace Ocaramba
         /// <summary>
         /// The logger.
         /// </summary>
-#if net47
+#if net47 || net45
         private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
 #endif
 #if netcoreapp3_1
@@ -363,7 +363,7 @@ namespace Ocaramba
             get
             {
                 double setting;
-#if net47
+#if net47 || net45
                 setting = Convert.ToDouble(ConfigurationManager.AppSettings["mediumTimeout"], CultureInfo.CurrentCulture);
 #endif
 #if netcoreapp3_1
@@ -385,7 +385,7 @@ namespace Ocaramba
             get
             {
                 double setting;
-#if net47
+#if net47 || net45
                 setting = Convert.ToDouble(ConfigurationManager.AppSettings["longTimeout"], CultureInfo.CurrentCulture);
 #endif
 #if netcoreapp3_1
@@ -407,7 +407,7 @@ namespace Ocaramba
             get
             {
                 double setting;
-#if net47
+#if net47 || net45
                 setting = Convert.ToDouble(ConfigurationManager.AppSettings["shortTimeout"], CultureInfo.CurrentCulture);
 #endif
 #if netcoreapp3_1
@@ -426,7 +426,7 @@ namespace Ocaramba
             get
             {
                 double setting;
-#if net47
+#if net47 || net45
                 setting = Convert.ToDouble(ConfigurationManager.AppSettings["ImplicitlyWaitMilliseconds"], CultureInfo.CurrentCulture);
 #endif
 #if netcoreapp3_1
@@ -445,7 +445,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
+#if net47 || net45
                 setting = ConfigurationManager.AppSettings["FirefoxBrowserExecutableLocation"];
 #endif
 #if netcoreapp3_1
@@ -469,7 +469,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
+#if net47 || net45
                 setting = ConfigurationManager.AppSettings["ChromeBrowserExecutableLocation"];
 #endif
 #if netcoreapp3_1
@@ -494,7 +494,7 @@ namespace Ocaramba
             {
                 string setting = null;
 
-#if net47
+#if net47 || net45
                 setting = ConfigurationManager.AppSettings["RemoteWebDriverHub"];
 #endif
 #if netcoreapp3_1
@@ -512,7 +512,7 @@ namespace Ocaramba
         {
             get
             {
-#if net47
+#if net47 || net45
                 Logger.Trace(
                     CultureInfo.CurrentCulture,
                     "Full Desktop Screen Shot Enabled value from App.config '{0}'",
@@ -534,6 +534,59 @@ namespace Ocaramba
         }
 
         /// <summary>
+        /// Gets specified path to the file of Chrome driver log. "C:\\Temp\\chromedriver.log" by Default.
+        /// </summary>
+        public static string PathToChromeDriverLog
+        {
+            get
+            {
+                string setting = null;
+#if net47 || net45
+                setting = ConfigurationManager.AppSettings["PathToChromeDriverLog"];
+#endif
+#if netcoreapp3_1
+                setting = Builder["appSettings:PathToChromeDriverLog"];
+#endif
+                Logger.Trace(CultureInfo.CurrentCulture, "Gets the PathToChromeDriverLog from settings file '{0}'", setting);
+                if (string.IsNullOrEmpty(setting))
+                {
+                    return "C:\\Temp\\chromedriver.log";
+                }
+
+                return setting;
+            }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether enable verbose logging for Chrome. False by default.
+        /// </summary>
+        public static bool EnableVerboseLoggingChrome
+        {
+            get
+            {
+                string setting = null;
+#if net47 || net45
+                setting = ConfigurationManager.AppSettings["EnableVerboseLoggingChrome"];
+#endif
+#if  netcoreapp3_1
+                setting = Builder["appSettings:EnableVerboseLoggingChrome"];
+#endif
+                Logger.Trace(CultureInfo.CurrentCulture, "Verbose logging for Chrome value from settings file '{0}'", setting);
+                if (string.IsNullOrEmpty(setting))
+                {
+                    return false;
+                }
+
+                if (setting.ToLower(CultureInfo.CurrentCulture).Equals("true"))
+                {
+                    return true;
+                }
+
+                return false;
+            }
+        }
+
+        /// <summary>
         /// Gets specified path to the directory containing InternetExplorer Driver.
         /// </summary>
         public static string PathToInternetExplorerDriverDirectory
@@ -541,7 +594,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
+#if net47 || net45
                 setting = ConfigurationManager.AppSettings["PathToInternetExplorerDriverDirectory"];
 #endif
 #if netcoreapp3_1
@@ -565,7 +618,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
+#if net47 || net45
                 setting = ConfigurationManager.AppSettings["PathToEdgeDriverDirectory"];
 #endif
 #if netcoreapp3_1
@@ -589,7 +642,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
+#if net47 || net45
                 setting = ConfigurationManager.AppSettings["PathToChromeDriverDirectory"];
 #endif
 #if netcoreapp3_1
@@ -614,7 +667,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
+#if net47 || net45
                 setting = ConfigurationManager.AppSettings["PathToFirefoxDriverDirectory"];
 #endif
 #if netcoreapp3_1
@@ -638,7 +691,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
+#if net47 || net45
                 setting = ConfigurationManager.AppSettings["JavaScriptErrorLogging"];
 #endif
 #if netcoreapp3_1
@@ -667,7 +720,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
+#if net47 || net45
                 setting = ConfigurationManager.AppSettings["JavaScriptErrorTypes"];
 #endif
 #if netcoreapp3_1
@@ -702,7 +755,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
+#if net47 || net45
                 setting = ConfigurationManager.AppSettings["FirefoxUseLegacyImplementation"];
 #endif
 #if netcoreapp3_1
@@ -731,7 +784,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
+#if net47 || net45
                 setting = ConfigurationManager.AppSettings["SeleniumScreenShotEnabled"];
 #endif
 #if netcoreapp3_1
@@ -760,7 +813,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
+#if net47 || net45
                 setting = ConfigurationManager.AppSettings["EnableEventFiringWebDriver"];
 #endif
 #if netcoreapp3_1
@@ -789,7 +842,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
+#if net47 || net45
                 setting = ConfigurationManager.AppSettings["UseCurrentDirectory"];
 #endif
 #if netcoreapp3_1
@@ -821,7 +874,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
+#if net47 || net45
                 setting = ConfigurationManager.AppSettings["GetPageSourceEnabled"];
 #endif
 #if netcoreapp3_1
@@ -850,7 +903,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
+#if net47 || net45
                 setting = ConfigurationManager.AppSettings["DownloadFolder"];
 #endif
 #if netcoreapp3_1
@@ -869,7 +922,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
+#if net47 || net45
                 setting = ConfigurationManager.AppSettings["ScreenShotFolder"];
 #endif
 #if netcoreapp3_1
@@ -888,7 +941,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
+#if net47 || net45
                 setting = ConfigurationManager.AppSettings["PageSourceFolder"];
 #endif
 #if netcoreapp3_1
@@ -944,7 +997,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
+#if net47 || net45
                 setting = ConfigurationManager.AppSettings["SynchronizationWithAngularEnabled"];
 #endif
 #if  netcoreapp3_1
