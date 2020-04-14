@@ -462,6 +462,30 @@ namespace Ocaramba
         }
 
         /// <summary>
+        /// Gets the path and file name of the Edge Chrominium browser executable. Default value "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe".
+        /// </summary>
+        public static string EdgeChrominiumBrowserExecutableLocation
+        {
+            get
+            {
+                string setting = null;
+#if net47 || net45
+                setting = ConfigurationManager.AppSettings["EdgeChrominiumBrowserExecutableLocation"];
+#endif
+#if netcoreapp3_1
+                setting = Builder["appSettings:EdgeChrominiumBrowserExecutableLocation"];
+#endif
+                Logger.Trace(CultureInfo.CurrentCulture, "Gets the path and file name of the Edge Chrominium browser executable from settings file '{0}'", setting);
+                if (string.IsNullOrEmpty(setting))
+                {
+                    return @"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe";
+                }
+
+                return setting;
+            }
+        }
+
+        /// <summary>
         /// Gets the path and file name of the Chrome browser executable.
         /// </summary>
         public static string ChromeBrowserExecutableLocation
@@ -604,6 +628,30 @@ namespace Ocaramba
                 if (string.IsNullOrEmpty(setting))
                 {
                     return string.Empty;
+                }
+
+                return setting;
+            }
+        }
+
+        /// <summary>
+        /// Gets specified path to the directory containing Edge Chrominum Driver, name of driver msedgedriver.exe. Default value "C:\Temp\Drivers".
+        /// </summary>
+        public static string PathToEdgeChrominumDriverDirectory
+        {
+            get
+            {
+                string setting = null;
+#if net47 || net45
+                setting = ConfigurationManager.AppSettings["PathToEdgeChrominumDriverDirectory"];
+#endif
+#if netcoreapp3_1
+                setting = Builder["appSettings:PathToEdgeChrominumDriverDirectory"];
+#endif
+                Logger.Trace(CultureInfo.CurrentCulture, "Gets the PathToEdgeChrominumDriverDirectory from settings file '{0}'", setting);
+                if (string.IsNullOrEmpty(setting))
+                {
+                    return @"C:\Temp\Drivers";
                 }
 
                 return setting;

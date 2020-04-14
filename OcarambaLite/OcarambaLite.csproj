@@ -8,7 +8,7 @@
     <Copyright>Copyright ©  2015</Copyright>
     <Company>Objectivity Bespoke Software Specialists</Company>
     <PackageProjectUrl>https://github.com/ObjectivityLtd/Ocaramba</PackageProjectUrl>
-    <PackageIconUrl>https://raw.githubusercontent.com/ObjectivityLtd/Ocaramba/master/icon.png</PackageIconUrl>
+    <PackageIcon>icon.png</PackageIcon>
     <RepositoryUrl>https://github.com/ObjectivityLtd/Ocaramba</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReleaseNotes>You can find info about this release here: https://github.com/ObjectivityLtd/Ocaramba/releases</PackageReleaseNotes>
@@ -16,13 +16,18 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Objectivity Bespoke Software Specialists</Authors>
     <PackageTags>selenium webdriver testautomation tests Ocaramba</PackageTags>
-	 <CodeAnalysisRuleSet>fxcop-sonarqube.tests.ruleset</CodeAnalysisRuleSet>
-
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <CodeAnalysisRuleSet>fxcop-sonarqube.tests.ruleset</CodeAnalysisRuleSet>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="..\icon.png" Pack="true" PackagePath="\"/>
     <PackageReference Include="NLog" Version="4.6.6" />
     <PackageReference Include="Selenium.Support" Version="3.141.0" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All"/>
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
