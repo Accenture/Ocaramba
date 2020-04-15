@@ -37,7 +37,7 @@ namespace Ocaramba.Extensions
     /// </summary>
     public static class WebDriverExtensions
     {
-#if net47
+#if net47 || net45
         private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
 #endif
 #if netcoreapp3_1

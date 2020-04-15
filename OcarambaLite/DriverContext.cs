@@ -23,6 +23,7 @@
 namespace Ocaramba
 {
     using System;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Collections.Specialized;
     using System.Configuration;
@@ -47,7 +48,7 @@ namespace Ocaramba
     [SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable", Justification = "Driver is disposed on test end")]
     public partial class DriverContext
     {
-#if net47
+#if net47 || net45
         private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
 #endif
 #if netcoreapp3_1
@@ -62,6 +63,10 @@ namespace Ocaramba
         /// The handle to driver.
         /// </value>
         private IWebDriver driver;
+
+        private EdgeDriverService serviceEdge;
+
+        private ChromeDriverService serviceChrome;
 
         private TestLogger logTest;
 
@@ -523,7 +528,10 @@ namespace Ocaramba
                         this.ChromeOptions.BinaryLocation = BaseConfiguration.ChromeBrowserExecutableLocation;
                     }
 
-                    this.driver = string.IsNullOrEmpty(this.GetBrowserDriversFolder(BaseConfiguration.PathToChromeDriverDirectory)) ? new ChromeDriver(this.SetDriverOptions(this.ChromeOptions)) : new ChromeDriver(this.GetBrowserDriversFolder(BaseConfiguration.PathToChromeDriverDirectory), this.SetDriverOptions(this.ChromeOptions));
+                    this.serviceChrome = ChromeDriverService.CreateDefaultService();
+                    this.serviceChrome.LogPath = BaseConfiguration.PathToChromeDriverLog;
+                    this.serviceChrome.EnableVerboseLogging = BaseConfiguration.EnableVerboseLoggingChrome;
+                    this.driver = string.IsNullOrEmpty(this.GetBrowserDriversFolder(BaseConfiguration.PathToChromeDriverDirectory)) ? new ChromeDriver(this.serviceChrome, this.SetDriverOptions(this.ChromeOptions)) : new ChromeDriver(this.GetBrowserDriversFolder(BaseConfiguration.PathToChromeDriverDirectory), this.SetDriverOptions(this.ChromeOptions));
                     break;
                 case BrowserType.Safari:
                     this.driver = new SafariDriver(this.SetDriverOptions(this.SafariOptions));
@@ -534,6 +542,27 @@ namespace Ocaramba
                     break;
                 case BrowserType.Edge:
                     this.driver = new EdgeDriver(EdgeDriverService.CreateDefaultService(this.GetBrowserDriversFolder(BaseConfiguration.PathToEdgeDriverDirectory), "MicrosoftWebDriver.exe", 52296), this.SetDriverOptions(this.EdgeOptions));
+                    break;
+                case BrowserType.EdgeChrominium:
+                    this.serviceEdge = EdgeDriverService.CreateDefaultService(BaseConfiguration.PathToEdgeChrominumDriverDirectory, @"msedgedriver.exe");
+                    this.serviceEdge.UseVerboseLogging = true;
+                    this.serviceEdge.UseSpecCompliantProtocol = true;
+
+                    this.serviceEdge.Start();
+
+#pragma warning disable CS0618 // Type or member is obsolete
+                    var caps = new DesiredCapabilities(new Dictionary<string, object>()
+                    {
+                        {
+                            "ms:edgeOptions", new Dictionary<string, object>()
+                         {
+                            { "binary", BaseConfiguration.EdgeChrominiumBrowserExecutableLocation },
+                         }
+                        },
+                    });
+#pragma warning restore CS0618 // Type or member is obsolete
+
+                    this.driver = new RemoteWebDriver(this.serviceEdge.ServiceUrl, caps);
                     break;
                 default:
                     throw new NotSupportedException(
@@ -567,6 +596,16 @@ namespace Ocaramba
         /// </summary>
         public void Stop()
         {
+            if (this.serviceEdge != null)
+            {
+                this.serviceEdge.Dispose();
+            }
+
+            if (this.serviceChrome != null)
+            {
+                this.serviceChrome.Dispose();
+            }
+
             if (this.driver != null)
             {
                 this.driver.Quit();

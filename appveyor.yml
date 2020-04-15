@@ -50,7 +50,7 @@ dotnet_csproj:
 environment:
   APPVEYOR_RDP_PASSWORD:
     secure: 3OiDAcFLoSt3UCnmEU+XgM2d541PAqCNJAPqoiRqwRI=
-  frameworkVersion: 3.2.6
+  frameworkVersion: 3.2.9
   seleniumGridVersion: selenium-server-standalone-3.141.59.jar
   seleniumGridUrl: http://selenium-release.storage.googleapis.com/3.141/selenium-server-standalone-3.141.59.jar
   latestNugetUrl: https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
@@ -77,8 +77,6 @@ environment:
 
 before_build:
  - ps: >-
-    dotnet tool install coveralls.net --tool-path packages
-    
     dotnet --version
     
     .\removeSubprojectFromSolution.ps1
@@ -106,7 +104,7 @@ for:
          .\ExecutingTestsOnWindows.ps1
 
   artifacts:
-  - path: .\**\Ocaramba*.nupkg
+  - path: .\**\Ocaramba*.*upkg
     name: NuGet
   deploy:
   - provider: NuGet
