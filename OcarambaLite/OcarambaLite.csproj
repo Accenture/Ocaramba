@@ -2,7 +2,6 @@
 
   <PropertyGroup>
 	<TargetFrameworks>netcoreapp3.1</TargetFrameworks>
-	<DebugType>full</DebugType>
 	<TargetFrameworks Condition="'$(OS)' != 'Unix'">net45;net472;netcoreapp3.1</TargetFrameworks>
     <Description>Framework to automate tests using Selenium WebDriver (lighten version without selenium drivers)</Description>
     <Copyright>Copyright ©  2015</Copyright>
