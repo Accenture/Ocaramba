@@ -20,7 +20,7 @@
 //     SOFTWARE.
 // </license>
 
-#if net47
+#if net47 || net45
 namespace Ocaramba.Helpers
 {
     using System;

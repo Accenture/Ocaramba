@@ -10,6 +10,20 @@ echo '********************************************NUnit tests*******************
  
 & nunit3-console.exe .\Ocaramba.Tests.Angular\bin\Debug\net472\Ocaramba.Tests.Angular.dll .\Ocaramba.Tests.NUnit\bin\Debug\net472\Ocaramba.Tests.NUnit.dll .\Ocaramba.UnitTests\bin\Debug\net472\Ocaramba.UnitTests.dll
 
+$output = $env:APPVEYOR_BUILD_FOLDER + "\Ocaramba.Tests.NUnit\bin\Debug\net45\"
+
+.\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.NUnit\bin\Debug\net45\" "Ocaramba.Tests.NUnit.dll.config" "//appSettings" "browser|PathToEdgeChrominumDriverDirectory" "EdgeChrominium|$output" $true
+
+echo "Downloading edgeChrominiumDriver from:" $env:edgeChrominiumDriverUrl
+        
+$outputZip = $env:APPVEYOR_BUILD_FOLDER + "\Ocaramba.Tests.NUnit\bin\Debug\net45\edgedriver_win64.zip"	
+		
+(New-Object System.Net.WebClient).DownloadFile($env:edgeChrominiumDriverUrl, $outputZip)
+
+Expand-Archive -LiteralPath $outputZip -DestinationPath $output  -Force
+
+& nunit3-console.exe .\Ocaramba.Tests.NUnit\bin\Debug\net45\Ocaramba.Tests.NUnit.dll --where "Category==BasicNUnit"
+
 echo '********************************************MsTest tests********************************************'
 
 & dotnet.exe test --configuration Debug --filter TestCategory!=TakingScreehShots --no-build --no-restore Ocaramba.Tests.MsTest -maxCpuCount --test-adapter-path:. --logger:Appveyor

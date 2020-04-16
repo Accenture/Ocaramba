@@ -77,7 +77,7 @@ namespace Ocaramba
 #if netcoreapp3_1
                 setting = Builder["appSettings:browser"];
 #endif
-#if net47
+#if net47 || net45
                 setting = ConfigurationManager.AppSettings["browser"];
 
 #endif
@@ -101,7 +101,7 @@ namespace Ocaramba
             {
                 bool supportedBrowser = false;
                 string setting = null;
-#if net47
+#if net47 || net45
                 setting = ConfigurationManager.AppSettings["DriverCapabilities"];
 #endif
 #if netcoreapp3_1
@@ -128,7 +128,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
+#if net47 || net45
                 setting = ConfigurationManager.AppSettings["PathToFirefoxProfile"];
 #elif netcoreapp3_1
                 setting = Builder["appSettings:PathToFirefoxProfile"];
@@ -151,7 +151,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
+#if net47 || net45
                 setting = ConfigurationManager.AppSettings["protocol"];
 #endif
 #if  netcoreapp3_1
@@ -170,7 +170,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
+#if net47 || net45
                 setting = ConfigurationManager.AppSettings["host"];
 #endif
 #if  netcoreapp3_1
@@ -189,7 +189,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
+#if net47 || net45
                 setting = ConfigurationManager.AppSettings["url"];
 #endif
 #if netcoreapp3_1
@@ -208,7 +208,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
+#if net47 || net45
                 setting = ConfigurationManager.AppSettings["proxy"];
 #endif
 #if netcoreapp3_1
@@ -227,7 +227,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
+#if net47 || net45
                 setting = ConfigurationManager.AppSettings["httpProxy"];
 #endif
 #if netcoreapp3_1
@@ -246,7 +246,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
+#if net47 || net45
                 setting = ConfigurationManager.AppSettings["ftpProxy"];
 #endif
 #if netcoreapp3_1
@@ -265,7 +265,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
+#if net47 || net45
                 setting = ConfigurationManager.AppSettings["sslProxy"];
 #endif
 #if netcoreapp3_1
@@ -284,7 +284,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
+#if net47 || net45
                 setting = ConfigurationManager.AppSettings["socksproxy"];
 #endif
 #if netcoreapp3_1
@@ -303,7 +303,7 @@ namespace Ocaramba
             get
             {
                 int setting = 0;
-#if net47
+#if net47 || net45
                 setting = int.Parse(ConfigurationManager.AppSettings["remoteTimeout"], CultureInfo.InvariantCulture);
 #endif
 #if netcoreapp3_1
@@ -322,7 +322,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
+#if net47 || net45
                 setting = ConfigurationManager.AppSettings["username"];
 #endif
 #if netcoreapp3_1
@@ -341,7 +341,7 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
+#if net47 || net45
                 setting = ConfigurationManager.AppSettings["password"];
 #endif
 #if netcoreapp3_1

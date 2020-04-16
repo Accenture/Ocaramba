@@ -205,7 +205,7 @@ namespace Ocaramba
                 NameValueCollection firefoxPreferences = new NameValueCollection();
 
                 NameValueCollection firefoxExtensions = new NameValueCollection();
-#if net47
+#if net47 || net45
                 firefoxPreferences = ConfigurationManager.GetSection("FirefoxPreferences") as NameValueCollection;
                 firefoxExtensions = ConfigurationManager.GetSection("FirefoxExtensions") as NameValueCollection;
 #endif
@@ -313,7 +313,7 @@ namespace Ocaramba
                 NameValueCollection chromePreferences = null;
                 NameValueCollection chromeExtensions = null;
                 NameValueCollection chromeArguments = null;
-#if net47
+#if net47 || net45
                 chromePreferences = ConfigurationManager.GetSection("ChromePreferences") as NameValueCollection;
                 chromeExtensions = ConfigurationManager.GetSection("ChromeExtensions") as NameValueCollection;
                 chromeArguments = ConfigurationManager.GetSection("ChromeArguments") as NameValueCollection;
@@ -416,7 +416,7 @@ namespace Ocaramba
             {
                 // retrieving settings from config file
                 NameValueCollection internetExplorerPreferences = null;
-#if net47
+#if net47 || net45
                 internetExplorerPreferences = ConfigurationManager.GetSection("InternetExplorerPreferences") as NameValueCollection;
 #endif
 #if netcoreapp3_1
@@ -616,7 +616,7 @@ namespace Ocaramba
         {
             NameValueCollection driverCapabilitiesConf = new NameValueCollection();
             NameValueCollection settings = new NameValueCollection();
-#if net47
+#if net47 || net45
             driverCapabilitiesConf = ConfigurationManager.GetSection("DriverCapabilities") as NameValueCollection;
             settings = ConfigurationManager.GetSection("environments/" + this.CrossBrowserEnvironment) as NameValueCollection;
 #endif

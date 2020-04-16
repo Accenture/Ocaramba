@@ -2,7 +2,7 @@
 
   <PropertyGroup>
 	<TargetFrameworks>netcoreapp3.1</TargetFrameworks>
-	<TargetFrameworks Condition="'$(OS)' != 'Unix'">net472;netcoreapp3.1</TargetFrameworks>
+	<TargetFrameworks Condition="'$(OS)' != 'Unix'">net45;net472;netcoreapp3.1</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,10 +12,9 @@
     <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="80.0.3987.10600" />
     <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.26.0" />
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'net472'">
+  <ItemGroup Condition="'$(TargetFramework)' == 'net472' Or '$(TargetFramework)' == 'net45'">
 	<Reference Include="System.Configuration" />
  </ItemGroup>
 
@@ -36,6 +35,10 @@
   <PropertyGroup Condition="'$(TargetFramework)'=='net472'">
     <DefineConstants>net47</DefineConstants>
 </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='net45'">
+    <DefineConstants>net45</DefineConstants>
+  </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net472|AnyCPU'">
     <CodeAnalysisRuleSet>..\Ocaramba\fxcop-sonarqube.tests.ruleset</CodeAnalysisRuleSet>
