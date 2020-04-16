@@ -32,7 +32,7 @@ namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
 
     public class SecureFileDownloadPage : ProjectPageBase
     {
-#if net47
+#if net47 || net45
         private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
 #endif
 #if netcoreapp3_1
@@ -57,10 +57,10 @@ namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
             if (BaseConfiguration.TestBrowser == BrowserType.Firefox
                 || BaseConfiguration.TestBrowser == BrowserType.Chrome)
             {
-            this.Driver.GetElement(this.fileLink.Format(fileName)).Click();
-            FilesHelper.WaitForFileOfGivenName(5, fileName, this.DriverContext.DownloadFolder);
-            FileInfo file = FilesHelper.GetLastFile(this.DriverContext.DownloadFolder, FileType.Txt);
-            FilesHelper.RenameFile(file.Name, newName, this.DriverContext.DownloadFolder, FileType.Csv);
+                this.Driver.GetElement(this.fileLink.Format(fileName)).Click();
+                FilesHelper.WaitForFileOfGivenName(5, fileName, this.DriverContext.DownloadFolder);
+                FileInfo file = FilesHelper.GetLastFile(this.DriverContext.DownloadFolder, FileType.Txt);
+                FilesHelper.RenameFile(file.Name, newName, this.DriverContext.DownloadFolder, FileType.Csv);
             }
             else
             {
