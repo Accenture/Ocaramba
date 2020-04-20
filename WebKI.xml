@@ -21,7 +21,9 @@
   </HelpKINode>
   <HelpKINode Title="BaseConfiguration.ChromeBrowserExecutableLocation property" Url="html/8287c416-f51b-9a1e-40ab-f8f301a68eb1.htm" />
   <HelpKINode Title="BaseConfiguration.DownloadFolder property" Url="html/927dd788-be62-cd3c-5548-a72075523167.htm" />
+  <HelpKINode Title="BaseConfiguration.EdgeChrominiumBrowserExecutableLocation property" Url="html/10ada60f-e379-033e-0ba0-6f42b4dd643f.htm" />
   <HelpKINode Title="BaseConfiguration.EnableEventFiringWebDriver property" Url="html/b66b9c03-3ed1-078e-c794-b8305a1c5a86.htm" />
+  <HelpKINode Title="BaseConfiguration.EnableVerboseLoggingChrome property" Url="html/08c9c0d5-c9a2-2d9c-d99f-871556ca4aee.htm" />
   <HelpKINode Title="BaseConfiguration.FirefoxBrowserExecutableLocation property" Url="html/980ae751-66d1-9ccb-b7cf-37e83bd8f6e8.htm" />
   <HelpKINode Title="BaseConfiguration.FirefoxUseLegacyImplementation property" Url="html/0e237274-191f-879c-c30b-fde82fe54f20.htm" />
   <HelpKINode Title="BaseConfiguration.FtpProxy property" Url="html/b160ca43-55e4-592e-37a5-c599f9d23c69.htm" />
@@ -39,6 +41,8 @@
   <HelpKINode Title="BaseConfiguration.PageSourceFolder property" Url="html/feaf88f7-1c7b-b405-0bed-871e6845d87c.htm" />
   <HelpKINode Title="BaseConfiguration.Password property" Url="html/a7407759-83b5-7d3c-2868-4d8ffed62bb3.htm" />
   <HelpKINode Title="BaseConfiguration.PathToChromeDriverDirectory property" Url="html/bff29a7e-6a10-20ab-307e-23bf420e127a.htm" />
+  <HelpKINode Title="BaseConfiguration.PathToChromeDriverLog property" Url="html/488e2bf8-84ea-4b4d-a6ad-0f577e8964b7.htm" />
+  <HelpKINode Title="BaseConfiguration.PathToEdgeChrominumDriverDirectory property" Url="html/c1ff6efd-33ac-939d-906e-90e9238fcb69.htm" />
   <HelpKINode Title="BaseConfiguration.PathToEdgeDriverDirectory property" Url="html/48105b81-f664-ee0b-7629-81583aabcc3a.htm" />
   <HelpKINode Title="BaseConfiguration.PathToFirefoxDriverDirectory property" Url="html/2c27dbff-1883-4794-b73b-80b463cec573.htm" />
   <HelpKINode Title="BaseConfiguration.PathToFirefoxProfile property" Url="html/80bbe5ec-1bf0-cb07-111e-f918f9360c31.htm" />
@@ -169,6 +173,8 @@
   <HelpKINode Title="DriversCustomSettings.SetAngularSynchronizationForDriver method" Url="html/d4af1dc3-313a-6f8b-c06c-e2d1eb04b8ea.htm" />
   <HelpKINode Title="Duration property" Url="html/b0a0be75-570d-ca98-e8fd-6e8b05219bac.htm" />
   <HelpKINode Title="Edge enumeration member" Url="html/e3630b09-627d-e606-a2b8-1b57cb5d17a1.htm" />
+  <HelpKINode Title="EdgeChrominium enumeration member" Url="html/e3630b09-627d-e606-a2b8-1b57cb5d17a1.htm" />
+  <HelpKINode Title="EdgeChrominiumBrowserExecutableLocation property" Url="html/10ada60f-e379-033e-0ba0-6f42b4dd643f.htm" />
   <HelpKINode Title="ElementCssSelector property" Url="html/beaf5f2d-c8ec-fb35-4c0e-83de6bb261c8.htm" />
   <HelpKINode Title="ElementLocator class">
     <HelpKINode Title="ElementLocator Class" Url="html/e1bab6ad-5cd1-1691-acdd-f644012168ec.htm" />
@@ -181,6 +187,7 @@
   <HelpKINode Title="ElementLocator.Kind property" Url="html/1ac297df-ba1b-ceb5-2fa7-7d6dfe0b1078.htm" />
   <HelpKINode Title="ElementLocator.Value property" Url="html/0bbb1940-f8c8-5a83-c03c-e6c57b8a29c4.htm" />
   <HelpKINode Title="EnableEventFiringWebDriver property" Url="html/b66b9c03-3ed1-078e-c794-b8305a1c5a86.htm" />
+  <HelpKINode Title="EnableVerboseLoggingChrome property" Url="html/08c9c0d5-c9a2-2d9c-d99f-871556ca4aee.htm" />
   <HelpKINode Title="Error method" Url="html/3f92afdb-e6cb-fdce-2cb4-ee74b32f0856.htm" />
   <HelpKINode Title="ErrorDetail class">
     <HelpKINode Title="ErrorDetail Class" Url="html/643864b4-739e-5ad9-9237-71b6bbacebb3.htm" />
@@ -426,6 +433,8 @@
   <HelpKINode Title="PartialLinkText enumeration member" Url="html/ec36fc3e-e193-ab06-4851-8d92537c820c.htm" />
   <HelpKINode Title="Password property" Url="html/a7407759-83b5-7d3c-2868-4d8ffed62bb3.htm" />
   <HelpKINode Title="PathToChromeDriverDirectory property" Url="html/bff29a7e-6a10-20ab-307e-23bf420e127a.htm" />
+  <HelpKINode Title="PathToChromeDriverLog property" Url="html/488e2bf8-84ea-4b4d-a6ad-0f577e8964b7.htm" />
+  <HelpKINode Title="PathToEdgeChrominumDriverDirectory property" Url="html/c1ff6efd-33ac-939d-906e-90e9238fcb69.htm" />
   <HelpKINode Title="PathToEdgeDriverDirectory property" Url="html/48105b81-f664-ee0b-7629-81583aabcc3a.htm" />
   <HelpKINode Title="PathToFirefoxDriverDirectory property" Url="html/2c27dbff-1883-4794-b73b-80b463cec573.htm" />
   <HelpKINode Title="PathToFirefoxProfile property" Url="html/80bbe5ec-1bf0-cb07-111e-f918f9360c31.htm" />
