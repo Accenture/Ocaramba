@@ -408,17 +408,5 @@ namespace Ocaramba
                 }
             }
         }
-
-        private string GetBrowserDriversFolder(string folder)
-        {
-#if netcoreapp3_1
-            if (string.IsNullOrEmpty(folder))
-            {
-                folder = this.CurrentDirectory;
-                Logger.Trace(CultureInfo.CurrentCulture, "Path to the directory containing driver {0}", folder);
-            }
-#endif
-            return folder;
-        }
     }
 }

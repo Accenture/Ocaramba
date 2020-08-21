@@ -515,12 +515,18 @@ namespace Ocaramba
                     {
                         this.FirefoxOptions.BrowserExecutableLocation = BaseConfiguration.FirefoxBrowserExecutableLocation;
                     }
-
-                    this.driver = string.IsNullOrEmpty(this.GetBrowserDriversFolder(BaseConfiguration.PathToFirefoxDriverDirectory)) ? new FirefoxDriver(this.SetDriverOptions(this.FirefoxOptions)) : new FirefoxDriver(this.GetBrowserDriversFolder(BaseConfiguration.PathToFirefoxDriverDirectory), this.SetDriverOptions(this.FirefoxOptions));
+#if netcoreapp3_1
+                    FirefoxDriverService serviceFirefox = FirefoxDriverService.CreateDefaultService();
+                    serviceFirefox.Host = "::1";
+                    this.driver = string.IsNullOrEmpty(BaseConfiguration.PathToFirefoxDriverDirectory) ? new FirefoxDriver(serviceFirefox, this.SetDriverOptions(this.FirefoxOptions)) : new FirefoxDriver(BaseConfiguration.PathToFirefoxDriverDirectory, this.SetDriverOptions(this.FirefoxOptions));
+#endif
+#if net47 || net45
+                    this.driver = string.IsNullOrEmpty(BaseConfiguration.PathToFirefoxDriverDirectory) ? new FirefoxDriver(this.SetDriverOptions(this.FirefoxOptions)) : new FirefoxDriver(BaseConfiguration.PathToFirefoxDriverDirectory, this.SetDriverOptions(this.FirefoxOptions));
+#endif
                     break;
                 case BrowserType.InternetExplorer:
                 case BrowserType.IE:
-                    this.driver = string.IsNullOrEmpty(this.GetBrowserDriversFolder(BaseConfiguration.PathToInternetExplorerDriverDirectory)) ? new InternetExplorerDriver(this.SetDriverOptions(this.InternetExplorerOptions)) : new InternetExplorerDriver(this.GetBrowserDriversFolder(this.GetBrowserDriversFolder(BaseConfiguration.PathToInternetExplorerDriverDirectory)), this.SetDriverOptions(this.InternetExplorerOptions));
+                    this.driver = string.IsNullOrEmpty(BaseConfiguration.PathToInternetExplorerDriverDirectory) ? new InternetExplorerDriver(this.SetDriverOptions(this.InternetExplorerOptions)) : new InternetExplorerDriver(BaseConfiguration.PathToInternetExplorerDriverDirectory, this.SetDriverOptions(this.InternetExplorerOptions));
                     break;
                 case BrowserType.Chrome:
                     if (!string.IsNullOrEmpty(BaseConfiguration.ChromeBrowserExecutableLocation))
@@ -531,7 +537,7 @@ namespace Ocaramba
                     this.serviceChrome = ChromeDriverService.CreateDefaultService();
                     this.serviceChrome.LogPath = BaseConfiguration.PathToChromeDriverLog;
                     this.serviceChrome.EnableVerboseLogging = BaseConfiguration.EnableVerboseLoggingChrome;
-                    this.driver = string.IsNullOrEmpty(this.GetBrowserDriversFolder(BaseConfiguration.PathToChromeDriverDirectory)) ? new ChromeDriver(this.serviceChrome, this.SetDriverOptions(this.ChromeOptions)) : new ChromeDriver(this.GetBrowserDriversFolder(BaseConfiguration.PathToChromeDriverDirectory), this.SetDriverOptions(this.ChromeOptions));
+                    this.driver = string.IsNullOrEmpty(BaseConfiguration.PathToChromeDriverDirectory) ? new ChromeDriver(this.serviceChrome, this.SetDriverOptions(this.ChromeOptions)) : new ChromeDriver(BaseConfiguration.PathToChromeDriverDirectory, this.SetDriverOptions(this.ChromeOptions));
                     break;
                 case BrowserType.Safari:
                     this.driver = new SafariDriver(this.SetDriverOptions(this.SafariOptions));
@@ -541,7 +547,7 @@ namespace Ocaramba
                     this.SetupRemoteWebDriver();
                     break;
                 case BrowserType.Edge:
-                    this.driver = new EdgeDriver(EdgeDriverService.CreateDefaultService(this.GetBrowserDriversFolder(BaseConfiguration.PathToEdgeDriverDirectory), "MicrosoftWebDriver.exe", 52296), this.SetDriverOptions(this.EdgeOptions));
+                    this.driver = new EdgeDriver(EdgeDriverService.CreateDefaultService(BaseConfiguration.PathToEdgeDriverDirectory, "MicrosoftWebDriver.exe", 52296), this.SetDriverOptions(this.EdgeOptions));
                     break;
                 case BrowserType.EdgeChrominium:
                     this.serviceEdge = EdgeDriverService.CreateDefaultService(BaseConfiguration.PathToEdgeChrominumDriverDirectory, @"msedgedriver.exe");
