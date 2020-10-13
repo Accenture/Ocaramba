@@ -10,14 +10,14 @@
     <PackageReference Include="NLog" Version="4.6.6" />
     <PackageReference Include="NUnit" Version="3.12.0" />
     <PackageReference Include="NUnit.Runners" Version="3.11.1" />
-    <PackageReference Include="NUnit3TestAdapter" Version="3.16.1">
+    <PackageReference Include="NUnit3TestAdapter" Version="3.17.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
 	<PackageReference Include="Selenium.Support" Version="3.141.0" />
     <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
-    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="83.0.4103.3900" />
-    <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.26.0" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="85.0.4183.8700" />
+    <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.27.0" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net472'">
@@ -28,7 +28,7 @@
  </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
     <PackageReference Include="NLog.Web.AspNetCore" Version="4.8.4" />
   </ItemGroup>
 
