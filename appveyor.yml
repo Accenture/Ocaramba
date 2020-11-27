@@ -24,14 +24,18 @@ init:
       echo 'seleniumGridVersion' $env:seleniumGridVersion 
 
       echo 'seleniumGridUrl' $env:seleniumGridUrl 
+      
       if ($isWindows) {
+      
           echo Windows: 
 
           (Get-WmiObject -class Win32_OperatingSystem).Caption
+          
           [System.Environment]::OSVersion.Version   
       }
+
       
-      (Get-Content 'Ocaramba.sln' -raw) -replace [regex]('.*?' + 'Documentation' + ('.*?\r\n' * (5 + 1))) | set-content  'Ocaramba.sln'
+      Get-Host | Select-Object Version
       
       echo 'ASPNETCORE_ENVIRONMENT' $env:ASPNETCORE_ENVIRONMENT
 
@@ -48,9 +52,11 @@ environment:
   APPVEYOR_RDP_PASSWORD:
     secure: 3OiDAcFLoSt3UCnmEU+XgM2d541PAqCNJAPqoiRqwRI=
   frameworkVersion: 3.2.6
+  frameworkVersion: 3.2.9
   seleniumGridVersion: selenium-server-standalone-3.141.59.jar
   seleniumGridUrl: http://selenium-release.storage.googleapis.com/3.141/selenium-server-standalone-3.141.59.jar
   latestNugetUrl: https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
+  edgeChrominiumDriverUrl: https://msedgedriver.azureedge.net/80.0.361.66/edgedriver_win64.zip
   GithubAuthToken:
     secure: x9uTnOFLUnZ6DiVhpBBxIJxij33Sz9uAIe+qef6M3sj9+J/AUmpfBmiGgqRabTqs
   COVERALLS_REPO_TOKEN:
@@ -71,20 +77,35 @@ environment:
   matrix:
     #- APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
      # ASPNETCORE_ENVIRONMENT: Linux
+    - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
+      ASPNETCORE_ENVIRONMENT: Linux
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
       ASPNETCORE_ENVIRONMENT: Windows
+
 before_build:
  - dotnet tool install coveralls.net --tool-path packages
  - dotnet --version
  - dotnet restore
+ - ps: >-
+    dotnet --version
+    
+    .\removeSubprojectFromSolution.ps1
+    
+    dotnet restore
+   
+build:
+  project: Ocaramba.sln
+  verbosity: minimal
 
 build_script:
  - dotnet build --configuration Release /verbosity:minimal "Ocaramba.sln"
 after_build:
  - ps: >-
+  - ps: >-
       if ($isWindows) {
         #.\PublishingApiDocumentationOn_gh-pages.ps1
         }
+
 for:
 -
   matrix:
@@ -95,10 +116,12 @@ for:
     - ps: >-
          .\ExecutingTestsOnDocker.ps1
     
+    - ps: >-   
          .\ExecutingTestsOnWindows.ps1
 
   artifacts:
   - path: .\**\Ocaramba*.nupkg
+  - path: .\**\Ocaramba*.*upkg
     name: NuGet
   deploy:
   - provider: NuGet
@@ -116,6 +139,17 @@ for:
   #test_script:
    # - ps: >-
     #    ./ExecutingTestsOnLinux.ps1 
+-
+  matrix:
+    only:
+      - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
+ 
+ 
+  test_script:
+    - ps: >-
+        ./ExecutingTestsOnLinux.ps1 
+        
+        ./ExecutingTestsOnDocker.ps1
 on_finish:
 - ps: >-
     if ($isWindows) {

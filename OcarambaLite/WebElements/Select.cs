@@ -36,7 +36,7 @@ namespace Ocaramba.WebElements
     /// </summary>
     public class Select : RemoteWebElement
     {
-#if net47
+#if net47 || net45
         private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
 #endif
 #if netcoreapp3_1

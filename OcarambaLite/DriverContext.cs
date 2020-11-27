@@ -23,6 +23,7 @@
 namespace Ocaramba
 {
     using System;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Collections.Specialized;
     using System.Configuration;
@@ -47,7 +48,7 @@ namespace Ocaramba
     [SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable", Justification = "Driver is disposed on test end")]
     public partial class DriverContext
     {
-#if net47
+#if net47 || net45
         private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
 #endif
 #if netcoreapp3_1
@@ -62,6 +63,10 @@ namespace Ocaramba
         /// The handle to driver.
         /// </value>
         private IWebDriver driver;
+
+        private EdgeDriverService serviceEdge;
+
+        private ChromeDriverService serviceChrome;
 
         private TestLogger logTest;
 
@@ -200,7 +205,7 @@ namespace Ocaramba
                 NameValueCollection firefoxPreferences = new NameValueCollection();
 
                 NameValueCollection firefoxExtensions = new NameValueCollection();
-#if net47
+#if net47 || net45
                 firefoxPreferences = ConfigurationManager.GetSection("FirefoxPreferences") as NameValueCollection;
                 firefoxExtensions = ConfigurationManager.GetSection("FirefoxExtensions") as NameValueCollection;
 #endif
@@ -308,7 +313,7 @@ namespace Ocaramba
                 NameValueCollection chromePreferences = null;
                 NameValueCollection chromeExtensions = null;
                 NameValueCollection chromeArguments = null;
-#if net47
+#if net47 || net45
                 chromePreferences = ConfigurationManager.GetSection("ChromePreferences") as NameValueCollection;
                 chromeExtensions = ConfigurationManager.GetSection("ChromeExtensions") as NameValueCollection;
                 chromeArguments = ConfigurationManager.GetSection("ChromeArguments") as NameValueCollection;
@@ -411,7 +416,7 @@ namespace Ocaramba
             {
                 // retrieving settings from config file
                 NameValueCollection internetExplorerPreferences = null;
-#if net47
+#if net47 || net45
                 internetExplorerPreferences = ConfigurationManager.GetSection("InternetExplorerPreferences") as NameValueCollection;
 #endif
 #if netcoreapp3_1
@@ -510,12 +515,18 @@ namespace Ocaramba
                     {
                         this.FirefoxOptions.BrowserExecutableLocation = BaseConfiguration.FirefoxBrowserExecutableLocation;
                     }
-
-                    this.driver = string.IsNullOrEmpty(this.GetBrowserDriversFolder(BaseConfiguration.PathToFirefoxDriverDirectory)) ? new FirefoxDriver(this.SetDriverOptions(this.FirefoxOptions)) : new FirefoxDriver(this.GetBrowserDriversFolder(BaseConfiguration.PathToFirefoxDriverDirectory), this.SetDriverOptions(this.FirefoxOptions));
+#if netcoreapp3_1
+                    FirefoxDriverService serviceFirefox = FirefoxDriverService.CreateDefaultService();
+                    serviceFirefox.Host = "::1";
+                    this.driver = string.IsNullOrEmpty(BaseConfiguration.PathToFirefoxDriverDirectory) ? new FirefoxDriver(serviceFirefox, this.SetDriverOptions(this.FirefoxOptions)) : new FirefoxDriver(BaseConfiguration.PathToFirefoxDriverDirectory, this.SetDriverOptions(this.FirefoxOptions));
+#endif
+#if net47 || net45
+                    this.driver = string.IsNullOrEmpty(BaseConfiguration.PathToFirefoxDriverDirectory) ? new FirefoxDriver(this.SetDriverOptions(this.FirefoxOptions)) : new FirefoxDriver(BaseConfiguration.PathToFirefoxDriverDirectory, this.SetDriverOptions(this.FirefoxOptions));
+#endif
                     break;
                 case BrowserType.InternetExplorer:
                 case BrowserType.IE:
-                    this.driver = string.IsNullOrEmpty(this.GetBrowserDriversFolder(BaseConfiguration.PathToInternetExplorerDriverDirectory)) ? new InternetExplorerDriver(this.SetDriverOptions(this.InternetExplorerOptions)) : new InternetExplorerDriver(this.GetBrowserDriversFolder(this.GetBrowserDriversFolder(BaseConfiguration.PathToInternetExplorerDriverDirectory)), this.SetDriverOptions(this.InternetExplorerOptions));
+                    this.driver = string.IsNullOrEmpty(BaseConfiguration.PathToInternetExplorerDriverDirectory) ? new InternetExplorerDriver(this.SetDriverOptions(this.InternetExplorerOptions)) : new InternetExplorerDriver(BaseConfiguration.PathToInternetExplorerDriverDirectory, this.SetDriverOptions(this.InternetExplorerOptions));
                     break;
                 case BrowserType.Chrome:
                     if (!string.IsNullOrEmpty(BaseConfiguration.ChromeBrowserExecutableLocation))
@@ -523,7 +534,10 @@ namespace Ocaramba
                         this.ChromeOptions.BinaryLocation = BaseConfiguration.ChromeBrowserExecutableLocation;
                     }
 
-                    this.driver = string.IsNullOrEmpty(this.GetBrowserDriversFolder(BaseConfiguration.PathToChromeDriverDirectory)) ? new ChromeDriver(this.SetDriverOptions(this.ChromeOptions)) : new ChromeDriver(this.GetBrowserDriversFolder(BaseConfiguration.PathToChromeDriverDirectory), this.SetDriverOptions(this.ChromeOptions));
+                    this.serviceChrome = ChromeDriverService.CreateDefaultService();
+                    this.serviceChrome.LogPath = BaseConfiguration.PathToChromeDriverLog;
+                    this.serviceChrome.EnableVerboseLogging = BaseConfiguration.EnableVerboseLoggingChrome;
+                    this.driver = string.IsNullOrEmpty(BaseConfiguration.PathToChromeDriverDirectory) ? new ChromeDriver(this.serviceChrome, this.SetDriverOptions(this.ChromeOptions)) : new ChromeDriver(BaseConfiguration.PathToChromeDriverDirectory, this.SetDriverOptions(this.ChromeOptions));
                     break;
                 case BrowserType.Safari:
                     this.driver = new SafariDriver(this.SetDriverOptions(this.SafariOptions));
@@ -533,7 +547,28 @@ namespace Ocaramba
                     this.SetupRemoteWebDriver();
                     break;
                 case BrowserType.Edge:
-                    this.driver = new EdgeDriver(EdgeDriverService.CreateDefaultService(this.GetBrowserDriversFolder(BaseConfiguration.PathToEdgeDriverDirectory), "MicrosoftWebDriver.exe", 52296), this.SetDriverOptions(this.EdgeOptions));
+                    this.driver = new EdgeDriver(EdgeDriverService.CreateDefaultService(BaseConfiguration.PathToEdgeDriverDirectory, "MicrosoftWebDriver.exe", 52296), this.SetDriverOptions(this.EdgeOptions));
+                    break;
+                case BrowserType.EdgeChrominium:
+                    this.serviceEdge = EdgeDriverService.CreateDefaultService(BaseConfiguration.PathToEdgeChrominumDriverDirectory, @"msedgedriver.exe");
+                    this.serviceEdge.UseVerboseLogging = true;
+                    this.serviceEdge.UseSpecCompliantProtocol = true;
+
+                    this.serviceEdge.Start();
+
+#pragma warning disable CS0618 // Type or member is obsolete
+                    var caps = new DesiredCapabilities(new Dictionary<string, object>()
+                    {
+                        {
+                            "ms:edgeOptions", new Dictionary<string, object>()
+                         {
+                            { "binary", BaseConfiguration.EdgeChrominiumBrowserExecutableLocation },
+                         }
+                        },
+                    });
+#pragma warning restore CS0618 // Type or member is obsolete
+
+                    this.driver = new RemoteWebDriver(this.serviceEdge.ServiceUrl, caps);
                     break;
                 default:
                     throw new NotSupportedException(
@@ -567,6 +602,16 @@ namespace Ocaramba
         /// </summary>
         public void Stop()
         {
+            if (this.serviceEdge != null)
+            {
+                this.serviceEdge.Dispose();
+            }
+
+            if (this.serviceChrome != null)
+            {
+                this.serviceChrome.Dispose();
+            }
+
             if (this.driver != null)
             {
                 this.driver.Quit();
@@ -577,7 +622,7 @@ namespace Ocaramba
         {
             NameValueCollection driverCapabilitiesConf = new NameValueCollection();
             NameValueCollection settings = new NameValueCollection();
-#if net47
+#if net47 || net45
             driverCapabilitiesConf = ConfigurationManager.GetSection("DriverCapabilities") as NameValueCollection;
             settings = ConfigurationManager.GetSection("environments/" + this.CrossBrowserEnvironment) as NameValueCollection;
 #endif

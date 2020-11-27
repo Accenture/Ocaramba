@@ -40,7 +40,7 @@ namespace Ocaramba.Tests.PageObjects.PageObjects.Kendo
             capColorKendoDropDownListLocator = new ElementLocator(Locator.CssSelector, "span[aria-owns='color_listbox']"),
             capSizeKendoDropDownListLocator = new ElementLocator(Locator.CssSelector, "span[aria-owns='size_listbox']");
 
-        private readonly Uri url = new Uri("http://demos.telerik.com/jsp-ui/dropdownlist/index");
+        private readonly Uri url = new Uri("http://demos.telerik.com/jsp-ui/dropdownlist/basic-usage");
 
         public KendoDropDownListPage(DriverContext driverContext)
             : base(driverContext)

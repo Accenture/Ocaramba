@@ -5,7 +5,6 @@
 
 [![Ocaramba Templates](https://img.shields.io/badge/get-Ocaramba_Templates-green.svg?color=4BC21F)](https://marketplace.visualstudio.com/items?itemName=Ocaramba.Ocaramba1)
 [![Build status](https://ci.appveyor.com/api/projects/status/p8p3bndotyknv7rk?svg=true)](https://ci.appveyor.com/project/ObjectivityAdminsTeam/ocaramba)
-[![Coverage Status](https://img.shields.io/coveralls/github/ObjectivityLtd/Ocaramba.svg)](https://coveralls.io/github/ObjectivityLtd/Ocaramba)
 [![AppVeyor tests](https://img.shields.io/appveyor/tests/ObjectivityAdminsTeam/ocaramba.svg)](https://ci.appveyor.com/project/ObjectivityAdminsTeam/ocaramba/build/tests)
 [![BrowserStack Status](https://www.browserstack.com/automate/badge.svg?badge_key=TmV0eWg4WElNTVBER2M2YWZSYVc2UjFCS2tJWjV4TUEwOFFpb0FXdGZVND0tLTJqRkVubVhnQWd2NHlISkFnMlBsM0E9PQ==--f3a8ace2e27c1ddf49487dd172e969dcacef037d)](https://www.browserstack.com/automate/public-build/TmV0eWg4WElNTVBER2M2YWZSYVc2UjFCS2tJWjV4TUEwOFFpb0FXdGZVND0tLTJqRkVubVhnQWd2NHlISkFnMlBsM0E9PQ==--f3a8ace2e27c1ddf49487dd172e969dcacef037d)
 [![Build Status](https://saucelabs.com/buildstatus/jraczek)](https://saucelabs.com/beta/builds/8de234710c7c46f1b5d0e9c9438e5d06)
@@ -16,14 +15,14 @@ Test Framework was designed in Objectivity to propose common way how people shou
 Project API documentation can be found here: http://objectivityltd.github.io/Ocaramba<br /><br />
 
 **It provides following features:**
-- .NET Framework 4.7.2 and .NET Core 3.1 supported
+- .NET Frameworks 4.5, 4.7.2 and .NET Core 3.1 supported
 - Cross-Platform  Windows, Linux and macOS systems supported
 - Ready for parallel tests execution, more details [here](https://github.com/ObjectivityLtd/Ocaramba/wiki/Selenium%20Parallel%20tests%20execution)
 - Possibility to use MSTest, NUnit or xUNIT framework
 - Specflow ready
 - Written entirely in C#
 - Contains example projects how to use it
-- Allows to use Chrome, Firefox, Safari or Internet Explorer
+- Allows to use Chrome, Firefox,Edge Chrominium, Safari or Internet Explorer
 - Overrides browser profile preferences, pass arguments to browsers,  installs browser extensions, loading default firefox profile, Headless mode, more details [here](https://github.com/ObjectivityLtd/Ocaramba/wiki/Override-browser-profile-preferences,-install-browser-extensions,-Headless-mode)
 - Extends Webdriver by additional methods like JavaScriptClick, WaitForAjax, WaitForAngular, etc., more details [here](http://objectivityltd.github.io/Ocaramba/html/d51aa97e-08b5-c0b6-6987-c10545a64ebd.htm)
 - Automatically waits when locating element for specified time and conditions,GetElement method instead of Selenium FindElement, more details [here](http://objectivityltd.github.io/Ocaramba/html/3c09ca99-f931-c6c9-98fc-194eff6500ff.htm)
@@ -38,7 +37,7 @@ Project API documentation can be found here: http://objectivityltd.github.io/Oca
 - Logging with NLog, EventFiringWebDriver logs, more details [here](https://github.com/ObjectivityLtd/Ocaramba/wiki/Logging)
 - Files downloading (Firefox, Chrome), more details [here](https://github.com/ObjectivityLtd/Ocaramba/wiki/Downloading%20files)
 - Possibility to send [SQL](http://objectivityltd.github.io/Ocaramba/html/730c92c7-831a-4449-3938-16540cf259b8.htm) or [MDX](http://objectivityltd.github.io/Ocaramba/html/7de319df-06eb-1c79-8c2d-9c60aaf3ab85.htm) queries (only .NET Framework)
-- Possibility of debugging framework installed from nuget package, more details [here](https://github.com/ObjectivityLtd/Ocaramba/wiki/Debugging-Test.Automation-framework).
+- Possibility of debugging framework installed from nuget package with [sourcelink](https://github.com/dotnet/sourcelink), more details [here](https://github.com/ObjectivityLtd/Ocaramba/wiki/Debugging-Test.Automation-framework).
 - AngularJS support, more details [here](https://github.com/ObjectivityLtd/Ocaramba/wiki/Angular-support).
 - Possiblity to check for JavaScript errors from browser, more details [here](https://github.com/ObjectivityLtd/Ocaramba/wiki/Verifying-Javascript-Errors-from-browser).
 - Instruction how to run Ocaramba tests with Docker container, more details [here](https://github.com/ObjectivityLtd/Ocaramba/wiki/Run-Ocaramba-tests-with-Docker-container).

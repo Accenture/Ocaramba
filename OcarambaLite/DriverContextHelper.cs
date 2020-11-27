@@ -116,7 +116,7 @@ namespace Ocaramba
             if (BaseConfiguration.FullDesktopScreenShotEnabled)
             {
                 // to do TakeScreenShot
-#if net47
+#if net47 || net45
                 filePaths.Add(TakeScreenShot.Save(TakeScreenShot.DoIt(), ImageFormat.Png, this.ScreenShotFolder, this.TestTitle));
 #endif
             }
@@ -205,7 +205,7 @@ namespace Ocaramba
         private FirefoxOptions AddFirefoxArguments(FirefoxOptions option)
         {
             NameValueCollection firefoxArguments = new NameValueCollection();
-#if net47
+#if net47 || net45
             firefoxArguments = ConfigurationManager.GetSection("FirefoxArguments") as NameValueCollection;
 #endif
 #if netcoreapp3_1
@@ -407,18 +407,6 @@ namespace Ocaramba
                         break;
                 }
             }
-        }
-
-        private string GetBrowserDriversFolder(string folder)
-        {
-#if netcoreapp3_1
-            if (string.IsNullOrEmpty(folder))
-            {
-                folder = this.CurrentDirectory;
-                Logger.Trace(CultureInfo.CurrentCulture, "Path to the directory containing driver {0}", folder);
-            }
-#endif
-            return folder;
         }
     }
 }

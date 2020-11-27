@@ -63,6 +63,11 @@ namespace Ocaramba
         Edge,
 
         /// <summary>
+        /// Edge Chrominium driver
+        /// </summary>
+        EdgeChrominium,
+
+        /// <summary>
         /// CloudProvider parallel cross browsers testing
         /// </summary>
         CloudProvider,
