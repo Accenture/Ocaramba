@@ -110,3 +110,27 @@ jobs:
       inputs:
         testResultsFormat: 'VSTest'
         testResultsFiles: '**/Ocaramba.Tests.*.xml'
+
+- job: RunTestsOnLinux
+  pool:
+    vmImage: 'ubuntu-latest'
+  steps:
+    - task: CmdLine@2
+      inputs:
+        script: |	
+          ls	
+          	
+          export ASPNETCORE_ENVIRONMENT=Linux	
+          	
+          echo $ASPNETCORE_ENVIRONMENT	
+          	
+          sudo apt-get install google-chrome-stable	
+          	
+          sed -i '/Features/,+1 d' ./Ocaramba.sln	
+          	
+          sed -i '/Documentation/,+5 d' ./Ocaramba.sln	
+    - script: dotnet build ./Ocaramba.sln --configuration $(buildConfiguration)
+
+    - task: PowerShell@2
+      inputs:
+        filePath: './ExecutingTestsOnLinuxAzure.ps1'
