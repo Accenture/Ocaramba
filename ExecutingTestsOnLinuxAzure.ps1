@@ -8,6 +8,8 @@ echo '********************************************Executing tests***************
         
 echo '********************************************netcoreapp3 tests********************************************'
 
+export ASPNETCORE_ENVIRONMENT=Linux
+echo $ASPNETCORE_ENVIRONMENT	
 dotnet vstest ./Ocaramba.Tests.NUnit/bin/Release/netcoreapp3.1/Ocaramba.Tests.NUnit.dll `
 			  /TestCaseFilter:"(TestCategory!=TakingScreehShots)" `
 	          --logger:"trx;LogFileName=Ocaramba.Tests.netcoreapp.xml"
