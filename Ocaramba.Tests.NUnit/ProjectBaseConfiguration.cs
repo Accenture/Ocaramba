@@ -20,6 +20,10 @@
 //     SOFTWARE.
 // </license>
 
+using System;
+using System.Globalization;
+using NLog;
+
 namespace Ocaramba.Tests.NUnit
 {
     using System.Configuration;
@@ -43,6 +47,22 @@ namespace Ocaramba.Tests.NUnit
 #if net47 || net45
         private static readonly string CurrentDirectory = TestContext.CurrentContext.TestDirectory;
 #endif
+#if net47 || net45
+        private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
+#endif
+#if netcoreapp3_1
+        public static readonly string Env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+
+        /// <summary>
+        /// Getting appsettings.json file.
+        /// </summary>
+        public static readonly IConfigurationRoot Builder = new ConfigurationBuilder()
+            .AddJsonFile("appsettings.json", true, true)
+            .AddJsonFile($"appsettings.{Env}.json", true, true)
+            .Build();
+
+        private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+#endif
 
         /// <summary>
         /// Gets the data driven file.
@@ -61,6 +81,7 @@ namespace Ocaramba.Tests.NUnit
 #if netcoreapp3_1
                 setting = BaseConfiguration.Builder["appSettings:DataDrivenFile"];
 #endif
+                Logger.Debug(CultureInfo.CurrentCulture, "DataDrivenFile value from settings file '{0}'", setting);
                 if (BaseConfiguration.UseCurrentDirectory)
                 {
                     return Path.Combine(CurrentDirectory + FilesHelper.Separator + setting);
@@ -87,6 +108,7 @@ namespace Ocaramba.Tests.NUnit
 #if netcoreapp3_1
                 setting = BaseConfiguration.Builder["appSettings:DataDrivenFileXlsx"];
 #endif
+                Logger.Debug(CultureInfo.CurrentCulture, "DataDrivenFileXlsx value from settings file '{0}'", setting);
                 if (BaseConfiguration.UseCurrentDirectory)
                 {
                     return Path.Combine(CurrentDirectory + FilesHelper.Separator + setting);
@@ -113,6 +135,7 @@ namespace Ocaramba.Tests.NUnit
 #if netcoreapp3_1
                 setting = BaseConfiguration.Builder["appSettings:DataDrivenFileCSV"];
 #endif
+                Logger.Debug(CultureInfo.CurrentCulture, "DataDrivenFileCSV value from settings file '{0}'", setting);
                 if (BaseConfiguration.UseCurrentDirectory)
                 {
                     return Path.Combine(CurrentDirectory + FilesHelper.Separator + setting);
@@ -136,6 +159,7 @@ namespace Ocaramba.Tests.NUnit
 #if netcoreapp3_1
                 setting = BaseConfiguration.Builder["appSettings:DownloadFolder"];
 #endif
+                Logger.Debug(CultureInfo.CurrentCulture, "DownloadFolder value from settings file '{0}'", setting);
                 return FilesHelper.GetFolder(setting, CurrentDirectory);
             }
         }
