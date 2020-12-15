@@ -134,3 +134,8 @@ jobs:
     - task: PowerShell@2
       inputs:
         filePath: './ExecutingTestsOnLinuxAzure.ps1'
+
+    - task: PublishTestResults@2
+      inputs:
+        testResultsFormat: 'VSTest'
+        testResultsFiles: '**/Ocaramba.Tests.*.xml'
