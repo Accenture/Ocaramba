@@ -1,0 +1,10 @@
+version: '3.7'
+services:
+  ocaramba_selenium_container:
+    image: ocaramba/selenium
+    build: 
+       context: .
+       dockerfile: Dockerfilebuild
+    container_name: ocaramba_selenium
+    stdin_open: true
+    tty: true
