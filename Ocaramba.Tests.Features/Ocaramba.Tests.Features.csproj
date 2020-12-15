@@ -8,7 +8,7 @@
   <ItemGroup>
     <PackageReference Include="Appveyor.TestLogger" Version="2.0.0" />
     <PackageReference Include="BoDi" Version="1.4.1" />
-    <PackageReference Include="NLog" Version="4.6.6" />
+    <PackageReference Include="NLog" Version="4.7.6" />
     <PackageReference Include="NUnit" Version="3.12.0" />
     <PackageReference Include="NUnit.Runners" Version="3.11.1" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.17.0">
@@ -18,14 +18,14 @@
     <PackageReference Include="Selenium.Support" Version="3.141.0" />
     <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="87.0.4280.8800" />
-    <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.27.0" />
+    <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.28.0" />
     <PackageReference Include="SpecFlow" Version="3.1.89" />
     <PackageReference Include="SpecFlow.NUnit" Version="3.1.89" />
     <PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="3.1.89" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.3" />
     <PackageReference Include="NLog.Web.AspNetCore" Version="4.8.4" />
   </ItemGroup>
 
