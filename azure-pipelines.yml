@@ -36,11 +36,11 @@ jobs:
         targetType: 'inline'
         script: '(Get-Content ''Ocaramba.sln'' -raw) -replace [regex](''.*?'' + ''Documentation'' + (''.*?\r\n'' * (5 + 1))) | set-content  ''Ocaramba.sln'''
 
+    - task: NuGetToolInstaller@1
+
     - task: NuGetCommand@2
       inputs:
         restoreSolution: '$(solution)'
-
-    - task: NuGetToolInstaller@1
 
     - task: Assembly-Info-NetCore@2
       inputs:
