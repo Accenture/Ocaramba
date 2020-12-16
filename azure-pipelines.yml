@@ -82,11 +82,6 @@ jobs:
         artifact: 'OcarambaLite$(frameworkVersion)'
         publishLocation: 'pipeline'
 
-    - task: DownloadPipelineArtifact@2
-      inputs:
-        buildType: 'current'
-        artifactName: 'OcarambaBuild'
-        targetPath: '$(Pipeline.Workspace)'
         
 - job: RunTestsOnDocker
   pool:
@@ -114,6 +109,12 @@ jobs:
   pool:
     vmImage: 'windows-latest'
   steps:
+
+    - task: DownloadPipelineArtifact@2
+      inputs:
+        buildType: 'current'
+        artifactName: 'OcarambaBuild'
+        targetPath: '$(Pipeline.Workspace)'
 
     - task: PowerShell@2
       inputs:
