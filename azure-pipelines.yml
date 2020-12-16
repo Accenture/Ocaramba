@@ -104,7 +104,43 @@ jobs:
         testResultsFormat: 'VSTest'
         testResultsFiles: '**/Ocaramba.Tests.*.xml'
 
-- job: RunTestsOnWindows
+- job: RunTestsOnWindows1
+  dependsOn:
+  - BuildTestsOnWindows
+  pool:
+    vmImage: 'windows-latest'
+  steps:
+
+    - task: VisualStudioTestPlatformInstaller@1
+      inputs:
+        packageFeedSelector: 'nugetOrg'
+        versionSelector: 'latestStable'
+
+    - task: DownloadPipelineArtifact@2
+      inputs:
+        buildType: 'current'
+        artifactName: 'OcarambaBuild'
+        targetPath: '$(Pipeline.Workspace)'
+    - task: PowerShell@2
+      inputs:
+        targetType: 'inline'
+        script: 'ls'
+    - task: PowerShell@2
+      inputs:
+        filePath: './ExecutingTestsOnWindowsAzure1.ps1'
+        
+    - task: PublishTestResults@2
+      inputs:
+        testResultsFormat: 'VSTest'
+        testResultsFiles: '**/Ocaramba.Tests.*.xml'
+        
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: './'
+        artifact: 'OcarambaBuild'
+        publishLocation: 'pipeline'
+
+- job: RunTestsOnWindows2
   dependsOn:
   - BuildTestsOnWindows
   pool:
@@ -124,7 +160,7 @@ jobs:
 
     - task: PowerShell@2
       inputs:
-        filePath: './ExecutingTestsOnWindowsAzure.ps1'
+        filePath: './ExecutingTestsOnWindowsAzure2.ps1'
         
     - task: PublishTestResults@2
       inputs:
