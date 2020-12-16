@@ -134,11 +134,6 @@ jobs:
         testResultsFormat: 'VSTest'
         testResultsFiles: '**/Ocaramba.Tests.*.xml'
         
-    - task: PublishPipelineArtifact@1
-      inputs:
-        targetPath: './'
-        artifact: 'OcarambaBuild'
-        publishLocation: 'pipeline'
 
 - job: RunTestsOnWindows2
   dependsOn:
@@ -166,12 +161,6 @@ jobs:
       inputs:
         testResultsFormat: 'VSTest'
         testResultsFiles: '**/Ocaramba.Tests.*.xml'
-        
-    - task: PublishPipelineArtifact@1
-      inputs:
-        targetPath: './'
-        artifact: 'OcarambaBuild'
-        publishLocation: 'pipeline'
 
 - job: RunTestsOnLinux
   pool:
