@@ -33,7 +33,6 @@ init:
           
           [System.Environment]::OSVersion.Version   
       }
-
       
       Get-Host | Select-Object Version
       
@@ -58,8 +57,6 @@ environment:
   edgeChrominiumDriverUrl: https://msedgedriver.azureedge.net/80.0.361.66/edgedriver_win64.zip
   GithubAuthToken:
     secure: x9uTnOFLUnZ6DiVhpBBxIJxij33Sz9uAIe+qef6M3sj9+J/AUmpfBmiGgqRabTqs
-  COVERALLS_REPO_TOKEN:
-    secure: Yd9hDsMjSmlbmrQ+cqjfLM0qTYWJzAoEnNz4CmWAB6NXr97qwxZ/2ckgnSk8mziE
   browserstackuser:
     secure: 0JGVozUyY/OYBuPZk2Pbgw==
   browserstackkey:
@@ -74,17 +71,12 @@ environment:
     secure: D6Yy/Ng4/rfzsqQmnzwmTtN/Knee3c8/NtI1HgKke2ybA/6WpqP38RQfSHENYECa
   APPVEYOR_SSH_KEY: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDs6YyI6KMFUrjDkdvXZqRAFJzAU2WZo6wyodL+xl4erDJuVMnKPXfyec8OnFiCXElk2HDXorz/G6+5jo3j4u2dB5J3WXZtnUR/ZhQmoRi45tOgZP2pWUpWYwAVbNd4dvrqJRCEiRILSAxgZkDSbdRQP7ijp9ekb1E0s5YDr6VY+xSdY75u1QcOgO7dF84hsrbZnhjHIXYwSqffFuD/Occba6HaGMEz2EbD5ZxDZKdjMGobzWds2y6U7mMWBazeGG7iXx4JjlIDSfkOUgejHy669lwCDc+faFFGHRww9Tb2clhLq5MDYvH8oKr/mowi2TtvuLsO6aHaxlodq5O0hQgH appveyor
   matrix:
-    #- APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
-     # ASPNETCORE_ENVIRONMENT: Linux
     - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
       ASPNETCORE_ENVIRONMENT: Linux
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
       ASPNETCORE_ENVIRONMENT: Windows
 
 before_build:
- - dotnet tool install coveralls.net --tool-path packages
- - dotnet --version
- - dotnet restore
  - ps: >-
     dotnet --version
     
@@ -96,10 +88,7 @@ build:
   project: Ocaramba.sln
   verbosity: minimal
 
-build_script:
- - dotnet build --configuration Release /verbosity:minimal "Ocaramba.sln"
 after_build:
- - ps: >-
   - ps: >-
       if ($isWindows) {
         #.\PublishingApiDocumentationOn_gh-pages.ps1
@@ -112,14 +101,10 @@ for:
       - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
       
   test_script:
-    - ps: >-
-         .\ExecutingTestsOnDocker.ps1
-    
     - ps: >-   
          .\ExecutingTestsOnWindows.ps1
 
   artifacts:
-  - path: .\**\Ocaramba*.nupkg
   - path: .\**\Ocaramba*.*upkg
     name: NuGet
   deploy:
@@ -130,14 +115,6 @@ for:
       branch: master
       appveyor_repo_tag: true
 
-#-
- # matrix:
-  #  only:
-   #   - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
-      
-  #test_script:
-   # - ps: >-
-    #    ./ExecutingTestsOnLinux.ps1 
 -
   matrix:
     only:
