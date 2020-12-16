@@ -18,7 +18,7 @@ variables:
   frameworkVersion: '3.2.6'
 
 jobs:
-- job: RunTestsOnWindows
+- job: BuildTestsOnWindows
   pool:
     vmImage: 'windows-latest'
   steps:
@@ -69,15 +69,6 @@ jobs:
         msbuildArgs: '/v:minimal'
         platform: '$(buildPlatform)'
         configuration: '$(buildConfiguration)'
-
-    - task: PowerShell@2
-      inputs:
-        filePath: './ExecutingTestsOnWindowsAzure.ps1'
-        
-    - task: PublishTestResults@2
-      inputs:
-        testResultsFormat: 'VSTest'
-        testResultsFiles: '**/Ocaramba.Tests.*.xml'
         
     - task: PublishPipelineArtifact@1
       inputs:
@@ -91,11 +82,11 @@ jobs:
         artifact: 'OcarambaLite$(frameworkVersion)'
         publishLocation: 'pipeline'
 
-    - task: PublishPipelineArtifact@1
+    - task: DownloadPipelineArtifact@2
       inputs:
-        targetPath: './'
-        artifact: 'OcarambaBuild'
-        publishLocation: 'pipeline'
+        buildType: 'current'
+        artifactName: 'OcarambaBuild'
+        targetPath: '$(Pipeline.Workspace)'
         
 - job: RunTestsOnDocker
   pool:
@@ -116,6 +107,27 @@ jobs:
       inputs:
         testResultsFormat: 'VSTest'
         testResultsFiles: '**/Ocaramba.Tests.*.xml'
+
+- job: RunTestsOnWindows
+  pool:
+    vmImage: 'windows-latest'
+  steps:
+
+
+    - task: PowerShell@2
+      inputs:
+        filePath: './ExecutingTestsOnWindowsAzure.ps1'
+        
+    - task: PublishTestResults@2
+      inputs:
+        testResultsFormat: 'VSTest'
+        testResultsFiles: '**/Ocaramba.Tests.*.xml'
+        
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: './'
+        artifact: 'OcarambaBuild'
+        publishLocation: 'pipeline'
 
 - job: RunTestsOnLinux
   pool:
