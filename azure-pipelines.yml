@@ -71,15 +71,14 @@ jobs:
         artifact: 'Ocaramba$(frameworkVersion)'
         publishLocation: 'pipeline'
 
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'OcarambaBuild'
+        publishLocation: 'Container'
     - task: PublishPipelineArtifact@1
       inputs:
-        targetPath: './OcarambaLite/bin/Release/OcarambaLite.$(frameworkVersion).nupkg'
-        artifact: 'OcarambaLite$(frameworkVersion)'
-        publishLocation: 'pipeline'
-
-    - task: PublishPipelineArtifact@1
-      inputs:
-        targetPath: './'
+        targetPath: '$(Pipeline.Workspace)'
         artifact: 'OcarambaBuild'
         publishLocation: 'pipeline'
 
@@ -98,7 +97,7 @@ jobs:
     - task: PowerShell@2
       inputs:
         filePath: './ExecutingTestsOnDockerAzure.ps1'
-        
+
     - task: PublishTestResults@2
       inputs:
         testResultsFormat: 'VSTest'
@@ -110,18 +109,17 @@ jobs:
   pool:
     vmImage: 'windows-latest'
   steps:
-
+    - checkout: none
     - task: VisualStudioTestPlatformInstaller@1
       inputs:
         packageFeedSelector: 'nugetOrg'
         versionSelector: 'latestStable'
-
-    - task: DownloadPipelineArtifact@2
+    - task: DownloadBuildArtifacts@0
       inputs:
         buildType: 'current'
+        downloadType: 'single'
         artifactName: 'OcarambaBuild'
-        itemPattern: '**/bin/Release/**'
-        targetPath: '$(Pipeline.Workspace)'
+        downloadPath: '$(System.ArtifactsDirectory)'
  
     - task: PowerShell@2
       inputs:
@@ -144,17 +142,18 @@ jobs:
   pool:
     vmImage: 'windows-latest'
   steps:
-
+    - checkout: none
     - task: VisualStudioTestPlatformInstaller@1
       inputs:
         packageFeedSelector: 'nugetOrg'
         versionSelector: 'latestStable'
 
-    - task: DownloadPipelineArtifact@2
+    - task: DownloadBuildArtifacts@0
       inputs:
         buildType: 'current'
+        downloadType: 'single'
         artifactName: 'OcarambaBuild'
-        targetPath: '$(Pipeline.Workspace)'
+        downloadPath: '$(System.ArtifactsDirectory)'
 
     - task: PowerShell@2
       inputs:
