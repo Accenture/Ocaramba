@@ -121,10 +121,15 @@ jobs:
         buildType: 'current'
         artifactName: 'OcarambaBuild'
         targetPath: '$(Pipeline.Workspace)'
+
     - task: PowerShell@2
       inputs:
         targetType: 'inline'
-        script: 'ls'
+        script: |
+          # Write your PowerShell commands here.
+          
+          cd .\Ocaramba.Tests.Angular\bin\Release\netcoreapp3.1\
+          ls
     - task: PowerShell@2
       inputs:
         filePath: './ExecutingTestsOnWindowsAzure1.ps1'
