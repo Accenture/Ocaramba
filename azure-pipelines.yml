@@ -76,11 +76,11 @@ jobs:
         targetPath: './OcarambaLite/bin/Release/OcarambaLite.$(frameworkVersion).nupkg'
         artifact: 'OcarambaLite$(frameworkVersion)'
         publishLocation: 'pipeline'
-    - task: PublishBuildArtifacts@1
+    - task: PublishPipelineArtifact@1
       inputs:
-        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-        ArtifactName: 'OcarambaBuild'
-        publishLocation: 'Container'
+        targetPath: '$(Pipeline.Workspace)'
+        artifact: 'OcarambaBuild'
+        publishLocation: 'pipeline'
         
 - job: RunTestsOnDocker
   pool:
@@ -113,18 +113,12 @@ jobs:
       inputs:
         packageFeedSelector: 'nugetOrg'
         versionSelector: 'latestStable'
-    - task: DownloadBuildArtifacts@0
+
+    - task: DownloadPipelineArtifact@2
       inputs:
         buildType: 'current'
-        downloadType: 'single'
         artifactName: 'OcarambaBuild'
-        downloadPath: '$(System.ArtifactsDirectory)'
- 
-    - task: CopyFiles@2
-      inputs:
-        SourceFolder: '$(System.ArtifactsDirectory)'
-        Contents: '**'
-        TargetFolder: '$(Pipeline.Workspace)'
+        targetPath: '$(Pipeline.Workspace)'
     - task: PowerShell@2
       inputs:
         targetType: 'inline'
@@ -151,18 +145,11 @@ jobs:
       inputs:
         packageFeedSelector: 'nugetOrg'
         versionSelector: 'latestStable'
-
-    - task: DownloadBuildArtifacts@0
+    - task: DownloadPipelineArtifact@2
       inputs:
         buildType: 'current'
-        downloadType: 'single'
         artifactName: 'OcarambaBuild'
-        downloadPath: '$(System.ArtifactsDirectory)'
-    - task: CopyFiles@2
-      inputs:
-        SourceFolder: '$(System.ArtifactsDirectory)'
-        Contents: '**'
-        TargetFolder: '$(Pipeline.Workspace)'
+        targetPath: '$(Pipeline.Workspace)'
     - task: PowerShell@2
       inputs:
         filePath: './ExecutingTestsOnWindowsAzure2.ps1'
