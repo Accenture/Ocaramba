@@ -58,17 +58,17 @@ jobs:
         FailOnWarning: false
         DisableTelemetry: false
 
+    - task: VisualStudioTestPlatformInstaller@1
+      inputs:
+        packageFeedSelector: 'nugetOrg'
+        versionSelector: 'latestStable'
+
     - task: VSBuild@1
       inputs:
         solution: '$(solution)'
         msbuildArgs: '/v:minimal'
         platform: '$(buildPlatform)'
         configuration: '$(buildConfiguration)'
-
-    - task: VisualStudioTestPlatformInstaller@1
-      inputs:
-        packageFeedSelector: 'nugetOrg'
-        versionSelector: 'latestStable'
 
     - task: PowerShell@2
       inputs:
@@ -89,6 +89,12 @@ jobs:
       inputs:
         targetPath: './OcarambaLite/bin/Release/OcarambaLite.$(frameworkVersion).nupkg'
         artifact: 'OcarambaLite$(frameworkVersion)'
+        publishLocation: 'pipeline'
+
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: './'
+        artifact: 'OcarambaBuild'
         publishLocation: 'pipeline'
         
 - job: RunTestsOnDocker
