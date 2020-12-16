@@ -5,7 +5,7 @@ $vstest = (Resolve-Path "D:\a\_temp\VsTest\Microsoft.TestPlatform*\tools\net*\Co
 
 & $vstest .\Ocaramba.Tests.Angular\bin\Debug\net472\Ocaramba.Tests.Angular.dll `
 			.\Ocaramba.Tests.NUnit\bin\Debug\net472\Ocaramba.Tests.NUnit.dll `
-			.\Ocaramba.UnitTests\bin\Debug\net472\Ocaramba.UnitTests.dll 
+			.\Ocaramba.UnitTests\bin\Debug\net472\Ocaramba.UnitTests.dll `
 			--logger:"trx;LogFileName=Ocaramba.Tests.net4.xml"
 
 
