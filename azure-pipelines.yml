@@ -82,6 +82,12 @@ jobs:
         artifact: 'OcarambaLite$(frameworkVersion)'
         publishLocation: 'pipeline'
 
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: './'
+        artifact: 'OcarambaBuild'
+        publishLocation: 'pipeline'
+
         
 - job: RunTestsOnDocker
   pool:
