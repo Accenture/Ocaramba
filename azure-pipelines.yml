@@ -109,10 +109,11 @@ jobs:
         testResultsFiles: '**/Ocaramba.Tests.*.xml'
 
 - job: RunTestsOnWindows
+  dependsOn:
+  - BuildTestsOnWindows
   pool:
     vmImage: 'windows-latest'
   steps:
-
 
     - task: PowerShell@2
       inputs:
