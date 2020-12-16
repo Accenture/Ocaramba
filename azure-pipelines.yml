@@ -159,6 +159,42 @@ jobs:
         testResultsFormat: 'VSTest'
         testResultsFiles: '**/Ocaramba.Tests.*.xml'
 
+- job: RunTestsOnWindows3
+  dependsOn:
+  - BuildTestsOnWindows
+  pool:
+    vmImage: 'windows-latest'
+  steps:
+    - checkout: none
+    - task: VisualStudioTestPlatformInstaller@1
+      inputs:
+        packageFeedSelector: 'nugetOrg'
+        versionSelector: 'latestStable'
+
+    - task: DownloadPipelineArtifact@2
+      inputs:
+        buildType: 'current'
+        artifactName: 'OcarambaBuild'
+        targetPath: '$(Pipeline.Workspace)'
+    - task: VSTest@2
+      inputs:
+        testSelector: 'testAssemblies'
+        testAssemblyVer2: |
+          **\net472\Ocaramba.Tests.Angular.dll
+          **\net472\Ocaramba.Tests.NUnit.dll
+          **\net472\Ocaramba.UnitTests.dll
+          **\net45\Ocaramba.Tests.NUnit.dll
+          **\net472\Ocaramba.Tests.Xunit.dll
+          **\net45\Ocaramba.Tests.Features.dll 
+        searchFolder: '$(System.DefaultWorkingDirectory)'
+        runInParallel: true
+    - task: VSTest@2
+      inputs:
+        testSelector: 'testAssemblies'
+        testAssemblyVer2: '**\net472\Ocaramba.Tests.MsTest.dll'
+        searchFolder: '$(System.DefaultWorkingDirectory)'
+        runSettingsFile: '.\Ocaramba.Tests.MsTest\bin\Debug\net472\Runsettings.runsettings'
+        runInParallel: true
 - job: RunTestsOnLinux
   pool:
     vmImage: 'ubuntu-latest'
