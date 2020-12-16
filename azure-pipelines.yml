@@ -126,10 +126,7 @@ jobs:
       inputs:
         targetType: 'inline'
         script: |
-          # Write your PowerShell commands here.
-          
-          cd .\Ocaramba.Tests.Angular\bin\Release\netcoreapp3.1\
-          ls
+          Get-ChildItem .\  -Recurse
     - task: PowerShell@2
       inputs:
         filePath: './ExecutingTestsOnWindowsAzure1.ps1'
