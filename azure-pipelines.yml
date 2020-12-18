@@ -7,6 +7,11 @@ trigger:
   branches:
     include:
     - '*'
+    exclude:
+    - gh-pages
+  paths:
+    exclude:
+    - README.md
   tags:
     include:
     - '*'
