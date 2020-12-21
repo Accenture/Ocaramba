@@ -15,6 +15,13 @@ trigger:
   tags:
     include:
     - '*'
+schedules:
+  - cron: "0 18 * * 0"
+    displayName: Weekly build
+    branches:
+      include:
+      - master
+    always: true 
 
 variables:
   solution: '**/*.sln'
