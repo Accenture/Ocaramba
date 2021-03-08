@@ -2,15 +2,9 @@ echo '********************************************Update Chrome*****************
 $LocalTempDir = ".\"; $ChromeInstaller = "ChromeInstaller.msi"; 
 (new-object    System.Net.WebClient).DownloadFile('https://dl.google.com/tag/s/appguid%3D%7B8A69D345-D564-463C-AFF1-A69D9E530F96%7D%26iid%3D%7B16597FD3-D497-42D5-1E46-04BAE17B6B4E%7D%26lang%3Den%26browser%3D5%26usagestats%3D0%26appname%3DGoogle%2520Chrome%26needsadmin%3Dprefers%26ap%3Dx64-stable-statsdef_1%26installdataindex%3Dempty/chrome/install/ChromeStandaloneSetup64.exe', "$LocalTempDir\$ChromeInstaller");
 
-$list = 
-@(
-    "/I `"$LocalTempDir\$ChromeInstaller`"",                     # Install this MSI
-    "/QN",                             # Quietly, without a UI
-    "/L*V `".\ChromeIns.log`""     # Verbose output to this log
-)
-$p = Start-Process -FilePath "msiexec" -ArgumentList $list -Wait 
-
-rm "$LocalTempDir\$ChromeInstaller" -ErrorAction SilentlyContinue -Verbose
+msiexec /q /i $LocalTempDir\$ChromeInstaller
+start-sleep -Seconds 120
+rm "$LocalTempDir\$ChromeInstaller"  -Verbose
 
 echo '********************************************Executing tests********************************************'
         
