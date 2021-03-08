@@ -50,7 +50,7 @@ dotnet_csproj:
 environment:
   APPVEYOR_RDP_PASSWORD:
     secure: 3OiDAcFLoSt3UCnmEU+XgM2d541PAqCNJAPqoiRqwRI=
-  frameworkVersion: 3.2.9
+  frameworkVersion: 3.2.12
   seleniumGridVersion: selenium-server-standalone-3.141.59.jar
   seleniumGridUrl: http://selenium-release.storage.googleapis.com/3.141/selenium-server-standalone-3.141.59.jar
   latestNugetUrl: https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
@@ -110,7 +110,7 @@ for:
   deploy:
   - provider: NuGet
     api_key:
-           secure: mZ24caKv/iXJvY54hwng51oLcxZ2/hnJRVW7Ab+bsyahcFYFVqNrhuxW3iT9I2S7
+           secure: fy/aj/thLLZq2GjazhALRKDN/ey+yJ/BvWE7wLXO+5e86uUE/79fwVP29psaUTIm
     on:
       branch: master
       appveyor_repo_tag: true
