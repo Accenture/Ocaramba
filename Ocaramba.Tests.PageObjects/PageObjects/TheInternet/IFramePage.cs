@@ -39,7 +39,7 @@ namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
 #endif
 
         private readonly ElementLocator
-            menu = new ElementLocator(Locator.Id, "mceu_14-body"),
+            menu = new ElementLocator(Locator.CssSelector, "div[role=menubar]"),
             iframe = new ElementLocator(Locator.Id, "mce_0_ifr"),
             elelemtInIFrame = new ElementLocator(Locator.Id, "tinymce");
 
@@ -56,20 +56,14 @@ namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
             int y = iFrame.Location.Y;
             this.Driver.SwitchTo().Frame(0);
             var el = this.Driver.GetElement(this.elelemtInIFrame);
-#if net47 || net45
             return TakeScreenShot.TakeScreenShotOfElement(x, y, el, folder, name);
-#endif
-#if netcoreapp3_1
-            return "to_be_implemented_in_netcore";
-#endif
         }
 
         public string TakeScreenShotsOfMenu(string folder, string name)
         {
             Logger.Info(CultureInfo.CurrentCulture, "Take Screen Shots");
             var el = this.Driver.GetElement(this.menu);
-            //return TakeScreenShot.TakeScreenShotOfElement(el, folder, name);
-            return "";
+            return TakeScreenShot.TakeScreenShotOfElement(el, folder, name);
         }
     }
 }

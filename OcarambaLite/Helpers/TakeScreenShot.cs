@@ -20,7 +20,6 @@
 //     SOFTWARE.
 // </license>
 
-#if net47 || net45
 namespace Ocaramba.Helpers
 {
     using System;
@@ -30,7 +29,9 @@ namespace Ocaramba.Helpers
     using System.Globalization;
     using System.IO;
     using System.Text.RegularExpressions;
+#if net47 || net45
     using System.Windows.Forms;
+#endif
     using NLog;
     using Ocaramba.Extensions;
     using Ocaramba.Helpers;
@@ -43,6 +44,7 @@ namespace Ocaramba.Helpers
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
+#if net47 || net45
         /// <summary>
         /// Takes screen shot.
         /// </summary>
@@ -103,6 +105,7 @@ namespace Ocaramba.Helpers
 
             return null;
         }
+#endif
 
         /// <summary>
         /// Takes screen shot of specific element.
@@ -228,4 +231,3 @@ namespace Ocaramba.Helpers
         }
     }
 }
-#endif

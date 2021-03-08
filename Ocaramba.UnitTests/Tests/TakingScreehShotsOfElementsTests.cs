@@ -69,13 +69,13 @@ namespace Ocaramba.UnitTests.Tests
         }
 
         [Test]
-        public void TakingScreehShotsOfElementTest()
+        public void TakingScreenShotsOfElementTest()
         {
             var internetPage = new InternetPage(this.DriverContext).OpenHomePage();
             internetPage.GoToIFramePage();
 
             IFramePage page = new IFramePage(this.DriverContext);
-            page.TakeScreenShotsOfMenu(folder + BaseConfiguration.ScreenShotFolder, "MenuOutSideTheIFrame" + BaseConfiguration.TestBrowser);
+            page.TakeScreenShotsOfMenu(folder + FilesHelper.Separator + BaseConfiguration.ScreenShotFolder, "MenuOutSideTheIFrame" + BaseConfiguration.TestBrowser);
         }
     }
 }
