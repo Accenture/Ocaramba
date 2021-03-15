@@ -126,6 +126,7 @@ namespace Ocaramba.Tests.Angular
             if (BaseConfiguration.TestBrowser == BrowserType.Chrome)
             {
                 ///// It doesn't work due to https://github.com/SeleniumHQ/selenium/issues/7900
+                //// and https://github.com/SeleniumHQ/selenium/issues/7335
                 ////var perfLogs = logs.GetLog("performance");
                 ////foreach (var perfLog in perfLogs)
                 ////{
