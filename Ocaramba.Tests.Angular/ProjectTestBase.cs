@@ -125,11 +125,12 @@ namespace Ocaramba.Tests.Angular
             var logs = this.driverContext.Driver.Manage().Logs;
             if (BaseConfiguration.TestBrowser == BrowserType.Chrome)
             {
-                var perfLogs = logs.GetLog("performance");
-                foreach (var perfLog in perfLogs)
-                {
-                    Logger.Info(perfLog.ToString);
-                }
+                ///// It doesn't work due to https://github.com/SeleniumHQ/selenium/issues/7900
+                ////var perfLogs = logs.GetLog("performance");
+                ////foreach (var perfLog in perfLogs)
+                ////{
+                ////    Logger.Info(perfLog.ToString);
+                ////}
             }
 
             if (this.IsVerifyFailedAndClearMessages(this.driverContext) && TestContext.CurrentContext.Result.Outcome.Status != TestStatus.Failed)
