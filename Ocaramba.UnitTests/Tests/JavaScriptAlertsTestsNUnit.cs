@@ -28,6 +28,7 @@ namespace Ocaramba.UnitTests.Tests
     [TestFixture]
     [Parallelizable(ParallelScope.Fixtures)]
     [Category("JavaScriptError")]
+    [Ignore("Ignore a fixture due to https://github.com/SeleniumHQ/selenium/issues/7900")]
     public class JavaScriptAlertsTestsNUnit : ProjectTestBase
     {
         [Test]
