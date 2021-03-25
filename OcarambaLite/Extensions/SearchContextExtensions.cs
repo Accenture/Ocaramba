@@ -53,7 +53,7 @@ namespace Ocaramba.Extensions
         /// </code></example>
         public static IWebElement GetElement(this ISearchContext element, ElementLocator locator, [Optional] string customMessage)
         {
-            return element.GetElement(locator, BaseConfiguration.LongTimeout, e => e.Displayed & e.Enabled, customMessage);
+            return element.GetElement(locator, BaseConfiguration.LongTimeout, e => e.Displayed && e.Enabled, customMessage);
         }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace Ocaramba.Extensions
         /// </code></example>
         public static IWebElement GetElement(this ISearchContext element, ElementLocator locator, double timeout, string customMessage)
         {
-            return element.GetElement(locator, timeout, e => e.Displayed & e.Enabled, customMessage);
+            return element.GetElement(locator, timeout, e => e.Displayed && e.Enabled, customMessage);
         }
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace Ocaramba.Extensions
         /// </code></example>
         public static IWebElement GetElement(this ISearchContext element, ElementLocator locator, double timeout)
         {
-            return element.GetElement(locator, timeout, e => e.Displayed & e.Enabled);
+            return element.GetElement(locator, timeout, e => e.Displayed && e.Enabled);
         }
 
         /// <summary>
