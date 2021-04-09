@@ -12,3 +12,4 @@
 /Ocaramba.Tests.Docker.xml
 /nuget.exe
 /TestResults
+/.sonarqube/**/*.*

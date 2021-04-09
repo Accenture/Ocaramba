@@ -54,7 +54,7 @@ environment:
   seleniumGridVersion: selenium-server-standalone-3.141.59.jar
   seleniumGridUrl: http://selenium-release.storage.googleapis.com/3.141/selenium-server-standalone-3.141.59.jar
   latestNugetUrl: https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
-  edgeChrominiumDriverUrl: https://msedgedriver.azureedge.net/80.0.361.66/edgedriver_win64.zip
+  edgeChrominiumDriverUrl: https://msedgedriver.azureedge.net/91.0.844.0/edgedriver_win64.zip
   GithubAuthToken:
     secure: x9uTnOFLUnZ6DiVhpBBxIJxij33Sz9uAIe+qef6M3sj9+J/AUmpfBmiGgqRabTqs
   browserstackuser:
