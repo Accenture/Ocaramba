@@ -19,7 +19,7 @@ dotnet test --configuration Debug --no-build --no-restore Ocaramba.Tests.Xunit -
 
 echo '********************************************Specflow tests********************************************' 
 
-#dotnet test --configuration Debug --filter TestCategory!=NotImplementedInCoreOrUploadDownload --no-build --no-restore Ocaramba.Tests.Features -maxCpuCount --test-adapter-path:. --logger:Appveyor  
+dotnet test --configuration Debug --filter TestCategory!=NotImplementedInCoreOrUploadDownload --no-build --no-restore Ocaramba.Tests.Features -maxCpuCount --test-adapter-path:. --logger:Appveyor  
 
 
 echo '********************************************MsTest tests********************************************'   

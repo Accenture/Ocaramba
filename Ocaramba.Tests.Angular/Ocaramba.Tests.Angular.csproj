@@ -7,7 +7,7 @@
 
   <ItemGroup>
     <PackageReference Include="Appveyor.TestLogger" Version="2.0.0" />
-    <PackageReference Include="NLog" Version="4.7.8" />
+    <PackageReference Include="NLog" Version="4.7.9" />
     <PackageReference Include="NUnit" Version="3.13.1" />
     <PackageReference Include="NUnit.Runners" Version="3.12.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.17.0">
@@ -22,14 +22,14 @@
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net472'">
 	<Reference Include="System.Configuration" />
-  <PackageReference Include="EWSoftware.SHFB" Version="2020.3.6" />
+  <PackageReference Include="EWSoftware.SHFB" Version="2021.4.5" />
   <PackageReference Include="EWSoftware.SHFB.NETFramework" Version="4.8.0" />
   <PackageReference Include="EWSoftware.SHFB.NETCore" Version="4.5.1" />
  </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.3" />
-    <PackageReference Include="NLog.Web.AspNetCore" Version="4.11.0" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="4.12.0" />
   </ItemGroup>
 
   <ItemGroup>
