@@ -21,7 +21,7 @@
     <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.29.1" />
     <PackageReference Include="SpecFlow" Version="3.6.23" />
     <PackageReference Include="SpecFlow.NUnit" Version="3.6.23" />
-    <PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="3.6.23" />
+    <PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="3.8.14" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
