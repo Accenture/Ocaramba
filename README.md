@@ -8,7 +8,7 @@
 [![AppVeyor tests](https://img.shields.io/appveyor/tests/ObjectivityAdminsTeam/ocaramba.svg)](https://ci.appveyor.com/project/ObjectivityAdminsTeam/ocaramba/build/tests)
 [![Build Status](https://dev.azure.com/ocaramba/Ocaramba/_apis/build/status/ObjectivityLtd.Ocaramba)](https://dev.azure.com/ocaramba/Ocaramba/_build/latest?definitionId=2)
 [![Azure DevOps tests](https://img.shields.io/azure-devops/tests/ocaramba/Ocaramba/2)](https://dev.azure.com/ocaramba/Ocaramba/_build?definitionId=2)
-[![BrowserStack Status](https://www.browserstack.com/automate/badge.svg?badge_key=TmV0eWg4WElNTVBER2M2YWZSYVc2UjFCS2tJWjV4TUEwOFFpb0FXdGZVND0tLTJqRkVubVhnQWd2NHlISkFnMlBsM0E9PQ==--f3a8ace2e27c1ddf49487dd172e969dcacef037d)](https://www.browserstack.com/automate/public-build/TmV0eWg4WElNTVBER2M2YWZSYVc2UjFCS2tJWjV4TUEwOFFpb0FXdGZVND0tLTJqRkVubVhnQWd2NHlISkFnMlBsM0E9PQ==--f3a8ace2e27c1ddf49487dd172e969dcacef037d)
+[![BrowserStack Status](https://automate.browserstack.com/badge.svg?badge_key=bCt1SllBNzYvSXMzMUFIaHFwYmZLZXdNKzRTRjBxQkRoeDJVL1VBbVZyYz0tLVNjK25adWZBekUvSUdNalZOTHV0VVE9PQ==--47db8f20ffc1ec8bd1cd46968f8b217c39f96509)](https://automate.browserstack.com/public-build/bCt1SllBNzYvSXMzMUFIaHFwYmZLZXdNKzRTRjBxQkRoeDJVL1VBbVZyYz0tLVNjK25adWZBekUvSUdNalZOTHV0VVE9PQ==--47db8f20ffc1ec8bd1cd46968f8b217c39f96509)
 [![Build Status](https://saucelabs.com/buildstatus/jraczek)](https://saucelabs.com/beta/builds/8de234710c7c46f1b5d0e9c9438e5d06)
 
 Test Framework was designed in Objectivity to propose a common way how people should create Selenium WebDriver tests.
