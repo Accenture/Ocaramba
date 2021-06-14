@@ -24,11 +24,11 @@
 
   <ItemGroup>
     <None Include="..\icon.png" Pack="true" PackagePath="\" />
-    <PackageReference Include="NLog" Version="4.7.8" />
+    <PackageReference Include="NLog" Version="4.7.10" />
     <PackageReference Include="Selenium.Support" Version="3.141.0" />
     <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
-    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="89.0.4389.2300" />
-    <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.29.0" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="91.0.4472.1900" />
+    <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.29.1" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
       <PrivateAssets>all</PrivateAssets>
@@ -38,7 +38,7 @@
   <ItemGroup Condition="'$(TargetFramework)' == 'net472' Or '$(TargetFramework)' == 'net45'">
 	<Reference Include="System.Configuration" />
 	<Reference Include="System.Windows.Forms" />
-	<PackageReference Include="Microsoft.AnalysisServices.AdomdClient.retail.amd64" Version="19.18.0" />
+	<PackageReference Include="Microsoft.AnalysisServices.AdomdClient.retail.amd64" Version="19.21.0" />
  </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
     <PackageReference Include="Microsoft.Extensions.Configuration">
