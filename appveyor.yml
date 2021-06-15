@@ -1,6 +1,8 @@
 skip_commits:
   files:
     - README.md
+    - '**/ExecutingTestsOn*Azure.ps1'
+    - 'azure-pipelines.yml'
 version: $(frameworkVersion).{build}
 branches:
   except:
