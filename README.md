@@ -16,6 +16,8 @@ Test Framework was designed in Objectivity to propose a common way how people sh
 <img align="left" src="https://user-images.githubusercontent.com/12324498/73060119-73159700-3e97-11ea-99d3-1b21584c6baa.png">
 Project API documentation can be found here: http://objectivityltd.github.io/Ocaramba<br /><br />
 
+<img align="left" src="https://github.com/ObjectivityLtd/Ocaramba/wiki/images/ocarambadiagram.png">
+
 **It provides the following features:**
 - .NET Frameworks 4.5, 4.7.2 and .NET Core 3.1 supported
 - Cross-Platform  Windows, Linux and macOS systems supported
