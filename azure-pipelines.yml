@@ -64,10 +64,10 @@ jobs:
         LogLevel: 'verbose'
         FailOnWarning: false
         DisableTelemetry: false
-
     - task: VSBuild@1
       inputs:
         solution: '$(solution)'
+        restoreNugetPackages: true
         msbuildArgs: '/v:minimal'
         platform: '$(buildPlatform)'
         configuration: '$(buildConfiguration)'
