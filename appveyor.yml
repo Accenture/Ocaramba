@@ -82,7 +82,7 @@ before_build:
  - ps: >-
     dotnet --version
     
-    .\removeSubprojectFromSolution.ps1
+    #.\removeSubprojectFromSolution.ps1
     
     dotnet restore
    
