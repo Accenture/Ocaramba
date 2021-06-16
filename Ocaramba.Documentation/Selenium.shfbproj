@@ -45,7 +45,6 @@
   <!-- Uncomment this to use the NuGet packages when SHFB is not installed locally, e.g. in the CI build pipeline.
 			Update the package versions to the latest releases.-->
 	<ItemGroup>
-	   <PackageReference Remove="Localization" />
 		<PackageReference Include="EWSoftware.SHFB" Version="2021.4.9" />
 		<PackageReference Include="EWSoftware.SHFB.NETFramework" Version="4.8.0" />
 	</ItemGroup>
@@ -56,11 +55,4 @@
   <Import Project="$(SHFBROOT)\SandcastleHelpFileBuilder.targets" Condition="Exists('$(SHFBROOT)\SandcastleHelpFileBuilder.targets')" />
   <!-- The pre-build and post-build event properties must appear *after* the targets file import in order to be
 			 evaluated correctly. -->
-  <PropertyGroup>
-    <PreBuildEvent>
-    </PreBuildEvent>
-    <PostBuildEvent>
-    </PostBuildEvent>
-    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-  </PropertyGroup>
 </Project>
