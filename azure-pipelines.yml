@@ -49,21 +49,6 @@ jobs:
       inputs:
         restoreSolution: '$(solution)'
 
-    - task: Assembly-Info-NetCore@2
-      inputs:
-        Path: '$(Build.SourcesDirectory)'
-        FileNames: '**/*.csproj'
-        InsertAttributes: false
-        FileEncoding: 'auto'
-        WriteBOM: false
-        GeneratePackageOnBuild: true
-        VersionNumber: '$(frameworkVersion)'
-        FileVersionNumber: '$(frameworkVersion).$(Build.BuildId)'
-        InformationalVersion: '$(frameworkVersion)'
-        PackageVersion: '$(frameworkVersion)'
-        LogLevel: 'verbose'
-        FailOnWarning: false
-        DisableTelemetry: false
     - task: VSBuild@1
       inputs:
         solution: '$(solution)'
