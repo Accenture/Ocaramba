@@ -93,7 +93,7 @@ build:
 after_build:
   - ps: >-
       if ($isWindows) {
-        #.\PublishingApiDocumentationOn_gh-pages.ps1
+        .\PublishingApiDocumentationOn_gh-pages.ps1
         }
 
 for:
