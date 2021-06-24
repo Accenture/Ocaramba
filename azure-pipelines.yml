@@ -79,14 +79,26 @@ jobs:
         
     - task: PublishPipelineArtifact@1
       inputs:
-        targetPath: './Ocaramba/bin/Release/Ocaramba.$(frameworkVersion).*upkg'
+        targetPath: './Ocaramba/bin/Release/Ocaramba.$(frameworkVersion).nupkg'
+        artifact: 'Ocaramba$(frameworkVersion)'
+        publishLocation: 'pipeline'
+
+
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: './Ocaramba/bin/Release/Ocaramba.$(frameworkVersion).snupkg'
+        artifact: 'Ocaramba$(frameworkVersion)'
+        publishLocation: 'pipeline'
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: './OcarambaLite/bin/Release/OcarambaLite.$(frameworkVersion).nupkg'
         artifact: 'Ocaramba$(frameworkVersion)'
         publishLocation: 'pipeline'
 
     - task: PublishPipelineArtifact@1
       inputs:
-        targetPath: './OcarambaLite/bin/Release/OcarambaLite.$(frameworkVersion).*upkg'
-        artifact: 'OcarambaLite$(frameworkVersion)'
+        targetPath: './OcarambaLite/bin/Release/OcarambaLite.$(frameworkVersion).snupkg'
+        artifact: 'Ocaramba$(frameworkVersion)'
         publishLocation: 'pipeline'
     - task: PublishPipelineArtifact@1
       condition: succeededOrFailed()
@@ -225,3 +237,32 @@ jobs:
       inputs:
         testResultsFormat: 'VSTest'
         testResultsFiles: '**/Ocaramba.Tests.*.xml'
+
+- job: PublishNuget
+  dependsOn:
+  - BuildTestsOnWindows
+  - RunTestsOnDocker
+  - RunTestsOnWindows1
+  - RunTestsOnWindows2
+  - RunTestsOnWindows3
+  - RunTestsOnLinux
+
+  pool:
+    vmImage: 'windows-latest'
+  steps:
+    - checkout: none
+    - task: DownloadPipelineArtifact@2
+      inputs:
+        buildType: 'current'
+        artifactName: 'Ocaramba$(frameworkVersion)'
+        targetPath: '$(Pipeline.Workspace)'
+    - task: DotNetCoreCLI@2
+      condition: and(succeeded(),startsWith(variables['Build.SourceBranch'], 'refs/tags/'))
+      displayName: Push Nuget Package
+      inputs:
+        command: custom
+        custom: nuget
+        arguments: >
+          push $(Agent.BuildDirectory)/OcarambaLite.$(frameworkVersion).*nupkg
+          -s https://api.nuget.org/v3/index.json
+          -k $(NuGetApiKey) 
