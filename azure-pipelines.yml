@@ -27,7 +27,7 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  frameworkVersion: '3.2.6'
+  frameworkVersion: '3.3.0'
 
 jobs:
 - job: BuildTestsOnWindows
@@ -79,13 +79,13 @@ jobs:
         
     - task: PublishPipelineArtifact@1
       inputs:
-        targetPath: './Ocaramba/bin/Release/Ocaramba.$(frameworkVersion).nupkg'
+        targetPath: './Ocaramba/bin/Release/Ocaramba.$(frameworkVersion).*upkg'
         artifact: 'Ocaramba$(frameworkVersion)'
         publishLocation: 'pipeline'
 
     - task: PublishPipelineArtifact@1
       inputs:
-        targetPath: './OcarambaLite/bin/Release/OcarambaLite.$(frameworkVersion).nupkg'
+        targetPath: './OcarambaLite/bin/Release/OcarambaLite.$(frameworkVersion).*upkg'
         artifact: 'OcarambaLite$(frameworkVersion)'
         publishLocation: 'pipeline'
     - task: PublishPipelineArtifact@1
