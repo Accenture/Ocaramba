@@ -71,13 +71,33 @@ namespace Ocaramba.Logger
         }
 
         /// <summary>
-        /// Information the specified message.
+        /// Information Info the specified message.
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="args">The arguments.</param>
         public void Info(string message, params object[] args)
         {
             Logger.Info(CultureInfo.CurrentCulture, message, args);
+        }
+
+        /// <summary>
+        /// Information Debug the specified message.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <param name="args">The arguments.</param>
+        public void Debug(string message, params object[] args)
+        {
+            Logger.Debug(CultureInfo.CurrentCulture, message, args);
+        }
+
+        /// <summary>
+        /// Information Trace the specified message.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <param name="args">The arguments.</param>
+        public void Trace(string message, params object[] args)
+        {
+            Logger.Trace(CultureInfo.CurrentCulture, message, args);
         }
 
         /// <summary>
