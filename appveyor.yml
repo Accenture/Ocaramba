@@ -106,17 +106,6 @@ for:
     - ps: >-   
          .\ExecutingTestsOnWindows.ps1
 
-  artifacts:
-  - path: .\**\Ocaramba*.*upkg
-    name: NuGet
-  deploy:
-  - provider: NuGet
-    api_key:
-           secure: fy/aj/thLLZq2GjazhALRKDN/ey+yJ/BvWE7wLXO+5e86uUE/79fwVP29psaUTIm
-    on:
-      branch: master
-      appveyor_repo_tag: true
-
 -
   matrix:
     only:
