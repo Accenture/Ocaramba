@@ -48,6 +48,7 @@ jobs:
         targetType: 'inline'
         script: '(Get-Content ''Ocaramba.sln'' -raw) -replace [regex](''.*?'' + ''Documentation'' + (''.*?\r\n'' * (5 + 1))) | set-content  ''Ocaramba.sln'''
 
+
     - task: NuGetToolInstaller@1
 
     - task: NuGetCommand@2
@@ -69,7 +70,6 @@ jobs:
         LogLevel: 'verbose'
         FailOnWarning: false
         DisableTelemetry: false
-
     - task: VSBuild@1
       inputs:
         solution: '$(solution)'
@@ -89,7 +89,9 @@ jobs:
         artifact: 'OcarambaLite$(frameworkVersion)'
         publishLocation: 'pipeline'
     - task: PublishPipelineArtifact@1
+      condition: succeededOrFailed()
       inputs:
+      
         targetPath: '$(Pipeline.Workspace)'
         artifact: 'OcarambaBuild'
         publishLocation: 'pipeline'
