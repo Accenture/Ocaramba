@@ -87,18 +87,18 @@ jobs:
     - task: PublishPipelineArtifact@1
       inputs:
         targetPath: './Ocaramba/bin/Release/Ocaramba.$(frameworkVersion).snupkg'
-        artifact: 'Ocaramba$(frameworkVersion)'
+        artifact: 'OcarambaS$(frameworkVersion)'
         publishLocation: 'pipeline'
     - task: PublishPipelineArtifact@1
       inputs:
         targetPath: './OcarambaLite/bin/Release/OcarambaLite.$(frameworkVersion).nupkg'
-        artifact: 'Ocaramba$(frameworkVersion)'
+        artifact: 'OcarambaLite$(frameworkVersion)'
         publishLocation: 'pipeline'
 
     - task: PublishPipelineArtifact@1
       inputs:
         targetPath: './OcarambaLite/bin/Release/OcarambaLite.$(frameworkVersion).snupkg'
-        artifact: 'Ocaramba$(frameworkVersion)'
+        artifact: 'OcarambaLiteS$(frameworkVersion)'
         publishLocation: 'pipeline'
     - task: PublishPipelineArtifact@1
       condition: succeededOrFailed()
@@ -256,6 +256,21 @@ jobs:
         buildType: 'current'
         artifactName: 'Ocaramba$(frameworkVersion)'
         targetPath: '$(Pipeline.Workspace)'
+    - task: DownloadPipelineArtifact@2
+      inputs:
+        buildType: 'current'
+        artifactName: 'OcarambaS$(frameworkVersion)'
+        targetPath: '$(Pipeline.Workspace)'
+    - task: DownloadPipelineArtifact@2
+      inputs:
+        buildType: 'current'
+        artifactName: 'OcarambaLite$(frameworkVersion)'
+        targetPath: '$(Pipeline.Workspace)'
+    - task: DownloadPipelineArtifact@2
+      inputs:
+        buildType: 'current'
+        artifactName: 'OcarambaLiteS$(frameworkVersion)'
+        targetPath: '$(Pipeline.Workspace)'
     - task: DotNetCoreCLI@2
       condition: and(succeeded(),startsWith(variables['Build.SourceBranch'], 'refs/tags/'))
       displayName: Push Nuget Package
@@ -263,6 +278,6 @@ jobs:
         command: custom
         custom: nuget
         arguments: >
-          push $(Agent.BuildDirectory)/OcarambaLite.$(frameworkVersion).*nupkg
+          push $(Agent.BuildDirectory)/Ocaramba*.$(frameworkVersion).*nupkg
           -s https://api.nuget.org/v3/index.json
           -k $(NuGetApiKey) 
