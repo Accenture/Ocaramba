@@ -214,6 +214,14 @@ jobs:
 - job: RunTestsOnWindows4
   dependsOn:
   - BuildTestsOnWindows
+  variables:
+    MAPPED_ENV_BROWSERSTACKKEY: $(browserstackkey)
+    MAPPED_ENV_BROWSERSTACKUSER: $(browserstackuser)
+    MAPPED_ENV_TESTINGBOTKEY: $(testingbotkey)
+    MAPPED_ENV_TESTINGBOTSECRET: $(testingbotsecret)
+    MAPPED_ENV_SAUCELABSACCESSKEY: $(saucelabsaccessKey)
+    MAPPED_ENV_SAUCELABSUSERNAME: $(saucelabsusername)
+
   pool:
     vmImage: 'windows-latest'
   steps:
