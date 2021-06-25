@@ -52,9 +52,9 @@ echo '********************************************Specflow tests****************
  
 & nunit3-console.exe .\Ocaramba.Tests.Features\bin\Debug\net45\Ocaramba.Tests.Features.dll 
 
-echo '********************************************CloudProviderCrossBrowser tests********************************************'
+#echo '********************************************CloudProviderCrossBrowser tests********************************************'
         
-echo '********************************************BrowserStack tests********************************************'
+#echo '********************************************BrowserStack tests********************************************'
         
    
 #.\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Debug\net472" "Ocaramba.Tests.CloudProviderCrossBrowser.dll.config" "//appSettings" "RemoteWebDriverHub" "http://$($env:browserstackuser):$($env:browserstackkey)@hub-cloud.browserstack.com/wd/hub"
@@ -87,77 +87,77 @@ echo '********************************************BrowserStack tests************
     
 #& nunit3-console.exe .\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Debug\net472\Ocaramba.Tests.CloudProviderCrossBrowser.dll --workers=5 --where "test =~ Chrome || test =~ IE || test =~ Safari || test =~ Firefox" --result=myresults.xml`;format=AppVeyor
       
-echo '********************************************Downloading Selenium Grid********************************************' 
+#echo '********************************************Downloading Selenium Grid********************************************' 
     
-$url = $env:seleniumGridUrl
+#$url = $env:seleniumGridUrl
         
-$grid = $env:seleniumGridVersion
+#$grid = $env:seleniumGridVersion
         
-$output = $env:APPVEYOR_BUILD_FOLDER + "\Ocaramba.Tests.NUnit\bin\Debug\net472\$grid"
+#$output = $env:APPVEYOR_BUILD_FOLDER + "\Ocaramba.Tests.NUnit\bin\Debug\net472\$grid"
         
-$outputLogs = $env:APPVEYOR_BUILD_FOLDER + "\Ocaramba.Tests.NUnit\bin\Debug\net472\"
+#$outputLogs = $env:APPVEYOR_BUILD_FOLDER + "\Ocaramba.Tests.NUnit\bin\Debug\net472\"
         
-$start_time = Get-Date
+#$start_time = Get-Date
 
-echo "Downloading Selenium Grid from:" $url
+#echo "Downloading Selenium Grid from:" $url
         
-(New-Object System.Net.WebClient).DownloadFile($url, $output)
+#(New-Object System.Net.WebClient).DownloadFile($url, $output)
         
-echo "Selenium Grid downloaded to:" $output
+#echo "Selenium Grid downloaded to:" $output
         
-echo "Time taken to download $($grid): $((Get-Date).Subtract($start_time).Seconds) second(s)"
+#echo "Time taken to download $($grid): $((Get-Date).Subtract($start_time).Seconds) second(s)"
         
-echo '******************************************Start Selenium Grid in background****************************************' 
+#echo '******************************************Start Selenium Grid in background****************************************' 
         
-$appHub=Start-Process java -ArgumentList '-jar', $output' -role hub' -RedirectStandardOutput $outputLogs'console_hub.out' -RedirectStandardError $outputLogs'console_hub.err' -passthru
+#$appHub=Start-Process java -ArgumentList '-jar', $output' -role hub' -RedirectStandardOutput $outputLogs'console_hub.out' -RedirectStandardError $outputLogs'console_hub.err' -passthru
 
-Start-Sleep -s 5
+#Start-Sleep -s 5
         
-echo "Selenium Grid hub started"
+#echo "Selenium Grid hub started"
 
-$appNode=Start-Process java -ArgumentList '-jar', $output' -role node  -hub http://localhost:4444/grid/register' -RedirectStandardOutput $outputLogs'console_node.out' -RedirectStandardError $outputLogs'console_node.err' -passthru 
+#$appNode=Start-Process java -ArgumentList '-jar', $output' -role node  -hub http://localhost:4444/grid/register' -RedirectStandardOutput $outputLogs'console_node.out' -RedirectStandardError $outputLogs'console_node.err' -passthru 
         
-Start-Sleep -s 5
+#Start-Sleep -s 5
         
-echo "Selenium Grid node started"
+#echo "Selenium Grid node started"
         
-echo '********************************************Run tests with Selenium Grid ****************************************' 
+#echo '********************************************Run tests with Selenium Grid ****************************************' 
         
-.\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.NUnit\bin\Debug\net472\" "Ocaramba.Tests.NUnit.dll.config" "//appSettings" "browser|RemoteWebDriverHub" "RemoteWebDriver|http://localhost:4444/wd/hub" $true
+#.\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.NUnit\bin\Debug\net472\" "Ocaramba.Tests.NUnit.dll.config" "//appSettings" "browser|RemoteWebDriverHub" "RemoteWebDriver|http://localhost:4444/wd/hub" $true
         
-& nunit3-console.exe .\Ocaramba.Tests.NUnit\bin\Debug\net472\Ocaramba.Tests.NUnit.dll --where:cat==BasicNUnit --result=myresults.xml`;format=AppVeyor
+#& nunit3-console.exe .\Ocaramba.Tests.NUnit\bin\Debug\net472\Ocaramba.Tests.NUnit.dll --where:cat==BasicNUnit --result=myresults.xml`;format=AppVeyor
  
-echo '*****************************Run CloudProviderCrossBrowser tests with Selenium Grid****************************'
+#echo '*****************************Run CloudProviderCrossBrowser tests with Selenium Grid****************************'
         
-.\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Debug\net472" "Ocaramba.Tests.CloudProviderCrossBrowser.dll.config" "//appSettings" "RemoteWebDriverHub" "http://localhost:4444/wd/hub" $true
+#.\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Debug\net472" "Ocaramba.Tests.CloudProviderCrossBrowser.dll.config" "//appSettings" "RemoteWebDriverHub" "http://localhost:4444/wd/hub" $true
         
-& nunit3-console.exe .\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Debug\net472\Ocaramba.Tests.CloudProviderCrossBrowser.dll --where "test =~ Chrome" --result=myresults.xml`;format=AppVeyor
+#& nunit3-console.exe .\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Debug\net472\Ocaramba.Tests.CloudProviderCrossBrowser.dll --where "test =~ Chrome" --result=myresults.xml`;format=AppVeyor
 
-if($lastexitcode -ne 0)
- {
-  echo 'lastexitcode' $lastexitcode
- }
+#if($lastexitcode -ne 0)
+# {
+#  echo 'lastexitcode' $lastexitcode
+# }
 
-echo '*****************************Stop Selenium Grid****************************'
+#echo '*****************************Stop Selenium Grid****************************'
  
-echo "Stop Selenium Grid node" 
+#echo "Stop Selenium Grid node" 
  
-Stop-Process -Id $appNode.Id
+#Stop-Process -Id $appNode.Id
         
-echo "Stop Selenium Grid hub" 
+#echo "Stop Selenium Grid hub" 
         
-Stop-Process -Id $appHub.Id   
+#Stop-Process -Id $appHub.Id   
         
-echo '*****************************Add Selenium Grid logs to testresults****************************'
+#echo '*****************************Add Selenium Grid logs to testresults****************************'
         
-7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.*\bin\Debug\**\*.err
+#7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.*\bin\Debug\**\*.err
         
-7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.*\bin\Debug\**\*.out
+#7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.*\bin\Debug\**\*.out
        
-7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.*\bin\Debug\**\TestOutput\*.png
+#7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.*\bin\Debug\**\TestOutput\*.png
 
-7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.*\bin\Debug\**\TestOutput\*.html
+#7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.*\bin\Debug\**\TestOutput\*.html
 
-7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.*\bin\Debug\**\*.log
+#7z a testresults_$env:appveyor_build_version.zip .\Ocaramba.*\bin\Debug\**\*.log
 
-appveyor PushArtifact testresults_$env:appveyor_build_version.zip
+#appveyor PushArtifact testresults_$env:appveyor_build_version.zip
