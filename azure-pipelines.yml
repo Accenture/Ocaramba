@@ -274,12 +274,11 @@ jobs:
         script: 'Get-ChildItem -Path $(Agent.BuildDirectory) -Recurse'
 
     - task: DotNetCoreCLI@2
-      condition: and(succeeded(),startsWith(variables['Build.SourceBranch'], 'refs/tags/'))
       displayName: Push Nuget Package
       inputs:
         command: custom
         custom: nuget
         arguments: >
-          push '.\**\Ocaramba*.$(frameworkVersion).*nupkg
+          push '.\Ocaramba*.$(frameworkVersion).*nupkg
           -s https://api.nuget.org/v3/index.json
           -k $(NuGetApiKey) 
