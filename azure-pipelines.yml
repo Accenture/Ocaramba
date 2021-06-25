@@ -274,6 +274,7 @@ jobs:
         script: 'Get-ChildItem -Path $(Agent.BuildDirectory) -Recurse'
 
     - task: DotNetCoreCLI@2
+      condition: and(succeeded(),startsWith(variables['Build.SourceBranch'], 'refs/tags/'))
       displayName: Push Nuget Package
       inputs:
         command: custom
@@ -282,16 +283,9 @@ jobs:
           push $(Agent.BuildDirectory)\Ocaramba.$(frameworkVersion).nupkg
           -s https://api.nuget.org/v3/index.json
           -k $(NuGetApiKey) 
+
     - task: DotNetCoreCLI@2
-      displayName: Push Nuget Package
-      inputs:
-        command: custom
-        custom: nuget
-        arguments: >
-          push $(Agent.BuildDirectory)\Ocaramba.$(frameworkVersion).snupkg
-          -s https://api.nuget.org/v3/index.json
-          -k $(NuGetApiKey)
-    - task: DotNetCoreCLI@2
+      condition: and(succeeded(),startsWith(variables['Build.SourceBranch'], 'refs/tags/'))
       displayName: Push Nuget Package
       inputs:
         command: custom
@@ -300,12 +294,3 @@ jobs:
           push $(Agent.BuildDirectory)\OcarambaLite.$(frameworkVersion).nupkg
           -s https://api.nuget.org/v3/index.json
           -k $(NuGetApiKey)
-    - task: DotNetCoreCLI@2
-      displayName: Push Nuget Package
-      inputs:
-        command: custom
-        custom: nuget
-        arguments: >
-          push $(Agent.BuildDirectory)\OcarambaLite.$(frameworkVersion).snupkg
-          -s https://api.nuget.org/v3/index.json
-          -k $(NuGetApiKey) 
