@@ -241,11 +241,7 @@ jobs:
 - job: PublishNuget
   dependsOn:
   - BuildTestsOnWindows
-  - RunTestsOnDocker
-  - RunTestsOnWindows1
-  - RunTestsOnWindows2
-  - RunTestsOnWindows3
-  - RunTestsOnLinux
+
 
   pool:
     vmImage: 'windows-latest'
@@ -271,6 +267,12 @@ jobs:
         buildType: 'current'
         artifactName: 'OcarambaLiteS$(frameworkVersion)'
         targetPath: '$(Pipeline.Workspace)'
+
+    - task: PowerShell@2
+      inputs:
+        targetType: 'inline'
+        script: 'Get-ChildItem -Path $(Agent.BuildDirectory) -Recurse'
+
     - task: DotNetCoreCLI@2
       condition: and(succeeded(),startsWith(variables['Build.SourceBranch'], 'refs/tags/'))
       displayName: Push Nuget Package
@@ -278,6 +280,6 @@ jobs:
         command: custom
         custom: nuget
         arguments: >
-          push $(Agent.BuildDirectory)/**/Ocaramba*.$(frameworkVersion).*nupkg
+          push '.\**\Ocaramba*.$(frameworkVersion).*nupkg
           -s https://api.nuget.org/v3/index.json
           -k $(NuGetApiKey) 
