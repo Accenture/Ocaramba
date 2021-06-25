@@ -6,9 +6,9 @@ $url = $env:seleniumGridUrl
         
 $grid = $env:seleniumGridVersion
         
-$output = $env:DownloadFolder + "\Ocaramba.Tests.NUnit\bin\Release\net472\$grid"
+$output = $PSScriptRoot + "\Ocaramba.Tests.NUnit\bin\Release\net472\$grid"
         
-$outputLogs = $env:DownloadFolder + "\Ocaramba.Tests.NUnit\bin\Release\net472\"
+$outputLogs = $PSScriptRoot + "\Ocaramba.Tests.NUnit\bin\Release\net472\"
         
 $start_time = Get-Date
 
@@ -16,10 +16,9 @@ echo url: $url
 echo grid: $grid
 echo output: $output
 echo outputLogs: $outputLogs
-Get-ChildItem -Path $($env:DownloadFolder) -Recurse
-echo "Downloading Selenium Grid from:" $url
 
-(new-object    System.Net.WebClient).DownloadFile('$($url)', '$($output)');        
+echo "Downloading Selenium Grid from: $($url) to $($output)"
+Invoke-WebRequest -Uri "$($url)" -Out "$($output)"      
         
 echo "Selenium Grid downloaded to:" $output
         
