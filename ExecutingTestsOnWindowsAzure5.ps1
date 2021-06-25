@@ -38,7 +38,7 @@ echo '********************************************Run tests with Selenium Grid *
         
 .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.NUnit\bin\Release\net472\" "Ocaramba.Tests.NUnit.dll.config" "//appSettings" "browser|RemoteWebDriverHub" "RemoteWebDriver|http://localhost:4444/wd/hub" $true
         
-& $vstest.\Ocaramba.Tests.NUnit\bin\Release\net472\Ocaramba.Tests.NUnit.dll /TestCaseFilter:"TestCategory=BasicNUnit"  `
+& $vstest .\Ocaramba.Tests.NUnit\bin\Release\net472\Ocaramba.Tests.NUnit.dll /TestCaseFilter:"TestCategory=BasicNUnit"  `
 			--logger:"trx;LogFileName=Ocaramba.Tests.NUnitGrid.xml"
  
 echo '*****************************Run CloudProviderCrossBrowser tests with Selenium Grid****************************'
