@@ -6,9 +6,9 @@ $url = $env:seleniumGridUrl
         
 $grid = $env:seleniumGridVersion
         
-$output = $env:Agent.BuildDirectory + "\Ocaramba.Tests.NUnit\bin\Release\net472\$grid"
+$output = $env:DownloadFolder + "\Ocaramba.Tests.NUnit\bin\Release\net472\$grid"
         
-$outputLogs = $env:Agent.BuildDirectory + "\Ocaramba.Tests.NUnit\bin\Release\net472\"
+$outputLogs = $env:DownloadFolder + "\Ocaramba.Tests.NUnit\bin\Release\net472\"
         
 $start_time = Get-Date
 

@@ -31,6 +31,7 @@ variables:
   BuildVersion: '$(frameworkVersion)$(Build.BuildNumber)'
   seleniumGridVersion: 'selenium-server-standalone-3.141.59.jar'
   seleniumGridUrl: 'http://selenium-release.storage.googleapis.com/3.141/selenium-server-standalone-3.141.59.jar'
+  DownloadFolder: '$(Pipeline.Workspace)'
 
 jobs:
 - job: BuildTestsOnWindows
