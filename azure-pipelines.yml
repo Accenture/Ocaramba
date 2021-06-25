@@ -278,6 +278,6 @@ jobs:
         command: custom
         custom: nuget
         arguments: >
-          push $(Agent.BuildDirectory)/Ocaramba*.$(frameworkVersion).*nupkg
+          push $(Agent.BuildDirectory)/**/Ocaramba*.$(frameworkVersion).*nupkg
           -s https://api.nuget.org/v3/index.json
           -k $(NuGetApiKey) 
