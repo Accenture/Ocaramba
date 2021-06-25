@@ -12,9 +12,14 @@ $outputLogs = $env:Agent.BuildDirectory + "\Ocaramba.Tests.NUnit\bin\Release\net
         
 $start_time = Get-Date
 
+echo url: $url
+echo grid: $grid
+echo output: $output
+echo outputLogs: $outputLogs
+
 echo "Downloading Selenium Grid from:" $url
-        
-(New-Object System.Net.WebClient).DownloadFile($url, $output)
+
+(new-object    System.Net.WebClient).DownloadFile('$($url)', "$($output)");        
         
 echo "Selenium Grid downloaded to:" $output
         
