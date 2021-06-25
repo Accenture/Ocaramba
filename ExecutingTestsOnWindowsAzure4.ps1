@@ -2,10 +2,6 @@ echo '********************************************CloudProviderCrossBrowser test
         
 echo '********************************************BrowserStack tests********************************************'
   
-echo  BuildVersion "$($env:BuildVersion)"
-echo  BuildVersion "$env:BuildVersion"
-
-  
 $vstest = (Resolve-Path "D:\a\_temp\VsTest\Microsoft.TestPlatform*\tools\net*\Common*\IDE\Extensions\TestPlatform\vstest.console.exe").ToString()
        
 .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\net472" "Ocaramba.Tests.CloudProviderCrossBrowser.dll.config" "//appSettings" "RemoteWebDriverHub" "https://$($env:MAPPED_ENV_BROWSERSTACKUSER):$($env:MAPPED_ENV_BROWSERSTACKKEY)@hub-cloud.browserstack.com/wd/hub"

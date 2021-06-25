@@ -28,7 +28,9 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
   frameworkVersion: '3.3.0'
-  BuildVersion: '$(frameworkVersion)+$(Build.BuildNumber)'
+  BuildVersion: '$(frameworkVersion)$(Build.BuildNumber)'
+  seleniumGridVersion: 'selenium-server-standalone-3.141.59.jar'
+  seleniumGridUrl: 'http://selenium-release.storage.googleapis.com/3.141/selenium-server-standalone-3.141.59.jar'
 
 jobs:
 - job: BuildTestsOnWindows
@@ -246,6 +248,32 @@ jobs:
         testResultsFormat: 'VSTest'
         testResultsFiles: '**/Ocaramba.Tests.*.xml'
 
+- job: RunTestsOnWindows5
+  dependsOn:
+  - BuildTestsOnWindows
+  pool:
+    vmImage: 'windows-latest'
+  steps:
+    - checkout: none
+    - task: VisualStudioTestPlatformInstaller@1
+      inputs:
+        packageFeedSelector: 'nugetOrg'
+        versionSelector: 'latestStable'
+
+    - task: DownloadPipelineArtifact@2
+      inputs:
+        buildType: 'current'
+        artifactName: 'OcarambaBuild'
+        targetPath: '$(Pipeline.Workspace)'
+    - task: PowerShell@2
+      inputs:
+        filePath: './ExecutingTestsOnWindowsAzure5.ps1'
+        
+    - task: PublishTestResults@2
+      inputs:
+        testResultsFormat: 'VSTest'
+        testResultsFiles: '**/Ocaramba.Tests.*.xml'
+
 - job: RunTestsOnLinux
   pool:
     vmImage: 'ubuntu-latest'
@@ -281,6 +309,7 @@ jobs:
   - RunTestsOnWindows2
   - RunTestsOnWindows3
   - RunTestsOnWindows4
+  - RunTestsOnWindows5
   - RunTestsOnLinux
 
   pool:
