@@ -2,6 +2,8 @@ echo '********************************************CloudProviderCrossBrowser test
         
 echo '********************************************BrowserStack tests********************************************'
 
+echo MAPPED_ENV_SAUCELABSUSERNAME $env:MAPPED_ENV_SAUCELABSUSERNAME
+echo MAPPED_ENV_SAUCELABSUSERNAME $($env:MAPPED_ENV_SAUCELABSUSERNAME)
     
 $vstest = (Resolve-Path "D:\a\_temp\VsTest\Microsoft.TestPlatform*\tools\net*\Common*\IDE\Extensions\TestPlatform\vstest.console.exe").ToString()
        
