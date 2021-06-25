@@ -211,6 +211,39 @@ jobs:
         testResultsFormat: 'VSTest'
         testResultsFiles: '**/Ocaramba.Tests.*.xml'
 
+- job: RunTestsOnWindows4
+  dependsOn:
+  - BuildTestsOnWindows
+  pool:
+    vmImage: 'windows-latest'
+  steps:
+    - checkout: none
+    - task: VisualStudioTestPlatformInstaller@1
+      inputs:
+        packageFeedSelector: 'nugetOrg'
+        versionSelector: 'latestStable'
+
+    - task: DownloadPipelineArtifact@2
+      inputs:
+        buildType: 'current'
+        artifactName: 'OcarambaBuild'
+        targetPath: '$(Pipeline.Workspace)'
+    - task: PowerShell@2
+      inputs:
+        filePath: './ExecutingTestsOnWindowsAzure4.ps1'
+      env:
+        MAPPED_ENV_BROWSERSTACKKEY: $(browserstackkey)
+        MAPPED_ENV_BROWSERSTACKUSER: $(browserstackuser)
+        MAPPED_ENV_TESTINGBOTKEY: $(testingbotkey)
+        MAPPED_ENV_TESTINGBOTSECRET: $(testingbotsecret)
+        MAPPED_ENV_SAUCELABSACCESSKEY: $(saucelabsaccessKey)
+        MAPPED_ENV_SAUCELABSUSERNAME: $(saucelabsusername)
+        
+    - task: PublishTestResults@2
+      inputs:
+        testResultsFormat: 'VSTest'
+        testResultsFiles: '**/Ocaramba.Tests.*.xml'
+
 - job: RunTestsOnLinux
   pool:
     vmImage: 'ubuntu-latest'
@@ -245,8 +278,8 @@ jobs:
   - RunTestsOnWindows1
   - RunTestsOnWindows2
   - RunTestsOnWindows3
+  - RunTestsOnWindows4
   - RunTestsOnLinux
-
 
   pool:
     vmImage: 'windows-latest'
