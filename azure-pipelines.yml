@@ -251,6 +251,18 @@ jobs:
       inputs:
         testResultsFormat: 'VSTest'
         testResultsFiles: '**/Ocaramba.Tests.*.xml'
+        
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: '.\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\net472\Ocaramba.Tests.CloudProviderCrossBrowser.dll.config'
+        artifact: 'CloudProviderCrossBrowserNeT'
+        publishLocation: 'pipeline'
+
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: '.\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\netcoreapp3.1\appsettings.json'
+        artifact: 'CloudProviderCrossBrowserCore'
+        publishLocation: 'pipeline'
 
 - job: RunTestsOnLinux
   pool:
