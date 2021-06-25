@@ -16,10 +16,10 @@ echo url: $url
 echo grid: $grid
 echo output: $output
 echo outputLogs: $outputLogs
-
+Get-ChildItem -Path $($env:DownloadFolder) -Recurse
 echo "Downloading Selenium Grid from:" $url
 
-(new-object    System.Net.WebClient).DownloadFile('$($url)', "$($output)");        
+(new-object    System.Net.WebClient).DownloadFile('$($url)', '$($output)');        
         
 echo "Selenium Grid downloaded to:" $output
         
