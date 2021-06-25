@@ -241,6 +241,11 @@ jobs:
 - job: PublishNuget
   dependsOn:
   - BuildTestsOnWindows
+  - RunTestsOnDocker
+  - RunTestsOnWindows1
+  - RunTestsOnWindows2
+  - RunTestsOnWindows3
+  - RunTestsOnLinux
 
 
   pool:
