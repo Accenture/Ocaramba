@@ -28,6 +28,7 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
   frameworkVersion: '3.3.0'
+  BuildVersion: '$(frameworkVersion)+$(Build.BuildNumber)'
 
 jobs:
 - job: BuildTestsOnWindows
