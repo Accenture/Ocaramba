@@ -164,7 +164,7 @@ stages:
           inputs:
             testResultsFormat: 'VSTest'
             testResultsFiles: '**/Ocaramba.Tests.*.xml' 
-    - job: RunTestsOnWindows1
+    - job: RunTestsOnWindowsCore1
       pool:
         vmImage: 'windows-latest'
       steps:
@@ -193,7 +193,7 @@ stages:
             testResultsFormat: 'VSTest'
             testResultsFiles: '**/Ocaramba.Tests.*.xml'
             
-    - job: RunTestsOnWindows2
+    - job: RunTestsOnWindowsCore2
       pool:
         vmImage: 'windows-latest'
       steps:
@@ -216,7 +216,7 @@ stages:
             testResultsFormat: 'VSTest'
             testResultsFiles: '**/Ocaramba.Tests.*.xml'
 
-    - job: RunTestsOnWindows3
+    - job: RunTestsOnWindowsFramework
       pool:
         vmImage: 'windows-latest'
       steps:
@@ -240,7 +240,7 @@ stages:
             testResultsFormat: 'VSTest'
             testResultsFiles: '**/Ocaramba.Tests.*.xml'
 
-    - job: RunTestsOnWindows4
+    - job: RunTestsOnCloudProviderCrossBrowser
       pool:
         vmImage: 'windows-latest'
       steps:
@@ -271,7 +271,7 @@ stages:
             testResultsFormat: 'VSTest'
             testResultsFiles: '**/Ocaramba.Tests.*.xml'
 
-    - job: RunTestsOnWindows5
+    - job: RunTestsSeleniumGrid
       pool:
         vmImage: 'windows-latest'
       steps:
