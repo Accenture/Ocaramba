@@ -115,9 +115,7 @@ stages:
             publishLocation: 'pipeline'
 
   - stage: test
-    displayName: Test 
-    dependsOn:
-      - build
+    displayName: TestOnLinuxAndDocker
     jobs:       
     - job: RunTestsOnDocker
       pool:
@@ -138,7 +136,38 @@ stages:
           inputs:
             testResultsFormat: 'VSTest'
             testResultsFiles: '**/Ocaramba.Tests.*.xml'
+    - job: RunTestsOnLinux
+      pool:
+        vmImage: 'ubuntu-latest'
+      steps:
+        - task: CmdLine@2
+          inputs:
+            script: |	
+              ls	
+                
+              export ASPNETCORE_ENVIRONMENT=Linux	
+                
+              echo $ASPNETCORE_ENVIRONMENT	
+                
+              sudo apt-get install google-chrome-stable	
+                
+              sed -i '/Documentation/,+5 d' ./Ocaramba.sln	
+        - script: dotnet build ./Ocaramba.sln --configuration $(buildConfiguration)
 
+        - task: PowerShell@2
+          inputs:
+            filePath: './ExecutingTestsOnLinuxAzure.ps1'
+
+        - task: PublishTestResults@2
+          inputs:
+            testResultsFormat: 'VSTest'
+            testResultsFiles: '**/Ocaramba.Tests.*.xml'
+            
+  - stage: test
+    displayName: TestOnWindows 
+    dependsOn:
+      - build
+    jobs:  
     - job: RunTestsOnWindows1
       pool:
         vmImage: 'windows-latest'
@@ -271,32 +300,6 @@ stages:
             testResultsFormat: 'VSTest'
             testResultsFiles: '**/Ocaramba.Tests.*.xml'
 
-    - job: RunTestsOnLinux
-      pool:
-        vmImage: 'ubuntu-latest'
-      steps:
-        - task: CmdLine@2
-          inputs:
-            script: |	
-              ls	
-                
-              export ASPNETCORE_ENVIRONMENT=Linux	
-                
-              echo $ASPNETCORE_ENVIRONMENT	
-                
-              sudo apt-get install google-chrome-stable	
-                
-              sed -i '/Documentation/,+5 d' ./Ocaramba.sln	
-        - script: dotnet build ./Ocaramba.sln --configuration $(buildConfiguration)
-
-        - task: PowerShell@2
-          inputs:
-            filePath: './ExecutingTestsOnLinuxAzure.ps1'
-
-        - task: PublishTestResults@2
-          inputs:
-            testResultsFormat: 'VSTest'
-            testResultsFiles: '**/Ocaramba.Tests.*.xml'
   - stage: release
     displayName: Release 
     dependsOn:
