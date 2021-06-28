@@ -114,7 +114,7 @@ stages:
             artifact: 'OcarambaBuild'
             publishLocation: 'pipeline'
 
-  - stage: test
+  - stage: testonlinux
     displayName: TestOnLinuxAndDocker
     jobs:       
     - job: RunTestsOnDocker
