@@ -311,15 +311,8 @@ stages:
     jobs:    
     - job: PublishNuget
       dependsOn:
-      - BuildTestsOnWindows
-      - RunTestsOnDocker
-      - RunTestsOnWindows1
-      - RunTestsOnWindows2
-      - RunTestsOnWindows3
-      - RunTestsOnWindows4
-      - RunTestsOnWindows5
-      - RunTestsOnLinux
-
+      - build
+      - test
       pool:
         vmImage: 'windows-latest'
       steps:
