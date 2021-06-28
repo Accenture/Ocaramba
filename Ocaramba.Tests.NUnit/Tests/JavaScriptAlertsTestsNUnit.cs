@@ -36,7 +36,7 @@ namespace Ocaramba.Tests.NUnit.Tests
             var jsAlertsPage = internetPage.GoToJavaScriptAlerts();
             jsAlertsPage.OpenJsAlert();
             jsAlertsPage.AcceptAlert();
-            Assert.AreEqual("You successfuly clicked an alert", jsAlertsPage.ResultText);
+            Assert.AreEqual("You successfully clicked an alert", jsAlertsPage.ResultText);
         }
 
         [Test]

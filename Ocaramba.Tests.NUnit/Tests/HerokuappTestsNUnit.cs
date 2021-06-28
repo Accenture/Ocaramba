@@ -47,6 +47,7 @@ namespace Ocaramba.Tests.NUnit.Tests
         }
 
         [Test]
+        [Ignore("ForgotPasswordPage doesn't work")]
         public void ForgotPasswordTest()
         {
             new InternetPage(this.DriverContext).OpenHomePage().GoToForgotPasswordPage();
