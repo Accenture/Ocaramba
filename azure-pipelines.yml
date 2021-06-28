@@ -31,335 +31,343 @@ variables:
   BuildVersion: '$(frameworkVersion)$(Build.BuildNumber)'
   seleniumGridVersion: 'selenium-server-standalone-3.141.59.jar'
   seleniumGridUrl: 'http://selenium-release.storage.googleapis.com/3.141/selenium-server-standalone-3.141.59.jar'
+  
+stages:
+  - stage: build
+    displayName: Build
+    jobs:
+    - job: BuildTestsOnWindows
+      pool:
+        vmImage: 'windows-latest'
+      steps:
+        - task: PowerShell@2
+          condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/')
+          inputs:
+            targetType: 'inline'
+            script: |
+              $tags = git tag --sort=-creatordate   
+              $tag = $tags[0]
+              Write-Host "##vso[task.setvariable variable=frameworkVersion]$tag"
 
-jobs:
-- job: BuildTestsOnWindows
-  pool:
-    vmImage: 'windows-latest'
-  steps:
-    - task: PowerShell@2
-      condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/')
-      inputs:
-        targetType: 'inline'
-        script: |
-          $tags = git tag --sort=-creatordate   
-          $tag = $tags[0]
-          Write-Host "##vso[task.setvariable variable=frameworkVersion]$tag"
-
-    - task: PowerShell@2
-      inputs:
-        targetType: 'inline'
-        script: '(Get-Content ''Ocaramba.sln'' -raw) -replace [regex](''.*?'' + ''Documentation'' + (''.*?\r\n'' * (5 + 1))) | set-content  ''Ocaramba.sln'''
-
-
-    - task: NuGetToolInstaller@1
-
-    - task: NuGetCommand@2
-      inputs:
-        restoreSolution: '$(solution)'
-
-    - task: Assembly-Info-NetCore@2
-      inputs:
-        Path: '$(Build.SourcesDirectory)'
-        FileNames: '**/*.csproj'
-        InsertAttributes: false
-        FileEncoding: 'auto'
-        WriteBOM: false
-        GeneratePackageOnBuild: true
-        VersionNumber: '$(frameworkVersion)'
-        FileVersionNumber: '$(frameworkVersion).$(Build.BuildId)'
-        InformationalVersion: '$(frameworkVersion)'
-        PackageVersion: '$(frameworkVersion)'
-        LogLevel: 'verbose'
-        FailOnWarning: false
-        DisableTelemetry: false
-    - task: VSBuild@1
-      inputs:
-        solution: '$(solution)'
-        msbuildArgs: '/v:minimal'
-        platform: '$(buildPlatform)'
-        configuration: '$(buildConfiguration)'
-        
-    - task: PublishPipelineArtifact@1
-      inputs:
-        targetPath: './Ocaramba/bin/Release/Ocaramba.$(frameworkVersion).nupkg'
-        artifact: 'Ocaramba$(frameworkVersion)'
-        publishLocation: 'pipeline'
+        - task: PowerShell@2
+          inputs:
+            targetType: 'inline'
+            script: '(Get-Content ''Ocaramba.sln'' -raw) -replace [regex](''.*?'' + ''Documentation'' + (''.*?\r\n'' * (5 + 1))) | set-content  ''Ocaramba.sln'''
 
 
-    - task: PublishPipelineArtifact@1
-      inputs:
-        targetPath: './Ocaramba/bin/Release/Ocaramba.$(frameworkVersion).snupkg'
-        artifact: 'OcarambaS$(frameworkVersion)'
-        publishLocation: 'pipeline'
-    - task: PublishPipelineArtifact@1
-      inputs:
-        targetPath: './OcarambaLite/bin/Release/OcarambaLite.$(frameworkVersion).nupkg'
-        artifact: 'OcarambaLite$(frameworkVersion)'
-        publishLocation: 'pipeline'
+        - task: NuGetToolInstaller@1
 
-    - task: PublishPipelineArtifact@1
-      inputs:
-        targetPath: './OcarambaLite/bin/Release/OcarambaLite.$(frameworkVersion).snupkg'
-        artifact: 'OcarambaLiteS$(frameworkVersion)'
-        publishLocation: 'pipeline'
-    - task: PublishPipelineArtifact@1
-      condition: succeededOrFailed()
-      inputs:
-      
-        targetPath: '$(Pipeline.Workspace)'
-        artifact: 'OcarambaBuild'
-        publishLocation: 'pipeline'
-        
-- job: RunTestsOnDocker
-  pool:
-    vmImage: 'ubuntu-latest'
-  steps:
-    - task: DockerCompose@0
-      inputs:
-        containerregistrytype: 'Container Registry'
-        dockerComposeFile: '**/docker-compose.yml'
-        action: 'Run a Docker Compose command'
-        dockerComposeCommand: 'up -d --build'
+        - task: NuGetCommand@2
+          inputs:
+            restoreSolution: '$(solution)'
 
-    - task: PowerShell@2
-      inputs:
-        filePath: './ExecutingTestsOnDockerAzure.ps1'
+        - task: Assembly-Info-NetCore@2
+          inputs:
+            Path: '$(Build.SourcesDirectory)'
+            FileNames: '**/*.csproj'
+            InsertAttributes: false
+            FileEncoding: 'auto'
+            WriteBOM: false
+            GeneratePackageOnBuild: true
+            VersionNumber: '$(frameworkVersion)'
+            FileVersionNumber: '$(frameworkVersion).$(Build.BuildId)'
+            InformationalVersion: '$(frameworkVersion)'
+            PackageVersion: '$(frameworkVersion)'
+            LogLevel: 'verbose'
+            FailOnWarning: false
+            DisableTelemetry: false
+        - task: VSBuild@1
+          inputs:
+            solution: '$(solution)'
+            msbuildArgs: '/v:minimal'
+            platform: '$(buildPlatform)'
+            configuration: '$(buildConfiguration)'
+            
+        - task: PublishPipelineArtifact@1
+          inputs:
+            targetPath: './Ocaramba/bin/Release/Ocaramba.$(frameworkVersion).nupkg'
+            artifact: 'Ocaramba$(frameworkVersion)'
+            publishLocation: 'pipeline'
 
-    - task: PublishTestResults@2
-      inputs:
-        testResultsFormat: 'VSTest'
-        testResultsFiles: '**/Ocaramba.Tests.*.xml'
 
-- job: RunTestsOnWindows1
-  dependsOn:
-  - BuildTestsOnWindows
-  pool:
-    vmImage: 'windows-latest'
-  steps:
-    - checkout: none
-    - task: VisualStudioTestPlatformInstaller@1
-      inputs:
-        packageFeedSelector: 'nugetOrg'
-        versionSelector: 'latestStable'
+        - task: PublishPipelineArtifact@1
+          inputs:
+            targetPath: './Ocaramba/bin/Release/Ocaramba.$(frameworkVersion).snupkg'
+            artifact: 'OcarambaS$(frameworkVersion)'
+            publishLocation: 'pipeline'
+        - task: PublishPipelineArtifact@1
+          inputs:
+            targetPath: './OcarambaLite/bin/Release/OcarambaLite.$(frameworkVersion).nupkg'
+            artifact: 'OcarambaLite$(frameworkVersion)'
+            publishLocation: 'pipeline'
 
-    - task: DownloadPipelineArtifact@2
-      inputs:
-        buildType: 'current'
-        artifactName: 'OcarambaBuild'
-        targetPath: '$(Pipeline.Workspace)'
-    - task: PowerShell@2
-      inputs:
-        targetType: 'inline'
-        script: |
-          Get-ChildItem .\  -Recurse
-    - task: PowerShell@2
-      inputs:
-        filePath: './ExecutingTestsOnWindowsAzure1.ps1'
-        
-    - task: PublishTestResults@2
-      inputs:
-        testResultsFormat: 'VSTest'
-        testResultsFiles: '**/Ocaramba.Tests.*.xml'
-        
+        - task: PublishPipelineArtifact@1
+          inputs:
+            targetPath: './OcarambaLite/bin/Release/OcarambaLite.$(frameworkVersion).snupkg'
+            artifact: 'OcarambaLiteS$(frameworkVersion)'
+            publishLocation: 'pipeline'
+        - task: PublishPipelineArtifact@1
+          condition: succeededOrFailed()
+          inputs:
+          
+            targetPath: '$(Pipeline.Workspace)'
+            artifact: 'OcarambaBuild'
+            publishLocation: 'pipeline'
 
-- job: RunTestsOnWindows2
-  dependsOn:
-  - BuildTestsOnWindows
-  pool:
-    vmImage: 'windows-latest'
-  steps:
-    - checkout: none
-    - task: VisualStudioTestPlatformInstaller@1
-      inputs:
-        packageFeedSelector: 'nugetOrg'
-        versionSelector: 'latestStable'
-    - task: DownloadPipelineArtifact@2
-      inputs:
-        buildType: 'current'
-        artifactName: 'OcarambaBuild'
-        targetPath: '$(Pipeline.Workspace)'
-    - task: PowerShell@2
-      inputs:
-        filePath: './ExecutingTestsOnWindowsAzure2.ps1'
-        
-    - task: PublishTestResults@2
-      inputs:
-        testResultsFormat: 'VSTest'
-        testResultsFiles: '**/Ocaramba.Tests.*.xml'
+  - stage: test
+    displayName: Test 
+    jobs:       
+    - job: RunTestsOnDocker
+      pool:
+        vmImage: 'ubuntu-latest'
+      steps:
+        - task: DockerCompose@0
+          inputs:
+            containerregistrytype: 'Container Registry'
+            dockerComposeFile: '**/docker-compose.yml'
+            action: 'Run a Docker Compose command'
+            dockerComposeCommand: 'up -d --build'
 
-- job: RunTestsOnWindows3
-  dependsOn:
-  - BuildTestsOnWindows
-  pool:
-    vmImage: 'windows-latest'
-  steps:
-    - checkout: none
-    - task: VisualStudioTestPlatformInstaller@1
-      inputs:
-        packageFeedSelector: 'nugetOrg'
-        versionSelector: 'latestStable'
+        - task: PowerShell@2
+          inputs:
+            filePath: './ExecutingTestsOnDockerAzure.ps1'
 
-    - task: DownloadPipelineArtifact@2
-      inputs:
-        buildType: 'current'
-        artifactName: 'OcarambaBuild'
-        targetPath: '$(Pipeline.Workspace)'
-    - task: PowerShell@2
-      inputs:
-        filePath: './ExecutingTestsOnWindowsAzure3.ps1'
-        
-    - task: PublishTestResults@2
-      inputs:
-        testResultsFormat: 'VSTest'
-        testResultsFiles: '**/Ocaramba.Tests.*.xml'
+        - task: PublishTestResults@2
+          inputs:
+            testResultsFormat: 'VSTest'
+            testResultsFiles: '**/Ocaramba.Tests.*.xml'
 
-- job: RunTestsOnWindows4
-  dependsOn:
-  - BuildTestsOnWindows
+    - job: RunTestsOnWindows1
+      dependsOn:
+      - BuildTestsOnWindows
+      pool:
+        vmImage: 'windows-latest'
+      steps:
+        - checkout: none
+        - task: VisualStudioTestPlatformInstaller@1
+          inputs:
+            packageFeedSelector: 'nugetOrg'
+            versionSelector: 'latestStable'
 
-  pool:
-    vmImage: 'windows-latest'
-  steps:
-    - checkout: none
-    - task: VisualStudioTestPlatformInstaller@1
-      inputs:
-        packageFeedSelector: 'nugetOrg'
-        versionSelector: 'latestStable'
+        - task: DownloadPipelineArtifact@2
+          inputs:
+            buildType: 'current'
+            artifactName: 'OcarambaBuild'
+            targetPath: '$(Pipeline.Workspace)'
+        - task: PowerShell@2
+          inputs:
+            targetType: 'inline'
+            script: |
+              Get-ChildItem .\  -Recurse
+        - task: PowerShell@2
+          inputs:
+            filePath: './ExecutingTestsOnWindowsAzure1.ps1'
+            
+        - task: PublishTestResults@2
+          inputs:
+            testResultsFormat: 'VSTest'
+            testResultsFiles: '**/Ocaramba.Tests.*.xml'
+            
 
-    - task: DownloadPipelineArtifact@2
-      inputs:
-        buildType: 'current'
-        artifactName: 'OcarambaBuild'
-        targetPath: '$(Pipeline.Workspace)'
-    - task: PowerShell@2
-      inputs:
-        filePath: './ExecutingTestsOnWindowsAzure4.ps1'
-      env:
-        MAPPED_ENV_BROWSERSTACKKEY: $(browserstackkey)
-        MAPPED_ENV_BROWSERSTACKUSER: $(browserstackuser)
-        MAPPED_ENV_TESTINGBOTKEY: $(testingbotkey)
-        MAPPED_ENV_TESTINGBOTSECRET: $(testingbotsecret)
-        MAPPED_ENV_SAUCELABSACCESSKEY: $(saucelabsaccessKey)
-        MAPPED_ENV_SAUCELABSUSERNAME: $(saucelabsusername)
-        
-    - task: PublishTestResults@2
-      inputs:
-        testResultsFormat: 'VSTest'
-        testResultsFiles: '**/Ocaramba.Tests.*.xml'
+    - job: RunTestsOnWindows2
+      dependsOn:
+      - BuildTestsOnWindows
+      pool:
+        vmImage: 'windows-latest'
+      steps:
+        - checkout: none
+        - task: VisualStudioTestPlatformInstaller@1
+          inputs:
+            packageFeedSelector: 'nugetOrg'
+            versionSelector: 'latestStable'
+        - task: DownloadPipelineArtifact@2
+          inputs:
+            buildType: 'current'
+            artifactName: 'OcarambaBuild'
+            targetPath: '$(Pipeline.Workspace)'
+        - task: PowerShell@2
+          inputs:
+            filePath: './ExecutingTestsOnWindowsAzure2.ps1'
+            
+        - task: PublishTestResults@2
+          inputs:
+            testResultsFormat: 'VSTest'
+            testResultsFiles: '**/Ocaramba.Tests.*.xml'
 
-- job: RunTestsOnWindows5
-  dependsOn:
-  - BuildTestsOnWindows
-  pool:
-    vmImage: 'windows-latest'
-  steps:
-    - checkout: none
-    - task: VisualStudioTestPlatformInstaller@1
-      inputs:
-        packageFeedSelector: 'nugetOrg'
-        versionSelector: 'latestStable'
+    - job: RunTestsOnWindows3
+      dependsOn:
+      - BuildTestsOnWindows
+      pool:
+        vmImage: 'windows-latest'
+      steps:
+        - checkout: none
+        - task: VisualStudioTestPlatformInstaller@1
+          inputs:
+            packageFeedSelector: 'nugetOrg'
+            versionSelector: 'latestStable'
 
-    - task: DownloadPipelineArtifact@2
-      inputs:
-        buildType: 'current'
-        artifactName: 'OcarambaBuild'
-        targetPath: '$(Pipeline.Workspace)'
-    - task: PowerShell@2
-      inputs:
-        filePath: './ExecutingTestsOnWindowsAzure5.ps1'
-        
-    - task: PublishTestResults@2
-      inputs:
-        testResultsFormat: 'VSTest'
-        testResultsFiles: '**/Ocaramba.Tests.*.xml'
+        - task: DownloadPipelineArtifact@2
+          inputs:
+            buildType: 'current'
+            artifactName: 'OcarambaBuild'
+            targetPath: '$(Pipeline.Workspace)'
+        - task: PowerShell@2
+          inputs:
+            filePath: './ExecutingTestsOnWindowsAzure3.ps1'
+            
+        - task: PublishTestResults@2
+          inputs:
+            testResultsFormat: 'VSTest'
+            testResultsFiles: '**/Ocaramba.Tests.*.xml'
 
-- job: RunTestsOnLinux
-  pool:
-    vmImage: 'ubuntu-latest'
-  steps:
-    - task: CmdLine@2
-      inputs:
-        script: |	
-          ls	
-          	
-          export ASPNETCORE_ENVIRONMENT=Linux	
-          	
-          echo $ASPNETCORE_ENVIRONMENT	
-          	
-          sudo apt-get install google-chrome-stable	
-          	
-          sed -i '/Documentation/,+5 d' ./Ocaramba.sln	
-    - script: dotnet build ./Ocaramba.sln --configuration $(buildConfiguration)
+    - job: RunTestsOnWindows4
+      dependsOn:
+      - BuildTestsOnWindows
 
-    - task: PowerShell@2
-      inputs:
-        filePath: './ExecutingTestsOnLinuxAzure.ps1'
+      pool:
+        vmImage: 'windows-latest'
+      steps:
+        - checkout: none
+        - task: VisualStudioTestPlatformInstaller@1
+          inputs:
+            packageFeedSelector: 'nugetOrg'
+            versionSelector: 'latestStable'
 
-    - task: PublishTestResults@2
-      inputs:
-        testResultsFormat: 'VSTest'
-        testResultsFiles: '**/Ocaramba.Tests.*.xml'
+        - task: DownloadPipelineArtifact@2
+          inputs:
+            buildType: 'current'
+            artifactName: 'OcarambaBuild'
+            targetPath: '$(Pipeline.Workspace)'
+        - task: PowerShell@2
+          inputs:
+            filePath: './ExecutingTestsOnWindowsAzure4.ps1'
+          env:
+            MAPPED_ENV_BROWSERSTACKKEY: $(browserstackkey)
+            MAPPED_ENV_BROWSERSTACKUSER: $(browserstackuser)
+            MAPPED_ENV_TESTINGBOTKEY: $(testingbotkey)
+            MAPPED_ENV_TESTINGBOTSECRET: $(testingbotsecret)
+            MAPPED_ENV_SAUCELABSACCESSKEY: $(saucelabsaccessKey)
+            MAPPED_ENV_SAUCELABSUSERNAME: $(saucelabsusername)
+            
+        - task: PublishTestResults@2
+          inputs:
+            testResultsFormat: 'VSTest'
+            testResultsFiles: '**/Ocaramba.Tests.*.xml'
 
-- job: PublishNuget
-  dependsOn:
-  - BuildTestsOnWindows
-  - RunTestsOnDocker
-  - RunTestsOnWindows1
-  - RunTestsOnWindows2
-  - RunTestsOnWindows3
-  - RunTestsOnWindows4
-  - RunTestsOnWindows5
-  - RunTestsOnLinux
+    - job: RunTestsOnWindows5
+      dependsOn:
+      - BuildTestsOnWindows
+      pool:
+        vmImage: 'windows-latest'
+      steps:
+        - checkout: none
+        - task: VisualStudioTestPlatformInstaller@1
+          inputs:
+            packageFeedSelector: 'nugetOrg'
+            versionSelector: 'latestStable'
 
-  pool:
-    vmImage: 'windows-latest'
-  steps:
-    - checkout: none
-    - task: DownloadPipelineArtifact@2
-      inputs:
-        buildType: 'current'
-        artifactName: 'Ocaramba$(frameworkVersion)'
-        targetPath: '$(Pipeline.Workspace)'
-    - task: DownloadPipelineArtifact@2
-      inputs:
-        buildType: 'current'
-        artifactName: 'OcarambaS$(frameworkVersion)'
-        targetPath: '$(Pipeline.Workspace)'
-    - task: DownloadPipelineArtifact@2
-      inputs:
-        buildType: 'current'
-        artifactName: 'OcarambaLite$(frameworkVersion)'
-        targetPath: '$(Pipeline.Workspace)'
-    - task: DownloadPipelineArtifact@2
-      inputs:
-        buildType: 'current'
-        artifactName: 'OcarambaLiteS$(frameworkVersion)'
-        targetPath: '$(Pipeline.Workspace)'
+        - task: DownloadPipelineArtifact@2
+          inputs:
+            buildType: 'current'
+            artifactName: 'OcarambaBuild'
+            targetPath: '$(Pipeline.Workspace)'
+        - task: PowerShell@2
+          inputs:
+            filePath: './ExecutingTestsOnWindowsAzure5.ps1'
+            
+        - task: PublishTestResults@2
+          inputs:
+            testResultsFormat: 'VSTest'
+            testResultsFiles: '**/Ocaramba.Tests.*.xml'
 
-    - task: PowerShell@2
-      inputs:
-        targetType: 'inline'
-        script: 'Get-ChildItem -Path $(Agent.BuildDirectory) -Recurse'
+    - job: RunTestsOnLinux
+      pool:
+        vmImage: 'ubuntu-latest'
+      steps:
+        - task: CmdLine@2
+          inputs:
+            script: |	
+              ls	
+                
+              export ASPNETCORE_ENVIRONMENT=Linux	
+                
+              echo $ASPNETCORE_ENVIRONMENT	
+                
+              sudo apt-get install google-chrome-stable	
+                
+              sed -i '/Documentation/,+5 d' ./Ocaramba.sln	
+        - script: dotnet build ./Ocaramba.sln --configuration $(buildConfiguration)
 
-    - task: DotNetCoreCLI@2
-      condition: and(succeeded(),startsWith(variables['Build.SourceBranch'], 'refs/tags/'))
-      displayName: Push Nuget Package
-      inputs:
-        command: custom
-        custom: nuget
-        arguments: >
-          push $(Agent.BuildDirectory)\Ocaramba.$(frameworkVersion).nupkg
-          -s https://api.nuget.org/v3/index.json
-          -k $(NuGetApiKey) 
+        - task: PowerShell@2
+          inputs:
+            filePath: './ExecutingTestsOnLinuxAzure.ps1'
 
-    - task: DotNetCoreCLI@2
-      condition: and(succeeded(),startsWith(variables['Build.SourceBranch'], 'refs/tags/'))
-      displayName: Push Nuget Package
-      inputs:
-        command: custom
-        custom: nuget
-        arguments: >
-          push $(Agent.BuildDirectory)\OcarambaLite.$(frameworkVersion).nupkg
-          -s https://api.nuget.org/v3/index.json
-          -k $(NuGetApiKey)
+        - task: PublishTestResults@2
+          inputs:
+            testResultsFormat: 'VSTest'
+            testResultsFiles: '**/Ocaramba.Tests.*.xml'
+  - stage: release
+    displayName: Release 
+    jobs:    
+    - job: PublishNuget
+      dependsOn:
+      - BuildTestsOnWindows
+      - RunTestsOnDocker
+      - RunTestsOnWindows1
+      - RunTestsOnWindows2
+      - RunTestsOnWindows3
+      - RunTestsOnWindows4
+      - RunTestsOnWindows5
+      - RunTestsOnLinux
+
+      pool:
+        vmImage: 'windows-latest'
+      steps:
+        - checkout: none
+        - task: DownloadPipelineArtifact@2
+          inputs:
+            buildType: 'current'
+            artifactName: 'Ocaramba$(frameworkVersion)'
+            targetPath: '$(Pipeline.Workspace)'
+        - task: DownloadPipelineArtifact@2
+          inputs:
+            buildType: 'current'
+            artifactName: 'OcarambaS$(frameworkVersion)'
+            targetPath: '$(Pipeline.Workspace)'
+        - task: DownloadPipelineArtifact@2
+          inputs:
+            buildType: 'current'
+            artifactName: 'OcarambaLite$(frameworkVersion)'
+            targetPath: '$(Pipeline.Workspace)'
+        - task: DownloadPipelineArtifact@2
+          inputs:
+            buildType: 'current'
+            artifactName: 'OcarambaLiteS$(frameworkVersion)'
+            targetPath: '$(Pipeline.Workspace)'
+
+        - task: PowerShell@2
+          inputs:
+            targetType: 'inline'
+            script: 'Get-ChildItem -Path $(Agent.BuildDirectory) -Recurse'
+
+        - task: DotNetCoreCLI@2
+          condition: and(succeeded(),startsWith(variables['Build.SourceBranch'], 'refs/tags/'))
+          displayName: Push Nuget Package
+          inputs:
+            command: custom
+            custom: nuget
+            arguments: >
+              push $(Agent.BuildDirectory)\Ocaramba.$(frameworkVersion).nupkg
+              -s https://api.nuget.org/v3/index.json
+              -k $(NuGetApiKey) 
+
+        - task: DotNetCoreCLI@2
+          condition: and(succeeded(),startsWith(variables['Build.SourceBranch'], 'refs/tags/'))
+          displayName: Push Nuget Package
+          inputs:
+            command: custom
+            custom: nuget
+            arguments: >
+              push $(Agent.BuildDirectory)\OcarambaLite.$(frameworkVersion).nupkg
+              -s https://api.nuget.org/v3/index.json
+              -k $(NuGetApiKey)
