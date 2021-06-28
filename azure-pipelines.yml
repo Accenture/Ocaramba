@@ -114,8 +114,10 @@ stages:
             artifact: 'OcarambaBuild'
             publishLocation: 'pipeline'
 
-  - stage: testonlinux
-    displayName: TestOnLinuxAndDocker
+  - stage: test
+    displayName: Test
+    dependsOn:
+      - build
     jobs:       
     - job: RunTestsOnDocker
       pool:
@@ -161,13 +163,7 @@ stages:
         - task: PublishTestResults@2
           inputs:
             testResultsFormat: 'VSTest'
-            testResultsFiles: '**/Ocaramba.Tests.*.xml'
-            
-  - stage: test
-    displayName: TestOnWindows 
-    dependsOn:
-      - build
-    jobs:  
+            testResultsFiles: '**/Ocaramba.Tests.*.xml' 
     - job: RunTestsOnWindows1
       pool:
         vmImage: 'windows-latest'
@@ -197,7 +193,6 @@ stages:
             testResultsFormat: 'VSTest'
             testResultsFiles: '**/Ocaramba.Tests.*.xml'
             
-
     - job: RunTestsOnWindows2
       pool:
         vmImage: 'windows-latest'
