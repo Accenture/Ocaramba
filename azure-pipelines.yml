@@ -139,7 +139,7 @@ stages:
 
     - job: RunTestsOnWindows1
       dependsOn:
-      - BuildTestsOnWindows
+      - build
       pool:
         vmImage: 'windows-latest'
       steps:
@@ -171,7 +171,7 @@ stages:
 
     - job: RunTestsOnWindows2
       dependsOn:
-      - BuildTestsOnWindows
+      - build
       pool:
         vmImage: 'windows-latest'
       steps:
@@ -196,7 +196,7 @@ stages:
 
     - job: RunTestsOnWindows3
       dependsOn:
-      - BuildTestsOnWindows
+      - build
       pool:
         vmImage: 'windows-latest'
       steps:
@@ -222,7 +222,7 @@ stages:
 
     - job: RunTestsOnWindows4
       dependsOn:
-      - BuildTestsOnWindows
+      - build
 
       pool:
         vmImage: 'windows-latest'
@@ -256,7 +256,7 @@ stages:
 
     - job: RunTestsOnWindows5
       dependsOn:
-      - BuildTestsOnWindows
+      - build
       pool:
         vmImage: 'windows-latest'
       steps:
