@@ -30,6 +30,7 @@ namespace Ocaramba.Tests.MsTest.Tests.KendoTests
     public class KendoDropDownListTests : ProjectTestBase
     {
         [TestMethod]
+        [Ignore]
         public void KendoDropDownListOptionsTest()
         {
             var options = new Collection<string> { "Black", "Orange", "Grey" };
@@ -39,6 +40,7 @@ namespace Ocaramba.Tests.MsTest.Tests.KendoTests
         }
 
         [TestMethod]
+        [Ignore]
         public void KendoDropDownSizeListOptionsTest()
         {
             var options = new Collection<string> { "S - 6 3/4\"", "M - 7 1/4\"", "L - 7 1/8\"", "XL - 7 5/8\"" };
@@ -48,6 +50,7 @@ namespace Ocaramba.Tests.MsTest.Tests.KendoTests
         }
 
         [TestMethod]
+        [Ignore]
         public void KendoDropDownListSelectedOptionTest()
         {
             var option = "Black";
@@ -67,6 +70,7 @@ namespace Ocaramba.Tests.MsTest.Tests.KendoTests
         }
 
         [TestMethod]
+        [Ignore]
         public void KendoDropDownSizeListSelectByTextTest()
         {
             var option = "XL - 7 5/8\"";

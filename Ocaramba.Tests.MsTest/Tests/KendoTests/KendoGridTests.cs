@@ -29,6 +29,7 @@ namespace Ocaramba.Tests.MsTest.Tests.KendoTests
     public class KendoGridTests : ProjectTestBase
     {
         [TestMethod]
+        [Ignore]
         public void KendoGridTotalPagesTest()
         {
             var totalPages = 5;
@@ -38,6 +39,7 @@ namespace Ocaramba.Tests.MsTest.Tests.KendoTests
         }
 
         [TestMethod]
+        [Ignore]
         public void KendoGridPageTest()
         {
             var currentPage = 1;
@@ -47,6 +49,7 @@ namespace Ocaramba.Tests.MsTest.Tests.KendoTests
         }
 
         [TestMethod]
+        [Ignore]
         public void KendoGridSetPageTest()
         {
             var page = 3;
@@ -56,6 +59,7 @@ namespace Ocaramba.Tests.MsTest.Tests.KendoTests
         }
 
         [TestMethod]
+        [Ignore]
         public void KendoGridSearchRowWithTextTest()
         {
             var text = "Maurizio Moroni";
