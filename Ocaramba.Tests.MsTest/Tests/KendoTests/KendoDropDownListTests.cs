@@ -60,6 +60,7 @@ namespace Ocaramba.Tests.MsTest.Tests.KendoTests
         }
 
         [TestMethod]
+        [Ignore]
         public void KendoDropDownListSelectByTextTest()
         {
             var option = "Orange";
