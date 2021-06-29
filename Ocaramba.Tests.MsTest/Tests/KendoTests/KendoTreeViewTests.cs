@@ -30,6 +30,7 @@ namespace Ocaramba.Tests.MsTest.Tests.KendoTests
     public class KendoTreeViewTests : ProjectTestBase
     {
         [TestMethod]
+        [Ignore]
         public void KendoTreeViewSelectTest()
         {
             var text = "logo.png";
@@ -39,6 +40,7 @@ namespace Ocaramba.Tests.MsTest.Tests.KendoTests
         }
 
         [TestMethod]
+        [Ignore]
         public void KendoTreeViewFindElementsByTextTest()
         {
             var text = "logo.png";

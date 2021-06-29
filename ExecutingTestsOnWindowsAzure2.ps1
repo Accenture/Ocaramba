@@ -15,7 +15,7 @@ dotnet vstest .\Ocaramba.Tests.Features\bin\Release\netcoreapp3.1\Ocaramba.Tests
 			  .\Ocaramba.Tests.Xunit\bin\Release\netcoreapp3.1\Ocaramba.Tests.Xunit.dll `
 			  .\Ocaramba.Tests.MsTest\bin\Release\netcoreapp3.1\Ocaramba.Tests.MsTest.dll `
 	          .\Ocaramba.UnitTests\bin\Release\netcoreapp3.1\Ocaramba.UnitTests.dll `
-			  /TestCaseFilter:"(TestCategory!=TakingScreehShots)" `
+			  /TestCaseFilter:"(TestCategory!=TakingScreehShots)" /Parallel `
 	          --logger:"trx;LogFileName=Ocaramba.Tests.netcoreapp.xml"
 
 echo '********************************************net472 tests********************************************'

@@ -30,6 +30,7 @@ namespace Ocaramba.Tests.MsTest.Tests.KendoTests
     public class KendoComboBoxTests : ProjectTestBase
     {
         [TestMethod]
+        [Ignore]
         public void KendoComboBoxOptionsTest()
         {
             var options = new Collection<string> { "Cotton", "Polyester", "Cotton/Polyester", "Rib Knit" };
@@ -39,6 +40,7 @@ namespace Ocaramba.Tests.MsTest.Tests.KendoTests
         }
 
         [TestMethod]
+        [Ignore]
         public void KendoComboBoxSearchOptionsTest()
         {
             var searchString = "cotton";
