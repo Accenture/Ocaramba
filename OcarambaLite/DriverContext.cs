@@ -36,7 +36,6 @@ namespace Ocaramba
     using Ocaramba.Types;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Chrome;
-    using OpenQA.Selenium.Edge;
     using OpenQA.Selenium.Firefox;
     using OpenQA.Selenium.IE;
     using OpenQA.Selenium.Remote;
@@ -64,7 +63,7 @@ namespace Ocaramba
         /// </value>
         private IWebDriver driver;
 
-        private EdgeDriverService serviceEdge;
+        private Microsoft.Edge.SeleniumTools.EdgeDriverService serviceEdge;
 
         private ChromeDriverService serviceChrome;
 
@@ -447,11 +446,11 @@ namespace Ocaramba
             }
         }
 
-        private EdgeOptions EdgeOptions
+        private OpenQA.Selenium.Edge.EdgeOptions EdgeOptions
         {
             get
             {
-                var options = new EdgeOptions();
+                var options = new OpenQA.Selenium.Edge.EdgeOptions();
 
                 // set browser proxy for Edge
                 if (!string.IsNullOrEmpty(BaseConfiguration.Proxy))
@@ -460,6 +459,115 @@ namespace Ocaramba
                 }
 
                 options.UseInPrivateBrowsing = true;
+
+                return options;
+            }
+        }
+
+        private Microsoft.Edge.SeleniumTools.EdgeOptions EdgeOptionsChrominium
+        {
+            get
+            {
+                var options = new Microsoft.Edge.SeleniumTools.EdgeOptions();
+
+                // retrieving settings from config file
+                NameValueCollection edgeChrominiumPreferences = null;
+                NameValueCollection edgeChrominiumExtensions = null;
+                NameValueCollection edgeChrominiumArguments = null;
+#if net47 || net45
+                edgeChrominiumPreferences = ConfigurationManager.GetSection("EdgeChrominiumPreferences") as NameValueCollection;
+                edgeChrominiumExtensions = ConfigurationManager.GetSection("EdgeChrominiumExtensions") as NameValueCollection;
+                edgeChrominiumArguments = ConfigurationManager.GetSection("EdgeChrominiumArguments") as NameValueCollection;
+#endif
+#if netcoreapp3_1
+                edgeChrominiumPreferences = BaseConfiguration.GetNameValueCollectionFromAppsettings("EdgeChrominiumPreferences");
+                edgeChrominiumExtensions = BaseConfiguration.GetNameValueCollectionFromAppsettings("EdgeChrominiumExtensions");
+                edgeChrominiumArguments = BaseConfiguration.GetNameValueCollectionFromAppsettings("EdgeChrominiumArguments");
+#endif
+
+                // set browser proxy for Edge
+                if (!string.IsNullOrEmpty(BaseConfiguration.Proxy))
+                {
+                    options.Proxy = this.CurrentProxy();
+                }
+
+                options.UseChromium = true;
+                options.BinaryLocation = BaseConfiguration.EdgeChrominiumBrowserExecutableLocation;
+                ////options.AddAdditionalCapability("useAutomationExtension", false);
+                //options.AddExcludedArgument("enable-automation");
+
+                // if there are any extensions
+                if (edgeChrominiumExtensions != null)
+                {
+                    // loop through all of them
+                    for (var i = 0; i < edgeChrominiumExtensions.Count; i++)
+                    {
+                        Logger.Trace(CultureInfo.CurrentCulture, "Installing extension {0}", edgeChrominiumExtensions.GetKey(i));
+                        try
+                        {
+                            options.AddExtension(edgeChrominiumExtensions.GetKey(i));
+                        }
+                        catch (FileNotFoundException)
+                        {
+                            Logger.Trace(CultureInfo.CurrentCulture, "Installing extension {0}", this.CurrentDirectory + FilesHelper.Separator + edgeChrominiumExtensions.GetKey(i));
+                            options.AddExtension(this.CurrentDirectory + FilesHelper.Separator + edgeChrominiumExtensions.GetKey(i));
+                        }
+                    }
+                }
+
+                // if there are any arguments
+                if (edgeChrominiumArguments != null)
+                {
+                    // loop through all of them
+                    for (var i = 0; i < edgeChrominiumArguments.Count; i++)
+                    {
+                        Logger.Trace(CultureInfo.CurrentCulture, "Setting Chrome Arguments {0}", edgeChrominiumArguments.GetKey(i));
+                        options.AddArgument(edgeChrominiumArguments.GetKey(i));
+                    }
+                }
+
+                // custom preferences
+                // if there are any settings
+                if (edgeChrominiumPreferences == null)
+                {
+                    return options;
+                }
+
+                // loop through all of them
+                for (var i = 0; i < edgeChrominiumPreferences.Count; i++)
+                {
+                    Logger.Trace(CultureInfo.CurrentCulture, "Set custom preference '{0},{1}'", edgeChrominiumPreferences.GetKey(i), edgeChrominiumPreferences[i]);
+
+                    // and verify all of them
+                    switch (edgeChrominiumPreferences[i])
+                    {
+                        // if current settings value is "true"
+                        case "true":
+                            options.AddUserProfilePreference(edgeChrominiumPreferences.GetKey(i), true);
+                            break;
+
+                        // if "false"
+                        case "false":
+                            options.AddUserProfilePreference(edgeChrominiumPreferences.GetKey(i), false);
+                            break;
+
+                        // otherwise
+                        default:
+                            int temp;
+
+                            // an attempt to parse current settings value to an integer. Method TryParse returns True if the attempt is successful (the string is integer) or return False (if the string is just a string and cannot be cast to a number)
+                            if (int.TryParse(edgeChrominiumPreferences.Get(i), out temp))
+                            {
+                                options.AddUserProfilePreference(edgeChrominiumPreferences.GetKey(i), temp);
+                            }
+                            else
+                            {
+                                options.AddUserProfilePreference(edgeChrominiumPreferences.GetKey(i), edgeChrominiumPreferences[i]);
+                            }
+
+                            break;
+                    }
+                }
 
                 return options;
             }
@@ -547,28 +655,12 @@ namespace Ocaramba
                     this.SetupRemoteWebDriver();
                     break;
                 case BrowserType.Edge:
-                    this.driver = new EdgeDriver(EdgeDriverService.CreateDefaultService(BaseConfiguration.PathToEdgeDriverDirectory, "MicrosoftWebDriver.exe", 52296), this.SetDriverOptions(this.EdgeOptions));
+                    this.driver = new OpenQA.Selenium.Edge.EdgeDriver(OpenQA.Selenium.Edge.EdgeDriverService.CreateDefaultService(BaseConfiguration.PathToEdgeDriverDirectory, "MicrosoftWebDriver.exe", 52296), this.SetDriverOptions(this.EdgeOptions));
                     break;
                 case BrowserType.EdgeChrominium:
-                    this.serviceEdge = EdgeDriverService.CreateDefaultService(BaseConfiguration.PathToEdgeChrominumDriverDirectory, @"msedgedriver.exe");
+                    this.serviceEdge = Microsoft.Edge.SeleniumTools.EdgeDriverService.CreateChromiumService(BaseConfiguration.PathToEdgeChrominumDriverDirectory, @"msedgedriver.exe");
                     this.serviceEdge.UseVerboseLogging = true;
-                    this.serviceEdge.UseSpecCompliantProtocol = true;
-
-                    this.serviceEdge.Start();
-
-#pragma warning disable CS0618 // Type or member is obsolete
-                    var caps = new DesiredCapabilities(new Dictionary<string, object>()
-                    {
-                        {
-                            "ms:edgeOptions", new Dictionary<string, object>()
-                         {
-                            { "binary", BaseConfiguration.EdgeChrominiumBrowserExecutableLocation },
-                         }
-                        },
-                    });
-#pragma warning restore CS0618 // Type or member is obsolete
-
-                    this.driver = new RemoteWebDriver(this.serviceEdge.ServiceUrl, caps);
+                    var driver = new Microsoft.Edge.SeleniumTools.EdgeDriver(this.serviceEdge, this.SetDriverOptions(this.EdgeOptionsChrominium), TimeSpan.FromSeconds(BaseConfiguration.LongTimeout));
                     break;
                 default:
                     throw new NotSupportedException(
@@ -653,7 +745,7 @@ namespace Ocaramba
                     this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(safariOptions).ToCapabilities());
                     break;
                 case BrowserType.Edge:
-                    EdgeOptions egEdgeOptions = new EdgeOptions();
+                    OpenQA.Selenium.Edge.EdgeOptions egEdgeOptions = new OpenQA.Selenium.Edge.EdgeOptions();
                     this.SetRemoteDriverOptions(driverCapabilitiesConf, settings, egEdgeOptions);
                     this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(egEdgeOptions).ToCapabilities());
                     break;
