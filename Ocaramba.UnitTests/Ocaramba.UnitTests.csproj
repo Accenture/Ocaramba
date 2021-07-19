@@ -7,7 +7,7 @@
   
   <ItemGroup>
     <PackageReference Include="Appveyor.TestLogger" Version="2.0.0" />
-    <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="8.0.0" />
+    <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="8.1.0" />
     <PackageReference Include="NLog" Version="4.7.10" />
     <PackageReference Include="NUnit" Version="3.13.2" />
     <PackageReference Include="NUnit.Runners" Version="3.12.0" />
