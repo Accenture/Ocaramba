@@ -25,7 +25,7 @@ $url = $env:edgeChromiumDriverUrl
 echo url: $url
 $outputZip = "edgedriver_win64.zip"
 $output = $PSScriptRoot + "\Ocaramba.Tests.NUnit\bin\Release\netcoreapp3.1\$outputZip"
-$outputPath = $PSScriptRoot + "\Ocaramba.Tests.NUnit\bin\Release\netcoreapp3.1"
+$outputPath = $PSScriptRoot + "\Ocaramba.Tests.NUnit\bin\Release\netcoreapp3.1\"
 
 echo output: $output
 echo outputPath: $outputPath
@@ -39,7 +39,7 @@ $driver=$outputPath+"msedgedriver.exe"
 
 echo driver: $driver
 
-.\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.NUnit\bin\Release\netcoreapp3.1\" "appsettings.json" "appSettings" "browser|PathToEdgeChrominumDriverDirectory" "EdgeChromium|$driver" $true $true
+.\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.NUnit\bin\Release\netcoreapp3.1\" "appsettings.json" "appSettings" "browser|PathToEdgeChromiumDriverDirectory" "EdgeChromium|$driver" $true $true
         
 $outputZip = $PSScriptRoot + "\Ocaramba.Tests.NUnit\bin\Release\netcoreapp3.1\edgedriver_win64.zip"	
 echo outputZip: $outputZip
