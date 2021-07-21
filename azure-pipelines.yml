@@ -306,7 +306,6 @@ stages:
       pool:
         vmImage: 'windows-latest'
       steps:
-        - checkout: none
         - task: PowerShell@2
           condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/')
           inputs:
