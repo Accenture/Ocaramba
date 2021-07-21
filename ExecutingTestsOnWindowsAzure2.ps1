@@ -23,9 +23,10 @@ echo '********************************************EdgeChrominum tests***********
 
 $url = $env:edgeChromiumDriverUrl
 echo url: $url
+$outputZip = "edgedriver_win64.zip"
 $output = $PSScriptRoot + "\Ocaramba.Tests.NUnit\bin\Release\netcoreapp3.1\$outputZip"
 $outputPath = $PSScriptRoot + "\Ocaramba.Tests.NUnit\bin\Release\netcoreapp3.1"
-$outputZip = "edgedriver_win64.zip"
+
 echo output: $output
 echo outputPath: $outputPath
 echo outputZip: $outputZip
