@@ -23,7 +23,6 @@ echo '********************************************EdgeChrominum tests***********
 
 $url = $env:edgeChromiumDriverUrl
 echo url: $url
-$outputZip = "edgedriver_win64.zip"	
 $output = $PSScriptRoot + "\Ocaramba.Tests.NUnit\bin\Release\netcoreapp3.1\$outputZip"
 $outputPath = $PSScriptRoot + "\Ocaramba.Tests.NUnit\bin\Release\netcoreapp3.1"
 echo output: $output
@@ -38,14 +37,13 @@ $driver=$outputPath+"msedgedriver.exe"
 echo driver: $driver
 
 .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.NUnit\bin\Release\netcoreapp3.1\" "appsettings.json" "appSettings" "browser|PathToEdgeChrominumDriverDirectory" "EdgeChromium|$driver" $true $true
-
-echo "Downloading edgeChromiumDriver from:" $env:edgeChromiumDriverUrl
         
-$outputZip = $env:APPVEYOR_BUILD_FOLDER + "\Ocaramba.Tests.NUnit\bin\Debug\net45\edgedriver_win64.zip"	
+$outputZip = $PSScriptRoot + "\Ocaramba.Tests.NUnit\bin\Release\netcoreapp3.1\edgedriver_win64.zip"	
+echo outputZip: $outputZip
 		
-(New-Object System.Net.WebClient).DownloadFile($env:edgeChromiumDriverUrl, $outputZip)
+(New-Object System.Net.WebClient).DownloadFile($url, $outputZip)
 
-Expand-Archive -LiteralPath $outputZip -DestinationPath $output  -Force
+Expand-Archive -LiteralPath $outputZip -DestinationPath $outputPath  -Force
 
 dotnet vstest .\Ocaramba.Tests.NUnit\bin\Release\netcoreapp3.1\Ocaramba.Tests.NUnit.dll `
 			  /TestCaseFilter:"(TestCategory=BasicNUnit)" /Parallel `
