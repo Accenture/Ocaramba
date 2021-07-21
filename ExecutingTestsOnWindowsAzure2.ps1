@@ -33,8 +33,8 @@ echo outputZip: $outputZip
 
 
 echo "Downloading EdgeChrominum driver from: $($url) to $($output)"
-Invoke-WebRequest -Uri "$($url)" -Out "$($output)"  
-Expand-Archive -LiteralPath $outputZip -DestinationPath $outputPath -Force
+
+
 $driver=$outputPath+"msedgedriver.exe"
 
 echo driver: $driver
@@ -43,8 +43,7 @@ echo driver: $driver
         
 $outputZip = $PSScriptRoot + "\Ocaramba.Tests.NUnit\bin\Release\netcoreapp3.1\edgedriver_win64.zip"	
 echo outputZip: $outputZip
-		
-(New-Object System.Net.WebClient).DownloadFile($url, $outputZip)
+Invoke-WebRequest -Uri "$($url)" -Out "$($output)"  		
 
 Expand-Archive -LiteralPath $outputZip -DestinationPath $outputPath  -Force
 
