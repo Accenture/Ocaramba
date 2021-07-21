@@ -749,6 +749,12 @@ namespace Ocaramba
                     this.SetRemoteDriverOptions(driverCapabilitiesConf, settings, egEdgeOptions);
                     this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(egEdgeOptions).ToCapabilities());
                     break;
+                case BrowserType.EdgeChromium:
+                    Microsoft.Edge.SeleniumTools.EdgeOptions edgeOptionsChromium = new Microsoft.Edge.SeleniumTools.EdgeOptions();
+                    edgeOptionsChromium.Proxy = this.CurrentProxy();
+                    this.SetRemoteDriverBrowserOptions(driverCapabilitiesConf, settings, edgeOptionsChromium);
+                    this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(edgeOptionsChromium).ToCapabilities());
+                    break;
                 case BrowserType.IE:
                 case BrowserType.InternetExplorer:
                     InternetExplorerOptions internetExplorerOptions = new InternetExplorerOptions();
