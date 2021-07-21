@@ -635,20 +635,20 @@ namespace Ocaramba
         }
 
         /// <summary>
-        /// Gets specified path to the directory containing Edge Chrominum Driver, name of driver msedgedriver.exe. Default value "C:\Temp\Drivers".
+        /// Gets specified path to the directory containing Edge Chromium Driver, name of driver msedgedriver.exe. Default value "C:\Temp\Drivers".
         /// </summary>
-        public static string PathToEdgeChrominumDriverDirectory
+        public static string PathToEdgeChromiumDriverDirectory
         {
             get
             {
                 string setting = null;
 #if net47 || net45
-                setting = ConfigurationManager.AppSettings["PathToEdgeChrominumDriverDirectory"];
+                setting = ConfigurationManager.AppSettings["PathToEdgeChromiumDriverDirectory"];
 #endif
 #if netcoreapp3_1
-                setting = Builder["appSettings:PathToEdgeChrominumDriverDirectory"];
+                setting = Builder["appSettings:PathToEdgeChromiumDriverDirectory"];
 #endif
-                Logger.Trace(CultureInfo.CurrentCulture, "Gets the PathToEdgeChrominumDriverDirectory from settings file '{0}'", setting);
+                Logger.Trace(CultureInfo.CurrentCulture, "Gets the PathToEdgeChromiumDriverDirectory from settings file '{0}'", setting);
                 if (string.IsNullOrEmpty(setting))
                 {
                     return @"C:\Temp\Drivers";

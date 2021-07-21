@@ -20,7 +20,7 @@ echo '********************************************NUnit tests*******************
 
 $output = $env:APPVEYOR_BUILD_FOLDER + "\Ocaramba.Tests.NUnit\bin\Debug\net45\"
 
-.\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.NUnit\bin\Debug\net45\" "Ocaramba.Tests.NUnit.dll.config" "//appSettings" "browser|PathToEdgeChrominumDriverDirectory" "EdgeChromium|$output" $true
+.\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.NUnit\bin\Debug\net45\" "Ocaramba.Tests.NUnit.dll.config" "//appSettings" "browser|PathToEdgeChromiumDriverDirectory" "EdgeChromium|$output" $true
 
 echo "Downloading edgeChromiumDriver from:" $env:edgeChromiumDriverUrl
         

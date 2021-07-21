@@ -658,7 +658,7 @@ namespace Ocaramba
                     this.driver = new OpenQA.Selenium.Edge.EdgeDriver(OpenQA.Selenium.Edge.EdgeDriverService.CreateDefaultService(BaseConfiguration.PathToEdgeDriverDirectory, "MicrosoftWebDriver.exe", 52296), this.SetDriverOptions(this.EdgeOptions));
                     break;
                 case BrowserType.EdgeChromium:
-                    this.serviceEdgeChromium = Microsoft.Edge.SeleniumTools.EdgeDriverService.CreateChromiumService(BaseConfiguration.PathToEdgeChrominumDriverDirectory, @"msedgedriver.exe");
+                    this.serviceEdgeChromium = Microsoft.Edge.SeleniumTools.EdgeDriverService.CreateChromiumService(BaseConfiguration.PathToEdgeChromiumDriverDirectory, @"msedgedriver.exe");
                     this.serviceEdgeChromium.UseVerboseLogging = true;
                     this.driver = new Microsoft.Edge.SeleniumTools.EdgeDriver(this.serviceEdgeChromium, this.SetDriverOptions(this.EdgeOptionsChromium), TimeSpan.FromSeconds(BaseConfiguration.LongTimeout));
                     break;

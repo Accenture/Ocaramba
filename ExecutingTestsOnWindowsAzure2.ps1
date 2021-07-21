@@ -34,7 +34,7 @@ echo outputZip: $outputZip
 
 echo "Downloading EdgeChrominum driver from: $($url) to $($output)"
 
-.\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.NUnit\bin\Release\netcoreapp3.1\" "appsettings.json" "appSettings" "browser|PathToEdgeChromiumDriverDirectory" "EdgeChromium|$outputPath" $true $true
+.\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.NUnit\bin\Release\netcoreapp3.1" "appsettings.json" "appSettings" "browser|PathToEdgeChromiumDriverDirectory" "EdgeChromium|$outputPath" $true $true
         
 $outputZip = $PSScriptRoot + "\Ocaramba.Tests.NUnit\bin\Release\netcoreapp3.1\edgedriver_win64.zip"	
 echo outputZip: $outputZip
