@@ -20,13 +20,13 @@ echo '********************************************NUnit tests*******************
 
 $output = $env:APPVEYOR_BUILD_FOLDER + "\Ocaramba.Tests.NUnit\bin\Debug\net45\"
 
-.\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.NUnit\bin\Debug\net45\" "Ocaramba.Tests.NUnit.dll.config" "//appSettings" "browser|PathToEdgeChrominumDriverDirectory" "EdgeChrominium|$output" $true
+.\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.NUnit\bin\Debug\net45\" "Ocaramba.Tests.NUnit.dll.config" "//appSettings" "browser|PathToEdgeChromiumDriverDirectory" "EdgeChromium|$output" $true
 
-echo "Downloading edgeChrominiumDriver from:" $env:edgeChrominiumDriverUrl
+echo "Downloading edgeChromiumDriver from:" $env:edgeChromiumDriverUrl
         
 $outputZip = $env:APPVEYOR_BUILD_FOLDER + "\Ocaramba.Tests.NUnit\bin\Debug\net45\edgedriver_win64.zip"	
 		
-(New-Object System.Net.WebClient).DownloadFile($env:edgeChrominiumDriverUrl, $outputZip)
+(New-Object System.Net.WebClient).DownloadFile($env:edgeChromiumDriverUrl, $outputZip)
 
 Expand-Archive -LiteralPath $outputZip -DestinationPath $output  -Force
 
