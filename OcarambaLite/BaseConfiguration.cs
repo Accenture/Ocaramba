@@ -462,20 +462,20 @@ namespace Ocaramba
         }
 
         /// <summary>
-        /// Gets the path and file name of the Edge Chrominium browser executable. Default value "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe".
+        /// Gets the path and file name of the Edge Chromium browser executable. Default value "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe".
         /// </summary>
-        public static string EdgeChrominiumBrowserExecutableLocation
+        public static string EdgeChromiumBrowserExecutableLocation
         {
             get
             {
                 string setting = null;
 #if net47 || net45
-                setting = ConfigurationManager.AppSettings["EdgeChrominiumBrowserExecutableLocation"];
+                setting = ConfigurationManager.AppSettings["EdgeChromiumBrowserExecutableLocation"];
 #endif
 #if netcoreapp3_1
-                setting = Builder["appSettings:EdgeChrominiumBrowserExecutableLocation"];
+                setting = Builder["appSettings:EdgeChromiumBrowserExecutableLocation"];
 #endif
-                Logger.Trace(CultureInfo.CurrentCulture, "Gets the path and file name of the Edge Chrominium browser executable from settings file '{0}'", setting);
+                Logger.Trace(CultureInfo.CurrentCulture, "Gets the path and file name of the Edge Chromium browser executable from settings file '{0}'", setting);
                 if (string.IsNullOrEmpty(setting))
                 {
                     return @"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe";

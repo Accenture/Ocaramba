@@ -63,7 +63,7 @@ namespace Ocaramba
         /// </value>
         private IWebDriver driver;
 
-        private Microsoft.Edge.SeleniumTools.EdgeDriverService serviceEdge;
+        private Microsoft.Edge.SeleniumTools.EdgeDriverService serviceEdgeChromium;
 
         private ChromeDriverService serviceChrome;
 
@@ -464,25 +464,25 @@ namespace Ocaramba
             }
         }
 
-        private Microsoft.Edge.SeleniumTools.EdgeOptions EdgeOptionsChrominium
+        private Microsoft.Edge.SeleniumTools.EdgeOptions EdgeOptionsChromium
         {
             get
             {
                 var options = new Microsoft.Edge.SeleniumTools.EdgeOptions();
 
                 // retrieving settings from config file
-                NameValueCollection edgeChrominiumPreferences = null;
-                NameValueCollection edgeChrominiumExtensions = null;
-                NameValueCollection edgeChrominiumArguments = null;
+                NameValueCollection edgeChromiumPreferences = null;
+                NameValueCollection edgeChromiumExtensions = null;
+                NameValueCollection edgeChromiumArguments = null;
 #if net47 || net45
-                edgeChrominiumPreferences = ConfigurationManager.GetSection("EdgeChrominiumPreferences") as NameValueCollection;
-                edgeChrominiumExtensions = ConfigurationManager.GetSection("EdgeChrominiumExtensions") as NameValueCollection;
-                edgeChrominiumArguments = ConfigurationManager.GetSection("EdgeChrominiumArguments") as NameValueCollection;
+                edgeChromiumPreferences = ConfigurationManager.GetSection("EdgeChromiumPreferences") as NameValueCollection;
+                edgeChromiumExtensions = ConfigurationManager.GetSection("EdgeChromiumExtensions") as NameValueCollection;
+                edgeChromiumArguments = ConfigurationManager.GetSection("EdgeChromiumArguments") as NameValueCollection;
 #endif
 #if netcoreapp3_1
-                edgeChrominiumPreferences = BaseConfiguration.GetNameValueCollectionFromAppsettings("EdgeChrominiumPreferences");
-                edgeChrominiumExtensions = BaseConfiguration.GetNameValueCollectionFromAppsettings("EdgeChrominiumExtensions");
-                edgeChrominiumArguments = BaseConfiguration.GetNameValueCollectionFromAppsettings("EdgeChrominiumArguments");
+                edgeChromiumPreferences = BaseConfiguration.GetNameValueCollectionFromAppsettings("EdgeChromiumPreferences");
+                edgeChromiumExtensions = BaseConfiguration.GetNameValueCollectionFromAppsettings("EdgeChromiumExtensions");
+                edgeChromiumArguments = BaseConfiguration.GetNameValueCollectionFromAppsettings("EdgeChromiumArguments");
 #endif
 
                 // set browser proxy for Edge
@@ -492,63 +492,63 @@ namespace Ocaramba
                 }
 
                 options.UseChromium = true;
-                options.BinaryLocation = BaseConfiguration.EdgeChrominiumBrowserExecutableLocation;
-                ////options.AddAdditionalCapability("useAutomationExtension", false);
-                //options.AddExcludedArgument("enable-automation");
+                options.BinaryLocation = BaseConfiguration.EdgeChromiumBrowserExecutableLocation;
+                options.AddAdditionalCapability("useAutomationExtension", false);
+                options.AddExcludedArgument("enable-automation");
 
                 // if there are any extensions
-                if (edgeChrominiumExtensions != null)
+                if (edgeChromiumExtensions != null)
                 {
                     // loop through all of them
-                    for (var i = 0; i < edgeChrominiumExtensions.Count; i++)
+                    for (var i = 0; i < edgeChromiumExtensions.Count; i++)
                     {
-                        Logger.Trace(CultureInfo.CurrentCulture, "Installing extension {0}", edgeChrominiumExtensions.GetKey(i));
+                        Logger.Trace(CultureInfo.CurrentCulture, "Installing extension {0}", edgeChromiumExtensions.GetKey(i));
                         try
                         {
-                            options.AddExtension(edgeChrominiumExtensions.GetKey(i));
+                            options.AddExtension(edgeChromiumExtensions.GetKey(i));
                         }
                         catch (FileNotFoundException)
                         {
-                            Logger.Trace(CultureInfo.CurrentCulture, "Installing extension {0}", this.CurrentDirectory + FilesHelper.Separator + edgeChrominiumExtensions.GetKey(i));
-                            options.AddExtension(this.CurrentDirectory + FilesHelper.Separator + edgeChrominiumExtensions.GetKey(i));
+                            Logger.Trace(CultureInfo.CurrentCulture, "Installing extension {0}", this.CurrentDirectory + FilesHelper.Separator + edgeChromiumExtensions.GetKey(i));
+                            options.AddExtension(this.CurrentDirectory + FilesHelper.Separator + edgeChromiumExtensions.GetKey(i));
                         }
                     }
                 }
 
                 // if there are any arguments
-                if (edgeChrominiumArguments != null)
+                if (edgeChromiumArguments != null)
                 {
                     // loop through all of them
-                    for (var i = 0; i < edgeChrominiumArguments.Count; i++)
+                    for (var i = 0; i < edgeChromiumArguments.Count; i++)
                     {
-                        Logger.Trace(CultureInfo.CurrentCulture, "Setting Chrome Arguments {0}", edgeChrominiumArguments.GetKey(i));
-                        options.AddArgument(edgeChrominiumArguments.GetKey(i));
+                        Logger.Trace(CultureInfo.CurrentCulture, "Setting Chrome Arguments {0}", edgeChromiumArguments.GetKey(i));
+                        options.AddArgument(edgeChromiumArguments.GetKey(i));
                     }
                 }
 
                 // custom preferences
                 // if there are any settings
-                if (edgeChrominiumPreferences == null)
+                if (edgeChromiumPreferences == null)
                 {
                     return options;
                 }
 
                 // loop through all of them
-                for (var i = 0; i < edgeChrominiumPreferences.Count; i++)
+                for (var i = 0; i < edgeChromiumPreferences.Count; i++)
                 {
-                    Logger.Trace(CultureInfo.CurrentCulture, "Set custom preference '{0},{1}'", edgeChrominiumPreferences.GetKey(i), edgeChrominiumPreferences[i]);
+                    Logger.Trace(CultureInfo.CurrentCulture, "Set custom preference '{0},{1}'", edgeChromiumPreferences.GetKey(i), edgeChromiumPreferences[i]);
 
                     // and verify all of them
-                    switch (edgeChrominiumPreferences[i])
+                    switch (edgeChromiumPreferences[i])
                     {
                         // if current settings value is "true"
                         case "true":
-                            options.AddUserProfilePreference(edgeChrominiumPreferences.GetKey(i), true);
+                            options.AddUserProfilePreference(edgeChromiumPreferences.GetKey(i), true);
                             break;
 
                         // if "false"
                         case "false":
-                            options.AddUserProfilePreference(edgeChrominiumPreferences.GetKey(i), false);
+                            options.AddUserProfilePreference(edgeChromiumPreferences.GetKey(i), false);
                             break;
 
                         // otherwise
@@ -556,13 +556,13 @@ namespace Ocaramba
                             int temp;
 
                             // an attempt to parse current settings value to an integer. Method TryParse returns True if the attempt is successful (the string is integer) or return False (if the string is just a string and cannot be cast to a number)
-                            if (int.TryParse(edgeChrominiumPreferences.Get(i), out temp))
+                            if (int.TryParse(edgeChromiumPreferences.Get(i), out temp))
                             {
-                                options.AddUserProfilePreference(edgeChrominiumPreferences.GetKey(i), temp);
+                                options.AddUserProfilePreference(edgeChromiumPreferences.GetKey(i), temp);
                             }
                             else
                             {
-                                options.AddUserProfilePreference(edgeChrominiumPreferences.GetKey(i), edgeChrominiumPreferences[i]);
+                                options.AddUserProfilePreference(edgeChromiumPreferences.GetKey(i), edgeChromiumPreferences[i]);
                             }
 
                             break;
@@ -657,10 +657,10 @@ namespace Ocaramba
                 case BrowserType.Edge:
                     this.driver = new OpenQA.Selenium.Edge.EdgeDriver(OpenQA.Selenium.Edge.EdgeDriverService.CreateDefaultService(BaseConfiguration.PathToEdgeDriverDirectory, "MicrosoftWebDriver.exe", 52296), this.SetDriverOptions(this.EdgeOptions));
                     break;
-                case BrowserType.EdgeChrominium:
-                    this.serviceEdge = Microsoft.Edge.SeleniumTools.EdgeDriverService.CreateChromiumService(BaseConfiguration.PathToEdgeChrominumDriverDirectory, @"msedgedriver.exe");
-                    this.serviceEdge.UseVerboseLogging = true;
-                    var driver = new Microsoft.Edge.SeleniumTools.EdgeDriver(this.serviceEdge, this.SetDriverOptions(this.EdgeOptionsChrominium), TimeSpan.FromSeconds(BaseConfiguration.LongTimeout));
+                case BrowserType.EdgeChromium:
+                    this.serviceEdgeChromium = Microsoft.Edge.SeleniumTools.EdgeDriverService.CreateChromiumService(BaseConfiguration.PathToEdgeChrominumDriverDirectory, @"msedgedriver.exe");
+                    this.serviceEdgeChromium.UseVerboseLogging = true;
+                    this.driver = new Microsoft.Edge.SeleniumTools.EdgeDriver(this.serviceEdgeChromium, this.SetDriverOptions(this.EdgeOptionsChromium), TimeSpan.FromSeconds(BaseConfiguration.LongTimeout));
                     break;
                 default:
                     throw new NotSupportedException(
@@ -694,9 +694,9 @@ namespace Ocaramba
         /// </summary>
         public void Stop()
         {
-            if (this.serviceEdge != null)
+            if (this.serviceEdgeChromium != null)
             {
-                this.serviceEdge.Dispose();
+                this.serviceEdgeChromium.Dispose();
             }
 
             if (this.serviceChrome != null)
