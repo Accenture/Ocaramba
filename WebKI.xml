@@ -21,7 +21,7 @@
   </HelpKINode>
   <HelpKINode Title="BaseConfiguration.ChromeBrowserExecutableLocation property" Url="html/8287c416-f51b-9a1e-40ab-f8f301a68eb1.htm" />
   <HelpKINode Title="BaseConfiguration.DownloadFolder property" Url="html/927dd788-be62-cd3c-5548-a72075523167.htm" />
-  <HelpKINode Title="BaseConfiguration.EdgeChrominiumBrowserExecutableLocation property" Url="html/10ada60f-e379-033e-0ba0-6f42b4dd643f.htm" />
+  <HelpKINode Title="BaseConfiguration.EdgeChromiumBrowserExecutableLocation property" Url="html/db25efda-3933-71f7-8d51-a84d61d5fc11.htm" />
   <HelpKINode Title="BaseConfiguration.EnableEventFiringWebDriver property" Url="html/b66b9c03-3ed1-078e-c794-b8305a1c5a86.htm" />
   <HelpKINode Title="BaseConfiguration.EnableVerboseLoggingChrome property" Url="html/08c9c0d5-c9a2-2d9c-d99f-871556ca4aee.htm" />
   <HelpKINode Title="BaseConfiguration.FirefoxBrowserExecutableLocation property" Url="html/980ae751-66d1-9ccb-b7cf-37e83bd8f6e8.htm" />
@@ -109,6 +109,7 @@
   <HelpKINode Title="DateHelper.GetFutureDate method" Url="html/e0be4784-96f7-b551-0301-432df0961064.htm" />
   <HelpKINode Title="DateHelper.TomorrowDate property" Url="html/30dba53a-9144-cf68-4171-e8090f9f09cb.htm" />
   <HelpKINode Title="DateTime property" Url="html/6bb37839-a4a0-e265-04f7-87fa5e702dc9.htm" />
+  <HelpKINode Title="Debug method" Url="html/742647b5-b5aa-e3b1-360d-ad5da94462fb.htm" />
   <HelpKINode Title="DeleteAllCookies method" Url="html/ba8fbe50-31af-0e2a-4751-bd30fbf51a5b.htm" />
   <HelpKINode Title="DeleteFile method" Url="html/a2b2e380-601d-b633-6473-e399d1f4e56a.htm" />
   <HelpKINode Title="DismissJavaScriptAlert method" Url="html/717f502f-9658-9dc4-130c-d6eacc29d853.htm" />
@@ -173,8 +174,8 @@
   <HelpKINode Title="DriversCustomSettings.SetAngularSynchronizationForDriver method" Url="html/d4af1dc3-313a-6f8b-c06c-e2d1eb04b8ea.htm" />
   <HelpKINode Title="Duration property" Url="html/b0a0be75-570d-ca98-e8fd-6e8b05219bac.htm" />
   <HelpKINode Title="Edge enumeration member" Url="html/e3630b09-627d-e606-a2b8-1b57cb5d17a1.htm" />
-  <HelpKINode Title="EdgeChrominium enumeration member" Url="html/e3630b09-627d-e606-a2b8-1b57cb5d17a1.htm" />
-  <HelpKINode Title="EdgeChrominiumBrowserExecutableLocation property" Url="html/10ada60f-e379-033e-0ba0-6f42b4dd643f.htm" />
+  <HelpKINode Title="EdgeChromium enumeration member" Url="html/e3630b09-627d-e606-a2b8-1b57cb5d17a1.htm" />
+  <HelpKINode Title="EdgeChromiumBrowserExecutableLocation property" Url="html/db25efda-3933-71f7-8d51-a84d61d5fc11.htm" />
   <HelpKINode Title="ElementCssSelector property" Url="html/beaf5f2d-c8ec-fb35-4c0e-83de6bb261c8.htm" />
   <HelpKINode Title="ElementLocator class">
     <HelpKINode Title="ElementLocator Class" Url="html/e1bab6ad-5cd1-1691-acdd-f644012168ec.htm" />
@@ -603,12 +604,14 @@
     <HelpKINode Title="constructor" Url="html/00135cce-8935-2cf8-a6bc-1fb5a7c8f6ba.htm" />
     <HelpKINode Title="methods" Url="html/f4b31755-852d-add8-3317-91116ae54aec.htm" />
   </HelpKINode>
+  <HelpKINode Title="TestLogger.Debug method" Url="html/742647b5-b5aa-e3b1-360d-ad5da94462fb.htm" />
   <HelpKINode Title="TestLogger.Error method" Url="html/3f92afdb-e6cb-fdce-2cb4-ee74b32f0856.htm" />
   <HelpKINode Title="TestLogger.Info method" Url="html/098a2715-63a3-4857-7583-73d62061b904.htm" />
   <HelpKINode Title="TestLogger.LogError method" Url="html/7fb5bc97-a532-99fd-dc16-715d3c67fdc0.htm" />
   <HelpKINode Title="TestLogger.LogTestEnding method" Url="html/8f1e1e2a-d80f-ad13-c91b-70912fd1b86e.htm" />
   <HelpKINode Title="TestLogger.LogTestStarting method" Url="html/176bd0a8-c933-593b-641d-3e4151a6f9b5.htm" />
   <HelpKINode Title="TestLogger.TestLogger constructor" Url="html/00135cce-8935-2cf8-a6bc-1fb5a7c8f6ba.htm" />
+  <HelpKINode Title="TestLogger.Trace method" Url="html/fa9a8e52-7524-149e-2b53-8560dc9339f9.htm" />
   <HelpKINode Title="TestLogger.Warn method" Url="html/ed898b9e-8e5a-5e3d-1e7b-17e83b71395c.htm" />
   <HelpKINode Title="TestTitle property" Url="html/06dfbca8-2783-1198-0cb4-df56bc150fe8.htm" />
   <HelpKINode Title="That method" Url="html/176072ee-1b99-e733-cbb8-1cefed7abd96.htm" />
@@ -617,6 +620,7 @@
   <HelpKINode Title="ToDriver method" Url="html/b78be3de-aba3-8b33-58a3-17a46769cd69.htm" />
   <HelpKINode Title="TomorrowDate property" Url="html/30dba53a-9144-cf68-4171-e8090f9f09cb.htm" />
   <HelpKINode Title="TotalPages property" Url="html/cc5b56a0-ff6b-7773-880b-cc2f5229ae4d.htm" />
+  <HelpKINode Title="Trace method" Url="html/fa9a8e52-7524-149e-2b53-8560dc9339f9.htm" />
   <HelpKINode Title="Txt enumeration member" Url="html/1c5aba28-7b21-9b53-ea89-4baa3b095d0f.htm" />
   <HelpKINode Title="UnorderedList property" Url="html/a44de57f-3d09-df20-c9fd-6c43ac2a34e0.htm" />
   <HelpKINode Title="UntickCheckbox method" Url="html/edf7d06a-85f2-6ab2-3bd5-27c3767a2dac.htm" />
