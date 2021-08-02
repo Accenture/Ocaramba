@@ -16,16 +16,16 @@
     </PackageReference>
     <PackageReference Include="Selenium.Support" Version="3.141.0" />
     <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
-    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="91.0.4472.10100" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="92.0.4515.10700" />
     <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.29.1" />
-    <PackageReference Include="SpecFlow" Version="3.9.8" />
-    <PackageReference Include="SpecFlow.NUnit" Version="3.9.8" />
+    <PackageReference Include="SpecFlow" Version="3.9.22" />
+    <PackageReference Include="SpecFlow.NUnit" Version="3.9.22" />
     <PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="3.9.8" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.3" />
-    <PackageReference Include="NLog.Web.AspNetCore" Version="4.11.0" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="4.13.0" />
   </ItemGroup>
 
   <ItemGroup>
