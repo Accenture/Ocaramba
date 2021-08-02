@@ -191,7 +191,7 @@ stages:
             
         - task: PublishTestResults@2
           inputs:
-            testResultsFormat: 'VSTest'
+            testResultsFormat: 'NUnit'
             testResultsFiles: '**/Ocaramba.Tests.*.xml'
             
     - job: RunTestsOnWindowsCore2
