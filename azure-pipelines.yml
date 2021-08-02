@@ -193,6 +193,13 @@ stages:
           inputs:
             testResultsFormat: 'VSTest'
             testResultsFiles: '**/Ocaramba.Tests.*.trx'
+        
+        - task: PublishPipelineArtifact@1
+          condition: succeededOrFailed()
+          inputs:
+            targetPath: '$(Pipeline.Workspace)/TestResults'
+            artifact: 'TestResults'
+            publishLocation: 'pipeline'
             
     - job: RunTestsOnWindowsCore2
       pool:
