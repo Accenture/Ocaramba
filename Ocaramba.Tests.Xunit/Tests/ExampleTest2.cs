@@ -23,7 +23,6 @@
 namespace Ocaramba.Tests.Xunit.Tests
 {
     using global::Xunit;
-    using Ocaramba.Tests.PageObjects.PageObjects.Kendo;
     using Ocaramba.Tests.PageObjects.PageObjects.TheInternet;
 
     public class ExampleTest2 : ProjectTestBase
@@ -47,19 +46,6 @@ namespace Ocaramba.Tests.Xunit.Tests
 
             nestedFramesPage.ReturnToDefaultContent().SwitchToFrame("frame-bottom");
             Assert.Equal("BOTTOM", nestedFramesPage.BottomBody);
-        }
-
-        [Fact]
-        public void KendoOpenCloseComboboxTest()
-        {
-            var homePage = new KendoComboBoxPage(this.DriverContext);
-            homePage.Open();
-
-            homePage.OpenFabricComboBox();
-            Assert.True(homePage.IsFabricComboBoxExpanded());
-
-            homePage.CloseFabricComboBox();
-            Assert.False(homePage.IsFabricComboBoxExpanded());
         }
     }
 }
