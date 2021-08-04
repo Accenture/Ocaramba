@@ -796,35 +796,6 @@ namespace Ocaramba
         }
 
         /// <summary>
-        /// Gets a value indicating whether enable legacy implementation for Firefox.
-        /// </summary>
-        public static bool FirefoxUseLegacyImplementation
-        {
-            get
-            {
-                string setting = null;
-#if net47 || net45
-                setting = ConfigurationManager.AppSettings["FirefoxUseLegacyImplementation"];
-#endif
-#if netcoreapp3_1
-                setting = Builder["appSettings:FirefoxUseLegacyImplementation"];
-#endif
-                Logger.Trace(CultureInfo.CurrentCulture, "Firefox Use Legacy Implementation Enabled value from settings file '{0}'", setting);
-                if (string.IsNullOrEmpty(setting))
-                {
-                    return false;
-                }
-
-                if (setting.ToLower(CultureInfo.CurrentCulture).Equals("true"))
-                {
-                    return true;
-                }
-
-                return false;
-            }
-        }
-
-        /// <summary>
         /// Gets a value indicating whether enable full desktop screen shot. True by default.
         /// </summary>
         public static bool SeleniumScreenShotEnabled

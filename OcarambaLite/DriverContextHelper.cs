@@ -238,7 +238,7 @@ namespace Ocaramba
                 {
                     string value = driverCapabilitiesConf.GetValues(i)[0];
                     Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0}", driverCapabilitiesConf.GetKey(i));
-                    options.AddAdditionalCapability(driverCapabilitiesConf.GetKey(i), value);
+                    options.AddAdditionalOption(driverCapabilitiesConf.GetKey(i), value);
                 }
             }
 
@@ -251,21 +251,21 @@ namespace Ocaramba
                 {
                     if (key == "name" && !string.IsNullOrEmpty(this.TestTitle))
                     {
-                        options.AddAdditionalCapability(key, this.TestTitle);
+                        options.AddAdditionalOption(key, this.TestTitle);
                         setName = true;
                     }
                     else
                     {
                         Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0} from {1}", key, this.CrossBrowserEnvironment);
 
-                        options.AddAdditionalCapability(key, settings[key]);
+                        options.AddAdditionalOption(key, settings[key]);
                     }
                 }
             }
 
             if (!setName && !string.IsNullOrEmpty(this.TestTitle))
             {
-                options.AddAdditionalCapability("name", this.TestTitle);
+                options.AddAdditionalOption("name", this.TestTitle);
             }
 
             return options;

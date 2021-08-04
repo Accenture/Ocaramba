@@ -29,7 +29,7 @@ namespace Ocaramba.Tests.PageObjects
     /// <summary>
     /// Sample class to extends framework with new webElement
     /// </summary>
-    public class CustomGrid : RemoteWebElement
+    public class CustomGrid : WebElement
     {
         /// <summary>
         /// The web element

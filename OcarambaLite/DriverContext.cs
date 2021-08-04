@@ -226,8 +226,6 @@ namespace Ocaramba
                 options.SetPreference("plugin.scan.Acrobat", "99.0");
                 options.SetPreference("plugin.scan.plid.all", false);
 
-                options.UseLegacyImplementation = BaseConfiguration.FirefoxUseLegacyImplementation;
-
                 // set browser proxy for Firefox
                 if (!string.IsNullOrEmpty(BaseConfiguration.Proxy))
                 {
@@ -493,7 +491,7 @@ namespace Ocaramba
 
                 options.UseChromium = true;
                 options.BinaryLocation = BaseConfiguration.EdgeChromiumBrowserExecutableLocation;
-                options.AddAdditionalCapability("useAutomationExtension", false);
+                options.AddAdditionalOption("useAutomationExtension", false);
                 options.AddExcludedArgument("enable-automation");
 
                 // if there are any extensions
@@ -578,7 +576,7 @@ namespace Ocaramba
             get
             {
                 var options = new SafariOptions();
-                options.AddAdditionalCapability("cleanSession", true);
+                options.AddAdditionalOption("cleanSession", true);
 
                 return options;
             }
