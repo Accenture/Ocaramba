@@ -727,6 +727,7 @@ namespace Ocaramba
                     FirefoxOptions firefoxOptions = new FirefoxOptions();
                     firefoxOptions.Proxy = this.CurrentProxy();
                     this.SetRemoteDriverBrowserOptions(driverCapabilitiesConf, settings, firefoxOptions);
+                    firefoxOptions.BrowserVersion = "latest";
                     this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(firefoxOptions).ToCapabilities());
                     break;
                 case BrowserType.Android:
@@ -734,21 +735,24 @@ namespace Ocaramba
                     ChromeOptions chromeOptions = new ChromeOptions();
                     chromeOptions.Proxy = this.CurrentProxy();
                     this.SetRemoteDriverBrowserOptions(driverCapabilitiesConf, settings, chromeOptions);
+                    chromeOptions.BrowserVersion = "latest";
                     this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(chromeOptions).ToCapabilities());
                     break;
                 case BrowserType.Iphone:
                 case BrowserType.Safari:
                     SafariOptions safariOptions = new SafariOptions();
-                    this.SetRemoteDriverOptions(driverCapabilitiesConf, settings, safariOptions);
+                    this.SetRemoteDriverBrowserOptions(driverCapabilitiesConf, settings, safariOptions);
                     this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(safariOptions).ToCapabilities());
                     break;
                 case BrowserType.Edge:
                     OpenQA.Selenium.Edge.EdgeOptions egEdgeOptions = new OpenQA.Selenium.Edge.EdgeOptions();
-                    this.SetRemoteDriverOptions(driverCapabilitiesConf, settings, egEdgeOptions);
+                    egEdgeOptions.BrowserVersion = "latest";
+                    this.SetRemoteDriverBrowserOptions(driverCapabilitiesConf, settings, egEdgeOptions);
                     this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(egEdgeOptions).ToCapabilities());
                     break;
                 case BrowserType.EdgeChromium:
                     Microsoft.Edge.SeleniumTools.EdgeOptions edgeOptionsChromium = new Microsoft.Edge.SeleniumTools.EdgeOptions();
+                    edgeOptionsChromium.BrowserVersion = "latest";
                     edgeOptionsChromium.Proxy = this.CurrentProxy();
                     this.SetRemoteDriverBrowserOptions(driverCapabilitiesConf, settings, edgeOptionsChromium);
                     this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(edgeOptionsChromium).ToCapabilities());

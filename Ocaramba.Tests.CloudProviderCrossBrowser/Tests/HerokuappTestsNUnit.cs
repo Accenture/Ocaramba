@@ -31,7 +31,7 @@ namespace Ocaramba.Tests.CloudProviderCrossBrowser.Tests
     [TestFixture("Iphone")]
     [TestFixture("FirefoxWindows")]
     [TestFixture("SafariMac")]
-    [TestFixture("EdgeWindows")]
+    [TestFixture("EdgeChromiumWindows")]
     [TestFixture("IEWindows")]
     [Parallelizable(ParallelScope.Fixtures)]
     public class HerokuappTestsNUnit : ProjectTestBase
@@ -42,20 +42,15 @@ namespace Ocaramba.Tests.CloudProviderCrossBrowser.Tests
         }
 
         [Test]
-        public void ContextMenuTest()
+        public void TablesTest()
         {
-            const string H3Value = "Context Menu";
-            var browser = BaseConfiguration.TestBrowser;
-            if (browser.Equals(BrowserType.Firefox))
-            {
-                var contextMenuPage = new InternetPage(this.DriverContext)
-                    .OpenHomePage()
-                    .GoToContextMenuPage()
-                    .SelectTheInternetOptionFromContextMenu();
+            var tableElements = new InternetPage(this.DriverContext)
+                .OpenHomePage()
+                .GoToTablesPage();
+            var table = tableElements.GetTableElements();
 
-                Assert.AreEqual("You selected a context menu", contextMenuPage.JavaScriptText);
-                Assert.True(contextMenuPage.ConfirmJavaScript().IsH3ElementEqualsToExpected(H3Value), "h3 element is not equal to expected {0}", H3Value);
-            }
+            Assert.AreEqual("Smith", table[0][0]);
+            Assert.AreEqual("edit delete", table[3][5]);
         }
 
         [Test]
