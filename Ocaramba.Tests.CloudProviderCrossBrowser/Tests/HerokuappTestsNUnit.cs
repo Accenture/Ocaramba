@@ -59,13 +59,15 @@ namespace Ocaramba.Tests.CloudProviderCrossBrowser.Tests
         }
 
         [Test]
-        public void SlowResourcesTest()
+        public void DynamicallyLoadedPageElementsTest()
         {
-            int timeout = 35;
-            new InternetPage(this.DriverContext)
+            var page = new InternetPage(this.DriverContext)
                 .OpenHomePage()
-                .GoToSlowResources()
-                .WaitForIt(timeout);
+                .GoToDynamicLoading()
+                .ClickOnExample2();
+
+            page.ClickStart();
+            Assert.AreEqual(page.Text, "Hello World!");
         }
     }
 }
