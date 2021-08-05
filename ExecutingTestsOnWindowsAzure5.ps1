@@ -26,13 +26,13 @@ echo "Time taken to download $($grid): $((Get-Date).Subtract($start_time).Second
         
 echo '******************************************Start Selenium Grid in background****************************************' 
         
-$appHub=Start-Process java -ArgumentList '-jar', $output' -role hub' -RedirectStandardOutput $outputLogs'console_hub.out' -RedirectStandardError $outputLogs'console_hub.err' -passthru
+$appHub=Start-Process java -ArgumentList '-jar', $output' hub' -RedirectStandardOutput $outputLogs'console_hub.out' -RedirectStandardError $outputLogs'console_hub.err' -passthru
 
 Start-Sleep -s 5
         
 echo "Selenium Grid hub started"
 
-$appNode=Start-Process java -ArgumentList '-jar', $output' -role node  -hub http://localhost:4444/grid/register' -RedirectStandardOutput $outputLogs'console_node.out' -RedirectStandardError $outputLogs'console_node.err' -passthru 
+$appNode=Start-Process java -ArgumentList '-jar', $output' node --detect-drivers true' -RedirectStandardOutput $outputLogs'console_node.out' -RedirectStandardError $outputLogs'console_node.err' -passthru 
         
 Start-Sleep -s 5
         
