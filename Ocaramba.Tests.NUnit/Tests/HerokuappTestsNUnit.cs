@@ -173,6 +173,7 @@ namespace Ocaramba.Tests.NUnit.Tests
         }
 
         [Test]
+        [Category("Grid")]
         public void TablesTest()
         {
             var tableElements = new InternetPage(this.DriverContext)
