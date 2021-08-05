@@ -20,6 +20,8 @@
 //     SOFTWARE.
 // </license>
 
+using System;
+
 namespace Ocaramba.Tests.CloudProviderCrossBrowser.Tests
 {
     using global::NUnit.Framework;
@@ -50,7 +52,7 @@ namespace Ocaramba.Tests.CloudProviderCrossBrowser.Tests
             var table = tableElements.GetTableElements();
 
             Assert.AreEqual("Smith", table[0][0]);
-            Assert.AreEqual("edit delete", table[3][5]);
+            Assert.AreEqual("edit delete", table[3][5].Trim().Replace("\r", String.Empty).Replace("         ", String.Empty).Replace("\n", String.Empty));
         }
 
         [Test]
