@@ -43,7 +43,7 @@ Invoke-WebRequest -Uri "$($url)" -Out "$($output)"
 Expand-Archive -LiteralPath $outputZip -DestinationPath $outputPath  -Force
 
 dotnet vstest .\Ocaramba.Tests.NUnit\bin\Release\netcoreapp3.1\Ocaramba.Tests.NUnit.dll `
-			  /TestCaseFilter:"(TestCategory=BasicNUnit)" /Parallel `
+			  /TestCaseFilter:"(TestCategory=Grid)" /Parallel `
 	          --logger:"trx;LogFileName=Ocaramba.Tests.EdgeChrominum.xml"
 
 if($lastexitcode -ne 0)
