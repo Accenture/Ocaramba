@@ -2,9 +2,9 @@ $vstest = (Resolve-Path "D:\a\_temp\VsTest\Microsoft.TestPlatform*\tools\net*\Co
  
 echo '********************************************Downloading Selenium Grid********************************************' 
     
-$url = $env:seleniumGridUrl
+$url = "https://selenium-release.storage.googleapis.com/4.0-beta-4/selenium-server-4.0.0-beta-4.jar"
         
-$grid = $env:seleniumGridVersion
+$grid = "selenium-server-4.0.0-beta-4.jar"
         
 $output = $PSScriptRoot + "\Ocaramba.Tests.NUnit\bin\Release\net472\$grid"
         
