@@ -51,7 +51,7 @@
       <Version>6.2.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.WSMan.Management">
-      <Version>6.2.1</Version>
+      <Version>7.1.4</Version>
     </PackageReference>
     <PackageReference Include="NLog.Web.AspNetCore">
       <Version>4.13.0</Version>
