@@ -741,11 +741,13 @@ namespace Ocaramba
                 case BrowserType.Iphone:
                 case BrowserType.Safari:
                     SafariOptions safariOptions = new SafariOptions();
+                    safariOptions.Proxy = this.CurrentProxy();
                     this.SetRemoteDriverOptions(driverCapabilitiesConf, settings, safariOptions);
                     this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(safariOptions).ToCapabilities());
                     break;
                 case BrowserType.Edge:
                     OpenQA.Selenium.Edge.EdgeOptions egEdgeOptions = new OpenQA.Selenium.Edge.EdgeOptions();
+                    egEdgeOptions.Proxy = this.CurrentProxy();
                     this.SetRemoteDriverOptions(driverCapabilitiesConf, settings, egEdgeOptions);
                     this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(egEdgeOptions).ToCapabilities());
                     break;
