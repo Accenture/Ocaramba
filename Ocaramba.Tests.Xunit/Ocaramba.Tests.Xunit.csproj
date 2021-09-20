@@ -11,7 +11,7 @@
     <PackageReference Include="Selenium.Support" Version="3.141.0" />
     <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="92.0.4515.10700" />
-    <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.29.1" />
+    <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.30.0" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.abstractions" Version="2.0.3" />
