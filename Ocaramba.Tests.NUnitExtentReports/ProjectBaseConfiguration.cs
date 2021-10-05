@@ -31,9 +31,8 @@ namespace Ocaramba.Tests.NUnit
     using global::NUnit.Framework;
     using Ocaramba;
     using Ocaramba.Helpers;
-#if netcoreapp3_1
     using Microsoft.Extensions.Configuration;
-#endif
+
 
     /// <summary>
     /// SeleniumConfiguration that consume app.config file
@@ -43,7 +42,6 @@ namespace Ocaramba.Tests.NUnit
 #if netcoreapp3_1
         private static readonly string CurrentDirectory = Directory.GetCurrentDirectory();
 #endif
-
 #if net47
         private static readonly string CurrentDirectory = TestContext.CurrentContext.TestDirectory;
         private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
