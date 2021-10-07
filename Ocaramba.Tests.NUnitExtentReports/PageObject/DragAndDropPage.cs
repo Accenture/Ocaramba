@@ -1,4 +1,4 @@
-﻿// <copyright file="PerformanceTests1NUnit.cs" company="Objectivity Bespoke Software Specialists">
+﻿// <copyright file="DragAndDropPage.cs" company="Objectivity Bespoke Software Specialists">
 // Copyright (c) Objectivity Bespoke Software Specialists. All rights reserved.
 // </copyright>
 // <license>
@@ -20,29 +20,36 @@
 //     SOFTWARE.
 // </license>
 
-namespace Ocaramba.Tests.NUnit.Tests
+namespace Ocaramba.Tests.NUnitExtentReports.PageObjects
 {
-    using global::NUnit.Framework;
-    using Ocaramba.Tests.PageObjects.PageObjects.TheInternet;
+    using Ocaramba;
+    using Ocaramba.Extensions;
+    using Ocaramba.Tests.PageObjects;
+    using Ocaramba.Types;
 
-    /// <summary>
-    /// Tests to test framework
-    /// </summary>
-    [TestFixture]
-    [Parallelizable(ParallelScope.Fixtures)]
-    public class PerformanceTests1NUnit : ProjectTestBase
+    public class DragAndDropPage : ProjectPageBase
     {
-        [Test]
-        [Repeat(3)]
-        public void HerokuappPerfTests1()
+        private readonly ElementLocator boxA = new ElementLocator(Locator.Id, "column-a");
+        private readonly ElementLocator boxB = new ElementLocator(Locator.Id, "column-b");
+        private readonly ElementLocator boxBtext = new ElementLocator(Locator.XPath, "//div[@id='column-b']/header");
+        private readonly ElementLocator classNameLocator = new ElementLocator(Locator.ClassName, "example");
+
+        private readonly ElementLocator cssSelectorLocator = new ElementLocator(Locator.CssSelector, "[class='example']");
+
+        public DragAndDropPage(DriverContext driverContext)
+            : base(driverContext)
         {
-            this.DriverContext.PerformanceMeasures.StartMeasure();
-            InternetPage internet = new InternetPage(this.DriverContext);
-            internet.OpenHomePage();
-            this.DriverContext.PerformanceMeasures.StopMeasure(TestContext.CurrentContext.Test.Name + "LoadingMainPage");
-            this.DriverContext.PerformanceMeasures.StartMeasure();
-            internet.GoToCheckboxesPage();
-            this.DriverContext.PerformanceMeasures.StopMeasure(TestContext.CurrentContext.Test.Name + "LoadingCheckboxesPage");
+        }
+
+        public DragAndDropPage MoveElementAtoElementB()
+        {
+           this.Driver.DragAndDropJs(this.Driver.GetElement(this.boxA), this.Driver.GetElement(this.boxB));
+           return this;
+        }
+
+        public bool IsElementAMovedToB()
+        {
+            return this.Driver.GetElement(this.boxBtext).Text.Equals("A");
         }
     }
 }

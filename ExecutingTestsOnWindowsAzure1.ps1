@@ -12,6 +12,7 @@ echo '********************************************netcoreapp3 tests*************
 
 dotnet vstest .\Ocaramba.Tests.Angular\bin\Release\netcoreapp3.1\Ocaramba.Tests.Angular.dll `
 	          .\Ocaramba.Tests.NUnit\bin\Release\netcoreapp3.1\Ocaramba.Tests.NUnit.dll `
+			  .\Ocaramba.Tests.NUnit\bin\Release\netcoreapp3.1\Ocaramba.Tests.NUnitExtentReports.dll `
 			  /TestCaseFilter:"(TestCategory!=TakingScreehShots)" /Parallel `
 	          --logger:"trx;LogFileName=Ocaramba.Tests.netcoreapp.trx"
 

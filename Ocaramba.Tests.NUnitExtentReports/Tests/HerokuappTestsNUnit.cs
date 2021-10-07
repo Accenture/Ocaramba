@@ -20,44 +20,34 @@
 //     SOFTWARE.
 // </license>
 
-namespace Ocaramba.Tests.NUnit.Tests
+namespace Ocaramba.Tests.NUnitExtentReports.Tests
 {
     using global::NUnit.Framework;
     using Ocaramba;
-    using Ocaramba.Tests.PageObjects.PageObjects.TheInternet;
-    using OpenQA.Selenium;
+    using Ocaramba.Tests.NUnitExtentReports;
+    using Ocaramba.Tests.NUnitExtentReports.PageObjects;
 
     [TestFixture]
     [Category("BasicNUnit")]
     [Parallelizable(ParallelScope.Fixtures)]
     public class HerokuappTestsNUnit : ProjectTestBase
     {
+
         [Test]
         public void BasicAuthTest()
         {
+            const string ExpectedCongratulationsInfo = "Congratulations! You must have the proper credentials.";
+
             var basicAuthPage =
                 new InternetPage(this.DriverContext).OpenHomePageWithUserCredentials().GoToBasicAuthPage();
 
+            test.Info("Verifying congratulations info, expected: " + ExpectedCongratulationsInfo);
             Verify.That(
                 this.DriverContext,
                 () =>
                 Assert.AreEqual(
-                    "Congratulations! You must have the proper credentials.",
+                    ExpectedCongratulationsInfo,
                     basicAuthPage.GetCongratulationsInfo));
-        }
-
-        [Test]
-        [Ignore("ForgotPasswordPage doesn't work")]
-        public void ForgotPasswordTest()
-        {
-            new InternetPage(this.DriverContext).OpenHomePage().GoToForgotPasswordPage();
-
-            var forgotPassword = new ForgotPasswordPage(this.DriverContext);
-
-            Verify.That(
-                this.DriverContext,
-                () => Assert.AreEqual(5 + 7 + 2, forgotPassword.EnterEmail(5, 7, 2)),
-                () => Assert.AreEqual("Your e-mail's been sent!", forgotPassword.ClickRetrievePassword));
         }
 
         [Test]
@@ -70,82 +60,45 @@ namespace Ocaramba.Tests.NUnit.Tests
                 .GoToMultipleWindowsPage()
                 .OpenNewWindowPage();
 
+            test.Info("Verifying page title, expected: " + PageTitle);
             Assert.True(newWindowPage.IsPageTile(PageTitle), "wrong page title, should be {0}", PageTitle);
+
+            test.Info("Verifying H3 header text displayd on te page, expected: " + PageTitle);
             Assert.True(newWindowPage.IsNewWindowH3TextVisible(PageTitle), "text is not equal to {0}", PageTitle);
         }
 
         [Test]
         public void NestedFramesTest()
         {
+            const string ExpectedLeftFrameText = "LEFT";
+            const string ExpectedMiddleFrameText = "MIDDLE";
+            const string ExpectedRightFrameText = "RIGHT";
+            const string ExpectedBottomFrameText = "BOTTOM";
+
             var nestedFramesPage = new InternetPage(this.DriverContext)
                 .OpenHomePage()
                 .GoToNestedFramesPage()
                 .SwitchToFrame("frame-top");
 
             nestedFramesPage.SwitchToFrame("frame-left");
-            Assert.AreEqual("LEFT", nestedFramesPage.LeftBody);
+
+            test.Info("Verifying text displayed in left frame, expected: " + ExpectedLeftFrameText);
+            Assert.AreEqual(ExpectedLeftFrameText, nestedFramesPage.LeftBody);
 
             nestedFramesPage.SwitchToParentFrame().SwitchToFrame("frame-middle");
-            Assert.AreEqual("MIDDLE", nestedFramesPage.MiddleBody);
+
+            test.Info("Verifying text displayed in middle frame, expected: " + ExpectedMiddleFrameText);
+            Assert.AreEqual(ExpectedMiddleFrameText, nestedFramesPage.MiddleBody);
 
             nestedFramesPage.SwitchToParentFrame().SwitchToFrame("frame-right");
-            Assert.AreEqual("RIGHT", nestedFramesPage.RightBody);
+
+            test.Info("Verifying text displayed in right frame, expected: " + ExpectedRightFrameText);
+            Assert.AreEqual(ExpectedRightFrameText, nestedFramesPage.RightBody);
 
             nestedFramesPage.ReturnToDefaultContent().SwitchToFrame("frame-bottom");
-            Assert.AreEqual("BOTTOM", nestedFramesPage.BottomBody);
-        }
 
-        [Test]
-        public void ContextMenuTest()
-        {
-            const string H3Value = "Context Menu";
-            var browser = BaseConfiguration.TestBrowser;
-            if (browser.Equals(BrowserType.Firefox))
-            {
-                var contextMenuPage = new InternetPage(this.DriverContext)
-                    .OpenHomePage()
-                    .GoToContextMenuPage()
-                    .SelectTheInternetOptionFromContextMenu();
-
-                Assert.AreEqual("You selected a context menu", contextMenuPage.JavaScriptText);
-                Assert.True(contextMenuPage.ConfirmJavaScript().IsH3ElementEqualsToExpected(H3Value), "h3 element is not equal to expected {0}", H3Value);
-            }
-        }
-
-        [Test]
-        public void HoversTest()
-        {
-            var expected = new[] { "name: user1", "name: user2", "name: user3" };
-
-            var homePage = new InternetPage(this.DriverContext)
-                .OpenHomePageWithUserCredentials()
-                .GoToHoversPage();
-
-            var text1Before = homePage.GetHoverText(1);
-            this.LogTest.Info("Text before: '{0}'", text1Before);
-            homePage.MouseHoverAt(1);
-            var text1After = homePage.GetHoverText(1);
-            this.LogTest.Info("Text after: '{0}'", text1After);
-
-            var text2Before = homePage.GetHoverText(2);
-            this.LogTest.Info("Text before: '{0}'", text2Before);
-            homePage.MouseHoverAt(2);
-            var text2After = homePage.GetHoverText(2);
-            this.LogTest.Info("Text after: '{0}'", text2After);
-
-            var text3Before = homePage.GetHoverText(3);
-            this.LogTest.Info("Text before: '{0}'", text3Before);
-            homePage.MouseHoverAt(3);
-            var text3After = homePage.GetHoverText(3);
-            this.LogTest.Info("Text after: '{0}'", text3After);
-
-            Assert.AreEqual(string.Empty, text1Before);
-            Assert.AreEqual(string.Empty, text2Before);
-            Assert.AreEqual(string.Empty, text3Before);
-
-            Assert.AreEqual(expected[0], text1After);
-            Assert.AreEqual(expected[1], text2After);
-            Assert.AreEqual(expected[2], text3After);
+            test.Info("Verifying text displayed in bottom frame, expected: " + ExpectedBottomFrameText);
+            Assert.AreEqual(ExpectedBottomFrameText, nestedFramesPage.BottomBody);
         }
 
         [Test]
@@ -160,16 +113,6 @@ namespace Ocaramba.Tests.NUnit.Tests
             var brokenImagesPage = new BrokenImagesPage(this.DriverContext);
 
             Assert.True(brokenImagesPage.IsPageHeaderElementEqualsToExpected("Broken Images"), "Page header element is not equal to expected 'Broken Images'");
-        }
-
-        [Test]
-        public void SlowResourcesTest()
-        {
-            int timeout = 35;
-            new InternetPage(this.DriverContext)
-                .OpenHomePage()
-                .GoToSlowResources()
-                .WaitForIt(timeout);
         }
 
         [Test]
@@ -193,32 +136,6 @@ namespace Ocaramba.Tests.NUnit.Tests
                 .MoveElementAtoElementB();
 
             Assert.IsTrue(dragAndDrop.IsElementAMovedToB(), "Element is not moved.");
-        }
-
-        [Test]
-        public void DynamicallyLoadedPageElementsTest()
-        {
-            var page = new InternetPage(this.DriverContext)
-                .OpenHomePage()
-                .GoToDynamicLoading()
-                .ClickOnExample2();
-
-            this.DriverContext.PerformanceMeasures.StartMeasure();
-            page.ClickStart();
-            Assert.AreEqual(page.Text, "Hello World!");
-            this.DriverContext.PerformanceMeasures.StopMeasure(TestContext.CurrentContext.Test.Name + "WaitForTest");
-        }
-
-        [Test]
-        public void DynamicallyLoadedPageElementsTimeOutTest()
-        {
-            var page = new InternetPage(this.DriverContext)
-                .OpenHomePage()
-                .GoToDynamicLoading()
-                .ClickOnExample2();
-
-            page.ClickStart();
-            Assert.Throws<WebDriverTimeoutException>(() => page.ShortTimeoutText());
         }
     }
 }

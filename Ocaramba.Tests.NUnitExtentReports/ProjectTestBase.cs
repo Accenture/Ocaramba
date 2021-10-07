@@ -22,7 +22,7 @@
 
 using System.IO;
 
-namespace Ocaramba.Tests.NUnit
+namespace Ocaramba.Tests.NUnitExtentReports
 {
     using global::NUnit.Framework;
     using global::NUnit.Framework.Interfaces;
@@ -31,6 +31,7 @@ namespace Ocaramba.Tests.NUnit
     using Ocaramba.Logger;
     using AventStack.ExtentReports;
     using System;
+    using Ocaramba.Tests.NUnitExtentReports.ExtentLogger;
 
     /// <summary>
     /// The base class for all tests <see href="https://github.com/ObjectivityLtd/Ocaramba/wiki/ProjectTestBase-class">More details on wiki</see>
@@ -77,7 +78,7 @@ namespace Ocaramba.Tests.NUnit
         public void BeforeClass()
         {
 
-            this.testContainer = TestExecutionManager.extent.CreateTest(TestContext.CurrentContext.Test.ClassName.Replace("BullSearch.UITests.Tests.", ""));
+            this.testContainer = TestExecutionManager.extent.CreateTest(TestContext.CurrentContext.Test.ClassName);
             this.DriverContext.CurrentDirectory = Directory.GetCurrentDirectory();
 #if net47
             
@@ -134,12 +135,12 @@ namespace Ocaramba.Tests.NUnit
             }
             if (status == TestStatus.Failed)
             {
-                test.Fail(status + ": " + errorMessage);
+                ExtentTestLogger.Fail(status, errorMessage);
                 EmbedAttachmentsToExtentReport(filePaths);
             }
             else
             {
-                test.Pass("Test Passed");
+                ExtentTestLogger.Pass("Test Passed");
             }
         }
 

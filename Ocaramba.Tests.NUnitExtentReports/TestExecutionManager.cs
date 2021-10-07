@@ -4,7 +4,7 @@ using System.IO;
 using AventStack.ExtentReports.Reporter;
 using AventStack.ExtentReports.Reporter.Configuration;
 
-namespace Ocaramba.Tests.NUnit
+namespace Ocaramba.Tests.NUnitExtentReports
 {
     [SetUpFixture]
     class TestExecutionManager : TestBase

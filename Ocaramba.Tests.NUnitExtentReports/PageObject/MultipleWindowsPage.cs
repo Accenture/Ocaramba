@@ -1,4 +1,4 @@
-﻿// <copyright file="PerformanceTestsNUnit.cs" company="Objectivity Bespoke Software Specialists">
+﻿// <copyright file="MultipleWindowsPage.cs" company="Objectivity Bespoke Software Specialists">
 // Copyright (c) Objectivity Bespoke Software Specialists. All rights reserved.
 // </copyright>
 // <license>
@@ -20,29 +20,29 @@
 //     SOFTWARE.
 // </license>
 
-namespace Ocaramba.Tests.NUnit.Tests
+namespace Ocaramba.Tests.NUnitExtentReports.PageObjects
 {
-    using global::NUnit.Framework;
-    using Ocaramba.Tests.PageObjects.PageObjects.TheInternet;
+    using System;
+    using Ocaramba;
+    using Ocaramba.Extensions;
+    using Ocaramba.Tests.PageObjects;
+    using Ocaramba.Types;
 
-    /// <summary>
-    /// Tests to test framework
-    /// </summary>
-    [TestFixture]
-    [Parallelizable(ParallelScope.Fixtures)]
-    public class PerformanceTestsNUnit : ProjectTestBase
+    public class MultipleWindowsPage : ProjectPageBase
     {
-        [Test]
-        [Repeat(3)]
-        public void HerokuappPerfTests()
+        private readonly ElementLocator
+    clickHerePageLocator = new ElementLocator(Locator.CssSelector, "a[href='/windows/new']");
+
+        public MultipleWindowsPage(DriverContext driverContext)
+            : base(driverContext)
         {
-            this.DriverContext.PerformanceMeasures.StartMeasure();
-            InternetPage internet = new InternetPage(this.DriverContext);
-            internet.OpenHomePage();
-            this.DriverContext.PerformanceMeasures.StopMeasure(TestContext.CurrentContext.Test.Name + "LoadingMainPage");
-            this.DriverContext.PerformanceMeasures.StartMeasure();
-            internet.GoToCheckboxesPage();
-            this.DriverContext.PerformanceMeasures.StopMeasure(TestContext.CurrentContext.Test.Name + "LoadingCheckboxesPage");
+        }
+
+        public NewWindowPage OpenNewWindowPage()
+        {
+            this.Driver.GetElement(this.clickHerePageLocator).Click();
+            this.Driver.SwitchToWindowUsingUrl(new Uri("http://the-internet.herokuapp.com/windows/new"), 5);
+            return new NewWindowPage(this.DriverContext);
         }
     }
 }

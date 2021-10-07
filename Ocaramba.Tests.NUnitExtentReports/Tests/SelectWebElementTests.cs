@@ -2,10 +2,11 @@
 // Copyright (c) Objectivity Bespoke Software Specialists. All rights reserved.
 // </copyright>
 
-namespace Ocaramba.Tests.NUnit.Tests
+namespace Ocaramba.Tests.NUnitExtentReports.Tests
 {
     using global::NUnit.Framework;
-    using Ocaramba.Tests.PageObjects.PageObjects.TheInternet;
+    using Ocaramba.Tests.NUnitExtentReports;
+    using Ocaramba.Tests.NUnitExtentReports.PageObjects;
 
     [TestFixture]
     [Parallelizable(ParallelScope.Fixtures)]
