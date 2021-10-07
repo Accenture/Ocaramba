@@ -2,7 +2,7 @@
 
   <PropertyGroup>
 	<TargetFrameworks>netcoreapp3.1</TargetFrameworks>
-	<TargetFrameworks Condition="'$(OS)' != 'Unix'">net472;netcoreapp3.1</TargetFrameworks>
+	<TargetFrameworks Condition="'$(OS)' != 'Unix'">net45;net472;netcoreapp3.1</TargetFrameworks>
   </PropertyGroup>
 <ItemGroup>
     <PackageReference Include="Appveyor.TestLogger" Version="2.0.0" />
