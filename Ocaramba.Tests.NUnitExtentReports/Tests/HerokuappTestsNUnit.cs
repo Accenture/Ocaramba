@@ -104,6 +104,8 @@ namespace Ocaramba.Tests.NUnitExtentReports.Tests
         [Test]
         public void SetAttributeTest()
         {
+            const string PageHeader = "Broken Images";
+
             var internetPage = new InternetPage(this.DriverContext)
                 .OpenHomePage();
 
@@ -112,19 +114,26 @@ namespace Ocaramba.Tests.NUnitExtentReports.Tests
 
             var brokenImagesPage = new BrokenImagesPage(this.DriverContext);
 
-            Assert.True(brokenImagesPage.IsPageHeaderElementEqualsToExpected("Broken Images"), "Page header element is not equal to expected 'Broken Images'");
+            test.Info("Verifying page header, expected: " + PageHeader);
+            Assert.True(brokenImagesPage.IsPageHeaderElementEqualsToExpected(PageHeader), "Page header element is not equal to expected " + PageHeader);
         }
 
         [Test]
         public void TablesTest()
         {
+            const string ExpectedSurname = "Smith";
+            const string ExpectedActionLinks = "edit delete";
+
             var tableElements = new InternetPage(this.DriverContext)
                 .OpenHomePage()
                 .GoToTablesPage();
             var table = tableElements.GetTableElements();
 
-            Assert.AreEqual("Smith", table[0][0]);
-            Assert.AreEqual("edit delete", table[3][5]);
+            test.Info("Verifying surname displayed in the table, expected: " + ExpectedSurname);
+            Assert.AreEqual(ExpectedSurname, table[0][0]);
+
+            test.Info("Verifying action links displayed in the table, expected: " + ExpectedActionLinks);
+            Assert.AreEqual(ExpectedActionLinks, table[3][5]);
         }
 
         [Test]
@@ -135,7 +144,30 @@ namespace Ocaramba.Tests.NUnitExtentReports.Tests
                 .GoToDragAndDropPage()
                 .MoveElementAtoElementB();
 
+            test.Info("Verifying element A was moved to element B");
             Assert.IsTrue(dragAndDrop.IsElementAMovedToB(), "Element is not moved.");
+        }
+
+        [Test]
+        public void ReportDemoFailingTest()
+        {
+            const string ExpectedLeftFrameText = "LEFT";
+            const string ExpectedMiddleFrameText = "CENTER";
+
+            var nestedFramesPage = new InternetPage(this.DriverContext)
+                .OpenHomePage()
+                .GoToNestedFramesPage()
+                .SwitchToFrame("frame-top");
+
+            nestedFramesPage.SwitchToFrame("frame-left");
+
+            test.Info("Verifying text displayed in left frame, expected: " + ExpectedLeftFrameText);
+            Assert.AreEqual(ExpectedLeftFrameText, nestedFramesPage.LeftBody);
+
+            nestedFramesPage.SwitchToParentFrame().SwitchToFrame("frame-middle");
+
+            test.Info("Verifying text displayed in middle frame, expected: " + ExpectedMiddleFrameText);
+            Assert.AreEqual(ExpectedMiddleFrameText, nestedFramesPage.MiddleBody);
         }
     }
 }

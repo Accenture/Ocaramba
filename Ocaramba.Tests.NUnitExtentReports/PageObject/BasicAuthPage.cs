@@ -26,18 +26,12 @@ namespace Ocaramba.Tests.NUnitExtentReports.PageObjects
     using NLog;
     using Ocaramba;
     using Ocaramba.Extensions;
-    using Ocaramba.Helpers;
     using Ocaramba.Tests.PageObjects;
     using Ocaramba.Types;
 
     public class BasicAuthPage : ProjectPageBase
     {
-#if net47 || net45
-        private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
-#endif
-#if netcoreapp3_1
         private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
-#endif
 
         /// <summary>
         /// Locators for elements

@@ -80,10 +80,6 @@ namespace Ocaramba.Tests.NUnitExtentReports
 
             this.testContainer = TestExecutionManager.extent.CreateTest(TestContext.CurrentContext.Test.ClassName);
             this.DriverContext.CurrentDirectory = Directory.GetCurrentDirectory();
-#if net47
-            
-            this.DriverContext.CurrentDirectory = TestContext.CurrentContext.TestDirectory;
-#endif
             this.DriverContext.Start();
         }
 

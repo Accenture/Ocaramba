@@ -24,6 +24,7 @@ namespace Ocaramba.Tests.NUnitExtentReports.PageObjects
 {
     using Ocaramba;
     using Ocaramba.Extensions;
+    using Ocaramba.Tests.NUnitExtentReports.ExtentLogger;
     using Ocaramba.Tests.PageObjects;
     using Ocaramba.Types;
 
@@ -62,18 +63,21 @@ namespace Ocaramba.Tests.NUnitExtentReports.PageObjects
 
         public NestedFramesPage SwitchToFrame(string frame)
         {
+            ExtentTestLogger.Debug("NestedFramesPage: Switching to frame: " + frame);
             this.Driver.SwitchTo().Frame(frame);
             return this;
         }
 
         public NestedFramesPage SwitchToParentFrame()
         {
+            ExtentTestLogger.Debug("NestedFramesPage: Switching to parent frame");
             this.Driver.SwitchTo().ParentFrame();
             return this;
         }
 
         public NestedFramesPage ReturnToDefaultContent()
         {
+            ExtentTestLogger.Debug("NestedFramesPage: Switching to default content");
             this.Driver.SwitchTo().DefaultContent();
             return this;
         }

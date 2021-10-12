@@ -24,6 +24,7 @@ namespace Ocaramba.Tests.NUnitExtentReports.PageObjects
 {
     using Ocaramba;
     using Ocaramba.Extensions;
+    using Ocaramba.Tests.NUnitExtentReports.ExtentLogger;
     using Ocaramba.Tests.PageObjects;
     using Ocaramba.Types;
     using Ocaramba.WebElements;
@@ -47,6 +48,7 @@ namespace Ocaramba.Tests.NUnitExtentReports.PageObjects
 
         public string[][] GetTableElements()
         {
+            ExtentTestLogger.Debug("TablesPage: Getting table elements");
             return this.Driver.GetElement<Table>(this.tableLocator).GetTable(this.row, this.column);
         }
     }

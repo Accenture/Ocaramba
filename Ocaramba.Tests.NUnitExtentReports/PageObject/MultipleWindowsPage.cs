@@ -25,6 +25,7 @@ namespace Ocaramba.Tests.NUnitExtentReports.PageObjects
     using System;
     using Ocaramba;
     using Ocaramba.Extensions;
+    using Ocaramba.Tests.NUnitExtentReports.ExtentLogger;
     using Ocaramba.Tests.PageObjects;
     using Ocaramba.Types;
 
@@ -40,8 +41,11 @@ namespace Ocaramba.Tests.NUnitExtentReports.PageObjects
 
         public NewWindowPage OpenNewWindowPage()
         {
+            const string UriString = "http://the-internet.herokuapp.com/windows/new";
+
+            ExtentTestLogger.Debug("MultipleWindowsPage: Opening new Uri: " + UriString);
             this.Driver.GetElement(this.clickHerePageLocator).Click();
-            this.Driver.SwitchToWindowUsingUrl(new Uri("http://the-internet.herokuapp.com/windows/new"), 5);
+            this.Driver.SwitchToWindowUsingUrl(new Uri(UriString), 5);
             return new NewWindowPage(this.DriverContext);
         }
     }

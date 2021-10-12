@@ -33,12 +33,7 @@ namespace Ocaramba.Tests.NUnitExtentReports.PageObjects
 
     public class InternetPage : ProjectPageBase
     {
-#if net47 || net45
-        private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
-#endif
-#if netcoreapp3_1
         private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
-#endif
 
         /// <summary>
         /// Locators for elements
@@ -77,12 +72,14 @@ namespace Ocaramba.Tests.NUnitExtentReports.PageObjects
 
         public DropdownPage GoToDropdownPage()
         {
+            ExtentTestLogger.Debug("InternetPage: Opening Dropdown page");
             this.Driver.GetElement(this.linkLocator.Format("dropdown")).Click();
             return new DropdownPage(this.DriverContext);
         }
 
         public MultipleWindowsPage GoToMultipleWindowsPage()
         {
+            ExtentTestLogger.Debug("InternetPage: Opening Multiple Windows page");
             this.Driver.GetElement(this.linkLocator.Format("windows")).Click();
             return new MultipleWindowsPage(this.DriverContext);
         }
@@ -96,30 +93,35 @@ namespace Ocaramba.Tests.NUnitExtentReports.PageObjects
 
         public NestedFramesPage GoToNestedFramesPage()
         {
+            ExtentTestLogger.Debug("InternetPage: Opening Nested Frames page");
             this.Driver.GetElement(this.linkLocator.Format("nested_frames")).Click();
             return new NestedFramesPage(this.DriverContext);
         }
 
         public TablesPage GoToTablesPage()
         {
+            ExtentTestLogger.Debug("InternetPage: Opening Tables page");
             this.Driver.GetElement(this.linkLocator.Format("tables")).Click();
             return new TablesPage(this.DriverContext);
         }
 
         public DragAndDropPage GoToDragAndDropPage()
         {
+            ExtentTestLogger.Debug("InternetPage: Opening Drag And Drop page");
             this.Driver.GetElement(this.linkLocator.Format("drag_and_drop")).Click();
             return new DragAndDropPage(this.DriverContext);
         }
 
         public void ChangeBasicAuthLink(string newAttributeValue)
         {
+            ExtentTestLogger.Debug("InternetPage: Changing BasicAuthLink to: " + newAttributeValue);
             var element = this.Driver.GetElement(this.basicAuthLink);
             element.SetAttribute("href", newAttributeValue);
         }
 
         public void BasicAuthLinkClick()
         {
+            ExtentTestLogger.Debug("InternetPage: Clicking BasicAuthLink");
             var element = this.Driver.GetElement(this.basicAuthLink);
             element.Click();
         }
