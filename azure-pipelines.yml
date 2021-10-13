@@ -203,15 +203,15 @@ stages:
         - task: ArchiveFiles@2
           condition: always()
           inputs:
-            rootFolderOrFile: '$(System.DefaultWorkingDirectory)/Ocaramba.Tests.NUnitExtentReports/bin/Debug/netcoreapp3.1/TestOutput'
+            rootFolderOrFile: '$(System.DefaultWorkingDirectory)/Ocaramba.Tests.NUnitExtentReports/bin/Release/netcoreapp3.1/TestOutput'
             includeRootFolder: true
             archiveType: 'zip'
-            archiveFile: '$(Pipeline.Workspace)/ExtentReports_$(Build.BuildId).zip'
+            archiveFile: '$(Build.ArtifactStagingDirectory)/ExtentReports_$(Build.BuildId).zip'
             replaceExistingArchive: true
         - task: PublishBuildArtifacts@1
           condition: always()
           inputs:
-            PathtoPublish: '$(Pipeline.Workspace)/ExtentReports_$(Build.BuildId).zip'
+            PathtoPublish: '$(Build.ArtifactStagingDirectory)/ExtentReports_$(Build.BuildId).zip'
             ArtifactName: 'ExtentTestReport'
             publishLocation: 'Container'    
 
