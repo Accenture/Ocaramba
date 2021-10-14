@@ -31,24 +31,15 @@ namespace Ocaramba.Tests.NUnit
     using global::NUnit.Framework;
     using Ocaramba;
     using Ocaramba.Helpers;
-#if netcoreapp3_1
     using Microsoft.Extensions.Configuration;
-#endif
+
 
     /// <summary>
     /// SeleniumConfiguration that consume app.config file
     /// </summary>
     public static class ProjectBaseConfiguration
     {
-#if netcoreapp3_1
         private static readonly string CurrentDirectory = Directory.GetCurrentDirectory();
-#endif
-
-#if net47 || net45
-        private static readonly string CurrentDirectory = TestContext.CurrentContext.TestDirectory;
-        private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
-#endif
-#if netcoreapp3_1
         public static readonly string Env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
         /// <summary>
@@ -60,7 +51,6 @@ namespace Ocaramba.Tests.NUnit
             .Build();
 
         private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
-#endif
 
         /// <summary>
         /// Gets the data driven file.
@@ -73,12 +63,7 @@ namespace Ocaramba.Tests.NUnit
             get
             {
                 string setting = null;
-#if net47 || net45
-                setting = ConfigurationManager.AppSettings["DataDrivenFile"];
-#endif
-#if netcoreapp3_1
                 setting = BaseConfiguration.Builder["appSettings:DataDrivenFile"];
-#endif
                 Logger.Debug(CultureInfo.CurrentCulture, "DataDrivenFile value from settings file '{0}'", setting);
                 if (BaseConfiguration.UseCurrentDirectory)
                 {
@@ -100,12 +85,7 @@ namespace Ocaramba.Tests.NUnit
             get
             {
                 string setting = null;
-#if net47 || net45
-                setting = ConfigurationManager.AppSettings["DataDrivenFileXlsx"];
-#endif
-#if netcoreapp3_1
                 setting = BaseConfiguration.Builder["appSettings:DataDrivenFileXlsx"];
-#endif
                 Logger.Debug(CultureInfo.CurrentCulture, "DataDrivenFileXlsx value from settings file '{0}'", setting);
                 if (BaseConfiguration.UseCurrentDirectory)
                 {
@@ -127,12 +107,7 @@ namespace Ocaramba.Tests.NUnit
             get
             {
                 string setting = null;
-#if net47 || net45
-                setting = ConfigurationManager.AppSettings["DataDrivenFileCSV"];
-#endif
-#if netcoreapp3_1
                 setting = BaseConfiguration.Builder["appSettings:DataDrivenFileCSV"];
-#endif
                 Logger.Debug(CultureInfo.CurrentCulture, "DataDrivenFileCSV value from settings file '{0}'", setting);
                 if (BaseConfiguration.UseCurrentDirectory)
                 {
@@ -151,12 +126,7 @@ namespace Ocaramba.Tests.NUnit
             get
             {
                 string setting = null;
-#if net47 || net45
-                setting = ConfigurationManager.AppSettings["DownloadFolder"];
-#endif
-#if netcoreapp3_1
                 setting = BaseConfiguration.Builder["appSettings:DownloadFolder"];
-#endif
                 Logger.Debug(CultureInfo.CurrentCulture, "DownloadFolder value from settings file '{0}'", setting);
                 return FilesHelper.GetFolder(setting, CurrentDirectory);
             }
