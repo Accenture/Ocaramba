@@ -16,15 +16,15 @@
     </PackageReference>
 	<PackageReference Include="Selenium.Support" Version="3.141.0" />
     <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
-    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="92.0.4515.10700" />
-    <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.29.1" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="94.0.4606.6100" />
+    <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.30.0" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net472'">
 	<Reference Include="System.Configuration" />
   <PackageReference Include="EWSoftware.SHFB" Version="2021.4.9" />
   <PackageReference Include="EWSoftware.SHFB.NETFramework" Version="4.8.0" />
-  <PackageReference Include="EWSoftware.SHFB.NETCore" Version="4.5.1" />
+  <PackageReference Include="EWSoftware.SHFB.NETCore" Version="4.5.1.1" />
  </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
