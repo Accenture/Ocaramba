@@ -25,7 +25,7 @@
   <ItemGroup>
     <None Include="..\icon.png" Pack="true" PackagePath="\" />
     <PackageReference Include="NLog" Version="4.7.11" />
-    <PackageReference Include="Selenium.Support" Version="3.141.0" />
+    <PackageReference Include="Selenium.Support" Version="4.0.1" />
     <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="94.0.4606.6100" />
     <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.30.0" />
