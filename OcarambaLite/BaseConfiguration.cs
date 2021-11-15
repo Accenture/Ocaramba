@@ -649,35 +649,6 @@ namespace Ocaramba
                 setting = Builder["appSettings:PathToEdgeChromiumDriverDirectory"];
 #endif
                 Logger.Trace(CultureInfo.CurrentCulture, "Gets the PathToEdgeChromiumDriverDirectory from settings file '{0}'", setting);
-                if (string.IsNullOrEmpty(setting))
-                {
-                    return @"C:\Temp\Drivers";
-                }
-
-                return setting;
-            }
-        }
-
-        /// <summary>
-        /// Gets specified path to the directory containing Edge Driver.
-        /// </summary>
-        public static string PathToEdgeDriverDirectory
-        {
-            get
-            {
-                string setting = null;
-#if net47 || net45
-                setting = ConfigurationManager.AppSettings["PathToEdgeDriverDirectory"];
-#endif
-#if netcoreapp3_1
-                setting = Builder["appSettings:PathToEdgeDriverDirectory"];
-#endif
-                Logger.Trace(CultureInfo.CurrentCulture, "Gets the PathToEdgeDriverDirectory from settings file '{0}'", setting);
-                if (string.IsNullOrEmpty(setting))
-                {
-                    return string.Empty;
-                }
-
                 return setting;
             }
         }
