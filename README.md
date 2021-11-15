@@ -46,6 +46,7 @@ Project API documentation can be found here: http://objectivityltd.github.io/Oca
 - AngularJS support, more details [here](https://github.com/ObjectivityLtd/Ocaramba/wiki/Angular-support).
 - Possibility to check for JavaScript errors from the browser, more details [here](https://github.com/ObjectivityLtd/Ocaramba/wiki/Verifying-Javascript-Errors-from-browser).
 - Instruction on how to run Ocaramba tests with Docker container, more details [here](https://github.com/ObjectivityLtd/Ocaramba/wiki/Run-Ocaramba-tests-with-Docker-container).
+- ExtentReports support, more details [here](https://github.com/ObjectivityLtd/Ocaramba/wiki/ExtentReports-Support).
 
 For all documentation, visit the [Ocaramba Wiki](https://github.com/ObjectivityLtd/Ocaramba/wiki).
 
@@ -54,6 +55,7 @@ Projects examples of using Test Framework :
 - Ocaramba.Tests.Features for Specflow
 - Ocaramba.Tests.MsTest for MsTest
 - Ocaramba.Tests.NUnit for NUnit
+- Ocaramba.Tests.NUnitExtentReports for NUnit featuring test execution HTML report based on ExtentReports framework
 - Ocaramba.Tests.xUnit for xUnit
 - Ocaramba.Tests.PageObjects for Page Object Pattern
 - Ocaramba.Documentation.shfbproj for building API documentation

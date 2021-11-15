@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Ocaramba.Tests.NUnit": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Linux"
+      }
+    }
+  }
+}
