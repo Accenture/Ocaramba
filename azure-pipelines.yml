@@ -27,7 +27,7 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  frameworkVersion: '3.3.1'
+  frameworkVersion: '4.0.0'
   BuildVersion: '$(frameworkVersion)$(Build.BuildNumber)'
   seleniumGridVersion: 'selenium-server-standalone-3.141.59.jar'
   seleniumGridUrl: 'http://selenium-release.storage.googleapis.com/3.141/selenium-server-standalone-3.141.59.jar'
