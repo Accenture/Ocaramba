@@ -31,7 +31,6 @@ variables:
   BuildVersion: '$(frameworkVersion)$(Build.BuildNumber)'
   seleniumGridVersion: 'selenium-server-4.0.0.jar'
   seleniumGridUrl: 'https://github.com/SeleniumHQ/selenium/releases/download/selenium-4.0.0/selenium-server-4.0.0.jar'
-  edgeChromiumDriverUrl: https://msedgedriver.azureedge.net/95.0.1020.44/edgedriver_win64.zip
   
 stages:
   - stage: build
