@@ -13,6 +13,7 @@ docker ps -a
 docker exec ocaramba_selenium sed -i '/Documentation/,+5 d' Ocaramba.sln
 echo 'build Ocaramba.sln'
 docker exec ocaramba_selenium dotnet build Ocaramba.sln
+docker exec ocaramba_selenium 'pwsh ./scripts/set_AppConfig_for_tests.ps1 \"./Ocaramba.Tests.NUnit/bin/Debug/netcoreapp3.1\" \"appsettings.Linux.json\" \"appSettings\" \"browser|PathToChromeDriverDirectory\" \"Chrome|/chromedriver\" -logValues -json'
 echo 'execute Ocaramba.sln tests'
 docker exec ocaramba_selenium dotnet vstest Ocaramba.Tests.NUnit/bin/Debug/netcoreapp3.1/Ocaramba.Tests.NUnit.dll  /TestCaseFilter:"(TestCategory!=NotImplementedInCoreOrUploadDownload)" /Parallel --logger:"trx;LogFileName=Ocaramba.Tests.Docker.xml"
 echo 'Downloading Ocaramba.Tests.Docker.xml'
