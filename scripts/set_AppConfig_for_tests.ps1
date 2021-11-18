@@ -28,9 +28,9 @@ SOFTWARE.
     
     [string]$values,
 	
-	[bool]$logValues=$false,
+	[switch]$logValues,
 	
-	[bool]$json=$false
+	[switch]$json
     )
 
 Function set_AppConfig_for_tests([string]$OutDir,[string]$configName,[string]$section,[string]$keys,[string]$values, [bool]$logValues, [bool]$json)
