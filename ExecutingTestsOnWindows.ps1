@@ -41,17 +41,17 @@ echo '********************************************NUnit tests*******************
 
 $output = $env:APPVEYOR_BUILD_FOLDER + "\Ocaramba.Tests.NUnit\bin\Debug\net45\"
 
-.\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.NUnit\bin\Debug\net45\" "Ocaramba.Tests.NUnit.dll.config" "//appSettings" "browser|PathToEdgeChromiumDriverDirectory" "EdgeChromium|$output" -logValues
+#.\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.NUnit\bin\Debug\net45\" "Ocaramba.Tests.NUnit.dll.config" "//appSettings" "browser|PathToEdgeChromiumDriverDirectory" "EdgeChromium|$output" -logValues
 
-echo "Downloading edgeChromiumDriver from:" $env:edgeChromiumDriverUrl
+#echo "Downloading edgeChromiumDriver from:" $env:edgeChromiumDriverUrl
         
-$outputZip = $env:APPVEYOR_BUILD_FOLDER + "\Ocaramba.Tests.NUnit\bin\Debug\net45\edgedriver_win64.zip"	
+#$outputZip = $env:APPVEYOR_BUILD_FOLDER + "\Ocaramba.Tests.NUnit\bin\Debug\net45\edgedriver_win64.zip"	
 		
-(New-Object System.Net.WebClient).DownloadFile($env:edgeChromiumDriverUrl, $outputZip)
+#(New-Object System.Net.WebClient).DownloadFile($env:edgeChromiumDriverUrl, $outputZip)
 
-Expand-Archive -LiteralPath $outputZip -DestinationPath $output  -Force
+#Expand-Archive -LiteralPath $outputZip -DestinationPath $output  -Force
 
-& nunit3-console.exe .\Ocaramba.Tests.NUnit\bin\Debug\net45\Ocaramba.Tests.NUnit.dll --where "Category==BasicNUnit"
+#& nunit3-console.exe .\Ocaramba.Tests.NUnit\bin\Debug\net45\Ocaramba.Tests.NUnit.dll --where "Category==BasicNUnit"
 
 echo '********************************************MsTest tests********************************************'
 
