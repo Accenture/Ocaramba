@@ -30,7 +30,7 @@ namespace Ocaramba.WebElements
     /// <summary>
     /// Contains methods for checkbox.
     /// </summary>
-    public class Checkbox : RemoteWebElement
+    public class Checkbox : WebElement
     {
         /// <summary>
         /// The web element.

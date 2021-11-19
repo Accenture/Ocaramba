@@ -31,7 +31,7 @@ namespace Ocaramba.WebElements
     /// <summary>
     /// The table class contains actions on tables.
     /// </summary>
-    public class Table : RemoteWebElement
+    public class Table : WebElement
     {
 #if net47 || net45
         private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();

@@ -649,35 +649,6 @@ namespace Ocaramba
                 setting = Builder["appSettings:PathToEdgeChromiumDriverDirectory"];
 #endif
                 Logger.Trace(CultureInfo.CurrentCulture, "Gets the PathToEdgeChromiumDriverDirectory from settings file '{0}'", setting);
-                if (string.IsNullOrEmpty(setting))
-                {
-                    return @"C:\Temp\Drivers";
-                }
-
-                return setting;
-            }
-        }
-
-        /// <summary>
-        /// Gets specified path to the directory containing Edge Driver.
-        /// </summary>
-        public static string PathToEdgeDriverDirectory
-        {
-            get
-            {
-                string setting = null;
-#if net47 || net45
-                setting = ConfigurationManager.AppSettings["PathToEdgeDriverDirectory"];
-#endif
-#if netcoreapp3_1
-                setting = Builder["appSettings:PathToEdgeDriverDirectory"];
-#endif
-                Logger.Trace(CultureInfo.CurrentCulture, "Gets the PathToEdgeDriverDirectory from settings file '{0}'", setting);
-                if (string.IsNullOrEmpty(setting))
-                {
-                    return string.Empty;
-                }
-
                 return setting;
             }
         }
@@ -792,35 +763,6 @@ namespace Ocaramba
                 }
 
                 return new Collection<string>(setting.Split(new char[] { ',' }));
-            }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether enable legacy implementation for Firefox.
-        /// </summary>
-        public static bool FirefoxUseLegacyImplementation
-        {
-            get
-            {
-                string setting = null;
-#if net47 || net45
-                setting = ConfigurationManager.AppSettings["FirefoxUseLegacyImplementation"];
-#endif
-#if netcoreapp3_1
-                setting = Builder["appSettings:FirefoxUseLegacyImplementation"];
-#endif
-                Logger.Trace(CultureInfo.CurrentCulture, "Firefox Use Legacy Implementation Enabled value from settings file '{0}'", setting);
-                if (string.IsNullOrEmpty(setting))
-                {
-                    return false;
-                }
-
-                if (setting.ToLower(CultureInfo.CurrentCulture).Equals("true"))
-                {
-                    return true;
-                }
-
-                return false;
             }
         }
 

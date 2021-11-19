@@ -26,13 +26,13 @@ echo "Time taken to download $($grid): $((Get-Date).Subtract($start_time).Second
         
 echo '******************************************Start Selenium Grid in background****************************************' 
         
-$appHub=Start-Process java -ArgumentList '-jar', $output' -role hub' -RedirectStandardOutput $outputLogs'console_hub.out' -RedirectStandardError $outputLogs'console_hub.err' -passthru
+$appHub=Start-Process java -ArgumentList '-jar', $output' hub' -RedirectStandardOutput $outputLogs'console_hub.out' -RedirectStandardError $outputLogs'console_hub.err' -passthru
 
 Start-Sleep -s 5
         
 echo "Selenium Grid hub started"
 
-$appNode=Start-Process java -ArgumentList '-jar', $output' -role node  -hub http://localhost:4444/grid/register' -RedirectStandardOutput $outputLogs'console_node.out' -RedirectStandardError $outputLogs'console_node.err' -passthru 
+$appNode=Start-Process java -ArgumentList '-jar', $output' node --detect-drivers true' -RedirectStandardOutput $outputLogs'console_node.out' -RedirectStandardError $outputLogs'console_node.err' -passthru 
         
 Start-Sleep -s 5
         
@@ -40,14 +40,14 @@ echo "Selenium Grid node started"
         
 echo '********************************************Run tests with Selenium Grid ****************************************' 
         
-.\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.NUnit\bin\Release\net472\" "Ocaramba.Tests.NUnit.dll.config" "//appSettings" "browser|RemoteWebDriverHub" "RemoteWebDriver|http://localhost:4444/wd/hub" $true
+.\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.NUnit\bin\Release\net472\" "Ocaramba.Tests.NUnit.dll.config" "//appSettings" "browser|RemoteWebDriverHub" "RemoteWebDriver|http://localhost:4444/wd/hub" -logValues
         
-& $vstest .\Ocaramba.Tests.NUnit\bin\Release\net472\Ocaramba.Tests.NUnit.dll /TestCaseFilter:"TestCategory=BasicNUnit" /Parallel `
+& $vstest .\Ocaramba.Tests.NUnit\bin\Release\net472\Ocaramba.Tests.NUnit.dll /TestCaseFilter:"TestCategory=Grid" /Parallel `
 			--logger:"trx;LogFileName=Ocaramba.Tests.NUnitGrid.xml"
  
 echo '*****************************Run CloudProviderCrossBrowser tests with Selenium Grid****************************'
         
-.\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\net472" "Ocaramba.Tests.CloudProviderCrossBrowser.dll.config" "//appSettings" "RemoteWebDriverHub" "http://localhost:4444/wd/hub" $true
+.\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\net472" "Ocaramba.Tests.CloudProviderCrossBrowser.dll.config" "//appSettings" "RemoteWebDriverHub" "http://localhost:4444/wd/hub" -logValues
         
 & $vstest .\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\net472\Ocaramba.Tests.CloudProviderCrossBrowser.dll /TestCaseFilter:"FullyQualifiedName~Chrome" /Parallel `
 			--logger:"trx;LogFileName=Ocaramba.Tests.CloudProviderCrossBrowserGrid.xml"

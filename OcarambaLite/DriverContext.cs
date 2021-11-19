@@ -36,6 +36,7 @@ namespace Ocaramba
     using Ocaramba.Types;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Chrome;
+    using OpenQA.Selenium.Edge;
     using OpenQA.Selenium.Firefox;
     using OpenQA.Selenium.IE;
     using OpenQA.Selenium.Remote;
@@ -63,9 +64,9 @@ namespace Ocaramba
         /// </value>
         private IWebDriver driver;
 
-        private Microsoft.Edge.SeleniumTools.EdgeDriverService serviceEdgeChromium;
-
         private ChromeDriverService serviceChrome;
+
+        private EdgeDriverService serviceEdge;
 
         private TestLogger logTest;
 
@@ -225,8 +226,6 @@ namespace Ocaramba
                 // disable Adobe Acrobat PDF preview plugin
                 options.SetPreference("plugin.scan.Acrobat", "99.0");
                 options.SetPreference("plugin.scan.plid.all", false);
-
-                options.UseLegacyImplementation = BaseConfiguration.FirefoxUseLegacyImplementation;
 
                 // set browser proxy for Firefox
                 if (!string.IsNullOrEmpty(BaseConfiguration.Proxy))
@@ -452,24 +451,6 @@ namespace Ocaramba
             {
                 var options = new OpenQA.Selenium.Edge.EdgeOptions();
 
-                // set browser proxy for Edge
-                if (!string.IsNullOrEmpty(BaseConfiguration.Proxy))
-                {
-                    options.Proxy = this.CurrentProxy();
-                }
-
-                options.UseInPrivateBrowsing = true;
-
-                return options;
-            }
-        }
-
-        private Microsoft.Edge.SeleniumTools.EdgeOptions EdgeOptionsChromium
-        {
-            get
-            {
-                var options = new Microsoft.Edge.SeleniumTools.EdgeOptions();
-
                 // retrieving settings from config file
                 NameValueCollection edgeChromiumPreferences = null;
                 NameValueCollection edgeChromiumExtensions = null;
@@ -491,9 +472,7 @@ namespace Ocaramba
                     options.Proxy = this.CurrentProxy();
                 }
 
-                options.UseChromium = true;
-                options.BinaryLocation = BaseConfiguration.EdgeChromiumBrowserExecutableLocation;
-                options.AddAdditionalCapability("useAutomationExtension", false);
+                options.AddAdditionalOption("useAutomationExtension", false);
                 options.AddExcludedArgument("enable-automation");
 
                 // if there are any extensions
@@ -578,7 +557,7 @@ namespace Ocaramba
             get
             {
                 var options = new SafariOptions();
-                options.AddAdditionalCapability("cleanSession", true);
+                options.AddAdditionalOption("cleanSession", true);
 
                 return options;
             }
@@ -655,12 +634,14 @@ namespace Ocaramba
                     this.SetupRemoteWebDriver();
                     break;
                 case BrowserType.Edge:
-                    this.driver = new OpenQA.Selenium.Edge.EdgeDriver(OpenQA.Selenium.Edge.EdgeDriverService.CreateDefaultService(BaseConfiguration.PathToEdgeDriverDirectory, "MicrosoftWebDriver.exe", 52296), this.SetDriverOptions(this.EdgeOptions));
-                    break;
                 case BrowserType.EdgeChromium:
-                    this.serviceEdgeChromium = Microsoft.Edge.SeleniumTools.EdgeDriverService.CreateChromiumService(BaseConfiguration.PathToEdgeChromiumDriverDirectory, @"msedgedriver.exe");
-                    this.serviceEdgeChromium.UseVerboseLogging = true;
-                    this.driver = new Microsoft.Edge.SeleniumTools.EdgeDriver(this.serviceEdgeChromium, this.SetDriverOptions(this.EdgeOptionsChromium), TimeSpan.FromSeconds(BaseConfiguration.LongTimeout));
+                    if (!string.IsNullOrEmpty(BaseConfiguration.EdgeChromiumBrowserExecutableLocation))
+                    {
+                        this.EdgeOptions.BinaryLocation = BaseConfiguration.EdgeChromiumBrowserExecutableLocation;
+                    }
+
+                    this.serviceEdge = EdgeDriverService.CreateDefaultService();
+                    this.driver = string.IsNullOrEmpty(BaseConfiguration.PathToEdgeChromiumDriverDirectory) ? new EdgeDriver(this.serviceEdge, this.SetDriverOptions(this.EdgeOptions)) : new EdgeDriver(EdgeDriverService.CreateDefaultService(BaseConfiguration.PathToEdgeChromiumDriverDirectory, @"msedgedriver.exe"), this.SetDriverOptions(this.EdgeOptions));
                     break;
                 default:
                     throw new NotSupportedException(
@@ -694,14 +675,14 @@ namespace Ocaramba
         /// </summary>
         public void Stop()
         {
-            if (this.serviceEdgeChromium != null)
-            {
-                this.serviceEdgeChromium.Dispose();
-            }
-
             if (this.serviceChrome != null)
             {
                 this.serviceChrome.Dispose();
+            }
+
+            if (this.serviceEdge != null)
+            {
+                this.serviceEdge.Dispose();
             }
 
             if (this.driver != null)
@@ -729,6 +710,7 @@ namespace Ocaramba
                     FirefoxOptions firefoxOptions = new FirefoxOptions();
                     firefoxOptions.Proxy = this.CurrentProxy();
                     this.SetRemoteDriverBrowserOptions(driverCapabilitiesConf, settings, firefoxOptions);
+                    firefoxOptions.BrowserVersion = "latest";
                     this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(firefoxOptions).ToCapabilities());
                     break;
                 case BrowserType.Android:
@@ -736,26 +718,22 @@ namespace Ocaramba
                     ChromeOptions chromeOptions = new ChromeOptions();
                     chromeOptions.Proxy = this.CurrentProxy();
                     this.SetRemoteDriverBrowserOptions(driverCapabilitiesConf, settings, chromeOptions);
+                    chromeOptions.BrowserVersion = "latest";
                     this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(chromeOptions).ToCapabilities());
                     break;
                 case BrowserType.Iphone:
                 case BrowserType.Safari:
                     SafariOptions safariOptions = new SafariOptions();
-                    safariOptions.Proxy = this.CurrentProxy();
                     this.SetRemoteDriverOptions(driverCapabilitiesConf, settings, safariOptions);
                     this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(safariOptions).ToCapabilities());
                     break;
                 case BrowserType.Edge:
-                    OpenQA.Selenium.Edge.EdgeOptions egEdgeOptions = new OpenQA.Selenium.Edge.EdgeOptions();
+                case BrowserType.EdgeChromium:
+                    EdgeOptions egEdgeOptions = new EdgeOptions();
+                    egEdgeOptions.BrowserVersion = "latest";
                     egEdgeOptions.Proxy = this.CurrentProxy();
                     this.SetRemoteDriverOptions(driverCapabilitiesConf, settings, egEdgeOptions);
                     this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(egEdgeOptions).ToCapabilities());
-                    break;
-                case BrowserType.EdgeChromium:
-                    Microsoft.Edge.SeleniumTools.EdgeOptions edgeOptionsChromium = new Microsoft.Edge.SeleniumTools.EdgeOptions();
-                    edgeOptionsChromium.Proxy = this.CurrentProxy();
-                    this.SetRemoteDriverBrowserOptions(driverCapabilitiesConf, settings, edgeOptionsChromium);
-                    this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(edgeOptionsChromium).ToCapabilities());
                     break;
                 case BrowserType.IE:
                 case BrowserType.InternetExplorer:

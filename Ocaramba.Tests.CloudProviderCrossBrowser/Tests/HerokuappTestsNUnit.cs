@@ -20,6 +20,8 @@
 //     SOFTWARE.
 // </license>
 
+using System;
+
 namespace Ocaramba.Tests.CloudProviderCrossBrowser.Tests
 {
     using global::NUnit.Framework;
@@ -31,7 +33,7 @@ namespace Ocaramba.Tests.CloudProviderCrossBrowser.Tests
     [TestFixture("Iphone")]
     [TestFixture("FirefoxWindows")]
     [TestFixture("SafariMac")]
-    [TestFixture("EdgeWindows")]
+    [TestFixture("EdgeChromiumWindows")]
     [TestFixture("IEWindows")]
     [Parallelizable(ParallelScope.Fixtures)]
     public class HerokuappTestsNUnit : ProjectTestBase
@@ -42,30 +44,27 @@ namespace Ocaramba.Tests.CloudProviderCrossBrowser.Tests
         }
 
         [Test]
-        public void ContextMenuTest()
+        public void TablesTest()
         {
-            const string H3Value = "Context Menu";
-            var browser = BaseConfiguration.TestBrowser;
-            if (browser.Equals(BrowserType.Firefox))
-            {
-                var contextMenuPage = new InternetPage(this.DriverContext)
-                    .OpenHomePage()
-                    .GoToContextMenuPage()
-                    .SelectTheInternetOptionFromContextMenu();
+            var tableElements = new InternetPage(this.DriverContext)
+                .OpenHomePage()
+                .GoToTablesPage();
+            var table = tableElements.GetTableElements();
 
-                Assert.AreEqual("You selected a context menu", contextMenuPage.JavaScriptText);
-                Assert.True(contextMenuPage.ConfirmJavaScript().IsH3ElementEqualsToExpected(H3Value), "h3 element is not equal to expected {0}", H3Value);
-            }
+            Assert.AreEqual("Smith", table[0][0]);
+            Assert.AreEqual("edit delete", table[3][5].Trim().Replace("\r", String.Empty).Replace("         ", String.Empty).Replace("\n", String.Empty));
         }
 
         [Test]
-        public void SlowResourcesTest()
+        public void DynamicallyLoadedPageElementsTest()
         {
-            int timeout = 35;
-            new InternetPage(this.DriverContext)
+            var page = new InternetPage(this.DriverContext)
                 .OpenHomePage()
-                .GoToSlowResources()
-                .WaitForIt(timeout);
+                .GoToDynamicLoading()
+                .ClickOnExample2();
+
+            page.ClickStart();
+            Assert.AreEqual(page.Text, "Hello World!");
         }
     }
 }

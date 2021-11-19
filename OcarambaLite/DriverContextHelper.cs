@@ -238,7 +238,7 @@ namespace Ocaramba
                 {
                     string value = driverCapabilitiesConf.GetValues(i)[0];
                     Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0}", driverCapabilitiesConf.GetKey(i));
-                    options.AddAdditionalCapability(driverCapabilitiesConf.GetKey(i), value);
+                    options.AddAdditionalOption(driverCapabilitiesConf.GetKey(i), value);
                 }
             }
 
@@ -251,21 +251,21 @@ namespace Ocaramba
                 {
                     if (key == "name" && !string.IsNullOrEmpty(this.TestTitle))
                     {
-                        options.AddAdditionalCapability(key, this.TestTitle);
+                        options.AddAdditionalOption(key, this.TestTitle);
                         setName = true;
                     }
                     else
                     {
                         Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0} from {1}", key, this.CrossBrowserEnvironment);
 
-                        options.AddAdditionalCapability(key, settings[key]);
+                        options.AddAdditionalOption(key, settings[key]);
                     }
                 }
             }
 
             if (!setName && !string.IsNullOrEmpty(this.TestTitle))
             {
-                options.AddAdditionalCapability("name", this.TestTitle);
+                options.AddAdditionalOption("name", this.TestTitle);
             }
 
             return options;
@@ -305,6 +305,8 @@ namespace Ocaramba
         // Used by firefox , chrome,  androdin, internet explorer
         private void SetRemoteDriverBrowserOptions(NameValueCollection driverCapabilitiesConf, NameValueCollection settings, dynamic browserOptions)
         {
+            Dictionary<string, object> capabilities = new Dictionary<string, object>();
+
             // if there are any capability
             if (driverCapabilitiesConf != null)
             {
@@ -313,7 +315,7 @@ namespace Ocaramba
                 {
                     string value = driverCapabilitiesConf.GetValues(i)[0];
                     Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0}", driverCapabilitiesConf.GetKey(i));
-                    browserOptions.AddAdditionalCapability(driverCapabilitiesConf.GetKey(i), value, true);
+                    capabilities.Add(driverCapabilitiesConf.GetKey(i), value);
                 }
             }
 
@@ -324,22 +326,39 @@ namespace Ocaramba
             {
                 foreach (string key in settings.AllKeys)
                 {
-                    if (key == "name" && !string.IsNullOrEmpty(this.TestTitle))
+                    if (key == "sessionName" && !string.IsNullOrEmpty(this.TestTitle))
                     {
-                        browserOptions.AddAdditionalCapability(key, this.TestTitle, true);
+                        capabilities.Add(key, this.TestTitle);
                         setName = true;
+                    }
+                    else if (key == "browser_version" || key == "browser")
+                    {
+                        Logger.Trace(CultureInfo.CurrentCulture, "Skipping setting {0} from {1}", key, this.CrossBrowserEnvironment);
                     }
                     else
                     {
                         Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0} from {1}", key, this.CrossBrowserEnvironment);
-                        browserOptions.AddAdditionalCapability(key, settings[key], true);
+                        capabilities.Add(key, settings[key]);
                     }
                 }
             }
 
             if (!setName && !string.IsNullOrEmpty(this.TestTitle))
             {
-                browserOptions.AddAdditionalCapability("name", this.TestTitle);
+                capabilities.Add("sessionName", this.TestTitle);
+            }
+
+            if (BaseConfiguration.RemoteWebDriverHub.ToString().ToLower().Contains("browserstack"))
+            {
+                browserOptions.AddAdditionalOption("bstack:options", capabilities);
+            }
+            else if (BaseConfiguration.RemoteWebDriverHub.ToString().ToLower().Contains("saucelabs"))
+            {
+                browserOptions.AddAdditionalOption("sauce:options", capabilities);
+            }
+            else if (BaseConfiguration.RemoteWebDriverHub.ToString().ToLower().Contains("testingbot"))
+            {
+                browserOptions.AddAdditionalOption("tb:options", capabilities);
             }
         }
 

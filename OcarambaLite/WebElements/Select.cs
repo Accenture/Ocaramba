@@ -34,7 +34,7 @@ namespace Ocaramba.WebElements
     /// <summary>
     /// Select contains implementation for method that can be used on dropdown.
     /// </summary>
-    public class Select : RemoteWebElement
+    public class Select : WebElement
     {
 #if net47 || net45
         private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
