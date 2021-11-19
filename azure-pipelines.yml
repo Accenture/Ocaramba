@@ -138,6 +138,8 @@ stages:
           inputs:
             testResultsFormat: 'VSTest'
             testResultsFiles: '**/Ocaramba.Tests.*.xml'
+            testRunTitle: 'RunTestsOnDocker'
+
     - job: RunTestsOnLinux
       pool:
         vmImage: 'ubuntu-latest'
@@ -163,7 +165,9 @@ stages:
         - task: PublishTestResults@2
           inputs:
             testResultsFormat: 'VSTest'
-            testResultsFiles: '**/Ocaramba.Tests.*.xml' 
+            testResultsFiles: '**/Ocaramba.Tests.*.xml'
+            testRunTitle: 'RunTestsOnLinux'
+
     - job: RunTestsOnWindowsCore1
       pool:
         vmImage: 'windows-latest'
@@ -192,6 +196,7 @@ stages:
           inputs:
             testResultsFormat: 'VSTest'
             testResultsFiles: '**/Ocaramba.Tests.*.trx'
+            testRunTitle: 'RunTestsOnWindowsCore1'
         
         - task: PublishPipelineArtifact@1
           condition: succeededOrFailed()
@@ -236,6 +241,7 @@ stages:
           inputs:
             testResultsFormat: 'VSTest'
             testResultsFiles: '**/Ocaramba.Tests.*.xml'
+            testRunTitle: 'RunTestsOnWindowsCore2'
 
     - job: RunTestsOnWindowsFramework
       pool:
@@ -260,6 +266,7 @@ stages:
           inputs:
             testResultsFormat: 'VSTest'
             testResultsFiles: '**/Ocaramba.Tests.*.xml'
+            testRunTitle: 'RunTestsOnWindowsFramework'
 
     - job: RunTestsOnCloudProviderCrossBrowser
       pool:
@@ -291,6 +298,7 @@ stages:
           inputs:
             testResultsFormat: 'VSTest'
             testResultsFiles: '**/Ocaramba.Tests.*.xml'
+            testRunTitle: 'RunTestsOnCloudProviderCrossBrowser'
 
     - job: RunTestsSeleniumGrid
       pool:
@@ -315,6 +323,7 @@ stages:
           inputs:
             testResultsFormat: 'VSTest'
             testResultsFiles: '**/Ocaramba.Tests.*.xml'
+            testRunTitle: 'RunTestsSeleniumGrid'
 
   - stage: release
     displayName: Release 
