@@ -167,7 +167,39 @@ stages:
             testResultsFormat: 'VSTest'
             testResultsFiles: '**/Ocaramba.Tests.*.xml'
             testRunTitle: 'RunTestsOnLinux'
+            
+    - job: RunTestsOnLinuxBrowserStack
+      pool:
+        vmImage: 'ubuntu-latest'
+      steps:
+        - task: CmdLine@2
+          inputs:
+            script: |	
+              ls	
+                
+              export ASPNETCORE_ENVIRONMENT=Linux	
+                
+              echo $ASPNETCORE_ENVIRONMENT	
+                
+              sed -i '/Documentation/,+5 d' ./Ocaramba.sln	
+        - script: dotnet build ./Ocaramba.sln --configuration $(buildConfiguration)
 
+        - task: PowerShell@2
+          inputs:
+            filePath: './ExecutingTestsOnLinuxBrowserStackAzure.ps1'
+          env:
+            MAPPED_ENV_BROWSERSTACKKEY: $(browserstackkey)
+            MAPPED_ENV_BROWSERSTACKUSER: $(browserstackuser)
+            MAPPED_ENV_TESTINGBOTKEY: $(testingbotkey)
+            MAPPED_ENV_TESTINGBOTSECRET: $(testingbotsecret)
+            MAPPED_ENV_SAUCELABSACCESSKEY: $(saucelabsaccessKey)
+            MAPPED_ENV_SAUCELABSUSERNAME: $(saucelabsusername)
+            
+        - task: PublishTestResults@2
+          inputs:
+            testResultsFormat: 'VSTest'
+            testResultsFiles: '**/Ocaramba.Tests.*.xml'
+            testRunTitle: 'RunTestsOnLinuxBrowserStackNetCore'
     - job: RunTestsOnWindowsCore1
       pool:
         vmImage: 'windows-latest'
@@ -268,7 +300,7 @@ stages:
             testResultsFiles: '**/Ocaramba.Tests.*.xml'
             testRunTitle: 'RunTestsOnWindowsFramework'
 
-    - job: RunTestsOnCloudProviderCrossBrowser
+    - job: RunTestsOnWindowsBrowserStack
       pool:
         vmImage: 'windows-latest'
       steps:
@@ -298,7 +330,7 @@ stages:
           inputs:
             testResultsFormat: 'VSTest'
             testResultsFiles: '**/Ocaramba.Tests.*.xml'
-            testRunTitle: 'RunTestsOnCloudProviderCrossBrowser'
+            testRunTitle: 'RunTestsOnWindowsBrowserStackNetFramework'
 
     - job: RunTestsSeleniumGrid
       pool:
@@ -324,7 +356,39 @@ stages:
             testResultsFormat: 'VSTest'
             testResultsFiles: '**/Ocaramba.Tests.*.xml'
             testRunTitle: 'RunTestsSeleniumGrid'
+            
+    - job: RunTestsOnWindowsSaucelabs
+      pool:
+        vmImage: 'windows-latest'
+      steps:
+        - checkout: none
+        - task: VisualStudioTestPlatformInstaller@1
+          inputs:
+            packageFeedSelector: 'nugetOrg'
+            versionSelector: 'latestStable'
 
+        - task: DownloadPipelineArtifact@2
+          inputs:
+            buildType: 'current'
+            artifactName: 'OcarambaBuild'
+            targetPath: '$(Pipeline.Workspace)'
+        - task: PowerShell@2
+          inputs:
+            filePath: './ExecutingTestsOnWindowsAzure6.ps1'
+          env:
+            MAPPED_ENV_BROWSERSTACKKEY: $(browserstackkey)
+            MAPPED_ENV_BROWSERSTACKUSER: $(browserstackuser)
+            MAPPED_ENV_TESTINGBOTKEY: $(testingbotkey)
+            MAPPED_ENV_TESTINGBOTSECRET: $(testingbotsecret)
+            MAPPED_ENV_SAUCELABSACCESSKEY: $(saucelabsaccessKey)
+            MAPPED_ENV_SAUCELABSUSERNAME: $(saucelabsusername)
+            
+        - task: PublishTestResults@2
+          inputs:
+            testResultsFormat: 'VSTest'
+            testResultsFiles: '**/Ocaramba.Tests.*.xml'
+            testRunTitle: 'RunTestsOnWindowsSaucelabsNetFramework'
+            
   - stage: release
     displayName: Release 
     dependsOn:
