@@ -9,7 +9,7 @@ echo $Env:ASPNETCORE_ENVIRONMENT
         
 .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\netcoreapp3.1" "appsettings.json" "DriverCapabilities" "buildName" "Ocaramba.Tests.BrowserStackCrossBrowser$($env:BuildVersion)" -logValues -json
 
-dotnet vstest .\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\netcoreapp3.1\Ocaramba.Tests.CloudProviderCrossBrowser.dll `
+dotnet vstest ./Ocaramba.Tests.CloudProviderCrossBrowser/bin/Release/netcoreapp3.1/Ocaramba.Tests.CloudProviderCrossBrowser.dll `
 	          --logger:"trx;LogFileName=Ocaramba.Tests.BrowserStacknetcoreapp.xml"
 			  
 if($lastexitcode -ne 0)
