@@ -4,12 +4,15 @@
 #sudo apt-get update
 #sudo apt-get install google-chrome-stable
 $ChromeDriverVersion=google-chrome --product-version;
+echo ChromeDriverVersion: $ChromeDriverVersion
 $TempFilePath = [System.IO.Path]::GetTempFileName();
 $TempZipFilePath = $TempFilePath.Replace(".tmp", ".zip");
 Rename-Item -Path $TempFilePath -NewName $TempZipFilePath;
 $TempFileUnzipPath = $TempFilePath.Replace(".tmp", "");
 Invoke-WebRequest "https://chromedriver.storage.googleapis.com/$ChromeDriverVersion/chromedriver_linux64.zip" -OutFile $TempZipFilePath;
 Expand-Archive $TempZipFilePath -DestinationPath $TempFileUnzipPath;
+echo TempFileUnzipPath: $TempFileUnzipPath
+dir $TempFileUnzipPath
 
 .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.NUnit\bin\Debug\netcoreapp3.1" "appsettings.json" "appSettings" "browser|PathToChromeDriverDirectory" "Chrome|$TempFileUnzipPath" -logValues -json
 .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.Angular\bin\Debug\netcoreapp3.1" "appsettings.json" "appSettings" "browser|PathToChromeDriverDirectory" "Chrome|$TempFileUnzipPath" -logValues -json
@@ -18,9 +21,6 @@ Expand-Archive $TempZipFilePath -DestinationPath $TempFileUnzipPath;
 .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.Xunit\bin\Debug\netcoreapp3.1" "appsettings.json" "appSettings" "browser|PathToChromeDriverDirectory" "Chrome|$TempFileUnzipPath" -logValues -json 
 .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.MsTest\bin\Debug\netcoreapp3.1" "appsettings.json" "appSettings" "browser|PathToChromeDriverDirectory" "Chrome|$TempFileUnzipPath" -logValues -json
 .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.UnitTests\bin\Debug\netcoreapp3.1" "appsettings.json" "appSettings" "browser|PathToChromeDriverDirectory" "Chrome|$TempFileUnzipPath" -logValues -json
-.\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.Angular\bin\Debug\net472" "Ocaramba.Tests.Angular.dll.config" "//appSettings" "browser|PathToChromeDriverDirectory" "Chrome|$TempFileUnzipPath" -logValues
-.\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.NUnit\bin\Debug\net472" "Ocaramba.Tests.NUnit.dll.config" "//appSettings" "browser|PathToChromeDriverDirectory" "Chrome|$TempFileUnzipPath" -logValues
-.\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.UnitTests\bin\Debug\net472" "Ocaramba.UnitTests.dll.config" "//appSettings" "browser|PathToChromeDriverDirectory" "Chrome|$TempFileUnzipPath" -logValues
 
 echo '********************************************Executing tests********************************************'
 
