@@ -51,7 +51,7 @@
       <Version>6.2.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.PowerShell.SDK">
-      <Version>6.2.1</Version>
+      <Version>7.2.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.WSMan.Management">
       <Version>6.2.1</Version>
