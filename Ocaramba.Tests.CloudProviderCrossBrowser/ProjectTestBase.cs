@@ -126,6 +126,11 @@ namespace Ocaramba.Tests.CloudProviderCrossBrowser
             {
                 Logger.Info("\nSauceOnDemandSessionID={0} job-name={1}", ((RemoteWebDriver)this.driverContext.Driver).SessionId, "saucelabs_test");
             }
+            else if (BaseConfiguration.RemoteWebDriverHub.ToString().ToLower(CultureInfo.CurrentCulture).Contains("browserstack"))
+            {
+                // Setting name of the test
+                ((IJavaScriptExecutor)DriverContext.Driver).ExecuteScript("browserstack_executor: {\"action\": \"setSessionName\", \"arguments\": {\"name\":\" "+this.DriverContext.TestTitle+" \"}}");
+            }
         }
 
         /// <summary>
@@ -143,6 +148,14 @@ namespace Ocaramba.Tests.CloudProviderCrossBrowser
             if (BaseConfiguration.RemoteWebDriverHub.ToString().ToLower(CultureInfo.CurrentCulture).Contains("saucelabs"))
             {
                 ((IJavaScriptExecutor)this.DriverContext.Driver).ExecuteScript("sauce:job-result=" + (this.DriverContext.IsTestFailed ? "failed" : "passed"));
+            }
+            else if (BaseConfiguration.RemoteWebDriverHub.ToString().ToLower(CultureInfo.CurrentCulture).Contains("browserstack") && !this.DriverContext.IsTestFailed)
+            {
+                ((IJavaScriptExecutor)DriverContext.Driver).ExecuteScript("browserstack_executor: {\"action\": \"setSessionStatus\", \"arguments\": {\"status\":\"passed\", \"reason\": \" Test Passed\"}}");
+            }
+            else if (BaseConfiguration.RemoteWebDriverHub.ToString().ToLower(CultureInfo.CurrentCulture).Contains("browserstack") && this.DriverContext.IsTestFailed)
+            {
+                ((IJavaScriptExecutor)DriverContext.Driver).ExecuteScript("browserstack_executor: {\"action\": \"setSessionStatus\", \"arguments\": {\"status\":\"failed\", \"reason\": \" Test Failed\"}}");
             }
 
             if (this.IsVerifyFailedAndClearMessages(this.driverContext) && TestContext.CurrentContext.Result.Outcome.Status != TestStatus.Failed)
