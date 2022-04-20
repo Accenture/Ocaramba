@@ -303,6 +303,7 @@ stages:
     - job: RunTestsOnWindowsBrowserStack
       pool:
         vmImage: 'windows-latest'
+      cancelTimeoutInMinutes: 5
       steps:
         - checkout: none
         - task: VisualStudioTestPlatformInstaller@1
