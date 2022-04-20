@@ -116,6 +116,8 @@ stages:
 
   - stage: test
     displayName: Test
+    dependsOn:
+      - build
     jobs:       
     - job: RunTestsOnDocker
       pool:
@@ -202,8 +204,6 @@ stages:
     - job: RunTestsOnWindowsCore1
       pool:
         vmImage: 'windows-latest'
-      dependsOn:
-      - build
       steps:
         - checkout: none
         - task: VisualStudioTestPlatformInstaller@1
@@ -279,8 +279,6 @@ stages:
     - job: RunTestsOnWindowsFramework
       pool:
         vmImage: 'windows-latest'
-      dependsOn:
-      - build
       steps:
         - checkout: none
         - task: VisualStudioTestPlatformInstaller@1
@@ -306,8 +304,7 @@ stages:
     - job: RunTestsOnWindowsBrowserStack
       pool:
         vmImage: 'windows-latest'
-      dependsOn:
-      - build
+      cancelTimeoutInMinutes: 5
       steps:
         - checkout: none
         - task: VisualStudioTestPlatformInstaller@1
@@ -340,8 +337,6 @@ stages:
     - job: RunTestsSeleniumGrid
       pool:
         vmImage: 'windows-latest'
-      dependsOn:
-      - build
       steps:
         - checkout: none
         - task: VisualStudioTestPlatformInstaller@1
@@ -367,8 +362,6 @@ stages:
     - job: RunTestsOnWindowsSaucelabs
       pool:
         vmImage: 'windows-latest'
-      dependsOn:
-      - build
       steps:
         - checkout: none
         - task: VisualStudioTestPlatformInstaller@1
