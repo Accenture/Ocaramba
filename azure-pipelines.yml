@@ -171,6 +171,7 @@ stages:
     - job: RunTestsOnLinuxBrowserStack
       pool:
         vmImage: 'ubuntu-latest'
+      timeoutInMinutes: 10
       steps:
         - task: CmdLine@2
           inputs:
