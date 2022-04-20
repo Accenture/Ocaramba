@@ -39,7 +39,7 @@ echo '********************************************NUnit tests*******************
  
 & nunit3-console.exe .\Ocaramba.Tests.Angular\bin\Debug\net472\Ocaramba.Tests.Angular.dll .\Ocaramba.Tests.NUnit\bin\Debug\net472\Ocaramba.Tests.NUnit.dll .\Ocaramba.UnitTests\bin\Debug\net472\Ocaramba.UnitTests.dll
 
-$output = $env:APPVEYOR_BUILD_FOLDER + "\Ocaramba.Tests.NUnit\bin\Debug\net45\"
+#$output = $env:APPVEYOR_BUILD_FOLDER + "\Ocaramba.Tests.NUnit\bin\Debug\net45\"
 
 #.\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.NUnit\bin\Debug\net45\" "Ocaramba.Tests.NUnit.dll.config" "//appSettings" "browser|PathToEdgeChromiumDriverDirectory" "EdgeChromium|$output" -logValues
 

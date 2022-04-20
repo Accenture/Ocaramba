@@ -29,7 +29,7 @@ namespace Ocaramba.Helpers
     using System.Globalization;
     using System.IO;
     using System.Text.RegularExpressions;
-#if net47 || net45
+#if net47
     using System.Windows.Forms;
 #endif
     using NLog;

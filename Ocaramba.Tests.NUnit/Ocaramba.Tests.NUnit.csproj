@@ -2,7 +2,7 @@
 
   <PropertyGroup>
 	<TargetFrameworks>netcoreapp3.1</TargetFrameworks>
-	<TargetFrameworks Condition="'$(OS)' != 'Unix'">net45;net472;netcoreapp3.1</TargetFrameworks>
+	<TargetFrameworks Condition="'$(OS)' != 'Unix'">net472;netcoreapp3.1</TargetFrameworks>
   </PropertyGroup>
 <ItemGroup>
     <PackageReference Include="Appveyor.TestLogger" Version="2.0.0" />
@@ -21,7 +21,7 @@
     <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.30.0.1" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'net472' Or '$(TargetFramework)' == 'net45'">
+  <ItemGroup Condition="'$(TargetFramework)' == 'net472'">
 	<Reference Include="System.Configuration" />
  </ItemGroup>
 
@@ -78,10 +78,6 @@
   <PropertyGroup Condition="'$(TargetFramework)'=='net472'">
     <DefineConstants>net47</DefineConstants>
 </PropertyGroup>
-
-  <PropertyGroup Condition="'$(TargetFramework)'=='net45'">
-    <DefineConstants>net45</DefineConstants>
-  </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net472|AnyCPU'">
     <CodeAnalysisRuleSet>..\Ocaramba\fxcop-sonarqube.tests.ruleset</CodeAnalysisRuleSet>

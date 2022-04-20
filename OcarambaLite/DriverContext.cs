@@ -48,7 +48,7 @@ namespace Ocaramba
     [SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable", Justification = "Driver is disposed on test end")]
     public partial class DriverContext
     {
-#if net47 || net45
+#if net47
         private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
 #endif
 #if netcoreapp3_1
@@ -205,7 +205,7 @@ namespace Ocaramba
                 NameValueCollection firefoxPreferences = new NameValueCollection();
 
                 NameValueCollection firefoxExtensions = new NameValueCollection();
-#if net47 || net45
+#if net47
                 firefoxPreferences = ConfigurationManager.GetSection("FirefoxPreferences") as NameValueCollection;
                 firefoxExtensions = ConfigurationManager.GetSection("FirefoxExtensions") as NameValueCollection;
 #endif
@@ -311,7 +311,7 @@ namespace Ocaramba
                 NameValueCollection chromePreferences = null;
                 NameValueCollection chromeExtensions = null;
                 NameValueCollection chromeArguments = null;
-#if net47 || net45
+#if net47
                 chromePreferences = ConfigurationManager.GetSection("ChromePreferences") as NameValueCollection;
                 chromeExtensions = ConfigurationManager.GetSection("ChromeExtensions") as NameValueCollection;
                 chromeArguments = ConfigurationManager.GetSection("ChromeArguments") as NameValueCollection;
@@ -414,7 +414,7 @@ namespace Ocaramba
             {
                 // retrieving settings from config file
                 NameValueCollection internetExplorerPreferences = null;
-#if net47 || net45
+#if net47
                 internetExplorerPreferences = ConfigurationManager.GetSection("InternetExplorerPreferences") as NameValueCollection;
 #endif
 #if netcoreapp3_1
@@ -455,7 +455,7 @@ namespace Ocaramba
                 NameValueCollection edgeChromiumPreferences = null;
                 NameValueCollection edgeChromiumExtensions = null;
                 NameValueCollection edgeChromiumArguments = null;
-#if net47 || net45
+#if net47
                 edgeChromiumPreferences = ConfigurationManager.GetSection("EdgeChromiumPreferences") as NameValueCollection;
                 edgeChromiumExtensions = ConfigurationManager.GetSection("EdgeChromiumExtensions") as NameValueCollection;
                 edgeChromiumArguments = ConfigurationManager.GetSection("EdgeChromiumArguments") as NameValueCollection;
@@ -607,7 +607,7 @@ namespace Ocaramba
                     serviceFirefox.Host = "::1";
                     this.driver = string.IsNullOrEmpty(BaseConfiguration.PathToFirefoxDriverDirectory) ? new FirefoxDriver(serviceFirefox, this.SetDriverOptions(this.FirefoxOptions)) : new FirefoxDriver(BaseConfiguration.PathToFirefoxDriverDirectory, this.SetDriverOptions(this.FirefoxOptions));
 #endif
-#if net47 || net45
+#if net47
                     this.driver = string.IsNullOrEmpty(BaseConfiguration.PathToFirefoxDriverDirectory) ? new FirefoxDriver(this.SetDriverOptions(this.FirefoxOptions)) : new FirefoxDriver(BaseConfiguration.PathToFirefoxDriverDirectory, this.SetDriverOptions(this.FirefoxOptions));
 #endif
                     break;
@@ -695,7 +695,7 @@ namespace Ocaramba
         {
             NameValueCollection driverCapabilitiesConf = new NameValueCollection();
             NameValueCollection settings = new NameValueCollection();
-#if net47 || net45
+#if net47
             driverCapabilitiesConf = ConfigurationManager.GetSection("DriverCapabilities") as NameValueCollection;
             settings = ConfigurationManager.GetSection("environments/" + this.CrossBrowserEnvironment) as NameValueCollection;
 #endif

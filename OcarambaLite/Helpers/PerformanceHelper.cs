@@ -35,7 +35,7 @@ namespace Ocaramba.Helpers
     /// </summary>
     public class PerformanceHelper
     {
-#if net47 || net45
+#if net47
         private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
 #endif
 #if netcoreapp3_1
