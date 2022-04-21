@@ -19,7 +19,7 @@
 //     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //     SOFTWARE.
 // </license>
-#if net47 || net45
+#if net47
 namespace Ocaramba.Helpers
 {
     using System.Collections.Generic;

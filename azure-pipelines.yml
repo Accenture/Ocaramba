@@ -171,6 +171,7 @@ stages:
     - job: RunTestsOnLinuxBrowserStack
       pool:
         vmImage: 'ubuntu-latest'
+      timeoutInMinutes: 10
       steps:
         - task: CmdLine@2
           inputs:
@@ -185,6 +186,7 @@ stages:
         - script: dotnet build ./Ocaramba.sln --configuration $(buildConfiguration)
 
         - task: PowerShell@2
+          enabled: false
           inputs:
             filePath: './ExecutingTestsOnLinuxBrowserStackAzure.ps1'
           env:
@@ -303,6 +305,7 @@ stages:
     - job: RunTestsOnWindowsBrowserStack
       pool:
         vmImage: 'windows-latest'
+      cancelTimeoutInMinutes: 5
       steps:
         - checkout: none
         - task: VisualStudioTestPlatformInstaller@1

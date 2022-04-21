@@ -33,7 +33,7 @@ namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
 
     public class KeyPressesPage : ProjectPageBase
     {
-#if net47 || net45
+#if net47
         private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
 #endif
 #if netcoreapp3_1
