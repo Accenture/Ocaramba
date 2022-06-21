@@ -38,7 +38,7 @@
   <ItemGroup Condition="'$(TargetFramework)' == 'net472'">
 	<Reference Include="System.Configuration" />
 	<Reference Include="System.Windows.Forms" />
-	<PackageReference Include="Microsoft.AnalysisServices.AdomdClient.retail.amd64" Version="19.39.0" />
+	<PackageReference Include="Microsoft.AnalysisServices.AdomdClient.retail.amd64" Version="19.42.0.4" />
  </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
     <PackageReference Include="Microsoft.Extensions.Configuration">
