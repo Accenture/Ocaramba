@@ -38,7 +38,7 @@
   <ItemGroup Condition="'$(TargetFramework)' == 'net472'">
 	<Reference Include="System.Configuration" />
 	<Reference Include="System.Windows.Forms" />
-	<PackageReference Include="Microsoft.AnalysisServices.AdomdClient.retail.amd64" Version="19.42.0.4" />
+	<PackageReference Include="Microsoft.AnalysisServices.AdomdClient.retail.amd64" Version="19.48.0" />
  </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
     <PackageReference Include="Microsoft.Extensions.Configuration">
@@ -48,7 +48,7 @@
       <Version>3.1.2</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.PowerShell.Commands.Diagnostics">
-      <Version>6.2.1</Version>
+      <Version>7.2.6</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.PowerShell.SDK">
       <Version>6.2.1</Version>
