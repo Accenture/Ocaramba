@@ -11,7 +11,7 @@
     
     <PackageReference Include="NLog" Version="5.0.2" />
     
-    <PackageReference Include="NLog.Web.AspNetCore" Version="5.1.1" />
+    
     <PackageReference Include="NUnit" Version="3.13.3" />
     <PackageReference Include="NUnit.Runners" Version="3.12.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.2.1">
@@ -31,7 +31,7 @@
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.0" />
-    <PackageReference Include="NLog.Web.AspNetCore" Version="4.14.0" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="5.1.1" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
   </ItemGroup>
 
