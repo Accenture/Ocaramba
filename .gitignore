@@ -13,3 +13,4 @@
 /nuget.exe
 /TestResults
 /.sonarqube/
+/UpgradeLog.htm
