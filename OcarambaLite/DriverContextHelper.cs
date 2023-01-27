@@ -154,13 +154,16 @@ namespace Ocaramba
                 Logger.Debug(CultureInfo.CurrentCulture, "Checking JavaScript error(s) in browser");
                 try
                 {
+#if net47
                     jsErrors =
                         this.driver.Manage()
                             .Logs.GetLog(LogType.Browser)
-#if net47
                             .Where(x => BaseConfiguration.JavaScriptErrorTypes.Any(predicate: e => x.Message.Contains(e)));
 #endif
 #if net6_0
+                    jsErrors =
+                        this.driver.Manage()
+                            .Logs.GetLog(LogType.Browser)
                             .Where(x => BaseConfiguration.JavaScriptErrorTypes.Any(predicate: e => x.Message.Contains(e, StringComparison.InvariantCultureIgnoreCase)));
 #endif
                 }
@@ -302,28 +305,32 @@ namespace Ocaramba
                 Logger.Info(CultureInfo.CurrentCulture, "supportedBrowser {0} : {1}", supportedBrowser, browserType);
             }
 
+#if net47
             if (!supportedBrowser)
             {
-#if net47
                 if (this.CrossBrowserEnvironment.ToLower(CultureInfo.CurrentCulture).Contains(BrowserType.Android.ToString().ToLower(CultureInfo.CurrentCulture)))
-#endif
-#if net6_0
-                if (this.CrossBrowserEnvironment.ToLower(CultureInfo.CurrentCulture).Contains(BrowserType.Android.ToString().ToLower(CultureInfo.CurrentCulture), StringComparison.InvariantCultureIgnoreCase))
-#endif
                 {
                     browserType = BrowserType.Chrome;
                 }
-#if net47
                 else if (this.CrossBrowserEnvironment.ToLower(CultureInfo.CurrentCulture).Contains(BrowserType.Iphone.ToString().ToLower(CultureInfo.CurrentCulture)))
+                {
+                    browserType = BrowserType.Safari;
+                }
+             }
 #endif
 #if net6_0
+            if (!supportedBrowser)
+            {
+                if (this.CrossBrowserEnvironment.ToLower(CultureInfo.CurrentCulture).Contains(BrowserType.Android.ToString().ToLower(CultureInfo.CurrentCulture), StringComparison.InvariantCultureIgnoreCase))
+                {
+                    browserType = BrowserType.Chrome;
+                }
                 else if (this.CrossBrowserEnvironment.ToLower(CultureInfo.CurrentCulture).Contains(BrowserType.Iphone.ToString().ToLower(CultureInfo.CurrentCulture), StringComparison.InvariantCultureIgnoreCase))
-#endif
                 {
                     browserType = BrowserType.Safari;
                 }
             }
-
+#endif
             return browserType;
         }
 
@@ -374,31 +381,32 @@ namespace Ocaramba
             }
 #if net47
             if (BaseConfiguration.RemoteWebDriverHub.ToString().ToLower().Contains("browserstack"))
-#endif
-#if net6_0
-            if (BaseConfiguration.RemoteWebDriverHub.ToString().ToLower(CultureInfo.CurrentCulture).Contains("browserstack", StringComparison.InvariantCultureIgnoreCase))
-#endif
             {
                 browserOptions.AddAdditionalOption("bstack:options", capabilities);
             }
-#if net47
             else if (BaseConfiguration.RemoteWebDriverHub.ToString().ToLower().Contains("saucelabs"))
-#endif
-#if net6_0
-            else if (BaseConfiguration.RemoteWebDriverHub.ToString().ToLower(CultureInfo.CurrentCulture).Contains("saucelabs", StringComparison.InvariantCultureIgnoreCase))
-#endif
             {
                 browserOptions.AddAdditionalOption("sauce:options", capabilities);
             }
-#if net47
             else if (BaseConfiguration.RemoteWebDriverHub.ToString().ToLower().Contains("testingbot"))
-#endif
-#if net6_0
-            else if (BaseConfiguration.RemoteWebDriverHub.ToString().ToLower(CultureInfo.CurrentCulture).Contains("testingbot", StringComparison.InvariantCultureIgnoreCase))
-#endif
             {
                 browserOptions.AddAdditionalOption("tb:options", capabilities);
             }
+#endif
+#if net6_0
+            if (BaseConfiguration.RemoteWebDriverHub.ToString().ToLower(CultureInfo.CurrentCulture).Contains("browserstack", StringComparison.InvariantCultureIgnoreCase))
+            {
+                browserOptions.AddAdditionalOption("bstack:options", capabilities);
+            }
+            else if (BaseConfiguration.RemoteWebDriverHub.ToString().ToLower(CultureInfo.CurrentCulture).Contains("saucelabs", StringComparison.InvariantCultureIgnoreCase))
+            {
+                browserOptions.AddAdditionalOption("sauce:options", capabilities);
+            }
+            else if (BaseConfiguration.RemoteWebDriverHub.ToString().ToLower(CultureInfo.CurrentCulture).Contains("testingbot", StringComparison.InvariantCultureIgnoreCase))
+            {
+                browserOptions.AddAdditionalOption("tb:options", capabilities);
+            }
+#endif
         }
 
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Loop through all internetExplorerPreferences")]
