@@ -18,7 +18,7 @@ Project API documentation can be found here: http://objectivityltd.github.io/Oca
 <img align="left" src="https://github.com/ObjectivityLtd/Ocaramba/wiki/images/ocarambadiagram.png">
 
 **It provides the following features:**
-- .NET Frameworks 4.7.2 and .NET Core 3.1 supported
+- .NET Frameworks 4.7.2 and .NET 6.0 supported
 - Cross-Platform  Windows, Linux and macOS systems supported
 - Supports  continuous integration tools like Azure DevOps, Teamcity, Jenkins and others. 
 - Ready for parallel tests execution, more details [here](https://github.com/ObjectivityLtd/Ocaramba/wiki/Selenium%20Parallel%20tests%20execution)
