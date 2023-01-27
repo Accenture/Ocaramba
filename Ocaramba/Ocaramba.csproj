@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	<TargetFrameworks>netcoreapp3.1</TargetFrameworks>
-	<TargetFrameworks Condition="'$(OS)' != 'Unix'">net472;netcoreapp3.1</TargetFrameworks>
+	<TargetFrameworks>net6.0</TargetFrameworks>
+	<TargetFrameworks Condition="'$(OS)' != 'Unix'">net472;net6.0</TargetFrameworks>
     <Description>Framework to automate tests using Selenium WebDriver</Description>
     <Copyright>Copyright ©  2015</Copyright>
     <Company>Objectivity Bespoke Software Specialists</Company>
@@ -27,7 +27,7 @@
     
     <PackageReference Include="Selenium.Support" Version="4.4.0" />
     <PackageReference Include="Selenium.WebDriver" Version="4.4.0" />
-    <PackageReference Include="NLog" Version="5.0.2" />
+    <PackageReference Include="NLog" Version="5.1.1" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="104.0.5112.7900" />
     <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.31.0" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
@@ -41,7 +41,7 @@
 	<Reference Include="System.Windows.Forms" />
 	<PackageReference Include="Microsoft.AnalysisServices.AdomdClient.retail.amd64" Version="19.48.0" />
  </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
+  <ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
     <PackageReference Include="Microsoft.Extensions.Configuration">
       <Version>3.1.2</Version>
     </PackageReference>
@@ -71,8 +71,8 @@
     <ProjectReference Include="..\OcarambaLite\OcarambaLite.csproj" />
   </ItemGroup>
   
-    <PropertyGroup Condition="'$(TargetFramework)'=='netcoreapp3.1'">
-    <DefineConstants>netcoreapp3_1</DefineConstants>
+    <PropertyGroup Condition="'$(TargetFramework)'=='net6.0'">
+    <DefineConstants>net6_0</DefineConstants>
 </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)'=='net472'">

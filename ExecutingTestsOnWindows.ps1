@@ -15,13 +15,13 @@ $TempFileUnzipPath = $TempFilePath.Replace(".tmp", "");
 Invoke-WebRequest "https://chromedriver.storage.googleapis.com/$ChromeVersion/chromedriver_win32.zip" -OutFile $TempZipFilePath;
 Expand-Archive $TempZipFilePath -DestinationPath $TempFileUnzipPath;
 
-.\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.NUnit\bin\Debug\netcoreapp3.1" "appsettings.json" "appSettings" "browser|PathToChromeDriverDirectory" "Chrome|$TempFileUnzipPath" -logValues -json
-.\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.Angular\bin\Debug\netcoreapp3.1" "appsettings.json" "appSettings" "browser|PathToChromeDriverDirectory" "Chrome|$TempFileUnzipPath" -logValues -json
-.\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.NUnitExtentReports\bin\Debug\netcoreapp3.1" "appsettings.json" "appSettings" "browser|PathToChromeDriverDirectory" "Chrome|$TempFileUnzipPath" -logValues -json
-.\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.Features\bin\Debug\netcoreapp3.1" "appsettings.json" "appSettings" "browser|PathToChromeDriverDirectory" "Chrome|$TempFileUnzipPath" -logValues -json
-.\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.Xunit\bin\Debug\netcoreapp3.1" "appsettings.json" "appSettings" "browser|PathToChromeDriverDirectory" "Chrome|$TempFileUnzipPath" -logValues -json 
-.\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.MsTest\bin\Debug\netcoreapp3.1" "appsettings.json" "appSettings" "browser|PathToChromeDriverDirectory" "Chrome|$TempFileUnzipPath" -logValues -json
-.\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.UnitTests\bin\Debug\netcoreapp3.1" "appsettings.json" "appSettings" "browser|PathToChromeDriverDirectory" "Chrome|$TempFileUnzipPath" -logValues -json
+.\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.NUnit\bin\Debug\net6.0" "appsettings.json" "appSettings" "browser|PathToChromeDriverDirectory" "Chrome|$TempFileUnzipPath" -logValues -json
+.\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.Angular\bin\Debug\net6.0" "appsettings.json" "appSettings" "browser|PathToChromeDriverDirectory" "Chrome|$TempFileUnzipPath" -logValues -json
+.\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.NUnitExtentReports\bin\Debug\net6.0" "appsettings.json" "appSettings" "browser|PathToChromeDriverDirectory" "Chrome|$TempFileUnzipPath" -logValues -json
+.\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.Features\bin\Debug\net6.0" "appsettings.json" "appSettings" "browser|PathToChromeDriverDirectory" "Chrome|$TempFileUnzipPath" -logValues -json
+.\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.Xunit\bin\Debug\net6.0" "appsettings.json" "appSettings" "browser|PathToChromeDriverDirectory" "Chrome|$TempFileUnzipPath" -logValues -json 
+.\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.MsTest\bin\Debug\net6.0" "appsettings.json" "appSettings" "browser|PathToChromeDriverDirectory" "Chrome|$TempFileUnzipPath" -logValues -json
+.\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.UnitTests\bin\Debug\net6.0" "appsettings.json" "appSettings" "browser|PathToChromeDriverDirectory" "Chrome|$TempFileUnzipPath" -logValues -json
 .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.Angular\bin\Debug\net472" "Ocaramba.Tests.Angular.dll.config" "//appSettings" "browser|PathToChromeDriverDirectory" "Chrome|$TempFileUnzipPath" -logValues
 .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.NUnit\bin\Debug\net472" "Ocaramba.Tests.NUnit.dll.config" "//appSettings" "browser|PathToChromeDriverDirectory" "Chrome|$TempFileUnzipPath" -logValues
 .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.UnitTests\bin\Debug\net472" "Ocaramba.UnitTests.dll.config" "//appSettings" "browser|PathToChromeDriverDirectory" "Chrome|$TempFileUnzipPath" -logValues
@@ -83,9 +83,9 @@ echo '********************************************Specflow tests****************
 
 #& nunit3-console.exe .\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Debug\net472\Ocaramba.Tests.CloudProviderCrossBrowser.dll --workers=5
     
-#.\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Debug\netcoreapp3.1" "appsettings.json" "appSettings" "RemoteWebDriverHub" "http://$($env:browserstackuser):$($env:browserstackkey)@hub-cloud.browserstack.com/wd/hub" $false $true
+#.\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Debug\net6.0" "appsettings.json" "appSettings" "RemoteWebDriverHub" "http://$($env:browserstackuser):$($env:browserstackkey)@hub-cloud.browserstack.com/wd/hub" $false $true
         
-#.\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Debug\netcoreapp3.1" "appsettings.json" "DriverCapabilities" "build" "Ocaramba.Tests.BrowserStackCrossBrowser$env:appveyor_build_version" $true $true
+#.\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Debug\net6.0" "appsettings.json" "DriverCapabilities" "build" "Ocaramba.Tests.BrowserStackCrossBrowser$env:appveyor_build_version" $true $true
     
 #& dotnet.exe test --configuration Debug --no-build --no-restore Ocaramba.Tests.CloudProviderCrossBrowser -maxCpuCount --test-adapter-path:. --logger:Appveyor
  

@@ -39,7 +39,7 @@ namespace Ocaramba.WebElements
 #if net47
         private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
 #endif
-#if netcoreapp3_1
+#if net6_0
         private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
 #endif
 
@@ -190,7 +190,7 @@ namespace Ocaramba.WebElements
             var element = this.WaitUntilDropdownIsPopulated(timeout);
             var selectElement = new SelectElement(element);
 
-            return selectElement.Options.Any(el => el.Text.Equals(option));
+            return selectElement.Options.Any(el => el.Text.Equals(option, StringComparison.Ordinal));
         }
 
         /// <summary>

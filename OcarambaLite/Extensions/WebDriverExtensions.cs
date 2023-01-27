@@ -40,7 +40,7 @@ namespace Ocaramba.Extensions
 #if net47
         private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
 #endif
-#if netcoreapp3_1
+#if net6_0
         private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
 #endif
 
@@ -190,7 +190,7 @@ namespace Ocaramba.Extensions
                     foreach (var handle in webDriver.WindowHandles)
                     {
                         webDriver.SwitchTo().Window(handle);
-                        if (driver.Url.Equals(url.ToString()))
+                        if (driver.Url.Equals(url.ToString(), StringComparison.Ordinal))
                         {
                             return true;
                         }
@@ -242,11 +242,23 @@ namespace Ocaramba.Extensions
 
             if (isCaseSensitive)
             {
+#if net47
                 condition = drv => drv.PageSource.Contains(text);
+#endif
+#if net6_0
+                condition = drv => drv.PageSource.Contains(text, StringComparison.InvariantCultureIgnoreCase);
+#endif
+
             }
             else
             {
+#if net47
                 condition = drv => drv.PageSource.ToUpperInvariant().Contains(text.ToUpperInvariant());
+#endif
+#if net6_0
+                condition = drv => drv.PageSource.ToUpperInvariant().Contains(text.ToUpperInvariant(), StringComparison.InvariantCultureIgnoreCase);
+#endif
+
             }
 
             if (timeoutInSeconds > 0)
@@ -366,7 +378,12 @@ namespace Ocaramba.Extensions
         /// <param name="webDriver">The web driver.</param>
         private static void ApproveCertificateForInternetExplorer(this IWebDriver webDriver)
         {
+#if net47
             if ((BaseConfiguration.TestBrowser.Equals(BrowserType.InternetExplorer) || BaseConfiguration.TestBrowser.Equals(BrowserType.IE)) && webDriver.Title.Contains("Certificate"))
+#endif
+#if net6_0
+            if ((BaseConfiguration.TestBrowser.Equals(BrowserType.InternetExplorer) || BaseConfiguration.TestBrowser.Equals(BrowserType.IE)) && webDriver.Title.Contains("Certificate", StringComparison.InvariantCultureIgnoreCase))
+#endif
             {
                 webDriver.FindElement(By.Id("overridelink")).JavaScriptClick();
             }

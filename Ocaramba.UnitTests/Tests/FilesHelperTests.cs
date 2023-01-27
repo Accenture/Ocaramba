@@ -10,7 +10,7 @@ namespace Ocaramba.UnitTests.Tests
     [TestFixture, Parallelizable(ParallelScope.Self)]
     public class FilesHelperTests
     {
-#if netcoreapp3_1
+#if net6_0
         string folder = Directory.GetCurrentDirectory();
 #endif
 

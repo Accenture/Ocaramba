@@ -31,7 +31,7 @@ namespace Ocaramba.Tests.NUnit
     using global::NUnit.Framework;
     using Ocaramba;
     using Ocaramba.Helpers;
-#if netcoreapp3_1
+#if net6_0
     using Microsoft.Extensions.Configuration;
 #endif
 
@@ -40,7 +40,7 @@ namespace Ocaramba.Tests.NUnit
     /// </summary>
     public static class ProjectBaseConfiguration
     {
-#if netcoreapp3_1
+#if net6_0
         private static readonly string CurrentDirectory = Directory.GetCurrentDirectory();
 #endif
 
@@ -48,7 +48,7 @@ namespace Ocaramba.Tests.NUnit
         private static readonly string CurrentDirectory = TestContext.CurrentContext.TestDirectory;
         private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
 #endif
-#if netcoreapp3_1
+#if net6_0
         public static readonly string Env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace Ocaramba.Tests.NUnit
 #if net47
                 setting = ConfigurationManager.AppSettings["DataDrivenFile"];
 #endif
-#if netcoreapp3_1
+#if net6_0
                 setting = BaseConfiguration.Builder["appSettings:DataDrivenFile"];
 #endif
                 Logger.Debug(CultureInfo.CurrentCulture, "DataDrivenFile value from settings file '{0}'", setting);
@@ -103,7 +103,7 @@ namespace Ocaramba.Tests.NUnit
 #if net47
                 setting = ConfigurationManager.AppSettings["DataDrivenFileXlsx"];
 #endif
-#if netcoreapp3_1
+#if net6_0
                 setting = BaseConfiguration.Builder["appSettings:DataDrivenFileXlsx"];
 #endif
                 Logger.Debug(CultureInfo.CurrentCulture, "DataDrivenFileXlsx value from settings file '{0}'", setting);
@@ -130,7 +130,7 @@ namespace Ocaramba.Tests.NUnit
 #if net47
                 setting = ConfigurationManager.AppSettings["DataDrivenFileCSV"];
 #endif
-#if netcoreapp3_1
+#if net6_0
                 setting = BaseConfiguration.Builder["appSettings:DataDrivenFileCSV"];
 #endif
                 Logger.Debug(CultureInfo.CurrentCulture, "DataDrivenFileCSV value from settings file '{0}'", setting);
@@ -154,7 +154,7 @@ namespace Ocaramba.Tests.NUnit
 #if net47
                 setting = ConfigurationManager.AppSettings["DownloadFolder"];
 #endif
-#if netcoreapp3_1
+#if net6_0
                 setting = BaseConfiguration.Builder["appSettings:DownloadFolder"];
 #endif
                 Logger.Debug(CultureInfo.CurrentCulture, "DownloadFolder value from settings file '{0}'", setting);

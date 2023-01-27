@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	<TargetFrameworks>netcoreapp3.1</TargetFrameworks>
-	<TargetFrameworks Condition="'$(OS)' != 'Unix'">net472;netcoreapp3.1</TargetFrameworks>
+	<TargetFrameworks>net6.0</TargetFrameworks>
+	<TargetFrameworks Condition="'$(OS)' != 'Unix'">net472;net6.0</TargetFrameworks>
   </PropertyGroup>
   
     <ItemGroup>
@@ -33,10 +33,9 @@
 	<Reference Include="System.Configuration" />
  </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
+  <ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.0" />
     <PackageReference Include="NLog.Web.AspNetCore" Version="5.1.1" />
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -56,8 +55,8 @@
     </None>
   </ItemGroup>
   
-  <PropertyGroup Condition="'$(TargetFramework)'=='netcoreapp3.1'">
-    <DefineConstants>netcoreapp3_1</DefineConstants>
+  <PropertyGroup Condition="'$(TargetFramework)'=='net6.0'">
+    <DefineConstants>net6_0</DefineConstants>
 </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)'=='net472'">

@@ -41,7 +41,7 @@ namespace Ocaramba.Tests.Angular
 #if net47
         private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
 #endif
-#if netcoreapp3_1
+#if net6_0
         private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
 #endif
 
@@ -83,7 +83,7 @@ namespace Ocaramba.Tests.Angular
         [OneTimeSetUp]
         public void BeforeClass()
         {
-#if netcoreapp3_1
+#if net6_0
             this.DriverContext.CurrentDirectory = Directory.GetCurrentDirectory();
 #endif
 
