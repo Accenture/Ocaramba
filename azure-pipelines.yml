@@ -241,7 +241,7 @@ stages:
         - task: ArchiveFiles@2
           condition: always()
           inputs:
-            rootFolderOrFile: '$(System.DefaultWorkingDirectory)/Ocaramba.Tests.NUnitExtentReports/bin/Release/netcoreapp3.1/TestOutput'
+            rootFolderOrFile: '$(System.DefaultWorkingDirectory)/Ocaramba.Tests.NUnitExtentReports/bin/Release/net6.0/TestOutput'
             includeRootFolder: true
             archiveType: 'zip'
             archiveFile: '$(Build.ArtifactStagingDirectory)/ExtentReports_$(Build.BuildId).zip'
