@@ -25,11 +25,11 @@ dir $TempFileUnzipPath
 echo '********************************************Executing tests********************************************'
 
 echo '********************************************NUnit tests********************************************'   
+dotnet test --configuration Debug --filter TestCategory!=NotImplementedInCoreOrUploadDownload --no-build --no-restore Ocaramba.UnitTests -maxCpuCount --test-adapter-path:. --logger:Appveyor
+
 dotnet test --configuration Debug --no-build --no-restore Ocaramba.Tests.Angular -maxCpuCount --test-adapter-path:. --logger:Appveyor
 
 dotnet test --configuration Debug --filter TestCategory!=NotImplementedInCoreOrUploadDownload --no-build --no-restore Ocaramba.Tests.NUnit -maxCpuCount --test-adapter-path:. --logger:Appveyor  
-
-dotnet test --configuration Debug --filter TestCategory!=NotImplementedInCoreOrUploadDownload --no-build --no-restore Ocaramba.UnitTests -maxCpuCount --test-adapter-path:. --logger:Appveyor
 
 echo '********************************************XUnit tests********************************************' 
 
