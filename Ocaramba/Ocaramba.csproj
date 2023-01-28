@@ -69,7 +69,8 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OcarambaLite\OcarambaLite.csproj" />
-  </ItemGroup>  
+  </ItemGroup>
+  
     <PropertyGroup Condition="'$(TargetFramework)'=='net6.0'">
     <DefineConstants>net6_0</DefineConstants>
 </PropertyGroup>
