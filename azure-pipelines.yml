@@ -30,7 +30,7 @@ variables:
   frameworkVersion: '4.0.0'
   BuildVersion: '$(frameworkVersion)$(Build.BuildNumber)'
   seleniumGridVersion: 'selenium-server-4.8.0.jar'
-  seleniumGridUrl: 'https://github.com/SeleniumHQ/selenium/releases/download/selenium-4.8.0/selenium-server-4.8.0.jar"
+  seleniumGridUrl: 'https://github.com/SeleniumHQ/selenium/releases/download/selenium-4.8.0/selenium-server-4.8.0.jar'
   
 stages:
   - stage: build
