@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1
+FROM mcr.microsoft.com/dotnet/core/sdk:6.0
 LABEL maintainer "Ocaramba <ocaramba@objectivity.co.uk>"
 #=========
 # Midnight Commander, lbzip2
