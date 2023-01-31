@@ -24,7 +24,7 @@
 
   <ItemGroup>
     <None Include="..\icon.png" Pack="true" PackagePath="\" />
-    
+	<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Selenium.WebDriver" Version="4.4.0" />
     <PackageReference Include="Selenium.Support" Version="4.4.0" />
     <PackageReference Include="NLog" Version="5.1.1" />
@@ -57,9 +57,6 @@
     <PackageReference Include="NLog.Web.AspNetCore">
       <Version>5.1.1</Version>
     </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
 
   <ItemGroup>
