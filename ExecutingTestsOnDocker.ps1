@@ -5,7 +5,7 @@ If($IsWindows){
 
 docker info
          
-docker build -t ocaramba/selenium -f DockerfileBuild .
+docker build -t ocaramba/selenium -f Dockerfile
          
 docker run --rm -dit --name ocaramba_selenium ocaramba/selenium
 docker ps -a
