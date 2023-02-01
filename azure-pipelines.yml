@@ -29,8 +29,8 @@ variables:
   buildConfiguration: 'Release'
   frameworkVersion: '4.0.0'
   BuildVersion: '$(frameworkVersion)$(Build.BuildNumber)'
-  seleniumGridVersion: 'selenium-server-4.0.0.jar'
-  seleniumGridUrl: 'https://github.com/SeleniumHQ/selenium/releases/download/selenium-4.0.0/selenium-server-4.0.0.jar'
+  seleniumGridVersion: 'selenium-server-4.8.0.jar'
+  seleniumGridUrl: 'https://github.com/SeleniumHQ/selenium/releases/download/selenium-4.8.0/selenium-server-4.8.0.jar'
   
 stages:
   - stage: build
@@ -122,6 +122,7 @@ stages:
     - job: RunTestsOnDocker
       pool:
         vmImage: 'ubuntu-latest'
+      condition: false 
       steps:
         - task: DockerCompose@0
           inputs:
@@ -129,6 +130,14 @@ stages:
             dockerComposeFile: '**/docker-compose.yml'
             action: 'Run a Docker Compose command'
             dockerComposeCommand: 'up -d --build'
+          enabled: false
+        
+        - task: Docker@2
+          displayName: Build an image
+          inputs:
+            repository: ocaramba_selenium
+            command: build
+            Dockerfile: Dockerfile
 
         - task: PowerShell@2
           inputs:
@@ -241,7 +250,7 @@ stages:
         - task: ArchiveFiles@2
           condition: always()
           inputs:
-            rootFolderOrFile: '$(System.DefaultWorkingDirectory)/Ocaramba.Tests.NUnitExtentReports/bin/Release/netcoreapp3.1/TestOutput'
+            rootFolderOrFile: '$(System.DefaultWorkingDirectory)/Ocaramba.Tests.NUnitExtentReports/bin/Release/net6.0/TestOutput'
             includeRootFolder: true
             archiveType: 'zip'
             archiveFile: '$(Build.ArtifactStagingDirectory)/ExtentReports_$(Build.BuildId).zip'

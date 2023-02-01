@@ -32,7 +32,7 @@ namespace Ocaramba.UnitTests.Tests
         [Test]
         public void CheckSynchronizationWithAngularFuctionality()
         {
-#if netcoreapp3_1
+#if net6_0
         string folder = Directory.GetCurrentDirectory();
 #endif
 

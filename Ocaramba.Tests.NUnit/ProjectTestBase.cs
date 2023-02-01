@@ -70,7 +70,7 @@ namespace Ocaramba.Tests.NUnit
         [OneTimeSetUp]
         public void BeforeClass()
         {
-#if netcoreapp3_1
+#if net6_0
         this.DriverContext.CurrentDirectory = Directory.GetCurrentDirectory();
 #endif
 
@@ -86,11 +86,9 @@ namespace Ocaramba.Tests.NUnit
         [OneTimeTearDown]
         public void AfterClass()
         {
-            PrintPerformanceResultsHelper.PrintAverageDurationMillisecondsInAppVeyor(this.DriverContext.PerformanceMeasures);
-            PrintPerformanceResultsHelper.PrintPercentiles90DurationMillisecondsInAppVeyor(this.DriverContext.PerformanceMeasures);
+            this.DriverContext.Stop();
             PrintPerformanceResultsHelper.PrintAverageDurationMillisecondsInTeamcity(this.DriverContext.PerformanceMeasures);
             PrintPerformanceResultsHelper.PrintPercentiles90DurationMillisecondsinTeamcity(this.DriverContext.PerformanceMeasures);
-            this.DriverContext.Stop();
         }
 
         /// <summary>

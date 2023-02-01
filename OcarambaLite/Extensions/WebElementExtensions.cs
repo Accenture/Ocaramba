@@ -40,7 +40,7 @@ namespace Ocaramba.Extensions
         /// </returns>
         public static bool IsElementTextEqualsToExpected(this IWebElement webElement, string text)
         {
-            return webElement.Text.Equals(text);
+            return webElement.Text.Equals(text, StringComparison.Ordinal);
         }
 
         /// <summary>

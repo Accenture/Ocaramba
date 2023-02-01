@@ -84,39 +84,33 @@ namespace Ocaramba.Helpers
         /// </code></example>
         public static bool Wait(Func<bool> condition, TimeSpan timeout, TimeSpan sleepInterval)
         {
-            var result = false;
-            var start = DateTime.Now;
-            var canceller = new CancellationTokenSource();
-            var task = Task.Factory.StartNew(condition, canceller.Token);
-
-            while ((DateTime.Now - start).TotalSeconds < timeout.TotalSeconds)
+            var taskConditionCheck = Task.Run(async () =>
             {
-                if (task.IsCompleted)
+                while (!condition())
                 {
-                    if (task.Result)
-                    {
-                        result = true;
-                        canceller.Cancel();
-                        break;
-                    }
+                    await Task.Delay(sleepInterval);
+                }
+            });
 
-                    task = Task.Factory.StartNew(
-                        () =>
-                            {
-                                using (canceller.Token.Register(Thread.CurrentThread.Abort))
-                                {
-                                    return condition();
-                                }
-                            },
-                        canceller.Token);
+            var taskTimeoutCheck = Task.Run(async () =>
+            {
+                    await Task.Delay(timeout);
+            });
+
+            while (true)
+            {
+                if (taskConditionCheck.IsCompleted)
+                {
+                    return true;
+                }
+
+                if (taskTimeoutCheck.IsCompleted)
+                {
+                    return false;
                 }
 
                 Thread.Sleep(sleepInterval);
             }
-
-            canceller.Cancel();
-            canceller.Dispose();
-            return result;
         }
     }
 }
