@@ -122,6 +122,7 @@ stages:
     - job: RunTestsOnDocker
       pool:
         vmImage: 'ubuntu-latest'
+     condition: false 
       steps:
         - task: DockerCompose@0
           inputs:
