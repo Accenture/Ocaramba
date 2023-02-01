@@ -129,6 +129,14 @@ stages:
             dockerComposeFile: '**/docker-compose.yml'
             action: 'Run a Docker Compose command'
             dockerComposeCommand: 'up -d --build'
+          enabled: false
+        
+        - task: Docker@2
+          displayName: Build an image
+          inputs:
+            repository: ocaramba_selenium
+            command: build
+            Dockerfile: Dockerfile
 
         - task: PowerShell@2
           inputs:
