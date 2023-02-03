@@ -127,6 +127,7 @@ stages:
           inputs:
             containerRegistry: 'docker'
             repository: 'ocaramba/selenium'
+            tags: 'latest'
             command: 'buildAndPush'
             Dockerfile: 'Dockerfile'
         - task: DockerCompose@0
