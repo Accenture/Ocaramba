@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   ocaramba_selenium_container:
-    image: mcr.microsoft.com/dotnet/sdk:6.0
+    image: ocaramba/selenium
     build: 
        context: .
        dockerfile: DockerfileBuild
