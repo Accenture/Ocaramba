@@ -26,9 +26,7 @@ RUN wget --no-verbose -O /tmp/firefox.tar.bz2 'https://download.mozilla.org/?pro
 # Firefox driver
 #=========
 RUN BASE_URL=https://github.com/mozilla/geckodriver/releases/download \
-  && VERSION=$(curl -sL \
-    https://api.github.com/repos/mozilla/geckodriver/releases/latest | \
-    grep "tag_name" | cut -d '"' -f 4) \
+  && VERSION=v0.32.1 \
   && curl -sL "$BASE_URL/$VERSION/geckodriver-$VERSION-linux64.tar.gz" | \
     tar -xz -C /usr/local/bin
 
