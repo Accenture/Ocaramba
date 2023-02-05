@@ -122,23 +122,21 @@ stages:
     - job: RunTestsOnDocker
       pool:
         vmImage: 'ubuntu-latest'
-      condition: false 
       steps:
+        - task: Docker@2
+          inputs:
+            containerRegistry: 'docker'
+            repository: 'ocaramba/selenium'
+            tags: 'latest'
+            command: 'buildAndPush'
+            Dockerfile: 'Dockerfile'
         - task: DockerCompose@0
           inputs:
             containerregistrytype: 'Container Registry'
             dockerComposeFile: '**/docker-compose.yml'
             action: 'Run a Docker Compose command'
             dockerComposeCommand: 'up -d --build'
-          enabled: false
-        
-        - task: Docker@2
-          displayName: Build an image
-          inputs:
-            repository: ocaramba_selenium
-            command: build
-            Dockerfile: Dockerfile
-
+          enabled: true
         - task: PowerShell@2
           inputs:
             filePath: './ExecutingTestsOnDockerAzure.ps1'
