@@ -3,7 +3,7 @@ LABEL maintainer "Ocaramba <ocaramba@objectivity.co.uk>"
 #=========
 # Midnight Commander, lbzip2
 #=========
-RUN apt-get update && apt-get install -y && apt-get --yes install mc && apt-get --yes install lbzip2
+RUN apt-get update && apt-get install -y && apt-get --yes install mc && apt-get --yes install lbzip2 && apt-get --yes install jq
 #=========
 # Chrome
 #=========
