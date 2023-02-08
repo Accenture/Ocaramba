@@ -75,7 +75,7 @@ environment:
   matrix:
     - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
       ASPNETCORE_ENVIRONMENT: Linux
-    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
       ASPNETCORE_ENVIRONMENT: Windows
 
 before_build:
