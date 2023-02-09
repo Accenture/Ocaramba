@@ -624,7 +624,7 @@ namespace Ocaramba
                     this.serviceChrome = ChromeDriverService.CreateDefaultService();
                     this.serviceChrome.LogPath = BaseConfiguration.PathToChromeDriverLog;
                     this.serviceChrome.EnableVerboseLogging = BaseConfiguration.EnableVerboseLoggingChrome;
-                    this.driver = string.IsNullOrEmpty(BaseConfiguration.PathToChromeDriverDirectory) ? new ChromeDriver(this.serviceChrome, this.SetDriverOptions(this.ChromeOptions)) : new ChromeDriver(BaseConfiguration.PathToChromeDriverDirectory, this.SetDriverOptions(this.ChromeOptions));
+                    this.driver = string.IsNullOrEmpty(BaseConfiguration.PathToChromeDriverDirectory) ? new ChromeDriver(this.serviceChrome, this.SetDriverOptions(this.ChromeOptions), BaseConfiguration.RemoteWebDriverTimeout) : new ChromeDriver(BaseConfiguration.PathToChromeDriverDirectory, this.SetDriverOptions(this.ChromeOptions), BaseConfiguration.RemoteWebDriverTimeout);
                     break;
                 case BrowserType.Safari:
                     this.driver = new SafariDriver(this.SetDriverOptions(this.SafariOptions));
@@ -641,7 +641,7 @@ namespace Ocaramba
                     }
 
                     this.serviceEdge = EdgeDriverService.CreateDefaultService();
-                    this.driver = string.IsNullOrEmpty(BaseConfiguration.PathToEdgeChromiumDriverDirectory) ? new EdgeDriver(this.serviceEdge, this.SetDriverOptions(this.EdgeOptions)) : new EdgeDriver(EdgeDriverService.CreateDefaultService(BaseConfiguration.PathToEdgeChromiumDriverDirectory, @"msedgedriver.exe"), this.SetDriverOptions(this.EdgeOptions));
+                    this.driver = string.IsNullOrEmpty(BaseConfiguration.PathToEdgeChromiumDriverDirectory) ? new EdgeDriver(this.serviceEdge, this.SetDriverOptions(this.EdgeOptions), BaseConfiguration.RemoteWebDriverTimeout) : new EdgeDriver(EdgeDriverService.CreateDefaultService(BaseConfiguration.PathToEdgeChromiumDriverDirectory, @"msedgedriver.exe"), this.SetDriverOptions(this.EdgeOptions), BaseConfiguration.RemoteWebDriverTimeout);
                     break;
                 default:
                     throw new NotSupportedException(

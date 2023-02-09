@@ -302,15 +302,22 @@ namespace Ocaramba
         {
             get
             {
-                int setting = 0;
+                string setting = null;
 #if net47
-                setting = int.Parse(ConfigurationManager.AppSettings["remoteTimeout"], CultureInfo.InvariantCulture);
+                setting = ConfigurationManager.AppSettings["remoteTimeout"];
 #endif
 #if net6_0
-                setting = int.Parse(Builder["appSettings:remoteTimeout"], CultureInfo.InvariantCulture);
+                setting = Builder["appSettings:remoteTimeout"];
 #endif
-                Logger.Trace(CultureInfo.CurrentCulture, "Gets the remote timeout from settings file '{0}'", setting);
-                return new TimeSpan(0, 0, setting);
+                if (string.IsNullOrEmpty(setting))
+                {
+                    setting = "300";
+                }
+
+                var timeout = int.Parse(setting, CultureInfo.InvariantCulture);
+
+                Logger.Trace(CultureInfo.CurrentCulture, "Gets the remote timeout from settings file '{0}'", timeout);
+                return new TimeSpan(0, 0, timeout);
             }
         }
 
