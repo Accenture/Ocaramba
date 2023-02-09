@@ -311,7 +311,7 @@ namespace Ocaramba
 #endif
                 if (string.IsNullOrEmpty(setting))
                 {
-                    setting = "300";
+                    setting = "60";
                 }
 
                 var timeout = int.Parse(setting, CultureInfo.InvariantCulture);
