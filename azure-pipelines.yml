@@ -31,6 +31,7 @@ variables:
   BuildVersion: '$(frameworkVersion)$(Build.BuildNumber)'
   seleniumGridVersion: 'selenium-server-4.8.0.jar'
   seleniumGridUrl: 'https://github.com/SeleniumHQ/selenium/releases/download/selenium-4.8.0/selenium-server-4.8.0.jar'
+  NUGET_PACKAGES: $(Pipeline.Workspace)/.nuget/packages
   
 stages:
   - stage: build
@@ -56,9 +57,20 @@ stages:
 
 
         - task: NuGetToolInstaller@1
-
-        - task: NuGetCommand@2
+        - task: Cache@2
+          displayName: Cache
           inputs:
+            key: 'nuget | "$(Agent.OS)" | **/packages.lock.json,!**/bin/**,!**/obj/**'
+            restoreKeys: |
+              nuget | "$(Agent.OS)"
+              nuget
+            path: '$(NUGET_PACKAGES)'
+            cacheHitVar: 'CACHE_RESTORED'
+        - task: NuGetCommand@2
+          displayName: 'NuGet restore'
+          condition: ne(variables.CACHE_RESTORED, true)
+          inputs:
+            command: 'restore'
             restoreSolution: '$(solution)'
 
         - task: Assembly-Info-NetCore@2
