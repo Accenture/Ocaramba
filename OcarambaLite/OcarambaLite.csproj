@@ -76,5 +76,7 @@
  <PropertyGroup>
   <GenerateDocumentationFile>true</GenerateDocumentationFile>
 </PropertyGroup>
-
+ <PropertyGroup>
+ <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+ </PropertyGroup>
 </Project>

@@ -70,5 +70,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net472|AnyCPU'">
     <CodeAnalysisRuleSet>..\Ocaramba\fxcop-sonarqube.tests.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
- 
+ <PropertyGroup>
+ <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+ </PropertyGroup> 
 </Project>

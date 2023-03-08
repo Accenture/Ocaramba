@@ -91,5 +91,7 @@
  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net6.0|AnyCPU'">
    <WarningLevel>6</WarningLevel>
  </PropertyGroup>
-
+ <PropertyGroup>
+ <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+ </PropertyGroup>
 </Project>
