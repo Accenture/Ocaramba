@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
 	<TargetFrameworks>net6.0</TargetFrameworks>
@@ -14,7 +14,7 @@
     <PackageReference Include="MSTest.TestAdapter" Version="2.2.10" />
     <PackageReference Include="MSTest.TestFramework" Version="2.2.10" />
     <PackageReference Include="NLog" Version="5.1.1" />
-    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="109.0.5414.7400" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="113.0.5672.6300" />
     <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.31.0" />
     <PackageReference Include="Selenium.WebDriver.IEDriver" Version="4.3.0" />
   </ItemGroup>
