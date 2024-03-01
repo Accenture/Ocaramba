@@ -134,7 +134,7 @@ jobs:
     - uses: actions/checkout@v2
       with:
         repository: none
-      run: dotnet add package Microsoft.TestPlatform
+    - run: dotnet add package Microsoft.TestPlatform
     - uses: actions/download-artifact@v2
     - shell: powershell
       run: Get-ChildItem .\  -Recurse
