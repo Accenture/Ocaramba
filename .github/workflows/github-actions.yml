@@ -184,6 +184,7 @@ jobs:
     - run: dotnet add package Microsoft.TestPlatform
     - uses: actions/download-artifact@v2
     - shell: powershell
+      run: ./ExecutingTestsOnWindowsAzure3.ps1
     - name: Publish Test Report
       uses: mikepenz/action-junit-report@v4
       if: success() || failure()
@@ -224,6 +225,7 @@ jobs:
     - run: dotnet add package Microsoft.TestPlatform
     - uses: actions/download-artifact@v2
     - shell: powershell
+      run: ./ExecutingTestsOnWindowsAzure5.ps1
     - name: Publish Test Report
       uses: mikepenz/action-junit-report@v4
       if: success() || failure()
@@ -241,6 +243,7 @@ jobs:
     - run: dotnet add package Microsoft.TestPlatform
     - uses: actions/download-artifact@v2
     - shell: powershell
+      run: ./ExecutingTestsOnWindowsAzure6.ps1
       env:
         MAPPED_ENV_BROWSERSTACKKEY: ${{ env.browserstackkey }}
         MAPPED_ENV_BROWSERSTACKUSER: ${{ env.browserstackuser }}
@@ -268,11 +271,11 @@ jobs:
     - test_Stage_RunTestsOnWindowsSaucelabs
     steps:
     - uses: actions/checkout@v2
-    - run: |
+    - shell: powershell
+      run: |
         $tags = git tag --sort=-creatordate   
         $tag = $tags[0]
         Write-Host "##vso[task.setvariable variable=frameworkVersion]$tag"
-      shell: powershell
       if: startsWith(github.ref, 'refs/tags/')
     - uses: actions/download-artifact@v2
     - uses: actions/download-artifact@v2
