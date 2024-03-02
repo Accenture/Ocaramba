@@ -35,11 +35,10 @@ jobs:
     - name: Cache
       uses: actions/cache@v3
       with:
-        key: nuget | "${{ runner.os }}" | **/packages.lock.json,!**/bin/**,!**/obj/**
-        restore-keys: 
-          nuget | "${{ runner.os }}"
-          nuget
-        path: ${{ env.NUGET_PACKAGES }}
+        path: ~/.nuget/packages
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-nuget-
     - name: NuGet restore
       run: nuget restore ${{ env.solution }}
     - name: Set project versions
