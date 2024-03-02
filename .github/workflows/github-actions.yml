@@ -35,9 +35,8 @@ jobs:
     - name: Cache
       uses: actions/cache@v3
       with:
-        path: |
-          ~/.nuget/packages
-        key: ${{ runner.os }}|nuget|${{ hashFiles('**/packages.lock.json') }}
+        path: ${{ env.NUGET_PACKAGES }}
+        key: ${{ runner.os }}|nuget|../packages.lock.json'
         restore-keys: |
           nuget | "${{ runner.os }}"
           nuget
