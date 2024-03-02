@@ -16,7 +16,7 @@ env:
   BuildVersion: 4.0.0${{ github.run_number }}
   seleniumGridVersion: selenium-server-4.8.0.jar
   seleniumGridUrl: https://github.com/SeleniumHQ/selenium/releases/download/selenium-4.8.0/selenium-server-4.8.0.jar
-  NUGET_PACKAGES: ./.nuget/packages
+  NUGET_PACKAGES: $(Pipeline.Workspace)/.nuget/packages
 jobs:
   build_Stage_BuildTestsOnWindows:
     runs-on: windows-latest
