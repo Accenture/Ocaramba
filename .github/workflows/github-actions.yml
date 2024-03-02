@@ -50,7 +50,7 @@ jobs:
       uses: vers-one/dotnet-project-version-updater@v1.4
       with:
         file: |
-          "${{ github.workspace }}/Ocaramba/Ocaramba.csproj"
+          "**/Ocaramba.csproj"
         version: ${{ env.frameworkVersion }}
     - run: msbuild '${{ env.solution }}' /p:configuration='${{ env.buildConfiguration }}' /p:platform='${{ env.buildPlatform }}' /v:minimal
     - uses: actions/upload-artifact@v2
