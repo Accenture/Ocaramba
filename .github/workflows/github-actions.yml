@@ -31,9 +31,10 @@ jobs:
       if: startsWith(github.ref, 'refs/tags/')
     - shell: powershell
       run: '(Get-Content ''Ocaramba.sln'' -raw) -replace [regex](''.*?'' + ''Documentation'' + (''.*?\r\n'' * (5 + 1))) | set-content  ''Ocaramba.sln'''
-   - uses: nuget/setup-nuget@v2
-     with:
-       nuget-version: latest
+    - name: Setup nuget
+      uses: nuget/setup-nuget@v2
+      with:
+        nuget-version: latest
     - name: Cache
       uses: actions/cache@v4
       with:
