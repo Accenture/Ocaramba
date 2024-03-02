@@ -9,7 +9,7 @@ on:
   schedule:
   - cron: '0 18 * * 0'
 env:
-  solution: './Ocaramba.sln'
+  solution: $(Pipeline.Workspace)/Ocaramba.sln
   buildPlatform: Any CPU
   buildConfiguration: Release
   frameworkVersion: 4.0.0
@@ -37,7 +37,7 @@ jobs:
       with:
         path: |
           ~/.nuget/packages
-        key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+        key: ${{ runner.os }}|nuget|${{ hashFiles('**/packages.lock.json') }}
         restore-keys: |
           nuget | "${{ runner.os }}"
           nuget
