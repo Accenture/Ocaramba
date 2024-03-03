@@ -69,11 +69,6 @@ jobs:
       with:
         path: ./OcarambaLite/bin/Release/OcarambaLite.${{ env.frameworkVersion }}.snupkg
         name: OcarambaLiteS${{ env.frameworkVersion }}
-    - uses: actions/upload-artifact@v2
-      with:
-        path: ./
-        name: OcarambaBuild
-      if: (${{ job.status }} != 'cancelled')
   test_Stage_RunTestsOnDocker:
     runs-on: ubuntu-latest
     needs:
