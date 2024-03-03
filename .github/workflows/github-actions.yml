@@ -56,18 +56,23 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         path: ./Ocaramba/bin/Release/Ocaramba.${{ env.frameworkVersion }}.nupkg
+        name: Ocaramba${{ env.frameworkVersion }}
     - uses: actions/upload-artifact@v2
       with:
         path: ./Ocaramba/bin/Release/Ocaramba.${{ env.frameworkVersion }}.snupkg
+        name: OcarambaS${{ env.frameworkVersion }}
     - uses: actions/upload-artifact@v2
       with:
         path: ./OcarambaLite/bin/Release/OcarambaLite.${{ env.frameworkVersion }}.nupkg
+        name: OcarambaLite${{ env.frameworkVersion }}
     - uses: actions/upload-artifact@v2
       with:
         path: ./OcarambaLite/bin/Release/OcarambaLite.${{ env.frameworkVersion }}.snupkg
+        name: OcarambaLiteS${{ env.frameworkVersion }}
     - uses: actions/upload-artifact@v2
       with:
-        path: ${{ env.Pipeline.Workspace }}
+        path: ./
+        name: OcarambaBuild
       if: (${{ job.status }} != 'cancelled')
   test_Stage_RunTestsOnDocker:
     runs-on: ubuntu-latest
