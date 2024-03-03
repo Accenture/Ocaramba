@@ -139,9 +139,6 @@ jobs:
     - build_Stage_BuildTestsOnWindows
     steps:
     - uses: actions/checkout@v2
-    - uses: actions/checkout@v2
-      with:
-        repository: none
     - run: dotnet add package Microsoft.TestPlatform
     - uses: actions/download-artifact@v2
     - shell: powershell
@@ -170,9 +167,6 @@ jobs:
     - build_Stage_BuildTestsOnWindows
     steps:
     - uses: actions/checkout@v2
-    - uses: actions/checkout@v2
-      with:
-        repository: none
     - run: dotnet add package Microsoft.TestPlatform
     - uses: actions/download-artifact@v2
     - name: Publish Test Report
@@ -186,9 +180,6 @@ jobs:
     - build_Stage_BuildTestsOnWindows
     steps:
     - uses: actions/checkout@v2
-    - uses: actions/checkout@v2
-      with:
-        repository: none
     - run: dotnet add package Microsoft.TestPlatform
     - uses: actions/download-artifact@v2
     - shell: powershell
@@ -203,7 +194,6 @@ jobs:
     needs:
     - build_Stage_BuildTestsOnWindows
     steps:
-    - uses: actions/checkout@v2
     - uses: actions/checkout@v2
       with:
         repository: none
@@ -227,9 +217,6 @@ jobs:
     - build_Stage_BuildTestsOnWindows
     steps:
     - uses: actions/checkout@v2
-    - uses: actions/checkout@v2
-      with:
-        repository: none
     - run: dotnet add package Microsoft.TestPlatform
     - uses: actions/download-artifact@v2
     - shell: powershell
@@ -244,7 +231,6 @@ jobs:
     needs:
     - build_Stage_BuildTestsOnWindows
     steps:
-    - uses: actions/checkout@v2
     - uses: actions/checkout@v2
       with:
         repository: none
