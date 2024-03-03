@@ -50,7 +50,7 @@ jobs:
       uses: vers-one/dotnet-project-version-updater@v1.4
       with:
         file: |
-          "**/Ocaramba.csproj", "**/Ocaramba.Tests.MsTest.csproj", "**/Ocaramba.Tests.NUnitExtentReports.csproj", "**/Ocaramba.Tests.NUnit.csproj", "**/Ocaramba.Tests.PageObjects.csproj", "**/Ocaramba.Tests.Xunit.csproj", "**/Ocaramba.UnitTests.csproj", "**/OcarambaLite.csproj"
+          "**/Ocaramba.csproj", "**/Ocaramba.Tests.NUnitExtentReports.csproj", "**/Ocaramba.Tests.NUnit.csproj", "**/Ocaramba.Tests.PageObjects.csproj", "**/Ocaramba.Tests.Xunit.csproj", "**/Ocaramba.UnitTests.csproj", "**/OcarambaLite.csproj"
         version: ${{ env.frameworkVersion }}
     - run: msbuild '${{ env.solution }}' /p:configuration='${{ env.buildConfiguration }}' /p:platform='${{ env.buildPlatform }}' /v:minimal
     - uses: actions/upload-artifact@v2
