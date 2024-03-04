@@ -70,7 +70,7 @@ jobs:
         path: ./OcarambaLite/bin/Release/OcarambaLite.${{ env.frameworkVersion }}.snupkg
         name: OcarambaLiteS${{ env.frameworkVersion }}
     - name: Zip artifact for deployment
-      run: Compress-Archive -Path folder/* -Destination OcarambaBuild.zip
+      run: Compress-Archive -Path ./ -Destination OcarambaBuild.zip
     - uses: actions/upload-artifact@v2
       with:
         path: OcarambaBuild.zip   
