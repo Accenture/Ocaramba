@@ -16,8 +16,7 @@ echo '********************************************net472 tests******************
 
 .\scripts\set_AppConfig_for_tests.ps1 "D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.Features\bin\Release\net472" "Ocaramba.Tests.Features.dll.config" "//appSettings" "browser|PathToChromeDriverDirectory" "Chrome|$($env:CHROMEWEBDRIVER)" -logValues
 
-$vstest = (Resolve-Path "D:\a\_temp\VsTest\Microsoft.TestPlatform*\tools\net*\Common*\IDE\Extensions\TestPlatform\vstest.console.exe").ToString()
-& $vstest D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.Features\bin\Release\net472\Ocaramba.Tests.Features.dll --logger:"trx;LogFileName=Ocaramba.Tests.Features.trx"
+dotnet vstest D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.Features\bin\Release\net472\Ocaramba.Tests.Features.dll --logger "trx;LogFileName=Ocaramba.Tests.Features.trx"
 if($lastexitcode -ne 0)
  {
   echo 'lastexitcode' $lastexitcode
