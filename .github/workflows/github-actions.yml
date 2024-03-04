@@ -69,9 +69,11 @@ jobs:
       with:
         path: ./OcarambaLite/bin/Release/OcarambaLite.${{ env.frameworkVersion }}.snupkg
         name: OcarambaLiteS${{ env.frameworkVersion }}
+    - name: Zip artifact for deployment
+      run: Compress-Archive -Path folder/* -Destination OcarambaBuild.zip
     - uses: actions/upload-artifact@v2
       with:
-        path: ./
+        path: OcarambaBuild.zip   
         name: OcarambaBuild
         compression-level: 0
       if: (${{ job.status }} != 'cancelled')
@@ -140,10 +142,19 @@ jobs:
     - build_Stage_BuildTestsOnWindows
     steps:
     - uses: actions/checkout@v2
-    - run: Get-Project Ocaramba.Tests.Angular,Ocaramba.Tests.NUnit,Ocaramba.Tests.NUnitExtentReports | dotnet add package Microsoft.TestPlatform
+    - run: |
+        cd Ocaramba.Tests.Angular
+        dotnet add package Microsoft.TestPlatform
+        cd ..
+        cd Ocaramba.Tests.NUnit
+        dotnet add package Microsoft.TestPlatform
+        cd ..
+        cd Ocaramba.Tests.NUnitExtentReports
+        dotnet add package Microsoft.TestPlatform
     - uses: actions/download-artifact@v2
       with:
         name: OcarambaBuild
+    - run: Expand-Archive -Path OcarambaBuild.zip -DestinationPath ./
     - shell: powershell
       run: |
         Get-ChildItem .\  -Recurse
