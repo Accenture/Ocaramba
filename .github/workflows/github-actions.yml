@@ -173,13 +173,12 @@ jobs:
       with:
         path: ${{ env.Pipeline.Workspace }}/TestResults
       if: (${{ job.status }} != 'cancelled')
-    - uses: montudor/action-zip@v0.1.0
-      with:
-        args: zip -r ${{ github.workspace }}/ExtentReports_${{ github.run_id }}.zip ${{ github.workspace }}/Ocaramba.Tests.NUnitExtentReports/bin/Release/net6.0/TestOutput
-      if: always()
+      
+    - name: Zip artifact
+      run: Compress-Archive -Path ${{ github.workspace }}/Ocaramba.Tests.NUnitExtentReports/bin/Release/net6.0/TestOutput -Destination ExtentReports_${{ github.run_id }}.zip
     - uses: actions/upload-artifact@v2
       with:
-        path: ${{ github.workspace }}/ExtentReports_${{ github.run_id }}.zip
+        path: ExtentReports_${{ github.run_id }}.zip
         name: ExtentTestReport
       if: always()
   test_Stage_RunTestsOnWindowsCore2:
