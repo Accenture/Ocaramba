@@ -69,6 +69,12 @@ jobs:
       with:
         path: ./OcarambaLite/bin/Release/OcarambaLite.${{ env.frameworkVersion }}.snupkg
         name: OcarambaLiteS${{ env.frameworkVersion }}
+    - uses: actions/upload-artifact@v2
+      with:
+        path: ./
+        name: OcarambaBuild
+        compression-level: 0
+      if: (${{ job.status }} != 'cancelled')
   test_Stage_RunTestsOnDocker:
     runs-on: ubuntu-latest
     needs:
@@ -134,10 +140,14 @@ jobs:
     - build_Stage_BuildTestsOnWindows
     steps:
     - uses: actions/checkout@v2
-    - run: dotnet add package Microsoft.TestPlatform
+    - run: Get-Project Ocaramba.Tests.Angular,Ocaramba.Tests.NUnit,Ocaramba.Tests.NUnitExtentReports | dotnet add package Microsoft.TestPlatform
     - uses: actions/download-artifact@v2
+      with:
+        name: OcarambaBuild
     - shell: powershell
-      run: Get-ChildItem .\  -Recurse
+      run: |
+        Get-ChildItem .\  -Recurse
+        ./ExecutingTestsOnWindowsAzure1.ps1
     - name: Publish Test Report
       uses: mikepenz/action-junit-report@v4
       if: success() || failure()
