@@ -155,10 +155,8 @@ jobs:
       with:
         name: OcarambaBuild
     - run: Expand-Archive -Path OcarambaBuild.zip -DestinationPath ./
-    - shell: powershell
-      run: |
-        Get-ChildItem .\  -Recurse
-        ./ExecutingTestsOnWindowsAzure1.ps1
+    - run: Get-ChildItem .\ -Recurse
+    - run: ./ExecutingTestsOnWindowsAzure1.ps1
     - name: Publish Test Report
       uses: mikepenz/action-junit-report@v4
       if: success() || failure()
