@@ -142,38 +142,33 @@ jobs:
     - build_Stage_BuildTestsOnWindows
     steps:
     - uses: actions/checkout@v2
-    - run: |
-        cd Ocaramba.Tests.Angular
-        dotnet add package Microsoft.TestPlatform
-        dotnet add package NUnit3TestAdapter --version 4.5.0
-        cd ..
-        cd Ocaramba.Tests.NUnit
-        dotnet add package Microsoft.TestPlatform
-        dotnet add package NUnit3TestAdapter --version 4.5.0
-        cd ..
-        cd Ocaramba.Tests.NUnitExtentReports
-        dotnet add package Microsoft.TestPlatform
-        dotnet add package NUnit3TestAdapter --version 4.5.0
-        cd ..
-        cd Ocaramba.Tests.Features
-        dotnet add package Microsoft.TestPlatform
-        dotnet add package NUnit3TestAdapter --version 4.5.0
+    - name: Setup MSBuild Path
+      uses: warrenbuckley/Setup-MSBuild@v1
+
+    - name: Setup VSTest Path
+      uses: darenm/Setup-VSTest@v1.2
+
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1.0.2
     - uses: actions/download-artifact@v2
       with:
         name: OcarambaBuild
     - run: Expand-Archive -Path OcarambaBuild.zip -DestinationPath ./
+    - name: VSTest
+      run: vstest.console.exe /Platform:x64 D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.Angular\bin\Release\net6.0\Ocaramba.Tests.Angular.dll
     - run: ./ExecutingTestsOnWindowsGithubActions1.ps1
+    - name: Run tests
+      uses: microsoft-approved-actions/vstest@master
+      with:
+        testAssembly: Ocaramba.Tests.Angular.dll
+        searchFolder: D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.Angular\bin\Release\net6.0
+        runInParallel: true
     - run: Get-ChildItem .\ -Recurse
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
       if: always()
       with:
         files: Ocaramba.Tests.*.trx
-    - uses: actions/upload-artifact@v2
-      with:
-        path: ${{ env.Pipeline.Workspace }}/TestResults
-      if: (${{ job.status }} != 'cancelled')
-      
     - name: Zip artifact
       run: Compress-Archive -Path ${{ github.workspace }}/Ocaramba.Tests.NUnitExtentReports/bin/Release/net6.0/TestOutput -Destination ExtentReports_${{ github.run_id }}.zip
     - uses: actions/upload-artifact@v2
