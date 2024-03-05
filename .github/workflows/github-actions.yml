@@ -157,12 +157,6 @@ jobs:
     - name: VSTest
       run: vstest.console.exe /Platform:x64 D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.Angular\bin\Release\net6.0\Ocaramba.Tests.Angular.dll
     - run: ./ExecutingTestsOnWindowsGithubActions1.ps1
-    - name: Run tests
-      uses: microsoft-approved-actions/vstest@master
-      with:
-        testAssembly: Ocaramba.Tests.Angular.dll
-        searchFolder: D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.Angular\bin\Release\net6.0
-        runInParallel: true
     - run: Get-ChildItem .\ -Recurse
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
