@@ -13,6 +13,7 @@ env:
   buildPlatform: Any CPU
   buildConfiguration: Release
   frameworkVersion: 4.0.0
+  CHROMEWEBDRIVER: C:\SeleniumWebDrivers\ChromeDriver
   BuildVersion: 4.0.0${{ github.run_number }}
   seleniumGridVersion: selenium-server-4.8.0.jar
   seleniumGridUrl: https://github.com/SeleniumHQ/selenium/releases/download/selenium-4.8.0/selenium-server-4.8.0.jar

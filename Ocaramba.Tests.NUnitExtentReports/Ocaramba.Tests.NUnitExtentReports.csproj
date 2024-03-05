@@ -3,6 +3,7 @@
   <PropertyGroup>
 	<TargetFrameworks>net6.0</TargetFrameworks>
 	<TargetFrameworks Condition="'$(OS)' != 'Unix'">net6.0</TargetFrameworks>
+	<GenerateRuntimeConfigDevFile>true</GenerateRuntimeConfigDevFile>
   </PropertyGroup>
 <ItemGroup>
     <PackageReference Include="Appveyor.TestLogger" Version="2.0.0" />
