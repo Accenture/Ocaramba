@@ -160,7 +160,7 @@ jobs:
         name: OcarambaBuild
     - run: Expand-Archive -Path OcarambaBuild.zip -DestinationPath ./
     - name: VSTest
-      run: vstest.console.exe /Platform:x64 D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.Angular\bin\Release\net6.0\Ocaramba.Tests.Angular.dll
+      run: vstest.console.exe D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.Angular\bin\Release\net6.0\Ocaramba.Tests.Angular.dll D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.NUnit\bin\Release\net6.0\Ocaramba.Tests.NUnit.dll D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.NUnitExtentReports\bin\Release\net6.0\Ocaramba.Tests.NUnitExtentReports.dll /TestCaseFilter:"(TestCategory!=TakingScreehShots)" /Parallel /Logger:"trx;LogFileName=Ocaramba.Tests.netcoreapp.trx"
     - run: ./ExecutingTestsOnWindowsGithubActions1.ps1
     - run: Get-ChildItem .\ -Recurse
     - name: Publish Test Results
