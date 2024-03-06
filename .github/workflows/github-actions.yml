@@ -166,9 +166,9 @@ jobs:
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
       if: always()
       with:
-        files: Ocaramba.Tests.*.trx
+        files: D:\a\Ocaramba\Ocaramba\TestResults\Ocaramba.Tests.netcoreapp.trx
     - name: Zip artifact
-      run: Compress-Archive -Path ${{ github.workspace }}/Ocaramba.Tests.NUnitExtentReports/bin/Release/net6.0/TestOutput -Destination ExtentReports_${{ github.run_id }}.zip
+      run: Compress-Archive -Path D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.NUnitExtentReports\bin\Release\net6.0\TestOutput -Destination ExtentReports_${{ github.run_id }}.zip
     - uses: actions/upload-artifact@v2
       with:
         path: ExtentReports_${{ github.run_id }}.zip
