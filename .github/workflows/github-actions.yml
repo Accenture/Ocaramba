@@ -180,13 +180,22 @@ jobs:
     - build_Stage_BuildTestsOnWindows
     steps:
     - uses: actions/checkout@v2
-    - run: dotnet add package Microsoft.TestPlatform
-    - uses: actions/download-artifact@v2
-    - name: Publish Test Report
-      uses: mikepenz/action-junit-report@v4
-      if: success() || failure()
+    - name: Setup VSTest Path
+      uses: darenm/Setup-VSTest@v1.2
+    - uses: nuget/setup-nuget@v2
       with:
-        report_paths: '**/Ocaramba.Tests.*.xml'
+        nuget-version: latest
+    - uses: actions/download-artifact@v2
+      with:
+        name: OcarambaBuild
+    - run: Expand-Archive -Path OcarambaBuild.zip -DestinationPath ./
+    - run: ./ExecutingTestsOnWindowsGithubActions2.ps1
+    - run: Get-ChildItem .\ -Recurse
+    - name: Publish Test Results
+      uses: EnricoMi/publish-unit-test-result-action/windows@v2
+      if: always()
+      with:
+        files: D:\a\Ocaramba\Ocaramba\TestResults\Ocaramba.Tests.netcoreapp.trx
   test_Stage_RunTestsOnWindowsFramework:
     runs-on: windows-latest
     needs:
