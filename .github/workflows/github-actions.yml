@@ -195,7 +195,7 @@ jobs:
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
       if: always()
       with:
-        files: D:\a\Ocaramba\Ocaramba\TestResults\Ocaramba.Tests.netcoreapp.trx
+        files: D:\a\Ocaramba\Ocaramba\TestResults\Ocaramba.Tests.netcoreapp.xml
   test_Stage_RunTestsOnWindowsFramework:
     runs-on: windows-latest
     needs:
