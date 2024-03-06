@@ -10,9 +10,9 @@ vstest.console.exe D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.Angular\bin\Re
 
 echo '********************************************net472 tests********************************************'
 
-.\scripts\set_AppConfig_for_tests.ps1 "D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.Features\bin\Release\net472" "Ocaramba.Tests.Features.dll.config" "appsettings.json" "browser|PathToChromeDriverDirectory" "Chrome|$($env:CHROMEWEBDRIVER)" -logValues
+#.\scripts\set_AppConfig_for_tests.ps1 "D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.Features\bin\Release\net472" "Ocaramba.Tests.Features.dll.config" "appsettings.json" "browser|PathToChromeDriverDirectory" "Chrome|C:\SeleniumWebDrivers\ChromeDriver" -logValues
 
-vstest.console.exe D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.Features\bin\Release\net472\Ocaramba.Tests.Features.dll /Logger:"trx;LogFileName=Ocaramba.Tests.Features.trx"
+#vstest.console.exe D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.Features\bin\Release\net472\Ocaramba.Tests.Features.dll /Logger:"trx;LogFileName=Ocaramba.Tests.Features.trx"
 if($lastexitcode -ne 0)
  {
   echo 'lastexitcode' $lastexitcode
