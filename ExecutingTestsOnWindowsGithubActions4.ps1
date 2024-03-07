@@ -6,7 +6,7 @@ echo '********************************************BrowserStack tests************
         
 .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\net472" "Ocaramba.Tests.CloudProviderCrossBrowser.dll.config" "//DriverCapabilities" "buildName" "Ocaramba.Tests.BrowserStackCrossBrowser$($env:BuildVersion)" -logValues 
 
-vstest.console.exe D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\net472\Ocaramba.Tests.CloudProviderCrossBrowser.dll \Logger:"trx;LogFileName=Ocaramba.Tests.BrowserStack.xml"
+vstest.console.exe D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\net472\Ocaramba.Tests.CloudProviderCrossBrowser.dll /Logger:"trx;LogFileName=Ocaramba.Tests.BrowserStack.xml"
 
 if($lastexitcode -ne 0)
  {
