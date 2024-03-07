@@ -238,8 +238,15 @@ jobs:
     - build_Stage_BuildTestsOnWindows
     steps:
     - uses: actions/checkout@v2
+    - name: Setup VSTest Path
+      uses: darenm/Setup-VSTest@v1.2
+    - uses: nuget/setup-nuget@v2
       with:
-        repository: none
+        nuget-version: latest
+    - uses: actions/download-artifact@v2
+      with:
+        name: OcarambaBuild
+    - run: Expand-Archive -Path OcarambaBuild.zip -DestinationPath ./
     - shell: powershell
       run: dotnet add package Microsoft.TestPlatform
       env:
