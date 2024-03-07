@@ -141,8 +141,9 @@ jobs:
         echo $ASPNETCORE_ENVIRONMENT
         
         sed -i '/Documentation/,+5 d' ./Ocaramba.sln     
+    - run: dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
     - shell: pwsh
-      run: dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
+      if: false
       env:
         MAPPED_ENV_BROWSERSTACKKEY: ${{ env.browserstackkey }}
         MAPPED_ENV_BROWSERSTACKUSER: ${{ env.browserstackuser }}
@@ -150,11 +151,13 @@ jobs:
         MAPPED_ENV_TESTINGBOTSECRET: ${{ env.testingbotsecret }}
         MAPPED_ENV_SAUCELABSACCESSKEY: ${{ env.saucelabsaccessKey }}
         MAPPED_ENV_SAUCELABSUSERNAME: ${{ env.saucelabsusername }}
-    - name: Publish Test Report
-      uses: mikepenz/action-junit-report@v4
-      if: success() || failure()
+      run: ./ExecutingTestsOnLinuxBrowserStackGithubActions.ps1
+    - name: Publish Test Results
+      uses: EnricoMi/publish-unit-test-result-action/linux@v2
+      if: always()
       with:
-        report_paths: '**/Ocaramba.Tests.*.xml'
+        files: |
+          /home/runner/work/Ocaramba/Ocaramba/TestResults/BrowserStacknetcoreapp.xml
   test_Stage_RunTestsOnWindowsCore1:
     runs-on: windows-latest
     needs:

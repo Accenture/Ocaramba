@@ -204,7 +204,7 @@ stages:
         - script: dotnet build ./Ocaramba.sln --configuration $(buildConfiguration)
 
         - task: PowerShell@2
-          enabled: false
+          enabled: true
           inputs:
             filePath: './ExecutingTestsOnLinuxBrowserStackAzure.ps1'
           env:
