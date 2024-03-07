@@ -1,8 +1,8 @@
 echo '********************************************Downloading Selenium Grid********************************************' 
     
-$url = ${{ env.seleniumGridUrl }}
+$url = '${{ env.seleniumGridUrl }}'
         
-$grid = ${{ env.seleniumGridVersion }}
+$grid = '${{ env.seleniumGridVersion }}'
         
 $output = $PSScriptRoot + ".\Ocaramba\Ocaramba.Tests.NUnit\bin\Release\net472\$grid"
         
