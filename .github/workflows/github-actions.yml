@@ -46,12 +46,11 @@ jobs:
         nuget-version: latest
     - name: Cache
       uses: actions/cache@v4
+      env:
+        cache-name: nuget-package-cache
       with:
         path: ~/.nuget/packages
-        key: ${{ runner.os }}|nuget|${{ hashFiles('**/packages.lock.json') }}
-        restore-keys: |
-          nuget | "${{ runner.os }}"
-          nuget
+        key: ${{ runner.os }}-${{ env.cache-name }}
     - name: NuGet restore
       run: nuget restore ${{ env.solution }}
     - name: Set project versions
@@ -107,6 +106,7 @@ jobs:
     - build_Stage_BuildTestsOnWindows
     steps:
     - uses: actions/checkout@v2
+    - run: find . -name '*.csproj' -exec sed -i -e 's/109.0.5414.7400/122.0.6261.9400/g' {} \;
     - run: |
         ls
         
