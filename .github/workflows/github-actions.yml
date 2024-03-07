@@ -140,8 +140,7 @@ jobs:
         
         echo $ASPNETCORE_ENVIRONMENT
         
-        sed -i '/Documentation/,+5 d' ./Ocaramba.sln
-        
+        sed -i '/Documentation/,+5 d' ./Ocaramba.sln     
     - shell: pwsh
       run: dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
       env:
