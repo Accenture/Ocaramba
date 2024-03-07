@@ -45,12 +45,12 @@ jobs:
       with:
         nuget-version: latest
     - name: Cache
-      uses: actions/cache@v4
-      env:
-        cache-name: nuget-package-cache
+      uses: actions/cache@v3
       with:
-        path: ~/.nuget/packages
-        key: ${{ runner.os }}-${{ env.cache-name }}
+        path: ${{ github.workspace }}\.nuget\packages
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }} #hash of project files
+        restore-keys: |
+          ${{ runner.os }}-nuget-
     - name: NuGet restore
       run: nuget restore ${{ env.solution }}
     - name: Set project versions
@@ -125,7 +125,7 @@ jobs:
       if: always()
       with:
         files: |
-          test-results/**/*.xml
+          /home/runner/work/Ocaramba/Ocaramba/TestResults/Ocaramba.Tests.netcoreapp.xml
   test_Stage_RunTestsOnLinuxBrowserStack:
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -224,7 +224,7 @@ jobs:
       with:
         name: OcarambaBuild
     - run: Expand-Archive -Path OcarambaBuild.zip -DestinationPath ./
-    - run: ./ExecutingTestsOnWindowsAzure3.ps1
+    - run: ./ExecutingTestsOnWindowsGithubActions3.ps1
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
       if: always()
