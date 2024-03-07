@@ -15,6 +15,7 @@ env:
   frameworkVersion: 4.0.0
   CHROMEWEBDRIVER: C:\SeleniumWebDrivers\ChromeDriver
   BuildVersion: 4.0.0${{ github.run_number }}
+  ChromeDriverVersion: 122.0.6261.9400
   seleniumGridVersion: selenium-server-4.8.0.jar
   seleniumGridUrl: https://github.com/SeleniumHQ/selenium/releases/download/selenium-4.8.0/selenium-server-4.8.0.jar
   NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
@@ -37,7 +38,7 @@ jobs:
         Get-ChildItem ./ *.csproj -recurse |
         Foreach-Object {
           $c = ($_ | Get-Content) 
-          $c = $c -replace '109.0.5414.7400','122.0.6261.9400'
+          $c = $c -replace '109.0.5414.7400','${{ env.ChromeDriverVersion }}'
           [IO.File]::WriteAllText($_.FullName, ($c -join "`r`n"))
         }
     - name: Setup nuget
@@ -91,22 +92,24 @@ jobs:
     - build_Stage_BuildTestsOnWindows
     steps:
     - uses: actions/checkout@v2
-    - run: |
-        docker build --file Dockerfile docker ocaramba/selenium --tags latest
-        docker push --file Dockerfile docker ocaramba/selenium --tags latest
-        docker-compose -f "./docker-compose.yml" up -d
-    - name: Publish Test Report
-      uses: mikepenz/action-junit-report@v4
-      if: success() || failure()
+    - run: docker build --file Dockerfile docker ocaramba/selenium
+    - run: docker push --file Dockerfile docker ocaramba/selenium
+    - run: docker-compose -f "./docker-compose.yml" up -d
+    - shell: pwsh
+      run: ./ExecutingTestsOnDockerGithubActions.ps1
+    - name: Publish Test Results
+      uses: EnricoMi/publish-unit-test-result-action/linux@v2
+      if: always()
       with:
-        report_paths: '**/Ocaramba.Tests.*.xml'
+        files: |
+          /home/runner/work/Ocaramba/Ocaramba/TestResults/Ocaramba.Tests.Docker.xml
   test_Stage_RunTestsOnLinux:
     runs-on: ubuntu-latest
     needs:
     - build_Stage_BuildTestsOnWindows
     steps:
     - uses: actions/checkout@v2
-    - run: find . -name '*.csproj' -exec sed -i -e 's/109.0.5414.7400/122.0.6261.9400/g' {} \;
+    - run: find . -name '*.csproj' -exec sed -i -e 's/109.0.5414.7400/${{ env.ChromeDriverVersion }}/g' {} \;
     - run: |
         ls
         
@@ -181,7 +184,7 @@ jobs:
       with:
         files: .\Ocaramba\TestResults\Ocaramba.Tests.netcoreapp.trx
     - name: Zip artifact
-      run: Compress-Archive -Path .\Ocaramba\Ocaramba\Ocaramba.Tests.NUnitExtentReports\bin\Release\net6.0\TestOutput -Destination ExtentReports_${{ github.run_id }}.zip
+      run: Compress-Archive -Path D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.NUnitExtentReports\bin\Release\net6.0\TestOutput -Destination ExtentReports_${{ github.run_id }}.zip
     - uses: actions/upload-artifact@v2
       with:
         path: ExtentReports_${{ github.run_id }}.zip
