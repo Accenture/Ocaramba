@@ -92,9 +92,9 @@ jobs:
     - build_Stage_BuildTestsOnWindows
     steps:
     - uses: actions/checkout@v2
-    - run: docker build --file Dockerfile docker ocaramba/selenium
-    - run: docker push --file Dockerfile docker ocaramba/selenium
-    - run: docker-compose -f "./docker-compose.yml" up -d
+    - run: docker build -t Dockerfile
+    - run: docker push -t Dockerfile
+    - run: docker-compose -f docker-compose.yml up -d
     - shell: pwsh
       run: ./ExecutingTestsOnDockerGithubActions.ps1
     - name: Publish Test Results
