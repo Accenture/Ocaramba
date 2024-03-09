@@ -92,12 +92,8 @@ jobs:
     - build_Stage_BuildTestsOnWindows
     steps:
     - uses: actions/checkout@v2
-    - uses: mr-smithers-excellent/docker-build-push@v6
-      name: Build & push Docker image
-      with:
-        image: Dockerfile
-        tags: latest
-        registry: docker
+    - run: docker build -f Dockerfile -t ***/selenium:latest
+    - run: docker push -t Dockerfile
     - run: docker-compose -f docker-compose.yml up -d
     - shell: pwsh
       run: ./ExecutingTestsOnDockerGithubActions.ps1
