@@ -92,7 +92,7 @@ jobs:
     - build_Stage_BuildTestsOnWindows
     steps:
     - uses: actions/checkout@v2
-    - run: docker build -f Dockerfile -t ***/selenium:latest
+    - run: docker buildx build -f Dockerfile -t ***/selenium:latest
     - run: docker push -t Dockerfile
     - run: docker-compose -f docker-compose.yml up -d
     - shell: pwsh
@@ -337,11 +337,18 @@ jobs:
         Write-Host "##vso[task.setvariable variable=frameworkVersion]$tag"
       if: startsWith(github.ref, 'refs/tags/')
     - uses: actions/download-artifact@v2
+      with:
+        name: Ocaramba${{ env.frameworkVersion }}
     - uses: actions/download-artifact@v2
+      with:
+        name: OcarambaS${{ env.frameworkVersion }}
     - uses: actions/download-artifact@v2
+      with:
+        name: OcarambaLite${{ env.frameworkVersion }}
     - uses: actions/download-artifact@v2
-    - shell: powershell
-      run: Get-ChildItem -Path ${{ env.Agent.BuildDirectory }} -Recurse
+      with:
+        name: OcarambaLiteS${{ env.frameworkVersion }}
+    - run: Get-ChildItem -Path ${{ env.Agent.BuildDirectory }} -Recurse
     - name: Push Nuget Package
       run: dotnet custom push ${{ env.Agent.BuildDirectory }}\Ocaramba.${{ env.frameworkVersion }}.nupkg -s https://api.nuget.org/v3/index.json -k ${{ env.NuGetApiKey }}
       if: (success() && startsWith(github.ref, 'refs/tags/'))
