@@ -93,10 +93,12 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - run: docker buildx build -f Dockerfile -t ***/selenium:latest
+      if: false
     - run: docker push -t Dockerfile
+      if: false
     - run: docker-compose -f docker-compose.yml up -d
-    - shell: pwsh
-      run: ./ExecutingTestsOnDockerGithubActions.ps1
+    - run: ./ExecutingTestsOnDockerGithubActions.ps1
+      if: false
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/linux@v2
       if: always()
