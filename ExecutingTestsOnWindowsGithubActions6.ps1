@@ -6,7 +6,7 @@ echo '********************************************saucelabs tests***************
     
 .\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\net472" "Ocaramba.Tests.CloudProviderCrossBrowser.dll.config" "//DriverCapabilities" "buildName" "Ocaramba.Tests.SauceLabsCrossBrowser$($env:BuildVersion)" -logValues   
     
-vstest.console.exe .\Ocaramba\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\net472\Ocaramba.Tests.CloudProviderCrossBrowser.dll /TestCaseFilter:"(FullyQualifiedName!~Iphone)&(FullyQualifiedName!~Android)&(FullyQualifiedName!~Samsung)" /Logger:"trx;LogFileName=Ocaramba.Tests.saucelabsnet472.xml"
+dotnet vstest .\Ocaramba\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\net472\Ocaramba.Tests.CloudProviderCrossBrowser.dll /TestCaseFilter:"(FullyQualifiedName!~Iphone)&(FullyQualifiedName!~Android)&(FullyQualifiedName!~Samsung)" /Logger:"trx;LogFileName=Ocaramba.Tests.saucelabsnet472.xml"
 
 if($lastexitcode -ne 0)
  {
