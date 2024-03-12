@@ -13,6 +13,7 @@ env:
   buildPlatform: Any CPU
   buildConfiguration: Release
   frameworkVersion: 4.0.0
+  TestResultsDirWindows: D:\a\Ocaramba\Ocaramba\TestResults
   CHROMEWEBDRIVER: C:\SeleniumWebDrivers\ChromeDriver
   BuildVersion: 4.0.0${{ github.run_number }}
   ChromeDriverVersion: 122.0.6261.9400
@@ -23,7 +24,7 @@ jobs:
   build_Stage_BuildTestsOnWindows:
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - uses: microsoft/setup-msbuild@v1.0.2
     - shell: powershell
       run: |
@@ -91,7 +92,7 @@ jobs:
     needs:
     - build_Stage_BuildTestsOnWindows
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - run: docker buildx build -f Dockerfile -t ***/selenium:latest
       if: false
     - run: docker push -t Dockerfile
@@ -110,7 +111,7 @@ jobs:
     needs:
     - build_Stage_BuildTestsOnWindows
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - run: find . -name '*.csproj' -exec sed -i -e 's/109.0.5414.7400/${{ env.ChromeDriverVersion }}/g' {} \;
     - run: |
         ls
@@ -137,7 +138,7 @@ jobs:
     needs:
     - build_Stage_BuildTestsOnWindows
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - run: |
         ls
         
@@ -168,7 +169,7 @@ jobs:
     needs:
     - build_Stage_BuildTestsOnWindows
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Setup VSTest Path
       uses: darenm/Setup-VSTest@v1.2
     - uses: nuget/setup-nuget@v2
@@ -184,7 +185,7 @@ jobs:
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
       if: always()
       with:
-        files: .\Ocaramba\Ocaramba\TestResults\Ocaramba.Tests.netcoreapp.trx
+        files: ${{ env.TestResultsDirWindows }}\Ocaramba.Tests.netcoreapp.trx
     - name: Zip artifact
       run: Compress-Archive -Path D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.NUnitExtentReports\bin\Release\net6.0\TestOutput -Destination ExtentReports_${{ github.run_id }}.zip
     - uses: actions/upload-artifact@v2
@@ -197,7 +198,7 @@ jobs:
     needs:
     - build_Stage_BuildTestsOnWindows
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Setup VSTest Path
       uses: darenm/Setup-VSTest@v1.2
     - uses: nuget/setup-nuget@v2
@@ -214,14 +215,14 @@ jobs:
       if: always()
       with:
         files: |
-          .\Ocaramba\Ocaramba\TestResults\Ocaramba.Tests.netcoreapp.xml
-          .\Ocaramba\Ocaramba\TestResults\Ocaramba.Tests.EdgeChrominum.xml
+          ${{ env.TestResultsDirWindows }}\Ocaramba.Tests.netcoreapp.xml
+          ${{ env.TestResultsDirWindows }}\Ocaramba.Tests.EdgeChrominum.xml
   test_Stage_RunTestsOnWindowsFramework:
     runs-on: windows-latest
     needs:
     - build_Stage_BuildTestsOnWindows
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Setup VSTest Path
       uses: darenm/Setup-VSTest@v1.2
     - uses: nuget/setup-nuget@v2
@@ -236,13 +237,13 @@ jobs:
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
       if: always()
       with:
-        files: .\Ocaramba\Ocaramba\TestResults\Ocaramba.Tests.net4.xml
+        files: ${{ env.TestResultsDirWindows }}\Ocaramba.Tests.net4.xml
   test_Stage_RunTestsOnWindowsBrowserStack:
     runs-on: windows-latest
     needs:
     - build_Stage_BuildTestsOnWindows
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Setup VSTest Path
       uses: darenm/Setup-VSTest@v1.2
     - uses: nuget/setup-nuget@v2
@@ -264,13 +265,13 @@ jobs:
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
       if: always()
       with:
-        files: .\Ocaramba\Ocaramba\TestResults\Ocaramba.Tests.BrowserStack.xml
+        files: ${{ env.TestResultsDirWindows }}\Ocaramba.Tests.BrowserStack.xml
   test_Stage_RunTestsSeleniumGrid:
     runs-on: windows-latest
     needs:
     - build_Stage_BuildTestsOnWindows
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Setup VSTest Path
       uses: darenm/Setup-VSTest@v1.2
     - uses: nuget/setup-nuget@v2
@@ -286,14 +287,14 @@ jobs:
       if: always()
       with:
         files: |
-          .\Ocaramba\Ocaramba\TestResults\Ocaramba.Tests.NUnitGrid.xml
-          .\Ocaramba\Ocaramba\TestResults\Ocaramba.Tests.CloudProviderCrossBrowserGrid.xml
+          ${{ env.TestResultsDirWindows }}\Ocaramba.Tests.NUnitGrid.xml
+          ${{ env.TestResultsDirWindows }}\Ocaramba.Tests.CloudProviderCrossBrowserGrid.xml
   test_Stage_RunTestsOnWindowsSaucelabs:
     runs-on: windows-latest
     needs:
     - build_Stage_BuildTestsOnWindows
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Setup VSTest Path
       uses: darenm/Setup-VSTest@v1.2
     - uses: nuget/setup-nuget@v2
@@ -316,7 +317,7 @@ jobs:
       if: always()
       with:
         files: |
-          .\Ocaramba\Ocaramba\TestResults\Ocaramba.Tests.saucelabsnet472.xml
+          ${{ env.TestResultsDirWindows }}\Ocaramba.Tests.saucelabsnet472.xml
   release_Stage_PublishNuget:
     runs-on: windows-latest
     needs:
@@ -331,7 +332,7 @@ jobs:
     - test_Stage_RunTestsSeleniumGrid
     - test_Stage_RunTestsOnWindowsSaucelabs
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - shell: powershell
       run: |
         $tags = git tag --sort=-creatordate   
