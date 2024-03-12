@@ -102,7 +102,7 @@ jobs:
       if: false
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/linux@v2
-      if: always()
+      if: false
       with:
         files: |
           /home/runner/work/Ocaramba/Ocaramba/TestResults/Ocaramba.Tests.Docker.xml
@@ -128,7 +128,7 @@ jobs:
       run: ./ExecutingTestsOnLinuxAzure.ps1
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/linux@v2
-      if: always()
+      if: false
       with:
         files: |
           /home/runner/work/Ocaramba/Ocaramba/TestResults/Ocaramba.Tests.netcoreapp.xml
@@ -170,8 +170,6 @@ jobs:
     - build_Stage_BuildTestsOnWindows
     steps:
     - uses: actions/checkout@v4
-    - name: Setup VSTest Path
-      uses: darenm/Setup-VSTest@v1.2
     - uses: nuget/setup-nuget@v2
       with:
         nuget-version: latest
@@ -199,8 +197,6 @@ jobs:
     - build_Stage_BuildTestsOnWindows
     steps:
     - uses: actions/checkout@v4
-    - name: Setup VSTest Path
-      uses: darenm/Setup-VSTest@v1.2
     - uses: nuget/setup-nuget@v2
       with:
         nuget-version: latest
@@ -223,8 +219,6 @@ jobs:
     - build_Stage_BuildTestsOnWindows
     steps:
     - uses: actions/checkout@v4
-    - name: Setup VSTest Path
-      uses: darenm/Setup-VSTest@v1.2
     - uses: nuget/setup-nuget@v2
       with:
         nuget-version: latest
@@ -244,8 +238,6 @@ jobs:
     - build_Stage_BuildTestsOnWindows
     steps:
     - uses: actions/checkout@v4
-    - name: Setup VSTest Path
-      uses: darenm/Setup-VSTest@v1.2
     - uses: nuget/setup-nuget@v2
       with:
         nuget-version: latest
@@ -272,8 +264,6 @@ jobs:
     - build_Stage_BuildTestsOnWindows
     steps:
     - uses: actions/checkout@v4
-    - name: Setup VSTest Path
-      uses: darenm/Setup-VSTest@v1.2
     - uses: nuget/setup-nuget@v2
       with:
         nuget-version: latest
@@ -295,8 +285,6 @@ jobs:
     - build_Stage_BuildTestsOnWindows
     steps:
     - uses: actions/checkout@v4
-    - name: Setup VSTest Path
-      uses: darenm/Setup-VSTest@v1.2
     - uses: nuget/setup-nuget@v2
       with:
         nuget-version: latest
