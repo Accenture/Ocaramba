@@ -184,7 +184,7 @@ jobs:
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
       if: always()
       with:
-        files: .\Ocaramba\TestResults\Ocaramba.Tests.netcoreapp.trx
+        files: .\Ocaramba\Ocaramba\TestResults\Ocaramba.Tests.netcoreapp.trx
     - name: Zip artifact
       run: Compress-Archive -Path D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.NUnitExtentReports\bin\Release\net6.0\TestOutput -Destination ExtentReports_${{ github.run_id }}.zip
     - uses: actions/upload-artifact@v2
@@ -214,8 +214,8 @@ jobs:
       if: always()
       with:
         files: |
-          .\Ocaramba\TestResults\Ocaramba.Tests.netcoreapp.xml
-          .\Ocaramba\TestResults\Ocaramba.Tests.EdgeChrominum.xml
+          .\Ocaramba\Ocaramba\TestResults\Ocaramba.Tests.netcoreapp.xml
+          .\Ocaramba\Ocaramba\TestResults\Ocaramba.Tests.EdgeChrominum.xml
   test_Stage_RunTestsOnWindowsFramework:
     runs-on: windows-latest
     needs:
@@ -236,7 +236,7 @@ jobs:
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
       if: always()
       with:
-        files: .\Ocaramba\TestResults\Ocaramba.Tests.net4.xml
+        files: .\Ocaramba\Ocaramba\TestResults\Ocaramba.Tests.net4.xml
   test_Stage_RunTestsOnWindowsBrowserStack:
     runs-on: windows-latest
     needs:
@@ -264,7 +264,7 @@ jobs:
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
       if: always()
       with:
-        files: .\Ocaramba\TestResults\Ocaramba.Tests.BrowserStack.xml
+        files: .\Ocaramba\Ocaramba\TestResults\Ocaramba.Tests.BrowserStack.xml
   test_Stage_RunTestsSeleniumGrid:
     runs-on: windows-latest
     needs:
@@ -286,8 +286,8 @@ jobs:
       if: always()
       with:
         files: |
-          .\Ocaramba\TestResults\Ocaramba.Tests.NUnitGrid.xml
-          .\Ocaramba\TestResults\Ocaramba.Tests.CloudProviderCrossBrowserGrid.xml
+          .\Ocaramba\Ocaramba\TestResults\Ocaramba.Tests.NUnitGrid.xml
+          .\Ocaramba\Ocaramba\TestResults\Ocaramba.Tests.CloudProviderCrossBrowserGrid.xml
   test_Stage_RunTestsOnWindowsSaucelabs:
     runs-on: windows-latest
     needs:
@@ -316,7 +316,7 @@ jobs:
       if: always()
       with:
         files: |
-          .\Ocaramba\TestResults\Ocaramba.Tests.saucelabsnet472.xml
+          .\Ocaramba\Ocaramba\TestResults\Ocaramba.Tests.saucelabsnet472.xml
   release_Stage_PublishNuget:
     runs-on: windows-latest
     needs:
