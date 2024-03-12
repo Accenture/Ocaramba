@@ -25,7 +25,7 @@ jobs:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v4
-    - uses: microsoft/setup-msbuild@v1.0.2
+    - uses: microsoft/setup-msbuild@v2
     - shell: powershell
       run: |
         $tags = git tag --sort=-creatordate   
@@ -47,7 +47,7 @@ jobs:
       with:
         nuget-version: latest
     - name: Cache
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: ${{ github.workspace }}\.nuget\packages
         key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }} #hash of project files
@@ -63,25 +63,25 @@ jobs:
           "**/Ocaramba.csproj", "**/OcarambaLite.csproj"
         version: ${{ env.frameworkVersion }}
     - run: msbuild '${{ env.solution }}' /p:configuration='${{ env.buildConfiguration }}' /p:platform='${{ env.buildPlatform }}' /v:minimal
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v4
       with:
         path: ./Ocaramba/bin/Release/Ocaramba.${{ env.frameworkVersion }}.nupkg
         name: Ocaramba${{ env.frameworkVersion }}
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v4
       with:
         path: ./Ocaramba/bin/Release/Ocaramba.${{ env.frameworkVersion }}.snupkg
         name: OcarambaS${{ env.frameworkVersion }}
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v4
       with:
         path: ./OcarambaLite/bin/Release/OcarambaLite.${{ env.frameworkVersion }}.nupkg
         name: OcarambaLite${{ env.frameworkVersion }}
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v4
       with:
         path: ./OcarambaLite/bin/Release/OcarambaLite.${{ env.frameworkVersion }}.snupkg
         name: OcarambaLiteS${{ env.frameworkVersion }}
     - name: Zip artifact for deployment
       run: Compress-Archive -Path ./ -Destination OcarambaBuild.zip
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v4
       with:
         path: OcarambaBuild.zip   
         name: OcarambaBuild
@@ -175,7 +175,7 @@ jobs:
     - uses: nuget/setup-nuget@v2
       with:
         nuget-version: latest
-    - uses: actions/download-artifact@v2
+    - uses: actions/download-artifact@v4
       with:
         name: OcarambaBuild
     - run: Expand-Archive -Path OcarambaBuild.zip -DestinationPath ./
@@ -188,7 +188,7 @@ jobs:
         files: ${{ env.TestResultsDirWindows }}\Ocaramba.Tests.netcoreapp.trx
     - name: Zip artifact
       run: Compress-Archive -Path D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.NUnitExtentReports\bin\Release\net6.0\TestOutput -Destination ExtentReports_${{ github.run_id }}.zip
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v4
       with:
         path: ExtentReports_${{ github.run_id }}.zip
         name: ExtentTestReport
@@ -204,7 +204,7 @@ jobs:
     - uses: nuget/setup-nuget@v2
       with:
         nuget-version: latest
-    - uses: actions/download-artifact@v2
+    - uses: actions/download-artifact@v4
       with:
         name: OcarambaBuild
     - run: Expand-Archive -Path OcarambaBuild.zip -DestinationPath ./
@@ -228,7 +228,7 @@ jobs:
     - uses: nuget/setup-nuget@v2
       with:
         nuget-version: latest
-    - uses: actions/download-artifact@v2
+    - uses: actions/download-artifact@v4
       with:
         name: OcarambaBuild
     - run: Expand-Archive -Path OcarambaBuild.zip -DestinationPath ./
@@ -249,7 +249,7 @@ jobs:
     - uses: nuget/setup-nuget@v2
       with:
         nuget-version: latest
-    - uses: actions/download-artifact@v2
+    - uses: actions/download-artifact@v4
       with:
         name: OcarambaBuild
     - run: Expand-Archive -Path OcarambaBuild.zip -DestinationPath ./
@@ -277,7 +277,7 @@ jobs:
     - uses: nuget/setup-nuget@v2
       with:
         nuget-version: latest
-    - uses: actions/download-artifact@v2
+    - uses: actions/download-artifact@v4
       with:
         name: OcarambaBuild
     - run: Expand-Archive -Path OcarambaBuild.zip -DestinationPath ./
@@ -300,7 +300,7 @@ jobs:
     - uses: nuget/setup-nuget@v2
       with:
         nuget-version: latest
-    - uses: actions/download-artifact@v2
+    - uses: actions/download-artifact@v4
       with:
         name: OcarambaBuild
     - run: Expand-Archive -Path OcarambaBuild.zip -DestinationPath ./
@@ -339,16 +339,16 @@ jobs:
         $tag = $tags[0]
         Write-Host "##vso[task.setvariable variable=frameworkVersion]$tag"
       if: startsWith(github.ref, 'refs/tags/')
-    - uses: actions/download-artifact@v2
+    - uses: actions/download-artifact@v4
       with:
         name: Ocaramba${{ env.frameworkVersion }}
-    - uses: actions/download-artifact@v2
+    - uses: actions/download-artifact@v4
       with:
         name: OcarambaS${{ env.frameworkVersion }}
-    - uses: actions/download-artifact@v2
+    - uses: actions/download-artifact@v4
       with:
         name: OcarambaLite${{ env.frameworkVersion }}
-    - uses: actions/download-artifact@v2
+    - uses: actions/download-artifact@v4
       with:
         name: OcarambaLiteS${{ env.frameworkVersion }}
     - run: Get-ChildItem ./ -Recurse 
