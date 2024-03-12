@@ -160,7 +160,7 @@ jobs:
       run: ./ExecutingTestsOnLinuxBrowserStackGithubActions.ps1
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/linux@v2
-      if: always()
+      if: false
       with:
         files: |
           /home/runner/work/Ocaramba/Ocaramba/TestResults/BrowserStacknetcoreapp.xml
