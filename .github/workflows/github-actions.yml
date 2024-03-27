@@ -1,0 +1,348 @@
+on:
+  push:
+    branches:
+    - '*'
+    paths-ignore:
+    - README.md
+    tags:
+    - '*'
+  schedule:
+  - cron: '0 18 * * 0'
+env:
+  solution: ${{ github.workspace }}/Ocaramba.sln
+  buildPlatform: Any CPU
+  buildConfiguration: Release
+  frameworkVersion: 4.0.0
+  TestResultsDirWindows: D:\a\Ocaramba\Ocaramba\TestResults
+  CHROMEWEBDRIVER: C:\SeleniumWebDrivers\ChromeDriver
+  BuildVersion: 4.0.0${{ github.run_number }}
+  ChromeDriverVersion: 122.0.6261.9400
+  seleniumGridVersion: selenium-server-4.8.0.jar
+  seleniumGridUrl: https://github.com/SeleniumHQ/selenium/releases/download/selenium-4.8.0/selenium-server-4.8.0.jar
+  NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
+jobs:
+  build_Stage_BuildTestsOnWindows:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: microsoft/setup-msbuild@v2
+    - shell: powershell
+      run: |
+        $tags = git tag --sort=-creatordate   
+        $tag = $tags[0]
+        Write-Host "##vso[task.setvariable variable=frameworkVersion]$tag"
+      if: startsWith(github.ref, 'refs/tags/')
+    - shell: powershell
+      run: '(Get-Content ''Ocaramba.sln'' -raw) -replace [regex](''.*?'' + ''Documentation'' + (''.*?\r\n'' * (5 + 1))) | set-content  ''Ocaramba.sln'''
+    - name: Update ChromeDriver in csproj
+      run: |
+        Get-ChildItem ./ *.csproj -recurse |
+        Foreach-Object {
+          $c = ($_ | Get-Content) 
+          $c = $c -replace '109.0.5414.7400','${{ env.ChromeDriverVersion }}'
+          [IO.File]::WriteAllText($_.FullName, ($c -join "`r`n"))
+        }
+    - name: Setup nuget
+      uses: nuget/setup-nuget@v2
+      with:
+        nuget-version: latest
+    - name: Cache
+      uses: actions/cache@v4
+      with:
+        path: ${{ github.workspace }}\.nuget\packages
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }} #hash of project files
+        restore-keys: |
+          ${{ runner.os }}-nuget-
+    - name: NuGet restore
+      run: nuget restore ${{ env.solution }}
+    - name: Set project versions
+      id: update
+      uses: vers-one/dotnet-project-version-updater@v1.4
+      with:
+        file: |
+          "**/Ocaramba.csproj", "**/OcarambaLite.csproj"
+        version: ${{ env.frameworkVersion }}
+    - run: msbuild '${{ env.solution }}' /p:configuration='${{ env.buildConfiguration }}' /p:platform='${{ env.buildPlatform }}' /v:minimal
+    - uses: actions/upload-artifact@v4
+      with:
+        path: ./Ocaramba/bin/Release/Ocaramba.${{ env.frameworkVersion }}.nupkg
+        name: Ocaramba${{ env.frameworkVersion }}
+    - uses: actions/upload-artifact@v4
+      with:
+        path: ./Ocaramba/bin/Release/Ocaramba.${{ env.frameworkVersion }}.snupkg
+        name: OcarambaS${{ env.frameworkVersion }}
+    - uses: actions/upload-artifact@v4
+      with:
+        path: ./OcarambaLite/bin/Release/OcarambaLite.${{ env.frameworkVersion }}.nupkg
+        name: OcarambaLite${{ env.frameworkVersion }}
+    - uses: actions/upload-artifact@v4
+      with:
+        path: ./OcarambaLite/bin/Release/OcarambaLite.${{ env.frameworkVersion }}.snupkg
+        name: OcarambaLiteS${{ env.frameworkVersion }}
+    - name: Zip artifact for deployment
+      run: Compress-Archive -Path ./ -Destination OcarambaBuild.zip
+    - uses: actions/upload-artifact@v4
+      with:
+        path: OcarambaBuild.zip   
+        name: OcarambaBuild
+        compression-level: 0
+      if: (${{ job.status }} != 'cancelled')
+  test_Stage_RunTestsOnDocker:
+    runs-on: ubuntu-latest
+    needs:
+    - build_Stage_BuildTestsOnWindows
+    steps:
+    - uses: actions/checkout@v4
+    - run: docker buildx build -f Dockerfile -t ***/selenium:latest
+      if: false
+    - run: docker push -t Dockerfile
+      if: false
+    - run: docker-compose -f docker-compose.yml up -d
+    - run: ./ExecutingTestsOnDockerGithubActions.ps1
+      if: false
+    - name: Publish Test Results
+      uses: EnricoMi/publish-unit-test-result-action/linux@v2
+      if: false
+      with:
+        files: |
+          /home/runner/work/Ocaramba/Ocaramba/TestResults/Ocaramba.Tests.Docker.xml
+  test_Stage_RunTestsOnLinux:
+    runs-on: ubuntu-latest
+    needs:
+    - build_Stage_BuildTestsOnWindows
+    steps:
+    - uses: actions/checkout@v4
+    - run: find . -name '*.csproj' -exec sed -i -e 's/109.0.5414.7400/${{ env.ChromeDriverVersion }}/g' {} \;
+    - run: |
+        ls
+        
+        export ASPNETCORE_ENVIRONMENT=Linux
+        
+        echo $ASPNETCORE_ENVIRONMENT
+        
+        sudo apt-get install google-chrome-stable
+        
+        sed -i '/Documentation/,+5 d' ./Ocaramba.sln
+    - run: dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
+    - shell: pwsh
+      run: ./ExecutingTestsOnLinuxAzure.ps1
+    - name: Publish Test Results
+      uses: EnricoMi/publish-unit-test-result-action/linux@v2
+      if: false
+      with:
+        files: |
+          /home/runner/work/Ocaramba/Ocaramba/TestResults/Ocaramba.Tests.netcoreapp.xml
+  test_Stage_RunTestsOnLinuxBrowserStack:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs:
+    - build_Stage_BuildTestsOnWindows
+    steps:
+    - uses: actions/checkout@v4
+    - run: |
+        ls
+        
+        export ASPNETCORE_ENVIRONMENT=Linux
+        
+        echo $ASPNETCORE_ENVIRONMENT
+        
+        sed -i '/Documentation/,+5 d' ./Ocaramba.sln     
+    - run: dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
+    - shell: pwsh
+      if: false
+      env:
+        MAPPED_ENV_BROWSERSTACKKEY: ${{ env.browserstackkey }}
+        MAPPED_ENV_BROWSERSTACKUSER: ${{ env.browserstackuser }}
+        MAPPED_ENV_TESTINGBOTKEY: ${{ env.testingbotkey }}
+        MAPPED_ENV_TESTINGBOTSECRET: ${{ env.testingbotsecret }}
+        MAPPED_ENV_SAUCELABSACCESSKEY: ${{ env.saucelabsaccessKey }}
+        MAPPED_ENV_SAUCELABSUSERNAME: ${{ env.saucelabsusername }}
+      run: ./ExecutingTestsOnLinuxBrowserStackGithubActions.ps1
+    - name: Publish Test Results
+      uses: EnricoMi/publish-unit-test-result-action/linux@v2
+      if: false
+      with:
+        files: |
+          /home/runner/work/Ocaramba/Ocaramba/TestResults/BrowserStacknetcoreapp.xml
+  test_Stage_RunTestsOnWindowsCore1:
+    runs-on: windows-latest
+    needs:
+    - build_Stage_BuildTestsOnWindows
+    steps:
+    - uses: actions/checkout@v4
+    - uses: nuget/setup-nuget@v2
+      with:
+        nuget-version: latest
+    - uses: actions/download-artifact@v4
+      with:
+        name: OcarambaBuild
+    - run: Expand-Archive -Path OcarambaBuild.zip -DestinationPath ./
+    - run: ./ExecutingTestsOnWindowsGithubActions1.ps1
+    - run: Get-ChildItem .\ -Recurse
+    - name: Publish Test Results
+      uses: EnricoMi/publish-unit-test-result-action/windows@v2
+      if: always()
+      with:
+        files: ${{ env.TestResultsDirWindows }}\Ocaramba.Tests.netcoreapp.trx
+    - name: Zip artifact
+      run: Compress-Archive -Path D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.NUnitExtentReports\bin\Release\net6.0\TestOutput -Destination ExtentReports_${{ github.run_id }}.zip
+    - uses: actions/upload-artifact@v4
+      with:
+        path: ExtentReports_${{ github.run_id }}.zip
+        name: ExtentTestReport
+      if: always()
+  test_Stage_RunTestsOnWindowsCore2:
+    runs-on: windows-latest
+    needs:
+    - build_Stage_BuildTestsOnWindows
+    steps:
+    - uses: actions/checkout@v4
+    - uses: nuget/setup-nuget@v2
+      with:
+        nuget-version: latest
+    - uses: actions/download-artifact@v4
+      with:
+        name: OcarambaBuild
+    - run: Expand-Archive -Path OcarambaBuild.zip -DestinationPath ./
+    - run: ./ExecutingTestsOnWindowsGithubActions2.ps1
+    - run: Get-ChildItem .\ -Recurse
+    - name: Publish Test Results
+      uses: EnricoMi/publish-unit-test-result-action/windows@v2
+      if: always()
+      with:
+        files: |
+          ${{ env.TestResultsDirWindows }}\Ocaramba.Tests.netcoreapp.xml
+          ${{ env.TestResultsDirWindows }}\Ocaramba.Tests.EdgeChrominum.xml
+  test_Stage_RunTestsOnWindowsFramework:
+    runs-on: windows-latest
+    needs:
+    - build_Stage_BuildTestsOnWindows
+    steps:
+    - uses: actions/checkout@v4
+    - uses: nuget/setup-nuget@v2
+      with:
+        nuget-version: latest
+    - uses: actions/download-artifact@v4
+      with:
+        name: OcarambaBuild
+    - run: Expand-Archive -Path OcarambaBuild.zip -DestinationPath ./
+    - run: ./ExecutingTestsOnWindowsGithubActions3.ps1
+    - name: Publish Test Results
+      uses: EnricoMi/publish-unit-test-result-action/windows@v2
+      if: always()
+      with:
+        files: ${{ env.TestResultsDirWindows }}\Ocaramba.Tests.net4.xml
+  test_Stage_RunTestsOnWindowsBrowserStack:
+    runs-on: windows-latest
+    needs:
+    - build_Stage_BuildTestsOnWindows
+    steps:
+    - uses: actions/checkout@v4
+    - uses: nuget/setup-nuget@v2
+      with:
+        nuget-version: latest
+    - uses: actions/download-artifact@v4
+      with:
+        name: OcarambaBuild
+    - run: Expand-Archive -Path OcarambaBuild.zip -DestinationPath ./
+    - run: ./ExecutingTestsOnWindowsGithubActions4.ps1
+      env:
+        MAPPED_ENV_BROWSERSTACKKEY: ${{ env.browserstackkey }}
+        MAPPED_ENV_BROWSERSTACKUSER: ${{ env.browserstackuser }}
+        MAPPED_ENV_TESTINGBOTKEY: ${{ env.testingbotkey }}
+        MAPPED_ENV_TESTINGBOTSECRET: ${{ env.testingbotsecret }}
+        MAPPED_ENV_SAUCELABSACCESSKEY: ${{ env.saucelabsaccessKey }}
+        MAPPED_ENV_SAUCELABSUSERNAME: ${{ env.saucelabsusername }}
+    - name: Publish Test Results
+      uses: EnricoMi/publish-unit-test-result-action/windows@v2
+      if: always()
+      with:
+        files: ${{ env.TestResultsDirWindows }}\Ocaramba.Tests.BrowserStack.xml
+  test_Stage_RunTestsSeleniumGrid:
+    runs-on: windows-latest
+    needs:
+    - build_Stage_BuildTestsOnWindows
+    steps:
+    - uses: actions/checkout@v4
+    - uses: nuget/setup-nuget@v2
+      with:
+        nuget-version: latest
+    - uses: actions/download-artifact@v4
+      with:
+        name: OcarambaBuild
+    - run: Expand-Archive -Path OcarambaBuild.zip -DestinationPath ./
+    - run: ./ExecutingTestsOnWindowsGithubActions5.ps1
+    - name: Publish Test Results
+      uses: EnricoMi/publish-unit-test-result-action/windows@v2
+      if: always()
+      with:
+        files: |
+          ${{ env.TestResultsDirWindows }}\Ocaramba.Tests.NUnitGrid.xml
+          ${{ env.TestResultsDirWindows }}\Ocaramba.Tests.CloudProviderCrossBrowserGrid.xml
+  test_Stage_RunTestsOnWindowsSaucelabs:
+    runs-on: windows-latest
+    needs:
+    - build_Stage_BuildTestsOnWindows
+    steps:
+    - uses: actions/checkout@v4
+    - uses: nuget/setup-nuget@v2
+      with:
+        nuget-version: latest
+    - uses: actions/download-artifact@v4
+      with:
+        name: OcarambaBuild
+    - run: Expand-Archive -Path OcarambaBuild.zip -DestinationPath ./
+    - run: ./ExecutingTestsOnWindowsGithubActions6.ps1
+      env:
+        MAPPED_ENV_BROWSERSTACKKEY: ${{ env.browserstackkey }}
+        MAPPED_ENV_BROWSERSTACKUSER: ${{ env.browserstackuser }}
+        MAPPED_ENV_TESTINGBOTKEY: ${{ env.testingbotkey }}
+        MAPPED_ENV_TESTINGBOTSECRET: ${{ env.testingbotsecret }}
+        MAPPED_ENV_SAUCELABSACCESSKEY: ${{ env.saucelabsaccessKey }}
+        MAPPED_ENV_SAUCELABSUSERNAME: ${{ env.saucelabsusername }}
+    - name: Publish Test Results
+      uses: EnricoMi/publish-unit-test-result-action/windows@v2
+      if: always()
+      with:
+        files: |
+          ${{ env.TestResultsDirWindows }}\Ocaramba.Tests.saucelabsnet472.xml
+  release_Stage_PublishNuget:
+    runs-on: windows-latest
+    needs:
+    - build_Stage_BuildTestsOnWindows
+    - test_Stage_RunTestsOnDocker
+    - test_Stage_RunTestsOnLinux
+    - test_Stage_RunTestsOnLinuxBrowserStack
+    - test_Stage_RunTestsOnWindowsCore1
+    - test_Stage_RunTestsOnWindowsCore2
+    - test_Stage_RunTestsOnWindowsFramework
+    - test_Stage_RunTestsOnWindowsBrowserStack
+    - test_Stage_RunTestsSeleniumGrid
+    - test_Stage_RunTestsOnWindowsSaucelabs
+    steps:
+    - uses: actions/checkout@v4
+    - shell: powershell
+      run: |
+        $tags = git tag --sort=-creatordate   
+        $tag = $tags[0]
+        Write-Host "##vso[task.setvariable variable=frameworkVersion]$tag"
+      if: startsWith(github.ref, 'refs/tags/')
+    - uses: actions/download-artifact@v4
+      with:
+        name: Ocaramba${{ env.frameworkVersion }}
+    - uses: actions/download-artifact@v4
+      with:
+        name: OcarambaS${{ env.frameworkVersion }}
+    - uses: actions/download-artifact@v4
+      with:
+        name: OcarambaLite${{ env.frameworkVersion }}
+    - uses: actions/download-artifact@v4
+      with:
+        name: OcarambaLiteS${{ env.frameworkVersion }}
+    - run: Get-ChildItem ./ -Recurse 
+    - name: Push Nuget Package
+      run: dotnet custom push ${{ env.Agent.BuildDirectory }}\Ocaramba.${{ env.frameworkVersion }}.nupkg -s https://api.nuget.org/v3/index.json -k ${{ env.NuGetApiKey }}
+      if: (success() && startsWith(github.ref, 'refs/tags/'))
+    - name: Push Nuget Package
+      run: dotnet custom push ${{ env.Agent.BuildDirectory }}\OcarambaLite.${{ env.frameworkVersion }}.nupkg -s https://api.nuget.org/v3/index.json -k ${{ env.NuGetApiKey }}
+      if: (success() && startsWith(github.ref, 'refs/tags/'))
