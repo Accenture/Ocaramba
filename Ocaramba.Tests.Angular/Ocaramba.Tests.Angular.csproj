@@ -8,7 +8,7 @@
   <ItemGroup>
     <PackageReference Include="Appveyor.TestLogger" Version="2.0.0" />
     
-    <PackageReference Include="NLog" Version="5.1.1" />
+    <PackageReference Include="NLog" Version="5.3.2" />
     
     
     <PackageReference Include="NUnit" Version="3.13.3" />
@@ -32,7 +32,7 @@
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.4.0" />
-    <PackageReference Include="NLog.Web.AspNetCore" Version="5.1.1" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="5.3.10" />
   </ItemGroup>
 
   <ItemGroup>
