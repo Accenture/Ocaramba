@@ -1119,8 +1119,8 @@
       },
       "System.Data.SqlClient": {
         "type": "Transitive",
-        "resolved": "4.8.3",
-        "contentHash": "yERfVLXAY0QbylAgaGLByYN0hFxX28aeEQ0hUgJO+Ntn1AfmWl5HHUoYJA0Yl9HhIUUJHVaS/Sw/RLZr5aaC+A==",
+        "resolved": "4.8.6",
+        "contentHash": "2Ij/LCaTQRyAi5lAv7UUTV9R2FobC8xN9mE0fXBZohum/xLl8IZVmE98Rq5ugQHjCgTBRKqpXRb4ORulRdA6Ig==",
         "dependencies": {
           "Microsoft.Win32.Registry": "4.7.0",
           "System.Security.Principal.Windows": "4.7.0",
@@ -2197,7 +2197,7 @@
           "Selenium.WebDriver.ChromeDriver": "[104.0.5112.7900, )",
           "Selenium.WebDriver.GeckoDriver": "[0.31.0, )",
           "System.Data.Common": "[4.3.0, )",
-          "System.Data.SqlClient": "[4.8.3, )"
+          "System.Data.SqlClient": "[4.8.6, )"
         }
       },
       "ocaramba.tests.pageobjects": {

@@ -10,11 +10,11 @@
       },
       "Magick.NET-Q16-AnyCPU": {
         "type": "Direct",
-        "requested": "[12.1.0, )",
-        "resolved": "12.1.0",
-        "contentHash": "maXWZxLlP4SmZWdTKB7dealzVkyjfxrRO4+lTdfU1oZ9dagvTW1sq24gFulcufy/XdiY0KqsuyF5u4ntfMKnIQ==",
+        "requested": "[14.2.0, )",
+        "resolved": "14.2.0",
+        "contentHash": "dlC3F/jpJ7SoUYCPrNBny0NnBBqj6M0jstEDHmyh83zZHH9vSdOcRk3f/3E7Qdd4vRD4DAPfR+d6e6chNyRjiA==",
         "dependencies": {
-          "Magick.NET.Core": "12.1.0"
+          "Magick.NET.Core": "14.2.0"
         }
       },
       "NLog": {
@@ -82,8 +82,8 @@
       },
       "Magick.NET.Core": {
         "type": "Transitive",
-        "resolved": "12.1.0",
-        "contentHash": "F1xGmBx+cy9mnEnLlznfmItLRcagiZ3xKOYPbOexDPi8w9SuCfmyOXXz6haGQBDo5DQ7O/Q4knjaV5+gQW9ISA=="
+        "resolved": "14.2.0",
+        "contentHash": "1F0vtPJwmoVg9tvi59VEy6KdmpUXbzKYJOH+TL37DT6kXfqj4iFtOMqD7CXC3G6z2zMgFeF5LX9SSApn8Jhhqg=="
       },
       "Microsoft.CSharp": {
         "type": "Transitive",
@@ -225,11 +225,11 @@
       },
       "Magick.NET-Q16-AnyCPU": {
         "type": "Direct",
-        "requested": "[12.1.0, )",
-        "resolved": "12.1.0",
-        "contentHash": "maXWZxLlP4SmZWdTKB7dealzVkyjfxrRO4+lTdfU1oZ9dagvTW1sq24gFulcufy/XdiY0KqsuyF5u4ntfMKnIQ==",
+        "requested": "[14.2.0, )",
+        "resolved": "14.2.0",
+        "contentHash": "dlC3F/jpJ7SoUYCPrNBny0NnBBqj6M0jstEDHmyh83zZHH9vSdOcRk3f/3E7Qdd4vRD4DAPfR+d6e6chNyRjiA==",
         "dependencies": {
-          "Magick.NET.Core": "12.1.0"
+          "Magick.NET.Core": "14.2.0"
         }
       },
       "Microsoft.NET.Test.Sdk": {
@@ -323,8 +323,8 @@
       },
       "Magick.NET.Core": {
         "type": "Transitive",
-        "resolved": "12.1.0",
-        "contentHash": "F1xGmBx+cy9mnEnLlznfmItLRcagiZ3xKOYPbOexDPi8w9SuCfmyOXXz6haGQBDo5DQ7O/Q4knjaV5+gQW9ISA=="
+        "resolved": "14.2.0",
+        "contentHash": "1F0vtPJwmoVg9tvi59VEy6KdmpUXbzKYJOH+TL37DT6kXfqj4iFtOMqD7CXC3G6z2zMgFeF5LX9SSApn8Jhhqg=="
       },
       "Markdig.Signed": {
         "type": "Transitive",
