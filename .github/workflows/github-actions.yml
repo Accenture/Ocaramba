@@ -99,6 +99,10 @@ jobs:
       if: false
     - run: docker push -t Dockerfile
       if: false
+    - name: Install Docker Compose 
+      run: | 
+        sudo apt-get update 
+        sudo apt-get install docker-compose -y
     - run: docker-compose -f docker-compose.yml up -d
     - run: ./ExecutingTestsOnDockerGithubActions.ps1
       if: false
