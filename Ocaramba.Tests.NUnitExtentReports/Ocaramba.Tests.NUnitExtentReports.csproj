@@ -27,7 +27,7 @@
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
     <PackageReference Include="ExtentReports">
-      <Version>4.1.0</Version>
+      <Version>5.0.4</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions">
       <Version>2.2.0</Version>
@@ -67,7 +67,7 @@
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net472'">
     <PackageReference Include="ExtentReports">
-      <Version>4.1.0</Version>
+      <Version>5.0.4</Version>
     </PackageReference>
   </ItemGroup>
 
