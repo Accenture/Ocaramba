@@ -1,136 +1,6 @@
 {
   "version": 1,
   "dependencies": {
-    ".NETFramework,Version=v4.7.2": {
-      "Appveyor.TestLogger": {
-        "type": "Direct",
-        "requested": "[2.0.0, )",
-        "resolved": "2.0.0",
-        "contentHash": "D2GsYP/5kddQss6vkX8edw6Dt+qHBN5+pv6DIF8vvb8ObFyiU/r/JK8A2RKE1ucC6nPojQUApvq8IJVNIjYedQ=="
-      },
-      "NLog": {
-        "type": "Direct",
-        "requested": "[5.1.1, )",
-        "resolved": "5.1.1",
-        "contentHash": "YBfUDzipCaucs+8ieCDp8XECumiWsQbZwSUVLlt9i7FGV03nOPqoVzLtmlhbTxq4TN92BBsLacqPAE/ZyDDJ1g=="
-      },
-      "NUnit": {
-        "type": "Direct",
-        "requested": "[3.13.3, )",
-        "resolved": "3.13.3",
-        "contentHash": "KNPDpls6EfHwC3+nnA67fh5wpxeLb3VLFAfLxrug6JMYDLHH6InaQIWR7Sc3y75d/9IKzMksH/gi08W7XWbmnQ=="
-      },
-      "NUnit.Runners": {
-        "type": "Direct",
-        "requested": "[3.12.0, )",
-        "resolved": "3.12.0",
-        "contentHash": "KNpc03ZPF8wUWdPnLwNch1ycqsUNJgsheVlsUQcsHStuN5S7HMuNEGAavBNVwsHGq++GmtgG0N1MBVEgmxFtFg==",
-        "dependencies": {
-          "NUnit.Console": "3.12.0"
-        }
-      },
-      "NUnit3TestAdapter": {
-        "type": "Direct",
-        "requested": "[4.3.1, )",
-        "resolved": "4.3.1",
-        "contentHash": "R+bGFtsUpLWywjT1nb3xMmoVa2AIw6ClIGC+XjW9lYE8hwJeos+NdR/mtg4RXbBphmC9epALrnUc6MM7mUG8+Q=="
-      },
-      "Selenium.Support": {
-        "type": "Direct",
-        "requested": "[4.4.0, )",
-        "resolved": "4.4.0",
-        "contentHash": "nxXOJVT2iV9qcCJhESRCrX3RnKF+O+71JORSIm6J5zOrLFsyVaGA37Jr1chFHO3NQ+MNrMM1vHLlgEPFmWPwgQ==",
-        "dependencies": {
-          "Selenium.WebDriver": "4.4.0"
-        }
-      },
-      "Selenium.WebDriver": {
-        "type": "Direct",
-        "requested": "[4.4.0, )",
-        "resolved": "4.4.0",
-        "contentHash": "gg/fFUW+SQEdOMaZvkKSau6m4xbMG2qBW6cCW6nGW1CtO0coA8OLYpHcQLpsKcc6q68i/Uq1wjtiVfiNXykJUQ=="
-      },
-      "Selenium.WebDriver.ChromeDriver": {
-        "type": "Direct",
-        "requested": "[109.0.5414.7400, )",
-        "resolved": "109.0.5414.7400",
-        "contentHash": "eTclb0YvUFujj9MCe3RfQvZA9LRcazmqoYzqmrOdW/FMhossjXOpbiaLsUsI84EDNFZQlkRMq4S61XmUtzZOaw=="
-      },
-      "Selenium.WebDriver.GeckoDriver": {
-        "type": "Direct",
-        "requested": "[0.31.0, )",
-        "resolved": "0.31.0",
-        "contentHash": "B9RJ8VrXWpCOpvz//b/I2UdLjVdiP2eDiXdaK6MZJuOGRxsVE8n/JZ7MH1CY2nnXpY4BJDLpWsNg577C7s1aYA=="
-      },
-      "Microsoft.CSharp": {
-        "type": "Transitive",
-        "resolved": "4.7.0",
-        "contentHash": "pTj+D3uJWyN3My70i2Hqo+OXixq3Os2D1nJ2x92FFo6sk8fYS1m1WLNTs0Dc1uPaViH0YvEEwvzddQ7y4rhXmA=="
-      },
-      "NUnit.Console": {
-        "type": "Transitive",
-        "resolved": "3.12.0",
-        "contentHash": "9KXFnViEIKQjz4vqiYFpLV9sntfHxixQomLCJzDMXC6WDo9DP2GhDQiBND6we6MRStMSNzoAWgourbLKwo7utQ==",
-        "dependencies": {
-          "NUnit.ConsoleRunner": "3.12.0",
-          "NUnit.Extension.NUnitProjectLoader": "3.6.0",
-          "NUnit.Extension.NUnitV2Driver": "3.8.0",
-          "NUnit.Extension.NUnitV2ResultWriter": "3.6.0",
-          "NUnit.Extension.TeamCityEventListener": "1.0.7",
-          "NUnit.Extension.VSProjectLoader": "3.8.0"
-        }
-      },
-      "NUnit.ConsoleRunner": {
-        "type": "Transitive",
-        "resolved": "3.12.0",
-        "contentHash": "ZUtI8leU9ozCjLy4ZZ2X6ClU0hxfQtb95VOdmMA4SxIUvf62rIPxoHXS+jghvo5QxgRihGGcEp8xT3vCfgDdsA=="
-      },
-      "NUnit.Extension.NUnitProjectLoader": {
-        "type": "Transitive",
-        "resolved": "3.6.0",
-        "contentHash": "ev2+dCJShMNIATkYNm/vHEuieBfbismr9DcUfBvafJZf5vNyugXPuMXO/MaOFcJaoW9j6/zjMmXKG7R5umWzXA=="
-      },
-      "NUnit.Extension.NUnitV2Driver": {
-        "type": "Transitive",
-        "resolved": "3.8.0",
-        "contentHash": "l6MgFJPTnrlDaMXWfbUZ82h1uvtj0C1ExPpqm6HrYOBa5Z4MBwmFLqj85rnv9JMhu/Ju7jQB/FIaMbfoXInI2A=="
-      },
-      "NUnit.Extension.NUnitV2ResultWriter": {
-        "type": "Transitive",
-        "resolved": "3.6.0",
-        "contentHash": "P/Nc+wgFRe3dT59/VjhiIT0SWfLMbb/Vc9AtBU3L71VOCs8zQnuNjCOEFLQL/Mq6XSaZeB2Sug9tUgTfCnQk9w=="
-      },
-      "NUnit.Extension.TeamCityEventListener": {
-        "type": "Transitive",
-        "resolved": "1.0.7",
-        "contentHash": "bw+ZwHsUmxqb9leo91qLEF7ggtdpawY2V6wNqHI6+ATa2SHxHxoxiV5UV07ZWDRpf/qlQJELNlZu7wIB3+w2qQ=="
-      },
-      "NUnit.Extension.VSProjectLoader": {
-        "type": "Transitive",
-        "resolved": "3.8.0",
-        "contentHash": "CIScV9a7+wUu6Ylb+WO0q/WGWQVoB05TUj3XZHa1CO+2BInDdfIVkqtlrSguhy6D/AGIMaLVrCZpQkQ2m0bbzQ=="
-      },
-      "ocaramba.tests.pageobjects": {
-        "type": "Project",
-        "dependencies": {
-          "NLog": "[5.1.1, )",
-          "OcarambaLite": "[1.0.0, )",
-          "Selenium.Support": "[4.4.0, )",
-          "Selenium.WebDriver": "[4.4.0, )",
-          "Selenium.WebDriver.ChromeDriver": "[104.0.5112.7900, )",
-          "Selenium.WebDriver.GeckoDriver": "[0.31.0, )"
-        }
-      },
-      "ocarambalite": {
-        "type": "Project",
-        "dependencies": {
-          "Microsoft.CSharp": "[4.7.0, )",
-          "NLog": "[5.1.1, )",
-          "Selenium.Support": "[4.4.0, )",
-          "Selenium.WebDriver": "[4.4.0, )"
-        }
-      }
-    },
     "net6.0": {
       "Appveyor.TestLogger": {
         "type": "Direct",
@@ -198,11 +68,11 @@
       },
       "Selenium.WebDriver": {
         "type": "Direct",
-        "requested": "[4.4.0, )",
-        "resolved": "4.4.0",
-        "contentHash": "gg/fFUW+SQEdOMaZvkKSau6m4xbMG2qBW6cCW6nGW1CtO0coA8OLYpHcQLpsKcc6q68i/Uq1wjtiVfiNXykJUQ==",
+        "requested": "[4.26.1, )",
+        "resolved": "4.26.1",
+        "contentHash": "f0t/Oo9l2aK+znAv/McTPSz6p0fSoIYMZpkHql1ndItqu1n6PGXE1XRhziVk2zwG3RBUzEfIr6r/emkl6sP63w==",
         "dependencies": {
-          "Newtonsoft.Json": "13.0.1"
+          "System.Text.Json": "8.0.4"
         }
       },
       "Selenium.WebDriver.ChromeDriver": {
@@ -1740,19 +1610,19 @@
       },
       "System.Text.Encodings.Web": {
         "type": "Transitive",
-        "resolved": "7.0.0",
-        "contentHash": "OP6umVGxc0Z0MvZQBVigj4/U31Pw72ITihDWP9WiWDm+q5aoe0GaJivsfYGq53o6dxH7DcXWiCTl7+0o2CGdmg==",
+        "resolved": "8.0.0",
+        "contentHash": "yev/k9GHAEGx2Rg3/tU6MQh4HGBXJs70y7j1LaM1i/ER9po+6nnQ6RRqTJn1E7Xu0fbIFK80Nh5EoODxrbxwBQ==",
         "dependencies": {
           "System.Runtime.CompilerServices.Unsafe": "6.0.0"
         }
       },
       "System.Text.Json": {
         "type": "Transitive",
-        "resolved": "7.0.0",
-        "contentHash": "DaGSsVqKsn/ia6RG8frjwmJonfos0srquhw09TlT8KRw5I43E+4gs+/bZj4K0vShJ5H9imCuXupb4RmS+dBy3w==",
+        "resolved": "8.0.4",
+        "contentHash": "bAkhgDJ88XTsqczoxEMliSrpijKZHhbJQldhAmObj/RbrN3sU5dcokuXmWJWsdQAhiMJ9bTayWsL1C9fbbCRhw==",
         "dependencies": {
           "System.Runtime.CompilerServices.Unsafe": "6.0.0",
-          "System.Text.Encodings.Web": "7.0.0"
+          "System.Text.Encodings.Web": "8.0.0"
         }
       },
       "System.Text.RegularExpressions": {
@@ -1940,7 +1810,7 @@
           "NLog.Web.AspNetCore": "[5.1.1, )",
           "OcarambaLite": "[1.0.0, )",
           "Selenium.Support": "[4.4.0, )",
-          "Selenium.WebDriver": "[4.4.0, )",
+          "Selenium.WebDriver": "[4.26.1, )",
           "Selenium.WebDriver.ChromeDriver": "[104.0.5112.7900, )",
           "Selenium.WebDriver.GeckoDriver": "[0.31.0, )",
           "System.Configuration.ConfigurationManager": "[4.7.0, )"
@@ -1958,7 +1828,7 @@
           "NLog": "[5.1.1, )",
           "NLog.Web.AspNetCore": "[5.1.1, )",
           "Selenium.Support": "[4.4.0, )",
-          "Selenium.WebDriver": "[4.4.0, )"
+          "Selenium.WebDriver": "[4.26.1, )"
         }
       }
     }
