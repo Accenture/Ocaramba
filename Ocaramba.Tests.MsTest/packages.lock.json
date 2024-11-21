@@ -58,9 +58,9 @@
       },
       "Selenium.WebDriver.IEDriver": {
         "type": "Direct",
-        "requested": "[4.3.0, )",
-        "resolved": "4.3.0",
-        "contentHash": "+M6FppGaEFrPf2t9mHy9y4fTkLVlRY3udl7JPc1mukXWrEE4mtq6KKymO5tJnnwAcaK5g0Jt7YS80dBa5xMTeg=="
+        "requested": "[4.14.0, )",
+        "resolved": "4.14.0",
+        "contentHash": "1oylYTK0wHXnmMC5aUH8Qf80PCKTfizLYyOrQkokf1l+FbRzAifM9R3U76V3tq+BhIwx5AUc+pboC0YZ5CnIVg=="
       },
       "Microsoft.Bcl.AsyncInterfaces": {
         "type": "Transitive",
@@ -235,9 +235,9 @@
       },
       "Selenium.WebDriver.IEDriver": {
         "type": "Direct",
-        "requested": "[4.3.0, )",
-        "resolved": "4.3.0",
-        "contentHash": "+M6FppGaEFrPf2t9mHy9y4fTkLVlRY3udl7JPc1mukXWrEE4mtq6KKymO5tJnnwAcaK5g0Jt7YS80dBa5xMTeg=="
+        "requested": "[4.14.0, )",
+        "resolved": "4.14.0",
+        "contentHash": "1oylYTK0wHXnmMC5aUH8Qf80PCKTfizLYyOrQkokf1l+FbRzAifM9R3U76V3tq+BhIwx5AUc+pboC0YZ5CnIVg=="
       },
       "Markdig.Signed": {
         "type": "Transitive",
