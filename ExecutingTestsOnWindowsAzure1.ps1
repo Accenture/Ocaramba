@@ -1,14 +1,14 @@
 echo '********************************************Executing tests********************************************'
         
-echo '********************************************net6.0 tests********************************************'
+echo '********************************************net8.0 tests********************************************'
 
-.\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.NUnit\bin\Release\net6.0" "appsettings.json" "appSettings" "browser|PathToChromeDriverDirectory" "Chrome|$($env:CHROMEWEBDRIVER)" -logValues -json
-.\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.Angular\bin\Release\net6.0" "appsettings.json" "appSettings" "browser|PathToChromeDriverDirectory" "Chrome|$($env:CHROMEWEBDRIVER)" -logValues -json
-.\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.NUnitExtentReports\bin\Release\net6.0" "appsettings.json" "appSettings" "browser|PathToChromeDriverDirectory" "Chrome|$($env:CHROMEWEBDRIVER)" -logValues -json
+.\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.NUnit\bin\Release\net8.0" "appsettings.json" "appSettings" "browser|PathToChromeDriverDirectory" "Chrome|$($env:CHROMEWEBDRIVER)" -logValues -json
+.\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.Angular\bin\Release\net8.0" "appsettings.json" "appSettings" "browser|PathToChromeDriverDirectory" "Chrome|$($env:CHROMEWEBDRIVER)" -logValues -json
+.\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.NUnitExtentReports\bin\Release\net8.0" "appsettings.json" "appSettings" "browser|PathToChromeDriverDirectory" "Chrome|$($env:CHROMEWEBDRIVER)" -logValues -json
 
-dotnet vstest .\Ocaramba.Tests.Angular\bin\Release\net6.0\Ocaramba.Tests.Angular.dll `
-	          .\Ocaramba.Tests.NUnit\bin\Release\net6.0\Ocaramba.Tests.NUnit.dll `
-			  .\Ocaramba.Tests.NUnitExtentReports\bin\Release\net6.0\Ocaramba.Tests.NUnitExtentReports.dll `
+dotnet vstest .\Ocaramba.Tests.Angular\bin\Release\net8.0\Ocaramba.Tests.Angular.dll `
+	          .\Ocaramba.Tests.NUnit\bin\Release\net8.0\Ocaramba.Tests.NUnit.dll `
+			  .\Ocaramba.Tests.NUnitExtentReports\bin\Release\net8.0\Ocaramba.Tests.NUnitExtentReports.dll `
 			  /TestCaseFilter:"(TestCategory!=TakingScreehShots)" /Parallel `
 	          --logger:"trx;LogFileName=Ocaramba.Tests.netcoreapp.trx"
 
