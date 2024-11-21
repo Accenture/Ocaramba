@@ -67,7 +67,7 @@ namespace Ocaramba
 
             try
             {
-                errorDetail.Screenshot.SaveAsFile(filePath, ScreenshotImageFormat.Png);
+                errorDetail.Screenshot.SaveAsFile(filePath);
                 FilesHelper.WaitForFileOfGivenName(BaseConfiguration.ShortTimeout, correctFileName, folder);
                 Logger.Error(CultureInfo.CurrentCulture, "Test failed: screenshot saved to {0}.", filePath);
                 Console.WriteLine(string.Format(CultureInfo.CurrentCulture, "##teamcity[publishArtifacts '{0}']", filePath));
