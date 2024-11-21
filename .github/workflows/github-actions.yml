@@ -14,10 +14,10 @@ env:
   solution: ${{ github.workspace }}/Ocaramba.sln
   buildPlatform: Any CPU
   buildConfiguration: Release
-  frameworkVersion: 4.0.0
+  frameworkVersion: 4.2.0
   TestResultsDirWindows: D:\a\Ocaramba\Ocaramba\TestResults
   CHROMEWEBDRIVER: C:\SeleniumWebDrivers\ChromeDriver
-  BuildVersion: 4.0.0${{ github.run_number }}
+  BuildVersion: 4.2.0${{ github.run_number }}
   ChromeDriverVersion: 122.0.6261.9400
   seleniumGridVersion: selenium-server-4.8.0.jar
   seleniumGridUrl: https://github.com/SeleniumHQ/selenium/releases/download/selenium-4.8.0/selenium-server-4.8.0.jar
@@ -347,8 +347,8 @@ jobs:
         name: OcarambaLiteS${{ env.frameworkVersion }}
     - run: Get-ChildItem ./ -Recurse 
     - name: Push Nuget Package
-      run: dotnet custom push ${{ env.Agent.BuildDirectory }}\Ocaramba.${{ env.frameworkVersion }}.nupkg -s https://api.nuget.org/v3/index.json -k ${{ env.NuGetApiKey }}
+      run: dotnet custom push ${{ env.Agent.BuildDirectory }}\Ocaramba.${{ env.frameworkVersion }}.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
       if: (success() && startsWith(github.ref, 'refs/tags/'))
     - name: Push Nuget Package
-      run: dotnet custom push ${{ env.Agent.BuildDirectory }}\OcarambaLite.${{ env.frameworkVersion }}.nupkg -s https://api.nuget.org/v3/index.json -k ${{ env.NuGetApiKey }}
+      run: dotnet custom push ${{ env.Agent.BuildDirectory }}\OcarambaLite.${{ env.frameworkVersion }}.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
       if: (success() && startsWith(github.ref, 'refs/tags/'))
