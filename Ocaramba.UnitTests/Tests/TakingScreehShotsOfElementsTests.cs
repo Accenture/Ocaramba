@@ -34,7 +34,7 @@ namespace Ocaramba.UnitTests.Tests
     [Category("NotImplementedInCoreOrUploadDownload")]
     public class TakingScreehShotsOfElementsTests : ProjectTestBase
     {
-#if net6_0
+#if net8_0
         string folder = Directory.GetCurrentDirectory();
 #endif
 
@@ -58,12 +58,15 @@ namespace Ocaramba.UnitTests.Tests
                     using (var imgDiff = new MagickImage())
                     {
                         img1.Compose = CompositeOperator.Src;
-                        img1.Compare(img2, new ErrorMetric(), imgDiff);
+                        img1.Compare(img2, ErrorMetric.MeanAbsolute, Channels.RGB);
                         flag = img1.Equals(img2);
                         imgDiff.Write(folder + FilesHelper.Separator + BaseConfiguration.ScreenShotFolder + FilesHelper.Separator + BaseConfiguration.TestBrowser + "TextWithinIFrameDIFF.png");
                     }
                 }
             }
+
+
+
 
             Assert.IsFalse(flag);
         }

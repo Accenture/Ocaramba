@@ -32,7 +32,7 @@ namespace Ocaramba.UnitTests.Tests
         [Test]
         public void CheckSynchronizationWithAngularFuctionality()
         {
-#if net6_0
+#if net8_0
         string folder = Directory.GetCurrentDirectory();
 #endif
 

@@ -13,9 +13,9 @@ docker ps -a
 docker exec ocaramba_selenium sed -i '/Documentation/,+5 d' Ocaramba.sln
 echo 'build Ocaramba.sln'
 docker exec ocaramba_selenium dotnet build Ocaramba.sln
-docker exec ocaramba_selenium bash -c 'pwsh ./scripts/set_AppConfig_for_tests.ps1 \"./Ocaramba.Tests.NUnit/bin/Debug/net6.0\" \"appsettings.Linux.json\" \"appSettings\" \"browser|PathToChromeDriverDirectory\" \"Chrome|/chromedriver\" -logValues -json'
+docker exec ocaramba_selenium bash -c 'pwsh ./scripts/set_AppConfig_for_tests.ps1 \"./Ocaramba.Tests.NUnit/bin/Debug/net8.0\" \"appsettings.Linux.json\" \"appSettings\" \"browser|PathToChromeDriverDirectory\" \"Chrome|/chromedriver\" -logValues -json'
 echo 'execute Ocaramba.sln tests'
-docker exec ocaramba_selenium dotnet vstest Ocaramba.Tests.NUnit/bin/Debug/net6.0/Ocaramba.Tests.NUnit.dll  /TestCaseFilter:"(TestCategory!=NotImplementedInCoreOrUploadDownload)" /Parallel --logger:"trx;LogFileName=Ocaramba.Tests.Docker.xml"
+docker exec ocaramba_selenium dotnet vstest Ocaramba.Tests.NUnit/bin/Debug/net8.0/Ocaramba.Tests.NUnit.dll  /TestCaseFilter:"(TestCategory!=NotImplementedInCoreOrUploadDownload)" /Parallel --logger:"trx;LogFileName=Ocaramba.Tests.Docker.xml"
 echo 'Downloading Ocaramba.Tests.Docker.xml'
 docker cp  ocaramba_selenium:/Ocaramba/TestResults/Ocaramba.Tests.Docker.xml .
 echo 'Uploading Ocaramba.Tests.Docker.xml'

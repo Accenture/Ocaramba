@@ -51,7 +51,7 @@ namespace Ocaramba
 #if net47
         private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
 #endif
-#if net6_0
+#if net8_0
         private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
 #endif
         private readonly Collection<ErrorDetail> verifyMessages = new Collection<ErrorDetail>();
@@ -209,7 +209,7 @@ namespace Ocaramba
                 firefoxPreferences = ConfigurationManager.GetSection("FirefoxPreferences") as NameValueCollection;
                 firefoxExtensions = ConfigurationManager.GetSection("FirefoxExtensions") as NameValueCollection;
 #endif
-#if net6_0
+#if net8_0
                 firefoxPreferences = BaseConfiguration.GetNameValueCollectionFromAppsettings("FirefoxPreferences");
                 firefoxExtensions = BaseConfiguration.GetNameValueCollectionFromAppsettings("FirefoxExtensions");
 #endif
@@ -316,7 +316,7 @@ namespace Ocaramba
                 chromeExtensions = ConfigurationManager.GetSection("ChromeExtensions") as NameValueCollection;
                 chromeArguments = ConfigurationManager.GetSection("ChromeArguments") as NameValueCollection;
 #endif
-#if net6_0
+#if net8_0
                 chromePreferences = BaseConfiguration.GetNameValueCollectionFromAppsettings("ChromePreferences");
                 chromeExtensions = BaseConfiguration.GetNameValueCollectionFromAppsettings("ChromeExtensions");
                 chromeArguments = BaseConfiguration.GetNameValueCollectionFromAppsettings("chromeArguments");
@@ -417,7 +417,7 @@ namespace Ocaramba
 #if net47
                 internetExplorerPreferences = ConfigurationManager.GetSection("InternetExplorerPreferences") as NameValueCollection;
 #endif
-#if net6_0
+#if net8_0
                 internetExplorerPreferences = BaseConfiguration.GetNameValueCollectionFromAppsettings("InternetExplorerPreferences");
 #endif
                 var options = new InternetExplorerOptions
@@ -460,7 +460,7 @@ namespace Ocaramba
                 edgeChromiumExtensions = ConfigurationManager.GetSection("EdgeChromiumExtensions") as NameValueCollection;
                 edgeChromiumArguments = ConfigurationManager.GetSection("EdgeChromiumArguments") as NameValueCollection;
 #endif
-#if net6_0
+#if net8_0
                 edgeChromiumPreferences = BaseConfiguration.GetNameValueCollectionFromAppsettings("EdgeChromiumPreferences");
                 edgeChromiumExtensions = BaseConfiguration.GetNameValueCollectionFromAppsettings("EdgeChromiumExtensions");
                 edgeChromiumArguments = BaseConfiguration.GetNameValueCollectionFromAppsettings("EdgeChromiumArguments");
@@ -602,7 +602,7 @@ namespace Ocaramba
                     {
                         this.FirefoxOptions.BrowserExecutableLocation = BaseConfiguration.FirefoxBrowserExecutableLocation;
                     }
-#if net6_0
+#if net8_0
                     FirefoxDriverService serviceFirefox = FirefoxDriverService.CreateDefaultService();
                     serviceFirefox.Host = "::1";
                     this.driver = string.IsNullOrEmpty(BaseConfiguration.PathToFirefoxDriverDirectory) ? new FirefoxDriver(serviceFirefox, this.SetDriverOptions(this.FirefoxOptions)) : new FirefoxDriver(BaseConfiguration.PathToFirefoxDriverDirectory, this.SetDriverOptions(this.FirefoxOptions));
@@ -699,7 +699,7 @@ namespace Ocaramba
             driverCapabilitiesConf = ConfigurationManager.GetSection("DriverCapabilities") as NameValueCollection;
             settings = ConfigurationManager.GetSection("environments/" + this.CrossBrowserEnvironment) as NameValueCollection;
 #endif
-#if net6_0
+#if net8_0
             driverCapabilitiesConf = BaseConfiguration.GetNameValueCollectionFromAppsettings("DriverCapabilities");
             settings = BaseConfiguration.GetNameValueCollectionFromAppsettings("environments:" + this.CrossBrowserEnvironment);
 #endif

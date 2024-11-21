@@ -17,7 +17,7 @@ Project API documentation can be found here: http://Accenture.github.io/Ocaramba
 <img align="left" src="https://github.com/Accenture/Ocaramba/wiki/images/ocarambadiagram.png">
 
 **It provides the following features:**
-- .NET Frameworks 4.7.2 and .NET 6.0 supported
+- .NET Frameworks 4.7.2 and .NET 8.0 supported
 - Cross-Platform  Windows, Linux and macOS systems supported
 - Supports  continuous integration tools like Azure DevOps, Teamcity, Jenkins and others. 
 - Ready for parallel tests execution, more details [here](https://github.com/Accenture/Ocaramba/wiki/Selenium%20Parallel%20tests%20execution)

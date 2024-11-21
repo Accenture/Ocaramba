@@ -40,7 +40,7 @@ namespace Ocaramba.Extensions
 #if net47
         private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
 #endif
-#if net6_0
+#if net8_0
         private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
 #endif
 
@@ -245,7 +245,7 @@ namespace Ocaramba.Extensions
 #if net47
                 condition = drv => drv.PageSource.Contains(text);
 #endif
-#if net6_0
+#if net8_0
                 condition = drv => drv.PageSource.Contains(text, StringComparison.InvariantCultureIgnoreCase);
 #endif
 
@@ -255,7 +255,7 @@ namespace Ocaramba.Extensions
 #if net47
                 condition = drv => drv.PageSource.ToUpperInvariant().Contains(text.ToUpperInvariant());
 #endif
-#if net6_0
+#if net8_0
                 condition = drv => drv.PageSource.ToUpperInvariant().Contains(text.ToUpperInvariant(), StringComparison.InvariantCultureIgnoreCase);
 #endif
 
@@ -381,7 +381,7 @@ namespace Ocaramba.Extensions
 #if net47
             if ((BaseConfiguration.TestBrowser.Equals(BrowserType.InternetExplorer) || BaseConfiguration.TestBrowser.Equals(BrowserType.IE)) && webDriver.Title.Contains("Certificate"))
 #endif
-#if net6_0
+#if net8_0
             if ((BaseConfiguration.TestBrowser.Equals(BrowserType.InternetExplorer) || BaseConfiguration.TestBrowser.Equals(BrowserType.IE)) && webDriver.Title.Contains("Certificate", StringComparison.InvariantCultureIgnoreCase))
 #endif
             {

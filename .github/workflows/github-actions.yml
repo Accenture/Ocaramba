@@ -14,10 +14,10 @@ env:
   solution: ${{ github.workspace }}/Ocaramba.sln
   buildPlatform: Any CPU
   buildConfiguration: Release
-  frameworkVersion: 4.0.0
+  frameworkVersion: 4.2.0
   TestResultsDirWindows: D:\a\Ocaramba\Ocaramba\TestResults
   CHROMEWEBDRIVER: C:\SeleniumWebDrivers\ChromeDriver
-  BuildVersion: 4.0.0${{ github.run_number }}
+  BuildVersion: 4.2.0${{ github.run_number }}
   ChromeDriverVersion: 122.0.6261.9400
   seleniumGridVersion: selenium-server-4.8.0.jar
   seleniumGridUrl: https://github.com/SeleniumHQ/selenium/releases/download/selenium-4.8.0/selenium-server-4.8.0.jar
@@ -99,6 +99,10 @@ jobs:
       if: false
     - run: docker push -t Dockerfile
       if: false
+    - name: Install Docker Compose 
+      run: | 
+        sudo apt-get update 
+        sudo apt-get install docker-compose -y
     - run: docker-compose -f docker-compose.yml up -d
     - run: ./ExecutingTestsOnDockerGithubActions.ps1
       if: false
@@ -134,6 +138,7 @@ jobs:
       with:
         files: |
           /home/runner/work/Ocaramba/Ocaramba/TestResults/Ocaramba.Tests.netcoreapp.xml
+        check_name: ExecutingTestsOnLinuxAzure 
   test_Stage_RunTestsOnLinuxBrowserStack:
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -166,6 +171,7 @@ jobs:
       with:
         files: |
           /home/runner/work/Ocaramba/Ocaramba/TestResults/BrowserStacknetcoreapp.xml
+        check_name: test_Stage_RunTestsOnLinuxBrowserStack           
   test_Stage_RunTestsOnWindowsCore1:
     runs-on: windows-latest
     needs:
@@ -186,8 +192,9 @@ jobs:
       if: always()
       with:
         files: ${{ env.TestResultsDirWindows }}\Ocaramba.Tests.netcoreapp.trx
+        check_name: ExecutingTestsOnWindowsGithubActions1  
     - name: Zip artifact
-      run: Compress-Archive -Path D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.NUnitExtentReports\bin\Release\net6.0\TestOutput -Destination ExtentReports_${{ github.run_id }}.zip
+      run: Compress-Archive -Path D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.NUnitExtentReports\bin\Release\net8.0\TestOutput -Destination ExtentReports_${{ github.run_id }}.zip
     - uses: actions/upload-artifact@v4
       with:
         path: ExtentReports_${{ github.run_id }}.zip
@@ -215,6 +222,7 @@ jobs:
         files: |
           ${{ env.TestResultsDirWindows }}\Ocaramba.Tests.netcoreapp.xml
           ${{ env.TestResultsDirWindows }}\Ocaramba.Tests.EdgeChrominum.xml
+        check_name: ExecutingTestsOnWindowsGithubActions2  
   test_Stage_RunTestsOnWindowsFramework:
     runs-on: windows-latest
     needs:
@@ -234,6 +242,7 @@ jobs:
       if: always()
       with:
         files: ${{ env.TestResultsDirWindows }}\Ocaramba.Tests.net4.xml
+        check_name: ExecutingTestsOnWindowsGithubActions3  
   test_Stage_RunTestsOnWindowsBrowserStack:
     runs-on: windows-latest
     needs:
@@ -260,6 +269,7 @@ jobs:
       if: always()
       with:
         files: ${{ env.TestResultsDirWindows }}\Ocaramba.Tests.BrowserStack.xml
+        check_name: ExecutingTestsOnWindowsGithubActions4  
   test_Stage_RunTestsSeleniumGrid:
     runs-on: windows-latest
     needs:
@@ -281,6 +291,7 @@ jobs:
         files: |
           ${{ env.TestResultsDirWindows }}\Ocaramba.Tests.NUnitGrid.xml
           ${{ env.TestResultsDirWindows }}\Ocaramba.Tests.CloudProviderCrossBrowserGrid.xml
+        check_name: ExecutingTestsOnWindowsGithubActions5         
   test_Stage_RunTestsOnWindowsSaucelabs:
     runs-on: windows-latest
     needs:
@@ -308,6 +319,7 @@ jobs:
       with:
         files: |
           ${{ env.TestResultsDirWindows }}\Ocaramba.Tests.saucelabsnet472.xml
+        check_name: ExecutingTestsOnWindowsGithubActions6  
   release_Stage_PublishNuget:
     runs-on: windows-latest
     needs:
@@ -343,8 +355,8 @@ jobs:
         name: OcarambaLiteS${{ env.frameworkVersion }}
     - run: Get-ChildItem ./ -Recurse 
     - name: Push Nuget Package
-      run: dotnet custom push ${{ env.Agent.BuildDirectory }}\Ocaramba.${{ env.frameworkVersion }}.nupkg -s https://api.nuget.org/v3/index.json -k ${{ env.NuGetApiKey }}
+      run: dotnet custom push ${{ env.Agent.BuildDirectory }}\Ocaramba.${{ env.frameworkVersion }}.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
       if: (success() && startsWith(github.ref, 'refs/tags/'))
     - name: Push Nuget Package
-      run: dotnet custom push ${{ env.Agent.BuildDirectory }}\OcarambaLite.${{ env.frameworkVersion }}.nupkg -s https://api.nuget.org/v3/index.json -k ${{ env.NuGetApiKey }}
+      run: dotnet custom push ${{ env.Agent.BuildDirectory }}\OcarambaLite.${{ env.frameworkVersion }}.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
       if: (success() && startsWith(github.ref, 'refs/tags/'))
