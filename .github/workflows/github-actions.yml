@@ -191,7 +191,7 @@ jobs:
       with:
         files: ${{ env.TestResultsDirWindows }}\Ocaramba.Tests.netcoreapp.trx
     - name: Zip artifact
-      run: Compress-Archive -Path D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.NUnitExtentReports\bin\Release\net6.0\TestOutput -Destination ExtentReports_${{ github.run_id }}.zip
+      run: Compress-Archive -Path D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.NUnitExtentReports\bin\Release\net8.0\TestOutput -Destination ExtentReports_${{ github.run_id }}.zip
     - uses: actions/upload-artifact@v4
       with:
         path: ExtentReports_${{ github.run_id }}.zip
