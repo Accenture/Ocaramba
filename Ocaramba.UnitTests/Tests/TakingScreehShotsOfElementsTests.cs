@@ -34,7 +34,7 @@ namespace Ocaramba.UnitTests.Tests
     [Category("NotImplementedInCoreOrUploadDownload")]
     public class TakingScreehShotsOfElementsTests : ProjectTestBase
     {
-#if net6_0
+#if net8_0
         string folder = Directory.GetCurrentDirectory();
 #endif
 

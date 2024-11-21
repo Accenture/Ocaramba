@@ -9,7 +9,7 @@ namespace Ocaramba.UnitTests.Tests
     [TestFixture, Parallelizable(ParallelScope.Self)]
     public class NameHelperTests
     {
-#if net6_0
+#if net8_0
         string folder = Directory.GetCurrentDirectory();
 #endif
 
@@ -19,7 +19,7 @@ namespace Ocaramba.UnitTests.Tests
 #if net47
         private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
 #endif
-#if net6_0
+#if net8_0
         private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
 #endif
         [Test()]

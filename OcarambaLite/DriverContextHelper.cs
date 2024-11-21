@@ -57,7 +57,7 @@ namespace Ocaramba
 #if net47
             var correctFileName = Path.GetInvalidFileNameChars().Aggregate(fileName, (current, c) => current.Replace(c.ToString(CultureInfo.CurrentCulture), string.Empty));
 #endif
-#if net6_0
+#if net8_0
             var correctFileName = Path.GetInvalidFileNameChars().Aggregate(fileName, (current, c) => current.Replace(c.ToString(CultureInfo.CurrentCulture), string.Empty, StringComparison.InvariantCultureIgnoreCase));
 #endif
             correctFileName = Regex.Replace(correctFileName, "[^0-9a-zA-Z._]+", "_");
@@ -103,7 +103,7 @@ namespace Ocaramba
 #if net47
                 pageSource = pageSource.Replace("<head>", string.Format(CultureInfo.CurrentCulture, "<head><base href=\"http://{0}\" target=\"_blank\">", BaseConfiguration.Host));
 #endif
-#if net6_0
+#if net8_0
                 pageSource = pageSource.Replace("<head>", string.Format(CultureInfo.CurrentCulture, "<head><base href=\"http://{0}\" target=\"_blank\">", BaseConfiguration.Host), StringComparison.InvariantCultureIgnoreCase);
 #endif
                 File.WriteAllText(path, pageSource);
@@ -160,7 +160,7 @@ namespace Ocaramba
                             .Logs.GetLog(LogType.Browser)
                             .Where(x => BaseConfiguration.JavaScriptErrorTypes.Any(predicate: e => x.Message.Contains(e)));
 #endif
-#if net6_0
+#if net8_0
                     jsErrors =
                         this.driver.Manage()
                             .Logs.GetLog(LogType.Browser)
@@ -226,7 +226,7 @@ namespace Ocaramba
 #if net47
             firefoxArguments = ConfigurationManager.GetSection("FirefoxArguments") as NameValueCollection;
 #endif
-#if net6_0
+#if net8_0
             firefoxArguments = BaseConfiguration.GetNameValueCollectionFromAppsettings("FirefoxArguments");
 #endif
 
@@ -318,7 +318,7 @@ namespace Ocaramba
                 }
              }
 #endif
-#if net6_0
+#if net8_0
             if (!supportedBrowser)
             {
                 if (this.CrossBrowserEnvironment.ToLower(CultureInfo.CurrentCulture).Contains(BrowserType.Android.ToString().ToLower(CultureInfo.CurrentCulture), StringComparison.InvariantCultureIgnoreCase))
@@ -393,7 +393,7 @@ namespace Ocaramba
                 browserOptions.AddAdditionalOption("tb:options", capabilities);
             }
 #endif
-#if net6_0
+#if net8_0
             if (BaseConfiguration.RemoteWebDriverHub.ToString().ToLower(CultureInfo.CurrentCulture).Contains("browserstack", StringComparison.InvariantCultureIgnoreCase))
             {
                 browserOptions.AddAdditionalOption("bstack:options", capabilities);

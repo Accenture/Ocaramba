@@ -10,7 +10,7 @@ namespace Ocaramba.Tests.Angular.PageObjects
 #if net47
         private readonly NLog.Logger logger = LogManager.GetCurrentClassLogger();
 #endif
-#if net6_0
+#if net8_0
         private readonly NLog.Logger logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
 #endif
 

@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net6.0</TargetFrameworks>
-    <TargetFrameworks Condition="'$(OS)' != 'Unix'">net472;net6.0</TargetFrameworks>
+    <TargetFrameworks>net8.0</TargetFrameworks>
+    <TargetFrameworks Condition="'$(OS)' != 'Unix'">net472;net8.0</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,7 +26,7 @@
     <PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="3.9.74" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
+  <ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.4.0" />
     <PackageReference Include="NLog.Web.AspNetCore" Version="5.3.14" />
   </ItemGroup>
@@ -55,8 +55,8 @@
     </SpecFlowFeatureFiles>
   </ItemGroup>
 
-  <PropertyGroup Condition="'$(TargetFramework)'=='net6.0'">
-    <DefineConstants>net6_0</DefineConstants>
+  <PropertyGroup Condition="'$(TargetFramework)'=='net8.0'">
+    <DefineConstants>net8_0</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)'=='net472'">

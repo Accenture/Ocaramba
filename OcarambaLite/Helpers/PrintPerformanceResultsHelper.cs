@@ -25,7 +25,7 @@ namespace Ocaramba.Helpers
     using System.ComponentModel;
     using System.Diagnostics;
     using System.Linq;
-#if net6_0
+#if net8_0
     using System.Management.Automation;
 #endif
     using NLog;
@@ -38,7 +38,7 @@ namespace Ocaramba.Helpers
 #if net47
         private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
 #endif
-#if net6_0
+#if net8_0
         private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
 #endif
 
@@ -150,7 +150,7 @@ namespace Ocaramba.Helpers
                 }
 #endif
 
-#if net6_0
+#if net8_0
                 text = "Add-AppveyorTest -Name " + measuresToPrint.ElementAt(i);
                 using (var ps = PowerShell.Create())
                 {

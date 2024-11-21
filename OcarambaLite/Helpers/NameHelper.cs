@@ -39,7 +39,7 @@ namespace Ocaramba.Helpers
 #if net47
         private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
 #endif
-#if net6_0
+#if net8_0
         private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
 #endif
 
@@ -80,7 +80,7 @@ namespace Ocaramba.Helpers
 #if net47
             while (!((folder + fileName).Length <= maxLength || !fileName.Contains(pattern)))
 #endif
-#if net6_0
+#if net8_0
             while (!((folder + fileName).Length <= maxLength || !fileName.Contains(pattern, StringComparison.InvariantCultureIgnoreCase)))
 #endif
             {
