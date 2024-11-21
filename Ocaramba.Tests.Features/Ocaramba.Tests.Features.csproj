@@ -13,14 +13,14 @@
     
     
     <PackageReference Include="NUnit.Runners" Version="3.12.0" />
-    <PackageReference Include="NUnit3TestAdapter" Version="4.2.1">
+    <PackageReference Include="NUnit3TestAdapter" Version="4.6.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Selenium.Support" Version="4.4.0" />
     <PackageReference Include="Selenium.WebDriver" Version="4.4.0" />
-    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="109.0.5414.7400" />
-    <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.31.0" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="131.0.6778.8500" />
+    <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.35.0" />
     <PackageReference Include="SpecFlow" Version="3.9.74" />
     <PackageReference Include="SpecFlow.NUnit" Version="3.9.74" />
     <PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="3.9.74" />

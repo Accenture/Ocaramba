@@ -44,15 +44,15 @@
       },
       "Selenium.WebDriver.ChromeDriver": {
         "type": "Direct",
-        "requested": "[104.0.5112.7900, )",
-        "resolved": "104.0.5112.7900",
-        "contentHash": "vDH+7FqF4APZtvqyqtJ8XYTTh523EsUV88CpqW4d2xjxKjUp6ifpeLi9rDhnSuruDIoQDLJvRBZPI7UlcMTXOw=="
+        "requested": "[131.0.6778.8500, )",
+        "resolved": "131.0.6778.8500",
+        "contentHash": "xi6B90m0dx8SRAo7HFLNflH1q6A4ISuHCc4cmIAn9KVqdw1H6ePEgyspO4odkLaQgrnYn++81i9WaXgyNdHdtA=="
       },
       "Selenium.WebDriver.GeckoDriver": {
         "type": "Direct",
-        "requested": "[0.31.0, )",
-        "resolved": "0.31.0",
-        "contentHash": "B9RJ8VrXWpCOpvz//b/I2UdLjVdiP2eDiXdaK6MZJuOGRxsVE8n/JZ7MH1CY2nnXpY4BJDLpWsNg577C7s1aYA=="
+        "requested": "[0.35.0, )",
+        "resolved": "0.35.0",
+        "contentHash": "+s9jC3IhtNmWloGv9pQ+TqNeRYM0cCPQrFicpXNcyP08KI/WjTRPE0b0M6Fc8I3FEGj98EBQjQBwUlAiQpMW0w=="
       },
       "StyleCop.Analyzers": {
         "type": "Direct",
@@ -206,15 +206,15 @@
       },
       "Selenium.WebDriver.ChromeDriver": {
         "type": "Direct",
-        "requested": "[104.0.5112.7900, )",
-        "resolved": "104.0.5112.7900",
-        "contentHash": "vDH+7FqF4APZtvqyqtJ8XYTTh523EsUV88CpqW4d2xjxKjUp6ifpeLi9rDhnSuruDIoQDLJvRBZPI7UlcMTXOw=="
+        "requested": "[131.0.6778.8500, )",
+        "resolved": "131.0.6778.8500",
+        "contentHash": "xi6B90m0dx8SRAo7HFLNflH1q6A4ISuHCc4cmIAn9KVqdw1H6ePEgyspO4odkLaQgrnYn++81i9WaXgyNdHdtA=="
       },
       "Selenium.WebDriver.GeckoDriver": {
         "type": "Direct",
-        "requested": "[0.31.0, )",
-        "resolved": "0.31.0",
-        "contentHash": "B9RJ8VrXWpCOpvz//b/I2UdLjVdiP2eDiXdaK6MZJuOGRxsVE8n/JZ7MH1CY2nnXpY4BJDLpWsNg577C7s1aYA=="
+        "requested": "[0.35.0, )",
+        "resolved": "0.35.0",
+        "contentHash": "+s9jC3IhtNmWloGv9pQ+TqNeRYM0cCPQrFicpXNcyP08KI/WjTRPE0b0M6Fc8I3FEGj98EBQjQBwUlAiQpMW0w=="
       },
       "StyleCop.Analyzers": {
         "type": "Direct",
