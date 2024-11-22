@@ -39,7 +39,8 @@ namespace Ocaramba.Tests.NUnitExtentReports
     public class ProjectTestBase : TestBase
     {
         private readonly DriverContext driverContext = new DriverContext();
-
+        
+        [ThreadStatic]
         private ExtentTest testContainer;
 
         [ThreadStatic]
