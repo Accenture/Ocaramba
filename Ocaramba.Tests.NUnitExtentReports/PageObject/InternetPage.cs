@@ -33,6 +33,7 @@ namespace Ocaramba.Tests.NUnitExtentReports.PageObjects
 
     public class InternetPage : ProjectPageBase
     {
+        [ThreadStatic]
         private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
 
         /// <summary>
