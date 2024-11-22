@@ -355,8 +355,8 @@ jobs:
         name: OcarambaLiteS${{ env.frameworkVersion }}
     - run: Get-ChildItem ./ -Recurse 
     - name: Push Nuget Package
-      run: dotnet custom push ${{ env.Agent.BuildDirectory }}\Ocaramba.${{ env.frameworkVersion }}.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
+      run: dotnet push .\Ocaramba\Ocaramba\Ocaramba.${{ env.frameworkVersion }}.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
       if: (success() && startsWith(github.ref, 'refs/tags/'))
     - name: Push Nuget Package
-      run: dotnet custom push ${{ env.Agent.BuildDirectory }}\OcarambaLite.${{ env.frameworkVersion }}.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
+      run: dotnet push .\Ocaramba\Ocaramba\OcarambaLite.${{ env.frameworkVersion }}.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
       if: (success() && startsWith(github.ref, 'refs/tags/'))
