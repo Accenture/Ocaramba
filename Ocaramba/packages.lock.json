@@ -1,103 +1,6 @@
 {
   "version": 1,
   "dependencies": {
-    ".NETFramework,Version=v4.7.2": {
-      "Microsoft.AnalysisServices.AdomdClient.retail.amd64": {
-        "type": "Direct",
-        "requested": "[19.84.1, )",
-        "resolved": "19.84.1",
-        "contentHash": "Y5L6XjS/h2jBCEWVTE+mD9vmFWC6KndpdllHmALlDDqCOCjVE4XtPAz7Vv+UTjvHeKAcy9X27D0+8Z+p/img9Q==",
-        "dependencies": {
-          "Microsoft.Identity.Client": "4.56.0"
-        }
-      },
-      "Microsoft.SourceLink.GitHub": {
-        "type": "Direct",
-        "requested": "[8.0.0, )",
-        "resolved": "8.0.0",
-        "contentHash": "G5q7OqtwIyGTkeIOAc3u2ZuV/kicQaec5EaRnc0pIeSnh9LUjj+PYQrJYBURvDt7twGl2PKA7nSN0kz1Zw5bnQ==",
-        "dependencies": {
-          "Microsoft.Build.Tasks.Git": "8.0.0",
-          "Microsoft.SourceLink.Common": "8.0.0"
-        }
-      },
-      "NLog": {
-        "type": "Direct",
-        "requested": "[5.3.4, )",
-        "resolved": "5.3.4",
-        "contentHash": "gLy7+O1hEYJXIlcTr1/VWjGXrZTQFZzYNO18IWasD64pNwz0BreV+nHLxWKXWZzERRzoKnsk2XYtwLkTVk7J1A=="
-      },
-      "Selenium.Support": {
-        "type": "Direct",
-        "requested": "[4.4.0, )",
-        "resolved": "4.4.0",
-        "contentHash": "nxXOJVT2iV9qcCJhESRCrX3RnKF+O+71JORSIm6J5zOrLFsyVaGA37Jr1chFHO3NQ+MNrMM1vHLlgEPFmWPwgQ==",
-        "dependencies": {
-          "Selenium.WebDriver": "4.4.0"
-        }
-      },
-      "Selenium.WebDriver": {
-        "type": "Direct",
-        "requested": "[4.4.0, )",
-        "resolved": "4.4.0",
-        "contentHash": "gg/fFUW+SQEdOMaZvkKSau6m4xbMG2qBW6cCW6nGW1CtO0coA8OLYpHcQLpsKcc6q68i/Uq1wjtiVfiNXykJUQ=="
-      },
-      "Selenium.WebDriver.ChromeDriver": {
-        "type": "Direct",
-        "requested": "[131.0.6778.8500, )",
-        "resolved": "131.0.6778.8500",
-        "contentHash": "xi6B90m0dx8SRAo7HFLNflH1q6A4ISuHCc4cmIAn9KVqdw1H6ePEgyspO4odkLaQgrnYn++81i9WaXgyNdHdtA=="
-      },
-      "Selenium.WebDriver.GeckoDriver": {
-        "type": "Direct",
-        "requested": "[0.35.0, )",
-        "resolved": "0.35.0",
-        "contentHash": "+s9jC3IhtNmWloGv9pQ+TqNeRYM0cCPQrFicpXNcyP08KI/WjTRPE0b0M6Fc8I3FEGj98EBQjQBwUlAiQpMW0w=="
-      },
-      "StyleCop.Analyzers": {
-        "type": "Direct",
-        "requested": "[1.1.118, )",
-        "resolved": "1.1.118",
-        "contentHash": "Onx6ovGSqXSK07n/0eM3ZusiNdB6cIlJdabQhWGgJp3Vooy9AaLS/tigeybOJAobqbtggTamoWndz72JscZBvw=="
-      },
-      "Microsoft.Build.Tasks.Git": {
-        "type": "Transitive",
-        "resolved": "8.0.0",
-        "contentHash": "bZKfSIKJRXLTuSzLudMFte/8CempWjVamNUR5eHJizsy+iuOuO/k2gnh7W0dHJmYY0tBf+gUErfluCv5mySAOQ=="
-      },
-      "Microsoft.CSharp": {
-        "type": "Transitive",
-        "resolved": "4.7.0",
-        "contentHash": "pTj+D3uJWyN3My70i2Hqo+OXixq3Os2D1nJ2x92FFo6sk8fYS1m1WLNTs0Dc1uPaViH0YvEEwvzddQ7y4rhXmA=="
-      },
-      "Microsoft.Identity.Client": {
-        "type": "Transitive",
-        "resolved": "4.56.0",
-        "contentHash": "rr4zbidvHy9r4NvOAs5hdd964Ao2A0pAeFBJKR95u1CJAVzbd1p6tPTXUZ+5ld0cfThiVSGvz6UHwY6JjraTpA==",
-        "dependencies": {
-          "Microsoft.IdentityModel.Abstractions": "6.22.0"
-        }
-      },
-      "Microsoft.IdentityModel.Abstractions": {
-        "type": "Transitive",
-        "resolved": "6.22.0",
-        "contentHash": "iI+9V+2ciCrbheeLjpmjcqCnhy+r6yCoEcid3nkoFWerHgjVuT6CPM4HODUTtUPe1uwks4wcnAujJ8u+IKogHQ=="
-      },
-      "Microsoft.SourceLink.Common": {
-        "type": "Transitive",
-        "resolved": "8.0.0",
-        "contentHash": "dk9JPxTCIevS75HyEQ0E4OVAFhB2N+V9ShCXf8Q6FkUQZDkgLI12y679Nym1YqsiSysuQskT7Z+6nUf3yab6Vw=="
-      },
-      "ocarambalite": {
-        "type": "Project",
-        "dependencies": {
-          "Microsoft.CSharp": "[4.7.0, )",
-          "NLog": "[5.3.4, )",
-          "Selenium.Support": "[4.4.0, )",
-          "Selenium.WebDriver": "[4.4.0, )"
-        }
-      }
-    },
     "net8.0": {
       "Microsoft.Extensions.Configuration": {
         "type": "Direct",
@@ -191,11 +94,11 @@
       },
       "NLog.Web.AspNetCore": {
         "type": "Direct",
-        "requested": "[5.3.14, )",
-        "resolved": "5.3.14",
-        "contentHash": "cc6VM07vrRI73JhIhC2LWyDKgFtgNfXf5UmJ4841qhp81nCN5CmOm3/YIA0YgStOWihrM3jVNlNQtDgsZ6wrJg==",
+        "requested": "[5.3.15, )",
+        "resolved": "5.3.15",
+        "contentHash": "Am5ZJ1htYf6K3QJ7stIbKK3CTGw1BOyGtucWxHoDScM/U1w6nE/zmYfZTfj7jRIKuZwbwpBqtRGZJsUcMGUvfA==",
         "dependencies": {
-          "NLog.Extensions.Logging": "5.3.13"
+          "NLog.Extensions.Logging": "5.3.15"
         }
       },
       "Selenium.Support": {
@@ -602,8 +505,8 @@
       },
       "NLog.Extensions.Logging": {
         "type": "Transitive",
-        "resolved": "5.3.13",
-        "contentHash": "i1n5+ZB6Hd5na2eWj7zjeIH4SS3qzmSgoSIGpxp3B0lJ8p/Cmg59NrDE9GReAAmKbQVbP0d/+e3S/6j79Tnaww==",
+        "resolved": "5.3.15",
+        "contentHash": "BSCkfWjaTesw4/k8Ujj3YdqtDzd2iCRYIOwoHume7aaJFz4/gLbemA5MLgkAwtCxcd8nGBGfaEkeIzQPGxArLg==",
         "dependencies": {
           "Microsoft.Extensions.Configuration.Abstractions": "8.0.0",
           "Microsoft.Extensions.Logging": "8.0.0",
