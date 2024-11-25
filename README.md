@@ -4,7 +4,6 @@
 **Cross-Platform C# Framework to automate tests using Selenium WebDriver**
 
 [![Ocaramba Templates](https://img.shields.io/badge/get-Ocaramba_Templates-green.svg?color=4BC21F)](https://marketplace.visualstudio.com/items?itemName=Ocaramba.Ocaramba1)
-[![Build status](https://ci.appveyor.com/api/projects/status/p8p3bndotyknv7rk?svg=true)](https://ci.appveyor.com/project/ObjectivityAdminsTeam/ocaramba)
 [![Build status](https://github.com/Accenture/Ocaramba/actions/workflows/github-actions.yml/badge.svg)
 [![BrowserStack Status](https://automate.browserstack.com/badge.svg?badge_key=LzcxRG9pYjdqMWF0SG5OTzVYcHJmdkVDVzdzVEZvSnUwNHB6MDJjRkFtZz0tLVQ5NHNtQkllOFQzOXl6T3BiOHFzZFE9PQ==--be558d9ee42bf47757e26a14b2848c8eccecf751)](https://automate.browserstack.com/public-build/LzcxRG9pYjdqMWF0SG5OTzVYcHJmdkVDVzdzVEZvSnUwNHB6MDJjRkFtZz0tLVQ5NHNtQkllOFQzOXl6T3BiOHFzZFE9PQ==--be558d9ee42bf47757e26a14b2848c8eccecf751)
 [![Build Status](https://saucelabs.com/buildstatus/jraczek)](https://saucelabs.com/beta/builds/8de234710c7c46f1b5d0e9c9438e5d06)
