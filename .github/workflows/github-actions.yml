@@ -151,6 +151,7 @@ jobs:
     - run: dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
     - uses: browser-actions/setup-chrome@v1
     - run: chrome --version
+    - uses: nanasess/setup-chromedriver@v2
     - shell: pwsh
       if: true
       env:
