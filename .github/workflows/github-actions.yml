@@ -156,10 +156,10 @@ jobs:
         sed -i '/Documentation/,+5 d' ./Ocaramba.sln     
     - run: dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
     - shell: pwsh
-      if: false
+      if: true
       env:
-        MAPPED_ENV_BROWSERSTACKKEY: ${{ env.browserstackkey }}
-        MAPPED_ENV_BROWSERSTACKUSER: ${{ env.browserstackuser }}
+        MAPPED_ENV_BROWSERSTACKKEY: ${{ secrets.BROWSERSTACKKEY }}
+        MAPPED_ENV_BROWSERSTACKUSER: ${{ secrets.BROWSERSTACKUSER }}
         MAPPED_ENV_TESTINGBOTKEY: ${{ env.testingbotkey }}
         MAPPED_ENV_TESTINGBOTSECRET: ${{ env.testingbotsecret }}
         MAPPED_ENV_SAUCELABSACCESSKEY: ${{ env.saucelabsaccessKey }}
