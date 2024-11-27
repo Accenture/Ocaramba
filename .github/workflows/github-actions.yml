@@ -115,6 +115,10 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - run: find . -name '*.csproj' -exec sed -i -e 's/109.0.5414.7400/${{ env.ChromeDriverVersion }}/g' {} \;
+    - uses: browser-actions/setup-chrome@v1
+      if: true
+    - run: chrome --version
+    - uses: nanasess/setup-chromedriver@v2    
     - run: |
         ls
         
