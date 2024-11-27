@@ -134,7 +134,7 @@ jobs:
       run: ./ExecutingTestsOnLinuxAzure.ps1
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/linux@v2
-      if: false
+      if: true
       with:
         files: |
           /home/runner/work/Ocaramba/Ocaramba/TestResults/Ocaramba.Tests.netcoreapp.xml
