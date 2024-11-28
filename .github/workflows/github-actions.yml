@@ -165,8 +165,19 @@ jobs:
         
         sed -i '/Documentation/,+5 d' ./Ocaramba.sln     
     - run: dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
-    - run: chmod +x ./chromedriver.sh
-    - run: ./chromedriver.sh
+    - name: 'BrowserStack Env Setup'
+      uses: 'browserstack/github-actions/setup-env@master'
+      with:
+        username:  ${{ secrets.BROWSERSTACKUSER }}
+        access-key: ${{ secrets.BROWSERSTACKKEY }}
+        build-name: 'BUILD_INFO'
+        project-name: 'REPO_NAME'
+    - name: 'Start BrowserStackLocal Tunnel'
+      uses: 'browserstack/github-actions/setup-local@master'
+      with:
+        local-testing: 'start'
+        local-logging-level: 'all-logs'
+        local-identifier: 'random'
     - shell: pwsh
       if: true
       env:
@@ -177,6 +188,12 @@ jobs:
         MAPPED_ENV_SAUCELABSACCESSKEY: ${{ env.saucelabsaccessKey }}
         MAPPED_ENV_SAUCELABSUSERNAME: ${{ env.saucelabsusername }}
       run: ./ExecutingTestsOnLinuxBrowserStackGithubActions.ps1
+    - name: 'Start BrowserStackLocal Tunnel'
+      uses: 'browserstack/github-actions/setup-local@master'
+      with:
+        local-testing: 'start'
+        local-logging-level: 'all-logs'
+        local-identifier: 'random'
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/linux@v2
       if: false
