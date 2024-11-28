@@ -165,6 +165,7 @@ jobs:
         
         sed -i '/Documentation/,+5 d' ./Ocaramba.sln     
     - run: dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
+    - run: chmod +x ./chromedriver.sh
     - run: ./chromedriver.sh
     - shell: pwsh
       if: true
