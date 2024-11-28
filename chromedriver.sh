@@ -8,6 +8,13 @@
 # This is a symlink; version-suffixed binaries live alongside it.
 destlink=${HOME}/local/bin/chromedriver
 
+# Install jq if not installed
+if ! command -v jq &> /dev/null; then
+    echo "jq not found, installing..."
+    sudo apt-get update
+    sudo apt-get install -y jq
+fi
+
 # The destination can be overridden via the command line.
 if [ $# -ge 1 ]; then
     if [ "$1" = '-h' ]; then
