@@ -125,7 +125,7 @@ jobs:
       if: true
       with:
         files: |
-          /home/runner/work/TestResults/Ocaramba.Tests.Docker.xml
+          /home/runner/**/TestResults/*.xml
   test_Stage_RunTestsOnLinux:
     runs-on: ubuntu-latest
     steps:
@@ -153,7 +153,7 @@ jobs:
       if: true
       with:
         files: |
-          /home/runner/work/Ocaramba/Ocaramba/TestResults/Ocaramba.Tests.netcoreapp.xml
+          /home/runner/work/**/TestResults/*.xml
         check_name: ExecutingTestsOnLinuxAzure 
   test_Stage_RunTestsOnLinuxBrowserStack:
     runs-on: ubuntu-latest
@@ -188,7 +188,7 @@ jobs:
       if: false
       with:
         files: |
-          /home/runner/work/Ocaramba/Ocaramba/TestResults/BrowserStacknetcoreapp.xml
+          /home/runner/work/**/TestResults/*.xml
         check_name: test_Stage_RunTestsOnLinuxBrowserStack           
   test_Stage_RunTestsOnWindowsCore1:
     runs-on: windows-latest
@@ -209,7 +209,7 @@ jobs:
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
       if: always()
       with:
-        files: ${{ env.TestResultsDirWindows }}\Ocaramba.Tests.netcoreapp.trx
+        files: ${{ env.TestResultsDirWindows }}\*.trx
         check_name: ExecutingTestsOnWindowsGithubActions1  
     - name: Zip artifact
       run: Compress-Archive -Path D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.NUnitExtentReports\bin\Release\net8.0\TestOutput -Destination ExtentReports_${{ github.run_id }}.zip
@@ -238,8 +238,7 @@ jobs:
       if: always()
       with:
         files: |
-          ${{ env.TestResultsDirWindows }}\Ocaramba.Tests.netcoreapp.xml
-          ${{ env.TestResultsDirWindows }}\Ocaramba.Tests.EdgeChrominum.xml
+          ${{ env.TestResultsDirWindows }}\*.xml
         check_name: ExecutingTestsOnWindowsGithubActions2  
   test_Stage_RunTestsOnWindowsFramework:
     runs-on: windows-latest
@@ -259,7 +258,7 @@ jobs:
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
       if: always()
       with:
-        files: ${{ env.TestResultsDirWindows }}\Ocaramba.Tests.net4.xml
+        files: ${{ env.TestResultsDirWindows }}\*.xml
         check_name: ExecutingTestsOnWindowsGithubActions3  
   test_Stage_RunTestsOnWindowsBrowserStack:
     runs-on: windows-latest
@@ -286,7 +285,7 @@ jobs:
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
       if: always()
       with:
-        files: ${{ env.TestResultsDirWindows }}\Ocaramba.Tests.BrowserStack.xml
+        files: ${{ env.TestResultsDirWindows }}\*.xml
         check_name: ExecutingTestsOnWindowsGithubActions4  
   test_Stage_RunTestsSeleniumGrid:
     runs-on: windows-latest
@@ -307,8 +306,7 @@ jobs:
       if: always()
       with:
         files: |
-          ${{ env.TestResultsDirWindows }}\Ocaramba.Tests.NUnitGrid.xml
-          ${{ env.TestResultsDirWindows }}\Ocaramba.Tests.CloudProviderCrossBrowserGrid.xml
+          ${{ env.TestResultsDirWindows }}\*.xml
         check_name: ExecutingTestsOnWindowsGithubActions5         
   test_Stage_RunTestsOnWindowsSaucelabs:
     runs-on: windows-latest
@@ -336,7 +334,7 @@ jobs:
       if: always()
       with:
         files: |
-          ${{ env.TestResultsDirWindows }}\Ocaramba.Tests.saucelabsnet472.xml
+          ${{ env.TestResultsDirWindows }}\*.xml
         check_name: ExecutingTestsOnWindowsGithubActions6  
   release_Stage_PublishNuget:
     runs-on: windows-latest
