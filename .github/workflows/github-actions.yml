@@ -108,6 +108,7 @@ jobs:
           context: .
           push: true
           tags: ocaramba/selenium:latest
+      if: startsWith(github.ref, 'refs/tags/')
     - name: Install Docker Compose 
       run: | 
         sudo apt-get update 
