@@ -94,19 +94,19 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - run: docker buildx build -f Dockerfile -t ***/selenium:latest
-      if: false
+      if: true
     - run: docker push -t Dockerfile
-      if: false
+      if: true
     - name: Install Docker Compose 
       run: | 
         sudo apt-get update 
         sudo apt-get install docker-compose -y
     - run: docker-compose -f docker-compose.yml up -d
     - run: ./ExecutingTestsOnDockerGithubActions.ps1
-      if: false
+      if: true
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/linux@v2
-      if: false
+      if: true
       with:
         files: |
           /home/runner/work/Ocaramba/Ocaramba/TestResults/Ocaramba.Tests.Docker.xml
