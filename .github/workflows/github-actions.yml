@@ -125,7 +125,7 @@ jobs:
       if: true
       with:
         files: |
-          /home/runner/work/Ocaramba/Ocaramba/TestResults/Ocaramba.Tests.Docker.xml
+          /home/runner/work/TestResults/Ocaramba.Tests.Docker.xml
   test_Stage_RunTestsOnLinux:
     runs-on: ubuntu-latest
     steps:
