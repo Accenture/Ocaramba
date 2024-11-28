@@ -16,13 +16,30 @@ RUN apt-get update && apt-get install -y gnupg \
 # Chrome driver
 #=========
 RUN CHROMEVER=$(google-chrome --product-version | grep -oE "[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+") \
-    && DRIVERVER=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROMEVER") \
-    && if [ -z "$DRIVERVER" ]; then \
-        echo "Failed to get ChromeDriver version, falling back to latest"; \
-        DRIVERVER=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE"); \
+    && major=$(echo "$CHROMEVER" | cut -d. -f 1) \
+    && minor=$(echo "$CHROMEVER" | cut -d. -f 2) \
+    && build=$(echo "$CHROMEVER" | cut -d. -f 3) \
+    && if [ "$major" -ge 115 ]; then \
+        re=^${major}\.${minor}\.${build}\.; \
+        url=$(wget --quiet -O- https://googlechromelabs.github.io/chrome-for-testing/known-good-versions-with-downloads.json | \
+              jq -r '.versions[] | select(.version | test("'"${re}"'")) | .downloads.chromedriver[] | select(.platform == "linux64") | .url' | \
+              tail -1); \
+        if [ -z "$url" ]; then \
+            echo "Failed finding latest release matching /${re}/"; \
+            exit 1; \
+        fi; \
+        rel=$(echo "$url" | sed -nre 's!.*/([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)/.*!\1!p'); \
+        srcfile=chromedriver-linux64/chromedriver; \
+    else \
+        short=$(echo "$build" | sed -re 's/\.[0-9]+$//'); \
+        rel=$(wget --quiet -O- "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_${short}"); \
+        url=https://chromedriver.storage.googleapis.com/${rel}/chromedriver_linux64.zip; \
+        srcfile=chromedriver; \
     fi \
-    && wget -q --continue -P /chromedriver "http://chromedriver.storage.googleapis.com/$DRIVERVER/chromedriver_linux64.zip" \
-    && unzip /chromedriver/chromedriver* -d /chromedriver
+    && wget -q --continue -P /chromedriver "$url" \
+    && unzip /chromedriver/chromedriver* -d /chromedriver \
+    && mv /chromedriver/$srcfile /usr/local/bin/chromedriver \
+    && chmod +x /usr/local/bin/chromedriver
 #=========
 # Firefox
 #=========
