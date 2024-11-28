@@ -125,7 +125,7 @@ jobs:
       if: true
       with:
         files: |
-          /home/runner/**/*.xml
+          /home/runner/**/*.trx
   test_Stage_RunTestsOnLinux:
     runs-on: ubuntu-latest
     steps:
