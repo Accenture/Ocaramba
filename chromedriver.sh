@@ -67,5 +67,9 @@ unzip -q "${tempdir}/chromedriver.zip" -d "${tempdir}"
 mkdir -p "$(dirname "${destlink}")"
 
 # Move the ChromeDriver to the destination directory
-mv "${tempdir}/chromedriver-linux64/chromedriver" "${destlink}.${cver}"
+if [ -f "${tempdir}/chromedriver" ]; then
+    mv "${tempdir}/chromedriver" "${destlink}.${cver}"
+else
+    mv "${tempdir}/chromedriver-linux64/chromedriver" "${destlink}.${cver}"
+fi
 ln -sf "${destlink}.${cver}" "${destlink}"
