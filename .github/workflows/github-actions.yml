@@ -93,7 +93,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - run: docker buildx build -f Dockerfile -t ***/selenium:latest .
+    - run: docker buildx build -f Dockerfile -t ocaramba/selenium:latest .
       if: true
     - run: docker push -t Dockerfile
       if: true
