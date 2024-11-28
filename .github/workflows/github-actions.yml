@@ -125,7 +125,7 @@ jobs:
       if: true
       with:
         files: |
-          /home/runner/**/*.trx
+          /home/runner/**/Ocaramba.Tests.Docker.trx
   test_Stage_RunTestsOnLinux:
     runs-on: ubuntu-latest
     steps:
@@ -137,13 +137,9 @@ jobs:
     - uses: nanasess/setup-chromedriver@v2    
     - run: |
         ls
-        
         export ASPNETCORE_ENVIRONMENT=Linux
-        
         echo $ASPNETCORE_ENVIRONMENT
-        
         sudo apt-get install google-chrome-stable
-        
         sed -i '/Documentation/,+5 d' ./Ocaramba.sln
     - run: dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
     - shell: pwsh
