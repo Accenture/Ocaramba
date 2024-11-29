@@ -15,8 +15,8 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-	<PackageReference Include="Selenium.Support" Version="4.4.0" />
-    <PackageReference Include="Selenium.WebDriver" Version="4.4.0" />
+	<PackageReference Include="Selenium.Support" Version="4.27.0" />
+    <PackageReference Include="Selenium.WebDriver" Version="4.27.0" />
 	<PackageReference Include="NLog" Version="5.3.4" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="131.0.6778.8500" />
     <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.35.0" />

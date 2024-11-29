@@ -20,7 +20,7 @@ namespace Ocaramba.Tests.NUnit.Tests
 
             dropdownPage.SelectByIndex(1);
 
-            Assert.AreEqual(dropdownPage.SelectedOption(), "Option 1");
+            Assert.That(dropdownPage.SelectedOption(), Is.EqualTo("Option 1"));
         }
 
         [Test]

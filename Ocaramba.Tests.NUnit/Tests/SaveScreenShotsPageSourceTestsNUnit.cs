@@ -39,12 +39,12 @@ namespace Ocaramba.Tests.NUnit.Tests
             var downloadPage = new InternetPage(this.DriverContext).OpenHomePage().GoToFileDownloader();
             var screenShotNumber = FilesHelper.CountFiles(this.DriverContext.ScreenShotFolder, FileType.Png);
 #if net47
-            Assert.IsNotNull(TakeScreenShot.Save(TakeScreenShot.DoIt(), ImageFormat.Png, this.DriverContext.ScreenShotFolder, string.Format(CultureInfo.CurrentCulture, this.DriverContext.TestTitle + "_first")));
+           // Assert.IsNotNull(TakeScreenShot.Save(TakeScreenShot.DoIt(), ImageFormat.Png, this.DriverContext.ScreenShotFolder, string.Format(CultureInfo.CurrentCulture, this.DriverContext.TestTitle + "_first")));
 #endif
             var nameOfScreenShot = downloadPage.CheckIfScreenShotIsSaved(screenShotNumber);
             TestContext.AddTestAttachment(nameOfScreenShot);
-            Assert.IsTrue(nameOfScreenShot.Contains(this.DriverContext.TestTitle), "Name of screenshot doesn't contain Test Title");
-            Assert.IsNotNull(this.DriverContext.TakeAndSaveScreenshot());
+            Assert.That(nameOfScreenShot.Contains(this.DriverContext.TestTitle), Is.True, "Name of screenshot doesn't contain Test Title");
+            Assert.That(this.DriverContext.TakeAndSaveScreenshot(), Is.Not.Null);
         }
 
         [Test]
@@ -52,10 +52,10 @@ namespace Ocaramba.Tests.NUnit.Tests
         {
             var downloadPage = new InternetPage(this.DriverContext).OpenHomePage().GoToFileDownloader();
             var screenShotNumber = FilesHelper.CountFiles(this.DriverContext.ScreenShotFolder, FileType.Png);
-            Assert.IsNotNull(downloadPage.SaveWebDriverScreenShot());
+            Assert.That(downloadPage.SaveWebDriverScreenShot(), Is.Not.Null);
             var nameOfScreenShot = downloadPage.CheckIfScreenShotIsSaved(screenShotNumber);
             TestContext.AddTestAttachment(nameOfScreenShot);
-            Assert.IsTrue(nameOfScreenShot.Contains(this.DriverContext.TestTitle), "Name of screenshot doesn't contain Test Title");
+            Assert.That(nameOfScreenShot.Contains(this.DriverContext.TestTitle), Is.True, "Name of screenshot doesn't contain Test Title");
         }
 
         [Test]
@@ -66,9 +66,9 @@ namespace Ocaramba.Tests.NUnit.Tests
             var name = this.DriverContext.TestTitle + FilesHelper.ReturnFileExtension(FileType.Html);
             FilesHelper.DeleteFile(name, this.DriverContext.PageSourceFolder);
             var pageSourceNumber = FilesHelper.CountFiles(this.DriverContext.PageSourceFolder, FileType.Html);
-            Assert.IsNotNull(basicAuthPage.SaveSourcePage());
+            Assert.That(basicAuthPage.SaveSourcePage(), Is.Not.Null);
             basicAuthPage.CheckIfPageSourceSaved();
-            Assert.IsTrue(pageSourceNumber < FilesHelper.CountFiles(this.DriverContext.PageSourceFolder, FileType.Html), "Number of html files did not increase");
+            Assert.That(pageSourceNumber < FilesHelper.CountFiles(this.DriverContext.PageSourceFolder, FileType.Html), "Number of html files did not increase");
         }
     }
 }

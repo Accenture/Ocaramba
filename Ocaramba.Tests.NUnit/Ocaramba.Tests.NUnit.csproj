@@ -11,20 +11,24 @@
     <PackageReference Include="NLog" Version="5.3.4" />
     
     <PackageReference Include="NPOI" Version="2.7.2" />
-    <PackageReference Include="NUnit" Version="3.13.3" />
+    <PackageReference Include="NUnit" Version="4.2.2" />
     <PackageReference Include="NUnit.Runners" Version="3.12.0" />
+    <PackageReference Include="System.Text.Json" Version="9.0.0" />
+    <PackageReference Include="System.Text.Encodings.Web" Version="9.0.0" />
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.6.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-	<PackageReference Include="Selenium.Support" Version="4.4.0" />
-    <PackageReference Include="Selenium.WebDriver" Version="4.4.0" />
+	<PackageReference Include="Selenium.Support" Version="4.27.0" />
+    <PackageReference Include="Selenium.WebDriver" Version="4.27.0" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="131.0.6778.8500" />
     <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.35.0" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net472'">
 	<Reference Include="System.Configuration" />
+	
  </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">

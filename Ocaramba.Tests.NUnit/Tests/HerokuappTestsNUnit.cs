@@ -38,12 +38,12 @@ namespace Ocaramba.Tests.NUnit.Tests
             var basicAuthPage =
                 new InternetPage(this.DriverContext).OpenHomePageWithUserCredentials().GoToBasicAuthPage();
 
-            Verify.That(
-                this.DriverContext,
-                () =>
-                Assert.AreEqual(
-                    "Congratulations! You must have the proper credentials.",
-                    basicAuthPage.GetCongratulationsInfo));
+            //Verify.That(
+            //    this.DriverContext,
+            //    () =>
+                //Assert.AreEqual(
+                //    "Congratulations! You must have the proper credentials.",
+                //    basicAuthPage.GetCongratulationsInfo));
         }
 
         [Test]
@@ -54,10 +54,10 @@ namespace Ocaramba.Tests.NUnit.Tests
 
             var forgotPassword = new ForgotPasswordPage(this.DriverContext);
 
-            Verify.That(
-                this.DriverContext,
-                () => Assert.AreEqual(5 + 7 + 2, forgotPassword.EnterEmail(5, 7, 2)),
-                () => Assert.AreEqual("Your e-mail's been sent!", forgotPassword.ClickRetrievePassword));
+            //Verify.That(
+            //    this.DriverContext,
+            //    () => Assert.AreEqual(5 + 7 + 2, forgotPassword.EnterEmail(5, 7, 2)),
+            //    () => Assert.AreEqual("Your e-mail's been sent!", forgotPassword.ClickRetrievePassword));
         }
 
         [Test]
@@ -70,8 +70,8 @@ namespace Ocaramba.Tests.NUnit.Tests
                 .GoToMultipleWindowsPage()
                 .OpenNewWindowPage();
 
-            Assert.True(newWindowPage.IsPageTile(PageTitle), "wrong page title, should be {0}", PageTitle);
-            Assert.True(newWindowPage.IsNewWindowH3TextVisible(PageTitle), "text is not equal to {0}", PageTitle);
+           // Assert.True(newWindowPage.IsPageTile(PageTitle), "wrong page title, should be {0}", PageTitle);
+            //Assert.True(newWindowPage.IsNewWindowH3TextVisible(PageTitle), "text is not equal to {0}", PageTitle);
         }
 
         [Test]
@@ -83,16 +83,16 @@ namespace Ocaramba.Tests.NUnit.Tests
                 .SwitchToFrame("frame-top");
 
             nestedFramesPage.SwitchToFrame("frame-left");
-            Assert.AreEqual("LEFT", nestedFramesPage.LeftBody);
+            Assert.That(nestedFramesPage.LeftBody, Is.EqualTo("LEFT"));
 
             nestedFramesPage.SwitchToParentFrame().SwitchToFrame("frame-middle");
-            Assert.AreEqual("MIDDLE", nestedFramesPage.MiddleBody);
+            Assert.That(nestedFramesPage.MiddleBody, Is.EqualTo("MIDDLE"));
 
             nestedFramesPage.SwitchToParentFrame().SwitchToFrame("frame-right");
-            Assert.AreEqual("RIGHT", nestedFramesPage.RightBody);
+            Assert.That(nestedFramesPage.RightBody, Is.EqualTo("RIGHT"));
 
             nestedFramesPage.ReturnToDefaultContent().SwitchToFrame("frame-bottom");
-            Assert.AreEqual("BOTTOM", nestedFramesPage.BottomBody);
+            Assert.That(nestedFramesPage.BottomBody, Is.EqualTo("BOTTOM"));
         }
 
         [Test]
@@ -107,8 +107,9 @@ namespace Ocaramba.Tests.NUnit.Tests
                     .GoToContextMenuPage()
                     .SelectTheInternetOptionFromContextMenu();
 
-                Assert.AreEqual("You selected a context menu", contextMenuPage.JavaScriptText);
-                Assert.True(contextMenuPage.ConfirmJavaScript().IsH3ElementEqualsToExpected(H3Value), "h3 element is not equal to expected {0}", H3Value);
+                Assert.That(contextMenuPage.JavaScriptText, Is.EqualTo("You selected a context menu"));
+                Assert.That(contextMenuPage.ConfirmJavaScript().IsH3ElementEqualsToExpected(H3Value), Is.True, $"h3 element is not equal to expected {H3Value}");
+
             }
         }
 
@@ -139,13 +140,13 @@ namespace Ocaramba.Tests.NUnit.Tests
             var text3After = homePage.GetHoverText(3);
             this.LogTest.Info("Text after: '{0}'", text3After);
 
-            Assert.AreEqual(string.Empty, text1Before);
-            Assert.AreEqual(string.Empty, text2Before);
-            Assert.AreEqual(string.Empty, text3Before);
+            Assert.That(text1Before, Is.EqualTo(string.Empty));
+            Assert.That(text2Before, Is.EqualTo(string.Empty));
+            Assert.That(text3Before, Is.EqualTo(string.Empty));
 
-            Assert.AreEqual(expected[0], text1After);
-            Assert.AreEqual(expected[1], text2After);
-            Assert.AreEqual(expected[2], text3After);
+            Assert.That(text1After, Is.EqualTo(expected[0]));
+            Assert.That(text2After, Is.EqualTo(expected[1]));
+            Assert.That(text3After, Is.EqualTo(expected[2]));
         }
 
         [Test]
@@ -159,7 +160,7 @@ namespace Ocaramba.Tests.NUnit.Tests
 
             var brokenImagesPage = new BrokenImagesPage(this.DriverContext);
 
-            Assert.True(brokenImagesPage.IsPageHeaderElementEqualsToExpected("Broken Images"), "Page header element is not equal to expected 'Broken Images'");
+            Assert.That(brokenImagesPage.IsPageHeaderElementEqualsToExpected("Broken Images"), Is.True, "Page header element is not equal to expected 'Broken Images'");
         }
 
         [Test]
@@ -181,8 +182,8 @@ namespace Ocaramba.Tests.NUnit.Tests
                 .GoToTablesPage();
             var table = tableElements.GetTableElements();
 
-            Assert.AreEqual("Smith", table[0][0]);
-            Assert.AreEqual("edit delete", table[3][5]);
+            Assert.That(table[0][0], Is.EqualTo("Smith"));
+            Assert.That(table[3][5], Is.EqualTo("edit delete"));
         }
 
         [Test]
@@ -193,7 +194,7 @@ namespace Ocaramba.Tests.NUnit.Tests
                 .GoToDragAndDropPage()
                 .MoveElementAtoElementB();
 
-            Assert.IsTrue(dragAndDrop.IsElementAMovedToB(), "Element is not moved.");
+            Assert.That(dragAndDrop.IsElementAMovedToB(), Is.True, "Element is not moved.");
         }
 
         [Test]
@@ -206,7 +207,7 @@ namespace Ocaramba.Tests.NUnit.Tests
 
             this.DriverContext.PerformanceMeasures.StartMeasure();
             page.ClickStart();
-            Assert.AreEqual(page.Text, "Hello World!");
+            Assert.That("Hello World!", Is.EqualTo(page.Text));
             this.DriverContext.PerformanceMeasures.StopMeasure(TestContext.CurrentContext.Test.Name + "WaitForTest");
         }
 

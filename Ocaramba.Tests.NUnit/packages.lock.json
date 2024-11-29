@@ -40,9 +40,14 @@
       },
       "NUnit": {
         "type": "Direct",
-        "requested": "[3.13.3, )",
-        "resolved": "3.13.3",
-        "contentHash": "KNPDpls6EfHwC3+nnA67fh5wpxeLb3VLFAfLxrug6JMYDLHH6InaQIWR7Sc3y75d/9IKzMksH/gi08W7XWbmnQ=="
+        "requested": "[4.2.2, )",
+        "resolved": "4.2.2",
+        "contentHash": "mon0OPko28yZ/foVXrhiUvq1LReaGsBdziumyyYGxV/pOE4q92fuYeN+AF+gEU5pCjzykcdBt5l7xobTaiBjsg==",
+        "dependencies": {
+          "System.Memory": "4.5.5",
+          "System.Threading.Tasks.Extensions": "4.5.4",
+          "System.ValueTuple": "4.5.0"
+        }
       },
       "NUnit.Runners": {
         "type": "Direct",
@@ -61,18 +66,21 @@
       },
       "Selenium.Support": {
         "type": "Direct",
-        "requested": "[4.4.0, )",
-        "resolved": "4.4.0",
-        "contentHash": "nxXOJVT2iV9qcCJhESRCrX3RnKF+O+71JORSIm6J5zOrLFsyVaGA37Jr1chFHO3NQ+MNrMM1vHLlgEPFmWPwgQ==",
+        "requested": "[4.27.0, )",
+        "resolved": "4.27.0",
+        "contentHash": "vPsJmYP+ONxutAmkpSc2cXJCO/eHjP+4dccx/M9mGntOZuVjM0DOzyH2cvX8tDoQ18yUq8l2P4rA3a278Gp2KQ==",
         "dependencies": {
-          "Selenium.WebDriver": "4.4.0"
+          "Selenium.WebDriver": "4.27.0"
         }
       },
       "Selenium.WebDriver": {
         "type": "Direct",
-        "requested": "[4.4.0, )",
-        "resolved": "4.4.0",
-        "contentHash": "gg/fFUW+SQEdOMaZvkKSau6m4xbMG2qBW6cCW6nGW1CtO0coA8OLYpHcQLpsKcc6q68i/Uq1wjtiVfiNXykJUQ=="
+        "requested": "[4.27.0, )",
+        "resolved": "4.27.0",
+        "contentHash": "bMIpqwpBfYLa1lh8gPVa6A1i9LeWNsfc2mR9why0DutEKI7ck3GVxzco1bB/8bv+7IA6rk4sR9WpZLRUnH/AAw==",
+        "dependencies": {
+          "System.Text.Json": "8.0.5"
+        }
       },
       "Selenium.WebDriver.ChromeDriver": {
         "type": "Direct",
@@ -85,6 +93,39 @@
         "requested": "[0.35.0, )",
         "resolved": "0.35.0",
         "contentHash": "+s9jC3IhtNmWloGv9pQ+TqNeRYM0cCPQrFicpXNcyP08KI/WjTRPE0b0M6Fc8I3FEGj98EBQjQBwUlAiQpMW0w=="
+      },
+      "System.Runtime.CompilerServices.Unsafe": {
+        "type": "Direct",
+        "requested": "[6.0.0, )",
+        "resolved": "6.0.0",
+        "contentHash": "/iUeP3tq1S0XdNNoMz5C9twLSrM/TH+qElHkXWaPvuNOt+99G75NrV0OS2EqHx5wMN7popYjpc8oTjC1y16DLg=="
+      },
+      "System.Text.Encodings.Web": {
+        "type": "Direct",
+        "requested": "[9.0.0, )",
+        "resolved": "9.0.0",
+        "contentHash": "e2hMgAErLbKyUUwt18qSBf9T5Y+SFAL3ZedM8fLupkVj8Rj2PZ9oxQ37XX2LF8fTO1wNIxvKpihD7Of7D/NxZw==",
+        "dependencies": {
+          "System.Buffers": "4.5.1",
+          "System.Memory": "4.5.5",
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
+        }
+      },
+      "System.Text.Json": {
+        "type": "Direct",
+        "requested": "[9.0.0, )",
+        "resolved": "9.0.0",
+        "contentHash": "js7+qAu/9mQvnhA4EfGMZNEzXtJCDxgkgj8ohuxq/Qxv+R56G+ljefhiJHOxTNiw54q8vmABCWUwkMulNdlZ4A==",
+        "dependencies": {
+          "Microsoft.Bcl.AsyncInterfaces": "9.0.0",
+          "System.Buffers": "4.5.1",
+          "System.IO.Pipelines": "9.0.0",
+          "System.Memory": "4.5.5",
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0",
+          "System.Text.Encodings.Web": "9.0.0",
+          "System.Threading.Tasks.Extensions": "4.5.4",
+          "System.ValueTuple": "4.5.0"
+        }
       },
       "BouncyCastle.Cryptography": {
         "type": "Transitive",
@@ -110,6 +151,14 @@
         "contentHash": "PSrHBVMf41SjbhlnpOMnoir8YgkyEJ6/nwxvjYpH+vJCexNcx2ms6zRww5yLVqLet1xLJgZ39swtKRTLhWdnAw==",
         "dependencies": {
           "System.ValueTuple": "4.4.0"
+        }
+      },
+      "Microsoft.Bcl.AsyncInterfaces": {
+        "type": "Transitive",
+        "resolved": "9.0.0",
+        "contentHash": "owmu2Cr3IQ8yQiBleBHlGk8dSQ12oaF2e7TpzwJKEl4m84kkZJjEY1n33L67Y3zM5jPOjmmbdHjbfiL0RqcMRQ==",
+        "dependencies": {
+          "System.Threading.Tasks.Extensions": "4.5.4"
         }
       },
       "Microsoft.CSharp": {
@@ -203,6 +252,16 @@
         "resolved": "4.5.1",
         "contentHash": "Rw7ijyl1qqRS0YQD/WycNst8hUUMgrMH4FCn1nNm27M4VxchZ1js3fVjQaANHO5f3sN4isvP4a+Met9Y4YomAg=="
       },
+      "System.IO.Pipelines": {
+        "type": "Transitive",
+        "resolved": "9.0.0",
+        "contentHash": "eA3cinogwaNB4jdjQHOP3Z3EuyiDII7MT35jgtnsA4vkn0LUrrSHsU0nzHTzFzmaFYeKV7MYyMxOocFzsBHpTw==",
+        "dependencies": {
+          "System.Buffers": "4.5.1",
+          "System.Memory": "4.5.5",
+          "System.Threading.Tasks.Extensions": "4.5.4"
+        }
+      },
       "System.Memory": {
         "type": "Transitive",
         "resolved": "4.5.5",
@@ -217,11 +276,6 @@
         "type": "Transitive",
         "resolved": "4.5.0",
         "contentHash": "QQTlPTl06J/iiDbJCiepZ4H//BVraReU4O4EoRw1U02H5TLUIT7xn3GnDp9AXPSlJUDyFs4uWjWafNX6WrAojQ=="
-      },
-      "System.Runtime.CompilerServices.Unsafe": {
-        "type": "Transitive",
-        "resolved": "5.0.0",
-        "contentHash": "ZD9TMpsmYJLrxbbmdvhwt9YEgG5WntEnZ/d1eH8JBX9LBp+Ju8BSBhUGbZMNVHHomWo2KVImJhTDl2hIgw/6MA=="
       },
       "System.Security.Cryptography.Pkcs": {
         "type": "Transitive",
@@ -243,24 +297,24 @@
       },
       "System.Threading.Tasks.Extensions": {
         "type": "Transitive",
-        "resolved": "4.5.2",
-        "contentHash": "BG/TNxDFv0svAzx8OiMXDlsHfGw623BZ8tCXw4YLhDFDvDhNUEV58jKYMGRnkbJNm7c3JNNJDiN7JBMzxRBR2w==",
+        "resolved": "4.5.4",
+        "contentHash": "zteT+G8xuGu6mS+mzDzYXbzS7rd3K6Fjb9RiZlYlJPam2/hU7JCBZBVEcywNuR+oZ1ncTvc/cq0faRr3P01OVg==",
         "dependencies": {
-          "System.Runtime.CompilerServices.Unsafe": "4.5.2"
+          "System.Runtime.CompilerServices.Unsafe": "4.5.3"
         }
       },
       "System.ValueTuple": {
         "type": "Transitive",
-        "resolved": "4.4.0",
-        "contentHash": "BahUww/+mdP4ARCAh2RQhQTg13wYLVrBb9SYVgW8ZlrwjraGCXHGjo0oIiUfZ34LUZkMMR+RAzR7dEY4S1HeQQ=="
+        "resolved": "4.5.0",
+        "contentHash": "okurQJO6NRE/apDIP23ajJ0hpiNmJ+f0BwOlB/cSqTLQlw5upkf+5+96+iG2Jw40G1fCVCyPz/FhIABUjMR+RQ=="
       },
       "ocaramba.tests.pageobjects": {
         "type": "Project",
         "dependencies": {
           "NLog": "[5.3.4, )",
           "OcarambaLite": "[1.0.0, )",
-          "Selenium.Support": "[4.4.0, )",
-          "Selenium.WebDriver": "[4.4.0, )",
+          "Selenium.Support": "[4.27.0, )",
+          "Selenium.WebDriver": "[4.27.0, )",
           "Selenium.WebDriver.ChromeDriver": "[131.0.6778.8500, )",
           "Selenium.WebDriver.GeckoDriver": "[0.35.0, )"
         }
@@ -270,8 +324,8 @@
         "dependencies": {
           "Microsoft.CSharp": "[4.7.0, )",
           "NLog": "[5.3.4, )",
-          "Selenium.Support": "[4.4.0, )",
-          "Selenium.WebDriver": "[4.4.0, )"
+          "Selenium.Support": "[4.27.0, )",
+          "Selenium.WebDriver": "[4.27.0, )"
         }
       }
     },
@@ -348,12 +402,9 @@
       },
       "NUnit": {
         "type": "Direct",
-        "requested": "[3.13.3, )",
-        "resolved": "3.13.3",
-        "contentHash": "KNPDpls6EfHwC3+nnA67fh5wpxeLb3VLFAfLxrug6JMYDLHH6InaQIWR7Sc3y75d/9IKzMksH/gi08W7XWbmnQ==",
-        "dependencies": {
-          "NETStandard.Library": "2.0.0"
-        }
+        "requested": "[4.2.2, )",
+        "resolved": "4.2.2",
+        "contentHash": "mon0OPko28yZ/foVXrhiUvq1LReaGsBdziumyyYGxV/pOE4q92fuYeN+AF+gEU5pCjzykcdBt5l7xobTaiBjsg=="
       },
       "NUnit.Runners": {
         "type": "Direct",
@@ -372,21 +423,18 @@
       },
       "Selenium.Support": {
         "type": "Direct",
-        "requested": "[4.4.0, )",
-        "resolved": "4.4.0",
-        "contentHash": "nxXOJVT2iV9qcCJhESRCrX3RnKF+O+71JORSIm6J5zOrLFsyVaGA37Jr1chFHO3NQ+MNrMM1vHLlgEPFmWPwgQ==",
+        "requested": "[4.27.0, )",
+        "resolved": "4.27.0",
+        "contentHash": "vPsJmYP+ONxutAmkpSc2cXJCO/eHjP+4dccx/M9mGntOZuVjM0DOzyH2cvX8tDoQ18yUq8l2P4rA3a278Gp2KQ==",
         "dependencies": {
-          "Selenium.WebDriver": "4.4.0"
+          "Selenium.WebDriver": "4.27.0"
         }
       },
       "Selenium.WebDriver": {
         "type": "Direct",
-        "requested": "[4.4.0, )",
-        "resolved": "4.4.0",
-        "contentHash": "gg/fFUW+SQEdOMaZvkKSau6m4xbMG2qBW6cCW6nGW1CtO0coA8OLYpHcQLpsKcc6q68i/Uq1wjtiVfiNXykJUQ==",
-        "dependencies": {
-          "Newtonsoft.Json": "13.0.1"
-        }
+        "requested": "[4.27.0, )",
+        "resolved": "4.27.0",
+        "contentHash": "bMIpqwpBfYLa1lh8gPVa6A1i9LeWNsfc2mR9why0DutEKI7ck3GVxzco1bB/8bv+7IA6rk4sR9WpZLRUnH/AAw=="
       },
       "Selenium.WebDriver.ChromeDriver": {
         "type": "Direct",
@@ -399,6 +447,28 @@
         "requested": "[0.35.0, )",
         "resolved": "0.35.0",
         "contentHash": "+s9jC3IhtNmWloGv9pQ+TqNeRYM0cCPQrFicpXNcyP08KI/WjTRPE0b0M6Fc8I3FEGj98EBQjQBwUlAiQpMW0w=="
+      },
+      "System.Runtime.CompilerServices.Unsafe": {
+        "type": "Direct",
+        "requested": "[6.0.0, )",
+        "resolved": "6.0.0",
+        "contentHash": "/iUeP3tq1S0XdNNoMz5C9twLSrM/TH+qElHkXWaPvuNOt+99G75NrV0OS2EqHx5wMN7popYjpc8oTjC1y16DLg=="
+      },
+      "System.Text.Encodings.Web": {
+        "type": "Direct",
+        "requested": "[9.0.0, )",
+        "resolved": "9.0.0",
+        "contentHash": "e2hMgAErLbKyUUwt18qSBf9T5Y+SFAL3ZedM8fLupkVj8Rj2PZ9oxQ37XX2LF8fTO1wNIxvKpihD7Of7D/NxZw=="
+      },
+      "System.Text.Json": {
+        "type": "Direct",
+        "requested": "[9.0.0, )",
+        "resolved": "9.0.0",
+        "contentHash": "js7+qAu/9mQvnhA4EfGMZNEzXtJCDxgkgj8ohuxq/Qxv+R56G+ljefhiJHOxTNiw54q8vmABCWUwkMulNdlZ4A==",
+        "dependencies": {
+          "System.IO.Pipelines": "9.0.0",
+          "System.Text.Encodings.Web": "9.0.0"
+        }
       },
       "BouncyCastle.Cryptography": {
         "type": "Transitive",
@@ -682,11 +752,6 @@
         "resolved": "3.0.0",
         "contentHash": "uwMyWN33+iQ8Wm/n1yoPXgFoiYNd0HzJyoqSVhaQZyJfaQrJR3udgcIHjqa1qbc3lS6kvfuUMN4TrF4U4refCQ=="
       },
-      "Microsoft.NETCore.Platforms": {
-        "type": "Transitive",
-        "resolved": "1.1.0",
-        "contentHash": "kz0PEW2lhqygehI/d6XsPCQzD7ff7gUJaVGPVETX611eadGsA3A877GdSlU0LRVMCTH/+P3o2iDTak+S08V2+A=="
-      },
       "Microsoft.PowerShell.Commands.Diagnostics": {
         "type": "Transitive",
         "resolved": "7.4.6",
@@ -873,14 +938,6 @@
         "type": "Transitive",
         "resolved": "7.4.6",
         "contentHash": "pnNVcVUT+CP7r23Ju/+nhp0fLSdwevAZwe3qe8XQEahYOUv9ACIP29GijRsjdOwIL8+7DaLUQF5jjh+P/ZjGTQ=="
-      },
-      "NETStandard.Library": {
-        "type": "Transitive",
-        "resolved": "2.0.0",
-        "contentHash": "7jnbRU+L08FXKMxqUflxEXtVymWvNOrS8yHgu9s6EM8Anr6T/wIX4nZ08j/u3Asz+tCufp3YVwFSEvFTPYmBPA==",
-        "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0"
-        }
       },
       "Newtonsoft.Json": {
         "type": "Transitive",
@@ -1227,11 +1284,6 @@
           "System.Configuration.ConfigurationManager": "8.0.1"
         }
       },
-      "System.Runtime.CompilerServices.Unsafe": {
-        "type": "Transitive",
-        "resolved": "6.0.0",
-        "contentHash": "/iUeP3tq1S0XdNNoMz5C9twLSrM/TH+qElHkXWaPvuNOt+99G75NrV0OS2EqHx5wMN7popYjpc8oTjC1y16DLg=="
-      },
       "System.Security.AccessControl": {
         "type": "Transitive",
         "resolved": "6.0.1",
@@ -1335,20 +1387,6 @@
         "resolved": "8.0.0",
         "contentHash": "OZIsVplFGaVY90G2SbpgU7EnCoOO5pw1t4ic21dBF3/1omrJFpAGoNAVpPyMVOC90/hvgkGG3VFqR13YgZMQfg=="
       },
-      "System.Text.Encodings.Web": {
-        "type": "Transitive",
-        "resolved": "9.0.0",
-        "contentHash": "e2hMgAErLbKyUUwt18qSBf9T5Y+SFAL3ZedM8fLupkVj8Rj2PZ9oxQ37XX2LF8fTO1wNIxvKpihD7Of7D/NxZw=="
-      },
-      "System.Text.Json": {
-        "type": "Transitive",
-        "resolved": "9.0.0",
-        "contentHash": "js7+qAu/9mQvnhA4EfGMZNEzXtJCDxgkgj8ohuxq/Qxv+R56G+ljefhiJHOxTNiw54q8vmABCWUwkMulNdlZ4A==",
-        "dependencies": {
-          "System.IO.Pipelines": "9.0.0",
-          "System.Text.Encodings.Web": "9.0.0"
-        }
-      },
       "System.Threading.AccessControl": {
         "type": "Transitive",
         "resolved": "9.0.0-preview.6.24327.7",
@@ -1371,8 +1409,8 @@
           "NLog": "[5.3.4, )",
           "NLog.Web.AspNetCore": "[5.3.14, )",
           "OcarambaLite": "[1.0.0, )",
-          "Selenium.Support": "[4.4.0, )",
-          "Selenium.WebDriver": "[4.4.0, )",
+          "Selenium.Support": "[4.27.0, )",
+          "Selenium.WebDriver": "[4.27.0, )",
           "Selenium.WebDriver.ChromeDriver": "[131.0.6778.8500, )",
           "Selenium.WebDriver.GeckoDriver": "[0.35.0, )",
           "System.Configuration.ConfigurationManager": "[9.0.0, )"
@@ -1389,8 +1427,8 @@
           "Microsoft.WSMan.Management": "[7.4.6, )",
           "NLog": "[5.3.4, )",
           "NLog.Web.AspNetCore": "[5.3.14, )",
-          "Selenium.Support": "[4.4.0, )",
-          "Selenium.WebDriver": "[4.4.0, )"
+          "Selenium.Support": "[4.27.0, )",
+          "Selenium.WebDriver": "[4.27.0, )"
         }
       }
     }
