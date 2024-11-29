@@ -16,7 +16,7 @@ namespace Ocaramba.UnitTests.Tests
                 .GoToDragAndDropPage()
                 .GetByIdLocator;
 
-            Assert.AreEqual("A", columnAText);
+            Assert.That(columnAText, Is.EqualTo("A"));
         }
 
         [Test]
@@ -28,15 +28,15 @@ namespace Ocaramba.UnitTests.Tests
 #if net8_0
             if (BaseConfiguration.Env == "Linux")
             {
-                Assert.AreEqual("Drag and Drop\nA\nB", titleByClassName);
+                Assert.That(titleByClassName, Is.EqualTo("Drag and Drop\nA\nB"));
             }
             else
             {
-                Assert.AreEqual("Drag and Drop\r\nA\r\nB", titleByClassName);
+                Assert.That(titleByClassName, Is.EqualTo("Drag and Drop\r\nA\r\nB"));
             }
 #endif
 #if net47
-             Assert.AreEqual("Drag and Drop\r\nA\r\nB", titleByClassName);
+             Assert.That(titleByClassName, Is.EqualTo("Drag and Drop\r\nA\r\nB"));
 #endif
         }
 
@@ -49,15 +49,15 @@ namespace Ocaramba.UnitTests.Tests
 #if net8_0
             if (BaseConfiguration.Env == "Linux")
             {
-                Assert.AreEqual("Drag and Drop\nA\nB", titleByCssSelector);
+                Assert.That(titleByCssSelector, Is.EqualTo("Drag and Drop\nA\nB"));
             }
             else
             {
-                Assert.AreEqual("Drag and Drop\r\nA\r\nB", titleByCssSelector);
+                Assert.That(titleByCssSelector, Is.EqualTo("Drag and Drop\r\nA\r\nB"));
             }
 #endif
 #if net47
-            Assert.AreEqual("Drag and Drop\r\nA\r\nB", titleByCssSelector);
+            Assert.That(titleByCssSelector, Is.EqualTo("Drag and Drop\r\nA\r\nB"));
 #endif
         }
 
@@ -68,7 +68,7 @@ namespace Ocaramba.UnitTests.Tests
                 .OpenHomePage()
                 .GoToDropdownPageByLinkText().SelectedText;
 
-            Assert.AreEqual("Please select an option", selectedOption);
+            Assert.That(selectedOption, Is.EqualTo("Please select an option"));
         }
 
         [Test]
@@ -81,15 +81,15 @@ namespace Ocaramba.UnitTests.Tests
 #if net8_0
             if (BaseConfiguration.Env == "Linux")
             {
-                Assert.AreEqual("Username\nPassword\nLogin", columnA);
+                Assert.That(columnA, Is.EqualTo("Username\nPassword\nLogin"));
             }
             else
             {
-                Assert.AreEqual("Username\r\nPassword\r\nLogin", columnA);
+                Assert.That(columnA, Is.EqualTo("Username\r\nPassword\r\nLogin"));
             }
 #endif
 #if net47
-            Assert.AreEqual("Username\r\nPassword\r\nLogin", columnA);
+            Assert.That(columnA, Is.EqualTo("Username\r\nPassword\r\nLogin"));
 #endif
         }
 
@@ -99,7 +99,7 @@ namespace Ocaramba.UnitTests.Tests
         {
             var titleBypartialLinkText = new InternetPage(DriverContext)
                 .OpenHomePage().GetDragAndDropLinkByPartialLinkText;
-            Assert.AreEqual("Drag and Drop", titleBypartialLinkText);
+            Assert.That(titleBypartialLinkText, Is.EqualTo("Drag and Drop"));
         }
 
         [Test]
@@ -109,7 +109,7 @@ namespace Ocaramba.UnitTests.Tests
                 .OpenHomePage()
                 .GoToTablesPage().GetByTagNameLocator;
 
-            Assert.AreEqual("Last Name", titleByTagName);
+            Assert.That(titleByTagName, Is.EqualTo("Last Name"));
         }
 
         [Test]
@@ -119,7 +119,7 @@ namespace Ocaramba.UnitTests.Tests
                 .OpenHomePage()
                 .GoToTablesPage().GetByXpathLocator;
 
-            Assert.AreEqual("Last Name", linkByXPath);
+            Assert.That(linkByXPath, Is.EqualTo("Last Name"));
         }
     }
 }
