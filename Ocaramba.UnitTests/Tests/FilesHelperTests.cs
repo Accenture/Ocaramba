@@ -22,7 +22,7 @@ namespace Ocaramba.UnitTests.Tests
         {
             var files = FilesHelper.GetFilesOfGivenTypeFromAllSubFolders(folder,
                 FileType.Xlsx);
-            Assert.IsTrue(files.Count > 0);
+            Assert.That(files.Count, Is.GreaterThan(0));
         }
 
         [Test()]
@@ -30,14 +30,14 @@ namespace Ocaramba.UnitTests.Tests
         {
             var files = FilesHelper.GetFilesOfGivenTypeFromAllSubFolders(folder,
                 FileType.Xml, "Driven");
-            Assert.IsTrue(files.Count > 0);
+            Assert.That(files.Count, Is.GreaterThan(0));
         }
 
         [Test()]
         public void GetAllFilesFromAllSubFoldersTest()
         {
             var files = FilesHelper.GetAllFilesFromAllSubFolders(folder);
-            Assert.IsTrue(files.Count > 0);
+            Assert.That(files.Count, Is.GreaterThan(0));
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
@@ -46,7 +46,7 @@ namespace Ocaramba.UnitTests.Tests
         {
             var files = FilesHelper.GetAllFilesFromAllSubFolders(folder,
                 "*.dll");
-            Assert.IsTrue(files.Count > 0);
+            Assert.That(files.Count, Is.GreaterThan(0));
             File.Create(folder + FilesHelper.Separator + "testfile.txt");
 
         }
@@ -79,7 +79,7 @@ namespace Ocaramba.UnitTests.Tests
             var start = DateTime.Now;
             Assert.Throws<WaitTimeoutException>(() => FilesHelper.WaitForFileOfGivenName("nofile.txt", folder));
             var stop = DateTime.Now;
-            Assert.True(stop - start <= TimeSpan.FromSeconds(BaseConfiguration.LongTimeout + 2));
+            Assert.That(stop - start, Is.LessThanOrEqualTo(TimeSpan.FromSeconds(BaseConfiguration.LongTimeout + 2)));
         }
     }
 }

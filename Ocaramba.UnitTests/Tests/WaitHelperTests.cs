@@ -16,22 +16,22 @@ namespace Ocaramba.UnitTests.Tests
             int wait = 3;
             Assert.Throws<WaitTimeoutException>(() => WaitHelper.Wait(() => SumNumber(1,1) > 3, TimeSpan.FromSeconds(wait), TimeSpan.FromSeconds(1), "Timeout"));
             var stop = DateTime.Now;
-            Assert.True(stop - start >= TimeSpan.FromSeconds(wait));
-            Assert.False(stop - start < TimeSpan.FromSeconds(wait));
+            Assert.That(stop - start, Is.GreaterThanOrEqualTo(TimeSpan.FromSeconds(wait)));
+            Assert.That(stop - start, Is.Not.LessThan(TimeSpan.FromSeconds(wait)));
         }
 
         [Test()]
         public void WaitReturnFalseTest()
         {
             bool result = WaitHelper.Wait(() => SumNumber(1, 1) > 3, TimeSpan.FromSeconds(2), TimeSpan.FromSeconds(1));
-            Assert.False(result);
+            Assert.That(result, Is.False);
         }
 
         [Test()]
         public void WaitReturnTrueTest()
         {
             bool result = WaitHelper.Wait(() => SumNumber(1, 1) > 1, TimeSpan.FromSeconds(10), TimeSpan.FromSeconds(1));
-            Assert.True(result);
+            Assert.That(result, Is.True);
         }
 
         int SumNumber(int a, int b)

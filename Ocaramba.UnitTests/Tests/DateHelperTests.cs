@@ -12,25 +12,25 @@ namespace Ocaramba.UnitTests.Tests
         [Test()]
         public void TomorrowDateTest()
         {
-            Assert.AreEqual(DateTime.Now.AddDays(1).ToString("ddMMyyyy", CultureInfo.CurrentCulture), DateHelper.TomorrowDate);
+            Assert.That(DateHelper.TomorrowDate, Is.EqualTo(DateTime.Now.AddDays(1).ToString("ddMMyyyy", CultureInfo.CurrentCulture)));
         }
 
         [Test()]
         public void CurrentDateTest()
         {
-            Assert.AreEqual(DateTime.Now.ToString("dd-MM-yyyy", CultureInfo.CurrentCulture), DateHelper.CurrentDate);
+            Assert.That(DateHelper.CurrentDate, Is.EqualTo(DateTime.Now.ToString("dd-MM-yyyy", CultureInfo.CurrentCulture)));
         }
 
         [Test()]
         public void CurrentTimeStampTest()
         {
-            Assert.LessOrEqual(DateTime.ParseExact(DateHelper.CurrentTimeStamp, "ddMMyyyyHHmmss", null), DateTime.Now);
+            Assert.That(DateTime.Now, Is.EqualTo(DateTime.ParseExact(DateHelper.CurrentTimeStamp, "ddMMyyyyHHmmss", null)));
         }
 
         [Test()]
         public void GetFutureDateTest()
         {
-            Assert.AreEqual(DateTime.Now.AddDays(3).ToString("ddMMyyyy", CultureInfo.CurrentCulture), DateHelper.GetFutureDate(3));
+            Assert.That(DateHelper.GetFutureDate(3), Is.EqualTo(DateTime.Now.AddDays(3).ToString("ddMMyyyy", CultureInfo.CurrentCulture)));
         }
     }
 }
