@@ -128,8 +128,8 @@ namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
 - See [Getting started](https://github.com/Accenture/Ocaramba/wiki/Getting%20started).
 
 Checkout the code or get it from [nuget.org](https://www.nuget.org/packages?q=Ocaramba)
-- Ocaramba [![NuGet Badge](https://buildstats.info/nuget/Ocaramba)](https://www.nuget.org/packages/Ocaramba/)
-- OcarambaLite [![NuGet Badge](https://buildstats.info/nuget/OcarambaLite)](https://www.nuget.org/packages/OcarambaLite/) - lighten version without selenium drivers
+- Ocaramba ![NuGet Downloads](https://img.shields.io/nuget/dt/Ocaramba)     ![NuGet Version](https://img.shields.io/nuget/v/Ocaramba)
+- OcarambaLite ![NuGet Downloads](https://img.shields.io/nuget/dt/OcarambaLite)     ![NuGet Version](https://img.shields.io/nuget/v/OcarambaLite) - lighten version without selenium drivers
 
 or download Ocaramba Visual Studio templates [![Ocaramba Templates](https://img.shields.io/badge/get-Ocaramba_Templates-green.svg?color=4BC21F)](https://marketplace.visualstudio.com/items?itemName=Ocaramba.Ocaramba1)
 
