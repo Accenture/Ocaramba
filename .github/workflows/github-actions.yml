@@ -218,7 +218,7 @@ jobs:
       if: always()
       with:
         files: ${{ env.TestResultsDirWindows }}\*.trx
-        check_name: ExecutingTestsOnWindowsGithubActions1  
+        check_name: ExecutingTestsOnWindowsGithubActionsCore1  
     - name: Zip artifact
       run: Compress-Archive -Path D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.NUnitExtentReports\bin\Release\net8.0\TestOutput -Destination ExtentReports_${{ github.run_id }}.zip
     - uses: actions/upload-artifact@v4
@@ -239,7 +239,7 @@ jobs:
       with:
         name: OcarambaBuild
     - run: Expand-Archive -Path OcarambaBuild.zip -DestinationPath ./
-    - run: ./ExecutingTestsOnWindowsGithubActions2.ps1
+    - run: ./ExecutingTestsOnWindowsGithubActionsCore2.ps1
     - run: Get-ChildItem .\ -Recurse
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
@@ -267,7 +267,7 @@ jobs:
       if: always()
       with:
         files: ${{ env.TestResultsDirWindows }}\*.xml
-        check_name: ExecutingTestsOnWindowsGithubActions3  
+        check_name: ExecutingTestsOnWindowsGithubActionsNet3  
   test_Stage_RunTestsOnWindowsBrowserStack:
     runs-on: windows-latest
     needs:
@@ -294,7 +294,7 @@ jobs:
       if: always()
       with:
         files: ${{ env.TestResultsDirWindows }}\*.xml
-        check_name: ExecutingTestsOnWindowsGithubActions4  
+        check_name: ExecutingTestsOnWindowsGithubActionsBrowserStack4  
   test_Stage_RunTestsSeleniumGrid:
     runs-on: windows-latest
     needs:
@@ -315,7 +315,7 @@ jobs:
       with:
         files: |
           ${{ env.TestResultsDirWindows }}\*.xml
-        check_name: ExecutingTestsOnWindowsGithubActions5         
+        check_name: ExecutingTestsOnWindowsGithubActionsSeleniumGrid5         
   test_Stage_RunTestsOnWindowsSaucelabs:
     runs-on: windows-latest
     needs:
@@ -343,7 +343,7 @@ jobs:
       with:
         files: |
           ${{ env.TestResultsDirWindows }}\*.xml
-        check_name: ExecutingTestsOnWindowsGithubActions6  
+        check_name: ExecutingTestsOnWindowsGithubActionsSaucelabs6  
   release_Stage_PublishNuget:
     runs-on: windows-latest
     needs:
