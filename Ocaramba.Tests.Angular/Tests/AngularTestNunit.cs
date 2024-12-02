@@ -41,7 +41,7 @@ namespace Ocaramba.Tests.Angular.Tests
                 .ClickProtractorApi()
                 .ClickElementToBeSelected();
 
-            Assert.True(protractorApiPage.IsElementToBeSelectedHeaderDisplayed(), "Header is not displayed.");
+            Assert.That(protractorApiPage.IsElementToBeSelectedHeaderDisplayed(), Is.True, "Header is not displayed.");
         }
     }
 }

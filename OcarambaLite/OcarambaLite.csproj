@@ -25,10 +25,10 @@
 
   <ItemGroup>
     <None Include="..\icon.png" Pack="true" PackagePath="\" />
-	 <None Include="..\README.md" Pack="true" PackagePath="\"/>
+	 <None Include="..\README.md" Pack="true" PackagePath="\" />
 	<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="Selenium.WebDriver" Version="4.4.0" />
-    <PackageReference Include="Selenium.Support" Version="4.4.0" />
+    <PackageReference Include="Selenium.WebDriver" Version="4.27.0" />
+    <PackageReference Include="Selenium.Support" Version="4.27.0" />
     <PackageReference Include="NLog" Version="5.3.4" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
@@ -57,7 +57,7 @@
       <Version>7.4.6</Version>
     </PackageReference>
     <PackageReference Include="NLog.Web.AspNetCore">
-      <Version>5.3.14</Version>
+      <Version>5.3.15</Version>
     </PackageReference>
   </ItemGroup>
 

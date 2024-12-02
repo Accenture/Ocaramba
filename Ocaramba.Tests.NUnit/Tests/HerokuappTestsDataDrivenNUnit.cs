@@ -44,7 +44,7 @@ namespace Ocaramba.Tests.NUnit.Tests
             formFormAuthentication.LogOn();
             Verify.That(
                 this.DriverContext,
-                () => Assert.AreEqual(parameters["message"], formFormAuthentication.GetMessage));
+                () => Assert.That(formFormAuthentication.GetMessage, Is.EqualTo(parameters["message"])));
         }
 
         [Test]
@@ -59,7 +59,7 @@ namespace Ocaramba.Tests.NUnit.Tests
             formFormAuthentication.LogOn();
             Verify.That(
                 this.DriverContext,
-                () => Assert.AreEqual(parameters["message"], formFormAuthentication.GetMessage));
+                () => Assert.That(formFormAuthentication.GetMessage, Is.EqualTo(parameters["message"])));
         }
 
         [Test]
@@ -74,7 +74,7 @@ namespace Ocaramba.Tests.NUnit.Tests
             formFormAuthentication.LogOn();
             Verify.That(
                 this.DriverContext,
-                () => Assert.AreEqual(parameters["message"], formFormAuthentication.GetMessage));
+                () => Assert.That(formFormAuthentication.GetMessage, Is.EqualTo(parameters["message"])));
         }
 
         [Test]
@@ -84,7 +84,7 @@ namespace Ocaramba.Tests.NUnit.Tests
             new InternetPage(this.DriverContext).OpenHomePage().GoToShiftingContentPage();
 
             var links = new ShiftingContentPage(this.DriverContext);
-            Verify.That(this.DriverContext, () => Assert.AreEqual(parameters["number"], links.CountLinks()));
+            Verify.That(this.DriverContext, () => Assert.That(links.CountLinks(), Is.EqualTo(parameters["number"])));
         }
 
         [Test]
@@ -94,7 +94,7 @@ namespace Ocaramba.Tests.NUnit.Tests
             new InternetPage(this.DriverContext).OpenHomePage().GoToShiftingContentPage();
 
             var links = new ShiftingContentPage(this.DriverContext);
-            Verify.That(this.DriverContext, () => Assert.AreEqual(parameters["number"], links.CountLinksGetElementsBasic()));
+            Verify.That(this.DriverContext, () => Assert.That(links.CountLinksGetElementsBasic(), Is.EqualTo(parameters["number"])));
         }
 
         [Test]
@@ -104,7 +104,7 @@ namespace Ocaramba.Tests.NUnit.Tests
             new InternetPage(this.DriverContext).OpenHomePage().GoToShiftingContentPage();
 
             var links = new ShiftingContentPage(this.DriverContext);
-            Verify.That(this.DriverContext, () => Assert.AreEqual(parameters["number"], links.CountLinks()));
+            Verify.That(this.DriverContext, () => Assert.That(links.CountLinks(), Is.EqualTo(parameters["number"])));
         }
     }
 }

@@ -36,7 +36,7 @@ namespace Ocaramba.Tests.NUnit.Tests
             var jsAlertsPage = internetPage.GoToJavaScriptAlerts();
             jsAlertsPage.OpenJsAlert();
             jsAlertsPage.AcceptAlert();
-            Assert.AreEqual("You successfully clicked an alert", jsAlertsPage.ResultText);
+            Assert.That(jsAlertsPage.ResultText, Is.EqualTo("You successfully clicked an alert"));
         }
 
         [Test]
@@ -46,7 +46,8 @@ namespace Ocaramba.Tests.NUnit.Tests
             var jsAlertsPage = internetPage.GoToJavaScriptAlerts();
             jsAlertsPage.OpenJsConfirm();
             jsAlertsPage.AcceptAlert();
-            Assert.AreEqual("You clicked: Ok", jsAlertsPage.ResultText);
+            Assert.That(jsAlertsPage.ResultText, Is.EqualTo("You clicked: Ok"));
+
         }
 
         [Test]
@@ -56,7 +57,7 @@ namespace Ocaramba.Tests.NUnit.Tests
             var jsAlertsPage = internetPage.GoToJavaScriptAlerts();
             jsAlertsPage.OpenJsConfirm();
             jsAlertsPage.DismissAlert();
-            Assert.AreEqual("You clicked: Cancel", jsAlertsPage.ResultText);
+            Assert.That(jsAlertsPage.ResultText, Is.EqualTo("You clicked: Cancel"));
         }
 
         [Test]
@@ -68,7 +69,7 @@ namespace Ocaramba.Tests.NUnit.Tests
             jsAlertsPage.OpenJsPrompt();
             jsAlertsPage.TypeTextOnAlert(text);
             jsAlertsPage.AcceptAlert();
-            Assert.AreEqual("You entered: " + text, jsAlertsPage.ResultText);
+           Assert.That(jsAlertsPage.ResultText, Is.EqualTo("You entered: " + text));
         }
 
         [Test]
@@ -78,7 +79,7 @@ namespace Ocaramba.Tests.NUnit.Tests
             var jsAlertsPage = internetPage.GoToJavaScriptAlerts();
             jsAlertsPage.OpenJsPrompt();
             jsAlertsPage.DismissAlert();
-            Assert.AreEqual("You entered: null", jsAlertsPage.ResultText);
+            Assert.That(jsAlertsPage.ResultText, Is.EqualTo("You entered: null"));
         }
     }
 }

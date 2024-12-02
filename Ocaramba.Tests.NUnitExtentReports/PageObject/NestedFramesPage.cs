@@ -63,21 +63,21 @@ namespace Ocaramba.Tests.NUnitExtentReports.PageObjects
 
         public NestedFramesPage SwitchToFrame(string frame)
         {
-            ExtentTestLogger.Debug("NestedFramesPage: Switching to frame: " + frame);
+            ExtentTestLogger.Info("NestedFramesPage: Switching to frame: " + frame);
             this.Driver.SwitchTo().Frame(frame);
             return this;
         }
 
         public NestedFramesPage SwitchToParentFrame()
         {
-            ExtentTestLogger.Debug("NestedFramesPage: Switching to parent frame");
+            ExtentTestLogger.Info("NestedFramesPage: Switching to parent frame");
             this.Driver.SwitchTo().ParentFrame();
             return this;
         }
 
         public NestedFramesPage ReturnToDefaultContent()
         {
-            ExtentTestLogger.Debug("NestedFramesPage: Switching to default content");
+            ExtentTestLogger.Info("NestedFramesPage: Switching to default content");
             this.Driver.SwitchTo().DefaultContent();
             return this;
         }

@@ -45,9 +45,7 @@ namespace Ocaramba.Tests.NUnitExtentReports.Tests
             Verify.That(
                 this.DriverContext,
                 () =>
-                Assert.AreEqual(
-                    ExpectedCongratulationsInfo,
-                    basicAuthPage.GetCongratulationsInfo));
+                    Assert.That(basicAuthPage.GetCongratulationsInfo, Is.EqualTo(ExpectedCongratulationsInfo)));
         }
 
         [Test]
@@ -61,10 +59,10 @@ namespace Ocaramba.Tests.NUnitExtentReports.Tests
                 .OpenNewWindowPage();
 
             test.Info("Verifying page title, expected: " + PageTitle);
-            Assert.True(newWindowPage.IsPageTile(PageTitle), "wrong page title, should be {0}", PageTitle);
+            Assert.That(newWindowPage.IsPageTile(PageTitle), Is.True, "wrong page title, should be {0}", PageTitle);
 
             test.Info("Verifying H3 header text displayd on te page, expected: " + PageTitle);
-            Assert.True(newWindowPage.IsNewWindowH3TextVisible(PageTitle), "text is not equal to {0}", PageTitle);
+            Assert.That(newWindowPage.IsNewWindowH3TextVisible(PageTitle), Is.True, "text is not equal to {0}", PageTitle);
         }
 
         [Test]
@@ -83,22 +81,22 @@ namespace Ocaramba.Tests.NUnitExtentReports.Tests
             nestedFramesPage.SwitchToFrame("frame-left");
 
             test.Info("Verifying text displayed in left frame, expected: " + ExpectedLeftFrameText);
-            Assert.AreEqual(ExpectedLeftFrameText, nestedFramesPage.LeftBody);
+            Assert.That(nestedFramesPage.LeftBody, Is.EqualTo(ExpectedLeftFrameText));
 
             nestedFramesPage.SwitchToParentFrame().SwitchToFrame("frame-middle");
 
             test.Info("Verifying text displayed in middle frame, expected: " + ExpectedMiddleFrameText);
-            Assert.AreEqual(ExpectedMiddleFrameText, nestedFramesPage.MiddleBody);
+            Assert.That(nestedFramesPage.MiddleBody, Is.EqualTo(ExpectedMiddleFrameText));
 
             nestedFramesPage.SwitchToParentFrame().SwitchToFrame("frame-right");
 
             test.Info("Verifying text displayed in right frame, expected: " + ExpectedRightFrameText);
-            Assert.AreEqual(ExpectedRightFrameText, nestedFramesPage.RightBody);
+            Assert.That(nestedFramesPage.RightBody, Is.EqualTo(ExpectedRightFrameText));
 
             nestedFramesPage.ReturnToDefaultContent().SwitchToFrame("frame-bottom");
 
             test.Info("Verifying text displayed in bottom frame, expected: " + ExpectedBottomFrameText);
-            Assert.AreEqual(ExpectedBottomFrameText, nestedFramesPage.BottomBody);
+            Assert.That(nestedFramesPage.BottomBody, Is.EqualTo(ExpectedBottomFrameText));
         }
 
         [Test]
@@ -115,7 +113,8 @@ namespace Ocaramba.Tests.NUnitExtentReports.Tests
             var brokenImagesPage = new BrokenImagesPage(this.DriverContext);
 
             test.Info("Verifying page header, expected: " + PageHeader);
-            Assert.True(brokenImagesPage.IsPageHeaderElementEqualsToExpected(PageHeader), "Page header element is not equal to expected " + PageHeader);
+            Assert.That(brokenImagesPage.IsPageHeaderElementEqualsToExpected(PageHeader), 
+                Is.True, "Page header element is not equal to expected " + PageHeader);
         }
 
         [Test]
@@ -130,10 +129,10 @@ namespace Ocaramba.Tests.NUnitExtentReports.Tests
             var table = tableElements.GetTableElements();
 
             test.Info("Verifying surname displayed in the table, expected: " + ExpectedSurname);
-            Assert.AreEqual(ExpectedSurname, table[0][0]);
+            Assert.That(table[0][0], Is.EqualTo(ExpectedSurname));
 
             test.Info("Verifying action links displayed in the table, expected: " + ExpectedActionLinks);
-            Assert.AreEqual(ExpectedActionLinks, table[3][5]);
+            Assert.That(table[3][5], Is.EqualTo(ExpectedActionLinks));
         }
 
         [Test]
@@ -145,7 +144,7 @@ namespace Ocaramba.Tests.NUnitExtentReports.Tests
                 .MoveElementAtoElementB();
 
             test.Info("Verifying element A was moved to element B");
-            Assert.IsTrue(dragAndDrop.IsElementAMovedToB(), "Element is not moved.");
+            Assert.That(dragAndDrop.IsElementAMovedToB(), Is.True, "Element is not moved.");
         }
 
         [Test]
@@ -162,12 +161,12 @@ namespace Ocaramba.Tests.NUnitExtentReports.Tests
             nestedFramesPage.SwitchToFrame("frame-left");
 
             test.Info("Verifying text displayed in left frame, expected: " + ExpectedLeftFrameText);
-            Assert.AreEqual(ExpectedLeftFrameText, nestedFramesPage.LeftBody);
+            Assert.That(nestedFramesPage.LeftBody, Is.EqualTo(ExpectedLeftFrameText));
 
             nestedFramesPage.SwitchToParentFrame().SwitchToFrame("frame-middle");
 
             test.Info("Verifying text displayed in middle frame, expected: " + ExpectedMiddleFrameText);
-            Assert.AreEqual(ExpectedMiddleFrameText, nestedFramesPage.MiddleBody);
+            Assert.That(nestedFramesPage.MiddleBody, Is.EqualTo(ExpectedMiddleFrameText));
         }
     }
 }

@@ -68,7 +68,7 @@ namespace Ocaramba.UnitTests.Tests
 
 
 
-            Assert.IsFalse(flag);
+            Assert.That(flag, Is.False);
         }
 
         [Test]

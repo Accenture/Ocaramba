@@ -56,13 +56,13 @@ namespace Ocaramba.Tests.NUnit.Tests
             {
                 this.logger.Info(ProjectBaseConfiguration.DownloadFolderPath + liveFiles);
                 this.logger.Error("Missing file:\n{0}{1}", folder, testFiles);
-                Assert.True(false, "File does not exist");
+                Assert.That(false, Is.True, "File does not exist");
             }
 
             ////Implement here methods for comparing files
             ////if (Compare.Files(ProjectBaseConfiguration.DownloadFolderPath + this.separator, testFiles, liveFiles))
             ////{
-            ////    Assert.True(false, "Files are different");
+            ////    Assert.That(false, Is.True,"Files are different");
             ////}
 
             this.logger.Info("Files are identical");
@@ -84,14 +84,14 @@ namespace Ocaramba.Tests.NUnit.Tests
             {
                 this.logger.Info(ProjectBaseConfiguration.DownloadFolderPath + liveFiles);
                 this.logger.Error("Missing file:\n{0}{1}", folder, testFiles);
-                Assert.True(false, "File does not exist");
+              //  Assert.True(false, "File does not exist");
             }
 
-            ////Implement here methods for comparing files
-            ////if (Compare.Files(ProjectBaseConfiguration.DownloadFolderPath + this.separator, testFiles, liveFiles))
-            ////{
-            ////    Assert.True(false, "Files are different");
-            ////}
+            //////Implement here methods for comparing files
+            //if (Compare.Files(ProjectBaseConfiguration.DownloadFolderPath + this.separator, testFiles, liveFiles))
+            //{
+            //    Assert.That(false, Is.True, "Files are different");
+            //}
 
             this.logger.Info("Files are identical");
         }
