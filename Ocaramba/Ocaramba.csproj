@@ -61,7 +61,7 @@
       <Version>7.4.6</Version>
     </PackageReference>
     <PackageReference Include="NLog.Web.AspNetCore">
-      <Version>5.3.14</Version>
+      <Version>5.3.15</Version>
     </PackageReference>
     <PackageReference Include="System.Data.Common">
       <Version>4.3.0</Version>

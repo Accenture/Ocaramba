@@ -44,7 +44,7 @@ namespace Ocaramba.Tests.NUnitExtentReports.PageObjects
 
         public DragAndDropPage MoveElementAtoElementB()
         {
-           ExtentTestLogger.Debug("DragAndDropPage: Moving Box A element to Box B");
+           ExtentTestLogger.Info("DragAndDropPage: Moving Box A element to Box B");
            this.Driver.DragAndDropJs(this.Driver.GetElement(this.boxA), this.Driver.GetElement(this.boxB));
            return this;
         }

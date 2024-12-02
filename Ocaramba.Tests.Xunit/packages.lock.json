@@ -261,11 +261,11 @@
       },
       "NLog.Web.AspNetCore": {
         "type": "Direct",
-        "requested": "[5.3.14, )",
-        "resolved": "5.3.14",
-        "contentHash": "cc6VM07vrRI73JhIhC2LWyDKgFtgNfXf5UmJ4841qhp81nCN5CmOm3/YIA0YgStOWihrM3jVNlNQtDgsZ6wrJg==",
+        "requested": "[5.3.15, )",
+        "resolved": "5.3.15",
+        "contentHash": "Am5ZJ1htYf6K3QJ7stIbKK3CTGw1BOyGtucWxHoDScM/U1w6nE/zmYfZTfj7jRIKuZwbwpBqtRGZJsUcMGUvfA==",
         "dependencies": {
-          "NLog.Extensions.Logging": "5.3.13"
+          "NLog.Extensions.Logging": "5.3.15"
         }
       },
       "Selenium.Support": {
@@ -772,8 +772,8 @@
       },
       "NLog.Extensions.Logging": {
         "type": "Transitive",
-        "resolved": "5.3.13",
-        "contentHash": "i1n5+ZB6Hd5na2eWj7zjeIH4SS3qzmSgoSIGpxp3B0lJ8p/Cmg59NrDE9GReAAmKbQVbP0d/+e3S/6j79Tnaww==",
+        "resolved": "5.3.15",
+        "contentHash": "BSCkfWjaTesw4/k8Ujj3YdqtDzd2iCRYIOwoHume7aaJFz4/gLbemA5MLgkAwtCxcd8nGBGfaEkeIzQPGxArLg==",
         "dependencies": {
           "Microsoft.Extensions.Configuration.Abstractions": "8.0.0",
           "Microsoft.Extensions.Logging": "8.0.0",
@@ -1203,7 +1203,7 @@
         "dependencies": {
           "Microsoft.NET.Test.Sdk": "[17.12.0, )",
           "NLog": "[5.3.4, )",
-          "NLog.Web.AspNetCore": "[5.3.14, )",
+          "NLog.Web.AspNetCore": "[5.3.15, )",
           "OcarambaLite": "[1.0.0, )",
           "Selenium.Support": "[4.27.0, )",
           "Selenium.WebDriver": "[4.27.0, )",
@@ -1222,7 +1222,7 @@
           "Microsoft.PowerShell.SDK": "[7.4.6, )",
           "Microsoft.WSMan.Management": "[7.4.6, )",
           "NLog": "[5.3.4, )",
-          "NLog.Web.AspNetCore": "[5.3.14, )",
+          "NLog.Web.AspNetCore": "[5.3.15, )",
           "Selenium.Support": "[4.27.0, )",
           "Selenium.WebDriver": "[4.27.0, )"
         }

@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework.Interfaces;
+using AventStack.ExtentReports; // Add this using directive
 
 namespace Ocaramba.Tests.NUnitExtentReports.ExtentLogger
 {
@@ -14,15 +15,6 @@ namespace Ocaramba.Tests.NUnitExtentReports.ExtentLogger
         public static void Info(string message)
         {
             test.Info(message);
-        }
-
-        /// <summary>
-        /// Log Debug entry in HTML file
-        /// </summary>
-        /// <param name="message">The message</param>
-        public static void Debug(string message)
-        {
-            test.Debug(message);
         }
 
         /// <summary>
@@ -50,7 +42,7 @@ namespace Ocaramba.Tests.NUnitExtentReports.ExtentLogger
         /// <param name="errorMessage">Error message</param>
         public static void Fail(TestStatus status, string errorMessage)
         {
-            test.Fail(status +": " + errorMessage);
+            test.Fail(status + ": " + errorMessage);
         }
     }
 }

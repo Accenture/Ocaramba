@@ -43,7 +43,7 @@ namespace Ocaramba.Tests.NUnitExtentReports.PageObjects
         {
             const string UriString = "http://the-internet.herokuapp.com/windows/new";
 
-            ExtentTestLogger.Debug("MultipleWindowsPage: Opening new Uri: " + UriString);
+            ExtentTestLogger.Info("MultipleWindowsPage: Opening new Uri: " + UriString);
             this.Driver.GetElement(this.clickHerePageLocator).Click();
             this.Driver.SwitchToWindowUsingUrl(new Uri(UriString), 5);
             return new NewWindowPage(this.DriverContext);

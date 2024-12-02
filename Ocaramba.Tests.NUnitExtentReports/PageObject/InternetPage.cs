@@ -67,62 +67,62 @@ namespace Ocaramba.Tests.NUnitExtentReports.PageObjects
             var url = BaseConfiguration.GetUrlValueWithUserCredentials;
             this.Driver.NavigateTo(new Uri(url));
             Logger.Info(CultureInfo.CurrentCulture, "Opening page {0}", url);
-            ExtentTestLogger.Debug("InternetPage: Opening page: " + url);
+            ExtentTestLogger.Info("InternetPage: Opening page: " + url);
             return this;
         }
 
         public DropdownPage GoToDropdownPage()
         {
-            ExtentTestLogger.Debug("InternetPage: Opening Dropdown page");
+            ExtentTestLogger.Info("InternetPage: Opening Dropdown page");
             this.Driver.GetElement(this.linkLocator.Format("dropdown")).Click();
             return new DropdownPage(this.DriverContext);
         }
 
         public MultipleWindowsPage GoToMultipleWindowsPage()
         {
-            ExtentTestLogger.Debug("InternetPage: Opening Multiple Windows page");
+            ExtentTestLogger.Info("InternetPage: Opening Multiple Windows page");
             this.Driver.GetElement(this.linkLocator.Format("windows")).Click();
             return new MultipleWindowsPage(this.DriverContext);
         }
 
         public BasicAuthPage GoToBasicAuthPage()
         {
-            ExtentTestLogger.Debug("InternetPage: Opening Basic Auth Page");
+            ExtentTestLogger.Info("InternetPage: Opening Basic Auth Page");
             this.Driver.GetElement(this.linkLocator.Format("basic_auth")).Click();
             return new BasicAuthPage(this.DriverContext);
         }
 
         public NestedFramesPage GoToNestedFramesPage()
         {
-            ExtentTestLogger.Debug("InternetPage: Opening Nested Frames page");
+            ExtentTestLogger.Info("InternetPage: Opening Nested Frames page");
             this.Driver.GetElement(this.linkLocator.Format("nested_frames")).Click();
             return new NestedFramesPage(this.DriverContext);
         }
 
         public TablesPage GoToTablesPage()
         {
-            ExtentTestLogger.Debug("InternetPage: Opening Tables page");
+            ExtentTestLogger.Info("InternetPage: Opening Tables page");
             this.Driver.GetElement(this.linkLocator.Format("tables")).Click();
             return new TablesPage(this.DriverContext);
         }
 
         public DragAndDropPage GoToDragAndDropPage()
         {
-            ExtentTestLogger.Debug("InternetPage: Opening Drag And Drop page");
+            ExtentTestLogger.Info("InternetPage: Opening Drag And Drop page");
             this.Driver.GetElement(this.linkLocator.Format("drag_and_drop")).Click();
             return new DragAndDropPage(this.DriverContext);
         }
 
         public void ChangeBasicAuthLink(string newAttributeValue)
         {
-            ExtentTestLogger.Debug("InternetPage: Changing BasicAuthLink to: " + newAttributeValue);
+            ExtentTestLogger.Info("InternetPage: Changing BasicAuthLink to: " + newAttributeValue);
             var element = this.Driver.GetElement(this.basicAuthLink);
             element.SetAttribute("href", newAttributeValue);
         }
 
         public void BasicAuthLinkClick()
         {
-            ExtentTestLogger.Debug("InternetPage: Clicking BasicAuthLink");
+            ExtentTestLogger.Info("InternetPage: Clicking BasicAuthLink");
             var element = this.Driver.GetElement(this.basicAuthLink);
             element.Click();
         }

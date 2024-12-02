@@ -41,28 +41,28 @@ namespace Ocaramba.Tests.NUnitExtentReports.PageObjects
         
         public void SelectByIndex(int index)
         {
-            ExtentTestLogger.Debug("DropdownPage: Selecting element on dropdown by index: " + index);
+            ExtentTestLogger.Info("DropdownPage: Selecting element on dropdown by index: " + index);
             Select select = this.Driver.GetElement<Select>(this.dropDownLocator, 300);
             select.SelectByIndex(index);
         }
 
         public void SelectByValue(string value)
         {
-            ExtentTestLogger.Debug("DropdownPage: Selecting element on dropdown by value: " + value);
+            ExtentTestLogger.Info("DropdownPage: Selecting element on dropdown by value: " + value);
             Select select = this.Driver.GetElement<Select>(this.dropDownLocator, 300);
             select.SelectByValue(value);
         }
 
         public void SelectByText(string text, int timeout)
         {
-            ExtentTestLogger.Debug("DropdownPage: Selecting element on dropdown by visible text: " + text);
+            ExtentTestLogger.Info("DropdownPage: Selecting element on dropdown by visible text: " + text);
             Select select = this.Driver.GetElement<Select>(this.dropDownLocator);
             select.SelectByText(text, timeout);
         }
 
         public string SelectedOption()
         {
-            ExtentTestLogger.Debug("DropdownPage: Getting selected option");
+            ExtentTestLogger.Info("DropdownPage: Getting selected option");
             Select select = this.Driver.GetElement<Select>(this.dropDownLocator);
             return select.SelectElement().SelectedOption.Text;
         }
