@@ -239,7 +239,7 @@ jobs:
       with:
         name: OcarambaBuild
     - run: Expand-Archive -Path OcarambaBuild.zip -DestinationPath ./
-    - run: ./ExecutingTestsOnWindowsGithubActionsCore2.ps1
+    - run: ./ExecutingTestsOnWindowsGithubActions2.ps1
     - run: Get-ChildItem .\ -Recurse
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
@@ -247,7 +247,7 @@ jobs:
       with:
         files: |
           ${{ env.TestResultsDirWindows }}\*.xml
-        check_name: ExecutingTestsOnWindowsGithubActions2  
+        check_name: ExecutingTestsOnWindowsGithubActionsCore2  
   test_Stage_RunTestsOnWindowsFramework:
     runs-on: windows-latest
     needs:
