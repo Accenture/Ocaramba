@@ -38,6 +38,7 @@ jobs:
       run: '(Get-Content ''Ocaramba.sln'' -raw) -replace [regex](''.*?'' + ''Documentation'' + (''.*?\r\n'' * (5 + 1))) | set-content  ''Ocaramba.sln'''
     - name: Update ChromeDriver in csproj
       run: |
+        Get-ChildItem ./ *.csproj -recurse |
         Foreach-Object {
           $c = ($_ | Get-Content) 
           $c = $c -replace '109.0.5414.7400','${{ env.ChromeDriverVersion }}'
