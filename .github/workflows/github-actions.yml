@@ -158,11 +158,8 @@ jobs:
     - uses: actions/checkout@v4
     - run: |
         ls
-        
         export ASPNETCORE_ENVIRONMENT=Linux
-        
         echo $ASPNETCORE_ENVIRONMENT
-        
         sed -i '/Documentation/,+5 d' ./Ocaramba.sln     
     - run: dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
     - name: 'BrowserStack Env Setup'
@@ -185,18 +182,19 @@ jobs:
         MAPPED_ENV_BROWSERSTACKUSER: ${{ secrets.BROWSERSTACKUSER }}
         MAPPED_ENV_TESTINGBOTKEY: ${{ env.testingbotkey }}
         MAPPED_ENV_TESTINGBOTSECRET: ${{ env.testingbotsecret }}
-        MAPPED_ENV_SAUCELABSACCESSKEY: ${{ env.saucelabsaccessKey }}
-        MAPPED_ENV_SAUCELABSUSERNAME: ${{ env.saucelabsusername }}
+        MAPPED_ENV_SAUCELABSACCESSKEY: ${{ secrets.saucelabsaccessKey }}
+        MAPPED_ENV_SAUCELABSUSERNAME: ${{ secrets.saucelabsusername }}
+    - name: Publish Test Results
       run: ./ExecutingTestsOnLinuxBrowserStackGithubActions.ps1
     - name: 'Start BrowserStackLocal Tunnel'
       uses: 'browserstack/github-actions/setup-local@master'
       with:
-        local-testing: 'start'
+        local-testing: 'stop'
         local-logging-level: 'all-logs'
         local-identifier: 'random'
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/linux@v2
-      if: false
+      if: true
       with:
         files: |
           /home/runner/work/**/TestResults/*.xml
@@ -286,12 +284,13 @@ jobs:
     - run: Expand-Archive -Path OcarambaBuild.zip -DestinationPath ./
     - run: ./ExecutingTestsOnWindowsGithubActions4.ps1
       env:
-        MAPPED_ENV_BROWSERSTACKKEY: ${{ env.browserstackkey }}
-        MAPPED_ENV_BROWSERSTACKUSER: ${{ env.browserstackuser }}
+        MAPPED_ENV_BROWSERSTACKKEY: ${{ secrets.BROWSERSTACKKEY }}
+        MAPPED_ENV_BROWSERSTACKUSER: ${{ secrets.BROWSERSTACKUSER }}
         MAPPED_ENV_TESTINGBOTKEY: ${{ env.testingbotkey }}
         MAPPED_ENV_TESTINGBOTSECRET: ${{ env.testingbotsecret }}
-        MAPPED_ENV_SAUCELABSACCESSKEY: ${{ env.saucelabsaccessKey }}
-        MAPPED_ENV_SAUCELABSUSERNAME: ${{ env.saucelabsusername }}
+        MAPPED_ENV_SAUCELABSACCESSKEY: ${{ secrets.saucelabsaccessKey }}
+        MAPPED_ENV_SAUCELABSUSERNAME: ${{ secrets.saucelabsusername }}
+    - name: Publish Test Results
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
       if: always()
