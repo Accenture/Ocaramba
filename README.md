@@ -5,8 +5,8 @@
 
 [![Ocaramba Templates](https://img.shields.io/badge/get-Ocaramba_Templates-green.svg?color=4BC21F)](https://marketplace.visualstudio.com/items?itemName=Ocaramba.Ocaramba1)
 ![Build status](https://github.com/Accenture/Ocaramba/actions/workflows/github-actions.yml/badge.svg)
-[![BrowserStack Status](https://automate.browserstack.com/badge.svg?badge_key=LzcxRG9pYjdqMWF0SG5OTzVYcHJmdkVDVzdzVEZvSnUwNHB6MDJjRkFtZz0tLVQ5NHNtQkllOFQzOXl6T3BiOHFzZFE9PQ==--be558d9ee42bf47757e26a14b2848c8eccecf751)](https://automate.browserstack.com/public-build/LzcxRG9pYjdqMWF0SG5OTzVYcHJmdkVDVzdzVEZvSnUwNHB6MDJjRkFtZz0tLVQ5NHNtQkllOFQzOXl6T3BiOHFzZFE9PQ==--be558d9ee42bf47757e26a14b2848c8eccecf751)
-[![Build Status](https://saucelabs.com/buildstatus/jraczek)](https://saucelabs.com/beta/builds/8de234710c7c46f1b5d0e9c9438e5d06)
+[![BrowserStack Status](https://automate.browserstack.com/badge.svg?badge_key=ZUJWZGNEczFZVFNVWUJvUHJ6Y0pYUTlnSG4rYnhKVXFUeSsrYzlTUEZIZz0tLWxZUStLVnNqWml6bXNpcm1FSUxMQ3c9PQ==--20fde38e51169fe9739fc60ce188f00ecdf0f1fe)](https://automate.browserstack.com/public-build/ZUJWZGNEczFZVFNVWUJvUHJ6Y0pYUTlnSG4rYnhKVXFUeSsrYzlTUEZIZz0tLWxZUStLVnNqWml6bXNpcm1FSUxMQ3c9PQ==--20fde38e51169fe9739fc60ce188f00ecdf0f1fe)
+[![Sauce Test Status](https://app.saucelabs.com/buildstatus/jraczek)](https://app.saucelabs.com/u/JRACZEK)
 
 Test Framework was designed in Objectivity to propose a common way how people should create Selenium WebDriver tests.
 
