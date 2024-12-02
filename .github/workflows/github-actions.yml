@@ -157,7 +157,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - run: |
-        ls
+        ls 
         export ASPNETCORE_ENVIRONMENT=Linux
         echo $ASPNETCORE_ENVIRONMENT
         sed -i '/Documentation/,+5 d' ./Ocaramba.sln     
@@ -180,11 +180,10 @@ jobs:
       env:
         MAPPED_ENV_BROWSERSTACKKEY: ${{ secrets.BROWSERSTACKKEY }}
         MAPPED_ENV_BROWSERSTACKUSER: ${{ secrets.BROWSERSTACKUSER }}
-        MAPPED_ENV_TESTINGBOTKEY: ${{ env.testingbotkey }}
-        MAPPED_ENV_TESTINGBOTSECRET: ${{ env.testingbotsecret }}
+        MAPPED_ENV_TESTINGBOTKEY: ${{ secrets.testingbotkey }}
+        MAPPED_ENV_TESTINGBOTSECRET: ${{ secrets.testingbotsecret }}
         MAPPED_ENV_SAUCELABSACCESSKEY: ${{ secrets.saucelabsaccessKey }}
         MAPPED_ENV_SAUCELABSUSERNAME: ${{ secrets.saucelabsusername }}
-    - name: Publish Test Results
       run: ./ExecutingTestsOnLinuxBrowserStackGithubActions.ps1
     - name: 'Start BrowserStackLocal Tunnel'
       uses: 'browserstack/github-actions/setup-local@master'
@@ -286,11 +285,10 @@ jobs:
       env:
         MAPPED_ENV_BROWSERSTACKKEY: ${{ secrets.BROWSERSTACKKEY }}
         MAPPED_ENV_BROWSERSTACKUSER: ${{ secrets.BROWSERSTACKUSER }}
-        MAPPED_ENV_TESTINGBOTKEY: ${{ env.testingbotkey }}
-        MAPPED_ENV_TESTINGBOTSECRET: ${{ env.testingbotsecret }}
+        MAPPED_ENV_TESTINGBOTKEY: ${{ secrets.testingbotkey }}
+        MAPPED_ENV_TESTINGBOTSECRET: ${{ secrets.testingbotsecret }}
         MAPPED_ENV_SAUCELABSACCESSKEY: ${{ secrets.saucelabsaccessKey }}
         MAPPED_ENV_SAUCELABSUSERNAME: ${{ secrets.saucelabsusername }}
-    - name: Publish Test Results
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
       if: always()
@@ -333,10 +331,10 @@ jobs:
     - run: Expand-Archive -Path OcarambaBuild.zip -DestinationPath ./
     - run: ./ExecutingTestsOnWindowsGithubActions6.ps1
       env:
-        MAPPED_ENV_BROWSERSTACKKEY: ${{ env.browserstackkey }}
-        MAPPED_ENV_BROWSERSTACKUSER: ${{ env.browserstackuser }}
-        MAPPED_ENV_TESTINGBOTKEY: ${{ env.testingbotkey }}
-        MAPPED_ENV_TESTINGBOTSECRET: ${{ env.testingbotsecret }}
+        MAPPED_ENV_BROWSERSTACKKEY: ${{ secrets.BROWSERSTACKKEY }}
+        MAPPED_ENV_BROWSERSTACKUSER: ${{ secrets.BROWSERSTACKUSER }}
+        MAPPED_ENV_TESTINGBOTKEY: ${{ secrets.testingbotkey }}
+        MAPPED_ENV_TESTINGBOTSECRET: ${{ secrets.testingbotsecret }}
         MAPPED_ENV_SAUCELABSACCESSKEY: ${{ secrets.saucelabsaccessKey }}
         MAPPED_ENV_SAUCELABSUSERNAME: ${{ secrets.saucelabsusername }}
     - name: Publish Test Results
