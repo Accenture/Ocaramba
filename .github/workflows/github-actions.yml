@@ -38,7 +38,6 @@ jobs:
       run: '(Get-Content ''Ocaramba.sln'' -raw) -replace [regex](''.*?'' + ''Documentation'' + (''.*?\r\n'' * (5 + 1))) | set-content  ''Ocaramba.sln'''
     - name: Update ChromeDriver in csproj
       run: |
-        Get-ChildItem ./ *.csproj -recurse |
         Foreach-Object {
           $c = ($_ | Get-Content) 
           $c = $c -replace '109.0.5414.7400','${{ env.ChromeDriverVersion }}'
@@ -212,7 +211,6 @@ jobs:
         name: OcarambaBuild
     - run: Expand-Archive -Path OcarambaBuild.zip -DestinationPath ./
     - run: ./ExecutingTestsOnWindowsGithubActions1.ps1
-    - run: Get-ChildItem .\ -Recurse
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
       if: always()
@@ -240,7 +238,6 @@ jobs:
         name: OcarambaBuild
     - run: Expand-Archive -Path OcarambaBuild.zip -DestinationPath ./
     - run: ./ExecutingTestsOnWindowsGithubActions2.ps1
-    - run: Get-ChildItem .\ -Recurse
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
       if: always()
@@ -377,7 +374,6 @@ jobs:
     - uses: actions/download-artifact@v4
       with:
         name: OcarambaLiteS${{ env.frameworkVersion }}
-    - run: Get-ChildItem ./ -Recurse 
     - name: Push Nuget Package
       run: dotnet push .\Ocaramba\Ocaramba\Ocaramba.${{ env.frameworkVersion }}.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
       if: (success() && startsWith(github.ref, 'refs/tags/'))
