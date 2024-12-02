@@ -51,8 +51,8 @@ namespace Ocaramba.Tests.CloudProviderCrossBrowser.Tests
                 .GoToTablesPage();
             var table = tableElements.GetTableElements();
 
-            Assert.AreEqual("Smith", table[0][0]);
-            Assert.AreEqual("edit delete", table[3][5].Trim().Replace("\r", String.Empty).Replace("         ", String.Empty).Replace("\n", String.Empty));
+            Assert.That(table[0][0], Is.EqualTo("Smith"));
+            Assert.That(table[3][5].Trim().Replace("\r", String.Empty).Replace("         ", String.Empty).Replace("\n", String.Empty), Is.EqualTo("edit delete"));
         }
 
         [Test]
@@ -64,7 +64,7 @@ namespace Ocaramba.Tests.CloudProviderCrossBrowser.Tests
                 .ClickOnExample2();
 
             page.ClickStart();
-            Assert.AreEqual(page.Text, "Hello World!");
+            Assert.That(page.Text, Is.EqualTo("Hello World!"));
         }
     }
 }
