@@ -23,7 +23,7 @@ namespace Ocaramba.Tests.NUnitExtentReports.Tests
 
             dropdownPage.SelectByIndex(1);
 
-            Assert.AreEqual(dropdownPage.SelectedOption(), ExpectedOption);
+            Assert.That(dropdownPage.SelectedOption(), Is.EqualTo(ExpectedOption));
             test.Info("Verifying selected option, expected: " + ExpectedOption);
         }
 
