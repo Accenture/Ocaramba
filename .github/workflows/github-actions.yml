@@ -32,7 +32,7 @@ jobs:
       run: |
         $tags = git tag --sort=-creatordate   
         $tag = $tags[0]
-        Write-Host "##vso[task.setvariable variable=frameworkVersion]$tag"
+        echo "{frameworkVersion}={value}" >> "$tag"
       if: startsWith(github.ref, 'refs/tags/')
     - shell: powershell
       run: '(Get-Content ''Ocaramba.sln'' -raw) -replace [regex](''.*?'' + ''Documentation'' + (''.*?\r\n'' * (5 + 1))) | set-content  ''Ocaramba.sln'''
@@ -361,7 +361,7 @@ jobs:
       run: |
         $tags = git tag --sort=-creatordate   
         $tag = $tags[0]
-        Write-Host "##vso[task.setvariable variable=frameworkVersion]$tag"
+        echo "{frameworkVersion}={value}" >> "$tag"
       if: startsWith(github.ref, 'refs/tags/')
     - uses: actions/download-artifact@v4
       with:
