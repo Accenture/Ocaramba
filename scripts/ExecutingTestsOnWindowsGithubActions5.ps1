@@ -4,9 +4,9 @@ $url = $env:seleniumGridUrl
         
 $grid = $env:seleniumGridVersion
         
-$output = $PSScriptRoot + ".\Ocaramba\Ocaramba.Tests.NUnit\bin\Release\net472\$grid"
+$output = $PSScriptRoot + "..\Ocaramba\Ocaramba.Tests.NUnit\bin\Release\net472\$grid"
         
-$outputLogs = $PSScriptRoot + ".\Ocaramba\Ocaramba.Tests.NUnit\bin\Release\net472\"
+$outputLogs = $PSScriptRoot + "..\Ocaramba\Ocaramba.Tests.NUnit\bin\Release\net472\"
         
 $start_time = Get-Date
 
