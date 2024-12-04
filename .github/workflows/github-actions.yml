@@ -118,7 +118,7 @@ jobs:
         sudo apt-get install docker-compose -y
     - run: docker-compose -f docker-compose.yml up -d
     - shell: pwsh
-      run: ./ExecutingTestsOnDockerGithubActions.ps1
+      run: ./scripts/ExecutingTestsOnDockerGithubActions.ps1
       if: true
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/linux@v2
@@ -143,7 +143,7 @@ jobs:
         sed -i '/Documentation/,+5 d' ./Ocaramba.sln
     - run: dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
     - shell: pwsh
-      run: ./ExecutingTestsOnLinuxAzure.ps1
+      run: ./scripts/ExecutingTestsOnLinuxAzure.ps1
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/linux@v2
       if: true
@@ -184,7 +184,7 @@ jobs:
         MAPPED_ENV_TESTINGBOTSECRET: ${{ secrets.testingbotsecret }}
         MAPPED_ENV_SAUCELABSACCESSKEY: ${{ secrets.saucelabsaccessKey }}
         MAPPED_ENV_SAUCELABSUSERNAME: ${{ secrets.saucelabsusername }}
-      run: ./ExecutingTestsOnLinuxBrowserStackGithubActions.ps1
+      run: ./scripts/ExecutingTestsOnLinuxBrowserStackGithubActions.ps1
     - name: 'Start BrowserStackLocal Tunnel'
       uses: 'browserstack/github-actions/setup-local@master'
       with:
@@ -211,7 +211,7 @@ jobs:
       with:
         name: OcarambaBuild
     - run: Expand-Archive -Path OcarambaBuild.zip -DestinationPath ./
-    - run: ./ExecutingTestsOnWindowsGithubActions1.ps1
+    - run: ./scripts/ExecutingTestsOnWindowsGithubActions1.ps1
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
       if: always()
@@ -238,7 +238,7 @@ jobs:
       with:
         name: OcarambaBuild
     - run: Expand-Archive -Path OcarambaBuild.zip -DestinationPath ./
-    - run: ./ExecutingTestsOnWindowsGithubActions2.ps1
+    - run: ./scripts/ExecutingTestsOnWindowsGithubActions2.ps1
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
       if: always()
@@ -259,7 +259,7 @@ jobs:
       with:
         name: OcarambaBuild
     - run: Expand-Archive -Path OcarambaBuild.zip -DestinationPath ./
-    - run: ./ExecutingTestsOnWindowsGithubActions3.ps1
+    - run: ./scripts/ExecutingTestsOnWindowsGithubActions3.ps1
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
       if: always()
@@ -279,7 +279,7 @@ jobs:
       with:
         name: OcarambaBuild
     - run: Expand-Archive -Path OcarambaBuild.zip -DestinationPath ./
-    - run: ./ExecutingTestsOnWindowsGithubActions4.ps1
+    - run: ./scripts/ExecutingTestsOnWindowsGithubActions4.ps1
       env:
         MAPPED_ENV_BROWSERSTACKKEY: ${{ secrets.BROWSERSTACKKEY }}
         MAPPED_ENV_BROWSERSTACKUSER: ${{ secrets.BROWSERSTACKUSER }}
@@ -306,7 +306,7 @@ jobs:
       with:
         name: OcarambaBuild
     - run: Expand-Archive -Path OcarambaBuild.zip -DestinationPath ./
-    - run: ./ExecutingTestsOnWindowsGithubActions5.ps1
+    - run: ./scripts/ExecutingTestsOnWindowsGithubActions5.ps1
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
       if: always()
@@ -327,7 +327,7 @@ jobs:
       with:
         name: OcarambaBuild
     - run: Expand-Archive -Path OcarambaBuild.zip -DestinationPath ./
-    - run: ./ExecutingTestsOnWindowsGithubActions6.ps1
+    - run: ./scripts/ExecutingTestsOnWindowsGithubActions6.ps1
       env:
         MAPPED_ENV_BROWSERSTACKKEY: ${{ secrets.BROWSERSTACKKEY }}
         MAPPED_ENV_BROWSERSTACKUSER: ${{ secrets.BROWSERSTACKUSER }}
