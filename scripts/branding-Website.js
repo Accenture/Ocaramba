@@ -2,14 +2,14 @@
 // System  : Sandcastle Help File Builder
 // File    : branding-Website.js
 // Author  : Eric Woodruff  (Eric@EWoodruff.us)
-// Updated : 03/04/2015
-// Note    : Copyright 2014-2015, Eric Woodruff, All rights reserved
-//           Portions Copyright 2014 Sam Harwell, All rights reserved
+// Updated : 08/02/2024
+// Note    : Copyright 2014-2024, Eric Woodruff, All rights reserved
+//           Portions Copyright 2014-2024 Sam Harwell, All rights reserved
 //
 // This file contains the methods necessary to implement the lightweight TOC and search functionality.
 //
 // This code is published under the Microsoft Public License (Ms-PL).  A copy of the license should be
-// distributed with the code.  It can also be found at the project website: https://GitHub.com/EWSoftware/SHFB.  This
+// distributed with the code and can be found at the project website: https://GitHub.com/EWSoftware/SHFB.  This
 // notice, the author's name, and all copyright notices must remain intact in all applications, documentation,
 // and source files.
 //
@@ -122,6 +122,7 @@ function Toggle(item)
 
             $.ajax({
                 url: "../toc/" + tocid + ".xml",
+                cache: false,
                 async: true,
                 dataType: "xml",
                 success: function(data)
@@ -223,12 +224,12 @@ function BuildChildren(tocDiv, data)
             var expander = "";
 
             if(hasChildren)
-                expander = "<a class=\"tocCollapsed\" onclick=\"javascript: Toggle(this);\" href=\"#!\"></a>";
+                expander = "<a class=\"tocCollapsed\" onclick=\"Toggle(this);\" href=\"#!\"></a>";
 
             var text = "<div class=\"toclevel" + childTocLevel + "\" data-toclevel=\"" + childLevel + "\">" +
                 expander + "<a data-tochassubtree=\"" + hasChildren + "\" href=\"" + childHRef + "\" title=\"" +
                 childTitle + "\" tocid=\"" + childId + "\"" +
-                (childHRef == "#" ? " onclick=\"javascript: Toggle(this.previousSibling);\"" : "") + ">" +
+                (childHRef == "#" ? " onclick=\"Toggle(this.previousSibling);\"" : "") + ">" +
                 childTitle + "</a></div>";
 
             tocDiv.after(text);
@@ -377,6 +378,7 @@ function PerformSearch()
         $.ajax({
             type: "GET",
             url: encodeURI("SearchHelp.aspx?Keywords=" + searchText + "&SortByTitle=" + sortByTitle),
+            cache: false,
             success: function(html)
             {
                 searchResults.innerHTML = html;
@@ -391,6 +393,7 @@ function PerformSearch()
         $.ajax({
             type: "GET",
             url: encodeURI("SearchHelp.php?Keywords=" + searchText + "&SortByTitle=" + sortByTitle),
+            cache: false,
             success: function(html)
             {
                 searchResults.innerHTML = html;
@@ -409,6 +412,7 @@ function PerformSearch()
     $.ajax({
         type: "GET",
         url: "fti/FTI_Files.json",
+        cache: false,
         dataType: "json",
         async: false,
         success: function(data)
@@ -436,6 +440,7 @@ function PerformSearch()
             $.ajax({
                 type: "GET",
                 url: "fti/FTI_" + letter.charCodeAt(0) + ".json",
+                cache: false,
                 dataType: "json",
                 async: false,
                 success: function(data)
@@ -471,6 +476,7 @@ function DetermineSearchMethod()
         $.ajax({
             type: "GET",
             url: "SearchHelp.aspx",
+            cache: false,
             async: false,
             success: function(html)
             {
@@ -483,6 +489,7 @@ function DetermineSearchMethod()
             $.ajax({
                 type: "GET",
                 url: "SearchHelp.php",
+                cache: false,
                 async: false,
                 success: function(html)
                 {
@@ -509,13 +516,8 @@ function ParseKeywords(keywords)
     {
         checkWord = words[idx].toLowerCase();
 
-        if(checkWord.length > 2)
-        {
-            var charCode = checkWord.charCodeAt(0);
-
-            if((charCode < 48 || charCode > 57) && $.inArray(checkWord, keywordList) == -1)
-                keywordList.push(checkWord);
-        }
+        if(checkWord.length >= 2 && $.inArray(checkWord, keywordList) == -1)
+            keywordList.push(checkWord);
     }
 
     return keywordList;
