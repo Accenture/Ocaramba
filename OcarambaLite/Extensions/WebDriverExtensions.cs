@@ -196,6 +196,7 @@ namespace Ocaramba.Extensions
                         }
                     }
 
+                    Logger.Debug($"Driver url {driver.Url}");
                     return false;
                 });
         }

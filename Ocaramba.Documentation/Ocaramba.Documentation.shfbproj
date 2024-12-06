@@ -54,8 +54,9 @@
     <Preliminary>False</Preliminary>
     <HeaderText>Framework to automate tests using Selenium WebDriver</HeaderText>
     <FeedbackEMailAddress>ocaramba%40objectivity.co.uk</FeedbackEMailAddress>
-    <CopyrightHref>http://www.objectivity.co.uk/</CopyrightHref>
-    <FeedbackEMailAddress>ocarmaba%40objectivity.co.uk</FeedbackEMailAddress>
+    <CopyrightHref>http://www.accenture.com</CopyrightHref>
+    <FeedbackEMailAddress>
+    </FeedbackEMailAddress>
     <SdkLinkTarget>Blank</SdkLinkTarget>
     <MissingTags>Summary, Parameter, Returns, AutoDocumentCtors, TypeParameter, AutoDocumentDispose</MissingTags>
     <DocumentationSources>
@@ -77,6 +78,7 @@
         </configuration>
       </PlugInConfig>
     </PlugInConfigurations>
+    <FrameworkVersion>.NET Framework 4.7.2</FrameworkVersion>
   </PropertyGroup>
   <!-- There are no properties for these groups.  AnyCPU needs to appear in order for Visual Studio to perform
 			 the build.  The others are optional common platform types that may appear. -->

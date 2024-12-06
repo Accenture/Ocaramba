@@ -38,12 +38,10 @@ namespace Ocaramba.Tests.NUnit.Tests
             var basicAuthPage =
                 new InternetPage(this.DriverContext).OpenHomePageWithUserCredentials().GoToBasicAuthPage();
 
-            //Verify.That(
-            //    this.DriverContext,
-            //    () =>
-                //Assert.AreEqual(
-                //    "Congratulations! You must have the proper credentials.",
-                //    basicAuthPage.GetCongratulationsInfo));
+            Verify.That(
+                this.DriverContext,
+                () => Assert.That(basicAuthPage.GetCongratulationsInfo, Is.EqualTo("Congratulations! You must have the proper credentials."))
+            );
         }
 
         [Test]
@@ -54,10 +52,11 @@ namespace Ocaramba.Tests.NUnit.Tests
 
             var forgotPassword = new ForgotPasswordPage(this.DriverContext);
 
-            //Verify.That(
-            //    this.DriverContext,
-            //    () => Assert.AreEqual(5 + 7 + 2, forgotPassword.EnterEmail(5, 7, 2)),
-            //    () => Assert.AreEqual("Your e-mail's been sent!", forgotPassword.ClickRetrievePassword));
+            Verify.That(
+                this.DriverContext,
+                () => Assert.That(forgotPassword.EnterEmail(5, 7, 2), Is.EqualTo(5 + 7 + 2)),
+                () => Assert.That(forgotPassword.ClickRetrievePassword, Is.EqualTo("Your e-mail's been sent!"))
+            );
         }
 
         [Test]
@@ -70,8 +69,8 @@ namespace Ocaramba.Tests.NUnit.Tests
                 .GoToMultipleWindowsPage()
                 .OpenNewWindowPage();
 
-           // Assert.True(newWindowPage.IsPageTile(PageTitle), "wrong page title, should be {0}", PageTitle);
-            //Assert.True(newWindowPage.IsNewWindowH3TextVisible(PageTitle), "text is not equal to {0}", PageTitle);
+            Assert.That(newWindowPage.IsPageTile(PageTitle), Is.True, "wrong page title, should be {0}", PageTitle);
+            Assert.That(newWindowPage.IsNewWindowH3TextVisible(PageTitle), Is.True, "text is not equal to {0}", PageTitle);
         }
 
         [Test]
