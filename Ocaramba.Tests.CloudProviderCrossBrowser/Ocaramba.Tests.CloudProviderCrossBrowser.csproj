@@ -20,7 +20,7 @@
 	  <PackageReference Include="System.Text.Json" Version="9.0.0" />
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
 	<PackageReference Include="NLog" Version="5.3.4" />
-    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="131.0.6778.8500" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="131.0.6778.10800" />
     <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.35.0" />
   </ItemGroup>
   
