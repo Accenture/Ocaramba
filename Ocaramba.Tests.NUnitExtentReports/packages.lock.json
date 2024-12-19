@@ -121,9 +121,9 @@
       },
       "Selenium.WebDriver.ChromeDriver": {
         "type": "Direct",
-        "requested": "[131.0.6778.8500, )",
-        "resolved": "131.0.6778.8500",
-        "contentHash": "xi6B90m0dx8SRAo7HFLNflH1q6A4ISuHCc4cmIAn9KVqdw1H6ePEgyspO4odkLaQgrnYn++81i9WaXgyNdHdtA=="
+        "requested": "[131.0.6778.20400, )",
+        "resolved": "131.0.6778.20400",
+        "contentHash": "K3U9GgnAJES8DJEsjiDhHC7M5yBoJAKmBi+FO8Gy+NEhKI+LFSvC6du5IQ8/t9yYV59obU6DBVraYxNgcxXXpg=="
       },
       "Selenium.WebDriver.GeckoDriver": {
         "type": "Direct",
@@ -1118,7 +1118,7 @@
           "OcarambaLite": "[1.0.0, )",
           "Selenium.Support": "[4.27.0, )",
           "Selenium.WebDriver": "[4.27.0, )",
-          "Selenium.WebDriver.ChromeDriver": "[131.0.6778.8500, )",
+          "Selenium.WebDriver.ChromeDriver": "[131.0.6778.20400, )",
           "Selenium.WebDriver.GeckoDriver": "[0.35.0, )",
           "System.Configuration.ConfigurationManager": "[9.0.0, )"
         }
