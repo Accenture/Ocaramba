@@ -6,6 +6,7 @@ permissions:
   checks: write
   contents: read
   issues: write
+  pull-requests: write
 version: 2
 updates:
   - package-ecosystem: "nuget" # See documentation for possible values
