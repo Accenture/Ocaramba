@@ -11,7 +11,9 @@ on:
   schedule:
   - cron: '0 18 * * 0'
 permissions:
-   checks: write
+  checks: write
+  contents: read
+  issues: write
 env:
   solution: ${{ github.workspace }}/Ocaramba.sln
   buildPlatform: Any CPU
