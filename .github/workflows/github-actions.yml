@@ -10,6 +10,8 @@ on:
     - '*'
   schedule:
   - cron: '0 18 * * 0'
+permissions:
+   checks: write
 env:
   solution: ${{ github.workspace }}/Ocaramba.sln
   buildPlatform: Any CPU
