@@ -1,4 +1,4 @@
-﻿// <copyright file="BrowserType.cs" company="Objectivity Bespoke Software Specialists">
+﻿// <copyright file="BrowserType.cs" company="Accenture">
 // Copyright (c) Objectivity Bespoke Software Specialists. All rights reserved.
 // </copyright>
 // <license>

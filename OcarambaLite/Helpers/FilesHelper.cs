@@ -1,4 +1,4 @@
-﻿// <copyright file="FilesHelper.cs" company="Objectivity Bespoke Software Specialists">
+﻿// <copyright file="FilesHelper.cs" company="Accenture">
 // Copyright (c) Objectivity Bespoke Software Specialists. All rights reserved.
 // </copyright>
 // <license>

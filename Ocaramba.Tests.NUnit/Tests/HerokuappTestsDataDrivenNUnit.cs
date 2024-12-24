@@ -1,4 +1,4 @@
-﻿// <copyright file="HerokuappTestsDataDrivenNUnit.cs" company="Objectivity Bespoke Software Specialists">
+﻿// <copyright file="HerokuappTestsDataDrivenNUnit.cs" company="Accenture">
 // Copyright (c) Objectivity Bespoke Software Specialists. All rights reserved.
 // </copyright>
 // <license>

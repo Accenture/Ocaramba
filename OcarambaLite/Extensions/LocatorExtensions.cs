@@ -1,4 +1,4 @@
-﻿// <copyright file="LocatorExtensions.cs" company="Objectivity Bespoke Software Specialists">
+﻿// <copyright file="LocatorExtensions.cs" company="Accenture">
 // Copyright (c) Objectivity Bespoke Software Specialists. All rights reserved.
 // </copyright>
 // <license>

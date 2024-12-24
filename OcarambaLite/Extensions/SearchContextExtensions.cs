@@ -1,4 +1,4 @@
-﻿// <copyright file="SearchContextExtensions.cs" company="Objectivity Bespoke Software Specialists">
+﻿// <copyright file="SearchContextExtensions.cs" company="Accenture">
 // Copyright (c) Objectivity Bespoke Software Specialists. All rights reserved.
 // </copyright>
 // <license>

@@ -1,4 +1,4 @@
-﻿// <copyright file="NestedFramesPage.cs" company="Objectivity Bespoke Software Specialists">
+﻿// <copyright file="NestedFramesPage.cs" company="Accenture">
 // Copyright (c) Objectivity Bespoke Software Specialists. All rights reserved.
 // </copyright>
 // <license>

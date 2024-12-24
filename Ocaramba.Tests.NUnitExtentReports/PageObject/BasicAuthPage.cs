@@ -1,4 +1,4 @@
-﻿// <copyright file="BasicAuthPage.cs" company="Objectivity Bespoke Software Specialists">
+﻿// <copyright file="BasicAuthPage.cs" company="Accenture">
 // Copyright (c) Objectivity Bespoke Software Specialists. All rights reserved.
 // </copyright>
 // <license>

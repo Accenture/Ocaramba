@@ -1,4 +1,4 @@
-﻿// <copyright file="PrintPerformanceResultsHelper.cs" company="Objectivity Bespoke Software Specialists">
+﻿// <copyright file="PrintPerformanceResultsHelper.cs" company="Accenture">
 // Copyright (c) Objectivity Bespoke Software Specialists. All rights reserved.
 // </copyright>
 // <license>

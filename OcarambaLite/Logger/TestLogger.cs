@@ -1,4 +1,4 @@
-﻿// <copyright file="TestLogger.cs" company="Objectivity Bespoke Software Specialists">
+﻿// <copyright file="TestLogger.cs" company="Accenture">
 // Copyright (c) Objectivity Bespoke Software Specialists. All rights reserved.
 // </copyright>
 // <license>
@@ -20,13 +20,13 @@
 //     SOFTWARE.
 // </license>
 
-namespace Ocaramba.Logger
+using System;
+using System.Globalization;
+using NLog;
+using Ocaramba;
+
+namespace OcarambaLite.Logger
 {
-    using System;
-    using System.Globalization;
-
-    using NLog;
-
     /// <summary>
     /// Class for test logger.
     /// </summary>
@@ -55,7 +55,7 @@ namespace Ocaramba.Logger
         {
             this.startTestTime = DateTime.Now;
             this.Info("*************************************************************************************");
-            this.Info("START: {0} starts at {1}.", driverContext.TestTitle, this.startTestTime);
+            this.Info($"START: {driverContext.TestTitle} starts at {this.startTestTime}.");
         }
 
         /// <summary>
@@ -65,8 +65,8 @@ namespace Ocaramba.Logger
         public void LogTestEnding(DriverContext driverContext)
         {
             var endTestTime = DateTime.Now;
-            var timeInSec = (endTestTime - this.startTestTime).TotalMilliseconds / 1000d;
-            this.Info("END: {0} ends at {1} after {2} sec.", driverContext.TestTitle, endTestTime, timeInSec.ToString("##,###", CultureInfo.CurrentCulture));
+            var timeInSec = (endTestTime - this.startTestTime).TotalSeconds;
+            this.Info($"END: {driverContext.TestTitle} ends at {endTestTime} after {timeInSec.ToString("N2", CultureInfo.CurrentCulture)} sec.");
             this.Info("*************************************************************************************");
         }
 
@@ -126,7 +126,7 @@ namespace Ocaramba.Logger
         /// <param name="e">The e.</param>
         public void LogError(Exception e)
         {
-            this.Error("Error occurred: {0}", e);
+            this.Error($"Error occurred: {e}");
             throw e;
         }
     }

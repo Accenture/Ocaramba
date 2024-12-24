@@ -1,4 +1,4 @@
-﻿// <copyright file="Verify.cs" company="Objectivity Bespoke Software Specialists">
+﻿// <copyright file="Verify.cs" company="Accenture">
 // Copyright (c) Objectivity Bespoke Software Specialists. All rights reserved.
 // </copyright>
 // <license>

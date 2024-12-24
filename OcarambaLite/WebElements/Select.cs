@@ -1,4 +1,4 @@
-﻿// <copyright file="Select.cs" company="Objectivity Bespoke Software Specialists">
+﻿// <copyright file="Select.cs" company="Accenture">
 // Copyright (c) Objectivity Bespoke Software Specialists. All rights reserved.
 // </copyright>
 // <license>

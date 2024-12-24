@@ -1,4 +1,4 @@
-﻿// <copyright file="DynamicControlsPage.cs" company="Objectivity Bespoke Software Specialists">
+﻿// <copyright file="DynamicControlsPage.cs" company="Accenture">
 // Copyright (c) Objectivity Bespoke Software Specialists. All rights reserved.
 // </copyright>
 // <license>

@@ -1,4 +1,4 @@
-﻿// <copyright file="InternetPage.cs" company="Objectivity Bespoke Software Specialists">
+﻿// <copyright file="InternetPage.cs" company="Accenture">
 // Copyright (c) Objectivity Bespoke Software Specialists. All rights reserved.
 // </copyright>
 // <license>

@@ -1,4 +1,4 @@
-﻿// <copyright file="IFramePage.cs" company="Objectivity Bespoke Software Specialists">
+﻿// <copyright file="IFramePage.cs" company="Accenture">
 // Copyright (c) Objectivity Bespoke Software Specialists. All rights reserved.
 // </copyright>
 // <license>

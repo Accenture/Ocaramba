@@ -1,4 +1,4 @@
-﻿// <copyright file="CheckboxesPage.cs" company="Objectivity Bespoke Software Specialists">
+﻿// <copyright file="CheckboxesPage.cs" company="Accenture">
 // Copyright (c) Objectivity Bespoke Software Specialists. All rights reserved.
 // </copyright>
 // <license>

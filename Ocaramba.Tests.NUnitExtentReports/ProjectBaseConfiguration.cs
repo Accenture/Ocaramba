@@ -1,4 +1,4 @@
-﻿// <copyright file="ProjectBaseConfiguration.cs" company="Objectivity Bespoke Software Specialists">
+﻿// <copyright file="ProjectBaseConfiguration.cs" company="Accenture">
 // Copyright (c) Objectivity Bespoke Software Specialists. All rights reserved.
 // </copyright>
 // <license>

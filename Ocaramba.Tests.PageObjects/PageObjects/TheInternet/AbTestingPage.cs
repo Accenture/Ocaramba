@@ -1,4 +1,4 @@
-﻿// <copyright file="AbTestingPage.cs" company="Objectivity Bespoke Software Specialists">
+﻿// <copyright file="AbTestingPage.cs" company="Accenture">
 // Copyright (c) Objectivity Bespoke Software Specialists. All rights reserved.
 // </copyright>
 // <license>

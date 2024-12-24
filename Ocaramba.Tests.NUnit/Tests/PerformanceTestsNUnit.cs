@@ -1,4 +1,4 @@
-﻿// <copyright file="PerformanceTestsNUnit.cs" company="Objectivity Bespoke Software Specialists">
+﻿// <copyright file="PerformanceTestsNUnit.cs" company="Accenture">
 // Copyright (c) Objectivity Bespoke Software Specialists. All rights reserved.
 // </copyright>
 // <license>

@@ -1,4 +1,4 @@
-﻿// <copyright file="SecureFileDownloadPage.cs" company="Objectivity Bespoke Software Specialists">
+﻿// <copyright file="SecureFileDownloadPage.cs" company="Accenture">
 // Copyright (c) Objectivity Bespoke Software Specialists. All rights reserved.
 // </copyright>
 // <license>

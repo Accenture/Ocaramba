@@ -1,4 +1,4 @@
-// <copyright file="DriverContext.cs" company="Objectivity Bespoke Software Specialists">
+// <copyright file="DriverContext.cs" company="Accenture">
 // Copyright (c) Objectivity Bespoke Software Specialists. All rights reserved.
 // </copyright>
 // <license>
@@ -19,6 +19,8 @@
 //     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //     SOFTWARE.
 // </license>
+
+using OcarambaLite.Logger;
 
 namespace Ocaramba
 {
