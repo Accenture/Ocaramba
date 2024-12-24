@@ -21,6 +21,7 @@
 // </license>
 
 using System.IO;
+using OcarambaLite.Logger;
 
 namespace Ocaramba.Tests.NUnitExtentReports
 {
