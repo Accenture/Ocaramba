@@ -2,11 +2,6 @@
 # package ecosystems to update and where the package manifests are located.
 # Please see the documentation for all configuration options:
 # https://help.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
-permissions:
-  checks: write
-  contents: read
-  issues: write
-  pull-requests: write
 version: 2
 updates:
   - package-ecosystem: "nuget" # See documentation for possible values
