@@ -14,6 +14,7 @@ permissions:
   checks: write
   contents: read
   issues: write
+  pull-requests: write
 env:
   solution: ${{ github.workspace }}/Ocaramba.sln
   buildPlatform: Any CPU
