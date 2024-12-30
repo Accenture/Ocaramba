@@ -44,9 +44,9 @@
       },
       "NUnit": {
         "type": "Direct",
-        "requested": "[4.2.2, )",
-        "resolved": "4.2.2",
-        "contentHash": "mon0OPko28yZ/foVXrhiUvq1LReaGsBdziumyyYGxV/pOE4q92fuYeN+AF+gEU5pCjzykcdBt5l7xobTaiBjsg=="
+        "requested": "[4.3.2, )",
+        "resolved": "4.3.2",
+        "contentHash": "puVXayXNmEu7MFQSUswGmUjOy3M3baprMbkLl5PAutpeDoGTr+jPv33qAYsqxywi2wJCq8l/O3EhHoLulPE1iQ=="
       },
       "NUnit.Runners": {
         "type": "Direct",
@@ -1095,7 +1095,7 @@
           "NLog": "[5.3.4, )",
           "NLog.Web.AspNetCore": "[5.3.15, )",
           "NPOI": "[2.7.2, )",
-          "NUnit": "[4.2.2, )",
+          "NUnit": "[4.3.2, )",
           "NUnit.Runners": "[3.12.0, )",
           "Ocaramba.Tests.PageObjects": "[1.0.0, )",
           "OcarambaLite": "[1.0.0, )",
