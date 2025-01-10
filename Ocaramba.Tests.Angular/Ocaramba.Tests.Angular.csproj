@@ -8,7 +8,6 @@
     <PackageReference Include="Appveyor.TestLogger" Version="2.0.0" />
     <PackageReference Include="NLog" Version="5.3.4" />
     <PackageReference Include="System.Text.Json" Version="9.0.0" />
-    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
     <PackageReference Include="NUnit" Version="4.3.2" />
     <PackageReference Include="NUnit.Runners" Version="3.12.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.6.0">
@@ -19,6 +18,7 @@
     <PackageReference Include="Selenium.WebDriver" Version="4.27.0" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="131.0.6778.8500" />
     <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.35.0" />
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.1.0" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net472'">
 	<Reference Include="System.Configuration" />
