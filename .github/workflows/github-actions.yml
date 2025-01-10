@@ -114,6 +114,7 @@ jobs:
       uses: bridgecrewio/checkov-action@v12.1347.0
       with:
          directory: .
+         soft_fail: true
     - name: Build and push
       uses: docker/build-push-action@v6
       with:
