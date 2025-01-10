@@ -57,3 +57,8 @@ RUN BASE_URL=https://github.com/mozilla/geckodriver/releases/download \
     tar -xz -C /usr/local/bin
 
 ENV ASPNETCORE_ENVIRONMENT Linux
+#=========
+# Health Check
+#=========
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+  CMD dotnet --info || exit 1
