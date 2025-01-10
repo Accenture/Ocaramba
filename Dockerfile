@@ -58,6 +58,11 @@ RUN BASE_URL=https://github.com/mozilla/geckodriver/releases/download \
 
 ENV ASPNETCORE_ENVIRONMENT Linux
 #=========
+# Create a user and switch to it
+#=========
+RUN groupadd -r ocaramba && useradd -r -g ocaramba ocaramba
+USER ocaramba
+#=========
 # Health Check
 #=========
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
