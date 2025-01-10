@@ -128,6 +128,7 @@ jobs:
       uses: aquasecurity/trivy-action@0.29.0
       with:
         severity: MEDIUM,HIGH,CRITICAL
+        image-ref: ocaramba/selenium:latest
     - name: Install Docker Compose 
       run: | 
         sudo apt-get update 
