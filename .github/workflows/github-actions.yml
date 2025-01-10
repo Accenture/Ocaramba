@@ -110,6 +110,18 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
       if: startsWith(github.ref, 'refs/tags/')
+    - name: install checkov
+      run: |
+          ls $(pwd)/app/dockerfile/java
+          sudo apt update
+          sudo apt install software-properties-common
+          sudo add-apt-repository ppa:deadsnakes/ppa
+          sudo apt install python3.7
+          sudo apt install python3-pip
+          sudo python3.7 -m pip install -U checkov
+    - name: Scan Dockerfile
+      run: |
+          checkov --directory .
     - name: Build and push
       uses: docker/build-push-action@v6
       with:
