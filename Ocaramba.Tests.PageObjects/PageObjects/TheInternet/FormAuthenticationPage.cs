@@ -72,7 +72,7 @@ namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
 
         public void EnterPassword(string password)
         {
-            Logger.Info(CultureInfo.CurrentCulture, "Password '{0}'", password);
+            Logger.Info(CultureInfo.CurrentCulture, "Password '{0}'", new string('*', password.Length));
             this.Driver.GetElement(this.passwordForm).SendKeys(password);
             this.Driver.WaitForAjax();
         }
