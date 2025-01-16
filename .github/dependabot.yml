@@ -8,3 +8,9 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "daily"
+      
+  - package-ecosystem: "docker"
+    directory: "/"
+    # Check for updates once a week
+    schedule:
+      interval: "weekly"
