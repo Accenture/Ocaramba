@@ -87,7 +87,11 @@ jobs:
         path: ./OcarambaLite/bin/Release/OcarambaLite.${{ env.frameworkVersion }}.snupkg
         name: OcarambaLiteS${{ env.frameworkVersion }}
     - name: Zip artifact for deployment
-      run: Compress-Archive -Path ./ -Destination OcarambaBuild.zip
+      run: |
+        $subfolders = Get-ChildItem -Path "/bin/Release/" -Directory
+        foreach ($folder in $subfolders) {
+            Compress-Archive -Path $folder.FullName -Destination OcarambaBuild.zip
+        }
     - uses: actions/upload-artifact@v4
       with:
         path: OcarambaBuild.zip   
