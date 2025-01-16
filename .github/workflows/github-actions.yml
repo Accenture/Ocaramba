@@ -306,7 +306,7 @@ jobs:
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
       if: always()
       with:
-        files: ${{ env.TestResultsDirWindows }}\*.xml
+        files: ${{ env.TestResultsDirWindows }}\*.trx
         check_name: ExecutingTestsOnWindowsGithubActionsBrowserStack4  
   test_Stage_RunTestsSeleniumGrid:
     runs-on: windows-latest
