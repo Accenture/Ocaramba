@@ -150,8 +150,8 @@ jobs:
       with:
         install-chromedriver: true
     - run: chrome --version
-    - uses: shell  
-    - run: |
+    - shell: cmd  
+      run: |
         ls
         export ASPNETCORE_ENVIRONMENT=Linux
         echo $ASPNETCORE_ENVIRONMENT
