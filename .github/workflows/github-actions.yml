@@ -226,7 +226,9 @@ jobs:
       with:
         name: OcarambaBuild
     - shell: cmd
-      run: 7z x "OcarambaBuild.zip" -y -bb
+      run: |
+        7z x "OcarambaBuild.zip" -o.\Ocaramba -y -bb 
+        7z x "Ocaramba\OcarambaBuild.zip" -o* -y -bb
     - run: ./scripts/ExecutingTestsOnWindowsGithubActions1.ps1
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
