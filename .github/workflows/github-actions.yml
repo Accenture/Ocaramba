@@ -226,7 +226,7 @@ jobs:
       with:
         name: OcarambaBuild
     - shell: cmd
-      run: 7z x "OcarambaBuild.zip"
+      run: 7z x "OcarambaBuild.zip" -y -bb
     - run: ./scripts/ExecutingTestsOnWindowsGithubActions1.ps1
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
@@ -254,7 +254,7 @@ jobs:
       with:
         name: OcarambaBuild
     - shell: cmd
-      run: 7z x "OcarambaBuild.zip"
+      run: 7z x "OcarambaBuild.zip" -y -bb
     - run: ./scripts/ExecutingTestsOnWindowsGithubActions2.ps1
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
@@ -276,7 +276,7 @@ jobs:
       with:
         name: OcarambaBuild
     - shell: cmd
-      run: 7z x "OcarambaBuild.zip"
+      run: 7z x "OcarambaBuild.zip" -y -bb
     - run: ./scripts/ExecutingTestsOnWindowsGithubActions3.ps1
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
@@ -297,7 +297,7 @@ jobs:
       with:
         name: OcarambaBuild
     - shell: cmd
-      run: 7z x "OcarambaBuild.zip"
+      run: 7z x "OcarambaBuild.zip" -y -bb
     - run: ./scripts/ExecutingTestsOnWindowsGithubActions4.ps1
       env:
         MAPPED_ENV_BROWSERSTACKKEY: ${{ secrets.BROWSERSTACKKEY }}
@@ -325,7 +325,7 @@ jobs:
       with:
         name: OcarambaBuild
     - shell: cmd
-      run: 7z x "OcarambaBuild.zip"
+      run: 7z x "OcarambaBuild.zip" -y -bb
     - run: ./scripts/ExecutingTestsOnWindowsGithubActions5.ps1
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
@@ -347,7 +347,7 @@ jobs:
       with:
         name: OcarambaBuild
     - shell: cmd
-      run: 7z x "OcarambaBuild.zip"
+      run: 7z x "OcarambaBuild.zip" -y -bb
     - run: ./scripts/ExecutingTestsOnWindowsGithubActions6.ps1
       env:
         MAPPED_ENV_BROWSERSTACKKEY: ${{ secrets.BROWSERSTACKKEY }}
