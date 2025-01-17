@@ -220,7 +220,7 @@ jobs:
     - shell: cmd
       run: |
         7z x "OcarambaBuild.zip" -o.\Ocaramba -y -bb
-    - run: ./scripts/ExecutingTestsOnWindowsGithubActions1.ps1
+    - run: ./Ocaramba/scripts/ExecutingTestsOnWindowsGithubActions1.ps1
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
       if: always()
@@ -244,7 +244,7 @@ jobs:
         name: OcarambaBuild
     - shell: cmd
       run: 7z x "OcarambaBuild.zip" -o.\Ocaramba -y -bb
-    - run: ./scripts/ExecutingTestsOnWindowsGithubActions2.ps1
+    - run: ./Ocaramba/scripts/ExecutingTestsOnWindowsGithubActions2.ps1
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
       if: always()
@@ -262,7 +262,7 @@ jobs:
         name: OcarambaBuild
     - shell: cmd
       run: 7z x "OcarambaBuild.zip" -o.\Ocaramba -y -bb
-    - run: ./scripts/ExecutingTestsOnWindowsGithubActions3.ps1
+    - run: ./Ocaramba/scripts/ExecutingTestsOnWindowsGithubActions3.ps1
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
       if: always()
@@ -279,7 +279,7 @@ jobs:
         name: OcarambaBuild
     - shell: cmd
       run: 7z x "OcarambaBuild.zip" -o.\Ocaramba -y -bb
-    - run: ./scripts/ExecutingTestsOnWindowsGithubActions4.ps1
+    - run: ./Ocaramba/scripts/ExecutingTestsOnWindowsGithubActions4.ps1
       env:
         MAPPED_ENV_BROWSERSTACKKEY: ${{ secrets.BROWSERSTACKKEY }}
         MAPPED_ENV_BROWSERSTACKUSER: ${{ secrets.BROWSERSTACKUSER }}
@@ -303,7 +303,7 @@ jobs:
         name: OcarambaBuild
     - shell: cmd
       run: 7z x "OcarambaBuild.zip" -o.\Ocaramba -y -bb
-    - run: ./scripts/ExecutingTestsOnWindowsGithubActions5.ps1
+    - run: ./Ocaramba/scripts/ExecutingTestsOnWindowsGithubActions5.ps1
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
       if: false
@@ -321,7 +321,7 @@ jobs:
         name: OcarambaBuild
     - shell: cmd
       run: 7z x "OcarambaBuild.zip" -o.\Ocaramba -y -bb
-    - run: ./scripts/ExecutingTestsOnWindowsGithubActions6.ps1
+    - run: ./Ocaramba/scripts/ExecutingTestsOnWindowsGithubActions6.ps1
       env:
         MAPPED_ENV_BROWSERSTACKKEY: ${{ secrets.BROWSERSTACKKEY }}
         MAPPED_ENV_BROWSERSTACKUSER: ${{ secrets.BROWSERSTACKUSER }}
