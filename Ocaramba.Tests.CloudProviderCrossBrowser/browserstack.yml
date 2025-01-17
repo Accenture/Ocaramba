@@ -4,8 +4,8 @@
 # Add your BrowserStack userName and acccessKey here or set BROWSERSTACK_USERNAME and
 # BROWSERSTACK_ACCESS_KEY as env variables
 
-userName: $env:MAPPED_ENV_BROWSERSTACKUSER
-accessKey: $env:MAPPED_ENV_BROWSERSTACKKEY
+userName: BROWSERSTACKUSER
+accessKey: BROWSERSTACKKEY
 
 # ======================
 # BrowserStack Reporting
