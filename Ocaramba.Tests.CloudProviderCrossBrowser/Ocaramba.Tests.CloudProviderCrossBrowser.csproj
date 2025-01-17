@@ -7,6 +7,7 @@
   
   <ItemGroup>
     <PackageReference Include="Appveyor.TestLogger" Version="2.0.0" />
+    <PackageReference Include="BrowserStack.TestAdapter" Version="0.13.16" />
     
     
     <PackageReference Include="NUnit" Version="4.3.2" />
@@ -44,6 +45,9 @@
     </None>
     <None Update="appsettings.Linux.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="browserstack.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="nlog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
