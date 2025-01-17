@@ -208,7 +208,7 @@ jobs:
         local-identifier: 'random'
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/linux@v2
-      if: true
+      if: false
       with:
         files: |
           /home/runner/work/**/TestResults/*.xml
@@ -225,8 +225,8 @@ jobs:
     - uses: actions/download-artifact@v4
       with:
         name: OcarambaBuild
-    - shell: pwsh
-      run: ."C:\Program Files\7-Zip\7z.exe" x "20210112_Testing.7z"
+    - shell: cmd
+      run: 7z x "OcarambaBuild.7z"
     - run: ./scripts/ExecutingTestsOnWindowsGithubActions1.ps1
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
@@ -253,8 +253,8 @@ jobs:
     - uses: actions/download-artifact@v4
       with:
         name: OcarambaBuild
-    - shell: pwsh
-      run: ."C:\Program Files\7-Zip\7z.exe" x "20210112_Testing.7z"
+    - shell: cmd
+      run: 7z x "OcarambaBuild.7z"
     - run: ./scripts/ExecutingTestsOnWindowsGithubActions2.ps1
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
@@ -275,8 +275,8 @@ jobs:
     - uses: actions/download-artifact@v4
       with:
         name: OcarambaBuild
-    - shell: pwsh
-      run: ."C:\Program Files\7-Zip\7z.exe" x "20210112_Testing.7z"
+    - shell: cmd
+      run: 7z x "OcarambaBuild.7z"
     - run: ./scripts/ExecutingTestsOnWindowsGithubActions3.ps1
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
@@ -296,8 +296,8 @@ jobs:
     - uses: actions/download-artifact@v4
       with:
         name: OcarambaBuild
-    - shell: pwsh
-      run: ."C:\Program Files\7-Zip\7z.exe" x "20210112_Testing.7z"
+    - shell: cmd
+      run: 7z x "OcarambaBuild.7z"
     - run: ./scripts/ExecutingTestsOnWindowsGithubActions4.ps1
       env:
         MAPPED_ENV_BROWSERSTACKKEY: ${{ secrets.BROWSERSTACKKEY }}
@@ -324,12 +324,12 @@ jobs:
     - uses: actions/download-artifact@v4
       with:
         name: OcarambaBuild
-    - shell: pwsh
-      run: ."C:\Program Files\7-Zip\7z.exe" x "20210112_Testing.7z"
+    - shell: cmd
+      run: 7z x "OcarambaBuild.7z"
     - run: ./scripts/ExecutingTestsOnWindowsGithubActions5.ps1
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
-      if: always()
+      if: false
       with:
         files: |
           ${{ env.TestResultsDirWindows }}\*.xml
@@ -357,7 +357,7 @@ jobs:
         MAPPED_ENV_SAUCELABSUSERNAME: ${{ secrets.saucelabsusername }}
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
-      if: always()
+      if: false
       with:
         files: |
           ${{ env.TestResultsDirWindows }}\*.xml
