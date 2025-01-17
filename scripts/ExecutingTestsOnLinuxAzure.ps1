@@ -9,7 +9,7 @@ echo $Env:ASPNETCORE_ENVIRONMENT
 $chromeDriver = Get-ChildItem -Path "/opt/hostedtoolcache/setup-chrome/chromedriver/" -Recurse -Filter "chromedriver" | Select-Object -First 1
 $chromeDriverPath = Split-Path -Path $chromeDriver.FullName
 
-$chrome = Get-ChildItem -Path "/opt/hostedtoolcache/setup-chrome/chromium/" -Recurse -Filter "chromedriver" | Select-Object -First 1
+$chrome = Get-ChildItem -Path "/opt/hostedtoolcache/setup-chrome/chromium/" -Recurse -Filter "chromium" | Select-Object -First 1
 $chromePath = Split-Path -Path $chrome.FullName
 
 
