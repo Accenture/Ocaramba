@@ -87,10 +87,10 @@ jobs:
         path: ./OcarambaLite/bin/Release/OcarambaLite.${{ env.frameworkVersion }}.snupkg
         name: OcarambaLiteS${{ env.frameworkVersion }}
     - shell: cmd
-      run: 7z a -mx9 -spf2 "OcarambaBuild.7z" ".\**\bin\**" -xr!*.nupkg -xr!*.snupkg
+      run: 7z a -mx9 -spf2 "OcarambaBuild.zip" ".\**\bin\**" -xr!*.nupkg -xr!*.snupkg
     - uses: actions/upload-artifact@v4
       with:
-        path: OcarambaBuild.7z   
+        path: OcarambaBuild.zip   
         name: OcarambaBuild
         compression-level: 0
       if: (${{ job.status }} != 'cancelled')
@@ -226,7 +226,7 @@ jobs:
       with:
         name: OcarambaBuild
     - shell: cmd
-      run: 7z x "OcarambaBuild.7z"
+      run: 7z x "OcarambaBuild.zip"
     - run: ./scripts/ExecutingTestsOnWindowsGithubActions1.ps1
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
@@ -254,7 +254,7 @@ jobs:
       with:
         name: OcarambaBuild
     - shell: cmd
-      run: 7z x "OcarambaBuild.7z"
+      run: 7z x "OcarambaBuild.zip"
     - run: ./scripts/ExecutingTestsOnWindowsGithubActions2.ps1
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
@@ -276,7 +276,7 @@ jobs:
       with:
         name: OcarambaBuild
     - shell: cmd
-      run: 7z x "OcarambaBuild.7z"
+      run: 7z x "OcarambaBuild.zip"
     - run: ./scripts/ExecutingTestsOnWindowsGithubActions3.ps1
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
@@ -297,7 +297,7 @@ jobs:
       with:
         name: OcarambaBuild
     - shell: cmd
-      run: 7z x "OcarambaBuild.7z"
+      run: 7z x "OcarambaBuild.zip"
     - run: ./scripts/ExecutingTestsOnWindowsGithubActions4.ps1
       env:
         MAPPED_ENV_BROWSERSTACKKEY: ${{ secrets.BROWSERSTACKKEY }}
@@ -325,7 +325,7 @@ jobs:
       with:
         name: OcarambaBuild
     - shell: cmd
-      run: 7z x "OcarambaBuild.7z"
+      run: 7z x "OcarambaBuild.zip"
     - run: ./scripts/ExecutingTestsOnWindowsGithubActions5.ps1
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
@@ -346,7 +346,8 @@ jobs:
     - uses: actions/download-artifact@v4
       with:
         name: OcarambaBuild
-    - run: Expand-Archive -Path OcarambaBuild.zip -DestinationPath ./
+    - shell: cmd
+      run: 7z x "OcarambaBuild.zip"
     - run: ./scripts/ExecutingTestsOnWindowsGithubActions6.ps1
       env:
         MAPPED_ENV_BROWSERSTACKKEY: ${{ secrets.BROWSERSTACKKEY }}
