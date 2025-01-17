@@ -86,8 +86,8 @@ jobs:
       with:
         path: ./OcarambaLite/bin/Release/OcarambaLite.${{ env.frameworkVersion }}.snupkg
         name: OcarambaLiteS${{ env.frameworkVersion }}
-    - shell: powershell
-      run: ."C:\Program Files\7-Zip\7z.exe" a -mx9 -spf2 "OcarambaBuild.7z" "D:\a\Ocaramba\Ocaramba\**\bin\**" -xr!*.nupkg -xr!*.snupkg
+    - shell: cmd
+      run: ."C:\Program Files\7-Zip\7z.exe" a -mx9 -spf2 "OcarambaBuild.7z" ".\Ocaramba\**\bin\**" -xr!*.nupkg -xr!*.snupkg
     - uses: actions/upload-artifact@v4
       with:
         path: OcarambaBuild.7z   
