@@ -149,9 +149,8 @@ jobs:
     - uses: browser-actions/setup-chrome@v1
       with:
         install-chromedriver: true
-    - run: chrome --version
-    - shell: cmd  
-      run: |
+    - run: |
+        chrome --version
         ls
         export ASPNETCORE_ENVIRONMENT=Linux
         echo $ASPNETCORE_ENVIRONMENT
