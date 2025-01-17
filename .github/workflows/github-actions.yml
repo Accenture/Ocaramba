@@ -146,9 +146,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - run: find . -name '*.csproj' -exec sed -i -e 's/109.0.5414.7400/${{ env.ChromeDriverVersion }}/g' {} \;
-    - shell: pwsh
-      run: |
-        chrome --version
+    - run: |
         ls
         export ASPNETCORE_ENVIRONMENT=Linux
         echo $ASPNETCORE_ENVIRONMENT
