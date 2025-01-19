@@ -85,6 +85,17 @@
         "resolved": "9.0.0",
         "contentHash": "PdkuMrwDhXoKFo/JxISIi9E8L+QGn9Iquj2OKDWHB6Y/HnUOuBouF7uS3R4Hw3FoNmwwMo6hWgazQdyHIIs27A=="
       },
+      "System.Memory": {
+        "type": "Direct",
+        "requested": "[4.6.0, )",
+        "resolved": "4.6.0",
+        "contentHash": "OEkbBQoklHngJ8UD8ez2AERSk2g+/qpAaSWWCBFbpH727HxDq5ydVkuncBaKcKfwRqXGWx64dS6G1SUScMsitg==",
+        "dependencies": {
+          "System.Buffers": "4.6.0",
+          "System.Numerics.Vectors": "4.6.0",
+          "System.Runtime.CompilerServices.Unsafe": "6.1.0"
+        }
+      },
       "System.Runtime.CompilerServices.Unsafe": {
         "type": "Direct",
         "requested": "[6.1.0, )",
@@ -269,16 +280,6 @@
           "System.Threading.Tasks.Extensions": "4.5.4"
         }
       },
-      "System.Memory": {
-        "type": "Transitive",
-        "resolved": "4.6.0",
-        "contentHash": "OEkbBQoklHngJ8UD8ez2AERSk2g+/qpAaSWWCBFbpH727HxDq5ydVkuncBaKcKfwRqXGWx64dS6G1SUScMsitg==",
-        "dependencies": {
-          "System.Buffers": "4.6.0",
-          "System.Numerics.Vectors": "4.6.0",
-          "System.Runtime.CompilerServices.Unsafe": "6.1.0"
-        }
-      },
       "System.Numerics.Vectors": {
         "type": "Transitive",
         "resolved": "4.6.0",
@@ -340,6 +341,7 @@
           "Selenium.WebDriver": "[4.27.0, )",
           "Selenium.WebDriver.ChromeDriver": "[131.0.6778.26400, )",
           "Selenium.WebDriver.GeckoDriver": "[0.35.0, )",
+          "System.Memory": "[4.6.0, )",
           "System.Runtime.CompilerServices.Unsafe": "[6.1.0, )",
           "System.Text.Encodings.Web": "[9.0.0, )",
           "System.Text.Json": "[9.0.0, )"
@@ -464,6 +466,12 @@
           "System.Diagnostics.EventLog": "9.0.0",
           "System.Security.Cryptography.ProtectedData": "9.0.0"
         }
+      },
+      "System.Memory": {
+        "type": "Direct",
+        "requested": "[4.6.0, )",
+        "resolved": "4.6.0",
+        "contentHash": "OEkbBQoklHngJ8UD8ez2AERSk2g+/qpAaSWWCBFbpH727HxDq5ydVkuncBaKcKfwRqXGWx64dS6G1SUScMsitg=="
       },
       "System.Runtime.CompilerServices.Unsafe": {
         "type": "Direct",
@@ -1468,6 +1476,7 @@
           "Selenium.WebDriver": "[4.27.0, )",
           "Selenium.WebDriver.ChromeDriver": "[131.0.6778.26400, )",
           "Selenium.WebDriver.GeckoDriver": "[0.35.0, )",
+          "System.Memory": "[4.6.0, )",
           "System.Runtime.CompilerServices.Unsafe": "[6.1.0, )",
           "System.Text.Encodings.Web": "[9.0.0, )",
           "System.Text.Json": "[9.0.0, )"

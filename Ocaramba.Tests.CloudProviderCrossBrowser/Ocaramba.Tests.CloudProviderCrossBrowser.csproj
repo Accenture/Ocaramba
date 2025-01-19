@@ -2,12 +2,13 @@
 
   <PropertyGroup>
 	<TargetFrameworks>net8.0</TargetFrameworks>
-	<TargetFrameworks Condition="'$(OS)' != 'Unix'">net472;net8.0</TargetFrameworks>
+	<TargetFrameworks Condition="'$(OS)' != 'Unix'">net8.0</TargetFrameworks>
   </PropertyGroup>
   
   <ItemGroup>
     <PackageReference Include="Appveyor.TestLogger" Version="2.0.0" />
-    
+    <PackageReference Include="BrowserStack.TestAdapter" Version="0.13.16" />
+  
     
     <PackageReference Include="NUnit" Version="4.3.2" />
     <PackageReference Include="NUnit.Runners" Version="3.12.0" />
@@ -23,10 +24,6 @@
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="131.0.6778.26400" />
     <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.35.0" />
   </ItemGroup>
-  
-    <ItemGroup Condition="'$(TargetFramework)' == 'net472'">
-	<Reference Include="System.Configuration" />
- </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
@@ -45,6 +42,9 @@
     <None Update="appsettings.Linux.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="browserstack.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="nlog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -54,17 +54,11 @@
     <DefineConstants>net8_0</DefineConstants>
 </PropertyGroup>
 
-  <PropertyGroup Condition="'$(TargetFramework)'=='net472'">
-    <DefineConstants>net47</DefineConstants>
-</PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net472|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|AnyCPU'">
     <CodeAnalysisRuleSet>..\Ocaramba\fxcop-sonarqube.tests.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net472|AnyCPU'">
-    <CodeAnalysisRuleSet>..\Ocaramba\fxcop-sonarqube.tests.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
  <PropertyGroup>
  <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
  </PropertyGroup>

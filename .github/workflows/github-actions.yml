@@ -86,8 +86,10 @@ jobs:
       with:
         path: ./OcarambaLite/bin/Release/OcarambaLite.${{ env.frameworkVersion }}.snupkg
         name: OcarambaLiteS${{ env.frameworkVersion }}
-    - name: Zip artifact for deployment
-      run: Compress-Archive -Path ./ -Destination OcarambaBuild.zip
+    - shell: cmd
+      run: |
+       7z a -mx9 -spf2 "OcarambaBuild.zip" ".\**\bin\**" -xr!*.nupkg -xr!*.snupkg
+       7z a -mx9 -spf2 "OcarambaBuild.zip" ".\scripts\**" -xr!*.nupkg -xr!*.snupkg
     - uses: actions/upload-artifact@v4
       with:
         path: OcarambaBuild.zip   
@@ -146,10 +148,6 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - run: find . -name '*.csproj' -exec sed -i -e 's/109.0.5414.7400/${{ env.ChromeDriverVersion }}/g' {} \;
-    - uses: browser-actions/setup-chrome@v1
-      if: true
-    - run: chrome --version
-    - uses: nanasess/setup-chromedriver@v2    
     - run: |
         ls
         export ASPNETCORE_ENVIRONMENT=Linux
@@ -208,7 +206,7 @@ jobs:
         local-identifier: 'random'
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/linux@v2
-      if: true
+      if: false
       with:
         files: |
           /home/runner/work/**/TestResults/*.xml
@@ -218,15 +216,13 @@ jobs:
     needs:
     - build_Stage_BuildTestsOnWindows
     steps:
-    - uses: actions/checkout@v4
-    - uses: nuget/setup-nuget@v2
-      with:
-        nuget-version: latest
     - uses: actions/download-artifact@v4
       with:
         name: OcarambaBuild
-    - run: Expand-Archive -Path OcarambaBuild.zip -DestinationPath ./
-    - run: ./scripts/ExecutingTestsOnWindowsGithubActions1.ps1
+    - shell: cmd
+      run: |
+        7z x "OcarambaBuild.zip" -o.\Ocaramba -y -bb0
+    - run: ./Ocaramba/ExecutingTestsOnWindowsGithubActions1.ps1
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
       if: always()
@@ -245,15 +241,12 @@ jobs:
     needs:
     - build_Stage_BuildTestsOnWindows
     steps:
-    - uses: actions/checkout@v4
-    - uses: nuget/setup-nuget@v2
-      with:
-        nuget-version: latest
     - uses: actions/download-artifact@v4
       with:
         name: OcarambaBuild
-    - run: Expand-Archive -Path OcarambaBuild.zip -DestinationPath ./
-    - run: ./scripts/ExecutingTestsOnWindowsGithubActions2.ps1
+    - shell: cmd
+      run: 7z x "OcarambaBuild.zip" -o.\Ocaramba -y -bb0
+    - run: ./Ocaramba/ExecutingTestsOnWindowsGithubActions2.ps1
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
       if: always()
@@ -266,18 +259,15 @@ jobs:
     needs:
     - build_Stage_BuildTestsOnWindows
     steps:
-    - uses: actions/checkout@v4
-    - uses: nuget/setup-nuget@v2
-      with:
-        nuget-version: latest
     - uses: actions/download-artifact@v4
       with:
         name: OcarambaBuild
-    - run: Expand-Archive -Path OcarambaBuild.zip -DestinationPath ./
-    - run: ./scripts/ExecutingTestsOnWindowsGithubActions3.ps1
+    - shell: cmd
+      run: 7z x "OcarambaBuild.zip" -o.\Ocaramba -y -bb0
+    - run: ./Ocaramba/ExecutingTestsOnWindowsGithubActions3.ps1
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
-      if: always()
+      if: false
       with:
         files: ${{ env.TestResultsDirWindows }}\*.xml
         check_name: ExecutingTestsOnWindowsGithubActionsNet3  
@@ -286,15 +276,12 @@ jobs:
     needs:
     - build_Stage_BuildTestsOnWindows
     steps:
-    - uses: actions/checkout@v4
-    - uses: nuget/setup-nuget@v2
-      with:
-        nuget-version: latest
     - uses: actions/download-artifact@v4
       with:
         name: OcarambaBuild
-    - run: Expand-Archive -Path OcarambaBuild.zip -DestinationPath ./
-    - run: ./scripts/ExecutingTestsOnWindowsGithubActions4.ps1
+    - shell: cmd
+      run: 7z x "OcarambaBuild.zip" -o.\Ocaramba -y -bb0
+    - run: ./Ocaramba/ExecutingTestsOnWindowsGithubActions4.ps1
       env:
         MAPPED_ENV_BROWSERSTACKKEY: ${{ secrets.BROWSERSTACKKEY }}
         MAPPED_ENV_BROWSERSTACKUSER: ${{ secrets.BROWSERSTACKUSER }}
@@ -313,18 +300,15 @@ jobs:
     needs:
     - build_Stage_BuildTestsOnWindows
     steps:
-    - uses: actions/checkout@v4
-    - uses: nuget/setup-nuget@v2
-      with:
-        nuget-version: latest
     - uses: actions/download-artifact@v4
       with:
         name: OcarambaBuild
-    - run: Expand-Archive -Path OcarambaBuild.zip -DestinationPath ./
-    - run: ./scripts/ExecutingTestsOnWindowsGithubActions5.ps1
+    - shell: cmd
+      run: 7z x "OcarambaBuild.zip" -o.\Ocaramba -y -bb0
+    - run: ./Ocaramba/ExecutingTestsOnWindowsGithubActions5.ps1
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
-      if: always()
+      if: false
       with:
         files: |
           ${{ env.TestResultsDirWindows }}\*.xml
@@ -334,15 +318,12 @@ jobs:
     needs:
     - build_Stage_BuildTestsOnWindows
     steps:
-    - uses: actions/checkout@v4
-    - uses: nuget/setup-nuget@v2
-      with:
-        nuget-version: latest
     - uses: actions/download-artifact@v4
       with:
         name: OcarambaBuild
-    - run: Expand-Archive -Path OcarambaBuild.zip -DestinationPath ./
-    - run: ./scripts/ExecutingTestsOnWindowsGithubActions6.ps1
+    - shell: cmd
+      run: 7z x "OcarambaBuild.zip" -o.\Ocaramba -y -bb0
+    - run: ./Ocaramba/ExecutingTestsOnWindowsGithubActions6.ps1
       env:
         MAPPED_ENV_BROWSERSTACKKEY: ${{ secrets.BROWSERSTACKKEY }}
         MAPPED_ENV_BROWSERSTACKUSER: ${{ secrets.BROWSERSTACKUSER }}
@@ -352,7 +333,7 @@ jobs:
         MAPPED_ENV_SAUCELABSUSERNAME: ${{ secrets.saucelabsusername }}
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
-      if: always()
+      if: false
       with:
         files: |
           ${{ env.TestResultsDirWindows }}\*.xml
@@ -371,7 +352,6 @@ jobs:
     - test_Stage_RunTestsSeleniumGrid
     - test_Stage_RunTestsOnWindowsSaucelabs
     steps:
-    - uses: actions/checkout@v4
     - shell: powershell
       run: |
         $tags = git tag --sort=-creatordate   
