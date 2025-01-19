@@ -352,6 +352,7 @@ jobs:
     - test_Stage_RunTestsSeleniumGrid
     - test_Stage_RunTestsOnWindowsSaucelabs
     steps:
+    - uses: actions/checkout@v4
     - shell: powershell
       run: |
         $tags = git tag --sort=-creatordate   
