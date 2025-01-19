@@ -340,6 +340,7 @@
           "Selenium.WebDriver": "[4.27.0, )",
           "Selenium.WebDriver.ChromeDriver": "[131.0.6778.26400, )",
           "Selenium.WebDriver.GeckoDriver": "[0.35.0, )",
+          "System.Memory": "[4.6.0, )",
           "System.Runtime.CompilerServices.Unsafe": "[6.1.0, )",
           "System.Text.Encodings.Web": "[9.0.0, )",
           "System.Text.Json": "[9.0.0, )"
@@ -1278,6 +1279,11 @@
           "System.Text.Encoding.CodePages": "8.0.0"
         }
       },
+      "System.Memory": {
+        "type": "Transitive",
+        "resolved": "4.6.0",
+        "contentHash": "OEkbBQoklHngJ8UD8ez2AERSk2g+/qpAaSWWCBFbpH727HxDq5ydVkuncBaKcKfwRqXGWx64dS6G1SUScMsitg=="
+      },
       "System.Net.Http.WinHttpHandler": {
         "type": "Transitive",
         "resolved": "8.0.2",
@@ -1468,6 +1474,7 @@
           "Selenium.WebDriver": "[4.27.0, )",
           "Selenium.WebDriver.ChromeDriver": "[131.0.6778.26400, )",
           "Selenium.WebDriver.GeckoDriver": "[0.35.0, )",
+          "System.Memory": "[4.6.0, )",
           "System.Runtime.CompilerServices.Unsafe": "[6.1.0, )",
           "System.Text.Encodings.Web": "[9.0.0, )",
           "System.Text.Json": "[9.0.0, )"
