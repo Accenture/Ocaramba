@@ -15,3 +15,4 @@
 /.sonarqube/
 /UpgradeLog.htm
 selenium-manager
+*.log
