@@ -19,7 +19,7 @@ env:
   solution: ${{ github.workspace }}/Ocaramba.sln
   buildPlatform: Any CPU
   buildConfiguration: Release
-  frameworkVersion: 4.2.0
+  frameworkVersion: 4.2.1
   TestResultsDirWindows: D:\a\Ocaramba\Ocaramba\TestResults
   CHROMEWEBDRIVER: C:\SeleniumWebDrivers\ChromeDriver
   BuildVersion: 4.2.0${{ github.run_number }}
