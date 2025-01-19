@@ -1,7 +1,7 @@
 echo '********************************************CloudProviderCrossBrowser tests********************************************'
         
 echo '********************************************BrowserStack tests********************************************'
-$filePath = ".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\net8.0\browserstack.yml"
+$filePath = ".\Ocaramba\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\net8.0\browserstack.yml"
 
 $fileContent = Get-Content -Path $filePath
 

@@ -5,7 +5,7 @@ $Env:ASPNETCORE_ENVIRONMENT="Linux"
 
 echo $Env:ASPNETCORE_ENVIRONMENT
 
-$filePath = ".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\net8.0\browserstack.yml"
+$filePath = ".\Ocaramba\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\net8.0\browserstack.yml"
 
 $fileContent = Get-Content -Path $filePath
 
