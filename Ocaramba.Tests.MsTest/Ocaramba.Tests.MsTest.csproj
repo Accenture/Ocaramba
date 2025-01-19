@@ -7,14 +7,15 @@
   
     <ItemGroup>
     <PackageReference Include="Appveyor.TestLogger" Version="2.0.0" />
-    <PackageReference Include="System.Text.Json" Version="9.0.0" />
-    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="9.0.1" />
+    <PackageReference Include="System.Text.Json" Version="9.0.1" />
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.1.0" />
     <PackageReference Include="Selenium.Support" Version="4.27.0" />
     <PackageReference Include="Selenium.WebDriver" Version="4.27.0" />
-    <PackageReference Include="MSTest.TestAdapter" Version="3.6.3" />
+    <PackageReference Include="MSTest.TestAdapter" Version="3.7.1" />
     <PackageReference Include="MSTest.TestFramework" Version="3.7.1" />
     <PackageReference Include="NLog" Version="5.3.4" />
-    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="131.0.6778.26400" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="132.0.6834.8300" />
     <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.35.0" />
     <PackageReference Include="Selenium.WebDriver.IEDriver" Version="4.14.0" />
   </ItemGroup>
