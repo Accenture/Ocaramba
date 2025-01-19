@@ -1,5 +1,5 @@
 echo '********************************************Executing tests********************************************'
-Get-ChildItem -Path ".\" -Recurse
+
 echo '********************************************net8.0 tests********************************************'
 
 .\Ocaramba\set_AppConfig_for_tests.ps1 "D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.NUnit\bin\Release\net8.0" "appsettings.json" "appSettings" "browser|PathToChromeDriverDirectory" "Chrome|C:\SeleniumWebDrivers\ChromeDriver" -logValues -json
