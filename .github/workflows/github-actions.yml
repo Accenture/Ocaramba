@@ -371,9 +371,15 @@ jobs:
     - uses: actions/download-artifact@v4
       with:
         name: OcarambaLiteS${{ env.frameworkVersion }}
+    - shell: cmd
+      run: |
+        7z x "OcarambaLite${{ env.tag }}.zip" -o.\Ocaramba -y -bb0
+        7z x "OcarambaLiteS${{ env.tag }}.zip" -o.\Ocaramba -y -bb0
+        7z x "OcarambaS${{ env.tag }}.zip" -o.\Ocaramba -y -bb0
+        7z x "Ocaramba${{ env.tag }}.zip" -o.\Ocaramba -y -bb0
     - name: Push Nuget Package
-      run: dotnet push .\Ocaramba\Ocaramba\Ocaramba.${{ env.frameworkVersion }}.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
+      run: dotnet push .\Ocaramba\Ocaramba.${{ env.tag }}.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
       if: (success() && startsWith(github.ref, 'refs/tags/'))
     - name: Push Nuget Package
-      run: dotnet push .\Ocaramba\Ocaramba\OcarambaLite.${{ env.frameworkVersion }}.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
+      run: dotnet push .\Ocaramba\OcarambaLite.${{ env.tag }}.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
       if: (success() && startsWith(github.ref, 'refs/tags/'))
