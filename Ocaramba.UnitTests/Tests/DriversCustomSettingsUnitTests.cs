@@ -47,9 +47,9 @@ namespace Ocaramba.UnitTests.Tests
             driverContext.Driver.SynchronizeWithAngular(false);
             var TurnOn_false = DriversCustomSettings.IsDriverSynchronizationWithAngular(driverContext.Driver);
             driverContext.Stop();
-            Assert.That("Default setting is not false", Is.EqualTo(Default_false));
-            Assert.That("Setting is not true", Is.EqualTo(TurnOn_true));
-            Assert.That("Setting is not false", Is.EqualTo(TurnOn_false));
+            Assert.That(false, Is.EqualTo(Default_false));
+            Assert.That(true, Is.EqualTo(TurnOn_true));
+            Assert.That(false, Is.EqualTo(TurnOn_false));
         }
     }
 }

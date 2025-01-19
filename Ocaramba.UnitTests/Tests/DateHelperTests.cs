@@ -24,7 +24,9 @@ namespace Ocaramba.UnitTests.Tests
         [Test()]
         public void CurrentTimeStampTest()
         {
-            Assert.That(DateTime.Now, Is.EqualTo(DateTime.ParseExact(DateHelper.CurrentTimeStamp, "ddMMyyyyHHmmss", null)));
+            var expectedDateTime = DateTime.ParseExact(DateHelper.CurrentTimeStamp, "ddMMyyyyHHmmss", null);
+            var actualDateTime = DateTime.Now;
+            Assert.That(actualDateTime.ToString("ddMMyyyyHHmmss"), Is.EqualTo(expectedDateTime.ToString("ddMMyyyyHHmmss")));
         }
 
         [Test()]
