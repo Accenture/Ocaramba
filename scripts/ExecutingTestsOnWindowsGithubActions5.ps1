@@ -2,8 +2,8 @@ echo '********************************************Downloading Selenium Grid*****
 
 $url = $env:seleniumGridUrl
 $grid = $env:seleniumGridVersion
-$output = Join-Path $PSScriptRoot "..\Ocaramba\Ocaramba.Tests.NUnit\bin\Release\net472\$grid"
-$outputLogs = Join-Path $PSScriptRoot "..\Ocaramba\Ocaramba.Tests.NUnit\bin\Release\net472\"
+$output = "D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.NUnit\bin\Release\net8.0\$grid"
+$outputLogs = "D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.NUnit\bin\Release\net8.0\"
 
 $start_time = Get-Date
 
