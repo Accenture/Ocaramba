@@ -60,7 +60,7 @@ ENV ASPNETCORE_ENVIRONMENT Linux
 #=========
 # Create a user and switch to it
 #=========
-RUN groupadd -r ocaramba && useradd -r -g ocaramba ocaramba
+RUN groupadd -r ocaramba && useradd -r -g ocaramba ocaramba && mkdir -p /home/ocaramba && chown -R ocaramba:ocaramba /home/ocaramba
 USER ocaramba
 #=========
 # Health Check
