@@ -30,7 +30,24 @@ echo "Selenium Grid hub started"
 $appNode=Start-Process java -ArgumentList '-jar', $output, 'node --detect-drivers true' -RedirectStandardOutput "$outputLogs\console_node.out" -RedirectStandardError "$outputLogs\console_node.err" -PassThru
 
 Start-Sleep -s 5
-Invoke-RestMethod -Uri "http://localhost:4444/wd/hub/status"
+
+$retryCount = 5
+$delay = 5
+for ($i = 0; $i -lt $retryCount; $i++) {
+  try {
+    $response = Invoke-RestMethod -Uri "http://localhost:4444/wd/hub/status"
+    if ($response.ready) {
+      Write-Output "Selenium Grid is ready."
+      break
+    }
+  } catch {
+    Write-Output "Attempt $($i + 1) failed. Retrying in $delay seconds..."
+    Start-Sleep -Seconds $delay
+  }
+}
+if ($i -eq $retryCount) {
+  Write-Output  "Failed to connect to Selenium Grid after $retryCount attempts."
+}
 echo "Selenium Grid node started"
 
 echo '********************************************Run tests with Selenium Grid ****************************************'
