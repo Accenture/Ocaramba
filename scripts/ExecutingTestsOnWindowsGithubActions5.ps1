@@ -30,14 +30,14 @@ echo "Selenium Grid hub started"
 $appNode=Start-Process java -ArgumentList '-jar', $output, 'node --detect-drivers true' -RedirectStandardOutput "$outputLogs\console_node.out" -RedirectStandardError "$outputLogs\console_node.err" -PassThru
 
 Start-Sleep -s 5
-
+Invoke-RestMethod -Uri "http://localhost:4444/wd/hub/status"
 echo "Selenium Grid node started"
 
 echo '********************************************Run tests with Selenium Grid ****************************************'
 
-.\Ocaramba\set_AppConfig_for_tests.ps1 ".\Ocaramba\Ocaramba.Tests.NUnit\bin\Release\net472\" "Ocaramba.Tests.NUnit.dll.config" "//appSettings" "browser|RemoteWebDriverHub" "RemoteWebDriver|http://localhost:4444/wd/hub"
+.\Ocaramba\set_AppConfig_for_tests.ps1 ".\Ocaramba\Ocaramba.Tests.NUnit\bin\Release\net8.0\" "appsettings.json" "appSettings" "browser|RemoteWebDriverHub" "RemoteWebDriver|http://localhost:4444/wd/hub" -json
 
-dotnet vstest .\Ocaramba\Ocaramba.Tests.NUnit\bin\Release\net472\Ocaramba.Tests.NUnit.dll /TestCaseFilter:"TestCategory=Grid" /Parallel /Logger:"trx;LogFileName=Ocaramba.Tests.NUnitGrid.xml"
+dotnet vstest .\Ocaramba\Ocaramba.Tests.NUnit\bin\Release\net8.0\Ocaramba.Tests.NUnit.dll /TestCaseFilter:"TestCategory=Grid" /Parallel /Logger:"trx;LogFileName=Ocaramba.Tests.NUnitGrid.xml"
 
 echo '*****************************Run CloudProviderCrossBrowser tests with Selenium Grid****************************'
 

@@ -24,8 +24,8 @@ env:
   CHROMEWEBDRIVER: C:\SeleniumWebDrivers\ChromeDriver
   BuildVersion: 4.2.0${{ github.run_number }}
   ChromeDriverVersion: 122.0.6261.9400
-  seleniumGridVersion: selenium-server-4.8.0.jar
-  seleniumGridUrl: https://github.com/SeleniumHQ/selenium/releases/download/selenium-4.8.0/selenium-server-4.8.0.jar
+  seleniumGridVersion: selenium-server-4.27.0.jar
+  seleniumGridUrl: https://github.com/SeleniumHQ/selenium/releases/download/selenium-4.27.0/selenium-server-4.27.0.jar
   NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
 jobs:
   build_Stage_BuildTestsOnWindows:
