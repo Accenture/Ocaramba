@@ -62,6 +62,7 @@ ENV ASPNETCORE_ENVIRONMENT Linux
 #=========
 RUN groupadd -r ocaramba && useradd -r -g ocaramba ocaramba && mkdir -p /home/ocaramba && chown -R ocaramba:ocaramba /home/ocaramba
 USER ocaramba
+WORKDIR /home/ocaramba
 #=========
 # Health Check
 #=========
