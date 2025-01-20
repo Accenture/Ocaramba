@@ -33,12 +33,13 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - uses: microsoft/setup-msbuild@v2
-    - shell: powershell
+    - shell: pwsh
       run: |
         $tags = git tag --sort=-creatordate   
         $tag = $tags[0]
-        echo "{frameworkVersion}={value}" >> "$tag"
+        echo "var=$tag" >> $env:frameworkVersion
       if: startsWith(github.ref, 'refs/tags/')
+    - run: echo $env:frameworkVersion
     - shell: powershell
       run: '(Get-Content ''Ocaramba.sln'' -raw) -replace [regex](''.*?'' + ''Documentation'' + (''.*?\r\n'' * (5 + 1))) | set-content  ''Ocaramba.sln'''
     - name: Update ChromeDriver in csproj
@@ -353,12 +354,12 @@ jobs:
     - test_Stage_RunTestsOnWindowsSaucelabs
     steps:
     - uses: actions/checkout@v4
-    - shell: powershell
+    - shell: pwsh
       run: |
         $tags = git tag --sort=-creatordate   
         $tag = $tags[0]
-        echo "{frameworkVersion}={value}" >> "$tag"
-      if: startsWith(github.ref, 'refs/tags/')
+        echo "var=$tag" >> $env:frameworkVersion
+      if: startsWith(github.ref, 'refs/tags/')    
     - uses: actions/download-artifact@v4
       with:
         name: Ocaramba${{ env.frameworkVersion }}
@@ -373,13 +374,13 @@ jobs:
         name: OcarambaLiteS${{ env.frameworkVersion }}
     - shell: cmd
       run: |
-        7z x "OcarambaLite${{ env.tag }}.zip" -o.\Ocaramba -y -bb0
-        7z x "OcarambaLiteS${{ env.tag }}.zip" -o.\Ocaramba -y -bb0
-        7z x "OcarambaS${{ env.tag }}.zip" -o.\Ocaramba -y -bb0
-        7z x "Ocaramba${{ env.tag }}.zip" -o.\Ocaramba -y -bb0
+        7z x "OcarambaLite${{ env.frameworkVersion }}.zip" -o.\Ocaramba -y -bb0
+        7z x "OcarambaLiteS${{ env.frameworkVersion }}.zip" -o.\Ocaramba -y -bb0
+        7z x "OcarambaS${{ env.frameworkVersion }}.zip" -o.\Ocaramba -y -bb0
+        7z x "Ocaramba${{ env.frameworkVersion }}.zip" -o.\Ocaramba -y -bb0
     - name: Push Nuget Package
-      run: dotnet push .\Ocaramba\Ocaramba.${{ env.tag }}.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
+      run: dotnet push .\Ocaramba\Ocaramba.${{ env.frameworkVersion }}.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
       if: (success() && startsWith(github.ref, 'refs/tags/'))
     - name: Push Nuget Package
-      run: dotnet push .\Ocaramba\OcarambaLite.${{ env.tag }}.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
+      run: dotnet push .\Ocaramba\OcarambaLite.${{ env.frameworkVersion }}.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
       if: (success() && startsWith(github.ref, 'refs/tags/'))
