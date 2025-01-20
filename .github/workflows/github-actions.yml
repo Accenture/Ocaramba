@@ -375,15 +375,9 @@ jobs:
     - shell: pwsh
       run: |
          Get-ChildItem -Recurse
-    - shell: cmd
-      run: |
-        7z x "OcarambaLite${{ env.frameworkVersion }}.zip" -o.\Ocaramba -y -bb0
-        7z x "OcarambaLiteS${{ env.frameworkVersion }}.zip" -o.\Ocaramba -y -bb0
-        7z x "OcarambaS${{ env.frameworkVersion }}.zip" -o.\Ocaramba -y -bb0
-        7z x "Ocaramba${{ env.frameworkVersion }}.zip" -o.\Ocaramba -y -bb0
     - name: Push Nuget Package
-      run: dotnet push .\Ocaramba\Ocaramba.${{ env.frameworkVersion }}.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
+      run: dotnet push .\Ocaramba.${{ env.frameworkVersion }}.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
       if: (success() && startsWith(github.ref, 'refs/tags/'))
     - name: Push Nuget Package
-      run: dotnet push .\Ocaramba\OcarambaLite.${{ env.frameworkVersion }}.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
+      run: dotnet push .\OcarambaLite.${{ env.frameworkVersion }}.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
       if: (success() && startsWith(github.ref, 'refs/tags/'))
