@@ -372,6 +372,9 @@ jobs:
     - uses: actions/download-artifact@v4
       with:
         name: OcarambaLiteS${{ env.frameworkVersion }}
+    - shell: pwsh
+      run: |
+         Get-ChildItem -Recurse
     - shell: cmd
       run: |
         7z x "OcarambaLite${{ env.frameworkVersion }}.zip" -o.\Ocaramba -y -bb0
