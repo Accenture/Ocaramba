@@ -2,8 +2,8 @@ echo '********************************************Downloading Selenium Grid*****
 
 $url = $env:seleniumGridUrl
 $grid = $env:seleniumGridVersion
-$output = "D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.NUnit\bin\Release\net8.0\$grid"
-$outputLogs = "D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.NUnit\bin\Release\net8.0\"
+$output = ".\$grid"
+$outputLogs = ".\"
 
 $start_time = Get-Date
 
@@ -21,21 +21,19 @@ echo "Time taken to download $($grid): $((Get-Date).Subtract($start_time).Second
 
 echo '******************************************Start Selenium Grid in background****************************************'
 
+java --version
+$firstIPAddress =  Get-NetIPConfiguration | Select-Object -ExpandProperty IPv4Address | Select-Object -First 1
+$firstIPAddress = $firstIPAddress.IPAddress
+Write-Output $firstIPAddress 
 $appHub=Start-Process java -ArgumentList '-jar', $output, 'hub' -RedirectStandardOutput "$outputLogs\console_hub.out" -RedirectStandardError "$outputLogs\console_hub.err" -PassThru
 
 Start-Sleep -s 5
 
-echo "Selenium Grid hub started"
-
-$appNode=Start-Process java -ArgumentList '-jar', $output, 'node --detect-drivers true' -RedirectStandardOutput "$outputLogs\console_node.out" -RedirectStandardError "$outputLogs\console_node.err" -PassThru
-
-Start-Sleep -s 5
-
-$retryCount = 5
-$delay = 5
+$retryCount = 6
+$delay = 10
 for ($i = 0; $i -lt $retryCount; $i++) {
   try {
-    $response = Invoke-RestMethod -Uri "http://localhost:4444/wd/hub/status"
+    $response = Invoke-RestMethod -Uri "http://$($firstIPAddress):4444/wd/hub/status"
     if ($response.ready) {
       Write-Output "Selenium Grid is ready."
       break
@@ -48,17 +46,23 @@ for ($i = 0; $i -lt $retryCount; $i++) {
 if ($i -eq $retryCount) {
   Write-Output  "Failed to connect to Selenium Grid after $retryCount attempts."
 }
+echo "Selenium Grid hub started"
+
+$appNode=Start-Process java -ArgumentList '-jar', $output, 'node --detect-drivers true' -RedirectStandardOutput "$outputLogs\console_node.out" -RedirectStandardError "$outputLogs\console_node.err" -PassThru
+
+Start-Sleep -s 5
+
 echo "Selenium Grid node started"
 
 echo '********************************************Run tests with Selenium Grid ****************************************'
 
-.\Ocaramba\set_AppConfig_for_tests.ps1 ".\Ocaramba\Ocaramba.Tests.NUnit\bin\Release\net8.0\" "appsettings.json" "appSettings" "browser|RemoteWebDriverHub" "RemoteWebDriver|http://localhost:4444/wd/hub" -json
+.\Ocaramba\set_AppConfig_for_tests.ps1 ".\Ocaramba\Ocaramba.Tests.NUnit\bin\Release\net8.0\" "appsettings.json" "appSettings" "browser|RemoteWebDriverHub" "RemoteWebDriver|http://$($firstIPAddress):4444/wd/hub" -json -logValues
 
 dotnet vstest .\Ocaramba\Ocaramba.Tests.NUnit\bin\Release\net8.0\Ocaramba.Tests.NUnit.dll /TestCaseFilter:"TestCategory=Grid" /Parallel /Logger:"trx;LogFileName=Ocaramba.Tests.NUnitGrid.xml"
 
 echo '*****************************Run CloudProviderCrossBrowser tests with Selenium Grid****************************'
 
-.\Ocaramba\set_AppConfig_for_tests.ps1 ".\Ocaramba\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\net8.0" "appsettings.json" "appSettings" "RemoteWebDriverHub" "http://localhost:4444/wd/hub" -json
+.\Ocaramba\set_AppConfig_for_tests.ps1 ".\Ocaramba\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\net8.0" "appsettings.json" "appSettings" "RemoteWebDriverHub" "http://$($firstIPAddress):4444/wd/hub" -json -logValues
 
 dotnet vstest .\Ocaramba\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\net8.0\Ocaramba.Tests.CloudProviderCrossBrowser.dll /TestCaseFilter:"FullyQualifiedName~Chrome" /Parallel /Logger:"trx;LogFileName=Ocaramba.Tests.CloudProviderCrossBrowserGrid.xml"
 
