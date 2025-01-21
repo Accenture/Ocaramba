@@ -24,6 +24,7 @@ echo '******************************************Start Selenium Grid in backgroun
 java --version
 $firstIPAddress =  Get-NetIPConfiguration | Select-Object -ExpandProperty IPv4Address | Select-Object -First 1
 $firstIPAddress = $firstIPAddress.IPAddress
+Write-Output $firstIPAddress 
 $appHub=Start-Process java -ArgumentList '-jar', $output, 'hub' -RedirectStandardOutput "$outputLogs\console_hub.out" -RedirectStandardError "$outputLogs\console_hub.err" -PassThru
 
 Start-Sleep -s 5
@@ -32,7 +33,7 @@ $retryCount = 6
 $delay = 10
 for ($i = 0; $i -lt $retryCount; $i++) {
   try {
-    $response = Invoke-RestMethod -Uri "http://$firstIPAddress:4444/wd/hub/status"
+    $response = Invoke-RestMethod -Uri "http://$($firstIPAddress):4444/wd/hub/status"
     if ($response.ready) {
       Write-Output "Selenium Grid is ready."
       break
@@ -55,13 +56,13 @@ echo "Selenium Grid node started"
 
 echo '********************************************Run tests with Selenium Grid ****************************************'
 
-.\Ocaramba\set_AppConfig_for_tests.ps1 ".\Ocaramba\Ocaramba.Tests.NUnit\bin\Release\net8.0\" "appsettings.json" "appSettings" "browser|RemoteWebDriverHub" "RemoteWebDriver|http://$firstIPAddress:4444/wd/hub" -json
+.\Ocaramba\set_AppConfig_for_tests.ps1 ".\Ocaramba\Ocaramba.Tests.NUnit\bin\Release\net8.0\" "appsettings.json" "appSettings" "browser|RemoteWebDriverHub" "RemoteWebDriver|http://$($firstIPAddress):4444/wd/hub" -json -logValues
 
 dotnet vstest .\Ocaramba\Ocaramba.Tests.NUnit\bin\Release\net8.0\Ocaramba.Tests.NUnit.dll /TestCaseFilter:"TestCategory=Grid" /Parallel /Logger:"trx;LogFileName=Ocaramba.Tests.NUnitGrid.xml"
 
 echo '*****************************Run CloudProviderCrossBrowser tests with Selenium Grid****************************'
 
-.\Ocaramba\set_AppConfig_for_tests.ps1 ".\Ocaramba\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\net8.0" "appsettings.json" "appSettings" "RemoteWebDriverHub" "http://$firstIPAddress:4444/wd/hub" -json
+.\Ocaramba\set_AppConfig_for_tests.ps1 ".\Ocaramba\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\net8.0" "appsettings.json" "appSettings" "RemoteWebDriverHub" "http://$($firstIPAddress):4444/wd/hub" -json -logValues
 
 dotnet vstest .\Ocaramba\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\net8.0\Ocaramba.Tests.CloudProviderCrossBrowser.dll /TestCaseFilter:"FullyQualifiedName~Chrome" /Parallel /Logger:"trx;LogFileName=Ocaramba.Tests.CloudProviderCrossBrowserGrid.xml"
 
