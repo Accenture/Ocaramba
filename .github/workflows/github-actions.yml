@@ -322,6 +322,9 @@ jobs:
       with:
         run: |
           java -jar D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.NUnit\bin\Release\net8.0\$env:seleniumGridVersion hub &
+        wait-on: http://localhost:4444
+        wait-for: 1m
+        tail: true
         log-output: stderr,stdout 
         working-directory: D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.NUnit\bin\Release\net8.0
     - name: Run JAR fil node
