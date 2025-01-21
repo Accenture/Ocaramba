@@ -22,19 +22,13 @@ echo "Time taken to download $($grid): $((Get-Date).Subtract($start_time).Second
 echo '******************************************Start Selenium Grid in background****************************************'
 
 java --version
-
+Get-NetIPConfiguration | Select-Object -ExpandProperty IPv4Address
 $appHub=Start-Process java -ArgumentList '-jar', $output, 'hub' -RedirectStandardOutput "$outputLogs\console_hub.out" -RedirectStandardError "$outputLogs\console_hub.err" -PassThru
 
 Start-Sleep -s 5
 
-echo "Selenium Grid hub started"
-
-$appNode=Start-Process java -ArgumentList '-jar', $output, 'node --detect-drivers true' -RedirectStandardOutput "$outputLogs\console_node.out" -RedirectStandardError "$outputLogs\console_node.err" -PassThru
-
-Start-Sleep -s 5
-
-$retryCount = 5
-$delay = 5
+$retryCount = 6
+$delay = 10
 for ($i = 0; $i -lt $retryCount; $i++) {
   try {
     $response = Invoke-RestMethod -Uri "http://localhost:4444/wd/hub/status"
@@ -50,6 +44,12 @@ for ($i = 0; $i -lt $retryCount; $i++) {
 if ($i -eq $retryCount) {
   Write-Output  "Failed to connect to Selenium Grid after $retryCount attempts."
 }
+echo "Selenium Grid hub started"
+
+$appNode=Start-Process java -ArgumentList '-jar', $output, 'node --detect-drivers true' -RedirectStandardOutput "$outputLogs\console_node.out" -RedirectStandardError "$outputLogs\console_node.err" -PassThru
+
+Start-Sleep -s 5
+
 echo "Selenium Grid node started"
 
 echo '********************************************Run tests with Selenium Grid ****************************************'
