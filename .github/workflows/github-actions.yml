@@ -315,10 +315,16 @@ jobs:
       run: |
         $output = "D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.NUnit\bin\Release\net8.0\$env:seleniumGridVersion"
         Invoke-WebRequest -Uri "$env:seleniumGridUrl" -OutFile "$($output)"
-    - name: Start Selenium Hub
-      run: java -jar D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.NUnit\bin\Release\net8.0\$env:seleniumGridVersion hub
-    - name: Start Selenium Node
-      run: java -jar D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.NUnit\bin\Release\net8.0\$env:seleniumGridVersion node --detect-drivers true
+    - name: Run JAR fil hub
+      uses: JarvusInnovations/background-action@v1.0.7
+      with:
+        run: java -jar D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.NUnit\bin\Release\net8.0\$env:seleniumGridVersion hub &
+        log-output: stderr,stdout    
+    - name: Run JAR file node 
+      uses: JarvusInnovations/background-action@v1.0.7
+      with:
+        run: java -jar D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.NUnit\bin\Release\net8.0\$env:seleniumGridVersion node --detect-drivers true &
+        log-output: stderr,stdout
     - run: ./Ocaramba/ExecutingTestsOnWindowsGithubActions5.ps1
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
