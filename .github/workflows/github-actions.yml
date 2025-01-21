@@ -308,7 +308,7 @@ jobs:
         sed -i '/Documentation/,+5 d' ./Ocaramba.sln
     - run: dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
     - shell: pwsh
-      run: ./scripts/Ocaramba/ExecutingTestsOnWindowsGithubActions5.ps1
+      run: ./scripts/ExecutingTestsOnWindowsGithubActions5.ps1
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
       if: false
