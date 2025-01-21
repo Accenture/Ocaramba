@@ -313,6 +313,14 @@ jobs:
        java-version: '21'
     - shell: powershell
       run: ./Ocaramba/ExecutingTestsOnWindowsGithubActions5.ps1
+    - uses: actions/upload-artifact@v4
+      with:
+        path: ./console_hub.out
+        name: hub
+    - uses: actions/upload-artifact@v4
+      with:
+        path: ./console_hub.err
+        name: huberr
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
       if: false
