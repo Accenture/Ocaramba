@@ -319,16 +319,16 @@ jobs:
       uses: JarvusInnovations/background-action@v1.0.7
       with:
         run: |
-          npm install wait-on &
           java -jar D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.NUnit\bin\Release\net8.0\$env:seleniumGridVersion hub &
-        log-output: stderr,stdout    
+        log-output: stderr,stdout 
+        working-directory: D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.NUnit\bin\Release\net8.0
     - name: Run JAR fil node
       uses: JarvusInnovations/background-action@v1.0.7
       with:
         run: |
-          npm install wait-on &
           java -jar D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.NUnit\bin\Release\net8.0\$env:seleniumGridVersion node --detect-drivers true &
         log-output: stderr,stdout
+        working-directory: D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.NUnit\bin\Release\net8.0
     - run: ./Ocaramba/ExecutingTestsOnWindowsGithubActions5.ps1
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
