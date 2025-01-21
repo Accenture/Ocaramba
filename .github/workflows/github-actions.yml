@@ -311,30 +311,8 @@ jobs:
       with:
        distribution: 'zulu' 
        java-version: '21'
-    - shell: pwsh
-      run: |
-        $output = "D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.NUnit\bin\Release\net8.0\$env:seleniumGridVersion"
-        Invoke-WebRequest -Uri "$env:seleniumGridUrl" -OutFile "$($output)"
-        cd "D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.NUnit\bin\Release\net8.0\" 
-        dir
-    - name: Run JAR fil hub
-      uses: JarvusInnovations/background-action@v1.0.7
-      with:
-        run: |
-          java -jar D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.NUnit\bin\Release\net8.0\selenium-server-4.27.0.jar hub &
-        wait-on: http://localhost:4444
-        wait-for: 1m
-        tail: true
-        log-output: stderr,stdout 
-        working-directory: D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.NUnit\bin\Release\net8.0
-    - name: Run JAR fil node
-      uses: JarvusInnovations/background-action@v1.0.7
-      with:
-        run: |
-          java -jar D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.NUnit\bin\Release\net8.0\selenium-server-4.27.0.jar node --detect-drivers true &
-        log-output: stderr,stdout
-        working-directory: D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.NUnit\bin\Release\net8.0
-    - run: ./Ocaramba/ExecutingTestsOnWindowsGithubActions5.ps1
+    - shell: powershell
+      run: ./Ocaramba/ExecutingTestsOnWindowsGithubActions5.ps1
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
       if: false

@@ -2,8 +2,8 @@ echo '********************************************Downloading Selenium Grid*****
 
 $url = $env:seleniumGridUrl
 $grid = $env:seleniumGridVersion
-$output = "D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.NUnit\bin\Release\net8.0\$grid"
-$outputLogs = "D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.NUnit\bin\Release\net8.0\"
+$output = ".\$grid"
+$outputLogs = ".\"
 
 $start_time = Get-Date
 
@@ -13,7 +13,7 @@ echo output: $output
 echo outputLogs: $outputLogs
 
 echo "Downloading Selenium Grid from: $($url) to $($output)"
-#Invoke-WebRequest -Uri "$($url)" -OutFile "$($output)"
+Invoke-WebRequest -Uri "$($url)" -OutFile "$($output)"
 
 echo "Selenium Grid downloaded to:" $output
 
@@ -21,13 +21,15 @@ echo "Time taken to download $($grid): $((Get-Date).Subtract($start_time).Second
 
 echo '******************************************Start Selenium Grid in background****************************************'
 
-#$appHub=Start-Process java -ArgumentList '-jar', $output, 'hub' -RedirectStandardOutput "$outputLogs\console_hub.out" -RedirectStandardError "$outputLogs\console_hub.err" -PassThru
+java --version
+
+$appHub=Start-Process java -ArgumentList '-jar', $output, 'hub' -RedirectStandardOutput "$outputLogs\console_hub.out" -RedirectStandardError "$outputLogs\console_hub.err" -PassThru
 
 Start-Sleep -s 5
 
 echo "Selenium Grid hub started"
 
-$$appNode=Start-Process java -ArgumentList '-jar', $output, 'node --detect-drivers true' -RedirectStandardOutput "$outputLogs\console_node.out" -RedirectStandardError "$outputLogs\console_node.err" -PassThru
+$appNode=Start-Process java -ArgumentList '-jar', $output, 'node --detect-drivers true' -RedirectStandardOutput "$outputLogs\console_node.out" -RedirectStandardError "$outputLogs\console_node.err" -PassThru
 
 Start-Sleep -s 5
 
