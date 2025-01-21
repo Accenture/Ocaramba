@@ -41,19 +41,4 @@ if($lastexitcode -ne 0)
   echo 'lastexitcode' $lastexitcode
 }
 
-echo '*****************************Stop Selenium Grid****************************'
-
-echo "Stop Selenium Grid node"
-
-Stop-Process -Id $appNode.Id
-
-echo "Stop Selenium Grid hub"
-
-Stop-Process -Id $appHub.Id
-
-if($lastexitcode -ne 0)
-{
-  echo 'lastexitcode' $lastexitcode
-}
-
 exit 0
