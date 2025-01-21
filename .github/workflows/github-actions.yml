@@ -318,12 +318,15 @@ jobs:
     - name: Run JAR fil hub
       uses: JarvusInnovations/background-action@v1.0.7
       with:
-        run: java -jar D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.NUnit\bin\Release\net8.0\$env:seleniumGridVersion hub &
+        run: |
+          npm install &
+          java -jar D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.NUnit\bin\Release\net8.0\$env:seleniumGridVersion hub &
         log-output: stderr,stdout    
-    - name: Run JAR file node 
+    - name: Run JAR fil node
       uses: JarvusInnovations/background-action@v1.0.7
       with:
-        run: java -jar D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.NUnit\bin\Release\net8.0\$env:seleniumGridVersion node --detect-drivers true &
+        run: |
+          npm install & java -jar D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.NUnit\bin\Release\net8.0\$env:seleniumGridVersion node --detect-drivers true &
         log-output: stderr,stdout
     - run: ./Ocaramba/ExecutingTestsOnWindowsGithubActions5.ps1
     - name: Publish Test Results
