@@ -306,10 +306,11 @@ jobs:
         name: OcarambaBuild
     - shell: cmd
       run: 7z x "OcarambaBuild.zip" -o.\Ocaramba -y -bb0
-    - name: Set up JDK 11
+    - name: Set up JDK
       uses: actions/setup-java@v4.6.0
       with:
-        java-version: '11'
+       distribution: 'zulu' 
+       java-version: '21'
     - run: ./Ocaramba/ExecutingTestsOnWindowsGithubActions5.ps1
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
