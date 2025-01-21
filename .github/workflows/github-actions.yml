@@ -87,16 +87,6 @@ jobs:
       with:
         path: ./OcarambaLite/bin/Release/OcarambaLite.${{ env.frameworkVersion }}.snupkg
         name: OcarambaLiteS${{ env.frameworkVersion }}
-    - shell: cmd
-      run: |
-       7z a -mx9 -spf2 "OcarambaBuild.zip" ".\**\bin\**" -xr!*.nupkg -xr!*.snupkg
-       7z a -mx9 -spf2 "OcarambaBuild.zip" ".\scripts\**" -xr!*.nupkg -xr!*.snupkg
-    - uses: actions/upload-artifact@v4
-      with:
-        path: OcarambaBuild.zip   
-        name: OcarambaBuild
-        compression-level: 0
-      if: (${{ job.status }} != 'cancelled')
   test_Stage_RunTestsOnDocker:
     runs-on: ubuntu-latest
     steps:
@@ -241,7 +231,7 @@ jobs:
         files: ${{ env.TestResultsDirWindows }}\*.trx
         check_name: ExecutingTestsOnWindowsGithubActionsCore1  
     - name: Zip artifact
-      run: Compress-Archive -Path D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.NUnitExtentReports\bin\Release\net8.0\TestOutput -Destination ExtentReports_${{ github.run_id }}.zip
+      run: Compress-Archive -Path .\Ocaramba.Tests.NUnitExtentReports\bin\Release\net8.0\TestOutput -Destination ExtentReports_${{ github.run_id }}.zip
     - uses: actions/upload-artifact@v4
       with:
         path: ExtentReports_${{ github.run_id }}.zip
@@ -252,12 +242,25 @@ jobs:
     needs:
     - build_Stage_BuildTestsOnWindows
     steps:
-    - uses: actions/download-artifact@v4
+    - uses: actions/checkout@v4
+    - uses: microsoft/setup-msbuild@v2
+    - shell: powershell
+      run: '(Get-Content ''Ocaramba.sln'' -raw) -replace [regex](''.*?'' + ''Documentation'' + (''.*?\r\n'' * (5 + 1))) | set-content  ''Ocaramba.sln'''
+    - name: Setup nuget
+      uses: nuget/setup-nuget@v2
       with:
-        name: OcarambaBuild
-    - shell: cmd
-      run: 7z x "OcarambaBuild.zip" -o.\Ocaramba -y -bb0
-    - run: ./Ocaramba/ExecutingTestsOnWindowsGithubActions2.ps1
+        nuget-version: latest
+    - name: Cache
+      uses: actions/cache@v4
+      with:
+        path: ${{ github.workspace }}\.nuget\packages
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }} #hash of project files
+        restore-keys: |
+          ${{ runner.os }}-nuget-
+    - name: NuGet restore
+      run: nuget restore ${{ env.solution }}
+    - run: msbuild '${{ env.solution }}' /p:configuration='${{ env.buildConfiguration }}' /p:platform='${{ env.buildPlatform }}' /v:minimal
+    - run: ./scripts/ExecutingTestsOnWindowsGithubActions2.ps1
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
       if: always()
@@ -267,15 +270,26 @@ jobs:
         check_name: ExecutingTestsOnWindowsGithubActionsCore2  
   test_Stage_RunTestsOnWindowsFramework:
     runs-on: windows-latest
-    needs:
-    - build_Stage_BuildTestsOnWindows
     steps:
-    - uses: actions/download-artifact@v4
+    - uses: actions/checkout@v4
+    - uses: microsoft/setup-msbuild@v2
+    - shell: powershell
+      run: '(Get-Content ''Ocaramba.sln'' -raw) -replace [regex](''.*?'' + ''Documentation'' + (''.*?\r\n'' * (5 + 1))) | set-content  ''Ocaramba.sln'''
+    - name: Setup nuget
+      uses: nuget/setup-nuget@v2
       with:
-        name: OcarambaBuild
-    - shell: cmd
-      run: 7z x "OcarambaBuild.zip" -o.\Ocaramba -y -bb0
-    - run: ./Ocaramba/ExecutingTestsOnWindowsGithubActions3.ps1
+        nuget-version: latest
+    - name: Cache
+      uses: actions/cache@v4
+      with:
+        path: ${{ github.workspace }}\.nuget\packages
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }} #hash of project files
+        restore-keys: |
+          ${{ runner.os }}-nuget-
+    - name: NuGet restore
+      run: nuget restore ${{ env.solution }}
+    - run: msbuild '${{ env.solution }}' /p:configuration='${{ env.buildConfiguration }}' /p:platform='${{ env.buildPlatform }}' /v:minimal
+    - run: ./scripts/ExecutingTestsOnWindowsGithubActions3.ps1
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
       if: false
@@ -329,12 +343,24 @@ jobs:
     needs:
     - build_Stage_BuildTestsOnWindows
     steps:
-    - uses: actions/download-artifact@v4
+    - uses: actions/checkout@v4
+    - uses: microsoft/setup-msbuild@v2
+    - shell: powershell
+      run: '(Get-Content ''Ocaramba.sln'' -raw) -replace [regex](''.*?'' + ''Documentation'' + (''.*?\r\n'' * (5 + 1))) | set-content  ''Ocaramba.sln'''
+    - name: Setup nuget
+      uses: nuget/setup-nuget@v2
       with:
-        name: OcarambaBuild
-    - shell: cmd
-      run: 7z x "OcarambaBuild.zip" -o.\Ocaramba -y -bb0
-    - run: ./Ocaramba/ExecutingTestsOnWindowsGithubActions6.ps1
+        nuget-version: latest
+    - name: Cache
+      uses: actions/cache@v4
+      with:
+        path: ${{ github.workspace }}\.nuget\packages
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }} #hash of project files
+        restore-keys: |
+          ${{ runner.os }}-nuget-
+    - name: NuGet restore
+      run: nuget restore ${{ env.solution }}
+    - run: ./scripts/ExecutingTestsOnWindowsGithubActions6.ps1
       env:
         MAPPED_ENV_BROWSERSTACKKEY: ${{ secrets.BROWSERSTACKKEY }}
         MAPPED_ENV_BROWSERSTACKUSER: ${{ secrets.BROWSERSTACKUSER }}
