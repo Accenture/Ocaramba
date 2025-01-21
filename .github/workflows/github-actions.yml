@@ -310,12 +310,11 @@ jobs:
     - shell: pwsh
       run: ./scripts/ExecutingTestsOnWindowsGithubActions5.ps1
     - name: Publish Test Results
-      uses: EnricoMi/publish-unit-test-result-action/windows@v2
-      if: false
+      uses: EnricoMi/publish-unit-test-result-action/linux@v2
+      if: true
       with:
         files: |
-          ${{ env.TestResultsDirWindows }}\*.xml
-        check_name: ExecutingTestsOnWindowsGithubActionsSeleniumGrid5         
+          /home/runner/work/**/TestResults/*.xml      
   test_Stage_RunTestsOnWindowsSaucelabs:
     runs-on: windows-latest
     needs:
