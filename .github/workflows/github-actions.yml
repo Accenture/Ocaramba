@@ -315,6 +315,8 @@ jobs:
       run: |
         $output = "D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.NUnit\bin\Release\net8.0\$env:seleniumGridVersion"
         Invoke-WebRequest -Uri "$env:seleniumGridUrl" -OutFile "$($output)"
+        cd "D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.NUnit\bin\Release\net8.0\" 
+        dir
     - name: Run JAR fil hub
       uses: JarvusInnovations/background-action@v1.0.7
       with:
