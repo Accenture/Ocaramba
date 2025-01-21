@@ -233,7 +233,7 @@ jobs:
     - name: NuGet restore
       run: nuget restore ${{ env.solution }}
     - run: msbuild '${{ env.solution }}' /p:configuration='${{ env.buildConfiguration }}' /p:platform='${{ env.buildPlatform }}' /v:minimal
-    - run: ./ExecutingTestsOnWindowsGithubActions1.ps1
+    - run: ./scripts/ExecutingTestsOnWindowsGithubActions1.ps1
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
       if: always()
