@@ -315,22 +315,10 @@ jobs:
       run: |
         $output = "D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.NUnit\bin\Release\net8.0\$env:seleniumGridVersion"
         Invoke-WebRequest -Uri "$env:seleniumGridUrl" -OutFile "$($output)"
-    - name: Run JAR file in background
-      uses: JarvusInnovations/background-action@v1.0.7
-      with:
-        run: java -jar D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.NUnit\bin\Release\net8.0\$env:seleniumGridVersion hub &
-        wait-on: http://localhost:4444
-        wait-for: 1m
-        tail: true
-        log-output: stderr,stdout
-        log-output-if: failure  
-    - name: Run JAR file in background
-      uses: JarvusInnovations/background-action@v1.0.7
-      with:
-        run: java -jar D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.NUnit\bin\Release\net8.0\$env:seleniumGridVersion node --hub http://localhost:4444 &
-        tail: true
-        log-output: stderr,stdout
-        log-output-if: failure  
+    - name: Start Selenium Hub
+      run: java -jar D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.NUnit\bin\Release\net8.0\$env:seleniumGridVersion hub
+    - name: Start Selenium Node
+      run: java -jar D:\a\Ocaramba\Ocaramba\Ocaramba\Ocaramba.Tests.NUnit\bin\Release\net8.0\$env:seleniumGridVersion node --detect-drivers true
     - run: ./Ocaramba/ExecutingTestsOnWindowsGithubActions5.ps1
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/windows@v2
