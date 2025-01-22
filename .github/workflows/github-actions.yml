@@ -315,7 +315,7 @@ jobs:
     - name: NuGet restore
       run: nuget restore ${{ env.solution }}
     - run: msbuild '${{ env.solution }}' /p:configuration='${{ env.buildConfiguration }}' /p:platform='${{ env.buildPlatform }}' /v:minimal
-    - run: ./sripts/Ocaramba/ExecutingTestsOnWindowsGithubActions4.ps1
+    - run: ./scripts/ExecutingTestsOnWindowsGithubActions4.ps1
       env:
         MAPPED_ENV_BROWSERSTACKKEY: ${{ secrets.BROWSERSTACKKEY }}
         MAPPED_ENV_BROWSERSTACKUSER: ${{ secrets.BROWSERSTACKUSER }}
