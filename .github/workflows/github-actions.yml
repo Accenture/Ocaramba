@@ -343,7 +343,7 @@ jobs:
       run: ./scripts/ExecutingTestsOnWindowsGithubActions5.ps1
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/linux@v2
-      if: true
+      if: false
       with:
         files: |
           /home/runner/work/**/TestResults/*.xml      
@@ -367,6 +367,7 @@ jobs:
           ${{ runner.os }}-nuget-
     - name: NuGet restore
       run: nuget restore ${{ env.solution }}
+    - run: dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
     - run: ./scripts/ExecutingTestsOnWindowsGithubActions6.ps1
       env:
         MAPPED_ENV_BROWSERSTACKKEY: ${{ secrets.BROWSERSTACKKEY }}
