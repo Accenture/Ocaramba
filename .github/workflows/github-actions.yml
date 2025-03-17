@@ -173,12 +173,6 @@ jobs:
         access-key: ${{ secrets.BROWSERSTACKKEY }}
         build-name: 'BUILD_INFO'
         project-name: 'REPO_NAME'
-    - name: 'Start BrowserStackLocal Tunnel'
-      uses: 'browserstack/github-actions/setup-local@master'
-      with:
-        local-testing: 'start'
-        local-logging-level: 'all-logs'
-        local-identifier: 'random'
     - shell: pwsh
       if: true
       env:
@@ -189,12 +183,6 @@ jobs:
         MAPPED_ENV_SAUCELABSACCESSKEY: ${{ secrets.saucelabsaccessKey }}
         MAPPED_ENV_SAUCELABSUSERNAME: ${{ secrets.saucelabsusername }}
       run: ./scripts/ExecutingTestsOnLinuxBrowserStackGithubActions.ps1
-    - name: 'Start BrowserStackLocal Tunnel'
-      uses: 'browserstack/github-actions/setup-local@master'
-      with:
-        local-testing: 'stop'
-        local-logging-level: 'all-logs'
-        local-identifier: 'random'
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/linux@v2
       if: false
