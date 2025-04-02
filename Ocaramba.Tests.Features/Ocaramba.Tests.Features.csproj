@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>net8.0</TargetFrameworks>
@@ -22,7 +22,7 @@
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="9.0.1" />
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.1.0" />
     <PackageReference Include="System.Text.Json" Version="9.0.1" />
-    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="132.0.6834.8300" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="135.0.7049.4200" />
     <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.35.0" />
     <PackageReference Include="SpecFlow" Version="3.9.74" />
     <PackageReference Include="SpecFlow.NUnit" Version="3.9.74" />
