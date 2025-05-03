@@ -51,13 +51,13 @@
       <Version>9.0.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.PowerShell.Commands.Diagnostics">
-      <Version>7.4.6</Version>
+      <Version>7.4.7</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.PowerShell.SDK">
-      <Version>7.4.6</Version>
+      <Version>7.4.7</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.WSMan.Management">
-      <Version>7.4.6</Version>
+      <Version>7.4.7</Version>
     </PackageReference>
     <PackageReference Include="NLog.Web.AspNetCore">
       <Version>5.3.15</Version>
