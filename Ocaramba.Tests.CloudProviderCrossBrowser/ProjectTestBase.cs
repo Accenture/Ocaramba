@@ -92,6 +92,10 @@ namespace Ocaramba.Tests.CloudProviderCrossBrowser
         [OneTimeSetUp]
         public void BeforeClass()
         {
+            // Initialize HarmonyLib patches
+            var harmony = new HarmonyLib.Harmony("com.browserstack.response.patch");
+            harmony.PatchAll(typeof(ProjectTestBase).Assembly);
+
 #if net8_0
             this.DriverContext.CurrentDirectory = Directory.GetCurrentDirectory();
 #endif
