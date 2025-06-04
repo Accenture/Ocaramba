@@ -27,8 +27,8 @@
     <None Include="..\icon.png" Pack="true" PackagePath="\" />
 	 <None Include="..\README.md" Pack="true" PackagePath="\" />
 	<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="Selenium.WebDriver" Version="4.28.0" />
-    <PackageReference Include="Selenium.Support" Version="4.28.0" />
+    <PackageReference Include="Selenium.WebDriver" Version="4.33.0" />
+    <PackageReference Include="Selenium.Support" Version="4.33.0" />
     <PackageReference Include="NLog" Version="5.3.4" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">

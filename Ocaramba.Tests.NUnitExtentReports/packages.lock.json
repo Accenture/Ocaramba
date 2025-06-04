@@ -106,18 +106,18 @@
       },
       "Selenium.Support": {
         "type": "Direct",
-        "requested": "[4.28.0, )",
-        "resolved": "4.28.0",
-        "contentHash": "6S1gZacGGDRitU2kO92AUHQU1JkMdiFK4NAm6fn8+6eZMU8n04MF6skH6oUqkWAv0wyF1rKWD5IBMFiTBm6G5A==",
+        "requested": "[4.33.0, )",
+        "resolved": "4.33.0",
+        "contentHash": "AsjM8PqJkueDBzw9StEHLLUq6bT7au9IY9mMLlwMxOdNYfu7PMJOqpHCMg2xVtLrUHGd6mADqrbFxcs9QWe6JA==",
         "dependencies": {
-          "Selenium.WebDriver": "4.28.0"
+          "Selenium.WebDriver": "4.33.0"
         }
       },
       "Selenium.WebDriver": {
         "type": "Direct",
-        "requested": "[4.28.0, )",
-        "resolved": "4.28.0",
-        "contentHash": "g4iZWBHQH5dObJQKcKXsol8yFJPIkXhVdn/8P726d4OmpHgQ9aYSwtTCWo+FUYHIkMS+haItgeOT6hilmLeHNw=="
+        "requested": "[4.33.0, )",
+        "resolved": "4.33.0",
+        "contentHash": "5dzwA1cMorwYWudX46zyeUqyZn48TZeCHbSERxbpKezGxZ8hMBpcL12XwG4RGUuQKGH8FiEOJOFK4eCE//uNpQ=="
       },
       "Selenium.WebDriver.ChromeDriver": {
         "type": "Direct",
@@ -1129,8 +1129,8 @@
           "NLog": "[5.3.4, )",
           "NLog.Web.AspNetCore": "[5.3.15, )",
           "OcarambaLite": "[1.0.0, )",
-          "Selenium.Support": "[4.28.0, )",
-          "Selenium.WebDriver": "[4.28.0, )",
+          "Selenium.Support": "[4.33.0, )",
+          "Selenium.WebDriver": "[4.33.0, )",
           "Selenium.WebDriver.ChromeDriver": "[132.0.6834.8300, )",
           "Selenium.WebDriver.GeckoDriver": "[0.35.0, )",
           "System.Configuration.ConfigurationManager": "[9.0.1, )",
@@ -1149,8 +1149,8 @@
           "Microsoft.WSMan.Management": "[7.4.6, )",
           "NLog": "[5.3.4, )",
           "NLog.Web.AspNetCore": "[5.3.15, )",
-          "Selenium.Support": "[4.28.0, )",
-          "Selenium.WebDriver": "[4.28.0, )",
+          "Selenium.Support": "[4.33.0, )",
+          "Selenium.WebDriver": "[4.33.0, )",
           "System.Configuration.ConfigurationManager": "[9.0.1, )",
           "System.Runtime.CompilerServices.Unsafe": "[6.1.0, )",
           "System.Text.Json": "[9.0.1, )"
