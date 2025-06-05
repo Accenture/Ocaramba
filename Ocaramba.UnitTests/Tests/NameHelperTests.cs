@@ -9,19 +9,15 @@ namespace Ocaramba.UnitTests.Tests
     [TestFixture, Parallelizable(ParallelScope.Self)]
     public class NameHelperTests
     {
-#if net8_0
-        string folder = Directory.GetCurrentDirectory();
-#endif
 
-#if net47
         string folder = TestContext.CurrentContext.TestDirectory;
-#endif
-#if net47
-        private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
-#endif
-#if net8_0
+
+
+        
+
+
         private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
-#endif
+
         [Test()]
         public void ShortenFileNameTest()
         {

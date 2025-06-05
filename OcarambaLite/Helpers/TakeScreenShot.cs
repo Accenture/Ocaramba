@@ -29,9 +29,9 @@ namespace Ocaramba.Helpers
     using System.Globalization;
     using System.IO;
     using System.Text.RegularExpressions;
-#if net47
+
     using System.Windows.Forms;
-#endif
+
     using NLog;
     using Ocaramba.Extensions;
     using Ocaramba.Helpers;
@@ -43,69 +43,6 @@ namespace Ocaramba.Helpers
     public static class TakeScreenShot
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-
-#if net47 || net45
-        /// <summary>
-        /// Takes screen shot.
-        /// </summary>
-        /// <returns>Image contains desktop screenshot.</returns>
-        public static Bitmap DoIt()
-        {
-            Logger.Info("****************************Taking*Screenshot***************************************");
-            var screen = Screen.PrimaryScreen;
-            using (var bitmap = new Bitmap(screen.Bounds.Width, screen.Bounds.Height))
-            {
-                using (var graphics = Graphics.FromImage(bitmap))
-                {
-                    try
-                    {
-                        graphics.CopyFromScreen(0, 0, 0, 0, screen.Bounds.Size);
-                    }
-                    catch (Win32Exception)
-                    {
-                        Logger.Error("Win32Exception Exception, user is locked out with no access to windows desktop");
-                        return null;
-                    }
-
-                    Logger.Error("Screenshot taken.");
-                }
-
-                return (Bitmap)bitmap.Clone();
-            }
-        }
-
-        /// <summary>
-        /// Saves the specified bitmap.
-        /// </summary>
-        /// <param name="bitmap">The bitmap.</param>
-        /// <param name="format">The format.</param>
-        /// <param name="folder">The folder.</param>
-        /// <param name="title">The title.</param>
-        /// <returns>The path to the saved bitmap, null if not saved.</returns>
-        public static string Save(Bitmap bitmap, ImageFormat format, string folder, string title)
-        {
-            var fileName = string.Format(CultureInfo.CurrentCulture, "{0}_{1}_{2}.png", title, DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss-fff", CultureInfo.CurrentCulture), "fullscreen");
-            fileName = Regex.Replace(fileName, "[^0-9a-zA-Z._]+", "_");
-            fileName = NameHelper.ShortenFileName(folder, fileName, "_", 255);
-            var filePath = Path.Combine(folder, fileName);
-
-            if (bitmap == null)
-            {
-                Logger.Error("Full screenshot is not saved");
-            }
-            else
-            {
-                bitmap.Save(filePath, format);
-                bitmap.Dispose();
-                Logger.Error(CultureInfo.CurrentCulture, "Test failed: full screenshot saved to {0}.", filePath);
-                FilesHelper.WaitForFileOfGivenName(BaseConfiguration.ShortTimeout, fileName, folder);
-                Console.WriteLine(string.Format(CultureInfo.CurrentCulture, "##teamcity[publishArtifacts '{0}']", filePath));
-                return filePath;
-            }
-
-            return null;
-        }
-#endif
 
         /// <summary>
         /// Takes screen shot of specific element.

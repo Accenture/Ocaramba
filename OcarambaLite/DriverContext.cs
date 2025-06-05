@@ -50,12 +50,8 @@ namespace Ocaramba
     [SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable", Justification = "Driver is disposed on test end")]
     public partial class DriverContext
     {
-#if net47
-        private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
-#endif
-#if net8_0
         private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
-#endif
+
         private readonly Collection<ErrorDetail> verifyMessages = new Collection<ErrorDetail>();
 
         /// <summary>
@@ -207,14 +203,14 @@ namespace Ocaramba
                 NameValueCollection firefoxPreferences = new NameValueCollection();
 
                 NameValueCollection firefoxExtensions = new NameValueCollection();
-#if net47
+
                 firefoxPreferences = ConfigurationManager.GetSection("FirefoxPreferences") as NameValueCollection;
                 firefoxExtensions = ConfigurationManager.GetSection("FirefoxExtensions") as NameValueCollection;
-#endif
-#if net8_0
+
+
                 firefoxPreferences = BaseConfiguration.GetNameValueCollectionFromAppsettings("FirefoxPreferences");
                 firefoxExtensions = BaseConfiguration.GetNameValueCollectionFromAppsettings("FirefoxExtensions");
-#endif
+
 
                 // preference for downloading files
                 options.SetPreference("browser.download.dir", this.DownloadFolder);
@@ -313,16 +309,16 @@ namespace Ocaramba
                 NameValueCollection chromePreferences = null;
                 NameValueCollection chromeExtensions = null;
                 NameValueCollection chromeArguments = null;
-#if net47
+
                 chromePreferences = ConfigurationManager.GetSection("ChromePreferences") as NameValueCollection;
                 chromeExtensions = ConfigurationManager.GetSection("ChromeExtensions") as NameValueCollection;
                 chromeArguments = ConfigurationManager.GetSection("ChromeArguments") as NameValueCollection;
-#endif
-#if net8_0
+
+
                 chromePreferences = BaseConfiguration.GetNameValueCollectionFromAppsettings("ChromePreferences");
                 chromeExtensions = BaseConfiguration.GetNameValueCollectionFromAppsettings("ChromeExtensions");
                 chromeArguments = BaseConfiguration.GetNameValueCollectionFromAppsettings("chromeArguments");
-#endif
+
                 options.AddUserProfilePreference("profile.default_content_settings.popups", 0);
                 options.AddUserProfilePreference("download.default_directory", this.DownloadFolder);
                 options.AddUserProfilePreference("download.prompt_for_download", false);
@@ -416,12 +412,12 @@ namespace Ocaramba
             {
                 // retrieving settings from config file
                 NameValueCollection internetExplorerPreferences = null;
-#if net47
+
                 internetExplorerPreferences = ConfigurationManager.GetSection("InternetExplorerPreferences") as NameValueCollection;
-#endif
-#if net8_0
+
+
                 internetExplorerPreferences = BaseConfiguration.GetNameValueCollectionFromAppsettings("InternetExplorerPreferences");
-#endif
+
                 var options = new InternetExplorerOptions
                 {
                     EnsureCleanSession = true,
@@ -457,16 +453,16 @@ namespace Ocaramba
                 NameValueCollection edgeChromiumPreferences = null;
                 NameValueCollection edgeChromiumExtensions = null;
                 NameValueCollection edgeChromiumArguments = null;
-#if net47
+
                 edgeChromiumPreferences = ConfigurationManager.GetSection("EdgeChromiumPreferences") as NameValueCollection;
                 edgeChromiumExtensions = ConfigurationManager.GetSection("EdgeChromiumExtensions") as NameValueCollection;
                 edgeChromiumArguments = ConfigurationManager.GetSection("EdgeChromiumArguments") as NameValueCollection;
-#endif
-#if net8_0
+
+
                 edgeChromiumPreferences = BaseConfiguration.GetNameValueCollectionFromAppsettings("EdgeChromiumPreferences");
                 edgeChromiumExtensions = BaseConfiguration.GetNameValueCollectionFromAppsettings("EdgeChromiumExtensions");
                 edgeChromiumArguments = BaseConfiguration.GetNameValueCollectionFromAppsettings("EdgeChromiumArguments");
-#endif
+
 
                 // set browser proxy for Edge
                 if (!string.IsNullOrEmpty(BaseConfiguration.Proxy))
@@ -604,14 +600,14 @@ namespace Ocaramba
                     {
                         this.FirefoxOptions.BrowserExecutableLocation = BaseConfiguration.FirefoxBrowserExecutableLocation;
                     }
-#if net8_0
+
                     FirefoxDriverService serviceFirefox = FirefoxDriverService.CreateDefaultService();
                     serviceFirefox.Host = "::1";
                     this.driver = string.IsNullOrEmpty(BaseConfiguration.PathToFirefoxDriverDirectory) ? new FirefoxDriver(serviceFirefox, this.SetDriverOptions(this.FirefoxOptions)) : new FirefoxDriver(BaseConfiguration.PathToFirefoxDriverDirectory, this.SetDriverOptions(this.FirefoxOptions));
-#endif
-#if net47
+
+
                     this.driver = string.IsNullOrEmpty(BaseConfiguration.PathToFirefoxDriverDirectory) ? new FirefoxDriver(this.SetDriverOptions(this.FirefoxOptions)) : new FirefoxDriver(BaseConfiguration.PathToFirefoxDriverDirectory, this.SetDriverOptions(this.FirefoxOptions));
-#endif
+
                     break;
                 case BrowserType.InternetExplorer:
                 case BrowserType.IE:
@@ -697,14 +693,14 @@ namespace Ocaramba
         {
             NameValueCollection driverCapabilitiesConf = new NameValueCollection();
             NameValueCollection settings = new NameValueCollection();
-#if net47
+
             driverCapabilitiesConf = ConfigurationManager.GetSection("DriverCapabilities") as NameValueCollection;
             settings = ConfigurationManager.GetSection("environments/" + this.CrossBrowserEnvironment) as NameValueCollection;
-#endif
-#if net8_0
+
+
             driverCapabilitiesConf = BaseConfiguration.GetNameValueCollectionFromAppsettings("DriverCapabilities");
             settings = BaseConfiguration.GetNameValueCollectionFromAppsettings("environments:" + this.CrossBrowserEnvironment);
-#endif
+
             var browserType = this.GetBrowserTypeForRemoteDriver(settings);
             switch (browserType)
             {

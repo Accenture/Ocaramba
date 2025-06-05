@@ -36,12 +36,8 @@ namespace Ocaramba.Helpers
         /// <summary>
         /// NLog logger handle.
         /// </summary>
-#if net47
-        private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
-#endif
-#if net8_0
         private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
-#endif
+
 
         /// <summary>
         /// Create random name.
@@ -77,12 +73,8 @@ namespace Ocaramba.Helpers
         public static string ShortenFileName(string folder, string fileName, string pattern, int maxLength)
         {
             Logger.Debug(CultureInfo.CurrentCulture, "Length of the file full name is {0} characters", (folder + fileName).Length);
-#if net47
-            while (!((folder + fileName).Length <= maxLength || !fileName.Contains(pattern)))
-#endif
-#if net8_0
-            while (!((folder + fileName).Length <= maxLength || !fileName.Contains(pattern, StringComparison.InvariantCultureIgnoreCase)))
-#endif
+
+            while (!((folder + fileName).Length <= maxLength || fileName.IndexOf(pattern, StringComparison.InvariantCultureIgnoreCase) < 0))
             {
                 Logger.Trace(CultureInfo.CurrentCulture, "Length of the file full name is over {0} characters removing first occurrence of {1}", maxLength, pattern);
                 Regex rgx = new Regex(pattern);

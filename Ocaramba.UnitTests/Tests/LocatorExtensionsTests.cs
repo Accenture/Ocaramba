@@ -25,7 +25,7 @@ namespace Ocaramba.UnitTests.Tests
             var titleByClassName = new InternetPage(DriverContext)
                 .OpenHomePage()
                 .GoToDragAndDropPage().GetByClassName;
-#if net8_0
+
             if (BaseConfiguration.Env == "Linux")
             {
                 Assert.That(titleByClassName, Is.EqualTo("Drag and Drop\nA\nB"));
@@ -34,10 +34,10 @@ namespace Ocaramba.UnitTests.Tests
             {
                 Assert.That(titleByClassName, Is.EqualTo("Drag and Drop\r\nA\r\nB"));
             }
-#endif
-#if net47
+
+
              Assert.That(titleByClassName, Is.EqualTo("Drag and Drop\r\nA\r\nB"));
-#endif
+
         }
 
         [Test]
@@ -46,7 +46,7 @@ namespace Ocaramba.UnitTests.Tests
             var titleByCssSelector = new InternetPage(DriverContext)
                 .OpenHomePage()
                 .GoToDragAndDropPage().GetByCssSelectorLocator;
-#if net8_0
+
             if (BaseConfiguration.Env == "Linux")
             {
                 Assert.That(titleByCssSelector, Is.EqualTo("Drag and Drop\nA\nB"));
@@ -55,10 +55,10 @@ namespace Ocaramba.UnitTests.Tests
             {
                 Assert.That(titleByCssSelector, Is.EqualTo("Drag and Drop\r\nA\r\nB"));
             }
-#endif
-#if net47
+
+
             Assert.That(titleByCssSelector, Is.EqualTo("Drag and Drop\r\nA\r\nB"));
-#endif
+
         }
 
         [Test]
@@ -78,7 +78,7 @@ namespace Ocaramba.UnitTests.Tests
                 .OpenHomePage()
                 .GoToFormAuthenticationPage()
                 .GetUsernameByNameLocator;
-#if net8_0
+
             if (BaseConfiguration.Env == "Linux")
             {
                 Assert.That(columnA, Is.EqualTo("Username\nPassword\nLogin"));
@@ -87,10 +87,10 @@ namespace Ocaramba.UnitTests.Tests
             {
                 Assert.That(columnA, Is.EqualTo("Username\r\nPassword\r\nLogin"));
             }
-#endif
-#if net47
+
+
             Assert.That(columnA, Is.EqualTo("Username\r\nPassword\r\nLogin"));
-#endif
+
         }
 
 

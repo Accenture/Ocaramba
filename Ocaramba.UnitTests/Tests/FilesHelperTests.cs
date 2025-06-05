@@ -10,13 +10,10 @@ namespace Ocaramba.UnitTests.Tests
     [TestFixture, Parallelizable(ParallelScope.Self)]
     public class FilesHelperTests
     {
-#if net8_0
-        string folder = Directory.GetCurrentDirectory();
-#endif
 
-#if net47
+
         string folder = TestContext.CurrentContext.TestDirectory;
-#endif
+
         [Test()]
         public void GetFilesOfGivenTypeFromAllSubFolderTest()
         {

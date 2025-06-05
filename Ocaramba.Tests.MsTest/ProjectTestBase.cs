@@ -117,9 +117,9 @@ namespace Ocaramba.Tests.MsTest
                 foreach (var filePath in filePaths)
                 {
                     this.LogTest.Info("Uploading file [{0}] to test context", filePath);
-#if net47
+
                     this.TestContext.AddResultFile(filePath);
-#endif
+
                 }
             }
         }

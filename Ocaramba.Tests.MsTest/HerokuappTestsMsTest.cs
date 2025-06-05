@@ -90,7 +90,8 @@ namespace Ocaramba.Tests.MsTest.Tests
             Assert.IsTrue(floatingMenuPage.IsUrlEndsWith("#home"), "URL does not end with #home - probably 'Home' floating menu button was not clicked properly");
         }
 
-#if net47
+
+
         [DeploymentItem("Ocaramba.Tests.MsTest\\DDT.xml")]
         [DeploymentItem("Ocaramba.Tests.MsTest\\IEDriverServer.exe")]
         [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "|DataDirectory|\\DDT.xml", "credential", DataAccessMethod.Sequential)]
@@ -101,18 +102,18 @@ namespace Ocaramba.Tests.MsTest.Tests
                 .OpenHomePage()
                 .GoToFormAuthenticationPage();
 
-            formFormAuthentication.EnterUserName((string)this.TestContext.DataRow["user"]);
-            formFormAuthentication.EnterPassword((string)this.TestContext.DataRow["password"]);
+            // Correctly access the data using TestContext.Properties
+            formFormAuthentication.EnterUserName((string)this.TestContext.Properties["user"]);
+            formFormAuthentication.EnterPassword((string)this.TestContext.Properties["password"]);
 
             formFormAuthentication.LogOn();
             Verify.That(
                 this.DriverContext,
-
-                () => Assert.AreEqual((string)this.TestContext.DataRow["message"], formFormAuthentication.GetMessage));
+                () => Assert.AreEqual((string)this.TestContext.Properties["message"], formFormAuthentication.GetMessage));
         }
-#endif
 
-#if net47
+
+
         [DeploymentItem("Ocaramba.Tests.MsTest\\DDT.csv")]
         [DataSource("Microsoft.VisualStudio.TestTools.DataSource.CSV", "|DataDirectory|\\DDT.csv", "DDT#csv", DataAccessMethod.Sequential)]
         [TestMethod]
@@ -122,16 +123,16 @@ namespace Ocaramba.Tests.MsTest.Tests
                 .OpenHomePage()
                 .GoToFormAuthenticationPage();
 
-            formFormAuthentication.EnterUserName((string)this.TestContext.DataRow["user"]);
-            formFormAuthentication.EnterPassword((string)this.TestContext.DataRow["password"]);
+            // Correctly access the data using TestContext.Properties
+            formFormAuthentication.EnterUserName((string)this.TestContext.Properties["user"]);
+            formFormAuthentication.EnterPassword((string)this.TestContext.Properties["password"]);
 
             formFormAuthentication.LogOn();
             Verify.That(
                 this.DriverContext,
-
-                () => Assert.AreEqual((string)this.TestContext.DataRow["message"], formFormAuthentication.GetMessage));
+                () => Assert.AreEqual((string)this.TestContext.Properties["message"], formFormAuthentication.GetMessage));
         }
-#endif
+
 
         [TestMethod]
         public void VerifyTest()

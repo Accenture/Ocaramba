@@ -29,12 +29,12 @@ namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
 
     public class DynamicLoadingPage : ProjectPageBase
     {
-#if net47
-        private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
-#endif
-#if net8_0
+
+        
+
+
         private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
-#endif
+
 
         private readonly ElementLocator exampleLink1 = new ElementLocator(Locator.CssSelector, "a[href='/dynamic_loading/2'"),
         startButton = new ElementLocator(Locator.XPath, "//button[.='Start']"),
