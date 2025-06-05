@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	<TargetFrameworks>net472;net8.0</TargetFrameworks>
-	<TargetFrameworks Condition="'$(OS)' != 'Unix'">net472;net8.0</TargetFrameworks>
+	<TargetFrameworks>net8.0</TargetFrameworks>
+	<TargetFrameworks Condition="'$(OS)' != 'Unix'">net8.0</TargetFrameworks>
     <Description>Framework to automate tests using Selenium WebDriver (lighten version without selenium drivers)</Description>
     <Copyright>Copyright ©  2015</Copyright>
     <Company>Objectivity Bespoke Software Specialists</Company>
@@ -38,12 +38,6 @@
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="9.0.1" />
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.1.0" />
     <PackageReference Include="System.Text.Json" Version="9.0.1" />
-  </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)' == 'net472'">
-	<Reference Include="System.Configuration" />
-	<Reference Include="System.Windows.Forms" />
-  </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
     <PackageReference Include="Microsoft.Extensions.Configuration">
       <Version>9.0.1</Version>
     </PackageReference>
@@ -69,14 +63,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  
-    <PropertyGroup Condition="'$(TargetFramework)'=='net8.0'">
-    <DefineConstants>net8_0</DefineConstants>
-</PropertyGroup>
-
-  <PropertyGroup Condition="'$(TargetFramework)'=='net472'">
-    <DefineConstants>net47</DefineConstants>
-</PropertyGroup>
+ 
 
  <PropertyGroup>
   <GenerateDocumentationFile>true</GenerateDocumentationFile>

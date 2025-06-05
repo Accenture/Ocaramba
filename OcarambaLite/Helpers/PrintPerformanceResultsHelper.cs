@@ -25,9 +25,9 @@ namespace Ocaramba.Helpers
     using System.ComponentModel;
     using System.Diagnostics;
     using System.Linq;
-#if net8_0
+
     using System.Management.Automation;
-#endif
+
     using NLog;
 
     /// <summary>
@@ -35,18 +35,14 @@ namespace Ocaramba.Helpers
     /// </summary>
     public static class PrintPerformanceResultsHelper
     {
-#if net47
-        private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
-#endif
-#if net8_0
-        private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
-#endif
+
+         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
         /// Prints the performance summary of percentiles 90 duration in millisecond in Teamcity.
         /// </summary>
         /// <param name="measures">The instance of PerformanceHelper class.</param>
-        public static void PrintPercentiles90DurationMillisecondsinTeamcity(PerformanceHelper measures)
+         public static void PrintPercentiles90DurationMillisecondsinTeamcity(PerformanceHelper measures)
         {
             var groupedPercentiles90Durations = measures.AllGroupedDurationsMilliseconds.Select(v =>
                 "##teamcity[testStarted name='" + v.StepName + "." + v.Browser + ".Percentile90Line']\n" +
@@ -112,7 +108,7 @@ namespace Ocaramba.Helpers
         /// <param name="measuresToPrint">Average load times for particular scenarios and browsers.</param>
         public static void PrintResultsInAppVeyor(IOrderedEnumerable<string> measuresToPrint)
         {
-#if net47
+
             // Use ProcessStartInfo class
             ProcessStartInfo startInfo = new ProcessStartInfo
             {
@@ -122,13 +118,13 @@ namespace Ocaramba.Helpers
                 WindowStyle = ProcessWindowStyle.Hidden,
             };
 
-#endif
+
 
             for (int i = 0; i < measuresToPrint.Count(); i++)
             {
                 var text = "AddTest " + measuresToPrint.ElementAt(i);
 
-#if net47
+
                 startInfo.Arguments = text;
 
                 // Start the process with the info we specified.
@@ -148,9 +144,9 @@ namespace Ocaramba.Helpers
                     Logger.Info("AppVeyor app not found");
                     break;
                 }
-#endif
 
-#if net8_0
+
+
                 text = "Add-AppveyorTest -Name " + measuresToPrint.ElementAt(i);
                 using (var ps = PowerShell.Create())
                 {
@@ -160,7 +156,7 @@ namespace Ocaramba.Helpers
                         Debug.Write(result.ToString());
                     }
                 }
-#endif
+
             }
         }
     }

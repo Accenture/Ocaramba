@@ -42,21 +42,14 @@ namespace Ocaramba.Tests.CloudProviderCrossBrowser
     /// </summary>
     public class ProjectTestBase : TestBase
     {
-#if net47
-        private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
-#endif
-#if net8_0
         private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
-#endif
 
-        private readonly DriverContext
-            driverContext = new DriverContext();
+        private readonly DriverContext driverContext = new DriverContext();
 
         public ProjectTestBase(string environment)
         {
             Logger.Info(CultureInfo.CurrentCulture, "environment {0}", environment);
-
-            this.DriverContext.CrossBrowserEnvironment = environment;
+            this.driverContext.CrossBrowserEnvironment = environment;
         }
 
         /// <summary>
@@ -64,15 +57,8 @@ namespace Ocaramba.Tests.CloudProviderCrossBrowser
         /// </summary>
         public TestLogger LogTest
         {
-            get
-            {
-                return this.DriverContext.LogTest;
-            }
-
-            set
-            {
-                this.DriverContext.LogTest = value;
-            }
+            get { return this.driverContext.LogTest; }
+            set { this.driverContext.LogTest = value; }
         }
 
         /// <summary>
@@ -80,10 +66,7 @@ namespace Ocaramba.Tests.CloudProviderCrossBrowser
         /// </summary>
         protected DriverContext DriverContext
         {
-            get
-            {
-                return this.driverContext;
-            }
+            get { return this.driverContext; }
         }
 
         /// <summary>
@@ -92,13 +75,7 @@ namespace Ocaramba.Tests.CloudProviderCrossBrowser
         [OneTimeSetUp]
         public void BeforeClass()
         {
-#if net8_0
-            this.DriverContext.CurrentDirectory = Directory.GetCurrentDirectory();
-#endif
-
-#if net47
-            this.DriverContext.CurrentDirectory = TestContext.CurrentContext.TestDirectory;
-#endif
+            this.driverContext.CurrentDirectory = Directory.GetCurrentDirectory();
         }
 
         /// <summary>
@@ -115,8 +92,8 @@ namespace Ocaramba.Tests.CloudProviderCrossBrowser
         [SetUp]
         public void BeforeTest()
         {
-            this.DriverContext.TestTitle = TestContext.CurrentContext.Test.Name;
-            this.DriverContext.Start();
+            this.driverContext.TestTitle = TestContext.CurrentContext.Test.Name;
+            this.driverContext.Start();
             this.LogTest.LogTestStarting(this.driverContext);
 
             if (BaseConfiguration.RemoteWebDriverHub.ToString().ToLower(CultureInfo.CurrentCulture).Contains("testingbot"))
@@ -130,7 +107,7 @@ namespace Ocaramba.Tests.CloudProviderCrossBrowser
             else if (BaseConfiguration.RemoteWebDriverHub.ToString().ToLower(CultureInfo.CurrentCulture).Contains("browserstack"))
             {
                 // Setting name of the test
-                ((IJavaScriptExecutor)DriverContext.Driver).ExecuteScript("browserstack_executor: {\"action\": \"setSessionName\", \"arguments\": {\"name\":\" "+this.DriverContext.TestTitle+" \"}}");
+                ((IJavaScriptExecutor)this.driverContext.Driver).ExecuteScript("browserstack_executor: {\"action\": \"setSessionName\", \"arguments\": {\"name\":\" " + this.driverContext.TestTitle + " \"}}");
             }
         }
 
@@ -140,7 +117,7 @@ namespace Ocaramba.Tests.CloudProviderCrossBrowser
         [TearDown]
         public void AfterTest()
         {
-            this.DriverContext.IsTestFailed = TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed || !this.driverContext.VerifyMessages.Count.Equals(0);
+            this.driverContext.IsTestFailed = TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed || this.driverContext.VerifyMessages.Count != 0;
             var filePaths = this.SaveTestDetailsIfTestFailed(this.driverContext);
             this.SaveAttachmentsToTestContext(filePaths);
             this.LogTest.LogTestEnding(this.driverContext);
@@ -148,15 +125,15 @@ namespace Ocaramba.Tests.CloudProviderCrossBrowser
             // Logs the result to Sauce Labs
             if (BaseConfiguration.RemoteWebDriverHub.ToString().ToLower(CultureInfo.CurrentCulture).Contains("saucelabs"))
             {
-                ((IJavaScriptExecutor)this.DriverContext.Driver).ExecuteScript("sauce:job-result=" + (this.DriverContext.IsTestFailed ? "failed" : "passed"));
+                ((IJavaScriptExecutor)this.driverContext.Driver).ExecuteScript("sauce:job-result=" + (this.driverContext.IsTestFailed ? "failed" : "passed"));
             }
-            else if (BaseConfiguration.RemoteWebDriverHub.ToString().ToLower(CultureInfo.CurrentCulture).Contains("browserstack") && !this.DriverContext.IsTestFailed)
+            else if (BaseConfiguration.RemoteWebDriverHub.ToString().ToLower(CultureInfo.CurrentCulture).Contains("browserstack") && !this.driverContext.IsTestFailed)
             {
-                ((IJavaScriptExecutor)DriverContext.Driver).ExecuteScript("browserstack_executor: {\"action\": \"setSessionStatus\", \"arguments\": {\"status\":\"passed\", \"reason\": \" Test Passed\"}}");
+                ((IJavaScriptExecutor)this.driverContext.Driver).ExecuteScript("browserstack_executor: {\"action\": \"setSessionStatus\", \"arguments\": {\"status\":\"passed\", \"reason\": \" Test Passed\"}}");
             }
-            else if (BaseConfiguration.RemoteWebDriverHub.ToString().ToLower(CultureInfo.CurrentCulture).Contains("browserstack") && this.DriverContext.IsTestFailed)
+            else if (BaseConfiguration.RemoteWebDriverHub.ToString().ToLower(CultureInfo.CurrentCulture).Contains("browserstack") && this.driverContext.IsTestFailed)
             {
-                ((IJavaScriptExecutor)DriverContext.Driver).ExecuteScript("browserstack_executor: {\"action\": \"setSessionStatus\", \"arguments\": {\"status\":\"failed\", \"reason\": \" Test Failed\"}}");
+                ((IJavaScriptExecutor)this.driverContext.Driver).ExecuteScript("browserstack_executor: {\"action\": \"setSessionStatus\", \"arguments\": {\"status\":\"failed\", \"reason\": \" Test Failed\"}}");
             }
 
             if (this.IsVerifyFailedAndClearMessages(this.driverContext) && TestContext.CurrentContext.Result.Outcome.Status != TestStatus.Failed)
@@ -164,7 +141,7 @@ namespace Ocaramba.Tests.CloudProviderCrossBrowser
                 Assert.Fail();
             }
 
-            this.DriverContext.Stop();
+            this.driverContext.Stop();
         }
 
         private void SaveAttachmentsToTestContext(string[] filePaths)

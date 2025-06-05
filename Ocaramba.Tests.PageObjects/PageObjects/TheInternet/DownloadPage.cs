@@ -33,12 +33,9 @@ namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
 
     public class DownloadPage : ProjectPageBase
     {
-#if net47
-        private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
-#endif
-#if net8_0
+
         private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
-#endif
+
 
         /// <summary>
         /// Locators for elements

@@ -35,23 +35,19 @@ namespace OcarambaLite.Logger
         /// <summary>
         /// The logger.
         /// </summary>
-#if net47
-        private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
-#endif
-#if net8_0
-        private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
-#endif
+
+       private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
 
         /// <summary>
         /// The start test time.
         /// </summary>
-        private DateTime startTestTime;
+       private DateTime startTestTime;
 
         /// <summary>
         /// Logs the test starting.
         /// </summary>
         /// <param name="driverContext">The driver context.</param>
-        public void LogTestStarting(DriverContext driverContext)
+       public void LogTestStarting(DriverContext driverContext)
         {
             this.startTestTime = DateTime.Now;
             this.Info("*************************************************************************************");
