@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
 	<TargetFrameworks>net8.0</TargetFrameworks>
@@ -7,23 +7,23 @@
   </PropertyGroup>
 <ItemGroup>
     <PackageReference Include="Appveyor.TestLogger" Version="2.0.0" />
-    <PackageReference Include="Microsoft.TestPlatform.TestHost" Version="17.12.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
-    <PackageReference Include="NLog" Version="5.3.4" />
-    <PackageReference Include="NLog.Web.AspNetCore" Version="5.3.15" />
-    <PackageReference Include="NPOI" Version="2.7.2" />
+    <PackageReference Include="Microsoft.TestPlatform.TestHost" Version="17.14.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+    <PackageReference Include="NLog" Version="5.5.0" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="5.5.0" />
+    <PackageReference Include="NPOI" Version="2.7.3" />
     <PackageReference Include="NUnit" Version="4.3.2" />
     <PackageReference Include="NUnit.Runners" Version="3.12.0" />
-    <PackageReference Include="NUnit3TestAdapter" Version="4.6.0">
+    <PackageReference Include="NUnit3TestAdapter" Version="5.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-	<PackageReference Include="Selenium.Support" Version="4.28.0" />
-    <PackageReference Include="Selenium.WebDriver" Version="4.28.0" />
-    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="132.0.6834.8300" />
-    <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.35.0" />
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="9.0.1" />
-    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.1.0" />
+	<PackageReference Include="Selenium.Support" Version="4.33.0" />
+    <PackageReference Include="Selenium.WebDriver" Version="4.33.0" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="137.0.7151.6800" />
+    <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.36.0" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="9.0.5" />
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.1.2" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net472'">
