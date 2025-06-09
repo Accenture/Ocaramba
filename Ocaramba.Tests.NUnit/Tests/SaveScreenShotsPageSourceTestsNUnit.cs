@@ -32,22 +32,6 @@ namespace Ocaramba.Tests.NUnit.Tests
     public class SaveScreenShotsPageSourceTestsNUnit : ProjectTestBase
     {
         [Test]
-        [Category("TakingScreehShots")]
-        [Category("NotImplementedInCoreOrUploadDownload")]
-        public void SaveFullScreenShotTest()
-        {
-            var downloadPage = new InternetPage(this.DriverContext).OpenHomePage().GoToFileDownloader();
-            var screenShotNumber = FilesHelper.CountFiles(this.DriverContext.ScreenShotFolder, FileType.Png);
-
-           // Assert.IsNotNull(TakeScreenShot.Save(TakeScreenShot.DoIt(), ImageFormat.Png, this.DriverContext.ScreenShotFolder, string.Format(CultureInfo.CurrentCulture, this.DriverContext.TestTitle + "_first")));
-
-            var nameOfScreenShot = downloadPage.CheckIfScreenShotIsSaved(screenShotNumber);
-            TestContext.AddTestAttachment(nameOfScreenShot);
-            Assert.That(nameOfScreenShot.Contains(this.DriverContext.TestTitle), Is.True, "Name of screenshot doesn't contain Test Title");
-            Assert.That(this.DriverContext.TakeAndSaveScreenshot(), Is.Not.Null);
-        }
-
-        [Test]
         public void SaveWebDriverScreenShotTest()
         {
             var downloadPage = new InternetPage(this.DriverContext).OpenHomePage().GoToFileDownloader();
