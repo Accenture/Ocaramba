@@ -27,17 +27,17 @@
       },
       "NLog": {
         "type": "Direct",
-        "requested": "[5.3.4, )",
-        "resolved": "5.3.4",
-        "contentHash": "gLy7+O1hEYJXIlcTr1/VWjGXrZTQFZzYNO18IWasD64pNwz0BreV+nHLxWKXWZzERRzoKnsk2XYtwLkTVk7J1A=="
+        "requested": "[5.5.0, )",
+        "resolved": "5.5.0",
+        "contentHash": "FCH8s7GWlonH5JXV9/EpeNJ8pRZQMVZOSWX3JrHPU8rzdHJhS5+lUGGvJIUOtzkGV1clYBFR0WXOI5FnUwVCMA=="
       },
       "NLog.Web.AspNetCore": {
         "type": "Direct",
-        "requested": "[5.3.15, )",
-        "resolved": "5.3.15",
-        "contentHash": "Am5ZJ1htYf6K3QJ7stIbKK3CTGw1BOyGtucWxHoDScM/U1w6nE/zmYfZTfj7jRIKuZwbwpBqtRGZJsUcMGUvfA==",
+        "requested": "[5.5.0, )",
+        "resolved": "5.5.0",
+        "contentHash": "MFDhgF9lHxq74Nmf3rNNHs/axsPpYgnZXNyAhKj9KKctJ0ZlrR+HR/184AQzu4h0KIH9SgRHeLgbWK9aCWWtRw==",
         "dependencies": {
-          "NLog.Extensions.Logging": "5.3.15"
+          "NLog.Extensions.Logging": "5.5.0"
         }
       },
       "Selenium.Support": {
@@ -498,12 +498,12 @@
       },
       "NLog.Extensions.Logging": {
         "type": "Transitive",
-        "resolved": "5.3.15",
-        "contentHash": "BSCkfWjaTesw4/k8Ujj3YdqtDzd2iCRYIOwoHume7aaJFz4/gLbemA5MLgkAwtCxcd8nGBGfaEkeIzQPGxArLg==",
+        "resolved": "5.5.0",
+        "contentHash": "l8gxUThXCiV5Vcilz9SF2/mf39p9ccdm+V3zoadQIfnv5dMHiy6BH8PSF/9ptOMHfUXZI5qOlBTiO+YcoMY/4Q==",
         "dependencies": {
           "Microsoft.Extensions.Configuration.Abstractions": "8.0.0",
           "Microsoft.Extensions.Logging": "8.0.0",
-          "NLog": "5.3.4"
+          "NLog": "5.5.0"
         }
       },
       "runtime.linux-arm.runtime.native.System.IO.Ports": {
@@ -902,8 +902,8 @@
           "Microsoft.PowerShell.Commands.Diagnostics": "[7.4.6, )",
           "Microsoft.PowerShell.SDK": "[7.4.6, )",
           "Microsoft.WSMan.Management": "[7.4.6, )",
-          "NLog": "[5.3.4, )",
-          "NLog.Web.AspNetCore": "[5.3.15, )",
+          "NLog": "[5.5.0, )",
+          "NLog.Web.AspNetCore": "[5.5.0, )",
           "Selenium.Support": "[4.33.0, )",
           "Selenium.WebDriver": "[4.33.0, )",
           "System.Configuration.ConfigurationManager": "[9.0.5, )",
