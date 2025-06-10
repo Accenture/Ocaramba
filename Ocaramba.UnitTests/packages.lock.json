@@ -117,9 +117,9 @@
       },
       "System.Memory": {
         "type": "Direct",
-        "requested": "[4.6.0, )",
-        "resolved": "4.6.0",
-        "contentHash": "OEkbBQoklHngJ8UD8ez2AERSk2g+/qpAaSWWCBFbpH727HxDq5ydVkuncBaKcKfwRqXGWx64dS6G1SUScMsitg=="
+        "requested": "[4.6.3, )",
+        "resolved": "4.6.3",
+        "contentHash": "qdcDOgnFZY40+Q9876JUHnlHu7bosOHX8XISRoH94fwk6hgaeQGSgfZd8srWRZNt5bV9ZW2TljcegDNxsf+96A=="
       },
       "System.Text.Json": {
         "type": "Direct",
@@ -1166,7 +1166,7 @@
           "Selenium.WebDriver.ChromeDriver": "[137.0.7151.6800, )",
           "Selenium.WebDriver.GeckoDriver": "[0.35.0, )",
           "System.Configuration.ConfigurationManager": "[9.0.5, )",
-          "System.Memory": "[4.6.0, )",
+          "System.Memory": "[4.6.3, )",
           "System.Text.Encodings.Web": "[9.0.5, )",
           "System.Text.Json": "[9.0.5, )"
         }
