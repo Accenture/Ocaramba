@@ -101,9 +101,9 @@
       },
       "Selenium.WebDriver.GeckoDriver": {
         "type": "Direct",
-        "requested": "[0.35.0, )",
-        "resolved": "0.35.0",
-        "contentHash": "+s9jC3IhtNmWloGv9pQ+TqNeRYM0cCPQrFicpXNcyP08KI/WjTRPE0b0M6Fc8I3FEGj98EBQjQBwUlAiQpMW0w=="
+        "requested": "[0.36.0, )",
+        "resolved": "0.36.0",
+        "contentHash": "jUdrPcwkVt8OJon4iWv6pNTPIAdViJYB9cbd4ct0Bt2RzPzynQiN8bBUfOA1iSxTppI9SH8L1eMfg5NRijlBsw=="
       },
       "System.Configuration.ConfigurationManager": {
         "type": "Direct",
@@ -1164,7 +1164,7 @@
           "Selenium.Support": "[4.33.0, )",
           "Selenium.WebDriver": "[4.33.0, )",
           "Selenium.WebDriver.ChromeDriver": "[137.0.7151.6800, )",
-          "Selenium.WebDriver.GeckoDriver": "[0.35.0, )",
+          "Selenium.WebDriver.GeckoDriver": "[0.36.0, )",
           "System.Configuration.ConfigurationManager": "[9.0.5, )",
           "System.Memory": "[4.6.3, )",
           "System.Text.Encodings.Web": "[9.0.5, )",
@@ -1182,7 +1182,7 @@
           "Selenium.Support": "[4.33.0, )",
           "Selenium.WebDriver": "[4.33.0, )",
           "Selenium.WebDriver.ChromeDriver": "[137.0.7151.6800, )",
-          "Selenium.WebDriver.GeckoDriver": "[0.35.0, )",
+          "Selenium.WebDriver.GeckoDriver": "[0.36.0, )",
           "System.Configuration.ConfigurationManager": "[9.0.5, )",
           "System.Text.Json": "[9.0.5, )"
         }

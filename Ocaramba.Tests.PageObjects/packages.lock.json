@@ -63,9 +63,9 @@
       },
       "Selenium.WebDriver.GeckoDriver": {
         "type": "Direct",
-        "requested": "[0.35.0, )",
-        "resolved": "0.35.0",
-        "contentHash": "+s9jC3IhtNmWloGv9pQ+TqNeRYM0cCPQrFicpXNcyP08KI/WjTRPE0b0M6Fc8I3FEGj98EBQjQBwUlAiQpMW0w=="
+        "requested": "[0.36.0, )",
+        "resolved": "0.36.0",
+        "contentHash": "jUdrPcwkVt8OJon4iWv6pNTPIAdViJYB9cbd4ct0Bt2RzPzynQiN8bBUfOA1iSxTppI9SH8L1eMfg5NRijlBsw=="
       },
       "System.Configuration.ConfigurationManager": {
         "type": "Direct",
