@@ -13,6 +13,8 @@
     <SHFBSchemaVersion>2017.9.26.0</SHFBSchemaVersion>
     <!-- AssemblyName, Name, and RootNamespace are not used by SHFB but Visual Studio adds them anyway -->
     <AssemblyName>Documentation</AssemblyName>
+	  <FrameworkVersion>.NET Core/.NET Standard/.NET 5.0+</FrameworkVersion>
+	  <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <RootNamespace>Documentation</RootNamespace>
     <Name>Documentation</Name>
     <!-- SHFB properties -->
@@ -20,8 +22,8 @@
     <HtmlHelpName>Documentation</HtmlHelpName>
     <Language>en-US</Language>
     <DocumentationSources>
-      <DocumentationSource sourceFile="..\OcarambaLite\bin\Debug\net472\WebDriver.dll" />
-<DocumentationSource sourceFile="..\OcarambaLite\bin\Debug\net472\WebDriver.Support.dll" /></DocumentationSources>
+      <DocumentationSource sourceFile="$(UserProfile)\.nuget\packages\selenium.webdriver\4.33.0\lib\net8.0\WebDriver.dll" />
+<DocumentationSource sourceFile="$(UserProfile)\.nuget\packages\selenium.support\4.33.0\lib\netstandard2.0\WebDriver.Support.dll" /></DocumentationSources>
   </PropertyGroup>
   <!-- There are no properties for these groups.  AnyCPU needs to appear in order for Visual Studio to perform
 			 the build.  The others are optional common platform types that may appear. -->
@@ -44,8 +46,8 @@
   <!-- Uncomment this to use the NuGet packages when SHFB is not installed locally, e.g. in the CI build pipeline.
 			Update the package versions to the latest releases.-->
 	<ItemGroup>
-		<PackageReference Include="EWSoftware.SHFB" Version="2022.8.14.1" />
-		<PackageReference Include="EWSoftware.SHFB.NETFramework" Version="4.8.0.2" />
+		<PackageReference Include="EWSoftware.SHFB" Version="2025.3.22" />
+		<PackageReference Include="EWSoftware.SHFB.NETCore" Version="4.5.1.2" />
 	</ItemGroup>
 	
   <!-- Import the common build targets during NuGet restore because before the packages are being installed, $(SHFBROOT) is not set yet -->
@@ -54,7 +56,4 @@
   <Import Project="$(SHFBROOT)\SandcastleHelpFileBuilder.targets" Condition="Exists('$(SHFBROOT)\SandcastleHelpFileBuilder.targets')" />
   <!-- The pre-build and post-build event properties must appear *after* the targets file import in order to be
 			 evaluated correctly. -->
-  <PropertyGroup>
-       <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    </PropertyGroup>
 </Project>

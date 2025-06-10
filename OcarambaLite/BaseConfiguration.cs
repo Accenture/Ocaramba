@@ -24,9 +24,9 @@ namespace Ocaramba
 {
     using System.Collections.Generic;
     using System.Collections.Specialized;
-#if net8_0
+
     using Microsoft.Extensions.Configuration;
-#endif
+
     using System;
     using System.Collections.ObjectModel;
     using System.Configuration;
@@ -39,13 +39,6 @@ namespace Ocaramba
     /// </summary>
     public static class BaseConfiguration
     {
-        /// <summary>
-        /// The logger.
-        /// </summary>
-#if net47
-        private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
-#endif
-#if net8_0
         public static readonly string Env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
         /// <summary>
@@ -57,7 +50,7 @@ namespace Ocaramba
             .Build();
 
         private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
-#endif
+
 
         /// <summary>
         /// Gets the Driver.
@@ -74,13 +67,9 @@ namespace Ocaramba
             {
                 bool supportedBrowser = false;
                 string setting = null;
-#if net8_0
-                setting = Builder["appSettings:browser"];
-#endif
-#if net47
-                setting = ConfigurationManager.AppSettings["browser"];
 
-#endif
+                setting = Builder["appSettings:browser"];
+
                 Logger.Trace(CultureInfo.CurrentCulture, "Browser value from settings file '{0}'", setting);
                 supportedBrowser = Enum.TryParse(setting, out BrowserType browserType);
                 if (supportedBrowser)
@@ -101,12 +90,8 @@ namespace Ocaramba
             {
                 bool supportedBrowser = false;
                 string setting = null;
-#if net47
-                setting = ConfigurationManager.AppSettings["DriverCapabilities"];
-#endif
-#if net8_0
                 setting = Builder["appSettings:DriverCapabilities"];
-#endif
+
 
                 Logger.Trace(CultureInfo.CurrentCulture, "Driver Capabilities value from settings file '{0}'", setting);
 
@@ -128,11 +113,9 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
-                setting = ConfigurationManager.AppSettings["PathToFirefoxProfile"];
-#elif net8_0
+
                 setting = Builder["appSettings:PathToFirefoxProfile"];
-#endif
+
                 Logger.Trace(CultureInfo.CurrentCulture, "Gets the path to firefox profile from settings file '{0}'", setting);
                 if (string.IsNullOrEmpty(setting))
                 {
@@ -151,12 +134,9 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
-                setting = ConfigurationManager.AppSettings["protocol"];
-#endif
-#if  net8_0
+
                 setting = Builder["appSettings:protocol"];
-#endif
+
                 Logger.Trace(CultureInfo.CurrentCulture, "Gets the protocol from settings file '{0}'", setting);
                 return setting;
             }
@@ -170,12 +150,9 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
-                setting = ConfigurationManager.AppSettings["host"];
-#endif
-#if  net8_0
+
                 setting = Builder["appSettings:host"];
-#endif
+
                 Logger.Trace(CultureInfo.CurrentCulture, "Gets the protocol from settings file '{0}'", setting);
                 return setting;
             }
@@ -189,12 +166,9 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
-                setting = ConfigurationManager.AppSettings["url"];
-#endif
-#if net8_0
+
                 setting = Builder["appSettings:url"];
-#endif
+
                 Logger.Trace(CultureInfo.CurrentCulture, "Gets the url from settings file '{0}'", setting);
                 return setting;
             }
@@ -208,12 +182,9 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
-                setting = ConfigurationManager.AppSettings["proxy"];
-#endif
-#if net8_0
+
                 setting = Builder["appSettings:proxy"];
-#endif
+
                 Logger.Trace(CultureInfo.CurrentCulture, "Gets the url from settings file '{0}'", setting);
                 return setting;
             }
@@ -227,12 +198,9 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
-                setting = ConfigurationManager.AppSettings["httpProxy"];
-#endif
-#if net8_0
+
                 setting = Builder["appSettings:httpProxy"];
-#endif
+
                 Logger.Trace(CultureInfo.CurrentCulture, "Gets the httpProxy from settings file '{0}'", setting);
                 return setting;
             }
@@ -246,12 +214,9 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
-                setting = ConfigurationManager.AppSettings["ftpProxy"];
-#endif
-#if net8_0
+
                 setting = Builder["appSettings:ftpProxy"];
-#endif
+
                 Logger.Trace(CultureInfo.CurrentCulture, "Gets the ftpProxy from settings file '{0}'", setting);
                 return setting;
             }
@@ -265,12 +230,9 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
-                setting = ConfigurationManager.AppSettings["sslProxy"];
-#endif
-#if net8_0
+
                 setting = Builder["appSettings:sslProxy"];
-#endif
+
                 Logger.Trace(CultureInfo.CurrentCulture, "Gets the sslProxy from settings file '{0}'", setting);
                 return setting;
             }
@@ -284,12 +246,9 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
-                setting = ConfigurationManager.AppSettings["socksproxy"];
-#endif
-#if net8_0
+
                 setting = Builder["appSettings:socksproxy"];
-#endif
+
                 Logger.Trace(CultureInfo.CurrentCulture, "Gets the socksproxy from settings file '{0}'", setting);
                 return setting;
             }
@@ -303,12 +262,9 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
-                setting = ConfigurationManager.AppSettings["remoteTimeout"];
-#endif
-#if net8_0
+
                 setting = Builder["appSettings:remoteTimeout"];
-#endif
+
                 if (string.IsNullOrEmpty(setting))
                 {
                     setting = "60";
@@ -329,12 +285,9 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
-                setting = ConfigurationManager.AppSettings["username"];
-#endif
-#if net8_0
+
                 setting = Builder["appSettings:username"];
-#endif
+
                 Logger.Trace(CultureInfo.CurrentCulture, "Gets the username from settings file '{0}'", setting);
                 return setting;
             }
@@ -348,12 +301,10 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
-                setting = ConfigurationManager.AppSettings["password"];
-#endif
-#if net8_0
+
+
                 setting = Builder["appSettings:password"];
-#endif
+
                 Logger.Trace(CultureInfo.CurrentCulture, "Gets the password from settings file '{0}'", setting);
                 return setting;
             }
@@ -370,12 +321,9 @@ namespace Ocaramba
             get
             {
                 double setting;
-#if net47
-                setting = Convert.ToDouble(ConfigurationManager.AppSettings["mediumTimeout"], CultureInfo.CurrentCulture);
-#endif
-#if net8_0
+
                 setting = Convert.ToDouble(Builder["appSettings:mediumTimeout"], CultureInfo.InvariantCulture);
-#endif
+
                 Logger.Trace(CultureInfo.CurrentCulture, "Gets the mediumTimeout from settings file '{0}'", setting);
                 return setting;
             }
@@ -392,12 +340,9 @@ namespace Ocaramba
             get
             {
                 double setting;
-#if net47
-                setting = Convert.ToDouble(ConfigurationManager.AppSettings["longTimeout"], CultureInfo.CurrentCulture);
-#endif
-#if net8_0
+
                 setting = Convert.ToDouble(Builder["appSettings:longTimeout"], CultureInfo.InvariantCulture);
-#endif
+
                 Logger.Trace(CultureInfo.CurrentCulture, "Gets the longTimeout from settings file '{0}'", setting);
                 return setting;
             }
@@ -414,12 +359,9 @@ namespace Ocaramba
             get
             {
                 double setting;
-#if net47
-                setting = Convert.ToDouble(ConfigurationManager.AppSettings["shortTimeout"], CultureInfo.CurrentCulture);
-#endif
-#if net8_0
+
                 setting = Convert.ToDouble(Builder["appSettings:shortTimeout"], CultureInfo.InvariantCulture);
-#endif
+
                 Logger.Trace(CultureInfo.CurrentCulture, "Gets the shortTimeout from settings file '{0}'", setting);
                 return setting;
             }
@@ -433,12 +375,9 @@ namespace Ocaramba
             get
             {
                 double setting;
-#if net47
-                setting = Convert.ToDouble(ConfigurationManager.AppSettings["ImplicitlyWaitMilliseconds"], CultureInfo.CurrentCulture);
-#endif
-#if net8_0
+
                 setting = Convert.ToDouble(Builder["appSettings:ImplicitlyWaitMilliseconds"], CultureInfo.InvariantCulture);
-#endif
+
                 Logger.Trace(CultureInfo.CurrentCulture, "Gets the ImplicitlyWaitMilliseconds from settings file '{0}'", setting);
                 return setting;
             }
@@ -452,12 +391,9 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
-                setting = ConfigurationManager.AppSettings["FirefoxBrowserExecutableLocation"];
-#endif
-#if net8_0
+
                 setting = Builder["appSettings:FirefoxBrowserExecutableLocation"];
-#endif
+
                 Logger.Trace(CultureInfo.CurrentCulture, "Gets the path and file name of the Firefox browser executable from settings file '{0}'", setting);
                 if (string.IsNullOrEmpty(setting))
                 {
@@ -476,12 +412,9 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
-                setting = ConfigurationManager.AppSettings["EdgeChromiumBrowserExecutableLocation"];
-#endif
-#if net8_0
+
                 setting = Builder["appSettings:EdgeChromiumBrowserExecutableLocation"];
-#endif
+
                 Logger.Trace(CultureInfo.CurrentCulture, "Gets the path and file name of the Edge Chromium browser executable from settings file '{0}'", setting);
                 if (string.IsNullOrEmpty(setting))
                 {
@@ -500,12 +433,9 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
-                setting = ConfigurationManager.AppSettings["ChromeBrowserExecutableLocation"];
-#endif
-#if net8_0
+
                 setting = Builder["appSettings:ChromeBrowserExecutableLocation"];
-#endif
+
                 Logger.Trace(CultureInfo.CurrentCulture, "Gets the path and file name of the Chrome browser executable from settings file '{0}'", setting);
                 if (string.IsNullOrEmpty(setting))
                 {
@@ -525,42 +455,10 @@ namespace Ocaramba
             {
                 string setting = null;
 
-#if net47
-                setting = ConfigurationManager.AppSettings["RemoteWebDriverHub"];
-#endif
-#if net8_0
                 setting = Builder["appSettings:RemoteWebDriverHub"];
-#endif
+
                 Logger.Trace(CultureInfo.CurrentCulture, "RemoteWebDriverHub from settings file '{0}'", setting);
                 return new Uri(setting);
-            }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether enable full desktop screen shot. False by default.
-        /// </summary>
-        public static bool FullDesktopScreenShotEnabled
-        {
-            get
-            {
-#if net47
-                Logger.Trace(
-                    CultureInfo.CurrentCulture,
-                    "Full Desktop Screen Shot Enabled value from App.config '{0}'",
-                    ConfigurationManager.AppSettings["FullDesktopScreenShotEnabled"]);
-                if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["FullDesktopScreenShotEnabled"]))
-                {
-                    return false;
-                }
-
-                if (ConfigurationManager.AppSettings["FullDesktopScreenShotEnabled"].ToLower(CultureInfo.CurrentCulture)
-                    .Equals("true"))
-                {
-                    return true;
-                }
-#endif
-                Logger.Trace(CultureInfo.CurrentCulture, "Full Desktop Screen Shot not supported in .NET Core 'false'");
-                return false;
             }
         }
 
@@ -572,12 +470,9 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
-                setting = ConfigurationManager.AppSettings["PathToChromeDriverLog"];
-#endif
-#if net8_0
+
                 setting = Builder["appSettings:PathToChromeDriverLog"];
-#endif
+
                 Logger.Trace(CultureInfo.CurrentCulture, "Gets the PathToChromeDriverLog from settings file '{0}'", setting);
                 if (string.IsNullOrEmpty(setting))
                 {
@@ -596,12 +491,9 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
-                setting = ConfigurationManager.AppSettings["EnableVerboseLoggingChrome"];
-#endif
-#if  net8_0
+
                 setting = Builder["appSettings:EnableVerboseLoggingChrome"];
-#endif
+
                 Logger.Trace(CultureInfo.CurrentCulture, "Verbose logging for Chrome value from settings file '{0}'", setting);
                 if (string.IsNullOrEmpty(setting))
                 {
@@ -625,12 +517,9 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
-                setting = ConfigurationManager.AppSettings["PathToInternetExplorerDriverDirectory"];
-#endif
-#if net8_0
+
                 setting = Builder["appSettings:PathToInternetExplorerDriverDirectory"];
-#endif
+
                 Logger.Trace(CultureInfo.CurrentCulture, "Gets the PathToInternetExplorerDriverDirectory from settings file '{0}'", setting);
                 if (string.IsNullOrEmpty(setting))
                 {
@@ -649,12 +538,9 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
-                setting = ConfigurationManager.AppSettings["PathToEdgeChromiumDriverDirectory"];
-#endif
-#if net8_0
+
                 setting = Builder["appSettings:PathToEdgeChromiumDriverDirectory"];
-#endif
+
                 Logger.Trace(CultureInfo.CurrentCulture, "Gets the PathToEdgeChromiumDriverDirectory from settings file '{0}'", setting);
                 return setting;
             }
@@ -668,12 +554,9 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
-                setting = ConfigurationManager.AppSettings["PathToChromeDriverDirectory"];
-#endif
-#if net8_0
+
                 setting = Builder["appSettings:PathToChromeDriverDirectory"];
-#endif
+
 
                 Logger.Trace(CultureInfo.CurrentCulture, "Path to the directory containing Chrome Driver from settings file '{0}'", setting);
                 if (string.IsNullOrEmpty(setting))
@@ -693,12 +576,9 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
-                setting = ConfigurationManager.AppSettings["PathToFirefoxDriverDirectory"];
-#endif
-#if net8_0
+
                 setting = Builder["appSettings:PathToFirefoxDriverDirectory"];
-#endif
+
                 Logger.Trace(CultureInfo.CurrentCulture, "Path to the directory containing Firefox Driver from settings file '{0}'", setting);
                 if (string.IsNullOrEmpty(setting))
                 {
@@ -717,12 +597,9 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
-                setting = ConfigurationManager.AppSettings["JavaScriptErrorLogging"];
-#endif
-#if net8_0
+
                 setting = Builder["appSettings:JavaScriptErrorLogging"];
-#endif
+
                 Logger.Trace(CultureInfo.CurrentCulture, "JavaScript error logging value from settings file '{0}'", setting);
                 if (string.IsNullOrEmpty(setting))
                 {
@@ -746,12 +623,9 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
-                setting = ConfigurationManager.AppSettings["JavaScriptErrorTypes"];
-#endif
-#if net8_0
+
                 setting = Builder["appSettings:JavaScriptErrorTypes"];
-#endif
+
                 Logger.Trace(CultureInfo.CurrentCulture, "JavaScript error logging value from settings file '{0}'", setting);
                 if (string.IsNullOrEmpty(setting))
                 {
@@ -781,12 +655,9 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
-                setting = ConfigurationManager.AppSettings["SeleniumScreenShotEnabled"];
-#endif
-#if net8_0
+
                 setting = Builder["appSettings:SeleniumScreenShotEnabled"];
-#endif
+
                 Logger.Trace(CultureInfo.CurrentCulture, "Selenium Screen Shot Enabled value from settings file '{0}'", setting);
                 if (string.IsNullOrEmpty(setting))
                 {
@@ -810,12 +681,9 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
-                setting = ConfigurationManager.AppSettings["EnableEventFiringWebDriver"];
-#endif
-#if net8_0
+
                 setting = Builder["appSettings:EnableEventFiringWebDriver"];
-#endif
+
                 Logger.Trace(CultureInfo.CurrentCulture, "Enable EventFiringWebDriver from settings file '{0}'", setting);
                 if (string.IsNullOrEmpty(setting))
                 {
@@ -839,12 +707,9 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
-                setting = ConfigurationManager.AppSettings["UseCurrentDirectory"];
-#endif
-#if net8_0
+
                 setting = Builder["appSettings:UseCurrentDirectory"];
-#endif
+
                 Logger.Trace(CultureInfo.CurrentCulture, "Use Current Directory value from settings file '{0}'", setting);
                 if (string.IsNullOrEmpty(setting))
                 {
@@ -871,12 +736,10 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
-                setting = ConfigurationManager.AppSettings["GetPageSourceEnabled"];
-#endif
-#if net8_0
+
+
                 setting = Builder["appSettings:GetPageSourceEnabled"];
-#endif
+
                 Logger.Trace(CultureInfo.CurrentCulture, "Get Page Source Enabled value from settings file '{0}'", setting);
                 if (string.IsNullOrEmpty(setting))
                 {
@@ -895,12 +758,9 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
-                setting = ConfigurationManager.AppSettings["DownloadFolder"];
-#endif
-#if net8_0
+
                 setting = Builder["appSettings:DownloadFolder"];
-#endif
+
                 Logger.Trace(CultureInfo.CurrentCulture, "Get DownloadFolder value from settings file '{0}'", setting);
                 return setting;
             }
@@ -914,12 +774,9 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
-                setting = ConfigurationManager.AppSettings["ScreenShotFolder"];
-#endif
-#if net8_0
+
                 setting = Builder["appSettings:ScreenShotFolder"];
-#endif
+
                 Logger.Trace(CultureInfo.CurrentCulture, "Get ScreenShotFolder value from settings file '{0}'", setting);
                 return setting;
             }
@@ -933,12 +790,9 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
-                setting = ConfigurationManager.AppSettings["PageSourceFolder"];
-#endif
-#if net8_0
+
                 setting = Builder["appSettings:PageSourceFolder"];
-#endif
+
                 Logger.Trace(CultureInfo.CurrentCulture, "Get PageSourceFolder value from settings file '{0}'", setting);
                 return setting;
             }
@@ -989,12 +843,9 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-#if net47
-                setting = ConfigurationManager.AppSettings["SynchronizationWithAngularEnabled"];
-#endif
-#if  net8_0
+
                 setting = Builder["appSettings:SynchronizationWithAngularEnabled"];
-#endif
+
                 Logger.Trace(CultureInfo.CurrentCulture, "Angular synchronization Enabled value from settings file '{0}'", setting);
                 if (string.IsNullOrEmpty(setting))
                 {
@@ -1009,7 +860,6 @@ namespace Ocaramba
                 return false;
             }
         }
-#if  net8_0
 
         /// <summary>
         /// Converting settings from appsettings.json into the NameValueCollection, key - value pairs.
@@ -1019,13 +869,13 @@ namespace Ocaramba
         public static NameValueCollection GetNameValueCollectionFromAppsettings(string preferences)
         {
             NameValueCollection preferencesCollection = new NameValueCollection();
-            var jsnonSettings = Builder.GetSection(preferences).Get<Dictionary<string, string>>();
-            if (jsnonSettings == null)
+            var jsonSettings = Builder.GetSection(preferences).Get<Dictionary<string, object>>();
+            if (jsonSettings == null)
             {
                 return preferencesCollection;
             }
 
-            foreach (var kvp in jsnonSettings)
+            foreach (var kvp in jsonSettings)
             {
                 string value = null;
                 if (kvp.Value != null)
@@ -1038,6 +888,6 @@ namespace Ocaramba
 
             return preferencesCollection;
         }
-#endif
+
     }
 }

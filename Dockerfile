@@ -13,6 +13,27 @@ RUN apt-get update && apt-get install -y gnupg \
     && sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list' \
     && apt-get update && apt-get install -y google-chrome-stable
 #=========
+# Microsoft Edge
+#=========
+RUN apt-get update && apt-get install -y wget gnupg \
+    && wget -q -O - https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg \
+    && install -o root -g root -m 644 microsoft.gpg /etc/apt/trusted.gpg.d/ \
+    && sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/edge stable main" > /etc/apt/sources.list.d/microsoft-edge.list' \
+    && rm microsoft.gpg \
+    && apt-get update \
+    && apt-get install -y microsoft-edge-stable
+#=========
+# Edge driver
+#=========
+RUN EDGEBROWSER_VERSION=$(microsoft-edge --version | awk '{print $NF}') \
+    && EDGE_MAJOR=$(echo $EDGEBROWSER_VERSION | cut -d. -f1) \
+    && EDGE_DRIVER_URL="https://msedgedriver.azureedge.net/$EDGEBROWSER_VERSION/edgedriver_linux64.zip" \
+    && wget -O /tmp/edgedriver.zip "$EDGE_DRIVER_URL" \
+    && unzip /tmp/edgedriver.zip -d /usr/local/bin/ \
+    && mv /usr/local/bin/msedgedriver /usr/local/bin/edgedriver \
+    && chmod +x /usr/local/bin/edgedriver \
+    && rm /tmp/edgedriver.zip
+#=========
 # Chrome driver
 #=========
 RUN CHROMEVER=$(google-chrome --product-version | grep -oE "[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+") \

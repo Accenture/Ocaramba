@@ -54,12 +54,11 @@ namespace Ocaramba
         public string SaveScreenshot(ErrorDetail errorDetail, string folder, string title)
         {
             var fileName = string.Format(CultureInfo.CurrentCulture, "{0}_{1}_{2}.png", title, errorDetail.DateTime.ToString("yyyy-MM-dd HH-mm-ss-fff", CultureInfo.CurrentCulture), "browser");
-#if net47
-            var correctFileName = Path.GetInvalidFileNameChars().Aggregate(fileName, (current, c) => current.Replace(c.ToString(CultureInfo.CurrentCulture), string.Empty));
-#endif
-#if net8_0
-            var correctFileName = Path.GetInvalidFileNameChars().Aggregate(fileName, (current, c) => current.Replace(c.ToString(CultureInfo.CurrentCulture), string.Empty, StringComparison.InvariantCultureIgnoreCase));
-#endif
+
+            // Remove invalid file name characters
+            var correctFileName = Path.GetInvalidFileNameChars().Aggregate(fileName, (current, c) => current.Replace(c.ToString(), string.Empty, StringComparison.Ordinal));
+
+            // Replace any remaining unwanted characters
             correctFileName = Regex.Replace(correctFileName, "[^0-9a-zA-Z._]+", "_");
             correctFileName = NameHelper.ShortenFileName(folder, correctFileName, "_", 255);
 
@@ -100,12 +99,12 @@ namespace Ocaramba
                 }
 
                 var pageSource = this.driver.PageSource;
-#if net47
-                pageSource = pageSource.Replace("<head>", string.Format(CultureInfo.CurrentCulture, "<head><base href=\"http://{0}\" target=\"_blank\">", BaseConfiguration.Host));
-#endif
-#if net8_0
+
                 pageSource = pageSource.Replace("<head>", string.Format(CultureInfo.CurrentCulture, "<head><base href=\"http://{0}\" target=\"_blank\">", BaseConfiguration.Host), StringComparison.InvariantCultureIgnoreCase);
-#endif
+
+
+                pageSource = pageSource.Replace("<head>", string.Format(CultureInfo.CurrentCulture, "<head><base href=\"http://{0}\" target=\"_blank\">", BaseConfiguration.Host), StringComparison.InvariantCultureIgnoreCase);
+
                 File.WriteAllText(path, pageSource);
                 FilesHelper.WaitForFileOfGivenName(BaseConfiguration.LongTimeout, fileNameWithExtension, this.PageSourceFolder);
                 Logger.Error(CultureInfo.CurrentCulture, "Test failed: page Source saved to {0}.", path);
@@ -123,13 +122,6 @@ namespace Ocaramba
         public string[] TakeAndSaveScreenshot()
         {
             List<string> filePaths = new List<string>();
-            if (BaseConfiguration.FullDesktopScreenShotEnabled)
-            {
-                // to do TakeScreenShot
-#if net47
-                filePaths.Add(TakeScreenShot.Save(TakeScreenShot.DoIt(), ImageFormat.Png, this.ScreenShotFolder, this.TestTitle));
-#endif
-            }
 
             if (BaseConfiguration.SeleniumScreenShotEnabled)
             {
@@ -154,18 +146,18 @@ namespace Ocaramba
                 Logger.Debug(CultureInfo.CurrentCulture, "Checking JavaScript error(s) in browser");
                 try
                 {
-#if net47
-                    jsErrors =
-                        this.driver.Manage()
-                            .Logs.GetLog(LogType.Browser)
-                            .Where(x => BaseConfiguration.JavaScriptErrorTypes.Any(predicate: e => x.Message.Contains(e)));
-#endif
-#if net8_0
+
                     jsErrors =
                         this.driver.Manage()
                             .Logs.GetLog(LogType.Browser)
                             .Where(x => BaseConfiguration.JavaScriptErrorTypes.Any(predicate: e => x.Message.Contains(e, StringComparison.InvariantCultureIgnoreCase)));
-#endif
+
+
+                    jsErrors =
+                        this.driver.Manage()
+                            .Logs.GetLog(LogType.Browser)
+                            .Where(x => BaseConfiguration.JavaScriptErrorTypes.Any(predicate: e => x.Message.Contains(e, StringComparison.InvariantCultureIgnoreCase)));
+
                 }
                 catch (NullReferenceException)
                 {
@@ -223,12 +215,12 @@ namespace Ocaramba
         private FirefoxOptions AddFirefoxArguments(FirefoxOptions option)
         {
             NameValueCollection firefoxArguments = new NameValueCollection();
-#if net47
+
             firefoxArguments = ConfigurationManager.GetSection("FirefoxArguments") as NameValueCollection;
-#endif
-#if net8_0
+
+
             firefoxArguments = BaseConfiguration.GetNameValueCollectionFromAppsettings("FirefoxArguments");
-#endif
+
 
             // if there are any arguments
             if (firefoxArguments != null)
@@ -305,20 +297,20 @@ namespace Ocaramba
                 Logger.Info(CultureInfo.CurrentCulture, "supportedBrowser {0} : {1}", supportedBrowser, browserType);
             }
 
-#if net47
+
             if (!supportedBrowser)
             {
-                if (this.CrossBrowserEnvironment.ToLower(CultureInfo.CurrentCulture).Contains(BrowserType.Android.ToString().ToLower(CultureInfo.CurrentCulture)))
+                if (this.CrossBrowserEnvironment.Contains(BrowserType.Android.ToString(), StringComparison.InvariantCultureIgnoreCase))
                 {
                     browserType = BrowserType.Chrome;
                 }
-                else if (this.CrossBrowserEnvironment.ToLower(CultureInfo.CurrentCulture).Contains(BrowserType.Iphone.ToString().ToLower(CultureInfo.CurrentCulture)))
+                else if (this.CrossBrowserEnvironment.Contains(BrowserType.Iphone.ToString(), StringComparison.InvariantCultureIgnoreCase))
                 {
                     browserType = BrowserType.Safari;
                 }
              }
-#endif
-#if net8_0
+
+
             if (!supportedBrowser)
             {
                 if (this.CrossBrowserEnvironment.ToLower(CultureInfo.CurrentCulture).Contains(BrowserType.Android.ToString().ToLower(CultureInfo.CurrentCulture), StringComparison.InvariantCultureIgnoreCase))
@@ -330,7 +322,7 @@ namespace Ocaramba
                     browserType = BrowserType.Safari;
                 }
             }
-#endif
+
             return browserType;
         }
 
@@ -379,21 +371,7 @@ namespace Ocaramba
             {
                 capabilities.Add("sessionName", this.TestTitle);
             }
-#if net47
-            if (BaseConfiguration.RemoteWebDriverHub.ToString().ToLower().Contains("browserstack"))
-            {
-                browserOptions.AddAdditionalOption("bstack:options", capabilities);
-            }
-            else if (BaseConfiguration.RemoteWebDriverHub.ToString().ToLower().Contains("saucelabs"))
-            {
-                browserOptions.AddAdditionalOption("sauce:options", capabilities);
-            }
-            else if (BaseConfiguration.RemoteWebDriverHub.ToString().ToLower().Contains("testingbot"))
-            {
-                browserOptions.AddAdditionalOption("tb:options", capabilities);
-            }
-#endif
-#if net8_0
+
             if (BaseConfiguration.RemoteWebDriverHub.ToString().ToLower(CultureInfo.CurrentCulture).Contains("browserstack", StringComparison.InvariantCultureIgnoreCase))
             {
                 browserOptions.AddAdditionalOption("bstack:options", capabilities);
@@ -406,7 +384,21 @@ namespace Ocaramba
             {
                 browserOptions.AddAdditionalOption("tb:options", capabilities);
             }
-#endif
+
+
+            if (BaseConfiguration.RemoteWebDriverHub.ToString().ToLower(CultureInfo.CurrentCulture).Contains("browserstack", StringComparison.InvariantCultureIgnoreCase))
+            {
+                browserOptions.AddAdditionalOption("bstack:options", capabilities);
+            }
+            else if (BaseConfiguration.RemoteWebDriverHub.ToString().ToLower(CultureInfo.CurrentCulture).Contains("saucelabs", StringComparison.InvariantCultureIgnoreCase))
+            {
+                browserOptions.AddAdditionalOption("sauce:options", capabilities);
+            }
+            else if (BaseConfiguration.RemoteWebDriverHub.ToString().ToLower(CultureInfo.CurrentCulture).Contains("testingbot", StringComparison.InvariantCultureIgnoreCase))
+            {
+                browserOptions.AddAdditionalOption("tb:options", capabilities);
+            }
+
         }
 
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Loop through all internetExplorerPreferences")]

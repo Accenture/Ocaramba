@@ -69,13 +69,13 @@ namespace Ocaramba.UnitTests
         [OneTimeSetUp]
         public void BeforeClass()
         {
-#if net8_0
-            this.DriverContext.CurrentDirectory = Directory.GetCurrentDirectory();
-#endif
 
-#if net47
+            this.DriverContext.CurrentDirectory = Directory.GetCurrentDirectory();
+
+
+
             this.DriverContext.CurrentDirectory = TestContext.CurrentContext.TestDirectory;
-#endif
+
             this.DriverContext.Start();
             this.DriverContext.WindowMaximize();
             this.DriverContext.DeleteAllCookies();

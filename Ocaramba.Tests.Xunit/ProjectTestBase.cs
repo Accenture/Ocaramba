@@ -34,12 +34,12 @@ namespace Ocaramba.Tests.Xunit
     {
         private bool disposed;
 
-#if net47
-        private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
-#endif
-#if net8_0
+
+        
+
+
         private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
-#endif
+
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ProjectTestBase"/> class.

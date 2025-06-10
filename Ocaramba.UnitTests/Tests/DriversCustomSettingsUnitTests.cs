@@ -32,13 +32,9 @@ namespace Ocaramba.UnitTests.Tests
         [Test]
         public void CheckSynchronizationWithAngularFuctionality()
         {
-#if net8_0
-        string folder = Directory.GetCurrentDirectory();
-#endif
 
-#if net47
             string folder = TestContext.CurrentContext.TestDirectory;
-#endif
+
             var driverContext = new Ocaramba.DriverContext {CurrentDirectory = folder };
             driverContext.Start();
             var Default_false = DriversCustomSettings.IsDriverSynchronizationWithAngular(driverContext.Driver);
