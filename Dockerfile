@@ -64,9 +64,10 @@ RUN CHROMEVER=$(google-chrome --product-version | grep -oE "[0-9]+\.[0-9]+\.[0-9
 #=========
 # Firefox
 #=========
-RUN wget --no-verbose -O /tmp/firefox.tar.bz2 'https://download.mozilla.org/?product=firefox-latest-ssl&os=linux64&lang=en-US' \
-&& lbzip2 -d /tmp/firefox.tar.bz2 &&  tar -C /opt -xvf /tmp/firefox.tar && rm /tmp/firefox.tar  && ln -fs /opt/firefox/firefox /usr/bin/firefox \
-&& apt-get install libdbus-glib-1-2 
+RUN wget --no-verbose -O /tmp/firefox.tar.xz 'https://download.mozilla.org/?product=firefox-latest-ssl&os=linux64&lang=en-US' \
+    && tar -C /opt -xJf /tmp/firefox.tar.xz \
+    && rm /tmp/firefox.tar.xz \
+    && ln -fs /opt/firefox/firefox /usr/bin/firefox
 #=========
 # Firefox driver
 #=========
