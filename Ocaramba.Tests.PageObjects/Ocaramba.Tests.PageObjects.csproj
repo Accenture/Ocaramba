@@ -12,7 +12,6 @@
     <PackageReference Include="NLog" Version="5.3.4" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="137.0.7151.6800" />
     <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.35.0" />
-    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.1.0" />
     <PackageReference Include="System.Text.Json" Version="9.0.5" />
 
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />

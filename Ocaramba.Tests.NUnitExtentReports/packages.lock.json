@@ -141,12 +141,6 @@
           "System.Security.Cryptography.ProtectedData": "9.0.5"
         }
       },
-      "System.Runtime.CompilerServices.Unsafe": {
-        "type": "Direct",
-        "requested": "[6.1.0, )",
-        "resolved": "6.1.0",
-        "contentHash": "5o/HZxx6RVqYlhKSq8/zronDkALJZUT2Vz0hx43f0gwe8mwlM0y2nYlqdBwLMzr262Bwvpikeb/yEwkAa5PADg=="
-      },
       "BouncyCastle.Cryptography": {
         "type": "Transitive",
         "resolved": "2.3.1",
@@ -989,6 +983,11 @@
           "System.Configuration.ConfigurationManager": "8.0.1"
         }
       },
+      "System.Runtime.CompilerServices.Unsafe": {
+        "type": "Transitive",
+        "resolved": "6.0.0",
+        "contentHash": "/iUeP3tq1S0XdNNoMz5C9twLSrM/TH+qElHkXWaPvuNOt+99G75NrV0OS2EqHx5wMN7popYjpc8oTjC1y16DLg=="
+      },
       "System.Security.AccessControl": {
         "type": "Transitive",
         "resolved": "6.0.1",
@@ -1134,7 +1133,6 @@
           "Selenium.WebDriver.ChromeDriver": "[137.0.7151.6800, )",
           "Selenium.WebDriver.GeckoDriver": "[0.35.0, )",
           "System.Configuration.ConfigurationManager": "[9.0.5, )",
-          "System.Runtime.CompilerServices.Unsafe": "[6.1.0, )",
           "System.Text.Json": "[9.0.5, )"
         }
       },
@@ -1152,7 +1150,6 @@
           "Selenium.Support": "[4.33.0, )",
           "Selenium.WebDriver": "[4.33.0, )",
           "System.Configuration.ConfigurationManager": "[9.0.5, )",
-          "System.Runtime.CompilerServices.Unsafe": "[6.1.0, )",
           "System.Text.Json": "[9.0.5, )"
         }
       }

@@ -9,7 +9,6 @@
     <PackageReference Include="Appveyor.TestLogger" Version="2.0.0" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="9.0.5" />
     <PackageReference Include="System.Text.Json" Version="9.0.5" />
-    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.1.0" />
     <PackageReference Include="Selenium.Support" Version="4.33.0" />
     <PackageReference Include="Selenium.WebDriver" Version="4.33.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="3.9.1" />

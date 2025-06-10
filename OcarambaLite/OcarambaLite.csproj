@@ -36,7 +36,6 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="9.0.5" />
-    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.1.0" />
     <PackageReference Include="System.Text.Json" Version="9.0.5" />
     <PackageReference Include="Microsoft.Extensions.Configuration">
       <Version>9.0.5</Version>
