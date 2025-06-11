@@ -17,7 +17,7 @@
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="9.0.6" />
 	  <PackageReference Include="System.Text.Json" Version="9.0.6" />
 	<PackageReference Include="NLog" Version="5.5.0" />
-    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="137.0.7151.6800" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="137.0.7151.7000" />
     <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.36.0" />
 
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
