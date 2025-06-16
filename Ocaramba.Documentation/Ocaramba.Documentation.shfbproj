@@ -74,10 +74,10 @@
     <PlugInConfigurations>
       <PlugInConfig id="Additional Reference Links" enabled="True">
         <configuration>
-  <targets>
-    <target htmlSdkLinkType="None" helpViewerSdkLinkType="Id" websiteSdkLinkType="None" helpFileProject="Selenium.shfbproj" />
-  </targets>
-</configuration>
+          <targets>
+            <target htmlSdkLinkType="None" helpViewerSdkLinkType="Id" websiteSdkLinkType="None" helpFileProject="Selenium.shfbproj" />
+          </targets>
+        </configuration>
       </PlugInConfig>
     </PlugInConfigurations>
   </PropertyGroup>

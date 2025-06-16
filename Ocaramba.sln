@@ -50,6 +50,8 @@ Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Ocaramba.Documentation", "O
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ocaramba.Tests.NUnitExtentReports", "Ocaramba.Tests.NUnitExtentReports\Ocaramba.Tests.NUnitExtentReports.csproj", "{D51843C5-8DCA-485A-9F9A-AA84A4824516}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ocaramba.Tests.Appium", "Ocaramba.Tests.Appium\Ocaramba.Tests.Appium.csproj", "{03B9F442-1FE3-064C-AC38-3752C86B7F67}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -104,6 +106,10 @@ Global
 		{D51843C5-8DCA-485A-9F9A-AA84A4824516}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D51843C5-8DCA-485A-9F9A-AA84A4824516}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D51843C5-8DCA-485A-9F9A-AA84A4824516}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03B9F442-1FE3-064C-AC38-3752C86B7F67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03B9F442-1FE3-064C-AC38-3752C86B7F67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03B9F442-1FE3-064C-AC38-3752C86B7F67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03B9F442-1FE3-064C-AC38-3752C86B7F67}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
