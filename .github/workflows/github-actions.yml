@@ -190,7 +190,7 @@ jobs:
                     sleep 2
                     A=$(adb shell getprop sys.boot_completed | tr -d '\r')
             done   
-            export ANDROID_EMULATOR_WAIT_TIME_BEFORE_KILL=600
+            export ANDROID_EMULATOR_WAIT_TIME_BEFORE_KILL=1200
             sleep 120
             adb devices
             npm install -g appium
