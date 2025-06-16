@@ -181,7 +181,7 @@ jobs:
           target: google_apis
           arch: x86_64
           profile: pixel_4
-          emulator-options: "-no-window -no-audio"
+          emulator-options: "-no-window -no-audio -no-snapshot"
           disable-animations: true    
           script: |
             adb wait-for-device       
@@ -190,7 +190,7 @@ jobs:
                     sleep 2
                     A=$(adb shell getprop sys.boot_completed | tr -d '\r')
             done   
-            export ANDROID_EMULATOR_WAIT_TIME_BEFORE_KILL=240
+            export ANDROID_EMULATOR_WAIT_TIME_BEFORE_KILL=600
             sleep 120
             adb devices
             npm install -g appium
