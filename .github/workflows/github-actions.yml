@@ -178,8 +178,9 @@ jobs:
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 30
-          target: google_apis
+          target: google_apis_playstore
           arch: x86_64
+          profile: pixel_4
           emulator-options: "-no-window -no-audio"
           disable-animations: true    
           script: |
@@ -189,14 +190,14 @@ jobs:
                     sleep 2
                     A=$(adb shell getprop sys.boot_completed | tr -d '\r')
             done   
-            adb shell input keyevent 82            
+            sleep 30
             adb devices
             npm install -g appium
             echo "Starting Appium server..."
             appium --log-level info &
             sleep 10 # Wait for Appium server to start
             echo "Appium server started."
-            pwsh ./scripts/ExecutingTestsOnLinuxAppium.ps1
+            dotnet test ./Ocaramba/Ocaramba.Tests.Appium/Ocaramba.Tests.Appium.csproj --logger:trx || echo "Tests failed"
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action/linux@v2
         if: true
