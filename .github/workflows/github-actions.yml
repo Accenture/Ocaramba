@@ -183,7 +183,15 @@ jobs:
           emulator-options: "-no-window -no-audio"
           disable-animations: true    
           script: |
-            # Start Appium server
+            adb wait-for-device       
+            A=$(adb shell getprop sys.boot_completed | tr -d '\r')
+            while [ "$A" != "1" ]; do
+                    sleep 2
+                    A=$(adb shell getprop sys.boot_completed | tr -d '\r')
+            done   
+            adb shell input keyevent 82            
+            adb devices
+            npm install -g appium
             echo "Starting Appium server..."
             appium --log-level info &
             sleep 10 # Wait for Appium server to start
