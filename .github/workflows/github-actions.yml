@@ -178,7 +178,7 @@ jobs:
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 30
-          target: google_apis_playstore
+          target: google_apis
           arch: x86_64
           profile: pixel_4
           emulator-options: "-no-window -no-audio"
