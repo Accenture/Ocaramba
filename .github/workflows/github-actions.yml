@@ -155,6 +155,47 @@ jobs:
           files: |
             /home/runner/work/**/TestResults/*.xml
           check_name: ExecutingTestsOnLinuxAzure
+  test_Stage_RunAppiumTestsOnAndroid:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          ls
+          export ASPNETCORE_ENVIRONMENT=Linux
+          echo $ASPNETCORE_ENVIRONMENT
+          sed -i '/Documentation/,+5 d' ./Ocaramba.sln
+      - run: dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}   
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+      - name: Enable KVM
+        run: |
+         echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+         sudo udevadm control --reload-rules
+      - name: run tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 30
+          target: google_apis
+          arch: x86_64
+          emulator-options: "-no-window -no-audio"
+          disable-animations: true    
+          script: |
+            # Start Appium server
+            echo "Starting Appium server..."
+            appium --log-level info &
+            sleep 10 # Wait for Appium server to start
+            echo "Appium server started."
+            pwsh ./scripts/ExecutingTestsOnLinuxAppium.ps1
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action/linux@v2
+        if: true
+        with:
+          files: |
+            /home/runner/work/**/TestResults/*.xml
+          check_name: ExecutingTestsOnLinuxAzure
   test_Stage_RunTestsOnLinuxBrowserStack:
     runs-on: ubuntu-latest
     timeout-minutes: 10
