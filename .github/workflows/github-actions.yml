@@ -161,7 +161,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: |
-          wget https://github.com/appium/android-apidemos/releases/download/v3.1.0/ApiDemos-debug.apk
+          wget-P ./Ocaramba.Tests.Appium/bin/Release/net8.0/ https://github.com/appium/android-apidemos/releases/download/v3.1.0/ApiDemos-debug.apk
           export ASPNETCORE_ENVIRONMENT=Linux
           echo $ASPNETCORE_ENVIRONMENT
           sed -i -e '/Documentation/,+5 d' -e '/Ocaramba.Tests.NUnit/,+1 d' -e '/Ocaramba.UnitTests/,+1 d' -e '/Ocaramba.Tests.CloudProviderCrossBrowser/,+1 d' -e '/Ocaramba.Tests.MsTest/,+1 d' -e '/Ocaramba.Tests.Features/,+1 d' -e '/Ocaramba.Tests.Xunit/,+1 d' -e '/Ocaramba.Tests.Angular/,+4 d' -e '/Ocaramba.Tests.NUnitExtentReports/,+1 d' ./Ocaramba.sln
