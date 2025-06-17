@@ -889,5 +889,103 @@ namespace Ocaramba
             return preferencesCollection;
         }
 
+        /// <summary>
+        /// Gets Appium App Package from configuration.
+        /// </summary>
+        public static string AppiumAppPackage
+        {
+            get
+            {
+                string setting = null;
+                setting = Builder["appSettings:AppiumAppPackage"];
+                Logger.Trace(CultureInfo.CurrentCulture, "Gets the AppiumAppPackage from settings file '{0}'", setting);
+                return setting;
+            }
+        }
+
+        /// <summary>
+        /// Gets Appium App Activity from configuration.
+        /// </summary>
+        public static string AppiumAppActivity
+        {
+            get
+            {
+                string setting = null;
+                setting = Builder["appSettings:AppiumAppActivity"];
+                Logger.Trace(CultureInfo.CurrentCulture, "Gets the AppiumAppActivity from settings file '{0}'", setting);
+                return setting;
+            }
+        }
+
+        /// <summary>
+        /// Gets the Appium platform name (e.g., Android, iOS).
+        /// </summary>
+        public static string AppiumPlatformName
+        {
+            get
+            {
+                string setting = null;
+                setting = Builder["appSettings:AppiumPlatformName"];
+                Logger.Trace(CultureInfo.CurrentCulture, "Gets the AppiumPlatformName from settings file '{0}'", setting);
+                return setting;
+            }
+        }
+
+        /// <summary>
+        /// Gets the Appium AutomationName.
+        /// </summary>
+        public static string AppiumAutomationName
+        {
+            get
+            {
+                string setting = null;
+                setting = Builder["appSettings:AppiumAutomationName"];
+                Logger.Trace(CultureInfo.CurrentCulture, "Gets the AppiumAutomationName from settings file '{0}'", setting);
+                return setting;
+            }
+        }
+
+        /// <summary>
+        /// Gets the Appium device name.
+        /// </summary>
+        public static string AppiumDeviceName
+        {
+            get
+            {
+                string setting = null;
+                setting = Builder["appSettings:AppiumDeviceName"];
+                Logger.Trace(CultureInfo.CurrentCulture, "Gets the AppiumDeviceName from settings file '{0}'", setting);
+                return setting;
+            }
+        }
+
+        /// <summary>
+        /// Gets the Appium app path.
+        /// </summary>
+        public static string AppiumAppPath
+        {
+            get
+            {
+                string setting = null;
+                setting = Builder["appSettings:AppiumAppPath"];
+                Logger.Trace(CultureInfo.CurrentCulture, "Gets the AppiumAppPath from settings file '{0}'", setting);
+                return setting;
+            }
+        }
+
+        /// <summary>
+        /// Gets the Appium server URL.
+        /// </summary>
+        public static string AppiumServerUrl
+        {
+            get
+            {
+                string setting = null;
+                setting = Builder["appSettings:AppiumServerUrl"];
+                Logger.Trace(CultureInfo.CurrentCulture, "Gets the AppiumServerUrl from settings file '{0}'", setting);
+                return setting;
+            }
+        }
+
     }
 }

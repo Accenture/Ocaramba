@@ -2,6 +2,16 @@
   "version": 1,
   "dependencies": {
     "net8.0": {
+      "Appium.WebDriver": {
+        "type": "Direct",
+        "requested": "[8.0.0, )",
+        "resolved": "8.0.0",
+        "contentHash": "+eJwC8Dy7SOIWD37bKX89xyZpufkDLZ7M4hYewYvno5Hn2eZ/z1k4d9gzn0vHNAh2QnJ2NKrFnh2zBjgMJiwcg==",
+        "dependencies": {
+          "Selenium.WebDriver": "4.29.0",
+          "System.Drawing.Common": "8.0.10"
+        }
+      },
       "Microsoft.CSharp": {
         "type": "Direct",
         "requested": "[4.7.0, )",

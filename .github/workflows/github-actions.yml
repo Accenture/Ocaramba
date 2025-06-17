@@ -134,6 +134,7 @@ jobs:
         with:
           files: |
             /home/runner/**/Ocaramba.Tests.Docker.trx
+          check_name: TestsOnDocker
   test_Stage_RunTestsOnLinux:
     runs-on: ubuntu-latest
     steps:
@@ -144,7 +145,7 @@ jobs:
           export ASPNETCORE_ENVIRONMENT=Linux
           echo $ASPNETCORE_ENVIRONMENT
           sudo apt-get install google-chrome-stable
-          sed -i '/Documentation/,+5 d' ./Ocaramba.sln
+          sed -i -e '/Documentation/,+5 d' -e '/Ocaramba.Tests.Appium/,+1 d' -e '/Ocaramba.UnitTests/,+1 d' -e '/Ocaramba.Tests.CloudProviderCrossBrowser/,+1 d' -e '/Ocaramba.Tests.MsTest/,+1 d' -e '/Ocaramba.Tests.Features/,+1 d' -e '/Ocaramba.Tests.Xunit/,+1 d' -e '/Ocaramba.Tests.Angular/,+4 d' -e '/Ocaramba.Tests.NUnitExtentReports/,+1 d' ./Ocaramba.sln
       - run: dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
       - shell: pwsh
         run: ./scripts/ExecutingTestsOnLinuxAzure.ps1
@@ -154,7 +155,63 @@ jobs:
         with:
           files: |
             /home/runner/work/**/TestResults/*.xml
-          check_name: ExecutingTestsOnLinuxAzure
+          check_name: TestsOnLinux
+  test_Stage_RunAppiumTestsOnAndroid:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          wget -P ./Ocaramba.Tests.Appium/bin/Release/net8.0/ https://github.com/appium/android-apidemos/releases/download/v3.1.0/ApiDemos-debug.apk
+          export ASPNETCORE_ENVIRONMENT=Linux
+          echo $ASPNETCORE_ENVIRONMENT
+          sed -i -e '/Documentation/,+5 d' -e '/Ocaramba.Tests.NUnit/,+1 d' -e '/Ocaramba.UnitTests/,+1 d' -e '/Ocaramba.Tests.CloudProviderCrossBrowser/,+1 d' -e '/Ocaramba.Tests.MsTest/,+1 d' -e '/Ocaramba.Tests.Features/,+1 d' -e '/Ocaramba.Tests.Xunit/,+1 d' -e '/Ocaramba.Tests.Angular/,+4 d' -e '/Ocaramba.Tests.NUnitExtentReports/,+1 d' ./Ocaramba.sln
+          ls
+          pwd
+      - run: dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: "temurin"
+          java-version: "17"
+      - name: Enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+      - run: |
+          npm install -g appium
+          appium -v
+          appium driver list --installed
+          appium driver install uiautomator2
+          nohup appium --log-level warn --log-timestamp --local-timezone > appium.log 2>&1 &
+          sleep 10
+          curl http://127.0.0.1:4723/wd/hub/sessions || echo "Appium check failed"
+      - name: run tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 28
+          target: google_apis
+          arch: x86_64
+          profile: Nexus 6
+          emulator-options: "-no-window -no-audio -no-snapshot"
+          disable-animations: true
+          script: |
+            echo "Installing APK on emulator 5554..."
+            adb -s emulator-5554 install -t -g ./Ocaramba.Tests.Appium/bin/Release/net8.0/ApiDemos-debug.apk
+
+            echo "Checking packages on emulator 5554:"
+            adb -s emulator-5554 shell pm list packages | grep io.appium.android.apis || echo "Package not found on emulator 5554"
+
+            dotnet vstest ./Ocaramba.Tests.Appium/bin/Release/net8.0/Ocaramba.Tests.Appium.dll --logger:"trx;LogFileName=Ocaramba.Tests.Appium.xml"
+            echo "Closing connection with emulator-5554"
+            adb -s emulator-5554 emu kill || true
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action/linux@v2
+        if: true
+        with:
+          files: |
+            /home/runner/work/**/TestResults/*.xml
+          check_name: TestsOnAndroid
   test_Stage_RunTestsOnLinuxBrowserStack:
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -164,7 +221,7 @@ jobs:
           ls 
           export ASPNETCORE_ENVIRONMENT=Linux
           echo $ASPNETCORE_ENVIRONMENT
-          sed -i '/Documentation/,+5 d' ./Ocaramba.sln
+          sed -i -e '/Documentation/,+5 d' -e '/Ocaramba.Tests.Appium/,+1 d' -e '/Ocaramba.UnitTests/,+1 d' -e '/Ocaramba.Tests.NUnit/,+1 d' -e '/Ocaramba.Tests.MsTest/,+1 d' -e '/Ocaramba.Tests.Features/,+1 d' -e '/Ocaramba.Tests.Xunit/,+1 d' -e '/Ocaramba.Tests.Angular/,+4 d' -e '/Ocaramba.Tests.NUnitExtentReports/,+1 d' ./Ocaramba.sln
       - run: dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
       - name: "BrowserStack Env Setup"
         uses: "browserstack/github-actions/setup-env@master"
@@ -189,7 +246,7 @@ jobs:
         with:
           files: |
             /home/runner/work/**/TestResults/*.xml
-          check_name: test_Stage_RunTestsOnLinuxBrowserStack
+          check_name: TestOnLinuxBrowserStack
   test_Stage_RunTestsOnWindowsCore1:
     runs-on: windows-latest
     steps:
@@ -217,7 +274,7 @@ jobs:
         if: always()
         with:
           files: ${{ env.TestResultsDirWindows }}\*.trx
-          check_name: ExecutingTestsOnWindowsGithubActionsCore1
+          check_name: TestOnWindows1
       - name: Zip artifact
         run: Compress-Archive -Path .\Ocaramba.Tests.NUnitExtentReports\bin\Release\net8.0\TestOutput -Destination ExtentReports_${{ github.run_id }}.zip
       - uses: actions/upload-artifact@v4
@@ -253,7 +310,7 @@ jobs:
         with:
           files: |
             ${{ env.TestResultsDirWindows }}\*.xml
-          check_name: ExecutingTestsOnWindowsGithubActionsCore2
+          check_name: TestsOnWindows2
   test_Stage_RunTestsOnWindowsBrowserStack:
     runs-on: windows-latest
     steps:
@@ -288,7 +345,7 @@ jobs:
         if: false
         with:
           files: ${{ env.TestResultsDirWindows }}\*.xml
-          check_name: ExecutingTestsOnWindowsGithubActionsBrowserStack4
+          check_name: TestsOnWindowsBrowserStack4
   test_Stage_RunTestsSeleniumGrid:
     runs-on: ubuntu-latest
     steps:
@@ -297,7 +354,7 @@ jobs:
           ls
           export ASPNETCORE_ENVIRONMENT=Linux
           echo $ASPNETCORE_ENVIRONMENT
-          sed -i '/Documentation/,+5 d' ./Ocaramba.sln
+          sed -i -e '/Documentation/,+5 d' -e '/Ocaramba.Tests.Appium/,+1 d' -e '/Ocaramba.UnitTests/,+1 d' -e '/Ocaramba.Tests.MsTest/,+1 d' -e '/Ocaramba.Tests.Features/,+1 d' -e '/Ocaramba.Tests.Xunit/,+1 d' -e '/Ocaramba.Tests.Angular/,+4 d' -e '/Ocaramba.Tests.NUnitExtentReports/,+1 d' ./Ocaramba.sln
       - run: dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
       - shell: pwsh
         run: ./scripts/ExecutingTestsOnWindowsGithubActions5.ps1
@@ -307,6 +364,7 @@ jobs:
         with:
           files: |
             /home/runner/work/**/TestResults/*.xml
+            check_name: TestsOnWindows5
   test_Stage_RunTestsOnWindowsSaucelabs:
     runs-on: windows-latest
     steps:
@@ -342,7 +400,7 @@ jobs:
         with:
           files: |
             ${{ env.TestResultsDirWindows }}\*.xml
-          check_name: ExecutingTestsOnWindowsGithubActionsSaucelabs6
+          check_name: TestsOnWindowsSaucelabs6
   release_Stage_PublishNuget:
     runs-on: windows-latest
     needs:
@@ -355,6 +413,7 @@ jobs:
       - test_Stage_RunTestsOnWindowsBrowserStack
       - test_Stage_RunTestsSeleniumGrid
       - test_Stage_RunTestsOnWindowsSaucelabs
+      - test_Stage_RunAppiumTestsOnAndroid
     steps:
       - uses: actions/checkout@v4
       - shell: pwsh
