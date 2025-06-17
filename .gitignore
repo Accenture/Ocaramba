@@ -16,3 +16,4 @@
 /UpgradeLog.htm
 selenium-manager
 *.log
+/Ocaramba.Tests.Appium/.vscode/tasks.json

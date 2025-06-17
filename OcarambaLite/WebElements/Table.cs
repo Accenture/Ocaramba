@@ -47,7 +47,7 @@ namespace Ocaramba.WebElements
         /// </summary>
         /// <param name="webElement">The _webElement.</param>
         public Table(IWebElement webElement)
-            : base(webElement.ToDriver() as RemoteWebDriver, null)
+            : base(webElement.ToDriver() as WebDriver, webElement.ToDriver().ToString() as string)
         {
             this.webElement = webElement;
         }
