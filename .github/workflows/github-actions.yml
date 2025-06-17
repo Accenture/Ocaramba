@@ -193,7 +193,7 @@ jobs:
           emulator-options: "-no-window -no-audio -no-snapshot"
           disable-animations: true    
           script: |
-            dotnet test ./Ocaramba/Ocaramba.Tests.Appium/Ocaramba.Tests.Appium.csproj --logger:trx || echo "Tests failed"
+            dotnet vstest ./Ocaramba.Tests.Appium/bin/Release/net8.0/Ocaramba.Tests.Appium.dll --logger:"trx;LogFileName=Ocaramba.Tests.Appium.xml"
             echo "Closing connection with emulator-5554"
             adb -s emulator-5554 emu kill || true
       - name: Publish Test Results
@@ -403,6 +403,7 @@ jobs:
       - test_Stage_RunTestsOnWindowsBrowserStack
       - test_Stage_RunTestsSeleniumGrid
       - test_Stage_RunTestsOnWindowsSaucelabs
+      - test_Stage_RunAppiumTestsOnAndroid
     steps:
       - uses: actions/checkout@v4
       - shell: pwsh
