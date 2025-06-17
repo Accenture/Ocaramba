@@ -161,7 +161,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: |
-          ls
+          wget https://github.com/appium/android-apidemos/releases/download/v3.1.0/ApiDemos-debug.apk
           export ASPNETCORE_ENVIRONMENT=Linux
           echo $ASPNETCORE_ENVIRONMENT
           sed -i -e '/Documentation/,+5 d' -e '/Ocaramba.Tests.NUnit/,+1 d' -e '/Ocaramba.UnitTests/,+1 d' -e '/Ocaramba.Tests.CloudProviderCrossBrowser/,+1 d' -e '/Ocaramba.Tests.MsTest/,+1 d' -e '/Ocaramba.Tests.Features/,+1 d' -e '/Ocaramba.Tests.Xunit/,+1 d' -e '/Ocaramba.Tests.Angular/,+4 d' -e '/Ocaramba.Tests.NUnitExtentReports/,+1 d' ./Ocaramba.sln
@@ -194,6 +194,12 @@ jobs:
           emulator-options: "-no-window -no-audio -no-snapshot"
           disable-animations: true
           script: |
+            echo "Installing APK on emulator 5554..."
+            adb -s emulator-5554 install -t -g ./ApiDemos-debug.apk
+
+            echo "Checking packages on emulator 5554:"
+            adb -s emulator-5554 shell pm list packages | grep calculator || echo "Package not found on emulator 5554"
+
             dotnet vstest ./Ocaramba.Tests.Appium/bin/Release/net8.0/Ocaramba.Tests.Appium.dll --logger:"trx;LogFileName=Ocaramba.Tests.Appium.xml"
             echo "Closing connection with emulator-5554"
             adb -s emulator-5554 emu kill || true

@@ -13,7 +13,7 @@ namespace Ocaramba.Tests.Appium
         public void SampleAppiumTest_ElementExists()
         {
             var page = new AppiumSamplePage(this.DriverContext);
-            Assert.That(page.IsSomeElementPresent(), Is.False);
+            Assert.That(page.IsSomeElementPresent(), Is.True);
         }
     }
 }

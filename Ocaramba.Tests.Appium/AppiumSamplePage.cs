@@ -6,7 +6,7 @@ namespace Ocaramba.Tests.Appium
 {
     public class AppiumSamplePage : ProjectPageBase
     {
-        private readonly By SomeElement = By.Id("com.google.android.youtube:id/search_edit_text");
+        private readonly By SomeElement = By.XPath("//android.widget.TextView[@text='API Demos']");
 
         public AppiumSamplePage(DriverContext driverContext)
             : base(driverContext)
