@@ -197,7 +197,7 @@ jobs:
           disable-animations: true
           script: |
             echo "Installing APK on emulator 5554..."
-            adb -s emulator-5554 install -t -g ./ApiDemos-debug.apk
+            adb -s emulator-5554 install -t -g ./Ocaramba.Tests.Appium/bin/Release/net8.0/ApiDemos-debug.apk
 
             echo "Checking packages on emulator 5554:"
             adb -s emulator-5554 shell pm list packages | grep io.appium.android.apis || echo "Package not found on emulator 5554"
