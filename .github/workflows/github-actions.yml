@@ -144,7 +144,7 @@ jobs:
           export ASPNETCORE_ENVIRONMENT=Linux
           echo $ASPNETCORE_ENVIRONMENT
           sudo apt-get install google-chrome-stable
-          sed -i '/Documentation/,+5 d' ./Ocaramba.sln
+          sed -i -e '/Documentation/,+5 d' -e '/Ocaramba.Tests.Appium/,+1 d' -e '/Ocaramba.UnitTests/,+1 d' -e '/Ocaramba.Tests.CloudProviderCrossBrowser/,+1 d' -e '/Ocaramba.Tests.MsTest/,+1 d' -e '/Ocaramba.Tests.Features/,+1 d' -e '/Ocaramba.Tests.Xunit/,+1 d' -e '/Ocaramba.Tests.Angular/,+4 d' -e '/Ocaramba.Tests.NUnitExtentReports/,+1 d' ./Ocaramba.sln
       - run: dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
       - shell: pwsh
         run: ./scripts/ExecutingTestsOnLinuxAzure.ps1
@@ -163,7 +163,7 @@ jobs:
           ls
           export ASPNETCORE_ENVIRONMENT=Linux
           echo $ASPNETCORE_ENVIRONMENT
-          sed -i -e '/Documentation/,+5 d' -e '/Ocaramba.Tests.NUnit/,+1 d' -e '/Ocaramba.UnitTests/,+1 d' -e '/Ocaramba.Tests.CloudProviderCrossBrowser/,+1 d' -e '/Ocaramba.Tests.MsTest/,+1 d' -e '/Ocaramba.Tests.Features/,+1 d' -e '/Ocaramba.Tests.Xunit/,+1 d' ./Ocaramba.sln
+          sed -i -e '/Documentation/,+5 d' -e '/Ocaramba.Tests.NUnit/,+1 d' -e '/Ocaramba.UnitTests/,+1 d' -e '/Ocaramba.Tests.CloudProviderCrossBrowser/,+1 d' -e '/Ocaramba.Tests.MsTest/,+1 d' -e '/Ocaramba.Tests.Features/,+1 d' -e '/Ocaramba.Tests.Xunit/,+1 d' -e '/Ocaramba.Tests.Angular/,+4 d' -e '/Ocaramba.Tests.NUnitExtentReports/,+1 d' ./Ocaramba.sln
       - run: dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
       - name: Set up JDK
         uses: actions/setup-java@v3
@@ -212,7 +212,7 @@ jobs:
           ls 
           export ASPNETCORE_ENVIRONMENT=Linux
           echo $ASPNETCORE_ENVIRONMENT
-          sed -i '/Documentation/,+5 d' ./Ocaramba.sln
+          sed -i -e '/Documentation/,+5 d' -e '/Ocaramba.Tests.Appium/,+1 d' -e '/Ocaramba.UnitTests/,+1 d' -e '/Ocaramba.Tests.NUnit/,+1 d' -e '/Ocaramba.Tests.MsTest/,+1 d' -e '/Ocaramba.Tests.Features/,+1 d' -e '/Ocaramba.Tests.Xunit/,+1 d' -e '/Ocaramba.Tests.Angular/,+4 d' -e '/Ocaramba.Tests.NUnitExtentReports/,+1 d' ./Ocaramba.sln
       - run: dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
       - name: "BrowserStack Env Setup"
         uses: "browserstack/github-actions/setup-env@master"
@@ -345,7 +345,7 @@ jobs:
           ls
           export ASPNETCORE_ENVIRONMENT=Linux
           echo $ASPNETCORE_ENVIRONMENT
-          sed -i '/Documentation/,+5 d' ./Ocaramba.sln
+          sed -i -e '/Documentation/,+5 d' -e '/Ocaramba.Tests.Appium/,+1 d' -e '/Ocaramba.UnitTests/,+1 d' -e '/Ocaramba.Tests.MsTest/,+1 d' -e '/Ocaramba.Tests.Features/,+1 d' -e '/Ocaramba.Tests.Xunit/,+1 d' -e '/Ocaramba.Tests.Angular/,+4 d' -e '/Ocaramba.Tests.NUnitExtentReports/,+1 d' ./Ocaramba.sln
       - run: dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
       - shell: pwsh
         run: ./scripts/ExecutingTestsOnWindowsGithubActions5.ps1
