@@ -163,18 +163,18 @@ jobs:
           ls
           export ASPNETCORE_ENVIRONMENT=Linux
           echo $ASPNETCORE_ENVIRONMENT
-          sed -i '/Documentation/,+5 d' ./Ocaramba.sln
-      - run: dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}   
+          sed -i '/Documentation/,+5 d' -e '/Ocaramba.Tests.NUnit/,+1 d' '/Ocaramba.UnitTests/,+1 d' '/Ocaramba.Tests.CloudProviderCrossBrowser/,+1 d' '/Ocaramba.Tests.MsTest/,+1 d' '/Ocaramba.Tests.Features/,+1 d' '/Ocaramba.Tests.Xunit/,+1 d' ./Ocaramba.sln
+      - run: dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
-          distribution: 'temurin'
-          java-version: '17'
+          distribution: "temurin"
+          java-version: "17"
       - name: Enable KVM
         run: |
-         echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
-         sudo udevadm control --reload-rules
-         sudo udevadm trigger --name-match=kvm
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
       - run: |
           npm install -g appium
           appium -v
@@ -182,7 +182,7 @@ jobs:
           appium driver install uiautomator2
           nohup appium --log-level warn --log-timestamp --local-timezone > appium.log 2>&1 &
           sleep 10
-          curl http://127.0.0.1:4723/wd/hub/sessions || echo "Appium check failed"   
+          curl http://127.0.0.1:4723/wd/hub/sessions || echo "Appium check failed"
       - name: run tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
@@ -191,7 +191,7 @@ jobs:
           arch: x86_64
           profile: Nexus 6
           emulator-options: "-no-window -no-audio -no-snapshot"
-          disable-animations: true    
+          disable-animations: true
           script: |
             dotnet vstest ./Ocaramba.Tests.Appium/bin/Release/net8.0/Ocaramba.Tests.Appium.dll --logger:"trx;LogFileName=Ocaramba.Tests.Appium.xml"
             echo "Closing connection with emulator-5554"
