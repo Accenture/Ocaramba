@@ -75,9 +75,9 @@
       },
       "Selenium.WebDriver.ChromeDriver": {
         "type": "Direct",
-        "requested": "[137.0.7151.6800, )",
-        "resolved": "137.0.7151.6800",
-        "contentHash": "iz9aZlE0STsteOtaQWP4OAyh667xyDaJBHhWUGtgHQ7ebJVZz0DA12NoP2H1Y1SE+f3DfsW5Hub66R6IiXeYmQ=="
+        "requested": "[137.0.7151.7000, )",
+        "resolved": "137.0.7151.7000",
+        "contentHash": "9KuGL7vG0pOlX/W1AvlcUFt/cLWFsfQocRV5RArYlHZBrfA4fnoXkwH6xI2Z3ZB5BuPSSTLYZSH71o7IjYzNmg=="
       },
       "Selenium.WebDriver.GeckoDriver": {
         "type": "Direct",
@@ -138,6 +138,15 @@
         "dependencies": {
           "System.IO.Pipelines": "9.0.6",
           "System.Text.Encodings.Web": "9.0.6"
+        }
+      },
+      "Appium.WebDriver": {
+        "type": "Transitive",
+        "resolved": "8.0.0",
+        "contentHash": "+eJwC8Dy7SOIWD37bKX89xyZpufkDLZ7M4hYewYvno5Hn2eZ/z1k4d9gzn0vHNAh2QnJ2NKrFnh2zBjgMJiwcg==",
+        "dependencies": {
+          "Selenium.WebDriver": "4.29.0",
+          "System.Drawing.Common": "8.0.10"
         }
       },
       "Gherkin": {
@@ -1802,6 +1811,7 @@
       "ocaramba": {
         "type": "Project",
         "dependencies": {
+          "Appium.WebDriver": "[8.0.0, )",
           "Microsoft.Extensions.Configuration": "[9.0.6, )",
           "Microsoft.Extensions.Configuration.Json": "[9.0.6, )",
           "Microsoft.PowerShell.Commands.Diagnostics": "[7.4.10, )",
@@ -1812,7 +1822,7 @@
           "OcarambaLite": "[1.0.0, )",
           "Selenium.Support": "[4.33.0, )",
           "Selenium.WebDriver": "[4.33.0, )",
-          "Selenium.WebDriver.ChromeDriver": "[137.0.7151.6800, )",
+          "Selenium.WebDriver.ChromeDriver": "[137.0.7151.7000, )",
           "Selenium.WebDriver.GeckoDriver": "[0.36.0, )",
           "System.Configuration.ConfigurationManager": "[9.0.6, )",
           "System.Data.Common": "[4.3.0, )",
@@ -1830,7 +1840,7 @@
           "OcarambaLite": "[1.0.0, )",
           "Selenium.Support": "[4.33.0, )",
           "Selenium.WebDriver": "[4.33.0, )",
-          "Selenium.WebDriver.ChromeDriver": "[137.0.7151.6800, )",
+          "Selenium.WebDriver.ChromeDriver": "[137.0.7151.7000, )",
           "Selenium.WebDriver.GeckoDriver": "[0.36.0, )",
           "System.Configuration.ConfigurationManager": "[9.0.6, )",
           "System.Text.Json": "[9.0.6, )"
@@ -1839,6 +1849,7 @@
       "ocarambalite": {
         "type": "Project",
         "dependencies": {
+          "Appium.WebDriver": "[8.0.0, )",
           "Microsoft.CSharp": "[4.7.0, )",
           "Microsoft.Extensions.Configuration": "[9.0.6, )",
           "Microsoft.Extensions.Configuration.Json": "[9.0.6, )",
