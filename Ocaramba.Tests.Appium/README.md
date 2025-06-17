@@ -9,7 +9,7 @@ This project demonstrates how to run Appium-based mobile tests using NUnit and C
 
 ## Prerequisites
 
-- .NET 6.0 SDK or later
+- .NET 8.0 SDK or later
 - Appium server running (see [Appium documentation](https://appium.io/))
 - Android emulator or real device available
 - The sample app APK available at the path specified in `appsettings.json`
