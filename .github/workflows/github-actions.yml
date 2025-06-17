@@ -134,6 +134,7 @@ jobs:
         with:
           files: |
             /home/runner/**/Ocaramba.Tests.Docker.trx
+          check_name: TestsOnDocker
   test_Stage_RunTestsOnLinux:
     runs-on: ubuntu-latest
     steps:
@@ -154,7 +155,7 @@ jobs:
         with:
           files: |
             /home/runner/work/**/TestResults/*.xml
-          check_name: ExecutingTestsOnLinuxAzure
+          check_name: TestsOnLinux
   test_Stage_RunAppiumTestsOnAndroid:
     runs-on: ubuntu-latest
     steps:
@@ -202,7 +203,7 @@ jobs:
         with:
           files: |
             /home/runner/work/**/TestResults/*.xml
-          check_name: ExecutingTestsOnLinuxAzure
+          check_name: TestsOnAndroid
   test_Stage_RunTestsOnLinuxBrowserStack:
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -237,7 +238,7 @@ jobs:
         with:
           files: |
             /home/runner/work/**/TestResults/*.xml
-          check_name: test_Stage_RunTestsOnLinuxBrowserStack
+          check_name: TestOnLinuxBrowserStack
   test_Stage_RunTestsOnWindowsCore1:
     runs-on: windows-latest
     steps:
@@ -265,7 +266,7 @@ jobs:
         if: always()
         with:
           files: ${{ env.TestResultsDirWindows }}\*.trx
-          check_name: ExecutingTestsOnWindowsGithubActionsCore1
+          check_name: TestOnWindows1
       - name: Zip artifact
         run: Compress-Archive -Path .\Ocaramba.Tests.NUnitExtentReports\bin\Release\net8.0\TestOutput -Destination ExtentReports_${{ github.run_id }}.zip
       - uses: actions/upload-artifact@v4
@@ -301,7 +302,7 @@ jobs:
         with:
           files: |
             ${{ env.TestResultsDirWindows }}\*.xml
-          check_name: ExecutingTestsOnWindowsGithubActionsCore2
+          check_name: TestsOnWindows2
   test_Stage_RunTestsOnWindowsBrowserStack:
     runs-on: windows-latest
     steps:
@@ -336,7 +337,7 @@ jobs:
         if: false
         with:
           files: ${{ env.TestResultsDirWindows }}\*.xml
-          check_name: ExecutingTestsOnWindowsGithubActionsBrowserStack4
+          check_name: TestsOnWindowsBrowserStack4
   test_Stage_RunTestsSeleniumGrid:
     runs-on: ubuntu-latest
     steps:
@@ -355,6 +356,7 @@ jobs:
         with:
           files: |
             /home/runner/work/**/TestResults/*.xml
+            check_name: TestsOnWindows5
   test_Stage_RunTestsOnWindowsSaucelabs:
     runs-on: windows-latest
     steps:
@@ -390,7 +392,7 @@ jobs:
         with:
           files: |
             ${{ env.TestResultsDirWindows }}\*.xml
-          check_name: ExecutingTestsOnWindowsGithubActionsSaucelabs6
+          check_name: TestsOnWindowsSaucelabs6
   release_Stage_PublishNuget:
     runs-on: windows-latest
     needs:
