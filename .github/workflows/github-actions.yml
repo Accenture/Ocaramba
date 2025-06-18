@@ -251,7 +251,10 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: microsoft/setup-msbuild@v2
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.x"
       - shell: powershell
         run: '(Get-Content ''Ocaramba.sln'' -raw) -replace [regex](''.*?'' + ''Documentation'' + (''.*?\r\n'' * (5 + 1))) | set-content  ''Ocaramba.sln'''
       - name: Setup nuget
@@ -267,13 +270,13 @@ jobs:
             ${{ runner.os }}-nuget-
       - name: NuGet restore
         run: nuget restore ${{ env.solution }}
-      - run: msbuild '${{ env.solution }}' /p:configuration='${{ env.buildConfiguration }}' /p:platform='${{ env.buildPlatform }}' /v:minimal
+      - run: dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
       - run: ./scripts/ExecutingTestsOnWindowsGithubActions1.ps1
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action/windows@v2
         if: always()
         with:
-          files: ${{ env.TestResultsDirWindows }}\*.trx
+          files: ./**/Ocaramba.Tests.netcoreapp.xml
           check_name: TestOnWindows1
       - name: Zip artifact
         run: Compress-Archive -Path .\Ocaramba.Tests.NUnitExtentReports\bin\Release\net8.0\TestOutput -Destination ExtentReports_${{ github.run_id }}.zip
@@ -286,7 +289,10 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: microsoft/setup-msbuild@v2
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.x"
       - shell: powershell
         run: '(Get-Content ''Ocaramba.sln'' -raw) -replace [regex](''.*?'' + ''Documentation'' + (''.*?\r\n'' * (5 + 1))) | set-content  ''Ocaramba.sln'''
       - name: Setup nuget
@@ -302,14 +308,13 @@ jobs:
             ${{ runner.os }}-nuget-
       - name: NuGet restore
         run: nuget restore ${{ env.solution }}
-      - run: msbuild '${{ env.solution }}' /p:configuration='${{ env.buildConfiguration }}' /p:platform='${{ env.buildPlatform }}' /v:minimal
+      - run: dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
       - run: ./scripts/ExecutingTestsOnWindowsGithubActions2.ps1
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action/windows@v2
         if: always()
         with:
-          files: |
-            ${{ env.TestResultsDirWindows }}\*.xml
+          files: ./**/*.xml
           check_name: TestsOnWindows2
   test_Stage_RunTestsOnWindowsBrowserStack:
     runs-on: windows-latest
@@ -318,7 +323,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-         dotnet-version: '8.x'
+          dotnet-version: "8.x"
       - shell: pwsh
         run: |
           (Get-Content ./Ocaramba.sln) | ForEach-Object -Begin { $skip = 0 } -Process {
