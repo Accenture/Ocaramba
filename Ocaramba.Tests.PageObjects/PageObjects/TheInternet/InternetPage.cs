@@ -27,8 +27,10 @@ namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
     using Ocaramba.Extensions;
     using Ocaramba.Helpers;
     using Ocaramba.Types;
+    using OpenQA.Selenium.Interactions;
     using System;
     using System.Globalization;
+    using System.Xml.Linq;
 
     public class InternetPage : ProjectPageBase
     {
@@ -170,8 +172,13 @@ namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
 
         public FormAuthenticationPage GoToFormAuthenticationPage()
         {
-            WaitHelper.Wait(() => this.Driver.GetElement(this.loginLocator).Displayed, TimeSpan.FromSeconds(BaseConfiguration.LongTimeout), "Timeout while waiting for login linkLocator");
-            this.Driver.GetElement(this.loginLocator).Click();
+
+            Actions actions = new Actions(this.Driver);
+            var element = this.Driver.GetElement(this.loginLocator);
+            actions.MoveToElement(element)
+             .Click()
+             .Build()
+             .Perform();
             return new FormAuthenticationPage(this.DriverContext);
         }
 
