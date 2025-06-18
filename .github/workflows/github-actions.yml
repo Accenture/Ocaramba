@@ -349,7 +349,6 @@ jobs:
             ${{ runner.os }}-nuget-
       - name: NuGet restore
         run: nuget restore ${{ env.solution }}
-      - run: msbuild '${{ env.solution }}' /p:configuration='${{ env.buildConfiguration }}' /p:platform='${{ env.buildPlatform }}' /v:minimal
       - name: "BrowserStack Env Setup"
         uses: "browserstack/github-actions/setup-env@master"
         with:
