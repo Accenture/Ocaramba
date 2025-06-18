@@ -315,7 +315,10 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: microsoft/setup-msbuild@v2
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+         dotnet-version: '8.x'
       - shell: pwsh
         run: |
           (Get-Content ./Ocaramba.sln) | ForEach-Object -Begin { $skip = 0 } -Process {
@@ -366,7 +369,7 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action/windows@v2
         if: always()
         with:
-          files: Ocaramba.Tests.BrowserStack.xml
+          files: ./TestResults/Ocaramba.Tests.BrowserStack.xml
           check_name: TestsOnWindowsBrowserStack4
   test_Stage_RunTestsSeleniumGrid:
     runs-on: ubuntu-latest
