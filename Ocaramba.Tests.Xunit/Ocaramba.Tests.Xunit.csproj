@@ -6,7 +6,7 @@
   </PropertyGroup>
   
     <ItemGroup>
-    <PackageReference Include="Appveyor.TestLogger" Version="2.0.0" />
+    
     
     
     <PackageReference Include="Selenium.Support" Version="4.33.0" />
@@ -29,7 +29,6 @@
     </PackageReference>
 
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
-    <PackageReference Include="NLog.Web.AspNetCore" Version="5.5.0" />
   </ItemGroup>
 
   <ItemGroup>

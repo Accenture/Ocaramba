@@ -42,7 +42,7 @@ namespace Ocaramba.WebElements
         /// </summary>
         /// <param name="webElement">The webElement.</param>
         public Checkbox(IWebElement webElement)
-            : base(webElement.ToDriver() as RemoteWebDriver, null)
+            : base(webElement.ToDriver() as WebDriver, webElement.ToDriver().ToString() as string)
         {
             this.webElement = webElement;
         }

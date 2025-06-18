@@ -2,12 +2,6 @@
   "version": 1,
   "dependencies": {
     "net8.0": {
-      "Appveyor.TestLogger": {
-        "type": "Direct",
-        "requested": "[2.0.0, )",
-        "resolved": "2.0.0",
-        "contentHash": "D2GsYP/5kddQss6vkX8edw6Dt+qHBN5+pv6DIF8vvb8ObFyiU/r/JK8A2RKE1ucC6nPojQUApvq8IJVNIjYedQ=="
-      },
       "ExtentReports": {
         "type": "Direct",
         "requested": "[5.0.4, )",
@@ -55,15 +49,6 @@
         "requested": "[5.5.0, )",
         "resolved": "5.5.0",
         "contentHash": "FCH8s7GWlonH5JXV9/EpeNJ8pRZQMVZOSWX3JrHPU8rzdHJhS5+lUGGvJIUOtzkGV1clYBFR0WXOI5FnUwVCMA=="
-      },
-      "NLog.Web.AspNetCore": {
-        "type": "Direct",
-        "requested": "[5.5.0, )",
-        "resolved": "5.5.0",
-        "contentHash": "MFDhgF9lHxq74Nmf3rNNHs/axsPpYgnZXNyAhKj9KKctJ0ZlrR+HR/184AQzu4h0KIH9SgRHeLgbWK9aCWWtRw==",
-        "dependencies": {
-          "NLog.Extensions.Logging": "5.5.0"
-        }
       },
       "NPOI": {
         "type": "Direct",
@@ -143,6 +128,15 @@
         "dependencies": {
           "System.Diagnostics.EventLog": "9.0.6",
           "System.Security.Cryptography.ProtectedData": "9.0.6"
+        }
+      },
+      "Appium.WebDriver": {
+        "type": "Transitive",
+        "resolved": "8.0.0",
+        "contentHash": "+eJwC8Dy7SOIWD37bKX89xyZpufkDLZ7M4hYewYvno5Hn2eZ/z1k4d9gzn0vHNAh2QnJ2NKrFnh2zBjgMJiwcg==",
+        "dependencies": {
+          "Selenium.WebDriver": "4.29.0",
+          "System.Drawing.Common": "8.0.10"
         }
       },
       "BouncyCastle.Cryptography": {
@@ -292,6 +286,14 @@
           "Microsoft.Extensions.Primitives": "9.0.6"
         }
       },
+      "Microsoft.Extensions.Configuration.Binder": {
+        "type": "Transitive",
+        "resolved": "9.0.6",
+        "contentHash": "Opl/7SIrwDy9WjHn/vU2thQ8CUtrIWHLr+89I7/0VYNEJQvpL24zvqYrh83cH38RzNKHji0WGVkCVP6HJChVVw==",
+        "dependencies": {
+          "Microsoft.Extensions.Configuration.Abstractions": "9.0.6"
+        }
+      },
       "Microsoft.Extensions.Configuration.FileExtensions": {
         "type": "Transitive",
         "resolved": "9.0.6",
@@ -314,14 +316,6 @@
           "Microsoft.Extensions.Configuration.FileExtensions": "9.0.6",
           "Microsoft.Extensions.FileProviders.Abstractions": "9.0.6",
           "System.Text.Json": "9.0.6"
-        }
-      },
-      "Microsoft.Extensions.DependencyInjection": {
-        "type": "Transitive",
-        "resolved": "8.0.0",
-        "contentHash": "V8S3bsm50ig6JSyrbcJJ8bW2b9QLGouz+G1miK3UTaOWmMtFwNNNzUf4AleyDWUmTrWMLNnFSLEQtxmxgNQnNQ==",
-        "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0"
         }
       },
       "Microsoft.Extensions.DependencyInjection.Abstractions": {
@@ -371,16 +365,6 @@
           "Microsoft.Extensions.Diagnostics.Abstractions": "8.0.1",
           "Microsoft.Extensions.FileProviders.Abstractions": "8.0.0",
           "Microsoft.Extensions.Logging.Abstractions": "8.0.2"
-        }
-      },
-      "Microsoft.Extensions.Logging": {
-        "type": "Transitive",
-        "resolved": "8.0.0",
-        "contentHash": "tvRkov9tAJ3xP51LCv3FJ2zINmv1P8Hi8lhhtcKGqM+ImiTCC84uOPEI4z8Cdq2C3o9e+Aa0Gw0rmrsJD77W+w==",
-        "dependencies": {
-          "Microsoft.Extensions.DependencyInjection": "8.0.0",
-          "Microsoft.Extensions.Logging.Abstractions": "8.0.0",
-          "Microsoft.Extensions.Options": "8.0.0"
         }
       },
       "Microsoft.Extensions.Logging.Abstractions": {
@@ -682,16 +666,6 @@
         "type": "Transitive",
         "resolved": "13.0.3",
         "contentHash": "HrC5BXdl00IP9zeV+0Z848QWPAoCr9P3bDEZguI+gkLcBKAOxix/tLEAAHC+UvDNPv4a2d18lOReHMOagPa+zQ=="
-      },
-      "NLog.Extensions.Logging": {
-        "type": "Transitive",
-        "resolved": "5.5.0",
-        "contentHash": "l8gxUThXCiV5Vcilz9SF2/mf39p9ccdm+V3zoadQIfnv5dMHiy6BH8PSF/9ptOMHfUXZI5qOlBTiO+YcoMY/4Q==",
-        "dependencies": {
-          "Microsoft.Extensions.Configuration.Abstractions": "8.0.0",
-          "Microsoft.Extensions.Logging": "8.0.0",
-          "NLog": "5.5.0"
-        }
       },
       "NUnit.Console": {
         "type": "Transitive",
@@ -1180,7 +1154,6 @@
           "Microsoft.Extensions.Configuration.Json": "[9.0.6, )",
           "Microsoft.NET.Test.Sdk": "[17.14.1, )",
           "NLog": "[5.5.0, )",
-          "NLog.Web.AspNetCore": "[5.5.0, )",
           "OcarambaLite": "[1.0.0, )",
           "Selenium.Support": "[4.33.0, )",
           "Selenium.WebDriver": "[4.33.0, )",
@@ -1193,14 +1166,15 @@
       "ocarambalite": {
         "type": "Project",
         "dependencies": {
+          "Appium.WebDriver": "[8.0.0, )",
           "Microsoft.CSharp": "[4.7.0, )",
           "Microsoft.Extensions.Configuration": "[9.0.6, )",
+          "Microsoft.Extensions.Configuration.Binder": "[9.0.6, )",
           "Microsoft.Extensions.Configuration.Json": "[9.0.6, )",
           "Microsoft.PowerShell.Commands.Diagnostics": "[7.4.10, )",
           "Microsoft.PowerShell.SDK": "[7.4.10, )",
           "Microsoft.WSMan.Management": "[7.4.10, )",
           "NLog": "[5.5.0, )",
-          "NLog.Web.AspNetCore": "[5.5.0, )",
           "Selenium.Support": "[4.33.0, )",
           "Selenium.WebDriver": "[4.33.0, )",
           "System.Configuration.ConfigurationManager": "[9.0.6, )",

@@ -21,7 +21,6 @@
     <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.36.0" />
 
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
-    <PackageReference Include="NLog.Web.AspNetCore" Version="5.5.0" />
   </ItemGroup>
 
   <ItemGroup>

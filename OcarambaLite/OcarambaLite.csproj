@@ -28,6 +28,7 @@
 	 <None Include="..\README.md" Pack="true" PackagePath="\" />
 	 <PackageReference Include="Appium.WebDriver" Version="8.0.0" />
 	<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+	<PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="9.0.6" />
     <PackageReference Include="Selenium.WebDriver" Version="4.33.0" />
     <PackageReference Include="Selenium.Support" Version="4.33.0" />
     <PackageReference Include="NLog" Version="5.5.0" />
@@ -52,9 +53,6 @@
     </PackageReference>
     <PackageReference Include="Microsoft.WSMan.Management">
       <Version>7.4.10</Version>
-    </PackageReference>
-    <PackageReference Include="NLog.Web.AspNetCore">
-      <Version>5.5.0</Version>
     </PackageReference>
   </ItemGroup>
 

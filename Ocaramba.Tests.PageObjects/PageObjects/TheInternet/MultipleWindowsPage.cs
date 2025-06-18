@@ -40,7 +40,7 @@ namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
         public NewWindowPage OpenNewWindowPage()
         {
             this.Driver.GetElement(this.clickHerePageLocator).Click();
-            this.Driver.SwitchToWindowUsingUrl(new Uri("https://the-internet.herokuapp.com/windows/new"), 5);
+            this.Driver.SwitchToWindowUsingUrl(new Uri("https://the-internet.herokuapp.com/windows/new"), 20);
             return new NewWindowPage(this.DriverContext);
         }
     }

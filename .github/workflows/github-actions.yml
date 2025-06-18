@@ -21,11 +21,7 @@ env:
   buildConfiguration: Release
   frameworkVersion: 4.2.2
   TestResultsDirWindows: D:\a\Ocaramba\Ocaramba\TestResults
-  CHROMEWEBDRIVER: C:\SeleniumWebDrivers\ChromeDriver
-  BuildVersion: 4.2.0${{ github.run_number }}
-  ChromeDriverVersion: 122.0.6261.9400
-  seleniumGridVersion: selenium-server-4.27.0.jar
-  seleniumGridUrl: https://github.com/SeleniumHQ/selenium/releases/download/selenium-4.27.0/selenium-server-4.27.0.jar
+  ChromeDriverVersion: 137.0.7151.6800
   NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
 jobs:
   build_Stage_BuildTestsOnWindows:
@@ -149,6 +145,10 @@ jobs:
       - run: dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
       - shell: pwsh
         run: ./scripts/ExecutingTestsOnLinuxAzure.ps1
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ExecutingTestsOnLinux
+          path: ./Ocaramba.Tests.NUnit/bin/Release/net8.0/ExecutingTestsOnLinux.zip
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action/linux@v2
         if: true

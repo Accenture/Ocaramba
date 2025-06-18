@@ -16,7 +16,7 @@ namespace Ocaramba.UnitTests.Tests
         
 
 
-        private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+        private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
 
         [Test()]
         public void ShortenFileNameTest()

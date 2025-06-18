@@ -36,7 +36,7 @@ namespace Ocaramba.WebElements
     /// </summary>
     public class Select : WebElement
     {
-        private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+        private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
 
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace Ocaramba.WebElements
         /// </summary>
         /// <param name="webElement">The _webElement.</param>
         public Select(IWebElement webElement)
-            : base(webElement.ToDriver() as RemoteWebDriver, null)
+            : base(webElement.ToDriver() as WebDriver, webElement.ToDriver().ToString() as string)
         {
             this.webElement = webElement;
         }

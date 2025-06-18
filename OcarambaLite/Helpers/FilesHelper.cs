@@ -40,7 +40,7 @@ namespace Ocaramba.Helpers
         /// Directory separator.
         /// </summary>
         public static readonly char Separator = Path.DirectorySeparatorChar;
-        private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+        private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
 
 
         /// <summary>

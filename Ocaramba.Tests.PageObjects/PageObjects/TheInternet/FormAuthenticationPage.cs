@@ -22,12 +22,15 @@
 
 namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
 {
-    using System;
-    using System.Globalization;
     using NLog;
     using Ocaramba;
     using Ocaramba.Extensions;
+    using Ocaramba.Helpers;
     using Ocaramba.Types;
+    using OpenQA.Selenium;
+    using OpenQA.Selenium.Interactions;
+    using System;
+    using System.Globalization;
 
     public class FormAuthenticationPage : ProjectPageBase
     {
@@ -35,13 +38,13 @@ namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
         
 
 
-        private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+        private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
 
 
         /// <summary>
         /// Locators for elements
         /// </summary>
-        private readonly ElementLocator pageHeader = new ElementLocator(Locator.XPath, "//h3[.='Login Page']"),
+        private readonly ElementLocator pageHeader = new ElementLocator(Locator.XPath, "//h2[.='Login Page']"),
                                         userNameForm = new ElementLocator(Locator.CssSelector, "Input[id=username]"),
                                         passwordForm = new ElementLocator(Locator.CssSelector, "Input[id=password]"),
                                         loginButton = new ElementLocator(Locator.XPath, "//form[@id='login']/button"),
@@ -51,9 +54,10 @@ namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
         public FormAuthenticationPage(DriverContext driverContext)
             : base(driverContext)
         {
-            Logger.Info("Waiting for page to open");
-            this.Driver.IsElementPresent(this.pageHeader, BaseConfiguration.ShortTimeout);
-        }
+            Logger.Info("Waiting for page to open 'Login Page'");
+            this.Driver.IsElementPresent(this.pageHeader, BaseConfiguration.MediumTimeout);
+			WaitHelper.Wait(() => this.Driver.GetElement(this.loginButton).Displayed,TimeSpan.FromSeconds(BaseConfiguration.LongTimeout), "Timeout while waiting for login button");
+		}
 
         public string GetMessage
         {
@@ -73,14 +77,25 @@ namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
         public void EnterPassword(string password)
         {
             Logger.Info(CultureInfo.CurrentCulture, "Password '{0}'", new string('*', password.Length));
-            this.Driver.GetElement(this.passwordForm).SendKeys(password);
+
+            var element = this.Driver.GetElement(this.passwordForm);
+
+            var javascript = element.ToDriver() as IJavaScriptExecutor;
+
+
+            javascript.ExecuteScript($"arguments[0].value='{password}'", element);
             this.Driver.WaitForAjax();
         }
 
         public void EnterUserName(string userName)
         {
             Logger.Info(CultureInfo.CurrentCulture, "User name '{0}'", userName);
-            this.Driver.GetElement(this.userNameForm).SendKeys(userName);
+            this.Driver.GetElement(this.userNameForm);
+            var element = this.Driver.GetElement(this.userNameForm);
+            var javascript = element.ToDriver() as IJavaScriptExecutor;
+
+
+            javascript.ExecuteScript($"arguments[0].value='{userName}'", element);
         }
 
         public void LogOn()

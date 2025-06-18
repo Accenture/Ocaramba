@@ -41,7 +41,7 @@ namespace Ocaramba.Tests.NUnit.DataDriven
     /// </summary>
     public static class DataDrivenHelper
     {
-        private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+        private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
 
 
         /// <summary>

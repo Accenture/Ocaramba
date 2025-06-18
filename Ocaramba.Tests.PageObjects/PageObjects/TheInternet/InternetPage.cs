@@ -22,23 +22,27 @@
 
 namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
 {
-    using System;
-    using System.Globalization;
     using NLog;
     using Ocaramba;
     using Ocaramba.Extensions;
+    using Ocaramba.Helpers;
     using Ocaramba.Types;
+    using OpenQA.Selenium.Interactions;
+    using System;
+    using System.Globalization;
+    using System.Xml.Linq;
 
     public class InternetPage : ProjectPageBase
     {
 
-        private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+        private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
         /// Locators for elements
         /// </summary>
         private readonly ElementLocator
             linkLocator = new ElementLocator(Locator.CssSelector, "a[href='/{0}']"),
+            loginLocator = new ElementLocator(Locator.XPath, "//a[translate(normalize-space(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'form authentication']"),
             basicAuthLink = new ElementLocator(Locator.XPath, "//a[contains(text(),'Auth')]"),
             dropdownPageByLinkTextLocator = new ElementLocator(Locator.LinkText, "Dropdown"),
             partialLinkTextLocator = new ElementLocator(Locator.PartialLinkText, "Drag");
@@ -168,7 +172,14 @@ namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
 
         public FormAuthenticationPage GoToFormAuthenticationPage()
         {
-            this.Driver.GetElement(this.linkLocator.Format("login")).Click();
+
+            Actions actions = new Actions(this.Driver);
+            var element = this.Driver.GetElement(this.loginLocator);
+            actions.MoveToElement(element)
+             .Build()
+             .Perform();
+
+            this.Driver.GetElement(this.loginLocator).JavaScriptClick();
             return new FormAuthenticationPage(this.DriverContext);
         }
 

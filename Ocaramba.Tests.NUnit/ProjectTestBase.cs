@@ -72,7 +72,7 @@ namespace Ocaramba.Tests.NUnit
         public void BeforeClass()
         {
 
-        this.DriverContext.CurrentDirectory = Directory.GetCurrentDirectory();
+            this.DriverContext.CurrentDirectory = Directory.GetCurrentDirectory();
 
 
 

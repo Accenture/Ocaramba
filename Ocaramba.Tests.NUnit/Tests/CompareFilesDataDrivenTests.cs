@@ -31,7 +31,7 @@ namespace Ocaramba.Tests.NUnit.Tests
     [TestFixture]
     public class CompareFilesDataDrivenTests
     {
-        private readonly NLog.Logger logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+        private readonly NLog.Logger logger = LogManager.GetCurrentClassLogger();
 
 
         private readonly char separator = Path.DirectorySeparatorChar;

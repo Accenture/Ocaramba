@@ -15,7 +15,6 @@
     <PackageReference Include="System.Text.Json" Version="9.0.6" />
 
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
-    <PackageReference Include="NLog.Web.AspNetCore" Version="5.5.0" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="9.0.6" />
   </ItemGroup>
 
