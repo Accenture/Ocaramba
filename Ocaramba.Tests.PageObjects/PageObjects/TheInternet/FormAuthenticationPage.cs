@@ -41,7 +41,7 @@ namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
         /// <summary>
         /// Locators for elements
         /// </summary>
-        private readonly ElementLocator pageHeader = new ElementLocator(Locator.XPath, "//h3[.='Login Page']"),
+        private readonly ElementLocator pageHeader = new ElementLocator(Locator.XPath, "//h2[.='Login Page']"),
                                         userNameForm = new ElementLocator(Locator.CssSelector, "Input[id=username]"),
                                         passwordForm = new ElementLocator(Locator.CssSelector, "Input[id=password]"),
                                         loginButton = new ElementLocator(Locator.XPath, "//form[@id='login']/button"),
