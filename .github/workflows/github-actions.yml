@@ -146,7 +146,7 @@ jobs:
         run: ./scripts/ExecutingTestsOnLinuxAzure.ps1
       - uses: actions/upload-artifact@v4
         with:
-          name: TestOutput
+          name: ExecutingTestsOnLinux
           path: ./Ocaramba.Tests.NUnit/bin/Release/net8.0/ExecutingTestsOnLinux.zip
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action/linux@v2
