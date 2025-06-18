@@ -22,12 +22,13 @@
 
 namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
 {
-    using System;
-    using System.Globalization;
     using NLog;
     using Ocaramba;
     using Ocaramba.Extensions;
+    using Ocaramba.Helpers;
     using Ocaramba.Types;
+    using System;
+    using System.Globalization;
 
     public class InternetPage : ProjectPageBase
     {
@@ -168,6 +169,7 @@ namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
 
         public FormAuthenticationPage GoToFormAuthenticationPage()
         {
+            WaitHelper.Wait(() => this.Driver.GetElement(this.linkLocator.Format("login")).Displayed, TimeSpan.FromSeconds(BaseConfiguration.LongTimeout), "Timeout while waiting for login linkLocator");
             this.Driver.GetElement(this.linkLocator.Format("login")).Click();
             return new FormAuthenticationPage(this.DriverContext);
         }
