@@ -43,6 +43,7 @@ namespace Ocaramba
     using OpenQA.Selenium.IE;
     using OpenQA.Selenium.Remote;
     using OpenQA.Selenium.Safari;
+    using OpenQA.Selenium.Appium;
 
     /// <summary>
     /// Contains handle to driver and methods for web browser.
@@ -596,50 +597,27 @@ namespace Ocaramba
             switch (BaseConfiguration.TestBrowser)
             {
                 case BrowserType.Firefox:
-                    if (!string.IsNullOrEmpty(BaseConfiguration.FirefoxBrowserExecutableLocation))
-                    {
-                        this.FirefoxOptions.BrowserExecutableLocation = BaseConfiguration.FirefoxBrowserExecutableLocation;
-                    }
-
-                    FirefoxDriverService serviceFirefox = FirefoxDriverService.CreateDefaultService();
-                    serviceFirefox.Host = "::1";
-                    this.driver = string.IsNullOrEmpty(BaseConfiguration.PathToFirefoxDriverDirectory) ? new FirefoxDriver(serviceFirefox, this.SetDriverOptions(this.FirefoxOptions)) : new FirefoxDriver(BaseConfiguration.PathToFirefoxDriverDirectory, this.SetDriverOptions(this.FirefoxOptions));
-
-
-                    this.driver = string.IsNullOrEmpty(BaseConfiguration.PathToFirefoxDriverDirectory) ? new FirefoxDriver(this.SetDriverOptions(this.FirefoxOptions)) : new FirefoxDriver(BaseConfiguration.PathToFirefoxDriverDirectory, this.SetDriverOptions(this.FirefoxOptions));
-
+                    this.StartFirefox();
                     break;
                 case BrowserType.InternetExplorer:
                 case BrowserType.IE:
-                    this.driver = string.IsNullOrEmpty(BaseConfiguration.PathToInternetExplorerDriverDirectory) ? new InternetExplorerDriver(this.SetDriverOptions(this.InternetExplorerOptions)) : new InternetExplorerDriver(BaseConfiguration.PathToInternetExplorerDriverDirectory, this.SetDriverOptions(this.InternetExplorerOptions));
+                    this.StartInternetExplorer();
                     break;
                 case BrowserType.Chrome:
-                    if (!string.IsNullOrEmpty(BaseConfiguration.ChromeBrowserExecutableLocation))
-                    {
-                        this.ChromeOptions.BinaryLocation = BaseConfiguration.ChromeBrowserExecutableLocation;
-                    }
-
-                    this.serviceChrome = ChromeDriverService.CreateDefaultService();
-                    this.serviceChrome.LogPath = BaseConfiguration.PathToChromeDriverLog;
-                    this.serviceChrome.EnableVerboseLogging = BaseConfiguration.EnableVerboseLoggingChrome;
-                    this.driver = string.IsNullOrEmpty(BaseConfiguration.PathToChromeDriverDirectory) ? new ChromeDriver(this.serviceChrome, this.SetDriverOptions(this.ChromeOptions), BaseConfiguration.RemoteWebDriverTimeout) : new ChromeDriver(BaseConfiguration.PathToChromeDriverDirectory, this.SetDriverOptions(this.ChromeOptions), BaseConfiguration.RemoteWebDriverTimeout);
+                    this.StartChrome();
                     break;
                 case BrowserType.Safari:
-                    this.driver = new SafariDriver(this.SetDriverOptions(this.SafariOptions));
-                    this.CheckIfProxySetForSafari();
+                    this.StartSafari();
                     break;
                 case BrowserType.RemoteWebDriver:
                     this.SetupRemoteWebDriver();
                     break;
                 case BrowserType.Edge:
                 case BrowserType.EdgeChromium:
-                    if (!string.IsNullOrEmpty(BaseConfiguration.EdgeChromiumBrowserExecutableLocation))
-                    {
-                        this.EdgeOptions.BinaryLocation = BaseConfiguration.EdgeChromiumBrowserExecutableLocation;
-                    }
-
-                    this.serviceEdge = EdgeDriverService.CreateDefaultService();
-                    this.driver = string.IsNullOrEmpty(BaseConfiguration.PathToEdgeChromiumDriverDirectory) ? new EdgeDriver(this.serviceEdge, this.SetDriverOptions(this.EdgeOptions), BaseConfiguration.RemoteWebDriverTimeout) : new EdgeDriver(EdgeDriverService.CreateDefaultService(BaseConfiguration.PathToEdgeChromiumDriverDirectory, @"msedgedriver.exe"), this.SetDriverOptions(this.EdgeOptions), BaseConfiguration.RemoteWebDriverTimeout);
+                    this.StartEdge();
+                    break;
+                case BrowserType.Appium:
+                    this.StartAppium();
                     break;
                 default:
                     throw new NotSupportedException(
@@ -649,6 +627,99 @@ namespace Ocaramba
             if (BaseConfiguration.EnableEventFiringWebDriver)
             {
                 this.driver = new MyEventFiringWebDriver(this.driver);
+            }
+        }
+
+        private void StartFirefox()
+        {
+            if (!string.IsNullOrEmpty(BaseConfiguration.FirefoxBrowserExecutableLocation))
+            {
+                this.FirefoxOptions.BrowserExecutableLocation = BaseConfiguration.FirefoxBrowserExecutableLocation;
+            }
+            FirefoxDriverService serviceFirefox = FirefoxDriverService.CreateDefaultService();
+            serviceFirefox.Host = "::1";
+            this.driver = string.IsNullOrEmpty(BaseConfiguration.PathToFirefoxDriverDirectory)
+                ? new FirefoxDriver(serviceFirefox, this.SetDriverOptions(this.FirefoxOptions))
+                : new FirefoxDriver(BaseConfiguration.PathToFirefoxDriverDirectory, this.SetDriverOptions(this.FirefoxOptions));
+        }
+
+        private void StartInternetExplorer()
+        {
+            this.driver = string.IsNullOrEmpty(BaseConfiguration.PathToInternetExplorerDriverDirectory)
+                ? new InternetExplorerDriver(this.SetDriverOptions(this.InternetExplorerOptions))
+                : new InternetExplorerDriver(BaseConfiguration.PathToInternetExplorerDriverDirectory, this.SetDriverOptions(this.InternetExplorerOptions));
+        }
+
+        private void StartChrome()
+        {
+            if (!string.IsNullOrEmpty(BaseConfiguration.ChromeBrowserExecutableLocation))
+            {
+                this.ChromeOptions.BinaryLocation = BaseConfiguration.ChromeBrowserExecutableLocation;
+            }
+            this.serviceChrome = ChromeDriverService.CreateDefaultService();
+            this.serviceChrome.LogPath = BaseConfiguration.PathToChromeDriverLog;
+            this.serviceChrome.EnableVerboseLogging = BaseConfiguration.EnableVerboseLoggingChrome;
+            this.driver = string.IsNullOrEmpty(BaseConfiguration.PathToChromeDriverDirectory)
+                ? new ChromeDriver(this.serviceChrome, this.SetDriverOptions(this.ChromeOptions), BaseConfiguration.RemoteWebDriverTimeout)
+                : new ChromeDriver(BaseConfiguration.PathToChromeDriverDirectory, this.SetDriverOptions(this.ChromeOptions), BaseConfiguration.RemoteWebDriverTimeout);
+        }
+
+        private void StartSafari()
+        {
+            this.driver = new SafariDriver(this.SetDriverOptions(this.SafariOptions));
+            this.CheckIfProxySetForSafari();
+        }
+
+        private void StartEdge()
+        {
+            if (!string.IsNullOrEmpty(BaseConfiguration.EdgeChromiumBrowserExecutableLocation))
+            {
+                this.EdgeOptions.BinaryLocation = BaseConfiguration.EdgeChromiumBrowserExecutableLocation;
+            }
+            this.serviceEdge = EdgeDriverService.CreateDefaultService();
+            this.driver = string.IsNullOrEmpty(BaseConfiguration.PathToEdgeChromiumDriverDirectory)
+                ? new EdgeDriver(this.serviceEdge, this.SetDriverOptions(this.EdgeOptions), BaseConfiguration.RemoteWebDriverTimeout)
+                : new EdgeDriver(EdgeDriverService.CreateDefaultService(BaseConfiguration.PathToEdgeChromiumDriverDirectory, @"msedgedriver.exe"), this.SetDriverOptions(this.EdgeOptions), BaseConfiguration.RemoteWebDriverTimeout);
+        }
+
+        private void StartAppium()
+        {
+            var appiumOptions = new OpenQA.Selenium.Appium.AppiumOptions();
+            if (!string.IsNullOrEmpty(BaseConfiguration.AppiumPlatformName))
+            {
+                appiumOptions.PlatformName = BaseConfiguration.AppiumPlatformName;
+            }
+            if (!string.IsNullOrEmpty(BaseConfiguration.AppiumDeviceName))
+            {
+                appiumOptions.DeviceName = BaseConfiguration.AppiumDeviceName;
+            }
+            if (!string.IsNullOrEmpty(BaseConfiguration.AppiumAppPath))
+            {
+                appiumOptions.App = BaseConfiguration.AppiumAppPath;
+            }
+            if (!string.IsNullOrEmpty(BaseConfiguration.AppiumAutomationName))
+            {
+                appiumOptions.AutomationName = BaseConfiguration.AppiumAutomationName; // <-- Use property, not AddAdditionalAppiumOption
+            }
+            if (!string.IsNullOrEmpty(BaseConfiguration.AppiumAppPackage))
+            {
+                appiumOptions.AddAdditionalAppiumOption("appPackage", BaseConfiguration.AppiumAppPackage);
+            }
+            if (!string.IsNullOrEmpty(BaseConfiguration.AppiumAppActivity))
+            {
+                appiumOptions.AddAdditionalAppiumOption("appActivity", BaseConfiguration.AppiumAppActivity);
+            }
+            if (BaseConfiguration.AppiumPlatformName?.ToLowerInvariant() == "android")
+            {
+                this.driver = new OpenQA.Selenium.Appium.Android.AndroidDriver(new Uri(BaseConfiguration.AppiumServerUrl), appiumOptions);
+            }
+            else if (BaseConfiguration.AppiumPlatformName?.ToLowerInvariant() == "ios")
+            {
+                this.driver = new OpenQA.Selenium.Appium.iOS.IOSDriver(new Uri(BaseConfiguration.AppiumServerUrl), appiumOptions);
+            }
+            else
+            {
+                throw new NotSupportedException($"Appium platform '{BaseConfiguration.AppiumPlatformName}' is not supported. Use 'Android' or 'iOS'.");
             }
         }
 

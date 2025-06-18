@@ -18,3 +18,4 @@ selenium-manager
 *.log
 /Ocaramba.Tests.Appium/.vscode/tasks.json
 /Ocaramba.Tests.CloudProviderCrossBrowser/.config/dotnet-tools.json
+/**/.vscode

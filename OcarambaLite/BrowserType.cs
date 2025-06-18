@@ -86,5 +86,10 @@ namespace Ocaramba
         /// Not supported browser
         /// </summary>
         None,
+
+        /// <summary>
+        /// Appium mobile automation
+        /// </summary>
+        Appium,
     }
 }
