@@ -141,6 +141,15 @@
           "System.Text.Encodings.Web": "9.0.6"
         }
       },
+      "Appium.WebDriver": {
+        "type": "Transitive",
+        "resolved": "8.0.0",
+        "contentHash": "+eJwC8Dy7SOIWD37bKX89xyZpufkDLZ7M4hYewYvno5Hn2eZ/z1k4d9gzn0vHNAh2QnJ2NKrFnh2zBjgMJiwcg==",
+        "dependencies": {
+          "Selenium.WebDriver": "4.29.0",
+          "System.Drawing.Common": "8.0.10"
+        }
+      },
       "BouncyCastle.Cryptography": {
         "type": "Transitive",
         "resolved": "2.3.1",
@@ -1127,6 +1136,7 @@
       "ocarambalite": {
         "type": "Project",
         "dependencies": {
+          "Appium.WebDriver": "[8.0.0, )",
           "Microsoft.CSharp": "[4.7.0, )",
           "Microsoft.Extensions.Configuration": "[9.0.6, )",
           "Microsoft.Extensions.Configuration.Binder": "[9.0.6, )",
