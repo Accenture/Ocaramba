@@ -10,7 +10,7 @@ $fileContent = $fileContent -replace "BROWSERSTACKKEY", "`$($env:MAPPED_ENV_BROW
 
 # Write the updated content back to the file
 
-dotnet vstest ./Ocaramba.Tests.CloudProviderCrossBrowser/bin/Release/net8.0/Ocaramba.Tests.CloudProviderCrossBrowser.dll /Logger:"trx;Ocaramba.Tests.BrowserStack.xml"
+dotnet vstest ./Ocaramba.Tests.CloudProviderCrossBrowser/bin/Debug/net8.0/Ocaramba.Tests.CloudProviderCrossBrowser.dll /Logger:"trx;Ocaramba.Tests.BrowserStack.xml"
 if($lastexitcode -ne 0)
  {
   echo 'lastexitcode' $lastexitcode
