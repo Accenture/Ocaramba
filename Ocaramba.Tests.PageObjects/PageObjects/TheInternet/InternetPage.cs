@@ -176,9 +176,10 @@ namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
             Actions actions = new Actions(this.Driver);
             var element = this.Driver.GetElement(this.loginLocator);
             actions.MoveToElement(element)
-             .Click()
              .Build()
              .Perform();
+
+            this.Driver.GetElement(this.loginLocator).JavaScriptClick();
             return new FormAuthenticationPage(this.DriverContext);
         }
 
