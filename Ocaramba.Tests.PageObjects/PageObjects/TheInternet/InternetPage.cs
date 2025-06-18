@@ -40,6 +40,7 @@ namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
         /// </summary>
         private readonly ElementLocator
             linkLocator = new ElementLocator(Locator.CssSelector, "a[href='/{0}']"),
+            loginLocator = new ElementLocator(Locator.XPath, "//a[contains(text(),'Form Authentication')]"),
             basicAuthLink = new ElementLocator(Locator.XPath, "//a[contains(text(),'Auth')]"),
             dropdownPageByLinkTextLocator = new ElementLocator(Locator.LinkText, "Dropdown"),
             partialLinkTextLocator = new ElementLocator(Locator.PartialLinkText, "Drag");
@@ -169,8 +170,8 @@ namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
 
         public FormAuthenticationPage GoToFormAuthenticationPage()
         {
-            WaitHelper.Wait(() => this.Driver.GetElement(this.linkLocator.Format("login")).Displayed, TimeSpan.FromSeconds(BaseConfiguration.LongTimeout), "Timeout while waiting for login linkLocator");
-            this.Driver.GetElement(this.linkLocator.Format("login")).Click();
+            WaitHelper.Wait(() => this.Driver.GetElement(this.loginLocator).Displayed, TimeSpan.FromSeconds(BaseConfiguration.LongTimeout), "Timeout while waiting for login linkLocator");
+            this.Driver.GetElement(this.loginLocator).Click();
             return new FormAuthenticationPage(this.DriverContext);
         }
 
