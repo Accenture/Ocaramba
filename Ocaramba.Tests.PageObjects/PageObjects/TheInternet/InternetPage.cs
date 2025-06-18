@@ -40,7 +40,7 @@ namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
         /// </summary>
         private readonly ElementLocator
             linkLocator = new ElementLocator(Locator.CssSelector, "a[href='/{0}']"),
-            loginLocator = new ElementLocator(Locator.XPath, "//a[contains(text(),'Form Authentication')]"),
+            loginLocator = new ElementLocator(Locator.XPath, "//a[contains(text(),'Form')]"),
             basicAuthLink = new ElementLocator(Locator.XPath, "//a[contains(text(),'Auth')]"),
             dropdownPageByLinkTextLocator = new ElementLocator(Locator.LinkText, "Dropdown"),
             partialLinkTextLocator = new ElementLocator(Locator.PartialLinkText, "Drag");
