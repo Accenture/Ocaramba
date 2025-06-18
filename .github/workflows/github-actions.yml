@@ -314,7 +314,7 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action/windows@v2
         if: always()
         with:
-          files: ./**/*.xml
+          files: ./**/Ocaramba.Tests.*.xml
           check_name: TestsOnWindows2
   test_Stage_RunTestsOnWindowsBrowserStack:
     runs-on: windows-latest
