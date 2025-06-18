@@ -242,7 +242,7 @@ jobs:
         run: ./scripts/ExecutingTestsOnLinuxBrowserStackGithubActions.ps1
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action/linux@v2
-        if: false
+        if: true
         with:
           files: |
             /home/runner/work/**/TestResults/*.xml
@@ -332,6 +332,13 @@ jobs:
       - name: NuGet restore
         run: nuget restore ${{ env.solution }}
       - run: msbuild '${{ env.solution }}' /p:configuration='${{ env.buildConfiguration }}' /p:platform='${{ env.buildPlatform }}' /v:minimal
+      - name: "BrowserStack Env Setup"
+        uses: "browserstack/github-actions/setup-env@master"
+        with:
+          username: ${{ secrets.BROWSERSTACKUSER }}
+          access-key: ${{ secrets.BROWSERSTACKKEY }}
+          build-name: "BUILD_INFO"
+          project-name: "REPO_NAME"
       - run: ./scripts/ExecutingTestsOnWindowsGithubActions4.ps1
         env:
           MAPPED_ENV_BROWSERSTACKKEY: ${{ secrets.BROWSERSTACKKEY }}
@@ -342,7 +349,7 @@ jobs:
           MAPPED_ENV_SAUCELABSUSERNAME: ${{ secrets.saucelabsusername }}
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action/windows@v2
-        if: false
+        if: true
         with:
           files: ${{ env.TestResultsDirWindows }}\*.xml
           check_name: TestsOnWindowsBrowserStack4
