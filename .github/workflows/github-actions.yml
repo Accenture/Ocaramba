@@ -242,7 +242,7 @@ jobs:
         run: ./scripts/ExecutingTestsOnLinuxBrowserStackGithubActions.ps1
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action/linux@v2
-        if: false
+        if: true
         with:
           files: |
             /home/runner/work/**/TestResults/*.xml
@@ -251,7 +251,10 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: microsoft/setup-msbuild@v2
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.x"
       - shell: powershell
         run: '(Get-Content ''Ocaramba.sln'' -raw) -replace [regex](''.*?'' + ''Documentation'' + (''.*?\r\n'' * (5 + 1))) | set-content  ''Ocaramba.sln'''
       - name: Setup nuget
@@ -267,13 +270,13 @@ jobs:
             ${{ runner.os }}-nuget-
       - name: NuGet restore
         run: nuget restore ${{ env.solution }}
-      - run: msbuild '${{ env.solution }}' /p:configuration='${{ env.buildConfiguration }}' /p:platform='${{ env.buildPlatform }}' /v:minimal
+      - run: dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
       - run: ./scripts/ExecutingTestsOnWindowsGithubActions1.ps1
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action/windows@v2
         if: always()
         with:
-          files: ${{ env.TestResultsDirWindows }}\*.trx
+          files: ./**/Ocaramba.Tests.netcoreapp.xml
           check_name: TestOnWindows1
       - name: Zip artifact
         run: Compress-Archive -Path .\Ocaramba.Tests.NUnitExtentReports\bin\Release\net8.0\TestOutput -Destination ExtentReports_${{ github.run_id }}.zip
@@ -286,7 +289,10 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: microsoft/setup-msbuild@v2
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.x"
       - shell: powershell
         run: '(Get-Content ''Ocaramba.sln'' -raw) -replace [regex](''.*?'' + ''Documentation'' + (''.*?\r\n'' * (5 + 1))) | set-content  ''Ocaramba.sln'''
       - name: Setup nuget
@@ -302,22 +308,39 @@ jobs:
             ${{ runner.os }}-nuget-
       - name: NuGet restore
         run: nuget restore ${{ env.solution }}
-      - run: msbuild '${{ env.solution }}' /p:configuration='${{ env.buildConfiguration }}' /p:platform='${{ env.buildPlatform }}' /v:minimal
+      - run: dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
       - run: ./scripts/ExecutingTestsOnWindowsGithubActions2.ps1
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action/windows@v2
         if: always()
         with:
-          files: |
-            ${{ env.TestResultsDirWindows }}\*.xml
+          files: ./**/Ocaramba.Tests.*.xml
           check_name: TestsOnWindows2
   test_Stage_RunTestsOnWindowsBrowserStack:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: microsoft/setup-msbuild@v2
-      - shell: powershell
-        run: '(Get-Content ''Ocaramba.sln'' -raw) -replace [regex](''.*?'' + ''Documentation'' + (''.*?\r\n'' * (5 + 1))) | set-content  ''Ocaramba.sln'''
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.x"
+      - shell: pwsh
+        run: |
+          (Get-Content ./Ocaramba.sln) | ForEach-Object -Begin { $skip = 0 } -Process {
+            if ($skip -gt 0) { $skip--; return }
+            switch -regex ($_) {
+                'Documentation'                        { $skip = 5; return }
+                'Ocaramba.Tests.Appium'               { $skip = 1; return }
+                'Ocaramba.UnitTests'                  { $skip = 1; return }
+                'Ocaramba.Tests.NUnit'                { $skip = 1; return }
+                'Ocaramba.Tests.MsTest'               { $skip = 1; return }
+                'Ocaramba.Tests.Features'             { $skip = 1; return }
+                'Ocaramba.Tests.Xunit'                { $skip = 1; return }
+                'Ocaramba.Tests.Angular'              { $skip = 4; return }
+                'Ocaramba.Tests.NUnitExtentReports'   { $skip = 1; return }
+                default { $_ }
+            }
+          } | Set-Content ./Ocaramba.sln
       - name: Setup nuget
         uses: nuget/setup-nuget@v2
         with:
@@ -331,7 +354,14 @@ jobs:
             ${{ runner.os }}-nuget-
       - name: NuGet restore
         run: nuget restore ${{ env.solution }}
-      - run: msbuild '${{ env.solution }}' /p:configuration='${{ env.buildConfiguration }}' /p:platform='${{ env.buildPlatform }}' /v:minimal
+      - run: dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
+      - name: "BrowserStack Env Setup"
+        uses: "browserstack/github-actions/setup-env@master"
+        with:
+          username: ${{ secrets.BROWSERSTACKUSER }}
+          access-key: ${{ secrets.BROWSERSTACKKEY }}
+          build-name: "BUILD_INFO"
+          project-name: "REPO_NAME"
       - run: ./scripts/ExecutingTestsOnWindowsGithubActions4.ps1
         env:
           MAPPED_ENV_BROWSERSTACKKEY: ${{ secrets.BROWSERSTACKKEY }}
@@ -342,9 +372,9 @@ jobs:
           MAPPED_ENV_SAUCELABSUSERNAME: ${{ secrets.saucelabsusername }}
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action/windows@v2
-        if: false
+        if: always()
         with:
-          files: ${{ env.TestResultsDirWindows }}\*.xml
+          files: ./**/Ocaramba.Tests.BrowserStack.xml
           check_name: TestsOnWindowsBrowserStack4
   test_Stage_RunTestsSeleniumGrid:
     runs-on: ubuntu-latest
