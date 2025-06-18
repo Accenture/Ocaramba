@@ -77,13 +77,13 @@ namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
         {
             Logger.Info(CultureInfo.CurrentCulture, "Password '{0}'", new string('*', password.Length));
             Actions actions = new Actions(this.Driver);
+            this.Driver.GetElement(this.passwordForm).JavaScriptClick();
             var element = this.Driver.GetElement(this.passwordForm);
             actions.MoveToElement(element)
+             .Click()
+             .SendKeys(password)
              .Build()
              .Perform();
-
-            this.Driver.GetElement(this.passwordForm).JavaScriptClick();
-            this.Driver.GetElement(this.passwordForm).SendKeys(password);
             this.Driver.WaitForAjax();
         }
 
@@ -91,13 +91,13 @@ namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
         {
             Logger.Info(CultureInfo.CurrentCulture, "User name '{0}'", userName);
             Actions actions = new Actions(this.Driver);
+            this.Driver.GetElement(this.userNameForm).JavaScriptClick();
             var element = this.Driver.GetElement(this.userNameForm);
             actions.MoveToElement(element)
+             .Click()
+             .SendKeys(userName)
              .Build()
              .Perform();
-
-            this.Driver.GetElement(this.userNameForm).JavaScriptClick();
-            this.Driver.GetElement(this.userNameForm).SendKeys(userName);
         }
 
         public void LogOn()
