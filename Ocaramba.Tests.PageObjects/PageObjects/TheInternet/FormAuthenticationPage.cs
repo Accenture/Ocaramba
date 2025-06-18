@@ -27,6 +27,7 @@ namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
     using Ocaramba.Extensions;
     using Ocaramba.Helpers;
     using Ocaramba.Types;
+    using OpenQA.Selenium;
     using OpenQA.Selenium.Interactions;
     using System;
     using System.Globalization;
@@ -76,28 +77,25 @@ namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
         public void EnterPassword(string password)
         {
             Logger.Info(CultureInfo.CurrentCulture, "Password '{0}'", new string('*', password.Length));
-            Actions actions = new Actions(this.Driver);
-            this.Driver.GetElement(this.passwordForm).JavaScriptClick();
+
             var element = this.Driver.GetElement(this.passwordForm);
-            actions.MoveToElement(element)
-             .Click()
-             .SendKeys(password)
-             .Build()
-             .Perform();
+
+            var javascript = element.ToDriver() as IJavaScriptExecutor;
+
+
+            javascript.ExecuteScript($"arguments[0].value='{password}'", element);
             this.Driver.WaitForAjax();
         }
 
         public void EnterUserName(string userName)
         {
             Logger.Info(CultureInfo.CurrentCulture, "User name '{0}'", userName);
-            Actions actions = new Actions(this.Driver);
-            this.Driver.GetElement(this.userNameForm).JavaScriptClick();
+            this.Driver.GetElement(this.userNameForm);
             var element = this.Driver.GetElement(this.userNameForm);
-            actions.MoveToElement(element)
-             .Click()
-             .SendKeys(userName)
-             .Build()
-             .Perform();
+            var javascript = element.ToDriver() as IJavaScriptExecutor;
+
+
+            javascript.ExecuteScript($"arguments[0].value='{userName}'", element);
         }
 
         public void LogOn()
