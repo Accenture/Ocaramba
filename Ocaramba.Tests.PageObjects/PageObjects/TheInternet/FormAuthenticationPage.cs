@@ -51,8 +51,8 @@ namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
         public FormAuthenticationPage(DriverContext driverContext)
             : base(driverContext)
         {
-            Logger.Info("Waiting for page to open");
-            this.Driver.IsElementPresent(this.pageHeader, BaseConfiguration.ShortTimeout);
+            Logger.Info("Waiting for page to open 'Login Page'");
+            this.Driver.IsElementPresent(this.pageHeader, BaseConfiguration.MediumTimeout);
         }
 
         public string GetMessage
