@@ -22,12 +22,13 @@
 
 namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
 {
-    using System;
-    using System.Globalization;
     using NLog;
     using Ocaramba;
     using Ocaramba.Extensions;
+    using Ocaramba.Helpers;
     using Ocaramba.Types;
+    using System;
+    using System.Globalization;
 
     public class FormAuthenticationPage : ProjectPageBase
     {
@@ -53,7 +54,8 @@ namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
         {
             Logger.Info("Waiting for page to open 'Login Page'");
             this.Driver.IsElementPresent(this.pageHeader, BaseConfiguration.MediumTimeout);
-        }
+			WaitHelper.Wait(() => this.Driver.GetElement(this.loginButton).Displayed,TimeSpan.FromSeconds(BaseConfiguration.LongTimeout), "Timeout while waiting for login button");
+		}
 
         public string GetMessage
         {
