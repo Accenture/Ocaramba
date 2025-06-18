@@ -281,53 +281,8 @@ namespace Ocaramba
             return options;
         }
 
-        private BrowserType GetBrowserTypeForRemoteDriver(NameValueCollection settings)
-        {
-            if (BaseConfiguration.TestBrowserCapabilities != BrowserType.CloudProvider)
-            {
-                return BaseConfiguration.TestBrowserCapabilities;
-            }
-
-            BrowserType browserType = BrowserType.None;
-            bool supportedBrowser = false;
-            if (settings != null)
-            {
-                string browser = settings.GetValues("browser")?[0];
-                supportedBrowser = Enum.TryParse(browser, true, out browserType);
-                Logger.Info(CultureInfo.CurrentCulture, "supportedBrowser {0} : {1}", supportedBrowser, browserType);
-            }
-
-
-            if (!supportedBrowser)
-            {
-                if (this.CrossBrowserEnvironment.Contains(BrowserType.Android.ToString(), StringComparison.InvariantCultureIgnoreCase))
-                {
-                    browserType = BrowserType.Chrome;
-                }
-                else if (this.CrossBrowserEnvironment.Contains(BrowserType.Iphone.ToString(), StringComparison.InvariantCultureIgnoreCase))
-                {
-                    browserType = BrowserType.Safari;
-                }
-             }
-
-
-            if (!supportedBrowser)
-            {
-                if (this.CrossBrowserEnvironment.ToLower(CultureInfo.CurrentCulture).Contains(BrowserType.Android.ToString().ToLower(CultureInfo.CurrentCulture), StringComparison.InvariantCultureIgnoreCase))
-                {
-                    browserType = BrowserType.Chrome;
-                }
-                else if (this.CrossBrowserEnvironment.ToLower(CultureInfo.CurrentCulture).Contains(BrowserType.Iphone.ToString().ToLower(CultureInfo.CurrentCulture), StringComparison.InvariantCultureIgnoreCase))
-                {
-                    browserType = BrowserType.Safari;
-                }
-            }
-
-            return browserType;
-        }
-
         // Used by firefox , chrome,  androdin, internet explorer
-        private void SetRemoteDriverBrowserOptions(NameValueCollection driverCapabilitiesConf, NameValueCollection settings, dynamic browserOptions)
+        private void SetRemoteDriverBrowserOptions(NameValueCollection driverCapabilitiesConf, dynamic browserOptions)
         {
             Dictionary<string, object> capabilities = new Dictionary<string, object>();
 
@@ -345,27 +300,6 @@ namespace Ocaramba
 
             var setName = false;
 
-            // if there are any capability
-            if (settings != null)
-            {
-                foreach (string key in settings.AllKeys)
-                {
-                    if (key == "sessionName" && !string.IsNullOrEmpty(this.TestTitle))
-                    {
-                        capabilities.Add(key, this.TestTitle);
-                        setName = true;
-                    }
-                    else if (key == "browser_version" || key == "browser")
-                    {
-                        Logger.Trace(CultureInfo.CurrentCulture, "Skipping setting {0} from {1}", key, this.CrossBrowserEnvironment);
-                    }
-                    else
-                    {
-                        Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0} from {1}", key, this.CrossBrowserEnvironment);
-                        capabilities.Add(key, settings[key]);
-                    }
-                }
-            }
 
             if (!setName && !string.IsNullOrEmpty(this.TestTitle))
             {

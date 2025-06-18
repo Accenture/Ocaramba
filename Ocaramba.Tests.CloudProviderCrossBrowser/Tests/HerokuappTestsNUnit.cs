@@ -28,18 +28,12 @@ namespace Ocaramba.Tests.CloudProviderCrossBrowser.Tests
     using Ocaramba;
     using Ocaramba.Tests.PageObjects.PageObjects.TheInternet;
 
-    [TestFixture("ChromeWindows")]
-    [TestFixture("Android")]
-    [TestFixture("Iphone")]
-    [TestFixture("FirefoxWindows")]
-    [TestFixture("SafariMac")]
-    [TestFixture("EdgeChromiumWindows")]
-    [TestFixture("IEWindows")]
+
     [Parallelizable(ParallelScope.Fixtures)]
     public class HerokuappTestsNUnit : ProjectTestBase
     {
-        public HerokuappTestsNUnit(string environment)
-            : base(environment)
+        public HerokuappTestsNUnit()
+            : base()
         {
         }
 
