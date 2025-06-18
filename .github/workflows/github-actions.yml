@@ -354,6 +354,7 @@ jobs:
             ${{ runner.os }}-nuget-
       - name: NuGet restore
         run: nuget restore ${{ env.solution }}
+      - run: dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
       - name: "BrowserStack Env Setup"
         uses: "browserstack/github-actions/setup-env@master"
         with:
