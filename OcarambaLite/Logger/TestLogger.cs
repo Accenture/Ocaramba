@@ -36,12 +36,12 @@ namespace OcarambaLite.Logger
         /// The logger.
         /// </summary>
 
-       private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+       private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
         /// The start test time.
         /// </summary>
-       private DateTime startTestTime;
+        private DateTime startTestTime;
 
         /// <summary>
         /// Logs the test starting.

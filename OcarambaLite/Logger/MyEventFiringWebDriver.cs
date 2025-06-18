@@ -32,7 +32,7 @@ namespace Ocaramba.Logger
     /// </summary>
     public class MyEventFiringWebDriver : EventFiringWebDriver
     {
-        private static readonly Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
 
         /// <summary>

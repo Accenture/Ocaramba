@@ -42,7 +42,7 @@ namespace Ocaramba.Tests.CloudProviderCrossBrowser
     /// </summary>
     public class ProjectTestBase : TestBase
     {
-        private static readonly NLog.Logger Logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+        private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
 
         private readonly DriverContext driverContext = new DriverContext();
 
