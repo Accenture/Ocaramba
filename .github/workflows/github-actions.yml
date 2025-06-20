@@ -266,7 +266,7 @@ jobs:
                 'Ocaramba.Tests.MsTest'               { $skip = 1; return }
                 'Ocaramba.Tests.Features'             { $skip = 1; return }
                 'Ocaramba.Tests.Xunit'                { $skip = 1; return }
-                'Ocaramba.Tests.CloudProviderCrossBrowser'              { $skip = 4; return }
+                'Ocaramba.Tests.CloudProviderCrossBrowser'              { $skip = 1; return }
                 default { $_ }
             }
           } | Set-Content ./Ocaramba.sln
@@ -323,7 +323,7 @@ jobs:
                 'Ocaramba.Tests.NUnit'                { $skip = 1; return }
                 'Ocaramba.Tests.NUnitExtentReports'   { $skip = 1; return }
                 'Ocaramba.Tests.Angular'              { $skip = 4; return }
-                'Ocaramba.Tests.CloudProviderCrossBrowser'              { $skip = 4; return }
+                'Ocaramba.Tests.CloudProviderCrossBrowser'              { $skip = 1; return }
                 default { $_ }
             }
           } | Set-Content ./Ocaramba.sln
