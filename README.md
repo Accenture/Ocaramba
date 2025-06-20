@@ -6,6 +6,7 @@
 
 [![Ocaramba Templates](https://img.shields.io/badge/get-Ocaramba_Templates-green.svg?color=4BC21F)](https://marketplace.visualstudio.com/items?itemName=Ocaramba.Ocaramba1)
 ![Build status](https://github.com/Accenture/Ocaramba/actions/workflows/github-actions.yml/badge.svg)
+[![BrowserStack Status](https://automate.browserstack.com/badge.svg?badge_key=VS9mU0F0ZTZnKzBtbE0yb3pRU0ttVXlKaENnWEJMaDFCTlg2Q1UwcTR3az0tLTZqYjdxb3ZTNzEyN251MzN6ZXFHOHc9PQ==--31d75cad9077a32207ec613dd10072305b5323e9)](https://automate.browserstack.com/public-build/VS9mU0F0ZTZnKzBtbE0yb3pRU0ttVXlKaENnWEJMaDFCTlg2Q1UwcTR3az0tLTZqYjdxb3ZTNzEyN251MzN6ZXFHOHc9PQ==--31d75cad9077a32207ec613dd10072305b5323e9)
 
 Test Framework was designed in Objectivity to propose a common way how people should create Selenium WebDriver tests.
 
