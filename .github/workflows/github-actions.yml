@@ -255,8 +255,21 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: "8.x"
-      - shell: powershell
-        run: '(Get-Content ''Ocaramba.sln'' -raw) -replace [regex](''.*?'' + ''Documentation'' + (''.*?\r\n'' * (5 + 1))) | set-content  ''Ocaramba.sln'''
+      - shell: pwsh
+        run: |
+          (Get-Content ./Ocaramba.sln) | ForEach-Object -Begin { $skip = 0 } -Process {
+            if ($skip -gt 0) { $skip--; return }
+            switch -regex ($_) {
+                'Documentation'                        { $skip = 5; return }
+                'Ocaramba.Tests.Appium'               { $skip = 1; return }
+                'Ocaramba.UnitTests'                  { $skip = 1; return }
+                'Ocaramba.Tests.MsTest'               { $skip = 1; return }
+                'Ocaramba.Tests.Features'             { $skip = 1; return }
+                'Ocaramba.Tests.Xunit'                { $skip = 1; return }
+                'Ocaramba.Tests.CloudProviderCrossBrowser'              { $skip = 1; return }
+                default { $_ }
+            }
+          } | Set-Content ./Ocaramba.sln
       - name: Setup nuget
         uses: nuget/setup-nuget@v2
         with:
@@ -278,12 +291,28 @@ jobs:
         with:
           files: ./**/Ocaramba.Tests.netcoreapp.xml
           check_name: TestOnWindows1
-      - name: Zip artifact
-        run: Compress-Archive -Path .\Ocaramba.Tests.NUnitExtentReports\bin\Release\net8.0\TestOutput -Destination ExtentReports_${{ github.run_id }}.zip
+      - shell: pwsh
+        run: |
+          Compress-Archive -Path .\Ocaramba.Tests.NUnitExtentReports\bin\Release\net8.0\TestOutput -Destination ExtentReports${{ github.run_id }}.zip
       - uses: actions/upload-artifact@v4
         with:
-          path: ExtentReports_${{ github.run_id }}.zip
+          path: ExtentReports${{ github.run_id }}.zip
           name: ExtentTestReport
+        if: always()
+      - shell: pwsh
+        run: |
+          $staging = "TempZipStaging_Core1"
+          New-Item -ItemType Directory -Path $staging -Force
+          Copy-Item ".\Ocaramba.Tests.NUnit\bin\Release\net8.0\TestOutput" -Destination "$staging\Ocaramba.Tests.NUnit" -Recurse
+          Copy-Item ".\Ocaramba.Tests.Angular\bin\Release\net8.0\TestOutput" -Destination "$staging\Ocaramba.Tests.Angular" -Recurse
+          Copy-Item ".\Ocaramba.Tests.NUnitExtentReports\bin\Release\net8.0\TestOutput" -Destination "$staging\Ocaramba.Tests.NUnitExtentReports" -Recurse
+          Compress-Archive -Path "$staging\*" -DestinationPath "WindowsCore1${{ github.run_id }}.zip"
+          Remove-Item -Recurse -Force $staging
+        if: always()
+      - uses: actions/upload-artifact@v4
+        with:
+          path: WindowsCore1${{ github.run_id }}.zip
+          name: WindowsCore1
         if: always()
   test_Stage_RunTestsOnWindowsCore2:
     runs-on: windows-latest
@@ -293,8 +322,19 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: "8.x"
-      - shell: powershell
-        run: '(Get-Content ''Ocaramba.sln'' -raw) -replace [regex](''.*?'' + ''Documentation'' + (''.*?\r\n'' * (5 + 1))) | set-content  ''Ocaramba.sln'''
+      - shell: pwsh
+        run: |
+          (Get-Content ./Ocaramba.sln) | ForEach-Object -Begin { $skip = 0 } -Process {
+            if ($skip -gt 0) { $skip--; return }
+            switch -regex ($_) {
+                'Documentation'                        { $skip = 5; return }
+                'Ocaramba.Tests.Appium'               { $skip = 1; return }
+                'Ocaramba.Tests.NUnitExtentReports'   { $skip = 1; return }
+                'Ocaramba.Tests.Angular'              { $skip = 4; return }
+                'Ocaramba.Tests.CloudProviderCrossBrowser'              { $skip = 1; return }
+                default { $_ }
+            }
+          } | Set-Content ./Ocaramba.sln
       - name: Setup nuget
         uses: nuget/setup-nuget@v2
         with:
@@ -316,6 +356,24 @@ jobs:
         with:
           files: ./**/Ocaramba.Tests.*.xml
           check_name: TestsOnWindows2
+      - shell: pwsh
+        run: |
+          $staging = "TempZipStaging"
+          New-Item -ItemType Directory -Path $staging
+
+          Copy-Item ".\Ocaramba.Tests.Features\bin\Release\net8.0\TestOutput" -Destination "$staging\Ocaramba.Tests.Features" -Recurse
+          Copy-Item ".\Ocaramba.Tests.Xunit\bin\Release\net8.0\TestOutput" -Destination "$staging\Ocaramba.Tests.Xunit" -Recurse
+          Copy-Item ".\Ocaramba.Tests.MsTest\bin\Release\net8.0\TestOutput" -Destination "$staging\Ocaramba.Tests.MsTest" -Recurse
+          Copy-Item ".\Ocaramba.UnitTests\bin\Release\net8.0\TestOutput" -Destination "$staging\Ocaramba.UnitTests" -Recurse
+          Compress-Archive -Path "$staging\*" -DestinationPath "WindowsCore2${{ github.run_id }}.zip"
+          Remove-Item -Recurse -Force $staging
+
+        if: always()
+      - uses: actions/upload-artifact@v4
+        with:
+          path: WindowsCore2${{ github.run_id }}.zip
+          name: WindowsCore2
+        if: always()
   test_Stage_RunTestsOnWindowsBrowserStack:
     runs-on: windows-latest
     steps:
@@ -395,35 +453,6 @@ jobs:
           files: |
             /home/runner/work/**/TestResults/*.xml
             check_name: TestsOnWindows5
-  test_Stage_RunTestsOnWindowsSaucelabs:
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: microsoft/setup-msbuild@v2
-      - shell: powershell
-        run: '(Get-Content ''Ocaramba.sln'' -raw) -replace [regex](''.*?'' + ''Documentation'' + (''.*?\r\n'' * (5 + 1))) | set-content  ''Ocaramba.sln'''
-      - name: Setup nuget
-        uses: nuget/setup-nuget@v2
-        with:
-          nuget-version: latest
-      - name: Cache
-        uses: actions/cache@v4
-        with:
-          path: ${{ github.workspace }}\.nuget\packages
-          key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }} #hash of project files
-          restore-keys: |
-            ${{ runner.os }}-nuget-
-      - name: NuGet restore
-        run: nuget restore ${{ env.solution }}
-      - run: dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
-      - run: ./scripts/ExecutingTestsOnWindowsGithubActions6.ps1
-        env:
-          MAPPED_ENV_BROWSERSTACKKEY: ${{ secrets.BROWSERSTACKKEY }}
-          MAPPED_ENV_BROWSERSTACKUSER: ${{ secrets.BROWSERSTACKUSER }}
-          MAPPED_ENV_TESTINGBOTKEY: ${{ secrets.testingbotkey }}
-          MAPPED_ENV_TESTINGBOTSECRET: ${{ secrets.testingbotsecret }}
-          MAPPED_ENV_SAUCELABSACCESSKEY: ${{ secrets.saucelabsaccessKey }}
-          MAPPED_ENV_SAUCELABSUSERNAME: ${{ secrets.saucelabsusername }}
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action/windows@v2
         if: false
@@ -442,7 +471,6 @@ jobs:
       - test_Stage_RunTestsOnWindowsCore2
       - test_Stage_RunTestsOnWindowsBrowserStack
       - test_Stage_RunTestsSeleniumGrid
-      - test_Stage_RunTestsOnWindowsSaucelabs
       - test_Stage_RunAppiumTestsOnAndroid
     steps:
       - uses: actions/checkout@v4

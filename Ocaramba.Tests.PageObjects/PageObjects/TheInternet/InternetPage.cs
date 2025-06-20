@@ -129,6 +129,7 @@ namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
 
         public MultipleWindowsPage GoToMultipleWindowsPage()
         {
+            Logger.Info("Click on link to go to Multiple Windows Page");
             this.Driver.GetElement(this.linkLocator.Format("windows")).Click();
             return new MultipleWindowsPage(this.DriverContext);
         }

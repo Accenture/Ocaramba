@@ -22,12 +22,15 @@
 
 namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
 {
+    using NLog;
     using Ocaramba;
     using Ocaramba.Extensions;
     using Ocaramba.Types;
 
     public class NewWindowPage : ProjectPageBase
     {
+        private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
+
         private readonly ElementLocator
     newWindowPageLocator = new ElementLocator(Locator.CssSelector, "h3");
 
@@ -38,11 +41,13 @@ namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
 
         public bool IsNewWindowH3TextVisible(string text)
         {
+            Logger.Info($"Checking if new window H3 text is '{text}'");
             return this.Driver.GetElement(this.newWindowPageLocator).IsElementTextEqualsToExpected(text);
         }
 
         public bool IsPageTile(string title)
         {
+            Logger.Info($"Checking if page title is '{title}'");
             return this.Driver.IsPageTitle(title, 2);
         }
     }
