@@ -305,7 +305,8 @@ jobs:
           ".\Ocaramba.Tests.NUnit\bin\Release\net8.0\TestOutput",
           ".\Ocaramba.Tests.Angular\bin\Release\net8.0\TestOutput",
           ".\Ocaramba.Tests.NUnitExtentReports\bin\Release\net8.0\TestOutput"
-          ) -DestinationPath "WindowsCore1${{ github.run_id }}.zip"
+          ) -DestinationPath "WindowsCore1${{ github.run_id }}.zip" -Update
+        if: always()
       - uses: actions/upload-artifact@v4
         with:
           path: WindowsCore1${{ github.run_id }}.zip
@@ -360,7 +361,8 @@ jobs:
           ".\Ocaramba.Tests.Xunit\bin\Release\net8.0\TestOutput",
           ".\Ocaramba.Tests.MsTest\bin\Release\net8.0\TestOutput",
           ".\Ocaramba.UnitTests\bin\Release\net8.0\TestOutput"
-          ) -DestinationPath "WindowsCore2_${{ github.run_id }}.zip"
+          ) -DestinationPath "WindowsCore2${{ github.run_id }}.zip" -Update
+        if: always()
       - uses: actions/upload-artifact@v4
         with:
           path: WindowsCore2${{ github.run_id }}.zip
