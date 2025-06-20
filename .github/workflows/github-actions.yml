@@ -299,7 +299,12 @@ jobs:
           name: ExtentTestReport
         if: always()
       - name: Zip artifact
-        run: Compress-Archive -Path .\Ocaramba.Tests.NUnit\bin\Release\net8.0\TestOutput .\Ocaramba.Tests.Angular\bin\Release\net8.0\TestOutput .\Ocaramba.Tests.NUnitExtentReports\bin\Release\net8.0\TestOutput -Destination WindowsCore1${{ github.run_id }}.zip
+        run: |
+          Compress-Archive -Path @(
+          ".\Ocaramba.Tests.NUnit\bin\Release\net8.0\TestOutput",
+          ".\Ocaramba.Tests.Angular\bin\Debug\net8.0\TestOutput",
+          ".\Ocaramba.Tests.NUnitExtentReports\bin\Release\net8.0\TestOutput"
+          ) -DestinationPath "WindowsCore1.zip"
       - uses: actions/upload-artifact@v4
         with:
           path: WindowsCore1${{ github.run_id }}.zip
@@ -348,7 +353,13 @@ jobs:
           files: ./**/Ocaramba.Tests.*.xml
           check_name: TestsOnWindows2
       - name: Zip artifact
-        run: Compress-Archive -Path .\Ocaramba.Tests.Features\bin\Release\net8.0\TestOutput .\Ocaramba.Tests.Xunit\bin\Release\net8.0\TestOutput .\Ocaramba.Tests.MsTest\bin\Release\net8.0\TestOutput .\Ocaramba.UnitTests\bin\Release\net8.0\TestOutput -Destination WindowsCore2${{ github.run_id }}.zip
+        run: |
+          Compress-Archive -Path @(
+          ".\Ocaramba.Tests.Features\bin\Release\net8.0\TestOutput",
+          ".\Ocaramba.Tests.Xunit\bin\Release\net8.0\TestOutput",
+          ".\Ocaramba.Tests.MsTest\bin\Release\net8.0\TestOutput",
+          ".\Ocaramba.UnitTests\bin\Release\net8.0\TestOutput"
+          ) -DestinationPath "WindowsCore2_${{ github.run_id }}.zip"
       - uses: actions/upload-artifact@v4
         with:
           path: WindowsCore2${{ github.run_id }}.zip
