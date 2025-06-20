@@ -19,7 +19,7 @@ env:
   solution: ${{ github.workspace }}/Ocaramba.sln
   buildPlatform: Any CPU
   buildConfiguration: Release
-  frameworkVersion: 4.2.2
+  frameworkVersion: 4.2.3
   TestResultsDirWindows: D:\a\Ocaramba\Ocaramba\TestResults
   ChromeDriverVersion: 137.0.7151.6800
   NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
