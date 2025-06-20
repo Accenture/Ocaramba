@@ -22,13 +22,17 @@
 
 namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
 {
-    using System;
+    using NLog;
     using Ocaramba;
     using Ocaramba.Extensions;
     using Ocaramba.Types;
+    using System;
 
     public class MultipleWindowsPage : ProjectPageBase
     {
+
+        private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
+
         private readonly ElementLocator
     clickHerePageLocator = new ElementLocator(Locator.CssSelector, "a[href='/windows/new']");
 
@@ -39,6 +43,7 @@ namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
 
         public NewWindowPage OpenNewWindowPage()
         {
+            Logger.Info("Opening New Window page from Multiple Windows page.");
             this.Driver.GetElement(this.clickHerePageLocator).Click();
             this.Driver.SwitchToWindowUsingUrl(new Uri("https://the-internet.herokuapp.com/windows/new"), 20);
             return new NewWindowPage(this.DriverContext);
