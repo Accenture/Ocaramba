@@ -305,7 +305,7 @@ jobs:
           ".\Ocaramba.Tests.NUnit\bin\Release\net8.0\TestOutput",
           ".\Ocaramba.Tests.Angular\bin\Release\net8.0\TestOutput",
           ".\Ocaramba.Tests.NUnitExtentReports\bin\Release\net8.0\TestOutput"
-          ) -DestinationPath "WindowsCore1.zip"
+          ) -DestinationPath "WindowsCore1${{ github.run_id }}.zip"
       - uses: actions/upload-artifact@v4
         with:
           path: WindowsCore1${{ github.run_id }}.zip
