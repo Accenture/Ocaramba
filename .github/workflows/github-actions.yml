@@ -301,11 +301,13 @@ jobs:
         if: always()
       - shell: pwsh
         run: |
-          Compress-Archive -Path @(
-          ".\Ocaramba.Tests.NUnit\bin\Release\net8.0\TestOutput",
-          ".\Ocaramba.Tests.Angular\bin\Release\net8.0\TestOutput",
-          ".\Ocaramba.Tests.NUnitExtentReports\bin\Release\net8.0\TestOutput"
-          ) -DestinationPath "WindowsCore1${{ github.run_id }}.zip" -Update
+          $staging = "TempZipStaging_Core1"
+          New-Item -ItemType Directory -Path $staging -Force
+          Copy-Item ".\Ocaramba.Tests.NUnit\bin\Release\net8.0\TestOutput" -Destination "$staging\Ocaramba.Tests.NUnit" -Recurse
+          Copy-Item ".\Ocaramba.Tests.Angular\bin\Release\net8.0\TestOutput" -Destination "$staging\Ocaramba.Tests.Angular" -Recurse
+          Copy-Item ".\Ocaramba.Tests.NUnitExtentReports\bin\Release\net8.0\TestOutput" -Destination "$staging\Ocaramba.Tests.NUnitExtentReports" -Recurse
+          Compress-Archive -Path "$staging\*" -DestinationPath "WindowsCore1_${{ github.run_id }}.zip"
+          Remove-Item -Recurse -Force $staging
         if: always()
       - uses: actions/upload-artifact@v4
         with:
@@ -356,12 +358,16 @@ jobs:
           check_name: TestsOnWindows2
       - shell: pwsh
         run: |
-          Compress-Archive -Path @(
-          ".\Ocaramba.Tests.Features\bin\Release\net8.0\TestOutput",
-          ".\Ocaramba.Tests.Xunit\bin\Release\net8.0\TestOutput",
-          ".\Ocaramba.Tests.MsTest\bin\Release\net8.0\TestOutput",
-          ".\Ocaramba.UnitTests\bin\Release\net8.0\TestOutput"
-          ) -DestinationPath "WindowsCore2${{ github.run_id }}.zip" -Update
+          $staging = "TempZipStaging"
+          New-Item -ItemType Directory -Path $staging
+
+          Copy-Item ".\Ocaramba.Tests.Features\bin\Release\net8.0\TestOutput" -Destination "$staging\Ocaramba.Tests.Features" -Recurse
+          Copy-Item ".\Ocaramba.Tests.Xunit\bin\Release\net8.0\TestOutput" -Destination "$staging\Ocaramba.Tests.Xunit" -Recurse
+          Copy-Item ".\Ocaramba.Tests.MsTest\bin\Release\net8.0\TestOutput" -Destination "$staging\Ocaramba.Tests.MsTest" -Recurse
+          Copy-Item ".\Ocaramba.UnitTests\bin\Release\net8.0\TestOutput" -Destination "$staging\Ocaramba.UnitTests" -Recurse
+          Compress-Archive -Path "$staging\*" -DestinationPath "WindowsCore2_${{ github.run_id }}.zip"
+          Remove-Item -Recurse -Force $staging
+
         if: always()
       - uses: actions/upload-artifact@v4
         with:
