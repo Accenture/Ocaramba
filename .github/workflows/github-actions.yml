@@ -255,8 +255,21 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: "8.x"
-      - shell: powershell
-        run: '(Get-Content ''Ocaramba.sln'' -raw) -replace [regex](''.*?'' + ''Documentation'' + (''.*?\r\n'' * (5 + 1))) | set-content  ''Ocaramba.sln'''
+      - shell: pwsh
+        run: |
+          (Get-Content ./Ocaramba.sln) | ForEach-Object -Begin { $skip = 0 } -Process {
+            if ($skip -gt 0) { $skip--; return }
+            switch -regex ($_) {
+                'Documentation'                        { $skip = 5; return }
+                'Ocaramba.Tests.Appium'               { $skip = 1; return }
+                'Ocaramba.UnitTests'                  { $skip = 1; return }
+                'Ocaramba.Tests.MsTest'               { $skip = 1; return }
+                'Ocaramba.Tests.Features'             { $skip = 1; return }
+                'Ocaramba.Tests.Xunit'                { $skip = 1; return }
+                'Ocaramba.Tests.CloudProviderCrossBrowser'              { $skip = 4; return }
+                default { $_ }
+            }
+          } | Set-Content ./Ocaramba.sln
       - name: Setup nuget
         uses: nuget/setup-nuget@v2
         with:
@@ -293,8 +306,20 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: "8.x"
-      - shell: powershell
-        run: '(Get-Content ''Ocaramba.sln'' -raw) -replace [regex](''.*?'' + ''Documentation'' + (''.*?\r\n'' * (5 + 1))) | set-content  ''Ocaramba.sln'''
+      - shell: pwsh
+        run: |
+          (Get-Content ./Ocaramba.sln) | ForEach-Object -Begin { $skip = 0 } -Process {
+            if ($skip -gt 0) { $skip--; return }
+            switch -regex ($_) {
+                'Documentation'                        { $skip = 5; return }
+                'Ocaramba.Tests.Appium'               { $skip = 1; return }
+                'Ocaramba.Tests.NUnit'                { $skip = 1; return }
+                'Ocaramba.Tests.NUnitExtentReports'   { $skip = 1; return }
+                'Ocaramba.Tests.Angular'              { $skip = 4; return }
+                'Ocaramba.Tests.CloudProviderCrossBrowser'              { $skip = 4; return }
+                default { $_ }
+            }
+          } | Set-Content ./Ocaramba.sln
       - name: Setup nuget
         uses: nuget/setup-nuget@v2
         with:
