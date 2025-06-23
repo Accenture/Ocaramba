@@ -14,9 +14,9 @@
       },
       "NLog": {
         "type": "Direct",
-        "requested": "[5.5.0, )",
-        "resolved": "5.5.0",
-        "contentHash": "FCH8s7GWlonH5JXV9/EpeNJ8pRZQMVZOSWX3JrHPU8rzdHJhS5+lUGGvJIUOtzkGV1clYBFR0WXOI5FnUwVCMA=="
+        "requested": "[6.0.0, )",
+        "resolved": "6.0.0",
+        "contentHash": "3wqlcN80L6OHh0ZTQR/F+eZBeaAZ109XbvCEbtZ/nG5B/S+XzGOxv67RAfMx0YMkHY1aAHyW245k0/OE7J0ZxA=="
       },
       "Selenium.Support": {
         "type": "Direct",
@@ -928,7 +928,7 @@
         "dependencies": {
           "Microsoft.Extensions.Configuration.Json": "[9.0.6, )",
           "Microsoft.NET.Test.Sdk": "[17.14.1, )",
-          "NLog": "[5.5.0, )",
+          "NLog": "[6.0.0, )",
           "OcarambaLite": "[1.0.0, )",
           "Selenium.Support": "[4.33.0, )",
           "Selenium.WebDriver": "[4.33.0, )",
@@ -949,7 +949,7 @@
           "Microsoft.PowerShell.Commands.Diagnostics": "[7.4.10, )",
           "Microsoft.PowerShell.SDK": "[7.4.10, )",
           "Microsoft.WSMan.Management": "[7.4.10, )",
-          "NLog": "[5.5.0, )",
+          "NLog": "[6.0.0, )",
           "Selenium.Support": "[4.33.0, )",
           "Selenium.WebDriver": "[4.33.0, )",
           "System.Configuration.ConfigurationManager": "[9.0.6, )",
