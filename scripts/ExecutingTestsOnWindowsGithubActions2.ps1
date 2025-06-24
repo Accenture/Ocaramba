@@ -23,6 +23,16 @@ echo '********************************************EdgeChrominum tests***********
 
 dotnet vstest .\Ocaramba.Tests.NUnit\bin\Release\net8.0\Ocaramba.Tests.NUnit.dll /TestCaseFilter:"(TestCategory=Grid)" /Parallel /Logger:"trx;LogFileName=Ocaramba.Tests.EdgeChrominum.xml"
 
+$staging = "TempZipStaging"
+New-Item -ItemType Directory -Path $staging
+
+Copy-Item ".\Ocaramba.Tests.Features\bin\Release\net8.0\TestOutput" -Destination "$staging\Ocaramba.Tests.Features" -Recurse
+Copy-Item ".\Ocaramba.Tests.Xunit\bin\Release\net8.0\TestOutput" -Destination "$staging\Ocaramba.Tests.Xunit" -Recurse
+Copy-Item ".\Ocaramba.Tests.MsTest\bin\Release\net8.0\TestOutput" -Destination "$staging\Ocaramba.Tests.MsTest" -Recurse
+Copy-Item ".\Ocaramba.UnitTests\bin\Release\net8.0\TestOutput" -Destination "$staging\Ocaramba.UnitTests" -Recurse
+Compress-Archive -Path "$staging\*" -DestinationPath "WindowsCore2$env:GITHUB_RUN_ID.zip"
+Remove-Item -Recurse -Force $staging
+
 if($lastexitcode -ne 0)
  {
   echo 'lastexitcode' $lastexitcode

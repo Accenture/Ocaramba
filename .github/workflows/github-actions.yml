@@ -29,14 +29,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: microsoft/setup-msbuild@v2
-      - shell: pwsh
+      - name: Set frameworkVersion
+        shell: pwsh
         run: |
           $tags = git tag --sort=-creatordate   
           $tag = $tags[0]
           echo "var=$tag" >> $env:frameworkVersion
         if: startsWith(github.ref, 'refs/tags/')
       - run: echo $env:frameworkVersion
-      - shell: powershell
+      - name: Remove Documentation sub project from solution
+        shell: powershell
         run: '(Get-Content ''Ocaramba.sln'' -raw) -replace [regex](''.*?'' + ''Documentation'' + (''.*?\r\n'' * (5 + 1))) | set-content  ''Ocaramba.sln'''
       - name: Update ChromeDriver in csproj
         run: |
@@ -131,6 +133,12 @@ jobs:
           files: |
             /home/runner/**/Ocaramba.Tests.Docker.trx
           check_name: TestsOnDocker
+      - name: Upload zip logs as artifact
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ExecutingTestsOnDocker
+          path: ./tmp/ExecutingTestsOnDocker.zip
   test_Stage_RunTestsOnLinux:
     runs-on: ubuntu-latest
     steps:
@@ -156,6 +164,12 @@ jobs:
           files: |
             /home/runner/work/**/TestResults/*.xml
           check_name: TestsOnLinux
+      - name: Upload zip logs as artifact
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ExecutingTestsOnLinux
+          path: ./Ocaramba.Tests.NUnit/bin/Release/net8.0/ExecutingTestsOnLinux.zip
   test_Stage_RunAppiumTestsOnAndroid:
     runs-on: ubuntu-latest
     steps:
@@ -203,6 +217,7 @@ jobs:
             adb -s emulator-5554 shell pm list packages | grep io.appium.android.apis || echo "Package not found on emulator 5554"
 
             dotnet vstest ./Ocaramba.Tests.Appium/bin/Release/net8.0/Ocaramba.Tests.Appium.dll --logger:"trx;LogFileName=Ocaramba.Tests.Appium.xml"
+            pwsh -Command "Compress-Archive -Path './Ocaramba.Tests.Appium/bin/Release/net8.0/TestOutput/*' -DestinationPath './Ocaramba.Tests.Appium/bin/Release/net8.0/ExecutingTestsOnAndroid.zip'"
             echo "Closing connection with emulator-5554"
             adb -s emulator-5554 emu kill || true
       - name: Publish Test Results
@@ -212,6 +227,12 @@ jobs:
           files: |
             /home/runner/work/**/TestResults/*.xml
           check_name: TestsOnAndroid
+      - name: Upload zip logs as artifact
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ExecutingTestsOnAndroid
+          path: ./Ocaramba.Tests.Appium/bin/Release/net8.0/ExecutingTestsOnAndroid.zip
   test_Stage_RunTestsOnLinuxBrowserStack:
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -247,6 +268,12 @@ jobs:
           files: |
             /home/runner/work/**/TestResults/*.xml
           check_name: TestOnLinuxBrowserStack
+      - name: Upload zip logs as artifact
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ExecutingTestsOnBrowserStackLinux
+          path: ./Ocaramba.Tests.CloudProviderCrossBrowser/bin/Release/net8.0/ExecutingTestsOnBrowserStackLinux.zip.zip
   test_Stage_RunTestsOnWindowsCore1:
     runs-on: windows-latest
     steps:
@@ -299,16 +326,6 @@ jobs:
           path: ExtentReports${{ github.run_id }}.zip
           name: ExtentTestReport
         if: always()
-      - shell: pwsh
-        run: |
-          $staging = "TempZipStaging_Core1"
-          New-Item -ItemType Directory -Path $staging -Force
-          Copy-Item ".\Ocaramba.Tests.NUnit\bin\Release\net8.0\TestOutput" -Destination "$staging\Ocaramba.Tests.NUnit" -Recurse
-          Copy-Item ".\Ocaramba.Tests.Angular\bin\Release\net8.0\TestOutput" -Destination "$staging\Ocaramba.Tests.Angular" -Recurse
-          Copy-Item ".\Ocaramba.Tests.NUnitExtentReports\bin\Release\net8.0\TestOutput" -Destination "$staging\Ocaramba.Tests.NUnitExtentReports" -Recurse
-          Compress-Archive -Path "$staging\*" -DestinationPath "WindowsCore1${{ github.run_id }}.zip"
-          Remove-Item -Recurse -Force $staging
-        if: always()
       - uses: actions/upload-artifact@v4
         with:
           path: WindowsCore1${{ github.run_id }}.zip
@@ -356,19 +373,6 @@ jobs:
         with:
           files: ./**/Ocaramba.Tests.*.xml
           check_name: TestsOnWindows2
-      - shell: pwsh
-        run: |
-          $staging = "TempZipStaging"
-          New-Item -ItemType Directory -Path $staging
-
-          Copy-Item ".\Ocaramba.Tests.Features\bin\Release\net8.0\TestOutput" -Destination "$staging\Ocaramba.Tests.Features" -Recurse
-          Copy-Item ".\Ocaramba.Tests.Xunit\bin\Release\net8.0\TestOutput" -Destination "$staging\Ocaramba.Tests.Xunit" -Recurse
-          Copy-Item ".\Ocaramba.Tests.MsTest\bin\Release\net8.0\TestOutput" -Destination "$staging\Ocaramba.Tests.MsTest" -Recurse
-          Copy-Item ".\Ocaramba.UnitTests\bin\Release\net8.0\TestOutput" -Destination "$staging\Ocaramba.UnitTests" -Recurse
-          Compress-Archive -Path "$staging\*" -DestinationPath "WindowsCore2${{ github.run_id }}.zip"
-          Remove-Item -Recurse -Force $staging
-
-        if: always()
       - uses: actions/upload-artifact@v4
         with:
           path: WindowsCore2${{ github.run_id }}.zip
@@ -434,6 +438,11 @@ jobs:
         with:
           files: ./**/Ocaramba.Tests.BrowserStack.xml
           check_name: TestsOnWindowsBrowserStack4
+      - uses: actions/upload-artifact@v4
+        with:
+          path: ./Ocaramba.Tests.CloudProviderCrossBrowser/bin/Release/net8.0/ExecutingTestsOnWindowsBrowserStack.zip
+          name: TestsOnWindowsBrowserStack4
+        if: always()
   test_Stage_RunTestsSeleniumGrid:
     runs-on: ubuntu-latest
     steps:
@@ -459,7 +468,12 @@ jobs:
         with:
           files: |
             ${{ env.TestResultsDirWindows }}\*.xml
-          check_name: TestsOnWindowsSaucelabs6
+          check_name: TestsOnWindowsSaucelabs5
+      - uses: actions/upload-artifact@v4
+        with:
+          path: WindowsCore5${{ github.run_id }}.zip
+          name: WindowsCore5
+        if: always()
   release_Stage_PublishNuget:
     runs-on: windows-latest
     needs:

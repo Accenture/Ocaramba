@@ -12,7 +12,6 @@ dotnet vstest ./Ocaramba.Tests.NUnit/bin/Release/net8.0/Ocaramba.Tests.NUnit.dll
 
 Compress-Archive -Path "./Ocaramba.Tests.NUnit/bin/Release/net8.0/TestOutput/*" -DestinationPath "./Ocaramba.Tests.NUnit/bin/Release/net8.0/ExecutingTestsOnLinux.zip"
 
-
 if($lastexitcode -ne 0)
  {
   echo 'lastexitcode' $lastexitcode
