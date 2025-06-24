@@ -138,7 +138,7 @@ jobs:
         if: always()
         with:
           name: ExecutingTestsOnDocker
-          path: ./tmp/ExecutingTestsOnDocker${{ github.run_id }}.zip
+          path: ./ExecutingTestsOnDocker${{ github.run_id }}.zip
   test_Stage_RunTestsOnLinux:
     runs-on: ubuntu-latest
     steps:
