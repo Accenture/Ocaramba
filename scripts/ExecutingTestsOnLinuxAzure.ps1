@@ -10,8 +10,7 @@ echo $Env:ASPNETCORE_ENVIRONMENT
 
 dotnet vstest ./Ocaramba.Tests.NUnit/bin/Release/net8.0/Ocaramba.Tests.NUnit.dll /TestCaseFilter:"(TestCategory!=NotImplementedInCoreOrUploadDownload)" /Parallel --logger:"trx;LogFileName=Ocaramba.Tests.netcoreapp.xml"
 
-Compress-Archive -Path "./Ocaramba.Tests.NUnit/bin/Release/net8.0/TestOutput/*" -DestinationPath "./Ocaramba.Tests.NUnit/bin/Release/net8.0/ExecutingTestsOnLinux.zip"
-
+Compress-Archive -Path "./Ocaramba.Tests.NUnit/bin/Release/net8.0/TestOutput/*" -DestinationPath "./Ocaramba.Tests.NUnit/bin/Release/net8.0/ExecutingTestsOnLinux$env:GITHUB_RUN_ID.zip"
 
 if($lastexitcode -ne 0)
  {
