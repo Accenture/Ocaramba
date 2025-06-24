@@ -153,10 +153,6 @@ jobs:
       - run: dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
       - shell: pwsh
         run: ./scripts/ExecutingTestsOnLinuxAzure.ps1
-      - uses: actions/upload-artifact@v4
-        with:
-          name: ExecutingTestsOnLinux
-          path: ./Ocaramba.Tests.NUnit/bin/Release/net8.0/ExecutingTestsOnLinux.zip
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action/linux@v2
         if: true
@@ -318,9 +314,6 @@ jobs:
         with:
           files: ./**/Ocaramba.Tests.netcoreapp.xml
           check_name: TestOnWindows1
-      - shell: pwsh
-        run: |
-          Compress-Archive -Path .\Ocaramba.Tests.NUnitExtentReports\bin\Release\net8.0\TestOutput -Destination ExtentReports${{ github.run_id }}.zip
       - uses: actions/upload-artifact@v4
         with:
           path: ExtentReports${{ github.run_id }}.zip
