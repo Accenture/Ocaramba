@@ -10,7 +10,7 @@ docker exec -u ocaramba ocaramba_selenium bash -c "ls /Ocaramba/TestResults/ && 
 docker cp ocaramba_selenium:/tmp/Ocaramba.Tests.Docker.trx .
 docker rm ocaramba_selenium --force
 
-Compress-Archive -Path "./tmp/TestOutput/*" -DestinationPath "./tmp/ExecutingTestsOnDocker.zip"
+Compress-Archive -Path "./tmp/TestOutput/*" -DestinationPath "./tmp/ExecutingTestsOnDocker$env:GITHUB_RUN_ID.zip"
 
 if($lastexitcode -ne 0)
  {

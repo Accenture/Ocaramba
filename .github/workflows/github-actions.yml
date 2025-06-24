@@ -138,7 +138,7 @@ jobs:
         if: always()
         with:
           name: ExecutingTestsOnDocker
-          path: ./tmp/ExecutingTestsOnDocker.zip
+          path: ./tmp/ExecutingTestsOnDocker${{ github.run_id }}.zip
   test_Stage_RunTestsOnLinux:
     runs-on: ubuntu-latest
     steps:
@@ -169,7 +169,7 @@ jobs:
         if: always()
         with:
           name: ExecutingTestsOnLinux
-          path: ./Ocaramba.Tests.NUnit/bin/Release/net8.0/ExecutingTestsOnLinux.zip
+          path: ./Ocaramba.Tests.NUnit/bin/Release/net8.0/ExecutingTestsOnLinux${{ github.run_id }}.zip
   test_Stage_RunAppiumTestsOnAndroid:
     runs-on: ubuntu-latest
     steps:
@@ -232,7 +232,7 @@ jobs:
         if: always()
         with:
           name: ExecutingTestsOnAndroid
-          path: ./Ocaramba.Tests.Appium/bin/Release/net8.0/ExecutingTestsOnAndroid.zip
+          path: ./Ocaramba.Tests.Appium/bin/Release/net8.0/ExecutingTestsOnAndroid${{ github.run_id }}.zip
   test_Stage_RunTestsOnLinuxBrowserStack:
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -273,7 +273,7 @@ jobs:
         if: always()
         with:
           name: ExecutingTestsOnBrowserStackLinux
-          path: ./Ocaramba.Tests.CloudProviderCrossBrowser/bin/Release/net8.0/ExecutingTestsOnBrowserStackLinux.zip.zip
+          path: ./Ocaramba.Tests.CloudProviderCrossBrowser/bin/Release/net8.0/ExecutingTestsOnBrowserStackLinux${{ github.run_id }}.zip
   test_Stage_RunTestsOnWindowsCore1:
     runs-on: windows-latest
     steps:
@@ -440,7 +440,7 @@ jobs:
           check_name: TestsOnWindowsBrowserStack4
       - uses: actions/upload-artifact@v4
         with:
-          path: ./Ocaramba.Tests.CloudProviderCrossBrowser/bin/Release/net8.0/ExecutingTestsOnWindowsBrowserStack.zip
+          path: ./Ocaramba.Tests.CloudProviderCrossBrowser/bin/Release/net8.0/ExecutingTestsOnWindowsBrowserStack${{ github.run_id }}.zip
           name: TestsOnWindowsBrowserStack4
         if: always()
   test_Stage_RunTestsSeleniumGrid:
