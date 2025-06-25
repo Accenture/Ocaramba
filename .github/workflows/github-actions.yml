@@ -302,7 +302,7 @@ jobs:
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: ExecutingTestsOnBrowserStackLinux
+          name: ExecutingTestsOnsaucelabsLinux
           path: ./Ocaramba.Tests.CloudProviderCrossBrowser/bin/Release/net8.0/ExecutingTestsOnsaucelabLinux${{ github.run_id }}.zip
   test_Stage_RunTestsOnWindowsCore1:
     runs-on: windows-latest
