@@ -88,11 +88,6 @@ namespace Ocaramba
         public string TestTitle { get; set; }
 
         /// <summary>
-        /// Gets or sets the Environment Browsers from App.config.
-        /// </summary>
-        public string CrossBrowserEnvironment { get; set; }
-
-        /// <summary>
         /// Gets Sets Folder name for ScreenShot.
         /// </summary>
         public string ScreenShotFolder
@@ -763,17 +758,53 @@ namespace Ocaramba
         private void SetupRemoteWebDriver()
         {
             NameValueCollection driverCapabilitiesConf = new NameValueCollection();
-
-
+            NameValueCollection settings = new NameValueCollection();
+   
             driverCapabilitiesConf = ConfigurationManager.GetSection("DriverCapabilities") as NameValueCollection;
+
             driverCapabilitiesConf = BaseConfiguration.GetNameValueCollectionFromAppsettings("DriverCapabilities");
 
-
-            ChromeOptions chromeOptions = new ChromeOptions();
-            chromeOptions.Proxy = this.CurrentProxy();
-            this.SetRemoteDriverBrowserOptions(driverCapabilitiesConf, chromeOptions);
-            chromeOptions.BrowserVersion = "latest";
-            this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(chromeOptions).ToCapabilities());
+            var browserType = this.GetBrowserTypeForRemoteDriver(settings);
+            switch (browserType)
+            {
+                case BrowserType.Firefox:
+                    FirefoxOptions firefoxOptions = new FirefoxOptions();
+                    firefoxOptions.Proxy = this.CurrentProxy();
+                    this.SetRemoteDriverBrowserOptions(driverCapabilitiesConf, firefoxOptions);
+                    this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(firefoxOptions).ToCapabilities());
+                    break;
+                case BrowserType.Android:
+                case BrowserType.Chrome:
+                    ChromeOptions chromeOptions = new ChromeOptions();
+                    chromeOptions.Proxy = this.CurrentProxy();
+                    this.SetRemoteDriverBrowserOptions(driverCapabilitiesConf, chromeOptions);
+                    this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(chromeOptions).ToCapabilities());
+                    break;
+                case BrowserType.Iphone:
+                case BrowserType.Safari:
+                    SafariOptions safariOptions = new SafariOptions();
+                    safariOptions.Proxy = this.CurrentProxy();
+                    this.SetRemoteDriverOptions(driverCapabilitiesConf,settings, safariOptions);
+                    this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(safariOptions).ToCapabilities());
+                    break;
+                case BrowserType.Edge:
+                case BrowserType.EdgeChromium:
+                    EdgeOptions egEdgeOptions = new EdgeOptions();
+                    egEdgeOptions.Proxy = this.CurrentProxy();
+                    this.SetRemoteDriverOptions(driverCapabilitiesConf, settings, egEdgeOptions);
+                    this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(egEdgeOptions).ToCapabilities());
+                    break;
+                case BrowserType.IE:
+                case BrowserType.InternetExplorer:
+                    InternetExplorerOptions internetExplorerOptions = new InternetExplorerOptions();
+                    internetExplorerOptions.Proxy = this.CurrentProxy();
+                    this.SetRemoteDriverBrowserOptions(driverCapabilitiesConf, internetExplorerOptions);
+                    this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(internetExplorerOptions).ToCapabilities());
+                    break;
+                default:
+                    throw new NotSupportedException(
+                        string.Format(CultureInfo.CurrentCulture, "Driver is not supported"));
+            }
         }
     }
 }

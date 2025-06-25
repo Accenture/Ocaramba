@@ -266,13 +266,12 @@ namespace Ocaramba
                     }
                     else
                     {
-                        Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0} from {1}", key, this.CrossBrowserEnvironment);
+                        Logger.Trace(CultureInfo.CurrentCulture, "Adding driver capability {0}", key);
 
                         options.AddAdditionalOption(key, settings[key]);
                     }
                 }
             }
-
             if (!setName && !string.IsNullOrEmpty(this.TestTitle))
             {
                 options.AddAdditionalOption("name", this.TestTitle);
@@ -306,11 +305,7 @@ namespace Ocaramba
                 capabilities.Add("sessionName", this.TestTitle);
             }
 
-            if (BaseConfiguration.RemoteWebDriverHub.ToString().ToLower(CultureInfo.CurrentCulture).Contains("browserstack", StringComparison.InvariantCultureIgnoreCase))
-            {
-                browserOptions.AddAdditionalOption("bstack:options", capabilities);
-            }
-            else if (BaseConfiguration.RemoteWebDriverHub.ToString().ToLower(CultureInfo.CurrentCulture).Contains("saucelabs", StringComparison.InvariantCultureIgnoreCase))
+            if (BaseConfiguration.RemoteWebDriverHub.ToString().ToLower(CultureInfo.CurrentCulture).Contains("saucelabs", StringComparison.InvariantCultureIgnoreCase))
             {
                 browserOptions.AddAdditionalOption("sauce:options", capabilities);
             }
@@ -320,11 +315,7 @@ namespace Ocaramba
             }
 
 
-            if (BaseConfiguration.RemoteWebDriverHub.ToString().ToLower(CultureInfo.CurrentCulture).Contains("browserstack", StringComparison.InvariantCultureIgnoreCase))
-            {
-                browserOptions.AddAdditionalOption("bstack:options", capabilities);
-            }
-            else if (BaseConfiguration.RemoteWebDriverHub.ToString().ToLower(CultureInfo.CurrentCulture).Contains("saucelabs", StringComparison.InvariantCultureIgnoreCase))
+            if (BaseConfiguration.RemoteWebDriverHub.ToString().ToLower(CultureInfo.CurrentCulture).Contains("saucelabs", StringComparison.InvariantCultureIgnoreCase))
             {
                 browserOptions.AddAdditionalOption("sauce:options", capabilities);
             }
@@ -333,6 +324,25 @@ namespace Ocaramba
                 browserOptions.AddAdditionalOption("tb:options", capabilities);
             }
 
+        }
+
+        private BrowserType GetBrowserTypeForRemoteDriver(NameValueCollection settings)
+        {
+            if (BaseConfiguration.TestBrowserCapabilities != BrowserType.CloudProvider)
+            {
+                return BaseConfiguration.TestBrowserCapabilities;
+            }
+
+            BrowserType browserType = BrowserType.None;
+            bool supportedBrowser = false;
+            if (settings != null)
+            {
+                string browser = settings.GetValues("browser")?[0];
+                supportedBrowser = Enum.TryParse(browser, true, out browserType);
+                Logger.Info(CultureInfo.CurrentCulture, "supportedBrowser {0} : {1}", supportedBrowser, browserType);
+            }
+
+            return browserType;
         }
 
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Loop through all internetExplorerPreferences")]
