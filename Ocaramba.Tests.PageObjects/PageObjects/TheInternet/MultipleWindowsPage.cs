@@ -42,11 +42,13 @@ namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
         {
         }
 
-        public NewWindowPage OpenNewWindowPage()
+        public NewWindowPage    OpenNewWindowPage()
         {
             Logger.Info("Opening New Window page from Multiple Windows page.");
             WaitHelper.Wait(() => this.Driver.GetElement(this.clickHerePageLocator).Enabled, TimeSpan.FromSeconds(BaseConfiguration.LongTimeout), "Timeout");
-            this.Driver.GetElement(this.clickHerePageLocator).Click();
+            Logger.Info("Clicking on 'Click Here' link to open new window.");
+            this.Driver.GetElement(this.clickHerePageLocator).JavaScriptClick();
+            Logger.Info("Switching to new window with URL 'https://the-internet.herokuapp.com/windows/new'.");
             this.Driver.SwitchToWindowUsingUrl(new Uri("https://the-internet.herokuapp.com/windows/new"), 20);
             return new NewWindowPage(this.DriverContext);
         }

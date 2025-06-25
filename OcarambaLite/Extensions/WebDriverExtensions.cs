@@ -187,11 +187,12 @@ namespace Ocaramba.Extensions
                         webDriver.SwitchTo().Window(handle);
                         if (driver.Url.Equals(url.ToString(), StringComparison.Ordinal))
                         {
+                            Logger.Debug($"Switched to url {driver.Url}");
                             return true;
                         }
                     }
 
-                    Logger.Debug($"Driver url {driver.Url}");
+                    Logger.Debug($"Not swiched to url {driver.Url}");
                     return false;
                 });
         }

@@ -33,6 +33,7 @@ namespace Ocaramba.Tests.NUnit.Tests
     public class HerokuappTestsNUnit : ProjectTestBase
     {
         [Test]
+        [Category("Grid")]
         public void BasicAuthTest()
         {
             var basicAuthPage =
@@ -74,6 +75,7 @@ namespace Ocaramba.Tests.NUnit.Tests
         }
 
         [Test]
+        [Category("Grid")]
         public void NestedFramesTest()
         {
             var nestedFramesPage = new InternetPage(this.DriverContext)
@@ -95,6 +97,7 @@ namespace Ocaramba.Tests.NUnit.Tests
         }
 
         [Test]
+        [Category("Grid")]
         public void ContextMenuTest()
         {
             const string H3Value = "Context Menu";
@@ -113,6 +116,7 @@ namespace Ocaramba.Tests.NUnit.Tests
         }
 
         [Test]
+        [Category("Grid")]
         public void HoversTest()
         {
             var expected = new[] { "name: user1", "name: user2", "name: user3" };
@@ -149,6 +153,7 @@ namespace Ocaramba.Tests.NUnit.Tests
         }
 
         [Test]
+        [Category("Grid")]
         public void SetAttributeTest()
         {
             var internetPage = new InternetPage(this.DriverContext)
@@ -163,6 +168,7 @@ namespace Ocaramba.Tests.NUnit.Tests
         }
 
         [Test]
+        [Category("Grid")]
         public void SlowResourcesTest()
         {
             int timeout = 35;
@@ -186,6 +192,7 @@ namespace Ocaramba.Tests.NUnit.Tests
         }
 
         [Test]
+        [Category("Grid")]
         public void DragAndDropTest()
         {
             var dragAndDrop = new InternetPage(this.DriverContext)
@@ -197,6 +204,7 @@ namespace Ocaramba.Tests.NUnit.Tests
         }
 
         [Test]
+        [Category("Grid")]
         public void DynamicallyLoadedPageElementsTest()
         {
             var page = new InternetPage(this.DriverContext)
@@ -211,6 +219,7 @@ namespace Ocaramba.Tests.NUnit.Tests
         }
 
         [Test]
+        [Category("Grid")]
         public void DynamicallyLoadedPageElementsTimeOutTest()
         {
             var page = new InternetPage(this.DriverContext)
