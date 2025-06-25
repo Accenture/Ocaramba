@@ -14,6 +14,11 @@ echo '*****************************Run CloudProviderCrossBrowser tests with Sele
 
 dotnet vstest ./Ocaramba.Tests.CloudProviderCrossBrowser/bin/Release/net8.0/Ocaramba.Tests.CloudProviderCrossBrowser.dll /Parallel /Logger:"trx;LogFileName=Ocaramba.Tests.CloudProviderCrossBrowserGrid.xml"
 
+docker ps -q | ForEach-Object {
+    Write-Host "==== Logs for container: $_ ===="
+    docker logs $_
+}
+
 $staging = "TempZipStaging"
 New-Item -ItemType Directory -Path $staging -Force
 
