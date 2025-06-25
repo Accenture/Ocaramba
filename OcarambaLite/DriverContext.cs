@@ -70,6 +70,11 @@ namespace Ocaramba
         private TestLogger logTest;
 
         /// <summary>
+        /// Gets or sets the Environment Browsers from App.config.
+        /// </summary>
+        public string CrossBrowserEnvironment { get; set; }
+
+        /// <summary>
         /// Occurs when [driver options set].
         /// </summary>
         public event EventHandler<DriverOptionsSetEventArgs> DriverOptionsSet;
@@ -759,10 +764,9 @@ namespace Ocaramba
         {
             NameValueCollection driverCapabilitiesConf = new NameValueCollection();
             NameValueCollection settings = new NameValueCollection();
-   
-            driverCapabilitiesConf = ConfigurationManager.GetSection("DriverCapabilities") as NameValueCollection;
 
             driverCapabilitiesConf = BaseConfiguration.GetNameValueCollectionFromAppsettings("DriverCapabilities");
+            settings = BaseConfiguration.GetNameValueCollectionFromAppsettings("environments:" + this.CrossBrowserEnvironment);
 
             var browserType = this.GetBrowserTypeForRemoteDriver(settings);
             switch (browserType)

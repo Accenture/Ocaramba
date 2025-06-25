@@ -46,11 +46,9 @@ namespace Ocaramba.Tests.CloudProviderCrossBrowser
 
         private readonly DriverContext driverContext = new DriverContext();
 
-        public ProjectTestBase(string environment)
+        public ProjectTestBase()
         {
-            Logger.Info(CultureInfo.CurrentCulture, $"environment {environment}");
-
-            this.DriverContext.CrossBrowserEnvironment = environment;
+            
         }
 
         /// <summary>

@@ -25,15 +25,17 @@ using System;
 namespace Ocaramba.Tests.CloudProviderCrossBrowser.Tests
 {
     using global::NUnit.Framework;
+    using Microsoft.VisualStudio.TestPlatform.PlatformAbstractions.Interfaces;
     using Ocaramba;
     using Ocaramba.Tests.PageObjects.PageObjects.TheInternet;
 
-
+    [TestFixture("ChromeWindows")]
+    [TestFixture("FirefoxWindows")]
     [Parallelizable(ParallelScope.Fixtures)]
     public class HerokuappTestsNUnit : ProjectTestBase
     {
-        public HerokuappTestsNUnit()
-            : base()
+        public HerokuappTestsNUnit(string environment)
+            : base(environment)
         {
         }
 

@@ -19,7 +19,6 @@
 	<PackageReference Include="NLog" Version="6.0.0" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="138.0.7204.4900" />
     <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.36.0" />
-	  <PackageReference Include="BrowserStack.TestAdapter" Version="0.*" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
   </ItemGroup>
 
@@ -34,9 +33,6 @@
     </None>
     <None Update="appsettings.Linux.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="browserstack.yml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="nlog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
