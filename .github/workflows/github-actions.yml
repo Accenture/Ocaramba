@@ -464,6 +464,11 @@ jobs:
           check_name: TestsOnWindows5SeleniumGrid
       - uses: actions/upload-artifact@v4
         with:
+          files: |
+            ${{ env.TestResultsDirWindows }}\*.xml
+          check_name: TestsOnWindowsSaucelabs5
+      - uses: actions/upload-artifact@v4
+        with:
           path: WindowsCore5${{ github.run_id }}.zip
           name: WindowsCore5
         if: always()
