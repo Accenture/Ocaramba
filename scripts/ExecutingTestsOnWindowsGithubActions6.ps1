@@ -8,6 +8,8 @@ echo '********************************************saucelabs tests***************
     
 dotnet vstest .\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\net8.0\Ocaramba.Tests.CloudProviderCrossBrowser.dll  /Logger:"trx;LogFileName=Ocaramba.Tests.saucelabsnet8.xml"
 
+Compress-Archive -Path "./Ocaramba.Tests.CloudProviderCrossBrowser/bin/Release/net8.0/TestOutput/*" -DestinationPath "./Ocaramba.Tests.CloudProviderCrossBrowser/bin/Release/net8.0/ExecutingTestsOnsaucelabLinux$env:GITHUB_RUN_ID.zip"
+
 if($lastexitcode -ne 0)
  {
   echo 'lastexitcode' $lastexitcode

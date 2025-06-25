@@ -270,6 +270,40 @@ jobs:
         with:
           name: ExecutingTestsOnBrowserStackLinux
           path: ./Ocaramba.Tests.BrowserStack/bin/Release/net8.0/ExecutingTestsOnBrowserStackLinux${{ github.run_id }}.zip
+  test_Stage_RunTestsOnLinuxsaucelabs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          ls 
+          export ASPNETCORE_ENVIRONMENT=Linux
+          echo $ASPNETCORE_ENVIRONMENT
+          sed -i -e '/Documentation/,+5 d' -e '/Ocaramba.Tests.Appium/,+1 d' -e '/Ocaramba.UnitTests/,+1 d' -e '/Ocaramba.Tests.NUnit/,+1 d' -e '/Ocaramba.Tests.BrowserStack/,+1 d' -e '/Ocaramba.Tests.MsTest/,+1 d' -e '/Ocaramba.Tests.Features/,+1 d' -e '/Ocaramba.Tests.Xunit/,+1 d' -e '/Ocaramba.Tests.Angular/,+4 d' -e '/Ocaramba.Tests.NUnitExtentReports/,+1 d' ./Ocaramba.sln
+      - run: dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
+      - shell: pwsh
+        if: true
+        env:
+          MAPPED_ENV_BROWSERSTACKKEY: ${{ secrets.BROWSERSTACKKEY }}
+          MAPPED_ENV_BROWSERSTACKUSER: ${{ secrets.BROWSERSTACKUSER }}
+          MAPPED_ENV_TESTINGBOTKEY: ${{ secrets.testingbotkey }}
+          MAPPED_ENV_TESTINGBOTSECRET: ${{ secrets.testingbotsecret }}
+          MAPPED_ENV_SAUCELABSACCESSKEY: ${{ secrets.saucelabsaccessKey }}
+          MAPPED_ENV_SAUCELABSUSERNAME: ${{ secrets.saucelabsusername }}
+        run: ./scripts/ExecutingTestsOnWindowsGithubActions6.ps1
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action/linux@v2
+        if: true
+        with:
+          files: |
+            /home/runner/work/**/TestResults/*.xml
+          check_name: TestOnLinuxsaucelabs
+      - name: Upload zip logs as artifact
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ExecutingTestsOnBrowserStackLinux
+          path: ./Ocaramba.Tests.CloudProviderCrossBrowser/bin/Release/net8.0/ExecutingTestsOnsaucelabLinux${{ github.run_id }}.zip
   test_Stage_RunTestsOnWindowsCore1:
     runs-on: windows-latest
     steps:
@@ -483,6 +517,7 @@ jobs:
       - test_Stage_RunTestsOnWindowsBrowserStack
       - test_Stage_RunTestsSeleniumGrid
       - test_Stage_RunAppiumTestsOnAndroid
+      - test_Stage_RunTestsOnLinuxsaucelabs
     steps:
       - uses: actions/checkout@v4
       - shell: pwsh
