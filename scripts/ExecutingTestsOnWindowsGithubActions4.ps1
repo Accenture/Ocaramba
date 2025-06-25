@@ -18,5 +18,4 @@ if($lastexitcode -ne 0)
  
 Compress-Archive -Path "./Ocaramba.Tests.BrowserStack/bin/Release/net8.0/TestOutput/*" -DestinationPath "./Ocaramba.Tests.BrowserStack/bin/Release/net8.0/ExecutingTestsOnWindowsBrowserStack$env:GITHUB_RUN_ID.zip"
 
-
 exit 0    

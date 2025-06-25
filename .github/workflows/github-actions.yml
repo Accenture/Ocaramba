@@ -464,8 +464,12 @@ jobs:
           check_name: TestsOnWindows5SeleniumGrid
       - uses: actions/upload-artifact@v4
         with:
-          path: WindowsCore5${{ github.run_id }}.zip
+          path: ${{ env.TestResultsDirWindows }}\*.xml
           name: WindowsCore5
+      - uses: actions/upload-artifact@v4
+        with:
+          path: WindowsCore5${{ github.run_id }}.zip
+          name: WindowsCore5SeleniumGrid
         if: always()
   release_Stage_PublishNuget:
     runs-on: windows-latest

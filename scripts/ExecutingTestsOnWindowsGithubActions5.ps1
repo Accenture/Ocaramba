@@ -21,8 +21,9 @@ $staging = "TempZipStaging"
 New-Item -ItemType Directory -Path $staging -Force
 
 Copy-Item ".\Ocaramba.Tests.NUnit\bin\Release\net8.0\TestOutput" -Destination "$staging\Ocaramba.Tests.NUnit" -Recurse
-Copy-Item ".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\net8.0\TestOutput" -Destination "$staging\Ocaramba.Tests.CloudProviderCrossBrowser" -Recurse
+Copy-Item ".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\net8.0\TestOutput" -Destination "$staging\Ocaramba.CloudProviderCrossBrowser" -Recurse
 Compress-Archive -Path "$staging\*" -DestinationPath "WindowsCore5$env:GITHUB_RUN_ID.zip"
+Remove-Item -Recurse -Force $staging
 
 if($lastexitcode -ne 0)
 {
