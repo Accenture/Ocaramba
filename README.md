@@ -28,7 +28,7 @@ AI generated documentation [DeepWiki](https://deepwiki.com/Accenture/Ocaramba)<b
 - Written entirely in C#
 - Contains example projects how to use it
 - Allows using Chrome, Firefox, Edge Chromium, Safari or Internet Explorer
-- Supports Appium-based Android UI tests
+- Supports Appium-based Android UI tests, more details [here](https://github.com/Accenture/Ocaramba/wiki/Ocaramba-framework-with-Appium)
 - Overrides browser profile preferences, pass arguments to browsers, installs browser extensions, loading default firefox profile, Headless mode, more details [here](https://github.com/Accenture/Ocaramba/wiki/Override-browser-profile-preferences,-install-browser-extensions,-Headless-mode)
 - Extends Webdriver by additional methods like JavaScriptClick, WaitForAjax, WaitForAngular, etc., more details [here](http://Accenture.github.io/Ocaramba/html/d51aa97e-08b5-c0b6-6987-c10545a64ebd.htm)
 - Automatically waits when locating element for specified time and conditions, GetElement method instead of Selenium FindElement, more details [here](http://Accenture.github.io/Ocaramba/html/3c09ca99-f931-c6c9-98fc-194eff6500ff.htm)
