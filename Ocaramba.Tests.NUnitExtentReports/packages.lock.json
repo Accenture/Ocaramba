@@ -46,26 +46,26 @@
       },
       "NLog": {
         "type": "Direct",
-        "requested": "[6.0.0, )",
-        "resolved": "6.0.0",
-        "contentHash": "3wqlcN80L6OHh0ZTQR/F+eZBeaAZ109XbvCEbtZ/nG5B/S+XzGOxv67RAfMx0YMkHY1aAHyW245k0/OE7J0ZxA=="
+        "requested": "[6.0.1, )",
+        "resolved": "6.0.1",
+        "contentHash": "qDWiqy8/xdpZKtHna/645KbalwP86N2NFJEzfqhcv+Si4V2iNaEfR/dCneuF/4+Dcwl3f7jHMXj3ndWYftV3Ug=="
       },
       "NPOI": {
         "type": "Direct",
-        "requested": "[2.7.3, )",
-        "resolved": "2.7.3",
-        "contentHash": "iCZx3DSwUSwaV61E8tXgPlPuxYmcYV/Zi405nGlxQvWaGTAbuc0KvSBjsLucQUJ92iMeetT8iK9makLfF4uZ3g==",
+        "requested": "[2.7.4, )",
+        "resolved": "2.7.4",
+        "contentHash": "1tCebTkr9qAfwiEa2ErXco2IT+D8MNmT9d4KFz9nWn3owkc5fAOsvxV8kq6y4531B4Z3gnInrvEdonwFyoRqPQ==",
         "dependencies": {
-          "BouncyCastle.Cryptography": "2.3.1",
-          "Enums.NET": "4.0.1",
+          "BouncyCastle.Cryptography": "2.4.0",
+          "Enums.NET": "5.0.0",
           "ExtendedNumerics.BigDecimal": "2025.1001.2.129",
           "MathNet.Numerics.Signed": "5.0.0",
-          "Microsoft.IO.RecyclableMemoryStream": "3.0.0",
+          "Microsoft.IO.RecyclableMemoryStream": "3.0.1",
           "SharpZipLib": "1.4.2",
           "SixLabors.Fonts": "1.0.1",
           "SixLabors.ImageSharp": "2.1.10",
-          "System.Security.Cryptography.Pkcs": "8.0.1",
-          "System.Security.Cryptography.Xml": "8.0.2"
+          "System.Security.Cryptography.Xml": "8.0.2",
+          "ZString": "2.6.0"
         }
       },
       "NUnit": {
@@ -95,18 +95,18 @@
       },
       "Selenium.Support": {
         "type": "Direct",
-        "requested": "[4.33.0, )",
-        "resolved": "4.33.0",
-        "contentHash": "AsjM8PqJkueDBzw9StEHLLUq6bT7au9IY9mMLlwMxOdNYfu7PMJOqpHCMg2xVtLrUHGd6mADqrbFxcs9QWe6JA==",
+        "requested": "[4.34.0, )",
+        "resolved": "4.34.0",
+        "contentHash": "+GROvBcro1ayU9PlGu4Q6xGyRk+wlbwGrmL3lZqm+s6T+NVs0Fmp2r8t6DvKMY/ZaDh9svkvxqN808+EnFPhDw==",
         "dependencies": {
-          "Selenium.WebDriver": "4.33.0"
+          "Selenium.WebDriver": "4.34.0"
         }
       },
       "Selenium.WebDriver": {
         "type": "Direct",
-        "requested": "[4.33.0, )",
-        "resolved": "4.33.0",
-        "contentHash": "5dzwA1cMorwYWudX46zyeUqyZn48TZeCHbSERxbpKezGxZ8hMBpcL12XwG4RGUuQKGH8FiEOJOFK4eCE//uNpQ=="
+        "requested": "[4.34.0, )",
+        "resolved": "4.34.0",
+        "contentHash": "uNx+GF7WugHDPV2zpGDPlbSn3STQ6n0xFskFSeJdhEuuUTkIDfAsYnjVUiQidWDpy7mKzTz53ae7Thjghl3dng=="
       },
       "Selenium.WebDriver.ChromeDriver": {
         "type": "Direct",
@@ -141,13 +141,13 @@
       },
       "BouncyCastle.Cryptography": {
         "type": "Transitive",
-        "resolved": "2.3.1",
-        "contentHash": "buwoISwecYke3CmgG1AQSg+sNZjJeIb93vTAtJiHZX35hP/teYMxsfg0NDXGUKjGx6BKBTNKc77O2M3vKvlXZQ=="
+        "resolved": "2.4.0",
+        "contentHash": "SwXsAV3sMvAU/Nn31pbjhWurYSjJ+/giI/0n6tCrYoupEK34iIHCuk3STAd9fx8yudM85KkLSVdn951vTng/vQ=="
       },
       "Enums.NET": {
         "type": "Transitive",
-        "resolved": "4.0.1",
-        "contentHash": "OUGCd5L8zHZ61GAf436G0gf/H6yrSUkEpV5vm2CbCUuz9Rx7iLFLP5iHSSfmOtqNpuyo4vYte0CvYEmPZXRmRQ=="
+        "resolved": "5.0.0",
+        "contentHash": "NfGq1iLJZ15XZPgBhjk4Ns1XZ+beaGk6cog6B4LxcROdGoSMdgCJqYXF70P6VTd3dz/vFRY4h1u1lAMqW/DC2w=="
       },
       "ExtendedNumerics.BigDecimal": {
         "type": "Transitive",
@@ -396,8 +396,8 @@
       },
       "Microsoft.IO.RecyclableMemoryStream": {
         "type": "Transitive",
-        "resolved": "3.0.0",
-        "contentHash": "irv0HuqoH8Ig5i2fO+8dmDNdFdsrO+DoQcedwIlb810qpZHBNQHZLW7C/AHBQDgLLpw2T96vmMAy/aE4Yj55Sg=="
+        "resolved": "3.0.1",
+        "contentHash": "s/s20YTVY9r9TPfTrN5g8zPF1YhwxyqO6PxUkrYTGI2B+OGPe9AdajWZrLhFqXIvqIW23fnUE4+ztrUWNU1+9g=="
       },
       "Microsoft.Management.Infrastructure": {
         "type": "Transitive",
@@ -1137,15 +1137,20 @@
         "resolved": "8.0.0",
         "contentHash": "Obg3a90MkOw9mYKxrardLpY2u0axDMrSmy4JCdq2cYbelM2cUwmUir5Bomvd1yxmPL9h5LVHU1tuKBZpUjfASg=="
       },
+      "ZString": {
+        "type": "Transitive",
+        "resolved": "2.6.0",
+        "contentHash": "XE8a+11nZg0LRaf+RGABEWaHIf8yGd5w8v/Ra1iWxMBmAVzwuKbW7G21mS0U7w7sh1lYcgckInWGgnz4qyET8A=="
+      },
       "ocaramba.tests.pageobjects": {
         "type": "Project",
         "dependencies": {
           "Microsoft.Extensions.Configuration.Json": "[9.0.6, )",
           "Microsoft.NET.Test.Sdk": "[17.14.1, )",
-          "NLog": "[6.0.0, )",
+          "NLog": "[6.0.1, )",
           "OcarambaLite": "[1.0.0, )",
-          "Selenium.Support": "[4.33.0, )",
-          "Selenium.WebDriver": "[4.33.0, )",
+          "Selenium.Support": "[4.34.0, )",
+          "Selenium.WebDriver": "[4.34.0, )",
           "Selenium.WebDriver.ChromeDriver": "[138.0.7204.4900, )",
           "Selenium.WebDriver.GeckoDriver": "[0.36.0, )",
           "System.Configuration.ConfigurationManager": "[9.0.6, )",
@@ -1163,9 +1168,9 @@
           "Microsoft.PowerShell.Commands.Diagnostics": "[7.4.11, )",
           "Microsoft.PowerShell.SDK": "[7.4.11, )",
           "Microsoft.WSMan.Management": "[7.4.11, )",
-          "NLog": "[6.0.0, )",
-          "Selenium.Support": "[4.33.0, )",
-          "Selenium.WebDriver": "[4.33.0, )",
+          "NLog": "[6.0.1, )",
+          "Selenium.Support": "[4.34.0, )",
+          "Selenium.WebDriver": "[4.34.0, )",
           "System.Configuration.ConfigurationManager": "[9.0.6, )",
           "System.Text.Json": "[9.0.6, )"
         }

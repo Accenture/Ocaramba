@@ -29,9 +29,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <PackageReference Include="Appium.WebDriver" Version="8.0.0" />
-    <PackageReference Include="Selenium.Support" Version="4.33.0" />
-    <PackageReference Include="Selenium.WebDriver" Version="4.33.0" />
-    <PackageReference Include="NLog" Version="6.0.0" />
+    <PackageReference Include="Selenium.Support" Version="4.34.0" />
+    <PackageReference Include="Selenium.WebDriver" Version="4.34.0" />
+    <PackageReference Include="NLog" Version="6.0.1" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="138.0.7204.4900" />
     <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.36.0" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />

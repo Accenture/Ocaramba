@@ -9,7 +9,7 @@
     
     <PackageReference Include="BoDi" Version="1.5.0" />
     
-    <PackageReference Include="NLog" Version="6.0.0" />
+    <PackageReference Include="NLog" Version="6.0.1" />
     
     
     <PackageReference Include="NUnit.Runners" Version="3.12.0" />
@@ -17,8 +17,8 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Selenium.Support" Version="4.33.0" />
-    <PackageReference Include="Selenium.WebDriver" Version="4.33.0" />
+    <PackageReference Include="Selenium.Support" Version="4.34.0" />
+    <PackageReference Include="Selenium.WebDriver" Version="4.34.0" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="9.0.6" />
     <PackageReference Include="System.Text.Json" Version="9.0.6" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="138.0.7204.4900" />
