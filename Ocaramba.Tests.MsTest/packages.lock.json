@@ -33,24 +33,24 @@
       },
       "NLog": {
         "type": "Direct",
-        "requested": "[6.0.0, )",
-        "resolved": "6.0.0",
-        "contentHash": "3wqlcN80L6OHh0ZTQR/F+eZBeaAZ109XbvCEbtZ/nG5B/S+XzGOxv67RAfMx0YMkHY1aAHyW245k0/OE7J0ZxA=="
+        "requested": "[6.0.1, )",
+        "resolved": "6.0.1",
+        "contentHash": "qDWiqy8/xdpZKtHna/645KbalwP86N2NFJEzfqhcv+Si4V2iNaEfR/dCneuF/4+Dcwl3f7jHMXj3ndWYftV3Ug=="
       },
       "Selenium.Support": {
         "type": "Direct",
-        "requested": "[4.33.0, )",
-        "resolved": "4.33.0",
-        "contentHash": "AsjM8PqJkueDBzw9StEHLLUq6bT7au9IY9mMLlwMxOdNYfu7PMJOqpHCMg2xVtLrUHGd6mADqrbFxcs9QWe6JA==",
+        "requested": "[4.34.0, )",
+        "resolved": "4.34.0",
+        "contentHash": "+GROvBcro1ayU9PlGu4Q6xGyRk+wlbwGrmL3lZqm+s6T+NVs0Fmp2r8t6DvKMY/ZaDh9svkvxqN808+EnFPhDw==",
         "dependencies": {
-          "Selenium.WebDriver": "4.33.0"
+          "Selenium.WebDriver": "4.34.0"
         }
       },
       "Selenium.WebDriver": {
         "type": "Direct",
-        "requested": "[4.33.0, )",
-        "resolved": "4.33.0",
-        "contentHash": "5dzwA1cMorwYWudX46zyeUqyZn48TZeCHbSERxbpKezGxZ8hMBpcL12XwG4RGUuQKGH8FiEOJOFK4eCE//uNpQ=="
+        "requested": "[4.34.0, )",
+        "resolved": "4.34.0",
+        "contentHash": "uNx+GF7WugHDPV2zpGDPlbSn3STQ6n0xFskFSeJdhEuuUTkIDfAsYnjVUiQidWDpy7mKzTz53ae7Thjghl3dng=="
       },
       "Selenium.WebDriver.ChromeDriver": {
         "type": "Direct",
@@ -929,10 +929,10 @@
         "dependencies": {
           "Microsoft.Extensions.Configuration.Json": "[9.0.6, )",
           "Microsoft.NET.Test.Sdk": "[17.14.1, )",
-          "NLog": "[6.0.0, )",
+          "NLog": "[6.0.1, )",
           "OcarambaLite": "[1.0.0, )",
-          "Selenium.Support": "[4.33.0, )",
-          "Selenium.WebDriver": "[4.33.0, )",
+          "Selenium.Support": "[4.34.0, )",
+          "Selenium.WebDriver": "[4.34.0, )",
           "Selenium.WebDriver.ChromeDriver": "[138.0.7204.4900, )",
           "Selenium.WebDriver.GeckoDriver": "[0.36.0, )",
           "System.Configuration.ConfigurationManager": "[9.0.6, )",
@@ -950,9 +950,9 @@
           "Microsoft.PowerShell.Commands.Diagnostics": "[7.4.11, )",
           "Microsoft.PowerShell.SDK": "[7.4.11, )",
           "Microsoft.WSMan.Management": "[7.4.11, )",
-          "NLog": "[6.0.0, )",
-          "Selenium.Support": "[4.33.0, )",
-          "Selenium.WebDriver": "[4.33.0, )",
+          "NLog": "[6.0.1, )",
+          "Selenium.Support": "[4.34.0, )",
+          "Selenium.WebDriver": "[4.34.0, )",
           "System.Configuration.ConfigurationManager": "[9.0.6, )",
           "System.Text.Json": "[9.0.6, )"
         }
