@@ -95,9 +95,9 @@
       },
       "xunit.runner.visualstudio": {
         "type": "Direct",
-        "requested": "[3.1.1, )",
-        "resolved": "3.1.1",
-        "contentHash": "gNu2zhnuwjq5vQlU4S7yK/lfaKZDLmtcu+vTjnhfTlMAUYn+Hmgu8IIX0UCwWepYkk+Szx03DHx1bDnc9Fd+9w=="
+        "requested": "[3.1.2, )",
+        "resolved": "3.1.2",
+        "contentHash": "0W1J4AFaswO3ycVWiN8ApgJFMXLJ7OuR9XmDeoWmjPF1pwMz0I8UnyIiwXcytyBYKjXD3M2cXbLmCTLToUg3TA=="
       },
       "Appium.WebDriver": {
         "type": "Transitive",
