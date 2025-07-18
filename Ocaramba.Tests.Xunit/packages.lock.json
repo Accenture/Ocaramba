@@ -35,9 +35,9 @@
       },
       "Selenium.WebDriver.ChromeDriver": {
         "type": "Direct",
-        "requested": "[138.0.7204.9400, )",
-        "resolved": "138.0.7204.9400",
-        "contentHash": "nVFFEbOaBeY0uWJikYNPlR1SQUb69eP0Jv3s7H0gLJHEbNMXPBSvkyVY3UYMYGpiEnFg+CUQD66Lw1yTV/mAdQ=="
+        "requested": "[138.0.7204.15700, )",
+        "resolved": "138.0.7204.15700",
+        "contentHash": "TXuEqxz4dHy+Xp+C+lQJAqqAACO8EWP92l+wc5XtWBF5JQsF0Qua/aaGgeTnNYwnQLwJcsvMJJjSzyvXdCYQKA=="
       },
       "Selenium.WebDriver.GeckoDriver": {
         "type": "Direct",
@@ -95,9 +95,9 @@
       },
       "xunit.runner.visualstudio": {
         "type": "Direct",
-        "requested": "[3.1.1, )",
-        "resolved": "3.1.1",
-        "contentHash": "gNu2zhnuwjq5vQlU4S7yK/lfaKZDLmtcu+vTjnhfTlMAUYn+Hmgu8IIX0UCwWepYkk+Szx03DHx1bDnc9Fd+9w=="
+        "requested": "[3.1.3, )",
+        "resolved": "3.1.3",
+        "contentHash": "go7e81n/UI3LeNqoJIJ3thkS4JfJtiQnDbAxLh09JkJqoHthnfbLS5p68s4/Bm12B9umkoYSB5SaDr68hZNleg=="
       },
       "Appium.WebDriver": {
         "type": "Transitive",
@@ -921,7 +921,7 @@
           "OcarambaLite": "[1.0.0, )",
           "Selenium.Support": "[4.34.0, )",
           "Selenium.WebDriver": "[4.34.0, )",
-          "Selenium.WebDriver.ChromeDriver": "[138.0.7204.9400, )",
+          "Selenium.WebDriver.ChromeDriver": "[138.0.7204.15700, )",
           "Selenium.WebDriver.GeckoDriver": "[0.36.0, )",
           "System.Configuration.ConfigurationManager": "[9.0.7, )",
           "System.Text.Json": "[9.0.7, )"
