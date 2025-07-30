@@ -39,6 +39,8 @@
   </ItemGroup>
 
   <ItemGroup>
+
+    <PackageReference Include="SixLabors.ImageSharp" Version="2.1.11" />
     <None Update="appsettings.Linux.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
