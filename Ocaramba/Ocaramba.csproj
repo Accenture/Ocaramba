@@ -31,22 +31,22 @@
     <PackageReference Include="Appium.WebDriver" Version="8.0.0" />
     <PackageReference Include="Selenium.Support" Version="4.34.0" />
     <PackageReference Include="Selenium.WebDriver" Version="4.34.0" />
-    <PackageReference Include="NLog" Version="6.0.1" />
-    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="138.0.7204.9400" />
+    <PackageReference Include="NLog" Version="6.0.2" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="138.0.7204.18300" />
     <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.36.0" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="9.0.7" />
-    <PackageReference Include="System.Text.Json" Version="9.0.7" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="9.0.8" />
+    <PackageReference Include="System.Text.Json" Version="9.0.8" />
 
     <PackageReference Include="Microsoft.Extensions.Configuration">
-      <Version>9.0.7</Version>
+      <Version>9.0.8</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Configuration.Json">
-      <Version>9.0.7</Version>
+      <Version>9.0.8</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.PowerShell.Commands.Diagnostics">
       <Version>7.4.11</Version>
