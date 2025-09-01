@@ -20,13 +20,13 @@
 //     SOFTWARE.
 // </license>
 
-using System;
-using System.Globalization;
-using NLog;
-using Ocaramba;
-
 namespace OcarambaLite.Logger
 {
+    using System;
+    using System.Globalization;
+    using NLog;
+    using Ocaramba;
+
     /// <summary>
     /// Class for test logger.
     /// </summary>
@@ -35,8 +35,7 @@ namespace OcarambaLite.Logger
         /// <summary>
         /// The logger.
         /// </summary>
-
-       private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
+        private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
         /// The start test time.
@@ -47,7 +46,7 @@ namespace OcarambaLite.Logger
         /// Logs the test starting.
         /// </summary>
         /// <param name="driverContext">The driver context.</param>
-       public void LogTestStarting(DriverContext driverContext)
+        public void LogTestStarting(DriverContext driverContext)
         {
             this.startTestTime = DateTime.Now;
             this.Info("*************************************************************************************");

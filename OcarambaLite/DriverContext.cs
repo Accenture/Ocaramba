@@ -20,8 +20,6 @@
 //     SOFTWARE.
 // </license>
 
-using OcarambaLite.Logger;
-
 namespace Ocaramba
 {
     using System;
@@ -36,14 +34,15 @@ namespace Ocaramba
     using Ocaramba.Helpers;
     using Ocaramba.Logger;
     using Ocaramba.Types;
+    using OcarambaLite.Logger;
     using OpenQA.Selenium;
+    using OpenQA.Selenium.Appium;
     using OpenQA.Selenium.Chrome;
     using OpenQA.Selenium.Edge;
     using OpenQA.Selenium.Firefox;
     using OpenQA.Selenium.IE;
     using OpenQA.Selenium.Remote;
     using OpenQA.Selenium.Safari;
-    using OpenQA.Selenium.Appium;
 
     /// <summary>
     /// Contains handle to driver and methods for web browser.
@@ -208,10 +207,8 @@ namespace Ocaramba
                 firefoxPreferences = ConfigurationManager.GetSection("FirefoxPreferences") as NameValueCollection;
                 firefoxExtensions = ConfigurationManager.GetSection("FirefoxExtensions") as NameValueCollection;
 
-
                 firefoxPreferences = BaseConfiguration.GetNameValueCollectionFromAppsettings("FirefoxPreferences");
                 firefoxExtensions = BaseConfiguration.GetNameValueCollectionFromAppsettings("FirefoxExtensions");
-
 
                 // preference for downloading files
                 options.SetPreference("browser.download.dir", this.DownloadFolder);
@@ -315,7 +312,6 @@ namespace Ocaramba
                 chromeExtensions = ConfigurationManager.GetSection("ChromeExtensions") as NameValueCollection;
                 chromeArguments = ConfigurationManager.GetSection("ChromeArguments") as NameValueCollection;
 
-
                 chromePreferences = BaseConfiguration.GetNameValueCollectionFromAppsettings("ChromePreferences");
                 chromeExtensions = BaseConfiguration.GetNameValueCollectionFromAppsettings("ChromeExtensions");
                 chromeArguments = BaseConfiguration.GetNameValueCollectionFromAppsettings("chromeArguments");
@@ -416,7 +412,6 @@ namespace Ocaramba
 
                 internetExplorerPreferences = ConfigurationManager.GetSection("InternetExplorerPreferences") as NameValueCollection;
 
-
                 internetExplorerPreferences = BaseConfiguration.GetNameValueCollectionFromAppsettings("InternetExplorerPreferences");
 
                 var options = new InternetExplorerOptions
@@ -459,11 +454,9 @@ namespace Ocaramba
                 edgeChromiumExtensions = ConfigurationManager.GetSection("EdgeChromiumExtensions") as NameValueCollection;
                 edgeChromiumArguments = ConfigurationManager.GetSection("EdgeChromiumArguments") as NameValueCollection;
 
-
                 edgeChromiumPreferences = BaseConfiguration.GetNameValueCollectionFromAppsettings("EdgeChromiumPreferences");
                 edgeChromiumExtensions = BaseConfiguration.GetNameValueCollectionFromAppsettings("EdgeChromiumExtensions");
                 edgeChromiumArguments = BaseConfiguration.GetNameValueCollectionFromAppsettings("EdgeChromiumArguments");
-
 
                 // set browser proxy for Edge
                 if (!string.IsNullOrEmpty(BaseConfiguration.Proxy))
@@ -636,6 +629,7 @@ namespace Ocaramba
             {
                 this.FirefoxOptions.BrowserExecutableLocation = BaseConfiguration.FirefoxBrowserExecutableLocation;
             }
+
             FirefoxDriverService serviceFirefox = FirefoxDriverService.CreateDefaultService();
             serviceFirefox.Host = "::1";
             this.driver = string.IsNullOrEmpty(BaseConfiguration.PathToFirefoxDriverDirectory)
@@ -656,6 +650,7 @@ namespace Ocaramba
             {
                 this.ChromeOptions.BinaryLocation = BaseConfiguration.ChromeBrowserExecutableLocation;
             }
+
             this.serviceChrome = ChromeDriverService.CreateDefaultService();
             this.serviceChrome.LogPath = BaseConfiguration.PathToChromeDriverLog;
             this.serviceChrome.EnableVerboseLogging = BaseConfiguration.EnableVerboseLoggingChrome;
@@ -676,6 +671,7 @@ namespace Ocaramba
             {
                 this.EdgeOptions.BinaryLocation = BaseConfiguration.EdgeChromiumBrowserExecutableLocation;
             }
+
             this.serviceEdge = EdgeDriverService.CreateDefaultService();
             this.driver = string.IsNullOrEmpty(BaseConfiguration.PathToEdgeChromiumDriverDirectory)
                 ? new EdgeDriver(this.serviceEdge, this.SetDriverOptions(this.EdgeOptions), BaseConfiguration.RemoteWebDriverTimeout)
@@ -689,26 +685,32 @@ namespace Ocaramba
             {
                 appiumOptions.PlatformName = BaseConfiguration.AppiumPlatformName;
             }
+
             if (!string.IsNullOrEmpty(BaseConfiguration.AppiumDeviceName))
             {
                 appiumOptions.DeviceName = BaseConfiguration.AppiumDeviceName;
             }
+
             if (!string.IsNullOrEmpty(BaseConfiguration.AppiumAppPath))
             {
                 appiumOptions.App = BaseConfiguration.AppiumAppPath;
             }
+
             if (!string.IsNullOrEmpty(BaseConfiguration.AppiumAutomationName))
             {
                 appiumOptions.AutomationName = BaseConfiguration.AppiumAutomationName; // <-- Use property, not AddAdditionalAppiumOption
             }
+
             if (!string.IsNullOrEmpty(BaseConfiguration.AppiumAppPackage))
             {
                 appiumOptions.AddAdditionalAppiumOption("appPackage", BaseConfiguration.AppiumAppPackage);
             }
+
             if (!string.IsNullOrEmpty(BaseConfiguration.AppiumAppActivity))
             {
                 appiumOptions.AddAdditionalAppiumOption("appActivity", BaseConfiguration.AppiumAppActivity);
             }
+
             if (BaseConfiguration.AppiumPlatformName?.ToLowerInvariant() == "android")
             {
                 this.driver = new OpenQA.Selenium.Appium.Android.AndroidDriver(new Uri(BaseConfiguration.AppiumServerUrl), appiumOptions);
@@ -788,7 +790,7 @@ namespace Ocaramba
                 case BrowserType.Safari:
                     SafariOptions safariOptions = new SafariOptions();
                     safariOptions.Proxy = this.CurrentProxy();
-                    this.SetRemoteDriverOptions(driverCapabilitiesConf,settings, safariOptions);
+                    this.SetRemoteDriverOptions(driverCapabilitiesConf, settings, safariOptions);
                     this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, this.SetDriverOptions(safariOptions).ToCapabilities());
                     break;
                 case BrowserType.Edge:

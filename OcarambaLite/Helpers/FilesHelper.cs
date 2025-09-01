@@ -42,7 +42,6 @@ namespace Ocaramba.Helpers
         public static readonly char Separator = Path.DirectorySeparatorChar;
         private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
 
-
         /// <summary>
         /// Returns the file extension.
         /// </summary>

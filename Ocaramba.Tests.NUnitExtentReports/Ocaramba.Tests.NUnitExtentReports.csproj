@@ -11,9 +11,9 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
     <PackageReference Include="NLog" Version="6.0.3" />
     <PackageReference Include="NPOI" Version="2.7.4" />
-    <PackageReference Include="NUnit" Version="4.3.2" />
+    <PackageReference Include="NUnit" Version="4.4.0" />
     <PackageReference Include="NUnit.Runners" Version="3.12.0" />
-    <PackageReference Include="NUnit3TestAdapter" Version="5.0.0">
+    <PackageReference Include="NUnit3TestAdapter" Version="5.1.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -40,7 +40,7 @@
 
   <ItemGroup>
 
-    <PackageReference Include="SixLabors.ImageSharp" Version="2.1.11" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="3.1.11" />
     <None Update="appsettings.Linux.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

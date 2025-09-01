@@ -35,7 +35,6 @@ namespace Ocaramba.Helpers
     /// </summary>
     public static class PrintPerformanceResultsHelper
     {
-
          private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
@@ -59,7 +58,7 @@ namespace Ocaramba.Helpers
         /// Prints the performance summary of average duration in millisecond in TeamCity.
         /// </summary>
         /// <param name="measures">The instance of PerformanceHelper class.</param>
-        public static void PrintAverageDurationMillisecondsInTeamcity(PerformanceHelper measures)
+         public static void PrintAverageDurationMillisecondsInTeamcity(PerformanceHelper measures)
         {
             var groupedAverageDurations = measures.AllGroupedDurationsMilliseconds.Select(v =>
                 "\n##teamcity[testStarted name='" + v.StepName + "." + v.Browser + ".Average']" +
@@ -76,7 +75,7 @@ namespace Ocaramba.Helpers
         /// Prints the performance summary of percentiles 90 duration in millisecond in AppVeyor.
         /// </summary>
         /// <param name="measures">The instance of PerformanceHelper class.</param>
-        public static void PrintPercentiles90DurationMillisecondsInAppVeyor(PerformanceHelper measures)
+         public static void PrintPercentiles90DurationMillisecondsInAppVeyor(PerformanceHelper measures)
         {
             var groupedDurationsAppVeyor = measures.AllGroupedDurationsMilliseconds.Select(v =>
                 v.StepName + "." + v.Browser +
@@ -91,7 +90,7 @@ namespace Ocaramba.Helpers
         /// Prints the performance summary of average duration in millisecond in AppVeyor.
         /// </summary>
         /// <param name="measures">The instance of PerformanceHelper class.</param>
-        public static void PrintAverageDurationMillisecondsInAppVeyor(PerformanceHelper measures)
+         public static void PrintAverageDurationMillisecondsInAppVeyor(PerformanceHelper measures)
         {
             var groupedDurationsAppVeyor = measures.AllGroupedDurationsMilliseconds.Select(v =>
                 v.StepName + "." + v.Browser +
@@ -106,9 +105,8 @@ namespace Ocaramba.Helpers
         /// Prints test results in AppVeyor.
         /// </summary>
         /// <param name="measuresToPrint">Average load times for particular scenarios and browsers.</param>
-        public static void PrintResultsInAppVeyor(IOrderedEnumerable<string> measuresToPrint)
+         public static void PrintResultsInAppVeyor(IOrderedEnumerable<string> measuresToPrint)
         {
-
             // Use ProcessStartInfo class
             ProcessStartInfo startInfo = new ProcessStartInfo
             {
@@ -118,12 +116,9 @@ namespace Ocaramba.Helpers
                 WindowStyle = ProcessWindowStyle.Hidden,
             };
 
-
-
             for (int i = 0; i < measuresToPrint.Count(); i++)
             {
                 var text = "AddTest " + measuresToPrint.ElementAt(i);
-
 
                 startInfo.Arguments = text;
 
@@ -145,8 +140,6 @@ namespace Ocaramba.Helpers
                     break;
                 }
 
-
-
                 text = "Add-AppveyorTest -Name " + measuresToPrint.ElementAt(i);
                 using (var ps = PowerShell.Create())
                 {
@@ -156,7 +149,6 @@ namespace Ocaramba.Helpers
                         Debug.Write(result.ToString());
                     }
                 }
-
             }
         }
     }

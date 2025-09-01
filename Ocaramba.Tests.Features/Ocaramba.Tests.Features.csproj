@@ -13,7 +13,7 @@
     
     
     <PackageReference Include="NUnit.Runners" Version="3.12.0" />
-    <PackageReference Include="NUnit3TestAdapter" Version="5.0.0">
+    <PackageReference Include="NUnit3TestAdapter" Version="5.1.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -27,6 +27,7 @@
     <PackageReference Include="SpecFlow.NUnit" Version="3.9.74" />
     <PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="3.9.74" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+	 <PackageReference Include="Selenium.WebDriver.MSEdgeDriver" Version="139.0.3405.102" />
   </ItemGroup>
 
   <ItemGroup>

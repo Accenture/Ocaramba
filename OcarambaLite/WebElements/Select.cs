@@ -38,7 +38,6 @@ namespace Ocaramba.WebElements
     {
         private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
 
-
         /// <summary>
         /// The web element.
         /// </summary>

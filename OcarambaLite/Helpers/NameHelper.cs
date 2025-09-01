@@ -38,7 +38,6 @@ namespace Ocaramba.Helpers
         /// </summary>
         private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
 
-
         /// <summary>
         /// Create random name.
         /// </summary>

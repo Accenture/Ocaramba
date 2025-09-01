@@ -33,9 +33,7 @@ namespace Ocaramba.WebElements
     /// </summary>
     public class Table : WebElement
     {
-
         private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
-
 
         /// <summary>
         /// The web element.
