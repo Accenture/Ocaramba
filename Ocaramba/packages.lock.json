@@ -998,7 +998,7 @@
           "Microsoft.PowerShell.Commands.Diagnostics": "[7.4.11, )",
           "Microsoft.PowerShell.SDK": "[7.4.11, )",
           "Microsoft.WSMan.Management": "[7.4.11, )",
-          "NLog": "[6.0.1, )",
+          "NLog": "[6.0.3, )",
           "Selenium.Support": "[4.34.0, )",
           "Selenium.WebDriver": "[4.34.0, )",
           "System.Configuration.ConfigurationManager": "[9.0.7, )",

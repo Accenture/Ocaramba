@@ -20,13 +20,13 @@
 //     SOFTWARE.
 // </license>
 
-using System;
-using System.Globalization;
-using NLog;
-using Ocaramba;
-
 namespace OcarambaLite.Logger
 {
+    using System;
+    using System.Globalization;
+    using NLog;
+    using Ocaramba;
+
     /// <summary>
     /// Class for test logger.
     /// </summary>
@@ -35,13 +35,12 @@ namespace OcarambaLite.Logger
         /// <summary>
         /// The logger.
         /// </summary>
-
        private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
         /// The start test time.
         /// </summary>
-        private DateTime startTestTime;
+       private DateTime startTestTime;
 
         /// <summary>
         /// Logs the test starting.
@@ -58,7 +57,7 @@ namespace OcarambaLite.Logger
         /// Logs the test ending.
         /// </summary>
         /// <param name="driverContext">The driver context.</param>
-        public void LogTestEnding(DriverContext driverContext)
+       public void LogTestEnding(DriverContext driverContext)
         {
             var endTestTime = DateTime.Now;
             var timeInSec = (endTestTime - this.startTestTime).TotalSeconds;
@@ -71,7 +70,7 @@ namespace OcarambaLite.Logger
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="args">The arguments.</param>
-        public void Info(string message, params object[] args)
+       public void Info(string message, params object[] args)
         {
             Logger.Info(CultureInfo.CurrentCulture, message, args);
         }
@@ -81,7 +80,7 @@ namespace OcarambaLite.Logger
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="args">The arguments.</param>
-        public void Debug(string message, params object[] args)
+       public void Debug(string message, params object[] args)
         {
             Logger.Debug(CultureInfo.CurrentCulture, message, args);
         }
@@ -91,7 +90,7 @@ namespace OcarambaLite.Logger
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="args">The arguments.</param>
-        public void Trace(string message, params object[] args)
+       public void Trace(string message, params object[] args)
         {
             Logger.Trace(CultureInfo.CurrentCulture, message, args);
         }
@@ -101,7 +100,7 @@ namespace OcarambaLite.Logger
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="args">The arguments.</param>
-        public void Warn(string message, params object[] args)
+       public void Warn(string message, params object[] args)
         {
             Logger.Warn(CultureInfo.CurrentCulture, message, args);
         }
@@ -111,7 +110,7 @@ namespace OcarambaLite.Logger
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="args">The arguments.</param>
-        public void Error(string message, params object[] args)
+       public void Error(string message, params object[] args)
         {
             Logger.Error(CultureInfo.CurrentCulture, message, args);
         }
@@ -120,7 +119,7 @@ namespace OcarambaLite.Logger
         /// Logs the error.
         /// </summary>
         /// <param name="e">The e.</param>
-        public void LogError(Exception e)
+       public void LogError(Exception e)
         {
             this.Error($"Error occurred: {e}");
             throw e;

@@ -122,13 +122,9 @@
       },
       "SixLabors.ImageSharp": {
         "type": "Direct",
-        "requested": "[2.1.11, )",
-        "resolved": "2.1.11",
-        "contentHash": "tUvsejgzUmEbES114yLseRxmFiYlQbH5RyaYXUQsEL7ksDo1/kW+ZL1EfD6iSUfxj7LHU8p110oFvSrRfsaWSQ==",
-        "dependencies": {
-          "System.Runtime.CompilerServices.Unsafe": "5.0.0",
-          "System.Text.Encoding.CodePages": "5.0.0"
-        }
+        "requested": "[3.1.11, )",
+        "resolved": "3.1.11",
+        "contentHash": "JfPLyigLthuE50yi6tMt7Amrenr/fA31t2CvJyhy/kQmfulIBAqo5T/YFUSRHtuYPXRSaUHygFeh6Qd933EoSw=="
       },
       "System.Configuration.ConfigurationManager": {
         "type": "Direct",
@@ -1148,7 +1144,7 @@
         "dependencies": {
           "Microsoft.Extensions.Configuration.Json": "[9.0.7, )",
           "Microsoft.NET.Test.Sdk": "[17.14.1, )",
-          "NLog": "[6.0.1, )",
+          "NLog": "[6.0.3, )",
           "OcarambaLite": "[1.0.0, )",
           "Selenium.Support": "[4.34.0, )",
           "Selenium.WebDriver": "[4.34.0, )",
@@ -1169,7 +1165,7 @@
           "Microsoft.PowerShell.Commands.Diagnostics": "[7.4.11, )",
           "Microsoft.PowerShell.SDK": "[7.4.11, )",
           "Microsoft.WSMan.Management": "[7.4.11, )",
-          "NLog": "[6.0.1, )",
+          "NLog": "[6.0.3, )",
           "Selenium.Support": "[4.34.0, )",
           "Selenium.WebDriver": "[4.34.0, )",
           "System.Configuration.ConfigurationManager": "[9.0.7, )",

@@ -1,9 +1,9 @@
-echo '********************************************CloudProviderCrossBrowser tests********************************************'
+Write-Output '********************************************CloudProviderCrossBrowser tests********************************************'
         
-echo '********************************************BrowserStack tests********************************************'
+Write-Output '********************************************BrowserStack tests********************************************'
 $Env:ASPNETCORE_ENVIRONMENT="Linux"
 
-echo $Env:ASPNETCORE_ENVIRONMENT
+Write-Output $Env:ASPNETCORE_ENVIRONMENT
 
 dotnet vstest ./Ocaramba.Tests.BrowserStack/bin/Release/net8.0/Ocaramba.Tests.BrowserStack.dll /Logger:"trx;LogFileName=Ocaramba.Tests.BrowserStacknetcoreapp.xml"
 
@@ -11,6 +11,6 @@ Compress-Archive -Path "./Ocaramba.Tests.BrowserStack/bin/Release/net8.0/TestOut
 			  
 if($lastexitcode -ne 0)
  {
-  echo 'lastexitcode' $lastexitcode
+  Write-Output 'lastexitcode' $lastexitcode
  } 
 exit 0    

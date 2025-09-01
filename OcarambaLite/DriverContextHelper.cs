@@ -101,8 +101,6 @@ namespace Ocaramba
                 var pageSource = this.driver.PageSource;
 
                 pageSource = pageSource.Replace("<head>", string.Format(CultureInfo.CurrentCulture, "<head><base href=\"http://{0}\" target=\"_blank\">", BaseConfiguration.Host), StringComparison.InvariantCultureIgnoreCase);
-
-
                 pageSource = pageSource.Replace("<head>", string.Format(CultureInfo.CurrentCulture, "<head><base href=\"http://{0}\" target=\"_blank\">", BaseConfiguration.Host), StringComparison.InvariantCultureIgnoreCase);
 
                 File.WriteAllText(path, pageSource);
@@ -146,12 +144,10 @@ namespace Ocaramba
                 Logger.Debug(CultureInfo.CurrentCulture, "Checking JavaScript error(s) in browser");
                 try
                 {
-
                     jsErrors =
                         this.driver.Manage()
                             .Logs.GetLog(LogType.Browser)
                             .Where(x => BaseConfiguration.JavaScriptErrorTypes.Any(predicate: e => x.Message.Contains(e, StringComparison.InvariantCultureIgnoreCase)));
-
 
                     jsErrors =
                         this.driver.Manage()
@@ -196,7 +192,6 @@ namespace Ocaramba
             Proxy proxy = new Proxy
             {
                 HttpProxy = BaseConfiguration.HttpProxy ?? BaseConfiguration.Proxy,
-                FtpProxy = BaseConfiguration.FtpProxy ?? BaseConfiguration.Proxy,
                 SslProxy = BaseConfiguration.SslProxy ?? BaseConfiguration.Proxy,
                 SocksProxy = BaseConfiguration.SocksProxy ?? BaseConfiguration.Proxy,
             };
@@ -218,9 +213,7 @@ namespace Ocaramba
 
             firefoxArguments = ConfigurationManager.GetSection("FirefoxArguments") as NameValueCollection;
 
-
             firefoxArguments = BaseConfiguration.GetNameValueCollectionFromAppsettings("FirefoxArguments");
-
 
             // if there are any arguments
             if (firefoxArguments != null)
@@ -298,7 +291,6 @@ namespace Ocaramba
             }
 
             var setName = false;
-
 
             if (!setName && !string.IsNullOrEmpty(this.TestTitle))
             {

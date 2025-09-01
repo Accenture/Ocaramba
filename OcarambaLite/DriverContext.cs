@@ -315,7 +315,6 @@ namespace Ocaramba
                 chromeExtensions = ConfigurationManager.GetSection("ChromeExtensions") as NameValueCollection;
                 chromeArguments = ConfigurationManager.GetSection("ChromeArguments") as NameValueCollection;
 
-
                 chromePreferences = BaseConfiguration.GetNameValueCollectionFromAppsettings("ChromePreferences");
                 chromeExtensions = BaseConfiguration.GetNameValueCollectionFromAppsettings("ChromeExtensions");
                 chromeArguments = BaseConfiguration.GetNameValueCollectionFromAppsettings("chromeArguments");

@@ -22,15 +22,13 @@
 
 namespace Ocaramba
 {
-    using System.Collections.Generic;
-    using System.Collections.Specialized;
-
-    using Microsoft.Extensions.Configuration;
-
     using System;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Collections.Specialized;
     using System.Configuration;
     using System.Globalization;
+    using Microsoft.Extensions.Configuration;
     using NLog;
     using Ocaramba;
 
@@ -50,7 +48,6 @@ namespace Ocaramba
             .Build();
 
         private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
-
 
         /// <summary>
         /// Gets the Driver.
@@ -91,7 +88,6 @@ namespace Ocaramba
                 bool supportedBrowser = false;
                 string setting = null;
                 setting = Builder["appSettings:DriverCapabilities"];
-
 
                 Logger.Trace(CultureInfo.CurrentCulture, "Driver Capabilities value from settings file '{0}'", setting);
 
@@ -207,22 +203,6 @@ namespace Ocaramba
         }
 
         /// <summary>
-        /// Gets the ftp proxy.
-        /// </summary>
-        public static string FtpProxy
-        {
-            get
-            {
-                string setting = null;
-
-                setting = Builder["appSettings:ftpProxy"];
-
-                Logger.Trace(CultureInfo.CurrentCulture, "Gets the ftpProxy from settings file '{0}'", setting);
-                return setting;
-            }
-        }
-
-        /// <summary>
         /// Gets the ssl proxy.
         /// </summary>
         public static string SslProxy
@@ -301,7 +281,6 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-
 
                 setting = Builder["appSettings:password"];
 
@@ -557,7 +536,6 @@ namespace Ocaramba
 
                 setting = Builder["appSettings:PathToChromeDriverDirectory"];
 
-
                 Logger.Trace(CultureInfo.CurrentCulture, "Path to the directory containing Chrome Driver from settings file '{0}'", setting);
                 if (string.IsNullOrEmpty(setting))
                 {
@@ -736,7 +714,6 @@ namespace Ocaramba
             get
             {
                 string setting = null;
-
 
                 setting = Builder["appSettings:GetPageSourceEnabled"];
 
@@ -986,6 +963,5 @@ namespace Ocaramba
                 return setting;
             }
         }
-
     }
 }

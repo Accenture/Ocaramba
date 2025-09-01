@@ -38,7 +38,6 @@ namespace Ocaramba.Helpers
 
         private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
 
-
         /// <summary>
         /// The timer.
         /// </summary>
