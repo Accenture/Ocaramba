@@ -9,8 +9,8 @@ $filePath = ".\Ocaramba.Tests.BrowserStack\bin\Release\net8.0\browserstack.yml"
 
 $fileContent = Get-Content -Path $filePath
 
-$fileContent = $fileContent -replace "BROWSERSTACKUSER", "`$($env:MAPPED_ENV_BROWSERSTACKUSER)"
-$fileContent = $fileContent -replace "BROWSERSTACKKEY", "`$($env:MAPPED_ENV_BROWSERSTACKKEY)"
+$fileContent = $fileContent -replace "BROWSERSTACK_USERNAME", "`$($env:MAPPED_ENV_BROWSERSTACKUSER)"
+$fileContent = $fileContent -replace "BROWSERSTACK_ACCESS_KEY", "`$($env:MAPPED_ENV_BROWSERSTACKKEY)"
 
 # Write the updated content back to the file
 Set-Content -Path $filePath -Value $fileContent
