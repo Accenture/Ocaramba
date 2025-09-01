@@ -239,19 +239,19 @@ jobs:
           export ASPNETCORE_ENVIRONMENT=Linux
           echo $ASPNETCORE_ENVIRONMENT
           sed -i -e '/Documentation/,+5 d' -e '/Ocaramba.Tests.Appium/,+1 d' -e '/Ocaramba.UnitTests/,+1 d' -e '/Ocaramba.Tests.NUnit/,+1 d' -e '/Ocaramba.Tests.CloudProviderCrossBrowser/,+1 d' -e '/Ocaramba.Tests.MsTest/,+1 d' -e '/Ocaramba.Tests.Features/,+1 d' -e '/Ocaramba.Tests.Xunit/,+1 d' -e '/Ocaramba.Tests.Angular/,+4 d' -e '/Ocaramba.Tests.NUnitExtentReports/,+1 d' ./Ocaramba.sln
-      - run: dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
       - name: "BrowserStack Env Setup"
         uses: "browserstack/github-actions/setup-env@master"
         with:
-          username: ${{ secrets.BROWSERSTACKUSER }}
-          access-key: ${{ secrets.BROWSERSTACKKEY }}
+          username: ${{ secrets.BROWSERSTACK_USERNAME }}
+          access-key: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
           build-name: "BUILD_INFO"
           project-name: "REPO_NAME"
+      - run: dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
       - shell: pwsh
         if: true
         env:
-          MAPPED_ENV_BROWSERSTACKKEY: ${{ secrets.BROWSERSTACKKEY }}
-          MAPPED_ENV_BROWSERSTACKUSER: ${{ secrets.BROWSERSTACKUSER }}
+          MAPPED_ENV_BROWSERSTACKKEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+          MAPPED_ENV_BROWSERSTACKUSER: ${{ secrets.BROWSERSTACK_USERNAME }}
           MAPPED_ENV_TESTINGBOTKEY: ${{ secrets.testingbotkey }}
           MAPPED_ENV_TESTINGBOTSECRET: ${{ secrets.testingbotsecret }}
           MAPPED_ENV_SAUCELABSACCESSKEY: ${{ secrets.saucelabsaccessKey }}
@@ -284,8 +284,8 @@ jobs:
       - shell: pwsh
         if: true
         env:
-          MAPPED_ENV_BROWSERSTACKKEY: ${{ secrets.BROWSERSTACKKEY }}
-          MAPPED_ENV_BROWSERSTACKUSER: ${{ secrets.BROWSERSTACKUSER }}
+          MAPPED_ENV_BROWSERSTACKKEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+          MAPPED_ENV_BROWSERSTACKUSER: ${{ secrets.BROWSERSTACK_USERNAME }}
           MAPPED_ENV_TESTINGBOTKEY: ${{ secrets.testingbotkey }}
           MAPPED_ENV_TESTINGBOTSECRET: ${{ secrets.testingbotsecret }}
           MAPPED_ENV_SAUCELABSACCESSKEY: ${{ secrets.saucelabsaccessKey }}
@@ -446,18 +446,18 @@ jobs:
             ${{ runner.os }}-nuget-
       - name: NuGet restore
         run: nuget restore ${{ env.solution }}
-      - run: dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
       - name: "BrowserStack Env Setup"
         uses: "browserstack/github-actions/setup-env@master"
         with:
-          username: ${{ secrets.BROWSERSTACKUSER }}
-          access-key: ${{ secrets.BROWSERSTACKKEY }}
+          username: ${{ secrets.BROWSERSTACK_USERNAME }}
+          access-key: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
           build-name: "BUILD_INFO"
           project-name: "REPO_NAME"
+      - run: dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
       - run: ./scripts/ExecutingTestsOnWindowsGithubActions4.ps1
         env:
-          MAPPED_ENV_BROWSERSTACKKEY: ${{ secrets.BROWSERSTACKKEY }}
-          MAPPED_ENV_BROWSERSTACKUSER: ${{ secrets.BROWSERSTACKUSER }}
+          MAPPED_ENV_BROWSERSTACKKEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+          MAPPED_ENV_BROWSERSTACKUSER: ${{ secrets.BROWSERSTACK_USERNAME }}
           MAPPED_ENV_TESTINGBOTKEY: ${{ secrets.testingbotkey }}
           MAPPED_ENV_TESTINGBOTSECRET: ${{ secrets.testingbotsecret }}
           MAPPED_ENV_SAUCELABSACCESSKEY: ${{ secrets.saucelabsaccessKey }}
