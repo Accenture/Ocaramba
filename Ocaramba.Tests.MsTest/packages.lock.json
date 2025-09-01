@@ -70,6 +70,12 @@
         "resolved": "4.14.0",
         "contentHash": "1oylYTK0wHXnmMC5aUH8Qf80PCKTfizLYyOrQkokf1l+FbRzAifM9R3U76V3tq+BhIwx5AUc+pboC0YZ5CnIVg=="
       },
+      "Selenium.WebDriver.MSEdgeDriver": {
+        "type": "Direct",
+        "requested": "[139.0.3405.102, )",
+        "resolved": "139.0.3405.102",
+        "contentHash": "Hqplj4ymjYg8VnYrUiohV7OoN77iaUjqmEKGXxMtJ13yXWEfKXQZ58yNIk7z3M9bhq8UdHA8tLHTC4V40TByLg=="
+      },
       "System.Configuration.ConfigurationManager": {
         "type": "Direct",
         "requested": "[9.0.7, )",

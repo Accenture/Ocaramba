@@ -12,6 +12,7 @@
     <PackageReference Include="NPOI" Version="2.7.4" />
     <PackageReference Include="NUnit" Version="4.4.0" />
     <PackageReference Include="NUnit.Runners" Version="3.12.0" />
+    <PackageReference Include="Selenium.WebDriver.MSEdgeDriver" Version="139.0.3405.102" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="9.0.7" />
     <PackageReference Include="System.Text.Json" Version="9.0.7" />
     <PackageReference Include="System.Memory" Version="4.6.3" />
