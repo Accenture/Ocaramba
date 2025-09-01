@@ -153,7 +153,6 @@ namespace Ocaramba
                         this.driver.Manage()
                             .Logs.GetLog(LogType.Browser)
                             .Where(x => BaseConfiguration.JavaScriptErrorTypes.Any(predicate: e => x.Message.Contains(e, StringComparison.InvariantCultureIgnoreCase)));
-
                 }
                 catch (NullReferenceException)
                 {
@@ -265,6 +264,7 @@ namespace Ocaramba
                     }
                 }
             }
+
             if (!setName && !string.IsNullOrEmpty(this.TestTitle))
             {
                 options.AddAdditionalOption("name", this.TestTitle);
@@ -306,7 +306,6 @@ namespace Ocaramba
                 browserOptions.AddAdditionalOption("tb:options", capabilities);
             }
 
-
             if (BaseConfiguration.RemoteWebDriverHub.ToString().ToLower(CultureInfo.CurrentCulture).Contains("saucelabs", StringComparison.InvariantCultureIgnoreCase))
             {
                 browserOptions.AddAdditionalOption("sauce:options", capabilities);
@@ -315,7 +314,6 @@ namespace Ocaramba
             {
                 browserOptions.AddAdditionalOption("tb:options", capabilities);
             }
-
         }
 
         private BrowserType GetBrowserTypeForRemoteDriver(NameValueCollection settings)

@@ -35,7 +35,6 @@ namespace Ocaramba.Helpers
     /// </summary>
     public static class PrintPerformanceResultsHelper
     {
-
          private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
@@ -117,12 +116,9 @@ namespace Ocaramba.Helpers
                 WindowStyle = ProcessWindowStyle.Hidden,
             };
 
-
-
             for (int i = 0; i < measuresToPrint.Count(); i++)
             {
                 var text = "AddTest " + measuresToPrint.ElementAt(i);
-
 
                 startInfo.Arguments = text;
 
@@ -144,8 +140,6 @@ namespace Ocaramba.Helpers
                     break;
                 }
 
-
-
                 text = "Add-AppveyorTest -Name " + measuresToPrint.ElementAt(i);
                 using (var ps = PowerShell.Create())
                 {
@@ -155,7 +149,6 @@ namespace Ocaramba.Helpers
                         Debug.Write(result.ToString());
                     }
                 }
-
             }
         }
     }

@@ -37,6 +37,10 @@ namespace Ocaramba
     /// </summary>
     public static class BaseConfiguration
     {
+        /// <summary>
+        /// Gets the value of the "ASPNETCORE_ENVIRONMENT" environment variable, which specifies the current environment
+        /// (e.g., Development, Staging, Production) for the application.
+        /// </summary>
         public static readonly string Env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
         /// <summary>

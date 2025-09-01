@@ -36,7 +36,6 @@ namespace Ocaramba
     {
         private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
 
-
         /// <summary>
         /// Verify group of assets.
         /// </summary>

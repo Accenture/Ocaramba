@@ -35,7 +35,6 @@ namespace Ocaramba.Helpers
     /// </summary>
     public class PerformanceHelper
     {
-
         private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
