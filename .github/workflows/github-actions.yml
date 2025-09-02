@@ -239,23 +239,13 @@ jobs:
           export ASPNETCORE_ENVIRONMENT=Linux
           echo $ASPNETCORE_ENVIRONMENT
           sed -i -e '/Documentation/,+5 d' -e '/Ocaramba.Tests.Appium/,+1 d' -e '/Ocaramba.UnitTests/,+1 d' -e '/Ocaramba.Tests.NUnit/,+1 d' -e '/Ocaramba.Tests.CloudProviderCrossBrowser/,+1 d' -e '/Ocaramba.Tests.MsTest/,+1 d' -e '/Ocaramba.Tests.Features/,+1 d' -e '/Ocaramba.Tests.Xunit/,+1 d' -e '/Ocaramba.Tests.Angular/,+4 d' -e '/Ocaramba.Tests.NUnitExtentReports/,+1 d' ./Ocaramba.sln
-      - run: dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
-      - name: "BrowserStack Env Setup"
-        uses: "browserstack/github-actions/setup-env@master"
-        with:
-          username: ${{ secrets.BROWSERSTACK_USERNAME }}
-          access-key: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
-          build-name: "BUILD_INFO"
-          project-name: "REPO_NAME"
+      - shell: pwsh
+        run: |
+          $env:BROWSERSTACK_USERNAME="${{ secrets.BROWSERSTACK_USERNAME }}"
+          $env:BROWSERSTACK_ACCESS_KEY="${{ secrets.BROWSERSTACK_ACCESS_KEY }}"
+          dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
       - shell: pwsh
         if: true
-        env:
-          MAPPED_ENV_BROWSERSTACKKEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
-          MAPPED_ENV_BROWSERSTACKUSER: ${{ secrets.BROWSERSTACK_USERNAME }}
-          MAPPED_ENV_TESTINGBOTKEY: ${{ secrets.testingbotkey }}
-          MAPPED_ENV_TESTINGBOTSECRET: ${{ secrets.testingbotsecret }}
-          MAPPED_ENV_SAUCELABSACCESSKEY: ${{ secrets.saucelabsaccessKey }}
-          MAPPED_ENV_SAUCELABSUSERNAME: ${{ secrets.saucelabsusername }}
         run: ./scripts/ExecutingTestsOnLinuxBrowserStackGithubActions.ps1
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action/linux@v2
@@ -439,21 +429,7 @@ jobs:
           $env:BROWSERSTACK_USERNAME="${{ secrets.BROWSERSTACK_USERNAME }}"
           $env:BROWSERSTACK_ACCESS_KEY="${{ secrets.BROWSERSTACK_ACCESS_KEY }}"
           dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
-      - name: "BrowserStack Env Setup"
-        uses: "browserstack/github-actions/setup-env@master"
-        with:
-          username: ${{ secrets.BROWSERSTACK_USERNAME }}
-          access-key: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
-          build-name: "BUILD_INFO"
-          project-name: "REPO_NAME"
       - run: ./scripts/ExecutingTestsOnWindowsGithubActions4.ps1
-        env:
-          MAPPED_ENV_BROWSERSTACKKEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
-          MAPPED_ENV_BROWSERSTACKUSER: ${{ secrets.BROWSERSTACK_USERNAME }}
-          MAPPED_ENV_TESTINGBOTKEY: ${{ secrets.testingbotkey }}
-          MAPPED_ENV_TESTINGBOTSECRET: ${{ secrets.testingbotsecret }}
-          MAPPED_ENV_SAUCELABSACCESSKEY: ${{ secrets.saucelabsaccessKey }}
-          MAPPED_ENV_SAUCELABSUSERNAME: ${{ secrets.saucelabsusername }}
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action/windows@v2
         if: false
