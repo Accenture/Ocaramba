@@ -432,16 +432,13 @@ jobs:
         uses: nuget/setup-nuget@v2
         with:
           nuget-version: latest
-      - name: Cache
-        uses: actions/cache@v4
-        with:
-          path: ${{ github.workspace }}\.nuget\packages
-          key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }} #hash of project files
-          restore-keys: |
-            ${{ runner.os }}-nuget-
       - name: NuGet restore
         run: nuget restore ${{ env.solution }}
-      - run: dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
+      - shell: pwsh
+        run: |
+          $env:BROWSERSTACK_USERNAME="${{ secrets.BROWSERSTACK_USERNAME }}"
+          $env:BROWSERSTACK_ACCESS_KEY="${{ secrets.BROWSERSTACK_ACCESS_KEY }}"
+          dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
       - name: "BrowserStack Env Setup"
         uses: "browserstack/github-actions/setup-env@master"
         with:
