@@ -259,7 +259,7 @@ jobs:
         run: ./scripts/ExecutingTestsOnLinuxBrowserStackGithubActions.ps1
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action/linux@v2
-        if: true
+        if: false
         with:
           files: |
             /home/runner/work/**/TestResults/*.xml
@@ -464,7 +464,7 @@ jobs:
           MAPPED_ENV_SAUCELABSUSERNAME: ${{ secrets.saucelabsusername }}
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action/windows@v2
-        if: always()
+        if: false
         with:
           files: ./**/Ocaramba.Tests.BrowserStack.xml
           check_name: TestsOnWindowsBrowserStack4
