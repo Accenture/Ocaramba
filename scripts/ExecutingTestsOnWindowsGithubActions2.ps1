@@ -13,7 +13,7 @@ dotnet vstest .\Ocaramba.Tests.Xunit\bin\Release\net8.0\Ocaramba.Tests.Xunit.dll
 
 dotnet vstest .\Ocaramba.Tests.MsTest\bin\Release\net8.0\Ocaramba.Tests.MsTest.dll  /TestCaseFilter:"(TestCategory!=TakingScreehShots)" /Parallel /Logger:"trx;LogFileName=Ocaramba.Tests.MsTest.xml"
 
-dotnet vstest .\Ocaramba.UnitTests\bin\Release\net8.0\Ocaramba.UnitTests.dll /TestCaseFilter:"(TestCategory!=TakingScreehShots)" /Parallel /Logger:"trx;LogFileName=Ocaramba.Tests.UnitTests.xml"
+dotnet vstest .\Ocaramba.UnitTests\bin\Release\net8.0\Ocaramba.UnitTests.dll  /Parallel /Logger:"trx;LogFileName=Ocaramba.Tests.UnitTests.xml"
 
 
 echo '********************************************EdgeChrominum tests********************************************'
