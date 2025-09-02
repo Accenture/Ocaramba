@@ -843,34 +843,6 @@ namespace Ocaramba
         }
 
         /// <summary>
-        /// Converting settings from appsettings.json into the NameValueCollection, key - value pairs.
-        /// </summary>
-        /// <param name="preferences">Section name in appsettings.json file.</param>
-        /// <returns>Settings.</returns>
-        public static NameValueCollection GetNameValueCollectionFromAppsettings(string preferences)
-        {
-            NameValueCollection preferencesCollection = new NameValueCollection();
-            var jsonSettings = Builder.GetSection(preferences).Get<Dictionary<string, object>>();
-            if (jsonSettings == null)
-            {
-                return preferencesCollection;
-            }
-
-            foreach (var kvp in jsonSettings)
-            {
-                string value = null;
-                if (kvp.Value != null)
-                {
-                    value = kvp.Value.ToString();
-                }
-
-                preferencesCollection.Add(kvp.Key.ToString(), value);
-            }
-
-            return preferencesCollection;
-        }
-
-        /// <summary>
         /// Gets Appium App Package from configuration.
         /// </summary>
         public static string AppiumAppPackage
@@ -966,6 +938,34 @@ namespace Ocaramba
                 Logger.Trace(CultureInfo.CurrentCulture, "Gets the AppiumServerUrl from settings file '{0}'", setting);
                 return setting;
             }
+        }
+
+        /// <summary>
+        /// Converting settings from appsettings.json into the NameValueCollection, key - value pairs.
+        /// </summary>
+        /// <param name="preferences">Section name in appsettings.json file.</param>
+        /// <returns>Settings.</returns>
+        public static NameValueCollection GetNameValueCollectionFromAppsettings(string preferences)
+        {
+            NameValueCollection preferencesCollection = new NameValueCollection();
+            var jsonSettings = Builder.GetSection(preferences).Get<Dictionary<string, object>>();
+            if (jsonSettings == null)
+            {
+                return preferencesCollection;
+            }
+
+            foreach (var kvp in jsonSettings)
+            {
+                string value = null;
+                if (kvp.Value != null)
+                {
+                    value = kvp.Value.ToString();
+                }
+
+                preferencesCollection.Add(kvp.Key.ToString(), value);
+            }
+
+            return preferencesCollection;
         }
     }
 }
