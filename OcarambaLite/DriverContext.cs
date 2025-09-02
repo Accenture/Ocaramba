@@ -69,14 +69,14 @@ namespace Ocaramba
         private TestLogger logTest;
 
         /// <summary>
-        /// Gets or sets the Environment Browsers from App.config.
-        /// </summary>
-        public string CrossBrowserEnvironment { get; set; }
-
-        /// <summary>
         /// Occurs when [driver options set].
         /// </summary>
         public event EventHandler<DriverOptionsSetEventArgs> DriverOptionsSet;
+
+        /// <summary>
+        /// Gets or sets the Environment Browsers from App.config.
+        /// </summary>
+        public string CrossBrowserEnvironment { get; set; }
 
         /// <summary>
         /// Gets instance of Performance PerformanceMeasures class.
@@ -623,11 +623,48 @@ namespace Ocaramba
             }
         }
 
+        /// <summary>
+        /// Maximizes the current window if it is not already maximized.
+        /// </summary>
+        public void WindowMaximize()
+        {
+            this.driver.Manage().Window.Maximize();
+        }
+
+        /// <summary>
+        /// Deletes all cookies from the page.
+        /// </summary>
+        public void DeleteAllCookies()
+        {
+            this.driver.Manage().Cookies.DeleteAllCookies();
+        }
+
+        /// <summary>
+        /// Stop browser instance.
+        /// </summary>
+        public void Stop()
+        {
+            if (this.serviceChrome != null)
+            {
+                this.serviceChrome.Dispose();
+            }
+
+            if (this.serviceEdge != null)
+            {
+                this.serviceEdge.Dispose();
+            }
+
+            if (this.driver != null)
+            {
+                this.driver.Quit();
+            }
+        }
+
         private void StartFirefox()
         {
             if (!string.IsNullOrEmpty(BaseConfiguration.FirefoxBrowserExecutableLocation))
             {
-                this.FirefoxOptions.BrowserExecutableLocation = BaseConfiguration.FirefoxBrowserExecutableLocation;
+                this.FirefoxOptions.BinaryLocation = BaseConfiguration.FirefoxBrowserExecutableLocation;
             }
 
             FirefoxDriverService serviceFirefox = FirefoxDriverService.CreateDefaultService();
@@ -722,43 +759,6 @@ namespace Ocaramba
             else
             {
                 throw new NotSupportedException($"Appium platform '{BaseConfiguration.AppiumPlatformName}' is not supported. Use 'Android' or 'iOS'.");
-            }
-        }
-
-        /// <summary>
-        /// Maximizes the current window if it is not already maximized.
-        /// </summary>
-        public void WindowMaximize()
-        {
-            this.driver.Manage().Window.Maximize();
-        }
-
-        /// <summary>
-        /// Deletes all cookies from the page.
-        /// </summary>
-        public void DeleteAllCookies()
-        {
-            this.driver.Manage().Cookies.DeleteAllCookies();
-        }
-
-        /// <summary>
-        /// Stop browser instance.
-        /// </summary>
-        public void Stop()
-        {
-            if (this.serviceChrome != null)
-            {
-                this.serviceChrome.Dispose();
-            }
-
-            if (this.serviceEdge != null)
-            {
-                this.serviceEdge.Dispose();
-            }
-
-            if (this.driver != null)
-            {
-                this.driver.Quit();
             }
         }
 

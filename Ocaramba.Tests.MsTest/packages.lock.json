@@ -39,18 +39,18 @@
       },
       "Selenium.Support": {
         "type": "Direct",
-        "requested": "[4.34.0, )",
-        "resolved": "4.34.0",
-        "contentHash": "+GROvBcro1ayU9PlGu4Q6xGyRk+wlbwGrmL3lZqm+s6T+NVs0Fmp2r8t6DvKMY/ZaDh9svkvxqN808+EnFPhDw==",
+        "requested": "[4.35.0, )",
+        "resolved": "4.35.0",
+        "contentHash": "K6DiLdDQNDSWI/zh14bk9vRjW8vEX2mhMI2Cq8bD72FM5rOnLhQwZABJHrWCZ3U1wb7KFFd7iQeUhvpyHVt2AA==",
         "dependencies": {
-          "Selenium.WebDriver": "4.34.0"
+          "Selenium.WebDriver": "4.35.0"
         }
       },
       "Selenium.WebDriver": {
         "type": "Direct",
-        "requested": "[4.34.0, )",
-        "resolved": "4.34.0",
-        "contentHash": "uNx+GF7WugHDPV2zpGDPlbSn3STQ6n0xFskFSeJdhEuuUTkIDfAsYnjVUiQidWDpy7mKzTz53ae7Thjghl3dng=="
+        "requested": "[4.35.0, )",
+        "resolved": "4.35.0",
+        "contentHash": "C9OrObS2KLyUQDJNRY883JAc4n5q58pBYmY954hf+lGMQQcsz4Ias2mk91lHkLXFX+2qMttya4df9lGP1SLiGQ=="
       },
       "Selenium.WebDriver.ChromeDriver": {
         "type": "Direct",
@@ -937,8 +937,8 @@
           "Microsoft.NET.Test.Sdk": "[17.14.1, )",
           "NLog": "[6.0.3, )",
           "OcarambaLite": "[1.0.0, )",
-          "Selenium.Support": "[4.34.0, )",
-          "Selenium.WebDriver": "[4.34.0, )",
+          "Selenium.Support": "[4.35.0, )",
+          "Selenium.WebDriver": "[4.35.0, )",
           "Selenium.WebDriver.ChromeDriver": "[138.0.7204.9400, )",
           "Selenium.WebDriver.GeckoDriver": "[0.36.0, )",
           "System.Configuration.ConfigurationManager": "[9.0.7, )",
@@ -957,8 +957,8 @@
           "Microsoft.PowerShell.SDK": "[7.4.11, )",
           "Microsoft.WSMan.Management": "[7.4.11, )",
           "NLog": "[6.0.3, )",
-          "Selenium.Support": "[4.34.0, )",
-          "Selenium.WebDriver": "[4.34.0, )",
+          "Selenium.Support": "[4.35.0, )",
+          "Selenium.WebDriver": "[4.35.0, )",
           "System.Configuration.ConfigurationManager": "[9.0.7, )",
           "System.Text.Json": "[9.0.7, )"
         }

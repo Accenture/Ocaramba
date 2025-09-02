@@ -228,7 +228,7 @@ jobs:
         if: always()
         with:
           name: ExecutingTestsOnAndroid
-          path: ./Ocaramba.Tests.Appium/bin/Release/net8.0/ExecutingTestsOnAndroid${{ github.run_id }}.zip
+          path: ./Ocaramba.Tests.Appium/bin/Release/net8.0/ExecutingTestsOnAndroid.zip
   test_Stage_RunTestsOnLinuxBrowserStack:
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -239,27 +239,21 @@ jobs:
           export ASPNETCORE_ENVIRONMENT=Linux
           echo $ASPNETCORE_ENVIRONMENT
           sed -i -e '/Documentation/,+5 d' -e '/Ocaramba.Tests.Appium/,+1 d' -e '/Ocaramba.UnitTests/,+1 d' -e '/Ocaramba.Tests.NUnit/,+1 d' -e '/Ocaramba.Tests.CloudProviderCrossBrowser/,+1 d' -e '/Ocaramba.Tests.MsTest/,+1 d' -e '/Ocaramba.Tests.Features/,+1 d' -e '/Ocaramba.Tests.Xunit/,+1 d' -e '/Ocaramba.Tests.Angular/,+4 d' -e '/Ocaramba.Tests.NUnitExtentReports/,+1 d' ./Ocaramba.sln
-      - name: "BrowserStack Env Setup"
-        uses: "browserstack/github-actions/setup-env@master"
-        with:
-          username: ${{ secrets.BROWSERSTACK_USERNAME }}
-          access-key: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
-          build-name: "BUILD_INFO"
-          project-name: "REPO_NAME"
-      - run: dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
+      - shell: pwsh
+        run: |
+          $env:BROWSERSTACK_USERNAME="${{ secrets.BROWSERSTACK_USERNAME }}"
+          $env:BROWSERSTACK_ACCESS_KEY="${{ secrets.BROWSERSTACK_ACCESS_KEY }}"
+          $env:BROWSERSTACK_SDK_LOG_LEVEL="debug"
+          dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
       - shell: pwsh
         if: true
-        env:
-          MAPPED_ENV_BROWSERSTACKKEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
-          MAPPED_ENV_BROWSERSTACKUSER: ${{ secrets.BROWSERSTACK_USERNAME }}
-          MAPPED_ENV_TESTINGBOTKEY: ${{ secrets.testingbotkey }}
-          MAPPED_ENV_TESTINGBOTSECRET: ${{ secrets.testingbotsecret }}
-          MAPPED_ENV_SAUCELABSACCESSKEY: ${{ secrets.saucelabsaccessKey }}
-          MAPPED_ENV_SAUCELABSUSERNAME: ${{ secrets.saucelabsusername }}
         run: ./scripts/ExecutingTestsOnLinuxBrowserStackGithubActions.ps1
+        env:
+          BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+          BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action/linux@v2
-        if: true
+        if: false
         with:
           files: |
             /home/runner/work/**/TestResults/*.xml
@@ -351,11 +345,6 @@ jobs:
           check_name: TestOnWindows1
       - uses: actions/upload-artifact@v4
         with:
-          path: ExtentReports${{ github.run_id }}.zip
-          name: ExtentTestReport
-        if: always()
-      - uses: actions/upload-artifact@v4
-        with:
           path: WindowsCore1${{ github.run_id }}.zip
           name: WindowsCore1
         if: always()
@@ -437,34 +426,20 @@ jobs:
         uses: nuget/setup-nuget@v2
         with:
           nuget-version: latest
-      - name: Cache
-        uses: actions/cache@v4
-        with:
-          path: ${{ github.workspace }}\.nuget\packages
-          key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }} #hash of project files
-          restore-keys: |
-            ${{ runner.os }}-nuget-
       - name: NuGet restore
         run: nuget restore ${{ env.solution }}
-      - name: "BrowserStack Env Setup"
-        uses: "browserstack/github-actions/setup-env@master"
-        with:
-          username: ${{ secrets.BROWSERSTACK_USERNAME }}
-          access-key: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
-          build-name: "BUILD_INFO"
-          project-name: "REPO_NAME"
-      - run: dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
+      - shell: pwsh
+        run: |
+          $env:BROWSERSTACK_USERNAME="${{ secrets.BROWSERSTACK_USERNAME }}"
+          $env:BROWSERSTACK_ACCESS_KEY="${{ secrets.BROWSERSTACK_ACCESS_KEY }}"
+          dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
       - run: ./scripts/ExecutingTestsOnWindowsGithubActions4.ps1
         env:
-          MAPPED_ENV_BROWSERSTACKKEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
-          MAPPED_ENV_BROWSERSTACKUSER: ${{ secrets.BROWSERSTACK_USERNAME }}
-          MAPPED_ENV_TESTINGBOTKEY: ${{ secrets.testingbotkey }}
-          MAPPED_ENV_TESTINGBOTSECRET: ${{ secrets.testingbotsecret }}
-          MAPPED_ENV_SAUCELABSACCESSKEY: ${{ secrets.saucelabsaccessKey }}
-          MAPPED_ENV_SAUCELABSUSERNAME: ${{ secrets.saucelabsusername }}
+          BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+          BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action/windows@v2
-        if: always()
+        if: false
         with:
           files: ./**/Ocaramba.Tests.BrowserStack.xml
           check_name: TestsOnWindowsBrowserStack4
@@ -494,12 +469,8 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action/linux@v2
         if: always()
         with:
-          files: /home/runner/work/**/TestResults/*.xml
+          files: ./**/Ocaramba.Tests.*.xml
           check_name: TestsOnWindows5SeleniumGrid
-      - uses: actions/upload-artifact@v4
-        with:
-          path: ${{ env.TestResultsDirWindows }}\*.xml
-          name: WindowsCore5
       - uses: actions/upload-artifact@v4
         with:
           path: WindowsCore5${{ github.run_id }}.zip

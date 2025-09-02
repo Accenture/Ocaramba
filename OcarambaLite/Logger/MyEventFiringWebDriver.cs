@@ -34,7 +34,6 @@ namespace Ocaramba.Logger
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-
         /// <summary>
         /// Initializes a new instance of the <see cref="MyEventFiringWebDriver"/> class.
         /// </summary>

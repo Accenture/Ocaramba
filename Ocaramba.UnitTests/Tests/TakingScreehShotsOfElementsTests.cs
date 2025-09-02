@@ -31,12 +31,9 @@ namespace Ocaramba.UnitTests.Tests
     [TestFixture]
     [Parallelizable(ParallelScope.Fixtures)]
     [Category("TakingScreehShots")] 
-    [Category("NotImplementedInCoreOrUploadDownload")]
     public class TakingScreehShotsOfElementsTests : ProjectTestBase
     {
-
         string folder = TestContext.CurrentContext.TestDirectory;
-
 
         [Test]
         public void TakingScreehShotsOfElementInIFrameTest()
@@ -44,27 +41,24 @@ namespace Ocaramba.UnitTests.Tests
             var internetPage = new InternetPage(this.DriverContext).OpenHomePage();
             internetPage.GoToIFramePage();
             IFramePage page = new IFramePage(this.DriverContext);
-            var path = page.TakeScreenShotsOfTextInIFrame(folder + FilesHelper.Separator + BaseConfiguration.ScreenShotFolder, "TextWithinIFrame" + BaseConfiguration.TestBrowser);
+            var path = page.TakeScreenShotsOfTextInIFrame(folder + FilesHelper.Separator + BaseConfiguration.ScreenShotFolder, "TextWithinIFrame" + BaseConfiguration.TestBrowser + ".png");
             var path2 = folder + FilesHelper.Separator + BaseConfiguration.ScreenShotFolder + FilesHelper.Separator + "TextWithinIFrameChromeError.png";
-            bool flag = true;
+            var diffOut = Path.Combine(folder, BaseConfiguration.ScreenShotFolder, $"{BaseConfiguration.TestBrowser}TextWithinIFrameDIFF.png");
+            double err;
             using (var img1 = new MagickImage(path))
-            {
-                using (var img2 = new MagickImage(path2))
+            using (var img2 = new MagickImage(path2))
+            {            
+                using (var diff = img1.Compare(img2, ErrorMetric.RootMeanSquared, Channels.RGB, out err))
                 {
-                    using (var imgDiff = new MagickImage())
+   
+                    if(err > 0)
                     {
-                        img1.Compose = CompositeOperator.Src;
-                        img1.Compare(img2, ErrorMetric.MeanAbsolute, Channels.RGB);
-                        flag = img1.Equals(img2);
-                        imgDiff.Write(folder + FilesHelper.Separator + BaseConfiguration.ScreenShotFolder + FilesHelper.Separator + BaseConfiguration.TestBrowser + "TextWithinIFrameDIFF.png");
+                        diff.Write(diffOut);
                     }
                 }
             }
 
-
-
-
-            Assert.That(flag, Is.False);
+            Assert.That(err, Is.GreaterThan(0)); // expect images to differ
         }
 
         [Test]

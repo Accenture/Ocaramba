@@ -42,7 +42,7 @@ namespace Ocaramba.Tests.NUnitExtentReports
         private readonly DriverContext driverContext = new DriverContext();
         
         [ThreadStatic]
-        private ExtentTest testContainer;
+        private static ExtentTest testContainer;
 
         [ThreadStatic]
         public static ExtentTest test;
@@ -80,7 +80,7 @@ namespace Ocaramba.Tests.NUnitExtentReports
         public void BeforeClass()
         {
 
-            this.testContainer = TestExecutionManager.extent.CreateTest(TestContext.CurrentContext.Test.ClassName);
+            testContainer = TestExecutionManager.extent.CreateTest(TestContext.CurrentContext.Test.ClassName);
             this.DriverContext.CurrentDirectory = Directory.GetCurrentDirectory();
             this.DriverContext.Start();
         }
@@ -104,7 +104,7 @@ namespace Ocaramba.Tests.NUnitExtentReports
         [SetUp]
         public void BeforeTest()
         {
-            test = this.testContainer.CreateNode(TestContext.CurrentContext.Test.Name);
+            test = testContainer.CreateNode(TestContext.CurrentContext.Test.Name);
             this.DriverContext.TestTitle = TestContext.CurrentContext.Test.Name;
             this.LogTest.LogTestStarting(this.driverContext);
         }
