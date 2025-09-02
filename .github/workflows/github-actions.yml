@@ -243,6 +243,7 @@ jobs:
         run: |
           $env:BROWSERSTACK_USERNAME="${{ secrets.BROWSERSTACK_USERNAME }}"
           $env:BROWSERSTACK_ACCESS_KEY="${{ secrets.BROWSERSTACK_ACCESS_KEY }}"
+          $env:BROWSERSTACK_SDK_LOG_LEVEL="debug"
           dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
       - shell: pwsh
         if: true
@@ -428,6 +429,7 @@ jobs:
         run: |
           $env:BROWSERSTACK_USERNAME="${{ secrets.BROWSERSTACK_USERNAME }}"
           $env:BROWSERSTACK_ACCESS_KEY="${{ secrets.BROWSERSTACK_ACCESS_KEY }}"
+          $env:BROWSERSTACK_SDK_LOG_LEVEL="debug"
           dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
       - run: ./scripts/ExecutingTestsOnWindowsGithubActions4.ps1
       - name: Publish Test Results
