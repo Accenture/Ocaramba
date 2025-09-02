@@ -1173,6 +1173,7 @@
           "NLog": "[6.0.3, )",
           "Selenium.Support": "[4.34.0, )",
           "Selenium.WebDriver": "[4.34.0, )",
+          "SixLabors.ImageSharp": "[3.1.11, )",
           "System.Configuration.ConfigurationManager": "[9.0.7, )",
           "System.Text.Json": "[9.0.7, )"
         }

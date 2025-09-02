@@ -23,19 +23,17 @@
 namespace Ocaramba.Helpers
 {
     using System;
-    using System.ComponentModel;
-    using System.Drawing;
-    using System.Drawing.Imaging;
+    using System.Collections.Generic;
     using System.Globalization;
     using System.IO;
-    using System.Text.RegularExpressions;
-
-    using System.Windows.Forms;
-
     using NLog;
     using Ocaramba.Extensions;
     using Ocaramba.Helpers;
     using OpenQA.Selenium;
+    using SixLabors.ImageSharp;
+    using SixLabors.ImageSharp.Formats.Png;
+    using SixLabors.ImageSharp.PixelFormats;
+    using SixLabors.ImageSharp.Processing;
 
     /// <summary>
     /// Custom screenshot solution.
@@ -91,16 +89,19 @@ namespace Ocaramba.Helpers
             var filePath = Path.Combine(folder, DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss-fff", CultureInfo.CurrentCulture) + "temporary_fullscreen.png");
             Logger.Debug(CultureInfo.CurrentCulture, "Taking full screenshot {0}", filePath);
             screenshot.SaveAsFile(filePath);
+            var js = (IJavaScriptExecutor)driver;
+            var rect = (Dictionary<string, object>)js.ExecuteScript(
+                "var r = arguments[0].getBoundingClientRect(); return {x: r.left + window.scrollX, y: r.top + window.scrollY};", element);
 
             if (BaseConfiguration.TestBrowser == BrowserType.Chrome)
             {
-                locationX = element.Location.X + locationX;
-                locationY = element.Location.Y + locationY;
+                locationX = Convert.ToInt32(rect["x"], CultureInfo.InvariantCulture) + locationX;
+                locationY = Convert.ToInt32(rect["y"], CultureInfo.InvariantCulture) + locationY;
             }
             else
             {
-                locationX = element.Location.X;
-                locationY = element.Location.Y;
+                locationX = Convert.ToInt32(rect["x"], CultureInfo.InvariantCulture);
+                locationY = Convert.ToInt32(rect["y"], CultureInfo.InvariantCulture);
             }
 
             var elementWidth = element.Size.Width;
@@ -127,43 +128,45 @@ namespace Ocaramba.Helpers
         {
             Logger.Debug(CultureInfo.CurrentCulture, "Trying to cut out screenshot locationX:{0} locationY:{1} elementWidth:{2} elementHeight:{3}", locationX, locationY, elementWidth, elementHeight);
 
-            string newFilePath;
-            Bitmap importFile = null;
-            Bitmap cloneFile;
+            string newFilePath = Path.Combine(folder, newScreenShotName + ".png");
+
             try
             {
-                importFile = new Bitmap(fullPathToScreenShotToCutOut);
-                Logger.Debug(CultureInfo.CurrentCulture, "Size of imported screenshot Width:{0} Height:{1}", importFile.Size.Width, importFile.Size.Height);
-                ////Check if new size of image is not bigger than imported.
-                if (locationY > importFile.Size.Height || locationX > importFile.Size.Width)
+                using (var image = Image.Load<Rgba32>(fullPathToScreenShotToCutOut))
                 {
-                    Logger.Error(CultureInfo.CurrentCulture, "Cutting out screenshot locationX:{0} locationY:{1} elementWidth:{2} elementHeight:{3} is not possible", locationX, locationY, elementWidth, elementHeight);
-                    return null;
+                    // Ensure the crop rectangle is within the image bounds
+                    if (locationY > image.Height || locationX > image.Width)
+                    {
+                        Logger.Error(CultureInfo.CurrentCulture, "Cutting out screenshot locationX:{0} locationY:{1} elementWidth:{2} elementHeight:{3} is not possible", locationX, locationY, elementWidth, elementHeight);
+                        return null;
+                    }
+
+                    if (image.Height - locationY < elementHeight)
+                    {
+                        elementHeight = image.Height - locationY;
+                    }
+
+                    if (image.Width - locationX < elementWidth)
+                    {
+                        elementWidth = image.Width - locationX;
+                    }
+
+                    Logger.Debug(CultureInfo.CurrentCulture, "Cutting out screenshot locationX:{0} locationY:{1} elementWidth:{2} elementHeight:{3}", locationX, locationY, elementWidth, elementHeight);
+
+                    var cropRectangle = new Rectangle(locationX, locationY, elementWidth, elementHeight);
+                    image.Mutate(x => x.Crop(cropRectangle));
+                    image.Save(newFilePath, new PngEncoder());
                 }
 
-                if (importFile.Size.Height - locationY < elementHeight)
-                {
-                    elementHeight = importFile.Size.Height - locationY;
-                }
-
-                if (importFile.Size.Width - locationX < elementWidth)
-                {
-                    elementWidth = importFile.Size.Width - locationX;
-                }
-
-                Logger.Debug(CultureInfo.CurrentCulture, "Cutting out screenshot locationX:{0} locationY:{1} elementWidth:{2} elementHeight:{3}", locationX, locationY, elementWidth, elementHeight);
-                var image = new Rectangle(locationX, locationY, elementWidth, elementHeight);
-                newFilePath = Path.Combine(folder, newScreenShotName + ".png");
-                cloneFile = (Bitmap)importFile.Clone(image, importFile.PixelFormat);
+                File.Delete(fullPathToScreenShotToCutOut);
             }
-            finally
+            catch (SixLabors.ImageSharp.ImageFormatException ex)
             {
-                importFile?.Dispose();
+                Logger.Error(CultureInfo.CurrentCulture, "Error during screenshot cropping: {0}", ex);
+                return null;
             }
 
             Logger.Debug(CultureInfo.CurrentCulture, "Saving new screenshot {0}", newFilePath);
-            cloneFile.Save(newFilePath);
-            File.Delete(fullPathToScreenShotToCutOut);
             return newFilePath;
         }
     }
