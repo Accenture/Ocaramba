@@ -22,6 +22,7 @@
 
 namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
 {
+    using System;
     using System.Globalization;
     using NLog;
     using Ocaramba;
@@ -37,7 +38,8 @@ namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
         private readonly ElementLocator
             menu = new ElementLocator(Locator.CssSelector, "div[role=menubar]"),
             iframe = new ElementLocator(Locator.Id, "mce_0_ifr"),
-            elelemtInIFrame = new ElementLocator(Locator.Id, "tinymce");
+            elelemtInIFrame = new ElementLocator(Locator.Id, "tinymce"),
+            toClose = new ElementLocator(Locator.CssSelector, "button div[aria-label]");
 
         public IFramePage(DriverContext driverContext)
             : base(driverContext)
@@ -47,12 +49,18 @@ namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
         public string TakeScreenShotsOfTextInIFrame(string folder, string name)
         {
             Logger.Info(CultureInfo.CurrentCulture, "Take Screen Shots");
+
+            bool flag = WaitHelper.Wait(() => this.Driver.GetElement(this.toClose).Displayed, TimeSpan.FromSeconds(BaseConfiguration.ShortTimeout), TimeSpan.FromSeconds(1));
+            if (flag)
+            {
+                this.Driver.GetElement(this.toClose).Click();
+            }
+
             var iFrame = this.Driver.GetElement(this.iframe);
-            int x = iFrame.Location.X;
-            int y = iFrame.Location.Y;
             this.Driver.SwitchTo().Frame(0);
+
             var el = this.Driver.GetElement(this.elelemtInIFrame);
-            return TakeScreenShot.TakeScreenShotOfElement(x, y, el, folder, name);
+            return TakeScreenShot.TakeScreenShotOfElement(el, folder, name);
         }
 
         public string TakeScreenShotsOfMenu(string folder, string name)

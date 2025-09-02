@@ -627,7 +627,7 @@ namespace Ocaramba
         {
             if (!string.IsNullOrEmpty(BaseConfiguration.FirefoxBrowserExecutableLocation))
             {
-                this.FirefoxOptions.BrowserExecutableLocation = BaseConfiguration.FirefoxBrowserExecutableLocation;
+                this.FirefoxOptions.BinaryLocation = BaseConfiguration.FirefoxBrowserExecutableLocation;
             }
 
             FirefoxDriverService serviceFirefox = FirefoxDriverService.CreateDefaultService();
