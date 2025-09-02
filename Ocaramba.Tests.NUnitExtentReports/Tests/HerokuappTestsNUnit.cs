@@ -58,10 +58,7 @@ namespace Ocaramba.Tests.NUnitExtentReports.Tests
                 .GoToMultipleWindowsPage()
                 .OpenNewWindowPage();
 
-            test.Info("Verifying page title, expected: " + PageTitle);
             Assert.That(newWindowPage.IsPageTile(PageTitle), Is.True, "wrong page title, should be {0}", PageTitle);
-
-            test.Info("Verifying H3 header text displayd on te page, expected: " + PageTitle);
             Assert.That(newWindowPage.IsNewWindowH3TextVisible(PageTitle), Is.True, "text is not equal to {0}", PageTitle);
         }
 
@@ -151,7 +148,7 @@ namespace Ocaramba.Tests.NUnitExtentReports.Tests
         public void ReportDemoFailingTest()
         {
             const string ExpectedLeftFrameText = "LEFT";
-            const string ExpectedMiddleFrameText = "CENTER";
+            const string ExpectedMiddleFrameText = "MIDDLE";
 
             var nestedFramesPage = new InternetPage(this.DriverContext)
                 .OpenHomePage()
