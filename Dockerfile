@@ -27,7 +27,7 @@ RUN apt-get update && apt-get install -y wget gnupg \
 #=========
 RUN EDGEBROWSER_VERSION=$(microsoft-edge --version | awk '{print $NF}') \
     && EDGE_MAJOR=$(echo $EDGEBROWSER_VERSION | cut -d. -f1) \
-    && EDGE_DRIVER_URL="https://msedgedriver.azureedge.net/$EDGEBROWSER_VERSION/edgedriver_linux64.zip" \
+    && EDGE_DRIVER_URL="https://msedgedriver.microsoft.com/$EDGEBROWSER_VERSION/edgedriver_linux64.zip" \
     && wget -O /tmp/edgedriver.zip "$EDGE_DRIVER_URL" \
     && unzip /tmp/edgedriver.zip -d /usr/local/bin/ \
     && mv /usr/local/bin/msedgedriver /usr/local/bin/edgedriver \
