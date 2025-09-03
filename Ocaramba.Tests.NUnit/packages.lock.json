@@ -115,6 +115,16 @@
         "resolved": "139.0.3405.102",
         "contentHash": "Hqplj4ymjYg8VnYrUiohV7OoN77iaUjqmEKGXxMtJ13yXWEfKXQZ58yNIk7z3M9bhq8UdHA8tLHTC4V40TByLg=="
       },
+      "SixLabors.ImageSharp": {
+        "type": "Direct",
+        "requested": "[2.1.11, )",
+        "resolved": "2.1.11",
+        "contentHash": "tUvsejgzUmEbES114yLseRxmFiYlQbH5RyaYXUQsEL7ksDo1/kW+ZL1EfD6iSUfxj7LHU8p110oFvSrRfsaWSQ==",
+        "dependencies": {
+          "System.Runtime.CompilerServices.Unsafe": "5.0.0",
+          "System.Text.Encoding.CodePages": "5.0.0"
+        }
+      },
       "System.Configuration.ConfigurationManager": {
         "type": "Direct",
         "requested": "[9.0.7, )",
@@ -789,15 +799,6 @@
         "type": "Transitive",
         "resolved": "1.0.1",
         "contentHash": "ljezRHWc7N0azdQViib7Aa5v+DagRVkKI2/93kEbtjVczLs+yTkSq6gtGmvOcx4IqyNbO3GjLt7SAQTpLkySNw=="
-      },
-      "SixLabors.ImageSharp": {
-        "type": "Transitive",
-        "resolved": "2.1.10",
-        "contentHash": "hk1E7U3RSlxrBVo6Gb6OjeM52fChpFYH+SZvyT/M2vzSGlzAaKE33hc3V/Pvnjcnn1opT8/Z+0QfqdM5HsIaeA==",
-        "dependencies": {
-          "System.Runtime.CompilerServices.Unsafe": "5.0.0",
-          "System.Text.Encoding.CodePages": "5.0.0"
-        }
       },
       "System.CodeDom": {
         "type": "Transitive",
