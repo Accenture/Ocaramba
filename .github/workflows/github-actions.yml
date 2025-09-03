@@ -113,6 +113,13 @@ jobs:
           push: true
           tags: ocaramba/selenium:latest
         if: startsWith(github.ref, 'refs/tags/')
+      - name: Build
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: false
+          tags: ocaramba/selenium:latest
+        if: ${{!startsWith(github.ref , 'refs/tags/')}}
       - name: Aqua Security Trivy
         uses: aquasecurity/trivy-action@0.29.0
         with:
