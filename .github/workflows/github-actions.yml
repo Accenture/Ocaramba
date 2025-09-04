@@ -53,6 +53,7 @@ jobs:
                  'Ocaramba.UnitTests'              { $skip = 1; return }
                  'Ocaramba.Tests.MsTest'              { $skip = 1; return }
                  'Ocaramba.Tests.Features'              { $skip = 1; return }
+                 'Ocaramba.Tests.Xunit'              { $skip = 1; return }
                 default { $_ }
             }
           } | Set-Content ./Ocaramba.sln
@@ -165,7 +166,7 @@ jobs:
           export ASPNETCORE_ENVIRONMENT=Linux
           echo $ASPNETCORE_ENVIRONMENT
           sudo apt-get install google-chrome-stable
-          sed -i '/Documentation/,+5 d' ./Ocaramba.sln ; sed -i '/CloudProviderCrossBrowser/,+1 d' ./Ocaramba.sln; sed -i '/UnitTests/,+1 d' ./Ocaramba.sln; sed -i '/BrowserStack/,+1 d' ./Ocaramba.sln; sed -i '/MsTest/,+1 d' ./Ocaramba.sln;sed -i '/Features/,+1 d' ./Ocaramba.sln;sed -i '/Xunit/,+1 d' ./Ocaramba.sln;sed -i '/NUnitExtentReports/,+1 d' ./Ocaramba.sln;sed -i '/Appium/,+1 d' ./Ocaramba.sln;sed -i '/CloudProviderCrossBrowser/,+1 d' ./Ocaramba.sln
+          sed -i '/Documentation/,+5 d' ./Ocaramba.sln ; sed -i '/CloudProviderCrossBrowser/,+1 d' ./Ocaramba.sln; sed -i '/UnitTests/,+1 d' ./Ocaramba.sln; sed -i '/BrowserStack/,+1 d' ./Ocaramba.sln; sed -i '/MsTest/,+1 d' ./Ocaramba.sln;sed -i '/Features/,+1 d' ./Ocaramba.sln;sed -i '/Xunit/,+1 d' ./Ocaramba.sln;sed -i '/NUnitExtentReports/,+1 d' ./Ocaramba.sln;sed -i '/Appium/,+1 d' ./Ocaramba.sln;sed -i '/CloudProviderCrossBrowser/,+1 d' ./Ocaramba.sln;sed -i '/Angular/,+1 d' ./Ocaramba.sln
       - run: dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
       - shell: pwsh
         run: ./scripts/ExecutingTestsOnLinuxAzure.ps1
@@ -190,7 +191,7 @@ jobs:
           wget -P ./Ocaramba.Tests.Appium/bin/Release/net8.0/ https://github.com/appium/android-apidemos/releases/download/v3.1.0/ApiDemos-debug.apk
           export ASPNETCORE_ENVIRONMENT=Linux
           echo $ASPNETCORE_ENVIRONMENT
-          sed -i '/Documentation/,+5 d' ./Ocaramba.sln ; sed -i '/CloudProviderCrossBrowser/,+1 d' ./Ocaramba.sln; sed -i '/UnitTests/,+1 d' ./Ocaramba.sln; sed -i '/BrowserStack/,+1 d' ./Ocaramba.sln; sed -i '/MsTest/,+1 d' ./Ocaramba.sln;sed -i '/Features/,+1 d' ./Ocaramba.sln;sed -i '/Xunit/,+1 d' ./Ocaramba.sln;sed -i '/NUnitExtentReports/,+1 d' ./Ocaramba.sln;sed -i '/NUnit/,+1 d' ./Ocaramba.sln
+          sed -i '/Documentation/,+5 d' ./Ocaramba.sln ; sed -i '/CloudProviderCrossBrowser/,+1 d' ./Ocaramba.sln; sed -i '/UnitTests/,+1 d' ./Ocaramba.sln; sed -i '/BrowserStack/,+1 d' ./Ocaramba.sln; sed -i '/MsTest/,+1 d' ./Ocaramba.sln;sed -i '/Features/,+1 d' ./Ocaramba.sln;sed -i '/Xunit/,+1 d' ./Ocaramba.sln;sed -i '/NUnitExtentReports/,+1 d' ./Ocaramba.sln;sed -i '/NUnit/,+1 d' ./Ocaramba.sln;sed -i '/Angular/,+1 d' ./Ocaramba.sln
           ls
           pwd
       - run: dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
@@ -289,7 +290,7 @@ jobs:
           ls 
           export ASPNETCORE_ENVIRONMENT=Linux
           echo $ASPNETCORE_ENVIRONMENT
-          sed -i '/Documentation/,+5 d' ./Ocaramba.sln ; sed -i '/BrowserStack/,+1 d' ./Ocaramba.sln; sed -i '/UnitTests/,+1 d' ./Ocaramba.sln; sed -i '/BrowserStack/,+1 d' ./Ocaramba.sln; sed -i '/MsTest/,+1 d' ./Ocaramba.sln;sed -i '/Features/,+1 d' ./Ocaramba.sln;sed -i '/Xunit/,+1 d' ./Ocaramba.sln;sed -i '/NUnitExtentReports/,+1 d' ./Ocaramba.sln;sed -i '/Appium/,+1 d' ./Ocaramba.sln
+          sed -i '/Documentation/,+5 d' ./Ocaramba.sln ; sed -i '/BrowserStack/,+1 d' ./Ocaramba.sln; sed -i '/UnitTests/,+1 d' ./Ocaramba.sln; sed -i '/BrowserStack/,+1 d' ./Ocaramba.sln; sed -i '/MsTest/,+1 d' ./Ocaramba.sln;sed -i '/Features/,+1 d' ./Ocaramba.sln;sed -i '/Xunit/,+1 d' ./Ocaramba.sln;sed -i '/NUnitExtentReports/,+1 d' ./Ocaramba.sln;sed -i '/Appium/,+1 d' ./Ocaramba.sln;sed -i '/NUnit/,+1 d' ./Ocaramba.sln;sed -i '/Angular/,+1 d' ./Ocaramba.sln
       - run: dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
       - shell: pwsh
         if: true
