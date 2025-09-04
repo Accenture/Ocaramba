@@ -39,7 +39,24 @@ jobs:
       - run: echo $env:frameworkVersion
       - name: Remove Documentation sub project from solution
         shell: powershell
-        run: '(Get-Content ''Ocaramba.sln'' -raw) -replace [regex](''.*?'' + ''Documentation'' + (''.*?\r\n'' * (5 + 1))) | set-content  ''Ocaramba.sln'''
+        run: |
+          (Get-Content ./Ocaramba.sln) | ForEach-Object -Begin { $skip = 0 } -Process {
+            if ($skip -gt 0) { $skip--; return }
+            switch -regex ($_) {
+                'Documentation'                        { $skip = 5; return }
+                'Ocaramba.Tests.Appium'               { $skip = 1; return }
+                'Ocaramba.Tests.NUnitExtentReports'   { $skip = 1; return }
+                'Ocaramba.Tests.Angular'              { $skip = 4; return }
+                'Ocaramba.Tests.CloudProviderCrossBrowser'              { $skip = 1; return }
+                'Ocaramba.Tests.BrowserStack'              { $skip = 1; return }
+                 'Ocaramba.Tests.NUnit'              { $skip = 1; return }
+                 'Ocaramba.UnitTests'              { $skip = 1; return }
+                 'Ocaramba.Tests.MsTest'              { $skip = 1; return }
+                 'Ocaramba.Tests.Features'              { $skip = 1; return }
+                 'Ocaramba.Tests.Xunit'              { $skip = 1; return }
+                default { $_ }
+            }
+          } | Set-Content ./Ocaramba.sln
       - name: Update ChromeDriver in csproj
         run: |
           Get-ChildItem ./ *.csproj -recurse |
@@ -156,7 +173,7 @@ jobs:
           export ASPNETCORE_ENVIRONMENT=Linux
           echo $ASPNETCORE_ENVIRONMENT
           sudo apt-get install google-chrome-stable
-          sed -i -e '/Documentation/,+5 d' -e '/Ocaramba.Tests.Appium/,+1 d' -e '/Ocaramba.BrowserStack/,+1 d' -e '/Ocaramba.UnitTests/,+1 d' -e '/Ocaramba.Tests.CloudProviderCrossBrowser/,+1 d' -e '/Ocaramba.Tests.MsTest/,+1 d' -e '/Ocaramba.Tests.Features/,+1 d' -e '/Ocaramba.Tests.Xunit/,+1 d' -e '/Ocaramba.Tests.Angular/,+4 d' -e '/Ocaramba.Tests.NUnitExtentReports/,+1 d' ./Ocaramba.sln
+          sed -i '/Documentation/,+5 d' ./Ocaramba.sln ; sed -i '/CloudProviderCrossBrowser/,+1 d' ./Ocaramba.sln; sed -i '/UnitTests/,+1 d' ./Ocaramba.sln; sed -i '/BrowserStack/,+1 d' ./Ocaramba.sln; sed -i '/MsTest/,+1 d' ./Ocaramba.sln;sed -i '/Features/,+1 d' ./Ocaramba.sln;sed -i '/Xunit/,+1 d' ./Ocaramba.sln;sed -i '/NUnitExtentReports/,+1 d' ./Ocaramba.sln;sed -i '/Appium/,+1 d' ./Ocaramba.sln;sed -i '/CloudProviderCrossBrowser/,+1 d' ./Ocaramba.sln;sed -i '/Angular/,+1 d' ./Ocaramba.sln
       - run: dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
       - shell: pwsh
         run: ./scripts/ExecutingTestsOnLinuxAzure.ps1
@@ -181,7 +198,7 @@ jobs:
           wget -P ./Ocaramba.Tests.Appium/bin/Release/net8.0/ https://github.com/appium/android-apidemos/releases/download/v3.1.0/ApiDemos-debug.apk
           export ASPNETCORE_ENVIRONMENT=Linux
           echo $ASPNETCORE_ENVIRONMENT
-          sed -i -e '/Documentation/,+5 d' -e '/Ocaramba.Tests.NUnit/,+1 d' -e '/Ocaramba.UnitTests/,+1 d' -e '/Ocaramba.BrowserStack/,+1 d' -e '/Ocaramba.Tests.CloudProviderCrossBrowser/,+1 d' -e '/Ocaramba.Tests.MsTest/,+1 d' -e '/Ocaramba.Tests.Features/,+1 d' -e '/Ocaramba.Tests.Xunit/,+1 d' -e '/Ocaramba.Tests.Angular/,+4 d' -e '/Ocaramba.Tests.NUnitExtentReports/,+1 d' ./Ocaramba.sln
+          sed -i '/Documentation/,+5 d' ./Ocaramba.sln ; sed -i '/CloudProviderCrossBrowser/,+1 d' ./Ocaramba.sln; sed -i '/UnitTests/,+1 d' ./Ocaramba.sln; sed -i '/BrowserStack/,+1 d' ./Ocaramba.sln; sed -i '/MsTest/,+1 d' ./Ocaramba.sln;sed -i '/Features/,+1 d' ./Ocaramba.sln;sed -i '/Xunit/,+1 d' ./Ocaramba.sln;sed -i '/NUnitExtentReports/,+1 d' ./Ocaramba.sln;sed -i '/NUnit/,+1 d' ./Ocaramba.sln;sed -i '/Angular/,+1 d' ./Ocaramba.sln
           ls
           pwd
       - run: dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
@@ -280,7 +297,7 @@ jobs:
           ls 
           export ASPNETCORE_ENVIRONMENT=Linux
           echo $ASPNETCORE_ENVIRONMENT
-          sed -i -e '/Documentation/,+5 d' -e '/Ocaramba.Tests.Appium/,+1 d' -e '/Ocaramba.UnitTests/,+1 d' -e '/Ocaramba.Tests.NUnit/,+1 d' -e '/Ocaramba.Tests.BrowserStack/,+1 d' -e '/Ocaramba.Tests.MsTest/,+1 d' -e '/Ocaramba.Tests.Features/,+1 d' -e '/Ocaramba.Tests.Xunit/,+1 d' -e '/Ocaramba.Tests.Angular/,+4 d' -e '/Ocaramba.Tests.NUnitExtentReports/,+1 d' ./Ocaramba.sln
+          sed -i '/Documentation/,+5 d' ./Ocaramba.sln ; sed -i '/BrowserStack/,+1 d' ./Ocaramba.sln; sed -i '/UnitTests/,+1 d' ./Ocaramba.sln; sed -i '/BrowserStack/,+1 d' ./Ocaramba.sln; sed -i '/MsTest/,+1 d' ./Ocaramba.sln;sed -i '/Features/,+1 d' ./Ocaramba.sln;sed -i '/Xunit/,+1 d' ./Ocaramba.sln;sed -i '/NUnitExtentReports/,+1 d' ./Ocaramba.sln;sed -i '/Appium/,+1 d' ./Ocaramba.sln;sed -i '/NUnit/,+1 d' ./Ocaramba.sln;sed -i '/Angular/,+1 d' ./Ocaramba.sln
       - run: dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
       - shell: pwsh
         if: true
