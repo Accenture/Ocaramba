@@ -289,7 +289,7 @@ jobs:
           ls 
           export ASPNETCORE_ENVIRONMENT=Linux
           echo $ASPNETCORE_ENVIRONMENT
-          sed -i '/Documentation/,+5 d' ./Ocaramba.sln ; sed -i '/BrowserStack/,+1 d' ./Ocaramba.sln; sed -i '/UnitTests/,+1 d' ./Ocaramba.sln; sed -i '/BrowserStack/,+1 d' ./Ocaramba.sln; sed -i '/MsTest/,+1 d' ./Ocaramba.sln;sed -i '/Features/,+1 d' ./Ocaramba.sln;sed -i '/Xunit/,+1 d' ./Ocaramba.sln;sed -i '/NUnitExtentReports/,+1 d' ./Ocaramba.sln;sed -i '/Appium/,+1 d' ./Ocaramba.sln;sed -i '/CloudProviderCrossBrowser/,+1 d' ./Ocaramba.sln
+          sed -i '/Documentation/,+5 d' ./Ocaramba.sln ; sed -i '/BrowserStack/,+1 d' ./Ocaramba.sln; sed -i '/UnitTests/,+1 d' ./Ocaramba.sln; sed -i '/BrowserStack/,+1 d' ./Ocaramba.sln; sed -i '/MsTest/,+1 d' ./Ocaramba.sln;sed -i '/Features/,+1 d' ./Ocaramba.sln;sed -i '/Xunit/,+1 d' ./Ocaramba.sln;sed -i '/NUnitExtentReports/,+1 d' ./Ocaramba.sln;sed -i '/Appium/,+1 d' ./Ocaramba.sln
       - run: dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
       - shell: pwsh
         if: true
