@@ -113,13 +113,6 @@ jobs:
           push: true
           tags: ocaramba/selenium:latest
         if: startsWith(github.ref, 'refs/tags/')
-      - name: Build
-        uses: docker/build-push-action@v6
-        with:
-          context: .
-          push: false
-          tags: ocaramba/selenium:latest
-        if: ${{!startsWith(github.ref , 'refs/tags/')}}
       - name: Aqua Security Trivy
         uses: aquasecurity/trivy-action@0.29.0
         with:
@@ -146,6 +139,13 @@ jobs:
         with:
           name: ExecutingTestsOnDocker
           path: ./ExecutingTestsOnDocker${{ github.run_id }}.zip
+      - name: Build
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: false
+          tags: ocaramba/selenium:latest
+        if: ${{!startsWith(github.ref , 'refs/tags/')}}          
   test_Stage_RunTestsOnLinux:
     runs-on: ubuntu-latest
     steps:
@@ -525,4 +525,5 @@ jobs:
       - name: Push Nuget Package
         run: dotnet nuget push .\OcarambaLite.${{ env.frameworkVersion }}.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
         if: (success() && startsWith(github.ref, 'refs/tags/'))
+
 
