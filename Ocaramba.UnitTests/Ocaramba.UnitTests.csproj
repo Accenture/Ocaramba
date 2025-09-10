@@ -19,7 +19,7 @@
     </PackageReference>
 	<PackageReference Include="Selenium.Support" Version="4.35.0" />
     <PackageReference Include="Selenium.WebDriver" Version="4.35.0" />
-    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="138.0.7204.9400" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="140.0.7339.8000" />
     <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.36.0" />
 	  <PackageReference Include="Selenium.WebDriver.MSEdgeDriver" Version="139.0.3405.102" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="9.0.9" />
