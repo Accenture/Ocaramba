@@ -46,7 +46,7 @@
       <Version>9.0.9</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.PowerShell.Commands.Diagnostics">
-      <Version>7.4.11</Version>
+      <Version>7.4.12</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.PowerShell.SDK">
       <Version>7.4.11</Version>
