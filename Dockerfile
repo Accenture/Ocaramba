@@ -1,5 +1,5 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0
-LABEL maintainer "Ocaramba <ocaramba@objectivity.co.uk>"
+LABEL maintainer="Ocaramba <ocaramba@objectivity.co.uk>"
 #=========
 # Midnight Commander, lbzip2
 #=========
@@ -78,7 +78,7 @@ RUN BASE_URL=https://github.com/mozilla/geckodriver/releases/download \
   && curl -sL "$BASE_URL/$VERSION/geckodriver-$VERSION-linux64.tar.gz" | \
     tar -xz -C /usr/local/bin
 
-ENV ASPNETCORE_ENVIRONMENT = Linux
+ENV ASPNETCORE_ENVIRONMENT=Linux
 #=========
 # Create a user and switch to it
 #=========
