@@ -8,7 +8,7 @@
     
     <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="14.8.2" />
     <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.3.0" />
-    <PackageReference Include="System.Text.Json" Version="9.0.7" />
+    <PackageReference Include="System.Text.Json" Version="9.0.9" />
     <PackageReference Include="System.Memory" Version="4.6.3" />
     <PackageReference Include="NLog" Version="6.0.3" />
     <PackageReference Include="NUnit" Version="4.4.0" />
@@ -22,7 +22,7 @@
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="138.0.7204.9400" />
     <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.36.0" />
 	  <PackageReference Include="Selenium.WebDriver.MSEdgeDriver" Version="139.0.3405.102" />
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="9.0.7" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="9.0.9" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
   </ItemGroup>
 
