@@ -109,13 +109,13 @@
       },
       "Microsoft.WSMan.Management": {
         "type": "Direct",
-        "requested": "[7.4.11, )",
-        "resolved": "7.4.11",
-        "contentHash": "qmQ/HKUu7CubbiH2uXYF096E+OTb1w0VZmN7yLqcu2NI/17N51StcQfeEiuZKs3/vpQcHMSL3gDNzRFi0MxkGg==",
+        "requested": "[7.4.12, )",
+        "resolved": "7.4.12",
+        "contentHash": "XWKZX+9cNJ6thtPjZD39WwPm3PIRaSvBQk+CN2t+AaBE1f6pMfPOU2mjxH9GVm5/BwjhTSg9gzd3nQ+OBzTFNQ==",
         "dependencies": {
-          "Microsoft.WSMan.Runtime": "7.4.11",
+          "Microsoft.WSMan.Runtime": "7.4.12",
           "System.Diagnostics.EventLog": "8.0.2",
-          "System.Management.Automation": "7.4.11",
+          "System.Management.Automation": "7.4.12",
           "System.ServiceProcess.ServiceController": "8.0.1"
         }
       },
@@ -544,8 +544,8 @@
       },
       "Microsoft.PowerShell.CoreCLR.Eventing": {
         "type": "Transitive",
-        "resolved": "7.4.11",
-        "contentHash": "V24hbrrpdGUlzFXtlNoMsqSlHXEtGUNGYYXF/g2ux9EkmaIzFxYEbmzP8VjVbfHwD/zFFl1yeBvqrj0lE7BaKg==",
+        "resolved": "7.4.12",
+        "contentHash": "FPOh7btqeUWgu+kXFGO6PjdKoyEIayejeYnybp3Q6K+2BngSWg+YdNxpoAj6mQtq6kra/e1PTjk0IlXIs5gSow==",
         "dependencies": {
           "System.Diagnostics.EventLog": "8.0.2"
         }
@@ -640,8 +640,8 @@
       },
       "Microsoft.WSMan.Runtime": {
         "type": "Transitive",
-        "resolved": "7.4.11",
-        "contentHash": "HVN1Zkt/4WIT2YLOFwCNyNfbnGlwybpZ52Qcal8QeDB3WEfdF0FmN8OJ6zyr1Nkl+SzR5dj67Ej8mQrqEX7RfQ=="
+        "resolved": "7.4.12",
+        "contentHash": "3Oi74bp2yWR8iZezzh1Y65bWNgojYaPexXIiHhjaGboKZsVsUTGEd5vjcPqMmhP55/axhh9eRDH53bNX0hz8wQ=="
       },
       "Newtonsoft.Json": {
         "type": "Transitive",
@@ -885,12 +885,12 @@
       },
       "System.Management.Automation": {
         "type": "Transitive",
-        "resolved": "7.4.11",
-        "contentHash": "jZM3gN5a1BeuTEUAzTfQOBWeiEorLN0WscJtT5QWHbGKTEuu4flkgPLW9av5yFo4j/YQle1LgwwSbMUffdIznQ==",
+        "resolved": "7.4.12",
+        "contentHash": "Gur81H587ELl0MNRHNdEeqtAY29L3N9nlU7xqdYWpXSgHKZjVfBbW0Xi6NkWMwzpsLNQZ3ak+A4s9aka7zGB1A==",
         "dependencies": {
           "Microsoft.ApplicationInsights": "2.21.0",
           "Microsoft.Management.Infrastructure": "3.0.0",
-          "Microsoft.PowerShell.CoreCLR.Eventing": "7.4.11",
+          "Microsoft.PowerShell.CoreCLR.Eventing": "7.4.12",
           "Microsoft.PowerShell.Native": "7.4.0",
           "Microsoft.Security.Extensions": "1.4.0",
           "Microsoft.Win32.Registry.AccessControl": "8.0.0",

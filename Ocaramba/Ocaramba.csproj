@@ -56,7 +56,7 @@
       <Version>7.4.11</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.WSMan.Management">
-      <Version>7.4.11</Version>
+      <Version>7.4.12</Version>
     </PackageReference>
     <PackageReference Include="System.Data.Common">
       <Version>4.3.0</Version>
