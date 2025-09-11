@@ -14,12 +14,12 @@
       },
       "MSTest.TestAdapter": {
         "type": "Direct",
-        "requested": "[3.9.3, )",
-        "resolved": "3.9.3",
-        "contentHash": "smeoTZladaMNSB+q8TeTcFdk2hA5hxdqbSnvEiuTo96v/pJlllPc9PviggjXAY6n3aO+7wKC8GXH66c5QPPptg==",
+        "requested": "[3.10.4, )",
+        "resolved": "3.10.4",
+        "contentHash": "Gnoegnprezaqlx+X0T+bkOJsVzS9kKerfIeiLrw0nEEtu3tvT5hoEnv4uCqy+OfV3EdLqk1aJyNI3S30RbGXgw==",
         "dependencies": {
-          "Microsoft.Testing.Extensions.VSTestBridge": "1.7.3",
-          "Microsoft.Testing.Platform.MSBuild": "1.7.3"
+          "Microsoft.Testing.Extensions.VSTestBridge": "1.8.4",
+          "Microsoft.Testing.Platform.MSBuild": "1.8.4"
         }
       },
       "MSTest.TestFramework": {
@@ -337,8 +337,8 @@
       },
       "Microsoft.PowerShell.CoreCLR.Eventing": {
         "type": "Transitive",
-        "resolved": "7.4.11",
-        "contentHash": "V24hbrrpdGUlzFXtlNoMsqSlHXEtGUNGYYXF/g2ux9EkmaIzFxYEbmzP8VjVbfHwD/zFFl1yeBvqrj0lE7BaKg==",
+        "resolved": "7.4.12",
+        "contentHash": "FPOh7btqeUWgu+kXFGO6PjdKoyEIayejeYnybp3Q6K+2BngSWg+YdNxpoAj6mQtq6kra/e1PTjk0IlXIs5gSow==",
         "dependencies": {
           "System.Diagnostics.EventLog": "8.0.2"
         }
@@ -404,44 +404,44 @@
       },
       "Microsoft.Testing.Extensions.Telemetry": {
         "type": "Transitive",
-        "resolved": "1.7.3",
-        "contentHash": "udSTexALlmp01a6a4fNzzpcUyUZOUbVZRRdHotCcnM1pCl3G1wqRWJlD9B6vDaIw29tYBPv7iA+YbVvq61RonA==",
+        "resolved": "1.8.4",
+        "contentHash": "NbwjZtoXLcmPH/qtCSU3x+jQ4xBw+Ia8FVA9m4Tlvk1qtk/4LYUN7hZyA2/xVPgSPerYJoYqLy1mDG+DWfR2Ew==",
         "dependencies": {
           "Microsoft.ApplicationInsights": "2.23.0",
-          "Microsoft.Testing.Platform": "1.7.3"
+          "Microsoft.Testing.Platform": "1.8.4"
         }
       },
       "Microsoft.Testing.Extensions.TrxReport.Abstractions": {
         "type": "Transitive",
-        "resolved": "1.7.3",
-        "contentHash": "dDEETHbX5JQBMIFgBPkX/FmCU4DRQSG+k58QUtz7zTdnEZDafPKH6YHSMoHY3blDiZV/vcSol35Ux3WC7wU+9Q==",
+        "resolved": "1.8.4",
+        "contentHash": "jDGV5d9K5zeQG6I5ZHZrrXd0sO9up/XLpb5qI5W+FPGJx5JXx5yEiwkw0MIEykH9ydeMASPOmjbY/7jS++gYwA==",
         "dependencies": {
-          "Microsoft.Testing.Platform": "1.7.3"
+          "Microsoft.Testing.Platform": "1.8.4"
         }
       },
       "Microsoft.Testing.Extensions.VSTestBridge": {
         "type": "Transitive",
-        "resolved": "1.7.3",
-        "contentHash": "iLD8UlqQis9eVmgKxuqEUBm1Tzmsqj6xluj8xe6/scM+PQ84eDX2oqi0rra2N0JLli5LxloTb0iWYN5y4+kn1A==",
+        "resolved": "1.8.4",
+        "contentHash": "t4ZgIrdURpF96XTyw3HLSwlYb22x/tpxcCMipcIYFV6QgCtmPQrVNVrPLNazNkJF8egXqumtC2hnDca+0KdRQQ==",
         "dependencies": {
           "Microsoft.TestPlatform.AdapterUtilities": "17.13.0",
           "Microsoft.TestPlatform.ObjectModel": "17.13.0",
-          "Microsoft.Testing.Extensions.Telemetry": "1.7.3",
-          "Microsoft.Testing.Extensions.TrxReport.Abstractions": "1.7.3",
-          "Microsoft.Testing.Platform": "1.7.3"
+          "Microsoft.Testing.Extensions.Telemetry": "1.8.4",
+          "Microsoft.Testing.Extensions.TrxReport.Abstractions": "1.8.4",
+          "Microsoft.Testing.Platform": "1.8.4"
         }
       },
       "Microsoft.Testing.Platform": {
         "type": "Transitive",
-        "resolved": "1.7.3",
-        "contentHash": "cI6u+CPxv3+07cbSwJVKOfxFrecbjfZnid1fe8EMhyPY4qmsSNnm+hN+GIy8u4JIlrADfrskDiwnScjRzVzJNw=="
+        "resolved": "1.8.4",
+        "contentHash": "MpYE6A13G9zLZjkDmy2Fm/R0MRkjBR75P0F8B1yLaUshaATixPlk2S2OE6u/rlqtqMkbEyM7F6wxc332gZpBpA=="
       },
       "Microsoft.Testing.Platform.MSBuild": {
         "type": "Transitive",
-        "resolved": "1.7.3",
-        "contentHash": "tSIKXv7tLLYDjfodqLuTigsmOVcYj0CDC1rYeac5MTgHjbYV8IfmYh4FprBt/xE1zW8phkCYP766F9ayo560jA==",
+        "resolved": "1.8.4",
+        "contentHash": "RnS7G0eXAopdIf/XPGFNW8HUwZxRq5iGX34rVYhyDUbLS7sF513yosd4P50GtjBKqOay4qb+WHYr4NkWjtUWzQ==",
         "dependencies": {
-          "Microsoft.Testing.Platform": "1.7.3"
+          "Microsoft.Testing.Platform": "1.8.4"
         }
       },
       "Microsoft.TestPlatform.AdapterUtilities": {
@@ -520,19 +520,19 @@
       },
       "Microsoft.WSMan.Management": {
         "type": "Transitive",
-        "resolved": "7.4.11",
-        "contentHash": "qmQ/HKUu7CubbiH2uXYF096E+OTb1w0VZmN7yLqcu2NI/17N51StcQfeEiuZKs3/vpQcHMSL3gDNzRFi0MxkGg==",
+        "resolved": "7.4.12",
+        "contentHash": "XWKZX+9cNJ6thtPjZD39WwPm3PIRaSvBQk+CN2t+AaBE1f6pMfPOU2mjxH9GVm5/BwjhTSg9gzd3nQ+OBzTFNQ==",
         "dependencies": {
-          "Microsoft.WSMan.Runtime": "7.4.11",
+          "Microsoft.WSMan.Runtime": "7.4.12",
           "System.Diagnostics.EventLog": "8.0.2",
-          "System.Management.Automation": "7.4.11",
+          "System.Management.Automation": "7.4.12",
           "System.ServiceProcess.ServiceController": "8.0.1"
         }
       },
       "Microsoft.WSMan.Runtime": {
         "type": "Transitive",
-        "resolved": "7.4.11",
-        "contentHash": "HVN1Zkt/4WIT2YLOFwCNyNfbnGlwybpZ52Qcal8QeDB3WEfdF0FmN8OJ6zyr1Nkl+SzR5dj67Ej8mQrqEX7RfQ=="
+        "resolved": "7.4.12",
+        "contentHash": "3Oi74bp2yWR8iZezzh1Y65bWNgojYaPexXIiHhjaGboKZsVsUTGEd5vjcPqMmhP55/axhh9eRDH53bNX0hz8wQ=="
       },
       "MSTest.Analyzers": {
         "type": "Transitive",
@@ -731,12 +731,12 @@
       },
       "System.Management.Automation": {
         "type": "Transitive",
-        "resolved": "7.4.11",
-        "contentHash": "jZM3gN5a1BeuTEUAzTfQOBWeiEorLN0WscJtT5QWHbGKTEuu4flkgPLW9av5yFo4j/YQle1LgwwSbMUffdIznQ==",
+        "resolved": "7.4.12",
+        "contentHash": "Gur81H587ELl0MNRHNdEeqtAY29L3N9nlU7xqdYWpXSgHKZjVfBbW0Xi6NkWMwzpsLNQZ3ak+A4s9aka7zGB1A==",
         "dependencies": {
           "Microsoft.ApplicationInsights": "2.21.0",
           "Microsoft.Management.Infrastructure": "3.0.0",
-          "Microsoft.PowerShell.CoreCLR.Eventing": "7.4.11",
+          "Microsoft.PowerShell.CoreCLR.Eventing": "7.4.12",
           "Microsoft.PowerShell.Native": "7.4.0",
           "Microsoft.Security.Extensions": "1.4.0",
           "Microsoft.Win32.Registry.AccessControl": "8.0.0",
@@ -939,7 +939,7 @@
           "OcarambaLite": "[1.0.0, )",
           "Selenium.Support": "[4.35.0, )",
           "Selenium.WebDriver": "[4.35.0, )",
-          "Selenium.WebDriver.ChromeDriver": "[138.0.7204.9400, )",
+          "Selenium.WebDriver.ChromeDriver": "[140.0.7339.8000, )",
           "Selenium.WebDriver.GeckoDriver": "[0.36.0, )",
           "System.Configuration.ConfigurationManager": "[9.0.9, )",
           "System.Text.Json": "[9.0.9, )"
@@ -955,7 +955,7 @@
           "Microsoft.Extensions.Configuration.Json": "[9.0.9, )",
           "Microsoft.PowerShell.Commands.Diagnostics": "[7.4.11, )",
           "Microsoft.PowerShell.SDK": "[7.4.11, )",
-          "Microsoft.WSMan.Management": "[7.4.11, )",
+          "Microsoft.WSMan.Management": "[7.4.12, )",
           "NLog": "[6.0.3, )",
           "Selenium.Support": "[4.35.0, )",
           "Selenium.WebDriver": "[4.35.0, )",
