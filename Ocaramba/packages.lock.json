@@ -142,9 +142,9 @@
       },
       "Selenium.WebDriver.ChromeDriver": {
         "type": "Direct",
-        "requested": "[140.0.7339.8000, )",
-        "resolved": "140.0.7339.8000",
-        "contentHash": "WEKtKwq/ZrADkml+niKVOVgJhSO2qUOPfU5vC5qTcfEXd+c4mDxD9gsxjyusqWmVc7dSxKa2eSoDKyXoFP3ImQ=="
+        "requested": "[140.0.7339.18500, )",
+        "resolved": "140.0.7339.18500",
+        "contentHash": "VJf23sZPg/9hI0jdETiU368FVGmaChGJzOsMdpcTu+/Cqmxkusq4PyKOlQYDWPYmTHYIxabMs6HqclrM7sVQLw=="
       },
       "Selenium.WebDriver.GeckoDriver": {
         "type": "Direct",
@@ -1183,8 +1183,8 @@
           "Microsoft.Extensions.Configuration": "[9.0.9, )",
           "Microsoft.Extensions.Configuration.Binder": "[9.0.9, )",
           "Microsoft.Extensions.Configuration.Json": "[9.0.9, )",
-          "Microsoft.PowerShell.Commands.Diagnostics": "[7.4.11, )",
-          "Microsoft.PowerShell.SDK": "[7.4.11, )",
+          "Microsoft.PowerShell.Commands.Diagnostics": "[7.4.12, )",
+          "Microsoft.PowerShell.SDK": "[7.4.12, )",
           "Microsoft.WSMan.Management": "[7.4.12, )",
           "NLog": "[6.0.3, )",
           "Selenium.Support": "[4.35.0, )",
