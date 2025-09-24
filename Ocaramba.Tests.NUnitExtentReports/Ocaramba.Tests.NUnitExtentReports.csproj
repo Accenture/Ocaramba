@@ -9,7 +9,7 @@
     
     <PackageReference Include="Microsoft.TestPlatform.TestHost" Version="17.14.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
-    <PackageReference Include="NLog" Version="6.0.3" />
+    <PackageReference Include="NLog" Version="6.0.4" />
     <PackageReference Include="NPOI" Version="2.7.4" />
     <PackageReference Include="NUnit" Version="4.4.0" />
     <PackageReference Include="NUnit.Runners" Version="3.12.0" />
