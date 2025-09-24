@@ -19,7 +19,7 @@
     <PackageReference Include="xunit.abstractions" Version="2.0.3" />
     <PackageReference Include="xunit.assert" Version="2.9.3" />
     <PackageReference Include="xunit.extensibility.execution" Version="2.9.3" />
-		<PackageReference Include="Selenium.WebDriver.MSEdgeDriver" Version="139.0.3405.102" />
+		<PackageReference Include="Selenium.WebDriver.MSEdgeDriver" Version="140.0.3485.66" />
     <PackageReference Include="xunit.runner.console" Version="2.9.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
