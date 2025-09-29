@@ -268,6 +268,7 @@ jobs:
           $env:BROWSERSTACK_USERNAME="${{ secrets.BROWSERSTACK_USERNAME }}"
           $env:BROWSERSTACK_ACCESS_KEY="${{ secrets.BROWSERSTACK_ACCESS_KEY }}"
           $env:BROWSERSTACK_SDK_LOG_LEVEL="debug"
+          dotnet new tool-manifest --force
           dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
       - shell: pwsh
         if: true
@@ -456,6 +457,7 @@ jobs:
         run: |
           $env:BROWSERSTACK_USERNAME="${{ secrets.BROWSERSTACK_USERNAME }}"
           $env:BROWSERSTACK_ACCESS_KEY="${{ secrets.BROWSERSTACK_ACCESS_KEY }}"
+          dotnet new tool-manifest --force
           dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
       - run: ./scripts/ExecutingTestsOnWindowsGithubActions4.ps1
         env:
@@ -542,5 +544,6 @@ jobs:
       - name: Push Nuget Package
         run: dotnet nuget push .\OcarambaLite.${{ env.frameworkVersion }}.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
         if: (success() && startsWith(github.ref, 'refs/tags/'))
+
 
 
