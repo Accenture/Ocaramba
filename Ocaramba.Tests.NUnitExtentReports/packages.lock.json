@@ -52,18 +52,19 @@
       },
       "NPOI": {
         "type": "Direct",
-        "requested": "[2.7.4, )",
-        "resolved": "2.7.4",
-        "contentHash": "1tCebTkr9qAfwiEa2ErXco2IT+D8MNmT9d4KFz9nWn3owkc5fAOsvxV8kq6y4531B4Z3gnInrvEdonwFyoRqPQ==",
+        "requested": "[2.7.5, )",
+        "resolved": "2.7.5",
+        "contentHash": "KmEHqThmfAdq/Q3LLTahpvFKHQMQJrzJNAFIoSZCGIZWUmYBtvxDArmpLF+Zyw1tzCem/rZsefCqJgqfIz2l4w==",
         "dependencies": {
           "BouncyCastle.Cryptography": "2.4.0",
           "Enums.NET": "5.0.0",
           "ExtendedNumerics.BigDecimal": "2025.1001.2.129",
           "MathNet.Numerics.Signed": "5.0.0",
           "Microsoft.IO.RecyclableMemoryStream": "3.0.1",
+          "NSax": "1.0.2",
           "SharpZipLib": "1.4.2",
           "SixLabors.Fonts": "1.0.1",
-          "SixLabors.ImageSharp": "2.1.10",
+          "SixLabors.ImageSharp": "2.1.11",
           "System.Security.Cryptography.Xml": "8.0.2",
           "ZString": "2.6.0"
         }
@@ -669,6 +670,11 @@
         "resolved": "13.0.3",
         "contentHash": "HrC5BXdl00IP9zeV+0Z848QWPAoCr9P3bDEZguI+gkLcBKAOxix/tLEAAHC+UvDNPv4a2d18lOReHMOagPa+zQ=="
       },
+      "NSax": {
+        "type": "Transitive",
+        "resolved": "1.0.2",
+        "contentHash": "7txlId2RJTQBL3YdSGO7x70+r3HUOCw725lu0OoBgThRl/e3RhAZ2QKYxW2y9dPRtqbFZYHVa8siIeB8+L//Cg=="
+      },
       "NUnit.Console": {
         "type": "Transitive",
         "resolved": "3.12.0",
@@ -1149,7 +1155,7 @@
         "dependencies": {
           "Microsoft.Extensions.Configuration.Json": "[9.0.9, )",
           "Microsoft.NET.Test.Sdk": "[17.14.1, )",
-          "NLog": "[6.0.3, )",
+          "NLog": "[6.0.4, )",
           "OcarambaLite": "[1.0.0, )",
           "Selenium.Support": "[4.35.0, )",
           "Selenium.WebDriver": "[4.35.0, )",
@@ -1170,7 +1176,7 @@
           "Microsoft.PowerShell.Commands.Diagnostics": "[7.4.12, )",
           "Microsoft.PowerShell.SDK": "[7.4.12, )",
           "Microsoft.WSMan.Management": "[7.4.12, )",
-          "NLog": "[6.0.3, )",
+          "NLog": "[6.0.4, )",
           "Selenium.Support": "[4.35.0, )",
           "Selenium.WebDriver": "[4.35.0, )",
           "System.Configuration.ConfigurationManager": "[9.0.9, )",
