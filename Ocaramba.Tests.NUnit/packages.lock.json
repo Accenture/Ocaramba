@@ -111,9 +111,9 @@
       },
       "Selenium.WebDriver.MSEdgeDriver": {
         "type": "Direct",
-        "requested": "[139.0.3405.102, )",
-        "resolved": "139.0.3405.102",
-        "contentHash": "Hqplj4ymjYg8VnYrUiohV7OoN77iaUjqmEKGXxMtJ13yXWEfKXQZ58yNIk7z3M9bhq8UdHA8tLHTC4V40TByLg=="
+        "requested": "[140.0.3485.66, )",
+        "resolved": "140.0.3485.66",
+        "contentHash": "wDrJCb2dlXbaksjXys9ckcK86jZiyzoC5+lcYkQd4p9JNusonq+5jWmXQkWFQWmanBiJukS0ytClpsltS27cjQ=="
       },
       "SixLabors.ImageSharp": {
         "type": "Direct",
@@ -1146,7 +1146,7 @@
           "Microsoft.PowerShell.Commands.Diagnostics": "[7.4.12, )",
           "Microsoft.PowerShell.SDK": "[7.4.12, )",
           "Microsoft.WSMan.Management": "[7.4.12, )",
-          "NLog": "[6.0.3, )",
+          "NLog": "[6.0.4, )",
           "Selenium.Support": "[4.35.0, )",
           "Selenium.WebDriver": "[4.35.0, )",
           "System.Configuration.ConfigurationManager": "[9.0.9, )",
