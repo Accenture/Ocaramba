@@ -254,41 +254,43 @@ jobs:
           name: ExecutingTestsOnAndroid
           path: ./Ocaramba.Tests.Appium/bin/Release/net8.0/ExecutingTestsOnAndroid.zip
   test_Stage_RunTestsOnLinuxBrowserStack:
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v4
-      - run: |
-          ls 
-          export ASPNETCORE_ENVIRONMENT=Linux
-          echo $ASPNETCORE_ENVIRONMENT
-          sed -i -e '/Documentation/,+5 d' -e '/Ocaramba.Tests.Appium/,+1 d' -e '/Ocaramba.UnitTests/,+1 d' -e '/Ocaramba.Tests.NUnit/,+1 d' -e '/Ocaramba.Tests.CloudProviderCrossBrowser/,+1 d' -e '/Ocaramba.Tests.MsTest/,+1 d' -e '/Ocaramba.Tests.Features/,+1 d' -e '/Ocaramba.Tests.Xunit/,+1 d' -e '/Ocaramba.Tests.Angular/,+4 d' -e '/Ocaramba.Tests.NUnitExtentReports/,+1 d' ./Ocaramba.sln
-      - name: 'BrowserStack Env Setup'
-        uses: 'browserstack/github-actions/setup-env@master'
-        with:
-          username:  ${{ secrets.BROWSERSTACK_USERNAME }}
-          access-key: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
-          build-name: BUILD_INFO
-          project-name: REPO_NAME
-      - shell: pwsh
-        run: |
-          dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
-      - shell: pwsh
-        if: true
-        run: ./scripts/ExecutingTestsOnLinuxBrowserStackGithubActions.ps1
-      - name: Publish Test Results
-        uses: EnricoMi/publish-unit-test-result-action/linux@v2
-        if: false
-        with:
-          files: |
-            /home/runner/work/**/TestResults/*.xml
-          check_name: TestOnLinuxBrowserStack
-      - name: Upload zip logs as artifact
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: ExecutingTestsOnBrowserStackLinux
-          path: ./Ocaramba.Tests.BrowserStack/bin/Release/net8.0/ExecutingTestsOnBrowserStackLinux${{ github.run_id }}.zip
+      runs-on: ubuntu-latest
+      timeout-minutes: 10      
+      environment:
+       name: githubActions
+      steps:
+        - uses: actions/checkout@v4
+        - run: |
+            ls 
+            export ASPNETCORE_ENVIRONMENT=Linux
+            echo $ASPNETCORE_ENVIRONMENT
+            sed -i -e '/Documentation/,+5 d' -e '/Ocaramba.Tests.Appium/,+1 d' -e '/Ocaramba.UnitTests/,+1 d' -e '/Ocaramba.Tests.NUnit/,+1 d' -e '/Ocaramba.Tests.CloudProviderCrossBrowser/,+1 d' -e '/Ocaramba.Tests.MsTest/,+1 d' -e '/Ocaramba.Tests.Features/,+1 d' -e '/Ocaramba.Tests.Xunit/,+1 d' -e '/Ocaramba.Tests.Angular/,+4 d' -e '/Ocaramba.Tests.NUnitExtentReports/,+1 d' ./Ocaramba.sln
+        - name: 'BrowserStack Env Setup'
+          uses: 'browserstack/github-actions/setup-env@master'
+          with:
+            username:  ${{ secrets.BROWSERSTACK_USERNAME }}
+            access-key: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+            build-name: BUILD_INFO
+            project-name: REPO_NAME
+        - shell: pwsh
+          run: |
+            dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
+        - shell: pwsh
+          if: true
+          run: ./scripts/ExecutingTestsOnLinuxBrowserStackGithubActions.ps1
+        - name: Publish Test Results
+          uses: EnricoMi/publish-unit-test-result-action/linux@v2
+          if: false
+          with:
+            files: |
+              /home/runner/work/**/TestResults/*.xml
+            check_name: TestOnLinuxBrowserStack
+        - name: Upload zip logs as artifact
+          uses: actions/upload-artifact@v4
+          if: always()
+          with:
+            name: ExecutingTestsOnBrowserStackLinux
+            path: ./Ocaramba.Tests.BrowserStack/bin/Release/net8.0/ExecutingTestsOnBrowserStackLinux${{ github.run_id }}.zip
   test_Stage_RunTestsOnLinuxsaucelabs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -423,6 +425,8 @@ jobs:
         if: always()
   test_Stage_RunTestsOnWindowsBrowserStack:
     runs-on: windows-latest
+    environment:
+       name: githubActions
     steps:
       - uses: actions/checkout@v4
       - name: Setup .NET
@@ -545,6 +549,7 @@ jobs:
       - name: Push Nuget Package
         run: dotnet nuget push .\OcarambaLite.${{ env.frameworkVersion }}.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
         if: (success() && startsWith(github.ref, 'refs/tags/'))
+
 
 
 
