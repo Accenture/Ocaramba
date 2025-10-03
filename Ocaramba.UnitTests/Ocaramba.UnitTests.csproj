@@ -23,7 +23,7 @@
     <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.36.0" />
 	  <PackageReference Include="Selenium.WebDriver.MSEdgeDriver" Version="140.0.3485.66" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="9.0.9" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.0" />
   </ItemGroup>
 
   <ItemGroup>
