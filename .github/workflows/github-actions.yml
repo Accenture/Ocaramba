@@ -469,6 +469,18 @@ jobs:
         env:
           BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
           BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
+      - name: Install Docker Compose
+        run: |
+          $dest = (Resolve-Path './Ocaramba.Tests.BrowserStack/bin/Release/net8.0/TestOutput').Path
+          New-Item -ItemType Directory -Path $dest -Force | Out-Null
+
+          Get-ChildItem -Path . -Recurse -File -Filter '*.log' |
+            Where-Object {
+              $_.FullName -notlike "$dest*"
+            } |
+            Copy-Item -Destination $dest -Force
+
+          Compress-Archive -Path "./Ocaramba.Tests.BrowserStack/bin/Release/net8.0/TestOutput/*" -DestinationPath "ExecutingTestsOnWindowsBrowserStack$env:GITHUB_RUN_ID.zip"
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action/windows@v2
         if: false

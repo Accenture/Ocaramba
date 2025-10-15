@@ -10,17 +10,5 @@ if($lastexitcode -ne 0)
   echo 'lastexitcode' $lastexitcode
  }
 
-cd ./../../../..
-
-$dest = (Resolve-Path './Ocaramba.Tests.BrowserStack/bin/Release/net8.0/TestOutput').Path
-New-Item -ItemType Directory -Path $dest -Force | Out-Null
-
-Get-ChildItem -Path . -Recurse -File -Filter '*.log' |
-  Where-Object {
-    $_.FullName -notlike "$dest*"
-  } |
-  Copy-Item -Destination $dest -Force
-
-Compress-Archive -Path "./Ocaramba.Tests.BrowserStack/bin/Release/net8.0/TestOutput/*" -DestinationPath "ExecutingTestsOnWindowsBrowserStack$env:GITHUB_RUN_ID.zip"
 
 exit 0    
