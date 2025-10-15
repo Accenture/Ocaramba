@@ -480,8 +480,8 @@ jobs:
               $_.FullName -notlike "$dest*"
             } |
             Copy-Item -Destination $dest -Force
-
-          Compress-Archive -Path "./Ocaramba.Tests.BrowserStack/bin/Release/net8.0/TestOutput/*" -DestinationPath "/Ocaramba.Tests.BrowserStack/bin/Release/net8.0/ExecutingTestsOnWindowsBrowserStack$env:GITHUB_RUN_ID.zip"
+          $dest = (Resolve-Path './Ocaramba.Tests.BrowserStack/bin/Release/net8.0').Path
+          Compress-Archive -Path "./Ocaramba.Tests.BrowserStack/bin/Release/net8.0/TestOutput/*" -DestinationPath "$dest/ExecutingTestsOnWindowsBrowserStack$env:GITHUB_RUN_ID.zip"
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action/windows@v2
         if: false
