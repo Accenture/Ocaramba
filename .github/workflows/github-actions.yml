@@ -455,15 +455,12 @@ jobs:
                 default { $_ }
             }
           } | Set-Content ./Ocaramba.sln
-      - name: Setup nuget
-        uses: nuget/setup-nuget@v2
-        with:
-          nuget-version: latest
-      - name: NuGet restore
-        run: nuget restore ${{ env.solution }}
+      - name: Restore
+        run: dotnet restore
       - shell: pwsh
         run: |
           dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }} --no-restore
+      - name: "BrowserStack Env Setup"
         uses: browserstack/github-actions/setup-env@master
         with:
           username: ${{ secrets.BROWSERSTACK_USERNAME }}
