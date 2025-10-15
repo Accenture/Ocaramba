@@ -10,7 +10,9 @@ if($lastexitcode -ne 0)
   echo 'lastexitcode' $lastexitcode
  }
 
-Copy-Item -Path "*.log" -Destination "./TestOutput/" -Recurse
-Compress-Archive -Path "./TestOutput/*" -DestinationPath "ExecutingTestsOnWindowsBrowserStack$env:GITHUB_RUN_ID.zip"
+cd ./../../../..
+Get-ChildItem -Path "./" -Recurse -Filter *.log -File | Copy-Item -Destination "./Ocaramba.Tests.BrowserStack/bin/Release/net8.0/TestOutput" -Force
+
+Compress-Archive -Path "./Ocaramba.Tests.BrowserStack/bin/Release/net8.0/TestOutput/*" -DestinationPath "ExecutingTestsOnWindowsBrowserStack$env:GITHUB_RUN_ID.zip"
 
 exit 0    
