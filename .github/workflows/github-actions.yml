@@ -162,7 +162,7 @@ jobs:
           context: .
           push: false
           tags: ocaramba/selenium:latest
-        if: ${{!startsWith(github.ref , 'refs/tags/')}}          
+        if: ${{!startsWith(github.ref , 'refs/tags/')}}
   test_Stage_RunTestsOnLinux:
     runs-on: ubuntu-latest
     steps:
@@ -258,17 +258,26 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
       - run: |
           ls 
           export ASPNETCORE_ENVIRONMENT=Linux
           echo $ASPNETCORE_ENVIRONMENT
           sed -i -e '/Documentation/,+5 d' -e '/Ocaramba.Tests.Appium/,+1 d' -e '/Ocaramba.UnitTests/,+1 d' -e '/Ocaramba.Tests.NUnit/,+1 d' -e '/Ocaramba.Tests.CloudProviderCrossBrowser/,+1 d' -e '/Ocaramba.Tests.MsTest/,+1 d' -e '/Ocaramba.Tests.Features/,+1 d' -e '/Ocaramba.Tests.Xunit/,+1 d' -e '/Ocaramba.Tests.Angular/,+4 d' -e '/Ocaramba.Tests.NUnitExtentReports/,+1 d' ./Ocaramba.sln
+      - name: Restore
+        run: dotnet restore
       - shell: pwsh
         run: |
-          $env:BROWSERSTACK_USERNAME="${{ secrets.BROWSERSTACK_USERNAME }}"
-          $env:BROWSERSTACK_ACCESS_KEY="${{ secrets.BROWSERSTACK_ACCESS_KEY }}"
-          $env:BROWSERSTACK_SDK_LOG_LEVEL="debug"
-          dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
+          dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }} --no-restore
+      - name: "BrowserStack Env Setup"
+        uses: browserstack/github-actions/setup-env@master
+        with:
+          username: ${{ secrets.BROWSERSTACK_USERNAME }}
+          access-key: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
       - shell: pwsh
         if: true
         run: ./scripts/ExecutingTestsOnLinuxBrowserStackGithubActions.ps1
@@ -542,5 +551,3 @@ jobs:
       - name: Push Nuget Package
         run: dotnet nuget push .\OcarambaLite.${{ env.frameworkVersion }}.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
         if: (success() && startsWith(github.ref, 'refs/tags/'))
-
-
