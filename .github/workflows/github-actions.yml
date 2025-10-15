@@ -286,7 +286,7 @@ jobs:
           BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action/linux@v2
-        if: false
+        if: true
         with:
           files: |
             /home/runner/work/**/TestResults/*.xml
@@ -464,7 +464,6 @@ jobs:
       - shell: pwsh
         run: |
           dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }} --no-restore
-      - name: "BrowserStack Env Setup"
         uses: browserstack/github-actions/setup-env@master
         with:
           username: ${{ secrets.BROWSERSTACK_USERNAME }}
