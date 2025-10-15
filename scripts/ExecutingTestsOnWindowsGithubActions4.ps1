@@ -9,7 +9,8 @@ if($lastexitcode -ne 0)
  {
   echo 'lastexitcode' $lastexitcode
  }
- 
+
+Copy-Item -Path "*.log" -Destination "./TestOutput/" -Recurse
 Compress-Archive -Path "./TestOutput/*" -DestinationPath "ExecutingTestsOnWindowsBrowserStack$env:GITHUB_RUN_ID.zip"
 
 exit 0    
