@@ -289,7 +289,7 @@ jobs:
         if: true
         with:
           files: |
-            /home/runner/work/**/TestResults/*.xml
+            /home/runner/work/**/TestResults/*.trx
           check_name: TestOnLinuxBrowserStack
       - name: Upload zip logs as artifact
         uses: actions/upload-artifact@v4
