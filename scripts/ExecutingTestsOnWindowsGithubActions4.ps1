@@ -9,7 +9,6 @@ if($lastexitcode -ne 0)
  {
   echo 'lastexitcode' $lastexitcode
  }
- 
-Compress-Archive -Path "./TestOutput/*" -DestinationPath "ExecutingTestsOnWindowsBrowserStack$env:GITHUB_RUN_ID.zip"
+
 
 exit 0    
