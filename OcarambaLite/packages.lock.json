@@ -4,11 +4,11 @@
     "net8.0": {
       "Appium.WebDriver": {
         "type": "Direct",
-        "requested": "[8.0.0, )",
-        "resolved": "8.0.0",
-        "contentHash": "+eJwC8Dy7SOIWD37bKX89xyZpufkDLZ7M4hYewYvno5Hn2eZ/z1k4d9gzn0vHNAh2QnJ2NKrFnh2zBjgMJiwcg==",
+        "requested": "[8.0.1, )",
+        "resolved": "8.0.1",
+        "contentHash": "vFEZA0Gfe2lPvIXZ9Ar1GfND8nPnwaxA5RreopO5ebklZ4OOPQXQy9L8i9VyNvntwM0R2BP0FypOlPwcvlHXIA==",
         "dependencies": {
-          "Selenium.WebDriver": "4.29.0",
+          "Selenium.WebDriver": "4.35.0",
           "System.Drawing.Common": "8.0.10"
         }
       },
