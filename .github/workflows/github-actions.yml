@@ -463,9 +463,12 @@ jobs:
         run: nuget restore ${{ env.solution }}
       - shell: pwsh
         run: |
-          $env:BROWSERSTACK_USERNAME="${{ secrets.BROWSERSTACK_USERNAME }}"
-          $env:BROWSERSTACK_ACCESS_KEY="${{ secrets.BROWSERSTACK_ACCESS_KEY }}"
-          dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
+          dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }} --no-restore
+            - name: "BrowserStack Env Setup"
+        uses: browserstack/github-actions/setup-env@master
+        with:
+          username: ${{ secrets.BROWSERSTACK_USERNAME }}
+          access-key: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
       - run: ./scripts/ExecutingTestsOnWindowsGithubActions4.ps1
         env:
           BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
