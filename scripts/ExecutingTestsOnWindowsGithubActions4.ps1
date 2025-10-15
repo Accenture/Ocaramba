@@ -11,7 +11,15 @@ if($lastexitcode -ne 0)
  }
 
 cd ./../../../..
-Get-ChildItem -Path "./" -Recurse -Filter *.log -File | Copy-Item -Destination "./Ocaramba.Tests.BrowserStack/bin/Release/net8.0/TestOutput" -Force
+
+$dest = (Resolve-Path './Ocaramba.Tests.BrowserStack/bin/Release/net8.0/TestOutput').Path
+New-Item -ItemType Directory -Path $dest -Force | Out-Null
+
+Get-ChildItem -Path . -Recurse -File -Filter '*.log' |
+  Where-Object {
+    $_.FullName -notlike "$dest*"
+  } |
+  Copy-Item -Destination $dest -Force
 
 Compress-Archive -Path "./Ocaramba.Tests.BrowserStack/bin/Release/net8.0/TestOutput/*" -DestinationPath "ExecutingTestsOnWindowsBrowserStack$env:GITHUB_RUN_ID.zip"
 
