@@ -20,15 +20,11 @@
 //     SOFTWARE.
 // </license>
 
-using System.IO;
 using OcarambaLite.Logger;
+using System.IO;
 
-namespace Ocaramba.Tests.CloudProviderCrossBrowser
+namespace Ocaramba.Tests.BrowserStack
 {
-    using System;
-    using System.Collections.Specialized;
-    using System.Configuration;
-    using System.Globalization;
     using global::NUnit.Framework;
     using global::NUnit.Framework.Interfaces;
     using NLog;
@@ -36,6 +32,12 @@ namespace Ocaramba.Tests.CloudProviderCrossBrowser
     using Ocaramba.Logger;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Remote;
+    using System;
+    using System.Collections.Specialized;
+    using System.Configuration;
+    using System.Globalization;
+    using System.Runtime.Intrinsics.X86;
+    using System.Text.Json.Nodes;
 
     /// <summary>
     /// The base class for all tests <see href="https://github.com/ObjectivityLtd/Ocaramba/wiki/ProjectTestBase-class">More details on wiki</see>
@@ -94,20 +96,13 @@ namespace Ocaramba.Tests.CloudProviderCrossBrowser
             this.driverContext.TestTitle = TestContext.CurrentContext.Test.Name;
             this.driverContext.Start();
             this.LogTest.LogTestStarting(this.driverContext);
+            JsonObject executorObject = new JsonObject();
+            JsonObject argumentsObject = new JsonObject();
+            argumentsObject.Add("name", this.driverContext.TestTitle);
+            executorObject.Add("action", "setSessionName");
+            executorObject.Add("arguments", argumentsObject);
+            ((IJavaScriptExecutor)this.driverContext.Driver).ExecuteScript("browserstack_executor: " + executorObject.ToString());
 
-            if (BaseConfiguration.RemoteWebDriverHub.ToString().ToLower(CultureInfo.CurrentCulture).Contains("testingbot"))
-            {
-                Logger.Info("\nTestingBotSessionID=" + ((RemoteWebDriver)this.driverContext.Driver).SessionId);
-            }
-            else if (BaseConfiguration.RemoteWebDriverHub.ToString().ToLower(CultureInfo.CurrentCulture).Contains("saucelabs"))
-            {
-                Logger.Info("\nSauceOnDemandSessionID={0} job-name={1}", ((RemoteWebDriver)this.driverContext.Driver).SessionId, "saucelabs_test");
-            }
-            else if (BaseConfiguration.RemoteWebDriverHub.ToString().ToLower(CultureInfo.CurrentCulture).Contains("browserstack"))
-            {
-                // Setting name of the test
-                ((IJavaScriptExecutor)this.driverContext.Driver).ExecuteScript("browserstack_executor: {\"action\": \"setSessionName\", \"arguments\": {\"name\":\" " + this.driverContext.TestTitle + " \"}}");
-            }
         }
 
         /// <summary>
@@ -120,20 +115,24 @@ namespace Ocaramba.Tests.CloudProviderCrossBrowser
             var filePaths = this.SaveTestDetailsIfTestFailed(this.driverContext);
             this.SaveAttachmentsToTestContext(filePaths);
             this.LogTest.LogTestEnding(this.driverContext);
+            JsonObject executorObject = new JsonObject();
+            JsonObject argumentsObject = new JsonObject();
+            
+            executorObject.Add("action", "setSessionStatus");
+            
 
-            // Logs the result to Sauce Labs
-            if (BaseConfiguration.RemoteWebDriverHub.ToString().ToLower(CultureInfo.CurrentCulture).Contains("saucelabs"))
+            if (this.driverContext.IsTestFailed)
             {
-                ((IJavaScriptExecutor)this.driverContext.Driver).ExecuteScript("sauce:job-result=" + (this.driverContext.IsTestFailed ? "failed" : "passed"));
-            }
-            else if (BaseConfiguration.RemoteWebDriverHub.ToString().ToLower(CultureInfo.CurrentCulture).Contains("browserstack") && !this.driverContext.IsTestFailed)
+                argumentsObject.Add("status", "failed>");
+                argumentsObject.Add("reason", "Test failed");
+            } else
             {
-                ((IJavaScriptExecutor)this.driverContext.Driver).ExecuteScript("browserstack_executor: {\"action\": \"setSessionStatus\", \"arguments\": {\"status\":\"passed\", \"reason\": \" Test Passed\"}}");
+                argumentsObject.Add("status", "passed");
+                argumentsObject.Add("reason", "Test Passed");
             }
-            else if (BaseConfiguration.RemoteWebDriverHub.ToString().ToLower(CultureInfo.CurrentCulture).Contains("browserstack") && this.driverContext.IsTestFailed)
-            {
-                ((IJavaScriptExecutor)this.driverContext.Driver).ExecuteScript("browserstack_executor: {\"action\": \"setSessionStatus\", \"arguments\": {\"status\":\"failed\", \"reason\": \" Test Failed\"}}");
-            }
+
+            executorObject.Add("arguments", argumentsObject);
+            ((IJavaScriptExecutor)this.driverContext.Driver).ExecuteScript("browserstack_executor: " + executorObject.ToString());
 
             if (this.IsVerifyFailedAndClearMessages(this.driverContext) && TestContext.CurrentContext.Result.Outcome.Status != TestStatus.Failed)
             {
