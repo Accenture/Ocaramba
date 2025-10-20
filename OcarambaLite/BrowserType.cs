@@ -91,5 +91,10 @@ namespace Ocaramba
         /// Appium mobile automation
         /// </summary>
         Appium,
+
+        /// <summary>
+        /// BrowserStack parallel cross browsers testing
+        /// </summary>
+        BrowserStack,
     }
 }
