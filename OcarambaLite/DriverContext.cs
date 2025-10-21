@@ -605,6 +605,9 @@ namespace Ocaramba
                 case BrowserType.RemoteWebDriver:
                     this.SetupRemoteWebDriver();
                     break;
+                case BrowserType.BrowserStack:
+                    this.SetupBrwoserStack();
+                    break;
                 case BrowserType.Edge:
                 case BrowserType.EdgeChromium:
                     this.StartEdge();
@@ -811,6 +814,13 @@ namespace Ocaramba
                     throw new NotSupportedException(
                         string.Format(CultureInfo.CurrentCulture, "Driver is not supported"));
             }
+        }
+
+        private void SetupBrwoserStack()
+        {
+            DriverOptions capability = new OpenQA.Selenium.Chrome.ChromeOptions();
+            capability.BrowserVersion = "latest";
+            this.driver = new RemoteWebDriver(BaseConfiguration.RemoteWebDriverHub, capability);
         }
     }
 }

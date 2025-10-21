@@ -28,6 +28,11 @@ namespace Ocaramba
     public enum BrowserType
     {
         /// <summary>
+        /// Chrome browser
+        /// </summary>
+        Chrome,
+
+        /// <summary>
         /// Firefox browser
         /// </summary>
         Firefox,
@@ -41,11 +46,6 @@ namespace Ocaramba
         /// InternetExplorer browser
         /// </summary>
         IE,
-
-        /// <summary>
-        /// Chrome browser
-        /// </summary>
-        Chrome,
 
         /// <summary>
         /// Safari browser
@@ -91,5 +91,10 @@ namespace Ocaramba
         /// Appium mobile automation
         /// </summary>
         Appium,
+
+        /// <summary>
+        /// BrowserStack parallel cross browsers testing
+        /// </summary>
+        BrowserStack,
     }
 }

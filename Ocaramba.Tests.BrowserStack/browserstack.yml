@@ -10,7 +10,7 @@ accessKey: ${BROWSERSTACK_ACCESS_KEY}
 # ======================
 # The following capabilities are used to set up reporting on BrowserStack:
 # Set 'projectName' to the name of your project. Example, Marketing Website
-projectName: BrowserStack Samples
+projectName: BrowserStack Ocaramba Tests
 # Set `buildName` as the name of the job / testsuite being run
 buildName: gha-${GITHUB_RUN_NUMBER}
 # `buildIdentifier` is a unique id to differentiate every execution that gets appended to
@@ -20,7 +20,7 @@ buildName: gha-${GITHUB_RUN_NUMBER}
 # Read more about buildIdentifiers here -> https://www.browserstack.com/docs/automate/selenium/organize-tests
 buildIdentifier: "#${BUILD_NUMBER}" # Supports strings along with either/both ${expression}
 # Set `source` in the syntax `<fw-name>:sample-<branch-name>:<version-number>
-
+testObservability: true
 source: nunit:sample-sdk:v1.1
 
 # =======================================
@@ -47,7 +47,7 @@ platforms:
 # ==========================================
 # Set browserStackLocal to true if your website under test is not accessible publicly over the internet
 # Learn more about how BrowserStack Local works here -> https://www.browserstack.com/docs/automate/selenium/local-testing-introduction
-browserstackLocal: false # <boolean> (Default false)
+browserstackLocal: true # <boolean> (Default false)
 
 # browserStackLocalOptions:
 # Options to be passed to BrowserStack local in-case of advanced configurations

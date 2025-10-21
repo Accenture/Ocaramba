@@ -174,6 +174,11 @@ jobs:
           echo $ASPNETCORE_ENVIRONMENT
           sudo apt-get install google-chrome-stable
           sed -i '/Documentation/,+5 d' ./Ocaramba.sln ; sed -i '/CloudProviderCrossBrowser/,+1 d' ./Ocaramba.sln; sed -i '/UnitTests/,+1 d' ./Ocaramba.sln; sed -i '/BrowserStack/,+1 d' ./Ocaramba.sln; sed -i '/MsTest/,+1 d' ./Ocaramba.sln;sed -i '/Features/,+1 d' ./Ocaramba.sln;sed -i '/Xunit/,+1 d' ./Ocaramba.sln;sed -i '/NUnitExtentReports/,+1 d' ./Ocaramba.sln;sed -i '/Appium/,+1 d' ./Ocaramba.sln;sed -i '/CloudProviderCrossBrowser/,+1 d' ./Ocaramba.sln;sed -i '/Angular/,+1 d' ./Ocaramba.sln
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v2
+      - name: Run the-internet app in Docker
+        run: |
+          docker run -d -p 7080:5000 gprestes/the-internet
       - run: dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }}
       - shell: pwsh
         run: ./scripts/ExecutingTestsOnLinuxAzure.ps1
@@ -262,7 +267,11 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: "8.0.x"
-
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v2
+      - name: Run the-internet app in Docker
+        run: |
+          docker run -d -p 7080:5000 gprestes/the-internet
       - run: |
           ls 
           export ASPNETCORE_ENVIRONMENT=Linux
@@ -278,12 +287,24 @@ jobs:
         with:
           username: ${{ secrets.BROWSERSTACK_USERNAME }}
           access-key: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+          project-name: Ocaramba_Linux_BrowserStack
+      - name: "Start BrowserStackLocal Tunnel"
+        uses: "browserstack/github-actions/setup-local@master"
+        with:
+          local-testing: "start"
+          local-logging-level: "all-logs"
+          local-identifier: "random"
       - shell: pwsh
         if: true
         run: ./scripts/ExecutingTestsOnLinuxBrowserStackGithubActions.ps1
         env:
           BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
           BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
+      - name: "Stop BrowserStackLocal"
+        if: always()
+        uses: "browserstack/github-actions/setup-local@master"
+        with:
+          local-testing: "stop"
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action/linux@v2
         if: true
@@ -465,6 +486,13 @@ jobs:
         with:
           username: ${{ secrets.BROWSERSTACK_USERNAME }}
           access-key: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+          project-name: Ocaramba_Windows_BrowserStack
+      - name: "Start BrowserStackLocal Tunnel"
+        uses: "browserstack/github-actions/setup-local@master"
+        with:
+          local-testing: "start"
+          local-logging-level: "all-logs"
+          local-identifier: "random"
       - run: ./scripts/ExecutingTestsOnWindowsGithubActions4.ps1
         env:
           BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
@@ -474,7 +502,6 @@ jobs:
         run: |
           $dest = (Resolve-Path './Ocaramba.Tests.BrowserStack/bin/Release/net8.0/TestOutput').Path
           New-Item -ItemType Directory -Path $dest -Force | Out-Null
-
           Get-ChildItem -Path . -Recurse -File -Filter '*.log' |
             Where-Object {
               $_.FullName -notlike "$dest*"
@@ -482,6 +509,11 @@ jobs:
             Copy-Item -Destination $dest -Force
           $dest = (Resolve-Path './Ocaramba.Tests.BrowserStack/bin/Release/net8.0').Path
           Compress-Archive -Path "./Ocaramba.Tests.BrowserStack/bin/Release/net8.0/TestOutput/*" -DestinationPath "$dest/ExecutingTestsOnWindowsBrowserStack$env:GITHUB_RUN_ID.zip"
+      - name: "Stop BrowserStackLocal"
+        if: always()
+        uses: "browserstack/github-actions/setup-local@master"
+        with:
+          local-testing: "stop"
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action/windows@v2
         if: false
@@ -530,10 +562,10 @@ jobs:
       - test_Stage_RunTestsOnLinuxBrowserStack
       - test_Stage_RunTestsOnWindowsCore1
       - test_Stage_RunTestsOnWindowsCore2
-      - test_Stage_RunTestsOnWindowsBrowserStack
       - test_Stage_RunTestsSeleniumGrid
       - test_Stage_RunAppiumTestsOnAndroid
       - test_Stage_RunTestsOnLinuxsaucelabs
+      - test_Stage_RunTestsOnWindowsBrowserStack
     steps:
       - uses: actions/checkout@v4
       - shell: pwsh

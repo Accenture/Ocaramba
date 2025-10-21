@@ -4,9 +4,9 @@
     "net8.0": {
       "BrowserStack.TestAdapter": {
         "type": "Direct",
-        "requested": "[0.20.0, )",
-        "resolved": "0.20.0",
-        "contentHash": "b527oEKqdjHRct9iq8AyZVNryVgGeKZObkvrTUp8l9VmonHu3QyQJ6sLggVKF67rX6GlkSocHcLzL7lbCREr9A==",
+        "requested": "[0.21.2, )",
+        "resolved": "0.21.2",
+        "contentHash": "nzexF4KLz6z7amK0jOslCmYSqx5iDGXEg+U+ZXpFKHuM1c4Pn5O0CESahk3Bjssrf30h1F/IuVZFtCknfrJAug==",
         "dependencies": {
           "Google.Protobuf": "3.30.2",
           "Grpc.Net.Client": "2.71.0",
@@ -2086,11 +2086,11 @@
         "dependencies": {
           "Microsoft.Extensions.Configuration.Json": "[9.0.9, )",
           "Microsoft.NET.Test.Sdk": "[17.14.1, )",
-          "NLog": "[6.0.3, )",
+          "NLog": "[6.0.4, )",
           "OcarambaLite": "[1.0.0, )",
           "Selenium.Support": "[4.35.0, )",
           "Selenium.WebDriver": "[4.35.0, )",
-          "Selenium.WebDriver.ChromeDriver": "[140.0.7339.18500, )",
+          "Selenium.WebDriver.ChromeDriver": "[140.0.7339.20700, )",
           "Selenium.WebDriver.GeckoDriver": "[0.36.0, )",
           "System.Configuration.ConfigurationManager": "[9.0.9, )",
           "System.Text.Json": "[9.0.9, )"
@@ -2107,7 +2107,7 @@
           "Microsoft.PowerShell.Commands.Diagnostics": "[7.4.12, )",
           "Microsoft.PowerShell.SDK": "[7.4.12, )",
           "Microsoft.WSMan.Management": "[7.4.12, )",
-          "NLog": "[6.0.3, )",
+          "NLog": "[6.0.4, )",
           "Selenium.Support": "[4.35.0, )",
           "Selenium.WebDriver": "[4.35.0, )",
           "System.Configuration.ConfigurationManager": "[9.0.9, )",

@@ -977,7 +977,7 @@
           "OcarambaLite": "[1.0.0, )",
           "Selenium.Support": "[4.35.0, )",
           "Selenium.WebDriver": "[4.35.0, )",
-          "Selenium.WebDriver.ChromeDriver": "[140.0.7339.18500, )",
+          "Selenium.WebDriver.ChromeDriver": "[140.0.7339.20700, )",
           "Selenium.WebDriver.GeckoDriver": "[0.36.0, )",
           "System.Configuration.ConfigurationManager": "[9.0.9, )",
           "System.Text.Json": "[9.0.9, )"

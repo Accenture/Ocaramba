@@ -22,10 +22,9 @@
 
 using System;
 
-namespace Ocaramba.Tests.CloudProviderCrossBrowser.Tests
+namespace Ocaramba.Tests.BrowserStack.Tests
 {
-    using global::NUnit.Framework;
-    using Ocaramba;
+    using NUnit.Framework;
     using Ocaramba.Tests.PageObjects.PageObjects.TheInternet;
 
 
@@ -46,7 +45,7 @@ namespace Ocaramba.Tests.CloudProviderCrossBrowser.Tests
             var table = tableElements.GetTableElements();
 
             Assert.That(table[0][0], Is.EqualTo("Smith"));
-            Assert.That(table[3][5].Trim().Replace("\r", String.Empty).Replace("         ", String.Empty).Replace("\n", String.Empty), Is.EqualTo("edit delete"));
+            Assert.That(table[3][5].Trim().Replace("\r", string.Empty).Replace("         ", string.Empty).Replace("\n", string.Empty), Is.EqualTo("edit delete"));
         }
 
         [Test]
