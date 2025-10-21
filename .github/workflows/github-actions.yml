@@ -449,6 +449,69 @@ jobs:
           path: WindowsCore2${{ github.run_id }}.zip
           name: WindowsCore2
         if: always()
+  test_Stage_RunTestsOnWindowsBrowserStack:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.x"
+      - shell: pwsh
+        run: |
+          (Get-Content ./Ocaramba.sln) | ForEach-Object -Begin { $skip = 0 } -Process {
+            if ($skip -gt 0) { $skip--; return }
+            switch -regex ($_) {
+                'Documentation'                        { $skip = 5; return }
+                'Ocaramba.Tests.Appium'               { $skip = 1; return }
+                'Ocaramba.UnitTests'                  { $skip = 1; return }
+                'Ocaramba.Tests.NUnit'                { $skip = 1; return }
+                'Ocaramba.Tests.MsTest'               { $skip = 1; return }
+                'Ocaramba.Tests.Features'             { $skip = 1; return }
+                'Ocaramba.Tests.Xunit'                { $skip = 1; return }
+                'Ocaramba.Tests.Angular'              { $skip = 4; return }
+                'Ocaramba.Tests.CloudProviderCrossBrowser'              { $skip = 1; return }
+                'Ocaramba.Tests.NUnitExtentReports'   { $skip = 1; return }
+                default { $_ }
+            }
+          } | Set-Content ./Ocaramba.sln
+      - name: Restore
+        run: dotnet restore
+      - shell: pwsh
+        run: |
+          dotnet build ./Ocaramba.sln --configuration ${{ env.buildConfiguration }} --no-restore
+      - name: "BrowserStack Env Setup"
+        uses: browserstack/github-actions/setup-env@master
+        with:
+          username: ${{ secrets.BROWSERSTACK_USERNAME }}
+          access-key: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+      - run: ./scripts/ExecutingTestsOnWindowsGithubActions4.ps1
+        env:
+          BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+          BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
+      - name: Archive logs
+        if: always()
+        run: |
+          $dest = (Resolve-Path './Ocaramba.Tests.BrowserStack/bin/Release/net8.0/TestOutput').Path
+          New-Item -ItemType Directory -Path $dest -Force | Out-Null
+          Get-ChildItem -Path . -Recurse -File -Filter '*.log' |
+            Where-Object {
+              $_.FullName -notlike "$dest*"
+            } |
+            Copy-Item -Destination $dest -Force
+          $dest = (Resolve-Path './Ocaramba.Tests.BrowserStack/bin/Release/net8.0').Path
+          Compress-Archive -Path "./Ocaramba.Tests.BrowserStack/bin/Release/net8.0/TestOutput/*" -DestinationPath "$dest/ExecutingTestsOnWindowsBrowserStack$env:GITHUB_RUN_ID.zip"
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action/windows@v2
+        if: false
+        with:
+          files: ./**/Ocaramba.Tests.BrowserStack.xml
+          check_name: TestsOnWindowsBrowserStack4
+      - uses: actions/upload-artifact@v4
+        with:
+          path: ./Ocaramba.Tests.BrowserStack/bin/Release/net8.0/ExecutingTestsOnWindowsBrowserStack${{ github.run_id }}.zip
+          name: TestsOnWindowsBrowserStack4
+        if: always()
   test_Stage_RunTestsSeleniumGrid:
     runs-on: ubuntu-latest
     steps:
@@ -489,6 +552,7 @@ jobs:
       - test_Stage_RunTestsSeleniumGrid
       - test_Stage_RunAppiumTestsOnAndroid
       - test_Stage_RunTestsOnLinuxsaucelabs
+      - test_Stage_RunTestsOnWindowsBrowserStack
     steps:
       - uses: actions/checkout@v4
       - shell: pwsh
