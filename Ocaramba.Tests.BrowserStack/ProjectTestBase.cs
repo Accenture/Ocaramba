@@ -123,7 +123,7 @@ namespace Ocaramba.Tests.BrowserStack
 
             if (this.driverContext.IsTestFailed)
             {
-                argumentsObject.Add("status", "failed>");
+                argumentsObject.Add("status", "failed");
                 argumentsObject.Add("reason", "Test failed");
             } else
             {

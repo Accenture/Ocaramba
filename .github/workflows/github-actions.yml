@@ -262,7 +262,11 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: "8.0.x"
-
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v2
+      - name: Run the-internet app in Docker
+        run: |
+          docker run -d -p 7080:5000 gprestes/the-internet
       - run: |
           ls 
           export ASPNETCORE_ENVIRONMENT=Linux
@@ -455,6 +459,11 @@ jobs:
                 default { $_ }
             }
           } | Set-Content ./Ocaramba.sln
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v2
+      - name: Run the-internet app in Docker
+        run: |
+          docker run -d -p 7080:5000 gprestes/the-internet
       - name: Restore
         run: dotnet restore
       - shell: pwsh
