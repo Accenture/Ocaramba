@@ -486,7 +486,6 @@ jobs:
       - test_Stage_RunTestsOnLinuxBrowserStack
       - test_Stage_RunTestsOnWindowsCore1
       - test_Stage_RunTestsOnWindowsCore2
-      - test_Stage_RunTestsOnWindowsBrowserStack
       - test_Stage_RunTestsSeleniumGrid
       - test_Stage_RunAppiumTestsOnAndroid
       - test_Stage_RunTestsOnLinuxsaucelabs
