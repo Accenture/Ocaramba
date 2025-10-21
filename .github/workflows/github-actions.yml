@@ -287,6 +287,7 @@ jobs:
         with:
           username: ${{ secrets.BROWSERSTACK_USERNAME }}
           access-key: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+          project-name: Ocaramba_Linux_BrowserStack
       - name: "Start BrowserStackLocal Tunnel"
         uses: "browserstack/github-actions/setup-local@master"
         with:
@@ -485,6 +486,7 @@ jobs:
         with:
           username: ${{ secrets.BROWSERSTACK_USERNAME }}
           access-key: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+          project-name: Ocaramba_Windows_BrowserStack
       - name: "Start BrowserStackLocal Tunnel"
         uses: "browserstack/github-actions/setup-local@master"
         with:

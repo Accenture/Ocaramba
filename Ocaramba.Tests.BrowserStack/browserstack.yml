@@ -20,7 +20,7 @@ buildName: gha-${GITHUB_RUN_NUMBER}
 # Read more about buildIdentifiers here -> https://www.browserstack.com/docs/automate/selenium/organize-tests
 buildIdentifier: "#${BUILD_NUMBER}" # Supports strings along with either/both ${expression}
 # Set `source` in the syntax `<fw-name>:sample-<branch-name>:<version-number>
-
+testObservability: true
 source: nunit:sample-sdk:v1.1
 
 # =======================================
