@@ -485,6 +485,12 @@ jobs:
         with:
           username: ${{ secrets.BROWSERSTACK_USERNAME }}
           access-key: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+      - name: "Start BrowserStackLocal Tunnel"
+        uses: "browserstack/github-actions/setup-local@master"
+        with:
+          local-testing: "start"
+          local-logging-level: "all-logs"
+          local-identifier: "random"
       - run: ./scripts/ExecutingTestsOnWindowsGithubActions4.ps1
         env:
           BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
@@ -501,6 +507,11 @@ jobs:
             Copy-Item -Destination $dest -Force
           $dest = (Resolve-Path './Ocaramba.Tests.BrowserStack/bin/Release/net8.0').Path
           Compress-Archive -Path "./Ocaramba.Tests.BrowserStack/bin/Release/net8.0/TestOutput/*" -DestinationPath "$dest/ExecutingTestsOnWindowsBrowserStack$env:GITHUB_RUN_ID.zip"
+      - name: "Stop BrowserStackLocal"
+        if: always()
+        uses: "browserstack/github-actions/setup-local@master"
+        with:
+          local-testing: "stop"
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action/windows@v2
         if: false
