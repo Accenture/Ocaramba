@@ -30,13 +30,14 @@ namespace Ocaramba.Tests.NUnit.Tests
     public class JavaScriptAlertsTestsNUnit : ProjectTestBase
     {
         [Test]
+        
         public void ClickJsAlertTest()
         {
             var internetPage = new InternetPage(this.DriverContext).OpenHomePage();
             var jsAlertsPage = internetPage.GoToJavaScriptAlerts();
             jsAlertsPage.OpenJsAlert();
             jsAlertsPage.AcceptAlert();
-            Assert.That(jsAlertsPage.ResultText, Is.EqualTo("You successfully clicked an alert"));
+            Assert.That(jsAlertsPage.ResultText, Is.EqualTo("You successfuly clicked an alert"));
         }
 
         [Test]

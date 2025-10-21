@@ -4,11 +4,11 @@ echo $Env:ASPNETCORE_ENVIRONMENT
 
 echo '********************************************Run tests with Selenium Grid ****************************************'
 
-.\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.NUnit\bin\Release\net8.0" "appsettings.Linux.json" "appSettings" "browser|RemoteWebDriverHub|protocol|host" "RemoteWebDriver|http://localhost:4444/wd/hub|http|localhost:7080" -json -logValues
+.\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.NUnit\bin\Release\net8.0" "appsettings.Linux.json" "appSettings" "browser|RemoteWebDriverHub|protocol|host" "RemoteWebDriver|http://localhost:4444/wd/hub|http|the-internet:5000" -json -logValues
 
 dotnet vstest ./Ocaramba.Tests.NUnit/bin/Release/net8.0/Ocaramba.Tests.NUnit.dll /TestCaseFilter:"TestCategory=Grid" /Parallel /Logger:"trx;LogFileName=Ocaramba.Tests.NUnitGrid.xml"
 
-.\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\net8.0" "appsettings.Linux.json" "appSettings" "browser|RemoteWebDriverHub|protocol|host" "RemoteWebDriver|http://localhost:4444/wd/hub|http|localhost:7080" -json -logValues
+.\scripts\set_AppConfig_for_tests.ps1 ".\Ocaramba.Tests.CloudProviderCrossBrowser\bin\Release\net8.0" "appsettings.Linux.json" "appSettings" "browser|RemoteWebDriverHub|protocol|host" "RemoteWebDriver|http://localhost:4444/wd/hub|http|the-internet:5000" -json -logValues
 
 dotnet vstest ./Ocaramba.Tests.CloudProviderCrossBrowser/bin/Release/net8.0/Ocaramba.Tests.CloudProviderCrossBrowser.dll /Parallel /Logger:"trx;LogFileName=Ocaramba.Tests.CloudProviderCrossBrowserGrid.xml"
 
