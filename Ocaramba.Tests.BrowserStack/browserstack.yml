@@ -10,7 +10,7 @@ accessKey: ${BROWSERSTACK_ACCESS_KEY}
 # ======================
 # The following capabilities are used to set up reporting on BrowserStack:
 # Set 'projectName' to the name of your project. Example, Marketing Website
-projectName: BrowserStack Samples
+projectName: BrowserStack Ocaramba Tests
 # Set `buildName` as the name of the job / testsuite being run
 buildName: gha-${GITHUB_RUN_NUMBER}
 # `buildIdentifier` is a unique id to differentiate every execution that gets appended to
