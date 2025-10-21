@@ -5,7 +5,7 @@ $Env:ASPNETCORE_ENVIRONMENT="Linux"
 
 Write-Output $Env:ASPNETCORE_ENVIRONMENT
 cd Ocaramba.Tests.BrowserStack/bin/Release/net8.0/
-dotnet browserstack-sdk --no-build  Ocaramba.Tests.BrowserStack.dll /Logger:"trx;LogFileName=Ocaramba.Tests.BrowserStacknetcoreapp.xml"
+dotnet browserstack-sdk Ocaramba.Tests.BrowserStack.dll /Logger:"trx;LogFileName=Ocaramba.Tests.BrowserStacknetcoreapp.xml"
 
 Copy-Item -Path "*.log" -Destination "./TestOutput/" -Recurse
 Compress-Archive -Path "./TestOutput/*" -DestinationPath "./ExecutingTestsOnBrowserStackLinux$env:GITHUB_RUN_ID.zip"

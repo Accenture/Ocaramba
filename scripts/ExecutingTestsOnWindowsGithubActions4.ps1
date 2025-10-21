@@ -3,7 +3,7 @@ echo '********************************************CloudProviderCrossBrowser test
 echo '********************************************BrowserStack tests********************************************'
 cd Ocaramba.Tests.BrowserStack/bin/Release/net8.0/
 
-dotnet browserstack-sdk --no-build Ocaramba.Tests.BrowserStack.dll /Logger:"trx;LogFileName=Ocaramba.Tests.BrowserStack.xml"
+dotnet browserstack-sdk Ocaramba.Tests.BrowserStack.dll /Logger:"trx;LogFileName=Ocaramba.Tests.BrowserStack.xml"
 
 if($lastexitcode -ne 0)
  {
