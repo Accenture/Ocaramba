@@ -29,17 +29,17 @@ source: nunit:sample-sdk:v1.1
 # Platforms object contains all the browser / device combinations you want to test on.
 # Entire list available here -> (https://www.browserstack.com/list-of-browsers-and-platforms/automate)
 platforms:
-  - os: OS X
-    osVersion: Big Sur
-    browserName: Chrome
+  - browserName: Edge
+    os: Windows
+    osVersion: 11
     browserVersion: latest
-  - os: Windows
-    osVersion: 10
-    browserName: Edge
-    browserVersion: latest
-  - deviceName: Samsung Galaxy S22 Ultra
-    browserName: chrome # Try 'samsung' for Samsung browser
-    osVersion: 12.0
+  - browserName: Safari
+    os: OS X
+    osVersion: Monterey
+    browserVersion: 15.6
+  - browserName: chrome
+    osVersion: 13.0
+    deviceName: Samsung Galaxy S23 Ultra
 
 # ==========================================
 # BrowserStack Local
