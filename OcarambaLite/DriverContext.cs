@@ -816,7 +816,7 @@ namespace Ocaramba
             }
         }
 
-        private void SetupBrwoserStack()
+        private void SetupBrowserStack()
         {
             DriverOptions capability = new OpenQA.Selenium.Chrome.ChromeOptions();
             capability.BrowserVersion = "latest";
@@ -824,3 +824,4 @@ namespace Ocaramba
         }
     }
 }
+
