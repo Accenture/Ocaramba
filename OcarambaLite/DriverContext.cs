@@ -606,7 +606,7 @@ namespace Ocaramba
                     this.SetupRemoteWebDriver();
                     break;
                 case BrowserType.BrowserStack:
-                    this.SetupBrwoserStack();
+                    this.SetupBrowserStack();
                     break;
                 case BrowserType.Edge:
                 case BrowserType.EdgeChromium:
@@ -824,4 +824,5 @@ namespace Ocaramba
         }
     }
 }
+
 
