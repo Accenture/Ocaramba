@@ -517,6 +517,7 @@ jobs:
             Copy-Item -Destination $dest -Force
           $dest = (Resolve-Path './Ocaramba.Tests.BrowserStack/bin/Release/net8.0').Path
           Compress-Archive -Path "./Ocaramba.Tests.BrowserStack/bin/Release/net8.0/TestOutput/*" -DestinationPath "$dest/ExecutingTestsOnWindowsBrowserStack$env:GITHUB_RUN_ID.zip"
+          Get-ChildItem -Path "./**/TestResults/*" -Recurse | Select-Object FullName
           Compress-Archive -Path "./**/TestResults/*" -DestinationPath "$dest/ExecutingTestsOnWindowsBrowserStackReport$env:GITHUB_RUN_ID.zip"
       - name: "Stop BrowserStackLocal"
         if: always()
@@ -609,6 +610,7 @@ jobs:
       - name: Push Nuget Package
         run: dotnet nuget push .\OcarambaLite.${{ env.frameworkVersion }}.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
         if: (success() && startsWith(github.ref, 'refs/tags/'))
+
 
 
 
