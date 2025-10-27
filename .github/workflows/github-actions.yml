@@ -312,19 +312,6 @@ jobs:
           files: |
             /home/runner/work/**/TestResults/*.trx
           check_name: TestOnLinuxBrowserStack
-      - name: 'BrowserStack Build Report'
-        uses: 'browserstack/github-actions/browserstack-report-action@master'
-        with:
-          username: ${{ secrets.BROWSERSTACK_USERNAME }}
-          access-key: ${{ secrets.BROWSERSTACK_USERNAME }}
-          build-name: BUILD_INFO
-          report-timeout: 10
-      - name: Upload HTML Report as Artifact
-        uses: actions/upload-artifact@v4
-        with:
-            name: BROWSERSTACK_Report
-            path: $
-        continue-on-error: true
       - name: Upload zip logs as artifact
         uses: actions/upload-artifact@v4
         if: always()
@@ -510,6 +497,14 @@ jobs:
         env:
           BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
           BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
+      - name: 'BrowserStack Build Report'
+        uses: 'browserstack/github-actions/browserstack-report-action@master'
+        with:
+          username: ${{ secrets.BROWSERSTACK_USERNAME }}
+          access-key: ${{ secrets.BROWSERSTACK_USERNAME }}
+          build-name: BUILD_INFO
+          report-timeout: 10
+        continue-on-error: true      
       - name: Archive logs
         if: always()
         run: |
@@ -522,6 +517,7 @@ jobs:
             Copy-Item -Destination $dest -Force
           $dest = (Resolve-Path './Ocaramba.Tests.BrowserStack/bin/Release/net8.0').Path
           Compress-Archive -Path "./Ocaramba.Tests.BrowserStack/bin/Release/net8.0/TestOutput/*" -DestinationPath "$dest/ExecutingTestsOnWindowsBrowserStack$env:GITHUB_RUN_ID.zip"
+          Compress-Archive -Path "D:\a\Ocaramba\Ocaramba\TestResults\*" -DestinationPath "$dest/ExecutingTestsOnWindowsBrowserStackReport$env:GITHUB_RUN_ID.zip"
       - name: "Stop BrowserStackLocal"
         if: always()
         uses: "browserstack/github-actions/setup-local@master"
@@ -529,13 +525,18 @@ jobs:
           local-testing: "stop"
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action/windows@v2
-        if: false
+        if: true
         with:
           files: ./**/Ocaramba.Tests.BrowserStack.xml
           check_name: TestsOnWindowsBrowserStack4
+      - name: Upload HTML Report as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+            name: BROWSERSTACK_Report
+            path: /Ocaramba.Tests.BrowserStack/bin/Release/net8.0/ExecutingTestsOnWindowsBrowserStack${{ github.run_id }}.zip     
       - uses: actions/upload-artifact@v4
         with:
-          path: ./Ocaramba.Tests.BrowserStack/bin/Release/net8.0/ExecutingTestsOnWindowsBrowserStack${{ github.run_id }}.zip
+          path: ./Ocaramba.Tests.BrowserStack/bin/Release/net8.0/ExecutingTestsOnWindowsBrowserStackReport${{ github.run_id }}.zip
           name: TestsOnWindowsBrowserStack4
         if: always()
   test_Stage_RunTestsSeleniumGrid:
@@ -608,4 +609,5 @@ jobs:
       - name: Push Nuget Package
         run: dotnet nuget push .\OcarambaLite.${{ env.frameworkVersion }}.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
         if: (success() && startsWith(github.ref, 'refs/tags/'))
+
 
