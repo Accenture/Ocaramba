@@ -84,7 +84,7 @@ jobs:
           file: |
             "**/Ocaramba.csproj", "**/OcarambaLite.csproj"
           version: ${{ env.frameworkVersion }}
-      - run: msbuild '${{ env.solution }}' /p:configuration='${{ env.buildConfiguration }}' /p:platform='${{ env.buildPlatform }}' /v:minimal
+      - run: msbuild '${{ env.solution }}' /p:configuration='${{ env.buildConfiguration }}' /p:platform='${{ env.buildPlatform }}' /v:minimal /p:AlwaysLoadProject=True
       - uses: actions/upload-artifact@v4
         with:
           path: ./Ocaramba/bin/Release/Ocaramba.${{ env.frameworkVersion }}.nupkg
