@@ -14,7 +14,7 @@
     <!-- AssemblyName, Name, and RootNamespace are not used by SHFB but Visual Studio adds them anyway -->
     <AssemblyName>Documentation</AssemblyName>
 	  <FrameworkVersion>.NET Core/.NET Standard/.NET 5.0+</FrameworkVersion>
-	  <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+	  <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <RootNamespace>Documentation</RootNamespace>
     <Name>Documentation</Name>
     <!-- SHFB properties -->
@@ -46,8 +46,8 @@
   <!-- Uncomment this to use the NuGet packages when SHFB is not installed locally, e.g. in the CI build pipeline.
 			Update the package versions to the latest releases.-->
 	<ItemGroup>
-		<PackageReference Include="EWSoftware.SHFB" Version="2025.3.22" />
-		<PackageReference Include="EWSoftware.SHFB.NETCore" Version="4.5.1.2" />
+  <PackageReference Include="EWSoftware.SHFB.NET" Version="10.0.0" />
+        <PackageReference Include="SmallEarthTech.SHFB" Version="2025.11.1-alpha" />
 	</ItemGroup>
 	
   <!-- Import the common build targets during NuGet restore because before the packages are being installed, $(SHFBROOT) is not set yet -->
