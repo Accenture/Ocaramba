@@ -3,7 +3,8 @@
   <!-- Import the common props to support NuGet packages via PackageReference -->
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+  <FrameworkVersion>.NET Core/.NET Standard/.NET 5.0+</FrameworkVersion>
     <!-- The configuration and platform will be used to determine which assemblies to include from solution and
 				 project documentation sources -->
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -16,7 +17,6 @@
     <RootNamespace>Ocaramba.Documentation</RootNamespace>
     <Name>Ocaramba.Documentation</Name>
     <!-- SHFB properties -->
-    <FrameworkVersion>.NET Core/.NET Standard/.NET 5.0+</FrameworkVersion>
     <OutputPath>.\Help\</OutputPath>
     <HtmlHelpName>Ocaramba</HtmlHelpName>
     <Language>en-US</Language>
@@ -114,8 +114,7 @@
   <ItemGroup>
     <Content Include="icons\Help.png" />
   </ItemGroup>
-  <!-- Uncomment this to use the NuGet packages when SHFB is not installed locally, e.g. in the CI build pipeline.
-			Update the package versions to the latest releases.-->
+  <PackageReference Include="SmallEarthTech.SHFB" Version="2025.11.1-alpha" />
   <ItemGroup>
     <PackageReference Include="EWSoftware.SHFB" Version="2025.3.22" />
     <PackageReference Include="EWSoftware.SHFB.NETCore" Version="4.5.1.2" />

@@ -43,7 +43,6 @@ jobs:
           (Get-Content ./Ocaramba.sln) | ForEach-Object -Begin { $skip = 0 } -Process {
             if ($skip -gt 0) { $skip--; return }
             switch -regex ($_) {
-                'Documentation'                        { $skip = 5; return }
                 'Ocaramba.Tests.Appium'               { $skip = 1; return }
                 'Ocaramba.Tests.NUnitExtentReports'   { $skip = 1; return }
                 'Ocaramba.Tests.Angular'              { $skip = 4; return }
