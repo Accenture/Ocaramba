@@ -142,7 +142,7 @@ jobs:
         run: |
           dotnet restore OcarambaLite
           dotnet restore Ocaramba
-          dotnet restore Ocaramba.Documentation/Ocaramba.Documentation.csproj
+          dotnet restore Ocaramba.Documentation/Ocaramba.Documentation.shfbproj
       - name: Cache
         uses: actions/cache@v4
         with:
