@@ -72,11 +72,13 @@
       </Filter>
     </ApiFilter>
     <PlugInConfigurations>
-      <PlugInConfig id="Additional Reference Links" enabled="True">
-        <configuration>
-          <targets>
-            <target htmlSdkLinkType="None" helpViewerSdkLinkType="Id" websiteSdkLinkType="None" helpFileProject="Selenium.shfbproj" />
-          </targets>
+      <PlugInConfig id="Assembly Binding Redirection" enabled="True">
+        <configuration useGAC="false">
+          <assemblyBinding />
+          <ignoreIfUnresolved>
+            <assemblyIdentity name="Selenium.Support" />
+            <assemblyIdentity name="Selenium.WebDriver" />
+          </ignoreIfUnresolved>
         </configuration>
       </PlugInConfig>
     </PlugInConfigurations>
