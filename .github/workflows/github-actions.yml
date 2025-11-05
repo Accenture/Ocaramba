@@ -80,7 +80,7 @@ jobs:
         run: nuget restore ${{ env.solution }}
       - name: Set project versions
         id: update
-        uses: vers-one/dotnet-project-version-updater@v1.4
+        uses: vers-one/dotnet-project-version-updater@v1.7
         with:
           file: |
             "**/Ocaramba.csproj", "**/OcarambaLite.csproj"
@@ -152,17 +152,23 @@ jobs:
             ${{ runner.os }}-nuget-
       - name: Set project versions
         id: update
-        uses: vers-one/dotnet-project-version-updater@v1.4
+        uses: vers-one/dotnet-project-version-updater@v1.7
         with:
           file: |
             "**/Ocaramba.csproj", "**/OcarambaLite.csproj"
           version: ${{ env.frameworkVersion }}
+      - name: Set version
+        shell: powershell
+        run: |
+          [xml]$xmlContent = Get-Content ./Ocaramba.Documentation/Ocaramba.Documentation.shfbproj
+          $xmlContent.SelectSingleNode("//HelpFileVersion").InnerText = ${{ env.frameworkVersion }}
+          $xmlContent.Save($xmlPath)
       - name: Build OcarambaLite
         run: dotnet build OcarambaLite\OcarambaLite.csproj --no-restore --configuration ${{ env.buildConfiguration }}
       - name: Build Ocaramba
         run: dotnet build Ocaramba\Ocaramba.csproj --no-restore --configuration ${{ env.buildConfiguration }}
       - name: Build Documentation
-        run: dotnet build Ocaramba.Documentation/Ocaramba.Documentation.shfbproj --no-restore --configuration Release -p:AlwaysLoadProject=true
+        run: dotnet build Ocaramba.Documentation/Ocaramba.Documentation.shfbproj --no-restore --configuration ${{ env.buildConfiguration }} -p:AlwaysLoadProject=true
       - uses: actions/upload-artifact@v4
         if: always()
         with:
