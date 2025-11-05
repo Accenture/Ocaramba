@@ -175,6 +175,7 @@ jobs:
         if: always()
         with:
           path: ./Ocaramba.Documentation/Help
+          name: github-pages
   test_Stage_RunTestsOnDocker:
     runs-on: ubuntu-latest
     steps:
@@ -680,7 +681,6 @@ jobs:
   deploy:
     needs:
       - build_Stage_BuildDocumentationOnWindows
-      - release_Stage_PublishNuget
     # Grant permissions to deploy to GitHub Pages
     permissions:
       pages: write
@@ -698,4 +698,5 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
         if: (success() && startsWith(github.ref, 'refs/tags/'))
+
 
