@@ -43,6 +43,7 @@ jobs:
           (Get-Content ./Ocaramba.sln) | ForEach-Object -Begin { $skip = 0 } -Process {
             if ($skip -gt 0) { $skip--; return }
             switch -regex ($_) {
+              'Documentation'                        { $skip = 5; return }
                 'Ocaramba.Tests.Appium'               { $skip = 1; return }
                 'Ocaramba.Tests.NUnitExtentReports'   { $skip = 1; return }
                 'Ocaramba.Tests.Angular'              { $skip = 4; return }
@@ -101,6 +102,71 @@ jobs:
         with:
           path: ./OcarambaLite/bin/Release/OcarambaLite.${{ env.frameworkVersion }}.snupkg
           name: OcarambaLiteS${{ env.frameworkVersion }}
+  build_Stage_BuildDocumentationOnWindows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
+      - name: Set frameworkVersion
+        shell: pwsh
+        run: |
+          $tags = git tag --sort=-creatordate   
+          $tag = $tags[0]
+          echo "var=$tag" >> $env:frameworkVersion
+        if: startsWith(github.ref, 'refs/tags/')
+      - run: echo $env:frameworkVersion
+      - name: Remove test sub projects from solution
+        shell: powershell
+        run: |
+          (Get-Content ./Ocaramba.sln) | ForEach-Object -Begin { $skip = 0 } -Process {
+            if ($skip -gt 0) { $skip--; return }
+            switch -regex ($_) {
+
+                'Ocaramba.Tests.Appium'               { $skip = 1; return }
+                'Ocaramba.Tests.NUnitExtentReports'   { $skip = 1; return }
+                'Ocaramba.Tests.Angular'              { $skip = 4; return }
+                'Ocaramba.Tests.CloudProviderCrossBrowser'              { $skip = 1; return }
+                'Ocaramba.Tests.BrowserStack'              { $skip = 1; return }
+                 'Ocaramba.Tests.NUnit'              { $skip = 1; return }
+                 'Ocaramba.UnitTests'              { $skip = 1; return }
+                 'Ocaramba.Tests.MsTest'              { $skip = 1; return }
+                 'Ocaramba.Tests.Features'              { $skip = 1; return }
+                 'Ocaramba.Tests.Xunit'              { $skip = 1; return }
+                default { $_ }
+            }
+          } | Set-Content ./Ocaramba.sln
+      - name: Restore Dependencies
+        run: |
+          dotnet restore OcarambaLite
+          dotnet restore Ocaramba
+          dotnet restore Ocaramba.Documentation/Ocaramba.Documentation.csproj
+      - name: Cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ github.workspace }}\.nuget\packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }} #hash of project files
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+      - name: Set project versions
+        id: update
+        uses: vers-one/dotnet-project-version-updater@v1.4
+        with:
+          file: |
+            "**/Ocaramba.csproj", "**/OcarambaLite.csproj"
+          version: ${{ env.frameworkVersion }}
+      - name: Build Documentation
+        run: dotnet build Ocaramba.Documentation/Ocaramba.Documentation.csproj --no-restore --configuration Release -p:AlwaysLoadProject=true
+      - uses: actions/upload-artifact@v4
+        with:
+          path: ./Ocaramba.Documentation/Help
+          name: OcarambaDocumentation${{ env.frameworkVersion }}
+      - uses: actions/upload-artifact@v4
+        with:
+          path: ./Ocaramba/bin/Release/Ocaramba.${{ env.frameworkVersion }}.snupkg
+          name: OcarambaS${{ env.frameworkVersion }}
   test_Stage_RunTestsOnDocker:
     runs-on: ubuntu-latest
     steps:
@@ -565,6 +631,7 @@ jobs:
       - test_Stage_RunAppiumTestsOnAndroid
       - test_Stage_RunTestsOnLinuxsaucelabs
       - test_Stage_RunTestsOnWindowsBrowserStack
+      - build_Stage_BuildDocumentationOnWindows
     steps:
       - uses: actions/checkout@v4
       - shell: pwsh

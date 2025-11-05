@@ -824,5 +824,3 @@ namespace Ocaramba
         }
     }
 }
-
-
