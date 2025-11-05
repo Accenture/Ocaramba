@@ -95,11 +95,10 @@ jobs:
         run: dotnet build Ocaramba.Documentation/Ocaramba.Documentation.shfbproj --no-restore --configuration ${{ env.buildConfiguration }} -p:AlwaysLoadProject=true
       - name: Setup Pages
         uses: actions/configure-pages@v5
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-pages-artifact@v3
         if: always()
         with:
           path: ./Ocaramba.Documentation/Help
-          name: github-pages
       - uses: actions/upload-artifact@v4
         with:
           path: ./Ocaramba/bin/Release/Ocaramba.${{ env.frameworkVersion }}.nupkg
