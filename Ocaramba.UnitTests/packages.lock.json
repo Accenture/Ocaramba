@@ -4,11 +4,11 @@
     "net8.0": {
       "Magick.NET-Q16-AnyCPU": {
         "type": "Direct",
-        "requested": "[14.8.2, )",
-        "resolved": "14.8.2",
-        "contentHash": "yvPWZQcBTCwM3I0Z9SWDu6aS9SMMLgSQY3yBFNFeDw+ZURuF3mPZ3iv4t4JxPlcax5xfmeFgCziW4qqDz+tESQ==",
+        "requested": "[14.9.0, )",
+        "resolved": "14.9.0",
+        "contentHash": "keg+91TbUncTkIn5QJ/hY9jtu+E4nQ5GpLVcvzn+P0o8EqIaYeVyzqW0lu28imxTIcEMVPyEU1cULcjPWxgM6A==",
         "dependencies": {
-          "Magick.NET.Core": "14.8.2"
+          "Magick.NET.Core": "14.9.0"
         }
       },
       "Microsoft.AspNetCore.Hosting.Abstractions": {
@@ -175,8 +175,8 @@
       },
       "Magick.NET.Core": {
         "type": "Transitive",
-        "resolved": "14.8.2",
-        "contentHash": "jGOTUTjMbTpOUCHj1IFlAlEl6bJdp+2tWi7q2CYhJx/ZahuqKMMzLfTOOyMX9rlSB4CYWX+FApIjmdb9OievIA=="
+        "resolved": "14.9.0",
+        "contentHash": "PIhf/KtxA+9QKIV2Ru/8/jSU46UjMhkIFSY4K2m4JiS0wjvC2/QHCL/f7EQD5EqvVDod7E1P0owpqBY0m3OyhQ=="
       },
       "Markdig.Signed": {
         "type": "Transitive",
