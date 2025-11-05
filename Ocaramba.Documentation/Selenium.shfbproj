@@ -22,8 +22,8 @@
     <HtmlHelpName>Documentation</HtmlHelpName>
     <Language>en-US</Language>
     <DocumentationSources>
-      <DocumentationSource sourceFile="$(UserProfile)\.nuget\packages\selenium.webdriver\4.33.0\lib\net8.0\WebDriver.dll" />
-<DocumentationSource sourceFile="$(UserProfile)\.nuget\packages\selenium.support\4.33.0\lib\netstandard2.0\WebDriver.Support.dll" /></DocumentationSources>
+      <DocumentationSource sourceFile="$(UserProfile)\.nuget\packages\selenium.webdriver\4.35.0\lib\net8.0\WebDriver.dll" />
+<DocumentationSource sourceFile="$(UserProfile)\.nuget\packages\selenium.support\4.35.0\lib\netstandard2.0\WebDriver.Support.dll" /></DocumentationSources>
   </PropertyGroup>
   <!-- There are no properties for these groups.  AnyCPU needs to appear in order for Visual Studio to perform
 			 the build.  The others are optional common platform types that may appear. -->
@@ -46,8 +46,8 @@
   <!-- Uncomment this to use the NuGet packages when SHFB is not installed locally, e.g. in the CI build pipeline.
 			Update the package versions to the latest releases.-->
 	<ItemGroup>
-		<PackageReference Include="EWSoftware.SHFB" Version="2025.3.22" />
-		<PackageReference Include="EWSoftware.SHFB.NETCore" Version="4.5.1.2" />
+  <PackageReference Include="EWSoftware.SHFB.NET" Version="10.0.0" />
+        <PackageReference Include="SmallEarthTech.SHFB" Version="2025.11.1-alpha" />
 	</ItemGroup>
 	
   <!-- Import the common build targets during NuGet restore because before the packages are being installed, $(SHFBROOT) is not set yet -->

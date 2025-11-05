@@ -43,7 +43,7 @@ jobs:
           (Get-Content ./Ocaramba.sln) | ForEach-Object -Begin { $skip = 0 } -Process {
             if ($skip -gt 0) { $skip--; return }
             switch -regex ($_) {
-                'Documentation'                        { $skip = 5; return }
+              'Documentation'                        { $skip = 5; return }
                 'Ocaramba.Tests.Appium'               { $skip = 1; return }
                 'Ocaramba.Tests.NUnitExtentReports'   { $skip = 1; return }
                 'Ocaramba.Tests.Angular'              { $skip = 4; return }
@@ -80,12 +80,12 @@ jobs:
         run: nuget restore ${{ env.solution }}
       - name: Set project versions
         id: update
-        uses: vers-one/dotnet-project-version-updater@v1.4
+        uses: vers-one/dotnet-project-version-updater@v1.7
         with:
           file: |
             "**/Ocaramba.csproj", "**/OcarambaLite.csproj"
           version: ${{ env.frameworkVersion }}
-      - run: msbuild '${{ env.solution }}' /p:configuration='${{ env.buildConfiguration }}' /p:platform='${{ env.buildPlatform }}' /v:minimal
+      - run: msbuild '${{ env.solution }}' /p:configuration='${{ env.buildConfiguration }}' /p:platform='${{ env.buildPlatform }}' /v:minimal /p:AlwaysLoadProject=True
       - uses: actions/upload-artifact@v4
         with:
           path: ./Ocaramba/bin/Release/Ocaramba.${{ env.frameworkVersion }}.nupkg
@@ -102,6 +102,79 @@ jobs:
         with:
           path: ./OcarambaLite/bin/Release/OcarambaLite.${{ env.frameworkVersion }}.snupkg
           name: OcarambaLiteS${{ env.frameworkVersion }}
+  build_Stage_BuildDocumentationOnWindows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
+      - name: Set frameworkVersion
+        shell: pwsh
+        run: |
+          $tags = git tag --sort=-creatordate   
+          $tag = $tags[0]
+          echo "var=$tag" >> $env:frameworkVersion
+        if: startsWith(github.ref, 'refs/tags/')
+      - run: echo $env:frameworkVersion
+      - name: Remove test sub projects from solution
+        shell: powershell
+        run: |
+          (Get-Content ./Ocaramba.sln) | ForEach-Object -Begin { $skip = 0 } -Process {
+            if ($skip -gt 0) { $skip--; return }
+            switch -regex ($_) {
+
+                'Ocaramba.Tests.Appium'               { $skip = 1; return }
+                'Ocaramba.Tests.NUnitExtentReports'   { $skip = 1; return }
+                'Ocaramba.Tests.Angular'              { $skip = 4; return }
+                'Ocaramba.Tests.CloudProviderCrossBrowser'              { $skip = 1; return }
+                'Ocaramba.Tests.BrowserStack'              { $skip = 1; return }
+                 'Ocaramba.Tests.NUnit'              { $skip = 1; return }
+                 'Ocaramba.UnitTests'              { $skip = 1; return }
+                 'Ocaramba.Tests.MsTest'              { $skip = 1; return }
+                 'Ocaramba.Tests.Features'              { $skip = 1; return }
+                 'Ocaramba.Tests.Xunit'              { $skip = 1; return }
+                default { $_ }
+            }
+          } | Set-Content ./Ocaramba.sln
+      - name: Restore Dependencies
+        run: |
+          dotnet restore OcarambaLite
+          dotnet restore Ocaramba
+          dotnet restore Ocaramba.Documentation/Ocaramba.Documentation.shfbproj
+      - name: Cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ github.workspace }}\.nuget\packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }} #hash of project files
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+      - name: Set project versions
+        id: update
+        uses: vers-one/dotnet-project-version-updater@v1.7
+        with:
+          file: |
+            "**/Ocaramba.csproj", "**/OcarambaLite.csproj"
+          version: ${{ env.frameworkVersion }}
+      - name: Set version
+        shell: powershell
+        run: |
+          $content = Get-Content ./Ocaramba.Documentation/Ocaramba.Documentation.shfbproj -Raw
+          $content = $content -replace '(<HelpFileVersion>)(.*?)(</HelpFileVersion>)', "`<HelpFileVersion>${{ env.frameworkVersion }}`</HelpFileVersion>"
+          Set-Content ./Ocaramba.Documentation/Ocaramba.Documentation.shfbproj $content
+      - name: Build OcarambaLite
+        run: dotnet build OcarambaLite\OcarambaLite.csproj --no-restore --configuration ${{ env.buildConfiguration }}
+      - name: Build Ocaramba
+        run: dotnet build Ocaramba\Ocaramba.csproj --no-restore --configuration ${{ env.buildConfiguration }}
+      - name: Build Documentation
+        run: dotnet build Ocaramba.Documentation/Ocaramba.Documentation.shfbproj --no-restore --configuration ${{ env.buildConfiguration }} -p:AlwaysLoadProject=true
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          path: ./Ocaramba.Documentation/Help
   test_Stage_RunTestsOnDocker:
     runs-on: ubuntu-latest
     steps:
@@ -173,7 +246,7 @@ jobs:
           export ASPNETCORE_ENVIRONMENT=Linux
           echo $ASPNETCORE_ENVIRONMENT
           sudo apt-get install google-chrome-stable
-          sed -i '/Documentation/,+5 d' ./Ocaramba.sln ; sed -i '/CloudProviderCrossBrowser/,+1 d' ./Ocaramba.sln; sed -i '/UnitTests/,+1 d' ./Ocaramba.sln; sed -i '/BrowserStack/,+1 d' ./Ocaramba.sln; sed -i '/MsTest/,+1 d' ./Ocaramba.sln;sed -i '/Features/,+1 d' ./Ocaramba.sln;sed -i '/Xunit/,+1 d' ./Ocaramba.sln;sed -i '/NUnitExtentReports/,+1 d' ./Ocaramba.sln;sed -i '/Appium/,+1 d' ./Ocaramba.sln;sed -i '/CloudProviderCrossBrowser/,+1 d' ./Ocaramba.sln;sed -i '/Angular/,+1 d' ./Ocaramba.sln
+          sed -i '/Documentation/,+5 d' ./Ocaramba.sln ;sed -i '/CloudProviderCrossBrowser/,+1 d' ./Ocaramba.sln; sed -i '/UnitTests/,+1 d' ./Ocaramba.sln; sed -i '/BrowserStack/,+1 d' ./Ocaramba.sln; sed -i '/MsTest/,+1 d' ./Ocaramba.sln;sed -i '/Features/,+1 d' ./Ocaramba.sln;sed -i '/Xunit/,+1 d' ./Ocaramba.sln;sed -i '/NUnitExtentReports/,+1 d' ./Ocaramba.sln;sed -i '/Appium/,+1 d' ./Ocaramba.sln;sed -i '/CloudProviderCrossBrowser/,+1 d' ./Ocaramba.sln;sed -i '/Angular/,+1 d' ./Ocaramba.sln
       - name: Set up Docker
         uses: docker/setup-buildx-action@v2
       - name: Run the-internet app in Docker
@@ -566,6 +639,7 @@ jobs:
       - test_Stage_RunAppiumTestsOnAndroid
       - test_Stage_RunTestsOnLinuxsaucelabs
       - test_Stage_RunTestsOnWindowsBrowserStack
+      - build_Stage_BuildDocumentationOnWindows
     steps:
       - uses: actions/checkout@v4
       - shell: pwsh
@@ -594,4 +668,25 @@ jobs:
         if: (success() && startsWith(github.ref, 'refs/tags/'))
       - name: Push Nuget Package
         run: dotnet nuget push .\OcarambaLite.${{ env.frameworkVersion }}.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
+        if: (success() && startsWith(github.ref, 'refs/tags/'))
+  deploy:
+    needs:
+      - build_Stage_BuildDocumentationOnWindows
+      - release_Stage_PublishNuget
+    # Grant permissions to deploy to GitHub Pages
+    permissions:
+      pages: write
+      id-token: write
+
+    # Deploy to GitHub Pages environment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+    steps:
+      # Deploy Documentation to GitHub Pages
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
         if: (success() && startsWith(github.ref, 'refs/tags/'))
