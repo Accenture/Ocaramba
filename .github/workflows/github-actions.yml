@@ -157,8 +157,10 @@ jobs:
           file: |
             "**/Ocaramba.csproj", "**/OcarambaLite.csproj"
           version: ${{ env.frameworkVersion }}
-      - name: Build Subprojects
-        run: dotnet build --no-restore --configuration ${{ env.buildConfiguration }}
+      - name: Build OcarambaLite
+        run: dotnet build OcarambaLite\OcarambaLite.csproj --no-restore --configuration ${{ env.buildConfiguration }}
+      - name: Build Ocaramba
+        run: dotnet build Ocaramba\Ocaramba.csproj --no-restore --configuration ${{ env.buildConfiguration }}
       - name: Build Documentation
         run: dotnet build Ocaramba.Documentation/Ocaramba.Documentation.shfbproj --no-restore --configuration Release -p:AlwaysLoadProject=true
       - uses: actions/upload-artifact@v4
