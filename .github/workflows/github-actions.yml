@@ -570,18 +570,20 @@ jobs:
         env:
           BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
           BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
+      - name: "BrowserStack Build Report"
+        uses: "browserstack/github-actions/browserstack-report-action@master"
+        with:
+          username: ${{ secrets.BROWSERSTACK_USERNAME }}
+          access-key: ${{ secrets.BROWSERSTACK_USERNAME }}
+          build-name: BUILD_INFO
+          report-timeout: 10
+        continue-on-error: true
       - name: Archive logs
         if: always()
         run: |
-          $dest = (Resolve-Path './Ocaramba.Tests.BrowserStack/bin/Release/net8.0/TestOutput').Path
-          New-Item -ItemType Directory -Path $dest -Force | Out-Null
-          Get-ChildItem -Path . -Recurse -File -Filter '*.log' |
-            Where-Object {
-              $_.FullName -notlike "$dest*"
-            } |
-            Copy-Item -Destination $dest -Force
-          $dest = (Resolve-Path './Ocaramba.Tests.BrowserStack/bin/Release/net8.0').Path
-          Compress-Archive -Path "./Ocaramba.Tests.BrowserStack/bin/Release/net8.0/TestOutput/*" -DestinationPath "$dest/ExecutingTestsOnWindowsBrowserStack$env:GITHUB_RUN_ID.zip"
+          $dest = "./Ocaramba.Tests.BrowserStack/bin/Release/net8.0"
+          Get-ChildItem -Path "./**/TestResults/*" -Recurse | Select-Object FullName
+          Compress-Archive -Path "./**/TestResults/*" -DestinationPath "$dest/ExecutingTestsOnWindowsBrowserStackReport$env:GITHUB_RUN_ID.zip"
       - name: "Stop BrowserStackLocal"
         if: always()
         uses: "browserstack/github-actions/setup-local@master"
@@ -589,15 +591,21 @@ jobs:
           local-testing: "stop"
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action/windows@v2
-        if: false
+        if: true
         with:
           files: ./**/Ocaramba.Tests.BrowserStack.xml
           check_name: TestsOnWindowsBrowserStack4
-      - uses: actions/upload-artifact@v4
+      - name: Upload HTML Report as Artifact
+        uses: actions/upload-artifact@v4
         with:
-          path: ./Ocaramba.Tests.BrowserStack/bin/Release/net8.0/ExecutingTestsOnWindowsBrowserStack${{ github.run_id }}.zip
-          name: TestsOnWindowsBrowserStack4
+          name: BROWSERSTACK_Report
+          path: /Ocaramba.Tests.BrowserStack/bin/Release/net8.0/ExecutingTestsOnWindowsBrowserStack${{ github.run_id }}.zip
+      - name: Upload zip logs as artifact
+        uses: actions/upload-artifact@v4
         if: always()
+        with:
+          name: ExecutingTestsOnBrowserStackWindows
+          path: ./Ocaramba.Tests.BrowserStack/bin/Release/net8.0/ExecutingTestsOnBrowserStackWindows${{ github.run_id }}.zip
   test_Stage_RunTestsSeleniumGrid:
     runs-on: ubuntu-latest
     steps:

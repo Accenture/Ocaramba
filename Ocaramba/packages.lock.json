@@ -1179,7 +1179,7 @@
       "ocarambalite": {
         "type": "Project",
         "dependencies": {
-          "Appium.WebDriver": "[8.0.0, )",
+          "Appium.WebDriver": "[8.0.1, )",
           "Microsoft.CSharp": "[4.7.0, )",
           "Microsoft.Extensions.Configuration": "[9.0.9, )",
           "Microsoft.Extensions.Configuration.Binder": "[9.0.9, )",
