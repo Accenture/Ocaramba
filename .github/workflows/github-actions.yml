@@ -15,6 +15,7 @@ permissions:
   contents: read
   issues: write
   pull-requests: write
+  id-token: write
 env:
   solution: ${{ github.workspace }}/Ocaramba.sln
   buildPlatform: Any CPU
@@ -698,5 +699,6 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
         if: (success() && startsWith(github.ref, 'refs/tags/'))
+
 
 
