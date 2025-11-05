@@ -161,7 +161,7 @@ jobs:
         shell: powershell
         run: |
           $content = Get-Content ./Ocaramba.Documentation/Ocaramba.Documentation.shfbproj -Raw
-          $content = $content -replace '(<HelpFileVersion>)(.*?)(</HelpFileVersion>)', "`<HelpFileVersion>${{ env.frameworkVersion }}`</HelpFileVersion>)"
+          $content = $content -replace '(<HelpFileVersion>)(.*?)(</HelpFileVersion>)', "`<HelpFileVersion>${{ env.frameworkVersion }}`</HelpFileVersion>"
           Set-Content ./Ocaramba.Documentation/Ocaramba.Documentation.shfbproj $content
       - name: Build OcarambaLite
         run: dotnet build OcarambaLite\OcarambaLite.csproj --no-restore --configuration ${{ env.buildConfiguration }}
