@@ -34,14 +34,13 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 9.0.x
-      - name: Set frameworkVersion
-        shell: pwsh
+      - name: Get latest tag and set frameworkVersion
+        id: set_version
         run: |
-          $tags = git tag --sort=-creatordate   
-          $tag = $tags[0]
-          echo "var=$tag" >> $env:frameworkVersion
+          latest_tag=$(git describe --tags `git rev-list --tags --max-count=1`)
+          echo "frameworkVersion=$latest_tag" >> $GITHUB_ENV
         if: startsWith(github.ref, 'refs/tags/')
-      - run: echo $env:frameworkVersion
+      - run: echo $frameworkVersion
       - name: Remove test sub projects from solution
         shell: powershell
         run: |
@@ -85,7 +84,7 @@ jobs:
         shell: powershell
         run: |
           $content = Get-Content ./Ocaramba.Documentation/Ocaramba.Documentation.shfbproj -Raw
-          $content = $content -replace '(<HelpFileVersion>)(.*?)(</HelpFileVersion>)', "`<HelpFileVersion>${{ env.frameworkVersion }}`</HelpFileVersion>"
+          $content = $content -replace '(<HelpFileVersion>)(.*?)(</HelpFileVersion>)', "`<HelpFileVersion>$env:frameworkVersion`</HelpFileVersion>"
           Set-Content ./Ocaramba.Documentation/Ocaramba.Documentation.shfbproj $content
       - name: Build OcarambaLite
         run: dotnet build OcarambaLite\OcarambaLite.csproj --no-restore --configuration ${{ env.buildConfiguration }}
@@ -589,11 +588,11 @@ jobs:
       - build_Stage_BuildOnWindows
     steps:
       - uses: actions/checkout@v4
-      - shell: pwsh
+      - name: Get latest tag and set frameworkVersion
+        id: set_version
         run: |
-          $tags = git tag --sort=-creatordate   
-          $tag = $tags[0]
-          echo "var=$tag" >> $env:frameworkVersion
+          latest_tag=$(git describe --tags `git rev-list --tags --max-count=1`)
+          echo "frameworkVersion=$latest_tag" >> $GITHUB_ENV
         if: startsWith(github.ref, 'refs/tags/')
       - uses: actions/download-artifact@v4
         with:
@@ -619,6 +618,7 @@ jobs:
   deploy:
     needs:
       - build_Stage_BuildOnWindows
+      - release_Stage_PublishNuget
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -629,4 +629,4 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-        if: success()
+        if: (success() )
