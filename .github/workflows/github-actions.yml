@@ -169,11 +169,12 @@ jobs:
         run: dotnet build Ocaramba\Ocaramba.csproj --no-restore --configuration ${{ env.buildConfiguration }}
       - name: Build Documentation
         run: dotnet build Ocaramba.Documentation/Ocaramba.Documentation.shfbproj --no-restore --configuration ${{ env.buildConfiguration }} -p:AlwaysLoadProject=true
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           path: ./Ocaramba.Documentation/Help
-          name: OcarambaOcarambaDocumentation${{ env.frameworkVersion }}
   test_Stage_RunTestsOnDocker:
     runs-on: ubuntu-latest
     steps:
@@ -667,4 +668,25 @@ jobs:
         if: (success() && startsWith(github.ref, 'refs/tags/'))
       - name: Push Nuget Package
         run: dotnet nuget push .\OcarambaLite.${{ env.frameworkVersion }}.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
+        if: (success() && startsWith(github.ref, 'refs/tags/'))
+  deploy:
+    needs:
+      - build_Stage_BuildDocumentationOnWindows
+      - release_Stage_PublishNuget
+    # Grant permissions to deploy to GitHub Pages
+    permissions:
+      pages: write
+      id-token: write
+
+    # Deploy to GitHub Pages environment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+    steps:
+      # Deploy Documentation to GitHub Pages
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
         if: (success() && startsWith(github.ref, 'refs/tags/'))
