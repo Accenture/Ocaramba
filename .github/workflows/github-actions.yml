@@ -160,13 +160,10 @@ jobs:
       - name: Build Documentation
         run: dotnet build Ocaramba.Documentation/Ocaramba.Documentation.csproj --no-restore --configuration Release -p:AlwaysLoadProject=true
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           path: ./Ocaramba.Documentation/Help
-          name: OcarambaDocumentation${{ env.frameworkVersion }}
-      - uses: actions/upload-artifact@v4
-        with:
-          path: ./Ocaramba/bin/Release/Ocaramba.${{ env.frameworkVersion }}.snupkg
-          name: OcarambaS${{ env.frameworkVersion }}
+          name: OcarambaOcarambaDocumentation${{ env.frameworkVersion }}
   test_Stage_RunTestsOnDocker:
     runs-on: ubuntu-latest
     steps:
