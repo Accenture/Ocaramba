@@ -160,9 +160,9 @@ jobs:
       - name: Set version
         shell: powershell
         run: |
-          [xml]$xmlContent = Get-Content ./Ocaramba.Documentation/Ocaramba.Documentation.shfbproj
-          $xmlContent.SelectSingleNode("//HelpFileVersion").InnerText = ${{ env.frameworkVersion }}
-          $xmlContent.Save($xmlPath)
+          $content = Get-Content ./Ocaramba.Documentation/Ocaramba.Documentation.shfbproj -Raw
+          $content = $content -replace '(<HelpFileVersion>)(.*?)(</HelpFileVersion>)', "`<HelpFileVersion>${{ env.frameworkVersion }}`</HelpFileVersion>)"
+          Set-Content $xmlPath $conten
       - name: Build OcarambaLite
         run: dotnet build OcarambaLite\OcarambaLite.csproj --no-restore --configuration ${{ env.buildConfiguration }}
       - name: Build Ocaramba
