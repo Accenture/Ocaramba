@@ -13,6 +13,7 @@ on:
 permissions:
   checks: write
   contents: read
+  pages: write
   issues: write
   pull-requests: write
 env:
@@ -175,7 +176,6 @@ jobs:
         if: always()
         with:
           path: ./Ocaramba.Documentation/Help
-          name: github-pages
   test_Stage_RunTestsOnDocker:
     runs-on: ubuntu-latest
     steps:
@@ -681,12 +681,6 @@ jobs:
   deploy:
     needs:
       - build_Stage_BuildDocumentationOnWindows
-    # Grant permissions to deploy to GitHub Pages
-    permissions:
-      pages: write
-      id-token: write
-
-    # Deploy to GitHub Pages environment
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -697,6 +691,7 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-        if: (success() && startsWith(github.ref, 'refs/tags/'))
+        if: success()
+
 
 
