@@ -593,6 +593,7 @@ jobs:
         run: |
           $latestTag = git describe --tags (git rev-list --tags --max-count=1)
           echo "frameworkVersion=$latestTag" >> $env:GITHUB_ENV
+        if: startsWith(github.ref, 'refs/tags/')
       - uses: actions/download-artifact@v4
         with:
           name: Ocaramba${{ env.frameworkVersion }}
@@ -621,7 +622,6 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-
     runs-on: ubuntu-latest
     steps:
       # Deploy Documentation to GitHub Pages
@@ -629,4 +629,5 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
         if: (success() && startsWith(github.ref, 'refs/tags/'))
+
 
