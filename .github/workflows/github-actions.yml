@@ -34,11 +34,11 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 9.0.x
-      - name: Get latest tag and set frameworkVersion
-        id: set_version
+      - name: Get latest Git tag
+        shell: powershell
         run: |
-          latest_tag=$(git describe --tags `git rev-list --tags --max-count=1`)
-          echo "frameworkVersion=$latest_tag" >> $GITHUB_ENV
+          $latestTag = git describe --tags (git rev-list --tags --max-count=1)
+          echo "frameworkVersion=$latestTag" >> $env:GITHUB_ENV
         if: startsWith(github.ref, 'refs/tags/')
       - run: echo $frameworkVersion
       - name: Remove test sub projects from solution
@@ -588,11 +588,11 @@ jobs:
       - build_Stage_BuildOnWindows
     steps:
       - uses: actions/checkout@v4
-      - name: Get latest tag and set frameworkVersion
-        id: set_version
+      - name: Get latest Git tag
+        shell: powershell
         run: |
-          latest_tag=$(git describe --tags `git rev-list --tags --max-count=1`)
-          echo "frameworkVersion=$latest_tag" >> $GITHUB_ENV
+          $latestTag = git describe --tags (git rev-list --tags --max-count=1)
+          echo "frameworkVersion=$latestTag" >> $env:GITHUB_ENV
       - uses: actions/download-artifact@v4
         with:
           name: Ocaramba${{ env.frameworkVersion }}
@@ -629,3 +629,4 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
         if: (success() && startsWith(github.ref, 'refs/tags/'))
+
