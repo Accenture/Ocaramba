@@ -26,85 +26,7 @@ env:
   ChromeDriverVersion: 137.0.7151.6800
   NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
 jobs:
-  build_Stage_BuildTestsOnWindows:
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: microsoft/setup-msbuild@v2
-      - name: Set frameworkVersion
-        shell: pwsh
-        run: |
-          $tags = git tag --sort=-creatordate   
-          $tag = $tags[0]
-          echo "var=$tag" >> $env:frameworkVersion
-        if: startsWith(github.ref, 'refs/tags/')
-      - run: echo $env:frameworkVersion
-      - name: Remove Documentation sub project from solution
-        shell: powershell
-        run: |
-          (Get-Content ./Ocaramba.sln) | ForEach-Object -Begin { $skip = 0 } -Process {
-            if ($skip -gt 0) { $skip--; return }
-            switch -regex ($_) {
-              'Documentation'                        { $skip = 5; return }
-                'Ocaramba.Tests.Appium'               { $skip = 1; return }
-                'Ocaramba.Tests.NUnitExtentReports'   { $skip = 1; return }
-                'Ocaramba.Tests.Angular'              { $skip = 4; return }
-                'Ocaramba.Tests.CloudProviderCrossBrowser'              { $skip = 1; return }
-                'Ocaramba.Tests.BrowserStack'              { $skip = 1; return }
-                 'Ocaramba.Tests.NUnit'              { $skip = 1; return }
-                 'Ocaramba.UnitTests'              { $skip = 1; return }
-                 'Ocaramba.Tests.MsTest'              { $skip = 1; return }
-                 'Ocaramba.Tests.Features'              { $skip = 1; return }
-                 'Ocaramba.Tests.Xunit'              { $skip = 1; return }
-                default { $_ }
-            }
-          } | Set-Content ./Ocaramba.sln
-      - name: Update ChromeDriver in csproj
-        run: |
-          Get-ChildItem ./ *.csproj -recurse |
-          Foreach-Object {
-            $c = ($_ | Get-Content) 
-            $c = $c -replace '109.0.5414.7400','${{ env.ChromeDriverVersion }}'
-            [IO.File]::WriteAllText($_.FullName, ($c -join "`r`n"))
-          }
-      - name: Setup nuget
-        uses: nuget/setup-nuget@v2
-        with:
-          nuget-version: latest
-      - name: Cache
-        uses: actions/cache@v4
-        with:
-          path: ${{ github.workspace }}\.nuget\packages
-          key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }} #hash of project files
-          restore-keys: |
-            ${{ runner.os }}-nuget-
-      - name: NuGet restore
-        run: nuget restore ${{ env.solution }}
-      - name: Set project versions
-        id: update
-        uses: vers-one/dotnet-project-version-updater@v1.7
-        with:
-          file: |
-            "**/Ocaramba.csproj", "**/OcarambaLite.csproj"
-          version: ${{ env.frameworkVersion }}
-      - run: msbuild '${{ env.solution }}' /p:configuration='${{ env.buildConfiguration }}' /p:platform='${{ env.buildPlatform }}' /v:minimal /p:AlwaysLoadProject=True
-      - uses: actions/upload-artifact@v4
-        with:
-          path: ./Ocaramba/bin/Release/Ocaramba.${{ env.frameworkVersion }}.nupkg
-          name: Ocaramba${{ env.frameworkVersion }}
-      - uses: actions/upload-artifact@v4
-        with:
-          path: ./Ocaramba/bin/Release/Ocaramba.${{ env.frameworkVersion }}.snupkg
-          name: OcarambaS${{ env.frameworkVersion }}
-      - uses: actions/upload-artifact@v4
-        with:
-          path: ./OcarambaLite/bin/Release/OcarambaLite.${{ env.frameworkVersion }}.nupkg
-          name: OcarambaLite${{ env.frameworkVersion }}
-      - uses: actions/upload-artifact@v4
-        with:
-          path: ./OcarambaLite/bin/Release/OcarambaLite.${{ env.frameworkVersion }}.snupkg
-          name: OcarambaLiteS${{ env.frameworkVersion }}
-  build_Stage_BuildDocumentationOnWindows:
+  build_Stage_BuildOnWindows:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
@@ -173,11 +95,27 @@ jobs:
         run: dotnet build Ocaramba.Documentation/Ocaramba.Documentation.shfbproj --no-restore --configuration ${{ env.buildConfiguration }} -p:AlwaysLoadProject=true
       - name: Setup Pages
         uses: actions/configure-pages@v5
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v3
         if: always()
         with:
           path: ./Ocaramba.Documentation/Help
           name: github-pages
+      - uses: actions/upload-artifact@v4
+        with:
+          path: ./Ocaramba/bin/Release/Ocaramba.${{ env.frameworkVersion }}.nupkg
+          name: Ocaramba${{ env.frameworkVersion }}
+      - uses: actions/upload-artifact@v4
+        with:
+          path: ./Ocaramba/bin/Release/Ocaramba.${{ env.frameworkVersion }}.snupkg
+          name: OcarambaS${{ env.frameworkVersion }}
+      - uses: actions/upload-artifact@v4
+        with:
+          path: ./OcarambaLite/bin/Release/OcarambaLite.${{ env.frameworkVersion }}.nupkg
+          name: OcarambaLite${{ env.frameworkVersion }}
+      - uses: actions/upload-artifact@v4
+        with:
+          path: ./OcarambaLite/bin/Release/OcarambaLite.${{ env.frameworkVersion }}.snupkg
+          name: OcarambaLiteS${{ env.frameworkVersion }}
   test_Stage_RunTestsOnDocker:
     runs-on: ubuntu-latest
     steps:
@@ -640,7 +578,6 @@ jobs:
   release_Stage_PublishNuget:
     runs-on: windows-latest
     needs:
-      - build_Stage_BuildTestsOnWindows
       - test_Stage_RunTestsOnDocker
       - test_Stage_RunTestsOnLinux
       - test_Stage_RunTestsOnLinuxBrowserStack
@@ -650,7 +587,7 @@ jobs:
       - test_Stage_RunAppiumTestsOnAndroid
       - test_Stage_RunTestsOnLinuxsaucelabs
       - test_Stage_RunTestsOnWindowsBrowserStack
-      - build_Stage_BuildDocumentationOnWindows
+      - build_Stage_BuildOnWindows
     steps:
       - uses: actions/checkout@v4
       - shell: pwsh
@@ -682,7 +619,7 @@ jobs:
         if: (success() && startsWith(github.ref, 'refs/tags/'))
   deploy:
     needs:
-      - build_Stage_BuildDocumentationOnWindows
+      - build_Stage_BuildOnWindows
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -694,8 +631,3 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
         if: success()
-
-
-
-
-
