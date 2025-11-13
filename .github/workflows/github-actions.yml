@@ -1,9 +1,7 @@
 on:
   workflow_dispatch:
-  pull_request:
-  push:
-    branches:
-      - "*"
+  pull_request_target:
+    types: [opened, synchronize]
     paths-ignore:
       - README.md
     tags:
@@ -271,10 +269,13 @@ jobs:
           name: ExecutingTestsOnAndroid
           path: ./Ocaramba.Tests.Appium/bin/Release/net8.0/ExecutingTestsOnAndroid.zip
   test_Stage_RunTestsOnLinuxBrowserStack:
+    if: ${{ github.actor == 'dependabot[bot]' || github.actor == github.repository_owner }
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4      
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
@@ -307,19 +308,16 @@ jobs:
           local-logging-level: "all-logs"
           local-identifier: "random"
       - shell: pwsh
-        if: true
         run: ./scripts/ExecutingTestsOnLinuxBrowserStackGithubActions.ps1
         env:
           BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
           BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
       - name: "Stop BrowserStackLocal"
-        if: always()
         uses: "browserstack/github-actions/setup-local@master"
         with:
           local-testing: "stop"
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action/linux@v2
-        if: true
         with:
           files: |
             /home/runner/work/**/TestResults/*.trx
@@ -331,10 +329,13 @@ jobs:
           name: ExecutingTestsOnBrowserStackLinux
           path: ./Ocaramba.Tests.BrowserStack/bin/Release/net8.0/ExecutingTestsOnBrowserStackLinux${{ github.run_id }}.zip
   test_Stage_RunTestsOnLinuxsaucelabs:
+    if: ${{ github.actor == 'dependabot[bot]' || github.actor == github.repository_owner }
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
+        with: 
+          ref: ${{ github.event.pull_request.head.sha }}
       - run: |
           ls 
           export ASPNETCORE_ENVIRONMENT=Linux
@@ -463,9 +464,12 @@ jobs:
           name: WindowsCore2
         if: always()
   test_Stage_RunTestsOnWindowsBrowserStack:
+    if: ${{ github.actor == 'dependabot[bot]' || github.actor == github.repository_owner }
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
+        with: 
+          ref: ${{ github.event.pull_request.head.sha }}
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
@@ -629,5 +633,6 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
         if: (success() && startsWith(github.ref, 'refs/tags/'))
+
 
 
