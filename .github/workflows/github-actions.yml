@@ -1,7 +1,7 @@
 on:
   workflow_dispatch:
   pull_request_target:
-    types: [opened, synchronize]
+    types: [opened, synchronize,edited, answered]
     paths-ignore:
       - README.md
     tags:
@@ -633,3 +633,4 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
         if: (success() && startsWith(github.ref, 'refs/tags/'))
+
