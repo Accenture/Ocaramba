@@ -66,5 +66,15 @@ namespace Ocaramba
         /// The XPath selector
         /// </summary>
         XPath,
+
+        // --- Appium specific ---
+        AccessibilityId,       // e.g. content-desc / accessibility id
+        AndroidUIAutomator,    // UIAutomator selector
+        IOSNsPredicate,        // iOS NSPredicate
+        IOSClassChain,
+        AppiumId,
+        AppiumClassName,
+        AppiumTagName
+
     }
 }

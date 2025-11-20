@@ -14,6 +14,8 @@ namespace Ocaramba.Tests.Appium
         {
             var page = new AppiumSamplePage(this.DriverContext);
             Assert.That(page.IsSomeElementPresent(), Is.True);
+            Assert.That(page.IsPreferencePresent(), Is.True);
+            page.ClickPreference();
         }
     }
 }

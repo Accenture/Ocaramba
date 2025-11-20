@@ -1,12 +1,21 @@
 using Ocaramba;
-using OpenQA.Selenium;
+using Ocaramba.Extensions;
 using Ocaramba.Tests.PageObjects;
+using Ocaramba.Types;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Appium;
+using OpenQA.Selenium.Appium.Android;
+
 
 namespace Ocaramba.Tests.Appium
 {
     public class AppiumSamplePage : ProjectPageBase
     {
-        private readonly By SomeElement = By.XPath("//android.widget.TextView[@text='API Demos']");
+        private readonly ElementLocator someElement = new ElementLocator(Locator.XPath, "//android.widget.TextView[@text='API Demos']");
+
+        private readonly ElementLocator preferencesButtonAccId =
+            new ElementLocator(Locator.AccessibilityId, "Preference");
+
 
         public AppiumSamplePage(DriverContext driverContext)
             : base(driverContext)
@@ -17,12 +26,29 @@ namespace Ocaramba.Tests.Appium
         {
             try
             {
-                return this.Driver.FindElement(this.SomeElement) != null;
+                return this.Driver.FindElement(this.someElement.ToBy()) != null;
             }
             catch (NoSuchElementException)
             {
                 return false;
             }
+        }
+
+        public bool IsPreferencePresent()
+        {
+            try
+            {
+                return this.Driver.FindElement(this.preferencesButtonAccId.ToBy()) != null;
+            }
+            catch (NoSuchElementException)
+            {
+                return false;
+            }
+        }
+
+        public void ClickPreference()
+        {
+           this.Driver.FindElement(this.preferencesButtonAccId.ToBy()).Click();
         }
     }
 }
