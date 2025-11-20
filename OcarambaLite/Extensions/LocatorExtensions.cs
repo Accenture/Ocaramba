@@ -24,6 +24,7 @@ namespace Ocaramba.Extensions
 {
     using Ocaramba.Types;
     using OpenQA.Selenium;
+    using OpenQA.Selenium.Appium;
 
     /// <summary>
     /// Locator extensions methods for selenium.
@@ -68,6 +69,24 @@ namespace Ocaramba.Extensions
                 case Locator.XPath:
                     by = By.XPath(locator.Value);
                     break;
+                case Locator.AccessibilityId:
+                    // Android: content-desc, iOS: accessibilityIdentifier/label
+                    return MobileBy.AccessibilityId(locator.Value);
+                case Locator.AndroidUIAutomator:
+                    // Example: new UiSelector().text("Login")
+                    return MobileBy.AndroidUIAutomator(locator.Value);
+                case Locator.IOSNsPredicate:
+                    // Example: type == 'XCUIElementTypeButton' AND name CONTAINS 'Login'
+                    return MobileBy.IosNSPredicate(locator.Value);
+                case Locator.IOSClassChain:
+                    // Example: **/XCUIElementTypeButton[`name == "Login"`]
+                    return MobileBy.IosClassChain(locator.Value);
+                case Locator.AppiumId:
+                    return MobileBy.Id(locator.Value);
+                case Locator.AppiumClassName:
+                    return MobileBy.ClassName(locator.Value);
+                case Locator.AppiumTagName:
+                    return MobileBy.TagName(locator.Value);
                 default:
                     by = By.Id(locator.Value);
                     break;
