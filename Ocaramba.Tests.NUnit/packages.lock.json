@@ -1130,7 +1130,7 @@
         "type": "Project",
         "dependencies": {
           "Microsoft.Extensions.Configuration.Json": "[9.0.9, )",
-          "Microsoft.NET.Test.Sdk": "[17.14.1, )",
+          "Microsoft.NET.Test.Sdk": "[18.0.1, )",
           "NLog": "[6.0.4, )",
           "OcarambaLite": "[1.0.0, )",
           "Selenium.Support": "[4.35.0, )",
