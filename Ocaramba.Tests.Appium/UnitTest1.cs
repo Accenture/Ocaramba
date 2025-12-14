@@ -16,15 +16,15 @@ namespace Ocaramba.Tests.Appium
             Assert.That(page.IsSomeElementPresent(), Is.True);
             Assert.That(page.IsPreferencePresent(), Is.True);
             page.ClickPreference();
-            driver.Navigate().Back();
+            this.DriverContext.Driver.Navigate().Back();
             page.ClickViews();
             page.ClickWebView();
-            this.driverContext.SwitchToWebView();
+            this.DriverContext.SwitchToWebView();
             var webViewElement = this.DriverContext.Driver.FindElement(By.CssSelector("h1"));
             Assert.That(webViewElement.Text.Contains("This page is a Selenium sandbox"), Is.True);
-            this.driverContext.SwitchToNativeApp();
-            driver.Navigate().Back();
-            driver.Navigate().Back();
+            this.DriverContext.SwitchToNative();
+            this.DriverContext.Driver.Navigate().Back();
+            this.DriverContext.Driver.Navigate().Back();
             Assert.That(page.IsPreferencePresent(), Is.True);
             page.ClickPreference();
         }
