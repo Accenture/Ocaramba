@@ -182,19 +182,29 @@ namespace Ocaramba
         public void SwitchToWebView()
         {
             var appiumDriver = (AppiumDriver)Driver;
-            var contexts = appiumDriver.Contexts;
 
-            foreach (var context in contexts)
+            // Wait until WEBVIEW context appears
+            var wait = new OpenQA.Selenium.Support.UI.WebDriverWait(appiumDriver, TimeSpan.FromSeconds(BaseConfiguration.MediumTimeout));
+            bool contextFound = wait.Until(d =>
             {
-                if (context.Contains("WEBVIEW", StringComparison.OrdinalIgnoreCase))
+                var contexts = appiumDriver.Contexts;
+                foreach (var context in contexts)
+                {
+                    if (context.Contains("WEBVIEW", StringComparison.OrdinalIgnoreCase))
                     {
                         appiumDriver.Context = context;
-                        return;
+                        return true;
                     }
-            }
+                }
+                return false;
+            });
 
-            throw new InvalidOperationException("No WebView context found!");
+            if (!contextFound)
+            {
+                throw new InvalidOperationException("No WebView context found within timeout!");
+            }
         }
+
 
         /// <summary>
         /// Switches the Appium driver back to native context ("NATIVE_APP").
@@ -204,7 +214,6 @@ namespace Ocaramba
             var appiumDriver = (AppiumDriver)Driver;
             appiumDriver.Context = "NATIVE_APP";
         }
-
 
         private FirefoxOptions FirefoxOptions
         {

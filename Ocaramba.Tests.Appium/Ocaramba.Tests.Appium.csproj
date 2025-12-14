@@ -10,6 +10,8 @@
 
   <ItemGroup>
     <PackageReference Include="Appium.WebDriver" Version="8.0.1" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="140.0.7339.20700" />
+    <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.36.0" />
     <PackageReference Include="coverlet.collector" Version="6.0.4" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
     <PackageReference Include="NUnit" Version="4.4.0" />
