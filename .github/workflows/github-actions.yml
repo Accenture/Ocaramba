@@ -240,7 +240,7 @@ jobs:
       - name: run tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: Baklava
+          api-level: 36
           target: google_apis_playstore
           arch: x86_64
           profile: pixel_7_pro
