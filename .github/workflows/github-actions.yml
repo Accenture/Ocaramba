@@ -240,7 +240,7 @@ jobs:
       - name: run tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: Baklava
+          api-level: 35
           target: google_apis_playstore
           arch: x86_64
           emulator-options: "-no-window -no-audio -no-snapshot"
