@@ -256,7 +256,7 @@ jobs:
             # Trigger Play Store update (headless, but Play Services will auto-update system apps)
             adb shell cmd package list packages | grep webview
             adb shell dumpsys package com.google.android.webview | grep versionName
-            CHROME_VERSION=$(adb shell dumpsys package com.google.android.webview | grep versionName | sed 's/.*=//')
+            CHROME_VERSION=$(adb shell dumpsys package com.google.android.webview | awk -F= '/versionName/{print $2}' | head -n1)
             CHROME_MAJOR=$(echo $CHROME_VERSION | cut -d. -f1)
             echo "Detected WebView Chrome version: $CHROME_VERSION (major $CHROME_MAJOR)"
 
@@ -264,7 +264,9 @@ jobs:
             echo "Downloading Chromedriver $LATEST_DRIVER for Chrome $CHROME_MAJOR"
 
             wget -O chromedriver.zip "https://chromedriver.storage.googleapis.com/$LATEST_DRIVER/chromedriver_linux64.zip"
-            unzip chromedriver.zip -d $HOME/chromedriver
+            unzip -o chromedriver.zip -d $HOME/chromedriver
+
+            echo "$HOME/chromedriver"
 
             dotnet vstest ./Ocaramba.Tests.Appium/bin/Release/net8.0/Ocaramba.Tests.Appium.dll --logger:"trx;LogFileName=Ocaramba.Tests.Appium.xml"
             pwsh -Command "Compress-Archive -Path './Ocaramba.Tests.Appium/bin/Release/net8.0/TestOutput/*' -DestinationPath './Ocaramba.Tests.Appium/bin/Release/net8.0/ExecutingTestsOnAndroid.zip'"
