@@ -785,7 +785,7 @@ namespace Ocaramba
 
             if (!string.IsNullOrEmpty(BaseConfiguration.ChromedriverExecutable))
             {
-                appiumOptions.AddAdditionalOption("chromedriverExecutable", BaseConfiguration.ChromedriverExecutable); // <-- Use property, not AddAdditionalAppiumOption
+                appiumOptions.AddAdditionalAppiumOption("chromedriverExecutable", BaseConfiguration.ChromedriverExecutable); // <-- Use property, not AddAdditionalAppiumOption
             }
 
             if (!string.IsNullOrEmpty(BaseConfiguration.AppiumAppPackage))

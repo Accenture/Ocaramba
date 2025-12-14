@@ -251,13 +251,6 @@ jobs:
 
             echo "Checking packages on emulator 5554:"
             adb -s emulator-5554 shell pm list packages | grep io.appium.android.apis || echo "Package not found on emulator 5554"
-            echo "Updating WebView/Chrome via Play Store..."
-            # Ensure Play Store auto-update is enabled
-            adb shell settings put global auto_update_apps 1
-
-            # Kick Play Store sync cycle
-            adb shell am broadcast -a com.android.vending.INSTALL_REFERRER -n com.android.vending/com.google.android.finsky.receivers.ReferrerReceiver
-            sleep 60
             adb shell dumpsys package com.google.android.webview | grep -m1 versionName 
             adb shell cmd package list packages | grep webview
 
