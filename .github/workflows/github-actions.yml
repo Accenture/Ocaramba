@@ -254,7 +254,7 @@ jobs:
             adb -s emulator-5554 shell pm list packages | grep io.appium.android.apis || echo "Package not found on emulator 5554"
             adb shell pm list packages | grep webview
             echo "Updating WebView to latest..."
-            wget -O webview.apk "https://www.apkmirror.com/apk/google-inc/android-system-webview/"
+            wget -O webview.apk "https://www.apkmirror.com/wp-content/themes/APKMirror/download.php?id=11791829&key=8c39b2e4f27acc4842418bcf536cb989316dc712&forcebaseapk=true"
 
             adb -s emulator-5554 install -r -d -g webview.apk
 
