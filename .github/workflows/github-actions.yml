@@ -256,10 +256,11 @@ jobs:
             # Trigger Play Store update (headless, but Play Services will auto-update system apps)
             adb shell cmd package list packages | grep webview
             adb shell dumpsys package com.google.android.webview | grep versionName
-            CHROME_VERSION=$(adb shell dumpsys package com.google.android.webview | grep versionName | head -n1 | awk -F= '{print $2}' | tr -d '[:space:]')
+            CHROME_VERSION=$(adb shell dumpsys package com.google.android.webview | grep versionName | head -n 1 | cut -d'=' -f2 | xargs)
+            echo "Detected WebView Chrome version: $CHROME_VERSION"
             CHROME_MAJOR=$(echo "$CHROME_VERSION" | cut -d. -f1-3)
 
-            echo "Detected WebView Chrome version: $CHROME_VERSION (major $CHROME_MAJOR)"
+            echo "Detected WebView Chrome version: major $CHROME_MAJOR)"
 
             LATEST_DRIVER=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_MAJOR")
             echo "Latest Chromedriver for Chrome $CHROME_MAJOR is $LATEST_DRIVER"
