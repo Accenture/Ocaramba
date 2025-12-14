@@ -6,7 +6,7 @@ using Ocaramba;
 namespace Ocaramba.Tests.Appium
 {
     [TestFixture]
-    public class UnitTest1 : TestBase
+    public class UnitTest2 : ProjectTestBase
     {
         [Test]
         public void WebViewTest()
