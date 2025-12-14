@@ -252,23 +252,13 @@ jobs:
             echo "Checking packages on emulator 5554:"
             adb -s emulator-5554 shell pm list packages | grep io.appium.android.apis || echo "Package not found on emulator 5554"
             echo "Updating WebView/Chrome via Play Store..."
-            # Trigger Play Store update (headless, but Play Services will auto-update system apps)
-            adb shell cmd package list packages | grep webview
-            adb shell dumpsys package com.google.android.webview | grep versionName
-            CHROME_VERSION=$(adb shell dumpsys package com.google.android.webview | grep -m1 versionName | cut -d= -f2)
-            echo "CHROME_VERSION=$CHROME_VERSION" >> $GITHUB_ENV
-            echo "WebView Chrome version $CHROME_VERSION"
+            # Ensure Play Store auto-update is enabled
+            adb shell settings put global auto_update_apps 1
 
-            CHROME_MAJOR=$(echo "$CHROME_VERSION" | cut -d. -f1-3)
-            echo "CHROME_MAJOR=$CHROME_MAJOR" >> $GITHUB_ENV
-            echo "Detected WebView Chrome version: major $CHROME_MAJOR"
-            LATEST_DRIVER=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_MAJOR")
-            echo "LATEST_DRIVER=$LATEST_DRIVER" >> $GITHUB_ENV
-            echo "Latest Chromedriver for Chrome $LATEST_DRIVER" 
-            wget -O chromedriver.zip "https://chromedriver.storage.googleapis.com/$LATEST_DRIVER/chromedriver_linux64.zip" && \
-            unzip -o chromedriver.zip -d "$HOME/chromedriver" && \
-            chmod +x "$HOME/chromedriver/chromedriver" && \
-            echo "$HOME/chromedriver"
+            # Kick Play Store sync cycle
+            adb shell am broadcast -a com.android.vending.INSTALL_REFERRER -n com.android.vending/com.google.android.finsky.receivers.ReferrerReceiver
+            sleep 60
+            adb shell cmd package list packages | grep webview
 
             dotnet vstest ./Ocaramba.Tests.Appium/bin/Release/net8.0/Ocaramba.Tests.Appium.dll --logger:"trx;LogFileName=Ocaramba.Tests.Appium.xml"
             pwsh -Command "Compress-Archive -Path './Ocaramba.Tests.Appium/bin/Release/net8.0/TestOutput/*' -DestinationPath './Ocaramba.Tests.Appium/bin/Release/net8.0/ExecutingTestsOnAndroid.zip'"
