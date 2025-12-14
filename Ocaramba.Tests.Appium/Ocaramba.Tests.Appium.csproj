@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="Appium.WebDriver" Version="8.0.1" />
+    <PackageReference Include="DotNetSeleniumExtras.WaitHelpers" Version="3.11.0" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="124.0.6367.7800" />
     <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.36.0" />
     <PackageReference Include="coverlet.collector" Version="6.0.4" />

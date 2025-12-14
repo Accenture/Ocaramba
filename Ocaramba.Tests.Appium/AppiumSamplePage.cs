@@ -5,6 +5,7 @@ using Ocaramba.Types;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.Android;
+using OpenQA.Selenium.Support.UI;
 
 
 namespace Ocaramba.Tests.Appium
@@ -42,6 +43,10 @@ namespace Ocaramba.Tests.Appium
         public void ClickViews()
         {
             var viewsLocator = new ElementLocator(Locator.AccessibilityId, "Views");
+            var wait = new WebDriverWait(this.Driver, TimeSpan.FromSeconds(10));
+            var viewsElement = wait.Until(
+                SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(viewsLocator.ToBy())
+            );
             this.Driver.FindElement(viewsLocator.ToBy()).Click();
         }
 
