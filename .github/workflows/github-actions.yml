@@ -240,10 +240,10 @@ jobs:
       - name: run tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 28
+          api-level: 34
           target: google_apis
           arch: x86_64
-          profile: Nexus 6
+          profile: pixel_6
           emulator-options: "-no-window -no-audio -no-snapshot"
           disable-animations: true
           script: |
