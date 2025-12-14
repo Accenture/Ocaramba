@@ -262,11 +262,9 @@ jobs:
             LATEST_DRIVER=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_MAJOR") && \
             echo "Latest Chromedriver for Chrome $CHROME_MAJOR is $LATEST_DRIVER" && \
             wget -O chromedriver.zip "https://chromedriver.storage.googleapis.com/$LATEST_DRIVER/chromedriver_linux64.zip" && \
-            unzip -o chromedriver.zip -d $HOME/chromedriver && \
-            chmod +x $HOME/chromedriver/chromedriver && \
+            unzip -o chromedriver.zip -d "$HOME/chromedriver" && \
+            chmod +x "$HOME/chromedriver/chromedriver" && \
             echo "$HOME/chromedriver"
-
-            chmod +x $HOME/chromedriver
 
             dotnet vstest ./Ocaramba.Tests.Appium/bin/Release/net8.0/Ocaramba.Tests.Appium.dll --logger:"trx;LogFileName=Ocaramba.Tests.Appium.xml"
             pwsh -Command "Compress-Archive -Path './Ocaramba.Tests.Appium/bin/Release/net8.0/TestOutput/*' -DestinationPath './Ocaramba.Tests.Appium/bin/Release/net8.0/ExecutingTestsOnAndroid.zip'"
