@@ -243,7 +243,7 @@ jobs:
           api-level: 36
           target: google_apis_playstore
           arch: x86_64
-          profile: pixel_9
+          profile: pixel_7
           emulator-options: "-no-window -no-audio -no-snapshot"
           disable-animations: true
           script: |
