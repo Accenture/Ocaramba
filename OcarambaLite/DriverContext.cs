@@ -761,6 +761,8 @@ namespace Ocaramba
         private void StartAppium()
         {
             var appiumOptions = new OpenQA.Selenium.Appium.AppiumOptions();
+            appiumOptions.AddAdditionalAppiumOption("chromedriver_autodownload", true);
+
             if (!string.IsNullOrEmpty(BaseConfiguration.AppiumPlatformName))
             {
                 appiumOptions.PlatformName = BaseConfiguration.AppiumPlatformName;
