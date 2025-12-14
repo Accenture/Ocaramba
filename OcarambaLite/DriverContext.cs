@@ -783,6 +783,11 @@ namespace Ocaramba
                 appiumOptions.AutomationName = BaseConfiguration.AppiumAutomationName; // <-- Use property, not AddAdditionalAppiumOption
             }
 
+            if (!string.IsNullOrEmpty(BaseConfiguration.ChromedriverExecutable))
+            {
+                appiumOptions.AddAdditionalOption("chromedriverExecutable", BaseConfiguration.ChromedriverExecutable); // <-- Use property, not AddAdditionalAppiumOption
+            }
+
             if (!string.IsNullOrEmpty(BaseConfiguration.AppiumAppPackage))
             {
                 appiumOptions.AddAdditionalAppiumOption("appPackage", BaseConfiguration.AppiumAppPackage);

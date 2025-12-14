@@ -11,7 +11,6 @@ namespace Ocaramba.Tests.Appium
 {
     public class AppiumSamplePage : ProjectPageBase
     {
-        private readonly ElementLocator someElement = new ElementLocator(Locator.XPath, "//android.widget.TextView[@text='API Demos']");
         private readonly ElementLocator h2Element = new ElementLocator(Locator.CssSelector, "h1");
 
         private readonly ElementLocator preferencesButtonAccId =
@@ -21,18 +20,6 @@ namespace Ocaramba.Tests.Appium
         public AppiumSamplePage(DriverContext driverContext)
             : base(driverContext)
         {
-        }
-
-        public bool IsSomeElementPresent()
-        {
-            try
-            {
-                return this.Driver.FindElement(this.someElement.ToBy()) != null;
-            }
-            catch (NoSuchElementException)
-            {
-                return false;
-            }
         }
 
         public bool IsPreferencePresent()
