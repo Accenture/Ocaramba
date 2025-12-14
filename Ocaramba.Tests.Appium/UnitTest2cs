@@ -6,10 +6,10 @@ using Ocaramba;
 namespace Ocaramba.Tests.Appium
 {
     [TestFixture]
-    public class UnitTest2 : ProjectTestBase
+    public class AppiumAndroidTests2 : ProjectTestBase
     {
         [Test]
-        public void WebViewTest()
+        public void SampleAppiumTest_WebView()
         {
             var page = new AppiumSamplePage(this.DriverContext);
             page.ClickViews();
