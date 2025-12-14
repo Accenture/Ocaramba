@@ -50,5 +50,17 @@ namespace Ocaramba.Tests.Appium
         {
            this.Driver.FindElement(this.preferencesButtonAccId.ToBy()).Click();
         }
+
+        public void ClickViews()
+        {
+            var viewsLocator = new ElementLocator(Locator.AccessibilityId, "Views");
+            this.Driver.FindElement(viewsLocator.ToBy()).Click();
+        }
+
+        public void ClickWebView()
+        {
+            var webViewLocator = new ElementLocator(Locator.AccessibilityId, "WebView");
+            this.Driver.FindElement(webViewLocator.ToBy()).Click();
+        }
     }
 }

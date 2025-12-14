@@ -1,0 +1,27 @@
+using NUnit.Framework;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Appium;
+using Ocaramba;
+
+namespace Ocaramba.Tests.Appium
+{
+    [TestFixture]
+    public class UnitTest1 : TestBase
+    {
+        [Test]
+        public void WebViewTest()
+        {
+            var page = new AppiumSamplePage(this.DriverContext);
+            page.ClickViews();
+            page.ClickWebView();
+            this.driverContext.SwitchToWebView();
+            var webViewElement = this.DriverContext.Driver.FindElement(By.CssSelector("body"));
+            Assert.That(webViewElement.Text.Contains("Hello World!"), Is.True);
+            this.driverContext.SwitchToNativeApp();
+            driver.Navigate().Back();
+            driver.Navigate().Back();
+            Assert.That(page.IsPreferencePresent(), Is.True);
+            page.ClickPreference();
+        }
+    }
+}

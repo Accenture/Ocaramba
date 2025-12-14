@@ -175,6 +175,34 @@ namespace Ocaramba
         /// </summary>
         public string CurrentDirectory { get; set; }
 
+        /// <summary>
+        /// Switches the Appium driver from the native app context ("NATIVE_APP")
+        /// to the first available WebView context ("WEBVIEW_xxx").
+        /// This allows interacting with HTML elements inside embedded web content.
+        /// </summary>
+        public void SwitchToWebView()
+        {
+            var contexts = ((AppiumDriver<IWebElement>)Driver).Contexts;
+            foreach (var context in contexts)
+            {
+                if (context.Contains("WEBVIEW"))
+                {
+                    ((AppiumDriver<IWebElement>)Driver).Context = context;
+                    return;
+                }
+            }
+            throw new Exception("No WebView context found!");
+        }
+
+        /// <summary>
+        /// Switches the Appium driver back to the native app context ("NATIVE_APP").
+        /// This is required to interact again with native mobile UI elements.
+        /// </summary>
+        public void SwitchToNative()
+        {
+            ((AppiumDriver<IWebElement>)Driver).Context = "NATIVE_APP";
+        }
+
         private FirefoxOptions FirefoxOptions
         {
             get
