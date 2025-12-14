@@ -241,7 +241,7 @@ jobs:
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 34
-          target: google_apis
+          target: google_apis_playstore
           arch: x86_64
           profile: pixel_6
           emulator-options: "-no-window -no-audio -no-snapshot"
@@ -252,6 +252,11 @@ jobs:
 
             echo "Checking packages on emulator 5554:"
             adb -s emulator-5554 shell pm list packages | grep io.appium.android.apis || echo "Package not found on emulator 5554"
+            adb shell pm list packages | grep webview
+            echo "Updating WebView to latest..."
+            wget -O webview.apk "https://www.apkmirror.com/apk/google-inc/android-system-webview/"
+
+            adb -s emulator-5554 install -r -d -g webview.apk
 
             dotnet vstest ./Ocaramba.Tests.Appium/bin/Release/net8.0/Ocaramba.Tests.Appium.dll --logger:"trx;LogFileName=Ocaramba.Tests.Appium.xml"
             pwsh -Command "Compress-Archive -Path './Ocaramba.Tests.Appium/bin/Release/net8.0/TestOutput/*' -DestinationPath './Ocaramba.Tests.Appium/bin/Release/net8.0/ExecutingTestsOnAndroid.zip'"
