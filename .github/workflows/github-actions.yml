@@ -240,10 +240,10 @@ jobs:
       - name: run tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 34
+          api-level: 36
           target: google_apis_playstore
           arch: x86_64
-          profile: pixel_6
+          profile: pixel_9
           emulator-options: "-no-window -no-audio -no-snapshot"
           disable-animations: true
           script: |
@@ -256,14 +256,12 @@ jobs:
             # Trigger Play Store update (headless, but Play Services will auto-update system apps)
             adb shell cmd package list packages | grep webview
             adb shell dumpsys package com.google.android.webview | grep versionName
-            CHROME_VERSION=$(adb shell dumpsys package com.google.android.webview \
-            | grep -m1 versionName \
-            | cut -d= -f2)
+            CHROME_VERSION=$(adb shell dumpsys package com.google.android.webview | grep -m1 versionName | cut -d= -f2)
 
-              if [ -z "$CHROME_VERSION" ]; then
-                echo "WebView Chrome version not detected!"
-                exit 1
-              fi
+            if [ -z "$CHROME_VERSION" ]; then
+              echo "WebView Chrome version not detected!"
+              exit 1
+            fi
             CHROME_MAJOR=$(echo "$CHROME_VERSION" | cut -d. -f1-3)
 
             echo "Detected WebView Chrome version: major $CHROME_MAJOR)"
