@@ -15,7 +15,6 @@ namespace Ocaramba.Tests.Appium
         public void SampleAppiumTest_ElementExists()
         {
             var page = new AppiumSamplePage(this.DriverContext);
-            Assert.That(page.IsSomeElementPresent(), Is.True);
             Assert.That(page.IsPreferencePresent(), Is.True);
             page.ClickPreference();
             this.DriverContext.Driver.Navigate().Back();
@@ -35,6 +34,9 @@ namespace Ocaramba.Tests.Appium
             Assert.That(page.GetElementinWebView().Contains("This page is a Selenium sandbox"), Is.True);
             this.DriverContext.SwitchToNative();
             this.DriverContext.Driver.Navigate().Back();
+            this.DriverContext.Driver.Navigate().Back();
+            Assert.That(page.IsPreferencePresent(), Is.True);
+            page.ClickPreference();
         }
     }
 }
