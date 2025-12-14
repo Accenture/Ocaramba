@@ -258,6 +258,7 @@ jobs:
             # Kick Play Store sync cycle
             adb shell am broadcast -a com.android.vending.INSTALL_REFERRER -n com.android.vending/com.google.android.finsky.receivers.ReferrerReceiver
             sleep 60
+            adb shell dumpsys package com.google.android.webview | grep -m1 versionName 
             adb shell cmd package list packages | grep webview
 
             dotnet vstest ./Ocaramba.Tests.Appium/bin/Release/net8.0/Ocaramba.Tests.Appium.dll --logger:"trx;LogFileName=Ocaramba.Tests.Appium.xml"
