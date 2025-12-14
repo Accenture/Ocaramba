@@ -240,10 +240,9 @@ jobs:
       - name: run tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 36
+          api-level: Baklava
           target: google_apis_playstore
           arch: x86_64
-          profile: pixel_7_pro
           emulator-options: "-no-window -no-audio -no-snapshot"
           disable-animations: true
           script: |
