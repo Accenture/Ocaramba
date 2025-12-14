@@ -16,8 +16,6 @@ namespace Ocaramba.Tests.Appium
         {
             var page = new AppiumSamplePage(this.DriverContext);
             Assert.That(page.IsPreferencePresent(), Is.True);
-            page.ClickPreference();
-            this.DriverContext.Driver.Navigate().Back();
             page.ClickViews();
             // Scroll until "WebView" is visible
             var androidDriver = (AppiumDriver)this.DriverContext.Driver;
