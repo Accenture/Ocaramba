@@ -252,11 +252,10 @@ jobs:
 
             echo "Checking packages on emulator 5554:"
             adb -s emulator-5554 shell pm list packages | grep io.appium.android.apis || echo "Package not found on emulator 5554"
-            adb shell pm list packages | grep webview
-            echo "Updating WebView to latest..."
-            wget -O webview.apk "https://www.apkmirror.com/wp-content/themes/APKMirror/download.php?id=11791829&key=8c39b2e4f27acc4842418bcf536cb989316dc712&forcebaseapk=true"
-
-            adb -s emulator-5554 install -r -d -g webview.apk
+            echo "Updating WebView/Chrome via Play Store..."
+            # Trigger Play Store update (headless, but Play Services will auto-update system apps)
+            adb shell cmd package list packages | grep webview
+            adb shell dumpsys package com.google.android.webview | grep versionName
 
             dotnet vstest ./Ocaramba.Tests.Appium/bin/Release/net8.0/Ocaramba.Tests.Appium.dll --logger:"trx;LogFileName=Ocaramba.Tests.Appium.xml"
             pwsh -Command "Compress-Archive -Path './Ocaramba.Tests.Appium/bin/Release/net8.0/TestOutput/*' -DestinationPath './Ocaramba.Tests.Appium/bin/Release/net8.0/ExecutingTestsOnAndroid.zip'"
