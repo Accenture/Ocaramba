@@ -255,7 +255,7 @@ jobs:
             # Trigger Play Store update (headless, but Play Services will auto-update system apps)
             adb shell cmd package list packages | grep webview
             adb shell dumpsys package com.google.android.webview | grep versionName
-            HROME_VERSION=$(adb shell dumpsys package com.google.android.webview | grep -m1 versionName | cut -d= -f2)
+            CHROME_VERSION=$(adb shell dumpsys package com.google.android.webview | grep -m1 versionName | cut -d= -f2)
             echo "CHROME_VERSION=$CHROME_VERSION" >> $GITHUB_ENV
             echo "WebView Chrome version $CHROME_VERSION"
 
