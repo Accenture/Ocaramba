@@ -32,8 +32,7 @@ namespace Ocaramba.Tests.Appium
             );
             page.ClickWebView();
             this.DriverContext.SwitchToWebView();
-            var webViewElementView = this.DriverContext.Driver.FindElement(By.CssSelector("h1"));
-            Assert.That(webViewElementView.Text.Contains("This page is a Selenium sandbox"), Is.True);
+            Assert.That(page.GetElementinWebView().Contains("This page is a Selenium sandbox"), Is.True);
             this.DriverContext.SwitchToNative();
             this.DriverContext.Driver.Navigate().Back();
             this.DriverContext.Driver.Navigate().Back();
