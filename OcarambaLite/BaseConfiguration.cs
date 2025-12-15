@@ -885,6 +885,20 @@ namespace Ocaramba
         }
 
         /// <summary>
+        /// Gets the chromedriverExecutable.
+        /// </summary>
+        public static string ChromedriverExecutable
+        {
+            get
+            {
+                string setting = null;
+                setting = Builder["appSettings:chromedriverExecutable"];
+                Logger.Trace(CultureInfo.CurrentCulture, "Gets the chromedriverExecutable from settings file '{0}'", setting);
+                return setting;
+            }
+        }
+
+        /// <summary>
         /// Gets the Appium AutomationName.
         /// </summary>
         public static string AppiumAutomationName

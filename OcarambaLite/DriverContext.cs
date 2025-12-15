@@ -175,6 +175,46 @@ namespace Ocaramba
         /// </summary>
         public string CurrentDirectory { get; set; }
 
+        /// <summary>
+        /// Switches the Appium driver from native context ("NATIVE_APP")
+        /// to the first available WebView context.
+        /// </summary>
+        public void SwitchToWebView()
+        {
+            var appiumDriver = (AppiumDriver)this.driver;
+
+            // Wait until WEBVIEW context appears
+            var wait = new OpenQA.Selenium.Support.UI.WebDriverWait(appiumDriver, TimeSpan.FromSeconds(BaseConfiguration.MediumTimeout));
+            bool contextFound = wait.Until(d =>
+            {
+                var contexts = appiumDriver.Contexts;
+                foreach (var context in contexts)
+                {
+                    if (context.Contains("WEBVIEW", StringComparison.OrdinalIgnoreCase))
+                    {
+                        appiumDriver.Context = context;
+                        return true;
+                    }
+                }
+
+                return false;
+            });
+
+            if (!contextFound)
+            {
+                throw new InvalidOperationException("No WebView context found within timeout!");
+            }
+        }
+
+        /// <summary>
+        /// Switches the Appium driver back to native context ("NATIVE_APP").
+        /// </summary>
+        public void SwitchToNative()
+        {
+            var appiumDriver = (AppiumDriver)this.driver;
+            appiumDriver.Context = "NATIVE_APP";
+        }
+
         private FirefoxOptions FirefoxOptions
         {
             get
@@ -721,6 +761,8 @@ namespace Ocaramba
         private void StartAppium()
         {
             var appiumOptions = new OpenQA.Selenium.Appium.AppiumOptions();
+            appiumOptions.AddAdditionalAppiumOption("chromedriver_autodownload", true);
+            appiumOptions.AddAdditionalAppiumOption("appium:showChromedriverLog", true);
             if (!string.IsNullOrEmpty(BaseConfiguration.AppiumPlatformName))
             {
                 appiumOptions.PlatformName = BaseConfiguration.AppiumPlatformName;
@@ -739,6 +781,11 @@ namespace Ocaramba
             if (!string.IsNullOrEmpty(BaseConfiguration.AppiumAutomationName))
             {
                 appiumOptions.AutomationName = BaseConfiguration.AppiumAutomationName; // <-- Use property, not AddAdditionalAppiumOption
+            }
+
+            if (!string.IsNullOrEmpty(BaseConfiguration.ChromedriverExecutable))
+            {
+                appiumOptions.AddAdditionalAppiumOption("chromedriverExecutable", BaseConfiguration.ChromedriverExecutable); // <-- Use property, not AddAdditionalAppiumOption
             }
 
             if (!string.IsNullOrEmpty(BaseConfiguration.AppiumAppPackage))
