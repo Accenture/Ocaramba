@@ -4,9 +4,14 @@ CHROME_VERSION=$(adb shell dumpsys package com.google.android.webview | grep -m1
 echo "WebView Chrome version $CHROME_VERSION" 
 CHROME_MAJOR=$(echo "$CHROME_VERSION" | cut -d. -f1-3) 
 echo "Detected WebView Chrome version: major $CHROME_MAJOR" 
-LATEST_DRIVER=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_MAJOR") 
-echo "Latest Chromedriver for Chrome $CHROME_MAJOR is $LATEST_DRIVER" 
-wget -O chromedriver.zip "https://chromedriver.storage.googleapis.com/$LATEST_DRIVER/chromedriver_linux64.zip" 
-unzip -o chromedriver.zip -d "$HOME/chromedriver" 
-chmod +x "$HOME/chromedriver/chromedriver" 
-echo "$HOME/chromedriver"
+DATA=$(curl -s https://googlechromelabs.github.io/chrome-for-testing/latest-patch-versions-per-build.json)
+
+# Get the latest patch version for that build
+PATCH_VERSION=$(echo "$DATA" | jq -r ".builds[\"$CHROME_MAJOR\"].version")
+
+echo "Latest patch version for $CHROME_MAJOR is $PATCH_VERSION"
+echo "Latest Chromedriver for Chrome $CHROME_MAJOR is $PATCH_VERSION" 
+wget -O chromedriver.zip "https://chromedriver.storage.googleapis.com/$PATCH_VERSION/chromedriver_linux64.zip" 
+unzip -o chromedriver.zip -d "./Ocaramba.Tests.Appium/bin/Release/net8.0/" 
+chmod +x "./Ocaramba.Tests.Appium/bin/Release/net8.0/chromedriver" 
+echo "./Ocaramba.Tests.Appium/bin/Release/net8.0/chromedriver is set up"
