@@ -11,7 +11,7 @@ PATCH_VERSION=$(echo "$DATA" | jq -r ".builds[\"$CHROME_MAJOR\"].version")
 
 echo "Latest patch version for $CHROME_MAJOR is $PATCH_VERSION"
 echo "Latest Chromedriver for Chrome $CHROME_MAJOR is $PATCH_VERSION" 
-wget -O chromedriver.zip "https://chromedriver.storage.googleapis.com/$PATCH_VERSION/chromedriver_linux64.zip" 
+wget -O chromedriver.zip "https://storage.googleapis.com/chrome-for-testing-public/$PATCH_VERSION/linux64/chromedriver-linux64.zip" 
 unzip -o chromedriver.zip -d "./Ocaramba.Tests.Appium/bin/Release/net8.0/" 
 chmod +x "./Ocaramba.Tests.Appium/bin/Release/net8.0/chromedriver" 
 echo "./Ocaramba.Tests.Appium/bin/Release/net8.0/chromedriver is set up"
