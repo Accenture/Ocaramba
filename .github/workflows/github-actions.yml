@@ -234,7 +234,6 @@ jobs:
           appium -v
           appium driver list --installed
           appium driver install uiautomator2
-          npm install appium-chromedriver --chromedriver-version=124.0.6367.78
           nohup appium --log-level warn --log-timestamp --local-timezone > appium.log 2>&1 &
           sleep 10
           curl http://127.0.0.1:4723/wd/hub/sessions || echo "Appium check failed"
@@ -254,7 +253,7 @@ jobs:
             adb -s emulator-5554 shell pm list packages | grep io.appium.android.apis || echo "Package not found on emulator 5554"
             adb shell dumpsys package com.google.android.webview | grep -m1 versionName 
             adb shell cmd package list packages | grep webview
-
+            bash ./Ocaramba.Tests.Appium/bin/Release/net8.0/setup_chromedriver.sh
             dotnet vstest ./Ocaramba.Tests.Appium/bin/Release/net8.0/Ocaramba.Tests.Appium.dll --logger:"trx;LogFileName=Ocaramba.Tests.Appium.xml"
             pwsh -Command "Compress-Archive -Path './Ocaramba.Tests.Appium/bin/Release/net8.0/TestOutput/*' -DestinationPath './Ocaramba.Tests.Appium/bin/Release/net8.0/ExecutingTestsOnAndroid.zip'"
             echo "Closing connection with emulator-5554"
@@ -632,7 +631,3 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
         if: (success() && startsWith(github.ref, 'refs/tags/'))
-
-
-
-
