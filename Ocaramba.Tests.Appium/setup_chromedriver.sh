@@ -9,7 +9,6 @@ DATA=$(curl -s https://googlechromelabs.github.io/chrome-for-testing/latest-patc
 # Get the latest patch version for that build
 PATCH_VERSION=$(echo "$DATA" | jq -r ".builds[\"$CHROME_MAJOR\"].version")
 
-echo "Latest patch version for $CHROME_MAJOR is $PATCH_VERSION"
 echo "Latest Chromedriver for Chrome $CHROME_MAJOR is $PATCH_VERSION" 
 wget -O chromedriver.zip "https://storage.googleapis.com/chrome-for-testing-public/$PATCH_VERSION/linux64/chromedriver-linux64.zip" 
 unzip -o chromedriver.zip -d "./Ocaramba.Tests.Appium/bin/Release/net8.0/" 
