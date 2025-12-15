@@ -762,7 +762,7 @@ namespace Ocaramba
         {
             var appiumOptions = new OpenQA.Selenium.Appium.AppiumOptions();
             appiumOptions.AddAdditionalAppiumOption("chromedriver_autodownload", true);
-
+            appiumOptions.AddAdditionalAppiumOption("appium:showChromedriverLog", true);
             if (!string.IsNullOrEmpty(BaseConfiguration.AppiumPlatformName))
             {
                 appiumOptions.PlatformName = BaseConfiguration.AppiumPlatformName;

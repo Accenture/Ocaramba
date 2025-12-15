@@ -12,8 +12,6 @@ namespace Ocaramba.Tests.Appium
 {
     public class AppiumSamplePage : ProjectPageBase
     {
-        private readonly ElementLocator h2Element = new ElementLocator(Locator.CssSelector, "h1");
-
         private readonly ElementLocator preferencesButtonAccId =
             new ElementLocator(Locator.AccessibilityId, "Preference");
 
@@ -58,7 +56,8 @@ namespace Ocaramba.Tests.Appium
 
         public string GetElementinWebView()
         {
-            return this.Driver.GetElement(this.h2Element).Text;
+            var viewsLocator = new ElementLocator(Locator.CssSelector, "h1");
+            return this.Driver.FindElement(viewsLocator.ToBy()).Text;
         }
 
 
