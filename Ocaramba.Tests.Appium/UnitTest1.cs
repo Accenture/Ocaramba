@@ -16,12 +16,18 @@ namespace Ocaramba.Tests.Appium
         {
             var page = new AppiumSamplePage(this.DriverContext);
             Assert.That(page.IsPreferencePresent(), Is.True);
+            var androidDriver = (AppiumDriver)this.DriverContext.Driver;
+            var element = androidDriver.FindElement(
+                MobileBy.AndroidUIAutomator(
+                    "new UiScrollable(new UiSelector().resourceId(\"android:id/list\"))" +
+                    ".scrollIntoView(new UiSelector().text(\"Views\"))"
+                )
+            );
             page.ClickViews();
             // Scroll until "WebView" is visible
-            var androidDriver = (AppiumDriver)this.DriverContext.Driver;
 
             // Scroll inside the ListView until "WebView" is visible
-            var element = androidDriver.FindElement(
+            element = androidDriver.FindElement(
                 MobileBy.AndroidUIAutomator(
                     "new UiScrollable(new UiSelector().resourceId(\"android:id/list\"))" +
                     ".scrollIntoView(new UiSelector().text(\"WebView\"))"
