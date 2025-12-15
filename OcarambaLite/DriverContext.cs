@@ -181,7 +181,7 @@ namespace Ocaramba
         /// </summary>
         public void SwitchToWebView()
         {
-            var appiumDriver = (AppiumDriver)Driver;
+            var appiumDriver = (AppiumDriver)this.driver;
 
             // Wait until WEBVIEW context appears
             var wait = new OpenQA.Selenium.Support.UI.WebDriverWait(appiumDriver, TimeSpan.FromSeconds(BaseConfiguration.MediumTimeout));
@@ -206,13 +206,12 @@ namespace Ocaramba
             }
         }
 
-
         /// <summary>
         /// Switches the Appium driver back to native context ("NATIVE_APP").
         /// </summary>
         public void SwitchToNative()
         {
-            var appiumDriver = (AppiumDriver)Driver;
+            var appiumDriver = (AppiumDriver)this.driver;
             appiumDriver.Context = "NATIVE_APP";
         }
 
