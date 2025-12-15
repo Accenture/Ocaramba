@@ -42,6 +42,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Update="setup_chromedriver.sh">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
     <None Update="appsettings.Linux.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
