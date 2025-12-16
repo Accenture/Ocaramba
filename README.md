@@ -21,6 +21,7 @@ AI generated documentation [DeepWiki](https://deepwiki.com/Accenture/Ocaramba)<b
 
 - .NET 8.0 supported
 - Cross-Platform Windows, Linux and macOS systems supported
+- Supports [Appium](https://appium.io/docs/en/latest/)-based UI automation of many app platforms, including mobile e.g. iOS, Android, Tizen, more details [here](https://github.com/Accenture/Ocaramba/wiki/Ocaramba-framework-with-Appium)
 - Supports continuous integration tools like Azure DevOps, Teamcity, Jenkins and others.
 - Ready for parallel tests execution, more details [here](https://github.com/Accenture/Ocaramba/wiki/Selenium%20Parallel%20tests%20execution)
 - Possibility to use MSTest, NUnit or xUNIT framework
@@ -28,7 +29,6 @@ AI generated documentation [DeepWiki](https://deepwiki.com/Accenture/Ocaramba)<b
 - Written entirely in C#
 - Contains example projects how to use it
 - Allows using Chrome, Firefox, Edge Chromium, Safari or Internet Explorer
-- Supports Appium-based Android UI tests, more details [here](https://github.com/Accenture/Ocaramba/wiki/Ocaramba-framework-with-Appium)
 - Overrides browser profile preferences, pass arguments to browsers, installs browser extensions, loading default firefox profile, Headless mode, more details [here](https://github.com/Accenture/Ocaramba/wiki/Override-browser-profile-preferences,-install-browser-extensions,-Headless-mode)
 - Extends Webdriver by additional methods like JavaScriptClick, WaitForAjax, WaitForAngular, etc., more details [here](http://Accenture.github.io/Ocaramba/html/d51aa97e-08b5-c0b6-6987-c10545a64ebd.htm)
 - Automatically waits when locating element for specified time and conditions, GetElement method instead of Selenium FindElement, more details [here](http://Accenture.github.io/Ocaramba/html/3c09ca99-f931-c6c9-98fc-194eff6500ff.htm)
@@ -140,3 +140,4 @@ Checkout the code or get it from [nuget.org](https://www.nuget.org/packages?q=Oc
 - OcarambaLite ![NuGet Downloads](https://img.shields.io/nuget/dt/OcarambaLite) ![NuGet Version](https://img.shields.io/nuget/v/OcarambaLite) - lighten version without selenium drivers
 
 or download Ocaramba Visual Studio templates [![Ocaramba Templates](https://img.shields.io/badge/get-Ocaramba_Templates-green.svg?color=4BC21F)](https://marketplace.visualstudio.com/items?itemName=Ocaramba.Ocaramba1)
+
