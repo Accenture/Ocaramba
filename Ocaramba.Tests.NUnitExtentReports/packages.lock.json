@@ -36,11 +36,11 @@
       },
       "Microsoft.TestPlatform.TestHost": {
         "type": "Direct",
-        "requested": "[17.14.1, )",
-        "resolved": "17.14.1",
-        "contentHash": "d78LPzGKkJwsJXAQwsbJJ7LE7D1wB+rAyhHHAaODF+RDSQ0NgMjDFkSA1Djw18VrxO76GlKAjRUhl+H8NL8Z+Q==",
+        "requested": "[18.0.1, )",
+        "resolved": "18.0.1",
+        "contentHash": "uDJKAEjFTaa2wHdWlfo6ektyoh+WD4/Eesrwb4FpBFKsLGehhACVnwwTI4qD3FrIlIEPlxdXg3SyrYRIcO+RRQ==",
         "dependencies": {
-          "Microsoft.TestPlatform.ObjectModel": "17.14.1",
+          "Microsoft.TestPlatform.ObjectModel": "18.0.1",
           "Newtonsoft.Json": "13.0.3"
         }
       },
@@ -1165,6 +1165,7 @@
         "dependencies": {
           "Microsoft.Extensions.Configuration.Json": "[9.0.9, )",
           "Microsoft.NET.Test.Sdk": "[17.14.1, )",
+          "Microsoft.TestPlatform.TestHost": "[18.0.1, )",
           "NLog": "[6.0.4, )",
           "OcarambaLite": "[1.0.0, )",
           "Selenium.Support": "[4.35.0, )",
