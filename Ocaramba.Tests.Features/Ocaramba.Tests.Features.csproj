@@ -26,7 +26,7 @@
     <PackageReference Include="SpecFlow" Version="3.9.74" />
     <PackageReference Include="SpecFlow.NUnit" Version="3.9.74" />
     <PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="3.9.74" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
 	 <PackageReference Include="Selenium.WebDriver.MSEdgeDriver" Version="140.0.3485.66" />
   </ItemGroup>
 
