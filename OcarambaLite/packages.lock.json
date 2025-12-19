@@ -123,18 +123,18 @@
       },
       "Selenium.Support": {
         "type": "Direct",
-        "requested": "[4.35.0, )",
-        "resolved": "4.35.0",
-        "contentHash": "K6DiLdDQNDSWI/zh14bk9vRjW8vEX2mhMI2Cq8bD72FM5rOnLhQwZABJHrWCZ3U1wb7KFFd7iQeUhvpyHVt2AA==",
+        "requested": "[4.39.0, )",
+        "resolved": "4.39.0",
+        "contentHash": "G27Hr8k9gGZ0lxdFqTnoJEwZ2l8nq+GFOs5AB9OqGXkHRznS13uDG7CFtMMgG9k4Dy06XTYJLrnENYTa/nVFhw==",
         "dependencies": {
-          "Selenium.WebDriver": "4.35.0"
+          "Selenium.WebDriver": "4.39.0"
         }
       },
       "Selenium.WebDriver": {
         "type": "Direct",
-        "requested": "[4.35.0, )",
-        "resolved": "4.35.0",
-        "contentHash": "C9OrObS2KLyUQDJNRY883JAc4n5q58pBYmY954hf+lGMQQcsz4Ias2mk91lHkLXFX+2qMttya4df9lGP1SLiGQ=="
+        "requested": "[4.39.0, )",
+        "resolved": "4.39.0",
+        "contentHash": "LbiWOVW/PA/YVHKAXxMPLwwoupj3XLWKwjnGNkGFF0dG0rX2MJHDWgSf9WPSRWb9Msr3vTWFg0EsEAdNs68NiA=="
       },
       "StyleCop.Analyzers": {
         "type": "Direct",
