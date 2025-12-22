@@ -73,9 +73,9 @@
       },
       "Selenium.WebDriver.MSEdgeDriver": {
         "type": "Direct",
-        "requested": "[140.0.3485.66, )",
-        "resolved": "140.0.3485.66",
-        "contentHash": "wDrJCb2dlXbaksjXys9ckcK86jZiyzoC5+lcYkQd4p9JNusonq+5jWmXQkWFQWmanBiJukS0ytClpsltS27cjQ=="
+        "requested": "[141.0.3537.71, )",
+        "resolved": "141.0.3537.71",
+        "contentHash": "ctVx7buR/izA/QwgzOPPOWg8ciUizsyjtHPzMWySJRas0M+Db1fqve1Op4+P3QlCQPLbCkDOgtdmPHcOqL22kQ=="
       },
       "System.Configuration.ConfigurationManager": {
         "type": "Direct",
