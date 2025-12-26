@@ -16,7 +16,7 @@
     <PackageReference Include="NLog" Version="6.0.4" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="143.0.7499.16900" />
     <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.36.0" />
-		<PackageReference Include="Selenium.WebDriver.MSEdgeDriver" Version="140.0.3485.66" />
+		<PackageReference Include="Selenium.WebDriver.MSEdgeDriver" Version="141.0.3537.71" />
     <PackageReference Include="Selenium.WebDriver.IEDriver" Version="4.14.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
   </ItemGroup>
