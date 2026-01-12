@@ -142,9 +142,9 @@
       },
       "Selenium.WebDriver.ChromeDriver": {
         "type": "Direct",
-        "requested": "[143.0.7499.16900, )",
-        "resolved": "143.0.7499.16900",
-        "contentHash": "vh50E6fkhwHi62plhZfaJ8oC9lnL4bqygAXh9MJIB16lKLeDq9rpWPQKqnEdzqEryahS1A4rzNlUhcrAuew30w=="
+        "requested": "[143.0.7499.19200, )",
+        "resolved": "143.0.7499.19200",
+        "contentHash": "FC39dn4EDv3Bzia8RYlM3levOk8BWJOtinb3mueIBTBdd+YsAlGmI1cx+aZG5lKpMXL4FwCfZhA+fcvu6lRfPg=="
       },
       "Selenium.WebDriver.GeckoDriver": {
         "type": "Direct",
@@ -343,10 +343,11 @@
       },
       "Microsoft.Extensions.Configuration.Binder": {
         "type": "Transitive",
-        "resolved": "9.0.9",
-        "contentHash": "6SIp/6Bngk4jm2W36JekZbiIbFPdE/eMUtrJEqIqHGpd1zar3jvgnwxnpWQfzUiGrkyY8q8s6V82zkkEZozghA==",
+        "resolved": "10.0.1",
+        "contentHash": "Lp4CZIuTVXtlvkAnTq6QvMSW7+H62gX2cU2vdFxHQUxvrWTpi7LwYI3X+YAyIS0r12/p7gaosco7efIxL4yFNw==",
         "dependencies": {
-          "Microsoft.Extensions.Configuration.Abstractions": "9.0.9"
+          "Microsoft.Extensions.Configuration": "10.0.1",
+          "Microsoft.Extensions.Configuration.Abstractions": "10.0.1"
         }
       },
       "Microsoft.Extensions.Configuration.FileExtensions": {
@@ -1182,7 +1183,7 @@
           "Appium.WebDriver": "[8.0.1, )",
           "Microsoft.CSharp": "[4.7.0, )",
           "Microsoft.Extensions.Configuration": "[10.0.1, )",
-          "Microsoft.Extensions.Configuration.Binder": "[9.0.9, )",
+          "Microsoft.Extensions.Configuration.Binder": "[10.0.1, )",
           "Microsoft.Extensions.Configuration.Json": "[10.0.1, )",
           "Microsoft.PowerShell.Commands.Diagnostics": "[7.4.12, )",
           "Microsoft.PowerShell.SDK": "[7.4.12, )",
