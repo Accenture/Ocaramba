@@ -13,9 +13,9 @@
       },
       "Microsoft.AspNetCore.Hosting.Abstractions": {
         "type": "Direct",
-        "requested": "[2.3.0, )",
-        "resolved": "2.3.0",
-        "contentHash": "4ivq53W2k6Nj4eez9wc81ytfGj6HR1NaZJCpOrvghJo9zHuQF57PLhPoQH5ItyCpHXnrN/y7yJDUm+TGYzrx0w==",
+        "requested": "[2.3.9, )",
+        "resolved": "2.3.9",
+        "contentHash": "kNdOUJvxQ8Jy6DcKyVVZZRZ2lheJ+4bIn+MWY9UYBWEow6rsaRRfzZujEhNkynIpl1vxLohoXtkudnO3sDpAIQ==",
         "dependencies": {
           "Microsoft.AspNetCore.Hosting.Server.Abstractions": "2.3.0",
           "Microsoft.AspNetCore.Http.Abstractions": "2.3.0",
@@ -1140,7 +1140,7 @@
       "ocaramba.tests.nunit": {
         "type": "Project",
         "dependencies": {
-          "Microsoft.AspNetCore.Hosting.Abstractions": "[2.3.0, )",
+          "Microsoft.AspNetCore.Hosting.Abstractions": "[2.3.9, )",
           "Microsoft.NET.Test.Sdk": "[18.0.1, )",
           "Microsoft.TestPlatform.TestHost": "[18.0.1, )",
           "NLog": "[6.0.4, )",
