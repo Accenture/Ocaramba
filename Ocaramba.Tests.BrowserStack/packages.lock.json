@@ -92,12 +92,12 @@
       },
       "System.Configuration.ConfigurationManager": {
         "type": "Direct",
-        "requested": "[9.0.9, )",
-        "resolved": "9.0.9",
-        "contentHash": "Q1LknxnRmmsUXt/ElBp739Gexppy0HeDYxvExpJq09jAYhpTHRRRkZIwfNKfM4BGRlFzRDVdnerZawxoE8naMg==",
+        "requested": "[10.0.2, )",
+        "resolved": "10.0.2",
+        "contentHash": "UpBPpVzF+xbB3GsBrraPvlYCwUiOhs+RLxnTMKLqDs2gNNaAtxQRlKjXfMV3zxE+hiQkGId5olZ+9tE6xXHdwQ==",
         "dependencies": {
-          "System.Diagnostics.EventLog": "9.0.9",
-          "System.Security.Cryptography.ProtectedData": "9.0.9"
+          "System.Diagnostics.EventLog": "10.0.2",
+          "System.Security.Cryptography.ProtectedData": "10.0.2"
         }
       },
       "System.Net.Http": {
@@ -1159,8 +1159,8 @@
       },
       "System.Diagnostics.EventLog": {
         "type": "Transitive",
-        "resolved": "9.0.9",
-        "contentHash": "wpsUfnyv8E5K4WQaok6weewvAbQhcLwXFcHBm5U0gdEaBs85N//ssuYvRPFWwz2rO/9/DFP3A1sGMzUFBj8y3w=="
+        "resolved": "10.0.2",
+        "contentHash": "TJPpTLF5MFPobq09c9BQ5X8QuviQfsKvH0Jbm7MkGylGvfIdRqJQLZDPC5sMRFkk9aZhmgir1NJKekip2NxfaA=="
       },
       "System.Diagnostics.PerformanceCounter": {
         "type": "Transitive",
@@ -1821,8 +1821,8 @@
       },
       "System.Security.Cryptography.ProtectedData": {
         "type": "Transitive",
-        "resolved": "9.0.9",
-        "contentHash": "XN37933FTzEkqGJoOTunvnvzAv/4VO/9wQ0QwsGcrR5KyQpYT0z4Ssm+f+fpY9bea6srypFp3JjNPHHC26xzLw=="
+        "resolved": "10.0.2",
+        "contentHash": "me7W69hkjdu5EzHXCQSXv9OS3uAkMXT26oZuWTaabeoO5BPxSVuRVJ2FSfIW8xyGxBb6mKCE6ZKg7TLk3IzJBQ=="
       },
       "System.Security.Cryptography.X509Certificates": {
         "type": "Transitive",
@@ -2093,7 +2093,7 @@
           "Selenium.WebDriver": "[4.39.0, )",
           "Selenium.WebDriver.ChromeDriver": "[143.0.7499.16900, )",
           "Selenium.WebDriver.GeckoDriver": "[0.36.0, )",
-          "System.Configuration.ConfigurationManager": "[9.0.9, )",
+          "System.Configuration.ConfigurationManager": "[10.0.2, )",
           "System.Text.Json": "[10.0.1, )"
         }
       },
@@ -2111,7 +2111,7 @@
           "NLog": "[6.0.4, )",
           "Selenium.Support": "[4.39.0, )",
           "Selenium.WebDriver": "[4.39.0, )",
-          "System.Configuration.ConfigurationManager": "[9.0.9, )",
+          "System.Configuration.ConfigurationManager": "[10.0.2, )",
           "System.Text.Json": "[10.0.1, )"
         }
       }
