@@ -15,7 +15,7 @@
     <PackageReference Include="System.Text.Json" Version="10.0.1" />
 
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="9.0.9" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="10.0.2" />
   </ItemGroup>
 
   <ItemGroup>

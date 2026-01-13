@@ -7,7 +7,7 @@
   <ItemGroup>
     
     <PackageReference Include="NLog" Version="6.0.4" />
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="9.0.9" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="10.0.2" />
     <PackageReference Include="System.Text.Json" Version="10.0.1" />
     <PackageReference Include="NUnit" Version="4.4.0" />
     <PackageReference Include="NUnit.Runners" Version="3.12.0" />
