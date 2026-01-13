@@ -140,9 +140,9 @@
       },
       "System.Text.Encodings.Web": {
         "type": "Direct",
-        "requested": "[10.0.1, )",
-        "resolved": "10.0.1",
-        "contentHash": "cVAka0o1rJJ5/De0pjNs7jcaZk5hUGf1HGzUyVmE2MEB1Vf0h/8qsWxImk1zjitCbeD2Avaq2P2+usdvqgbeVQ=="
+        "requested": "[10.0.2, )",
+        "resolved": "10.0.2",
+        "contentHash": "Ro4cLT4qpRy64crfLAy3ekihtXckeXrD5eI6qb6NDSEVyHcHsmH7KgN4dbnIuiBmXIoaCslx4SynLYxag1SLSQ=="
       },
       "System.Text.Json": {
         "type": "Direct",
@@ -1157,6 +1157,7 @@
           "Selenium.Support": "[4.39.0, )",
           "Selenium.WebDriver": "[4.39.0, )",
           "System.Configuration.ConfigurationManager": "[9.0.9, )",
+          "System.Text.Encodings.Web": "[10.0.2, )",
           "System.Text.Json": "[10.0.1, )"
         }
       }
