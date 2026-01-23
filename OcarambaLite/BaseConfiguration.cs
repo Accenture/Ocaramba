@@ -33,7 +33,7 @@ namespace Ocaramba
     using Ocaramba;
 
     /// <summary>
-    /// SeleniumConfiguration that consume settings file <see href="https://github.com/ObjectivityLtd/Ocaramba/wiki/Description%20of%20settings file%20file">More details on wiki</see>.
+    /// SeleniumConfiguration that consume settings file <see href="https://github.com/ObjectivityLtd/Ocaramba/wiki/Description%20of%20settings%20file">More details on wiki</see>.
     /// </summary>
     public static class BaseConfiguration
     {
