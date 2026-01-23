@@ -1,4 +1,4 @@
-﻿// <copyright file="IFramePage.cs" company="Accenture">
+// <copyright file="IFramePage.cs" company="Accenture">
 // Copyright (c) Objectivity Bespoke Software Specialists. All rights reserved.
 // </copyright>
 // <license>
@@ -38,7 +38,7 @@ namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
         private readonly ElementLocator
             menu = new ElementLocator(Locator.CssSelector, "div[role=menubar]"),
             iframe = new ElementLocator(Locator.Id, "mce_0_ifr"),
-            elelemtInIFrame = new ElementLocator(Locator.Id, "tinymce"),
+            elementInIFrame = new ElementLocator(Locator.Id, "tinymce"),
             toClose = new ElementLocator(Locator.CssSelector, "button div[aria-label]");
 
         public IFramePage(DriverContext driverContext)
@@ -59,7 +59,7 @@ namespace Ocaramba.Tests.PageObjects.PageObjects.TheInternet
             var iFrame = this.Driver.GetElement(this.iframe);
             this.Driver.SwitchTo().Frame(0);
 
-            var el = this.Driver.GetElement(this.elelemtInIFrame);
+            var el = this.Driver.GetElement(this.elementInIFrame);
             return TakeScreenShot.TakeScreenShotOfElement(el, folder, name);
         }
 

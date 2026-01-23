@@ -1,4 +1,4 @@
-﻿// <copyright file="TestLogger.cs" company="Accenture">
+// <copyright file="TestLogger.cs" company="Accenture">
 // Copyright (c) Objectivity Bespoke Software Specialists. All rights reserved.
 // </copyright>
 // <license>
@@ -66,7 +66,7 @@ namespace OcarambaLite.Logger
         }
 
         /// <summary>
-        /// Information Info the specified message.
+        /// Logs the specified message at Info level.
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="args">The arguments.</param>
@@ -76,7 +76,7 @@ namespace OcarambaLite.Logger
         }
 
         /// <summary>
-        /// Information Debug the specified message.
+        /// Logs the specified message at Debug level.
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="args">The arguments.</param>
@@ -86,7 +86,7 @@ namespace OcarambaLite.Logger
         }
 
         /// <summary>
-        /// Information Trace the specified message.
+        /// Logs the specified message at Trace level.
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="args">The arguments.</param>

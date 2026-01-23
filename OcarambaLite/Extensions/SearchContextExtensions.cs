@@ -1,4 +1,4 @@
-﻿// <copyright file="SearchContextExtensions.cs" company="Accenture">
+// <copyright file="SearchContextExtensions.cs" company="Accenture">
 // Copyright (c) Objectivity Bespoke Software Specialists. All rights reserved.
 // </copyright>
 // <license>
@@ -195,8 +195,8 @@ namespace Ocaramba.Extensions
         public static T GetElement<T>(this ISearchContext searchContext, ElementLocator locator, [Optional] string customMessage)
             where T : class, IWebElement
         {
-            IWebElement webElemement = searchContext.GetElement(locator, customMessage);
-            return webElemement.As<T>();
+            IWebElement webElement = searchContext.GetElement(locator, customMessage);
+            return webElement.As<T>();
         }
 
         /// <summary>
@@ -216,8 +216,8 @@ namespace Ocaramba.Extensions
         public static T GetElement<T>(this ISearchContext searchContext, ElementLocator locator, double timeout)
             where T : class, IWebElement
         {
-            IWebElement webElemement = searchContext.GetElement(locator, timeout);
-            return webElemement.As<T>();
+            IWebElement webElement = searchContext.GetElement(locator, timeout);
+            return webElement.As<T>();
         }
 
         /// <summary>
@@ -238,8 +238,8 @@ namespace Ocaramba.Extensions
         public static T GetElement<T>(this ISearchContext searchContext, ElementLocator locator, Func<IWebElement, bool> condition, [Optional] string customMessage)
             where T : class, IWebElement
         {
-            IWebElement webElemement = searchContext.GetElement(locator, condition, customMessage);
-            return webElemement.As<T>();
+            IWebElement webElement = searchContext.GetElement(locator, condition, customMessage);
+            return webElement.As<T>();
         }
 
         /// <summary>
@@ -261,8 +261,8 @@ namespace Ocaramba.Extensions
         public static T GetElement<T>(this ISearchContext searchContext, ElementLocator locator, double timeout, Func<IWebElement, bool> condition, [Optional] string customMessage)
             where T : class, IWebElement
         {
-            IWebElement webElemement = searchContext.GetElement(locator, timeout, condition, customMessage);
-            return webElemement.As<T>();
+            IWebElement webElement = searchContext.GetElement(locator, timeout, condition, customMessage);
+            return webElement.As<T>();
         }
 
         /// <summary>

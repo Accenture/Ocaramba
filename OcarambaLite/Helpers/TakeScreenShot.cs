@@ -1,4 +1,4 @@
-﻿// <copyright file="TakeScreenShot.cs" company="Accenture">
+// <copyright file="TakeScreenShot.cs" company="Accenture">
 // Copyright (c) Objectivity Bespoke Software Specialists. All rights reserved.
 // </copyright>
 // <license>
@@ -44,12 +44,12 @@ namespace Ocaramba.Helpers
         /// <example>How to use it: <code>
         /// var iFrame = this.Driver.GetElement(this.iframe);
         /// this.Driver.SwitchTo().Frame(0);
-        /// var el = this.Driver.GetElement(this.elelemtInIFrame);
+        /// var el = this.Driver.GetElement(this.elementInIFrame);
         /// var fullPath = TakeScreenShot.TakeScreenShotOfElement(el, Directory.GetCurrentDirectory() + BaseConfiguration.ScreenShotFolder, "MenuOutSideTheIFrame");
         /// </code></example>
         public static string TakeScreenShotOfElement(IWebElement element, string folder, string screenshotName)
         {
-            Logger.Debug("Taking screenhot of element");
+            Logger.Debug("Taking screenshot of element");
 
             var screenshot = ((ITakesScreenshot)element).GetScreenshot();
             var filePath = Path.Combine(folder, screenshotName);

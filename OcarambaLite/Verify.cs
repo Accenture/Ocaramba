@@ -1,4 +1,4 @@
-﻿// <copyright file="Verify.cs" company="Accenture">
+// <copyright file="Verify.cs" company="Accenture">
 // Copyright (c) Objectivity Bespoke Software Specialists. All rights reserved.
 // </copyright>
 // <license>
@@ -37,7 +37,7 @@ namespace Ocaramba
         private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
-        /// Verify group of assets.
+        /// Verify group of asserts.
         /// </summary>
         /// <param name="driverContext">Container for driver.</param>
         /// <param name="myAsserts">Group asserts.</param>
@@ -53,7 +53,7 @@ namespace Ocaramba
         }
 
         /// <summary>
-        /// Verify group of assets.
+        /// Verify group of asserts.
         /// </summary>
         /// <param name="driverContext">Container for driver.</param>
         /// <param name="enableScreenShot">Enable screenshot.</param>
