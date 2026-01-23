@@ -532,7 +532,7 @@ namespace Ocaramba
                     // loop through all of them
                     for (var i = 0; i < edgeChromiumArguments.Count; i++)
                     {
-                        Logger.Trace(CultureInfo.CurrentCulture, "Setting Chrome Arguments {0}", edgeChromiumArguments.GetKey(i));
+                        Logger.Trace(CultureInfo.CurrentCulture, "Setting Edge Chromium Arguments {0}", edgeChromiumArguments.GetKey(i));
                         options.AddArgument(edgeChromiumArguments.GetKey(i));
                     }
                 }

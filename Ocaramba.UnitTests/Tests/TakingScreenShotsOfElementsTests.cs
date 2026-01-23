@@ -1,4 +1,4 @@
-﻿// <copyright file="JavaScriptAlertsTestsNUnit.cs" company="Accenture">
+// <copyright file="JavaScriptAlertsTestsNUnit.cs" company="Accenture">
 // Copyright (c) Objectivity Bespoke Software Specialists. All rights reserved.
 // </copyright>
 // <license>
@@ -30,13 +30,13 @@ namespace Ocaramba.UnitTests.Tests
 {
     [TestFixture]
     [Parallelizable(ParallelScope.Fixtures)]
-    [Category("TakingScreehShots")] 
-    public class TakingScreehShotsOfElementsTests : ProjectTestBase
+[Category("TakingScreenShots")] 
+    public class TakingScreenShotsOfElementsTests : ProjectTestBase
     {
         string folder = TestContext.CurrentContext.TestDirectory;
 
         [Test]
-        public void TakingScreehShotsOfElementInIFrameTest()
+        public void TakingScreenShotsOfElementInIFrameTest()
         {
             var internetPage = new InternetPage(this.DriverContext).OpenHomePage();
             internetPage.GoToIFramePage();

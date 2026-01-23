@@ -1,4 +1,4 @@
-﻿// <copyright file="WebDriverExtensions.cs" company="Accenture">
+// <copyright file="WebDriverExtensions.cs" company="Accenture">
 // Copyright (c) Objectivity Bespoke Software Specialists. All rights reserved.
 // </copyright>
 // <license>
@@ -158,7 +158,7 @@ namespace Ocaramba.Extensions
         /// Waits the until element is no longer found.
         /// </summary>
         /// <example>Sample code to check page title: <code>
-        /// this.Driver.WaitUntilElementIsNoLongerFound(dissapearingInfo, BaseConfiguration.ShortTimeout);
+        /// this.Driver.WaitUntilElementIsNoLongerFound(disappearingInfo, BaseConfiguration.ShortTimeout);
         /// </code></example>
         /// <param name="webDriver">The web driver.</param>
         /// <param name="locator">The locator.</param>
@@ -192,7 +192,7 @@ namespace Ocaramba.Extensions
                         }
                     }
 
-                    Logger.Debug($"Not swiched to url {driver.Url}");
+                    Logger.Debug($"Not switched to url {driver.Url}");
                     return false;
                 });
         }
