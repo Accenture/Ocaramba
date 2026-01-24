@@ -101,7 +101,6 @@ namespace Ocaramba
                 var pageSource = this.driver.PageSource;
 
                 pageSource = pageSource.Replace("<head>", string.Format(CultureInfo.CurrentCulture, "<head><base href=\"http://{0}\" target=\"_blank\">", BaseConfiguration.Host), StringComparison.InvariantCultureIgnoreCase);
-                pageSource = pageSource.Replace("<head>", string.Format(CultureInfo.CurrentCulture, "<head><base href=\"http://{0}\" target=\"_blank\">", BaseConfiguration.Host), StringComparison.InvariantCultureIgnoreCase);
 
                 File.WriteAllText(path, pageSource);
                 FilesHelper.WaitForFileOfGivenName(BaseConfiguration.LongTimeout, fileNameWithExtension, this.PageSourceFolder);
@@ -144,11 +143,6 @@ namespace Ocaramba
                 Logger.Debug(CultureInfo.CurrentCulture, "Checking JavaScript error(s) in browser");
                 try
                 {
-                    jsErrors =
-                        this.driver.Manage()
-                            .Logs.GetLog(LogType.Browser)
-                            .Where(x => BaseConfiguration.JavaScriptErrorTypes.Any(predicate: e => x.Message.Contains(e, StringComparison.InvariantCultureIgnoreCase)));
-
                     jsErrors =
                         this.driver.Manage()
                             .Logs.GetLog(LogType.Browser)
@@ -295,15 +289,6 @@ namespace Ocaramba
             if (!setName && !string.IsNullOrEmpty(this.TestTitle))
             {
                 capabilities.Add("sessionName", this.TestTitle);
-            }
-
-            if (BaseConfiguration.RemoteWebDriverHub.ToString().ToLower(CultureInfo.CurrentCulture).Contains("saucelabs", StringComparison.InvariantCultureIgnoreCase))
-            {
-                browserOptions.AddAdditionalOption("sauce:options", capabilities);
-            }
-            else if (BaseConfiguration.RemoteWebDriverHub.ToString().ToLower(CultureInfo.CurrentCulture).Contains("testingbot", StringComparison.InvariantCultureIgnoreCase))
-            {
-                browserOptions.AddAdditionalOption("tb:options", capabilities);
             }
 
             if (BaseConfiguration.RemoteWebDriverHub.ToString().ToLower(CultureInfo.CurrentCulture).Contains("saucelabs", StringComparison.InvariantCultureIgnoreCase))

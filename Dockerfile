@@ -75,8 +75,14 @@ RUN BASE_URL=https://github.com/mozilla/geckodriver/releases/download \
   && VERSION=$(curl -sL \
     https://api.github.com/repos/mozilla/geckodriver/releases/latest | \
      jq -r '.tag_name') \
-  && curl -sL "$BASE_URL/$VERSION/geckodriver-$VERSION-linux64.tar.gz" | \
-    tar -xz -C /usr/local/bin
+  && if [ -z "$VERSION" ] || [ "$VERSION" = "null" ]; then \
+       echo "Failed to fetch geckodriver version from GitHub API (rate limit?), using fallback"; \
+       VERSION="v0.36.0"; \
+     fi \
+  && echo "Downloading geckodriver version: $VERSION" \
+  && curl -sL -o /tmp/geckodriver.tar.gz "$BASE_URL/$VERSION/geckodriver-$VERSION-linux64.tar.gz" \
+  && tar -xzf /tmp/geckodriver.tar.gz -C /usr/local/bin \
+  && rm /tmp/geckodriver.tar.gz
 
 ENV ASPNETCORE_ENVIRONMENT=Linux
 #=========
