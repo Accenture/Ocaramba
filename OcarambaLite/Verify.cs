@@ -71,17 +71,7 @@ namespace Ocaramba
         {
             foreach (var myAssert in myAsserts)
             {
-                That(driverContext, myAssert, false, false);
-            }
-
-            if (!driverContext.VerifyMessages.Count.Equals(0) && enableScreenShot)
-            {
-                driverContext.TakeAndSaveScreenshot();
-            }
-
-            if (!driverContext.VerifyMessages.Count.Equals(0) && enableSavePageSource)
-            {
-                driverContext.SavePageSource(driverContext.TestTitle);
+                That(driverContext, myAssert, enableScreenShot, enableSavePageSource);
             }
         }
 
