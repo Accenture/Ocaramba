@@ -1,4 +1,4 @@
-﻿// <copyright file="MyEventFiringWebDriver.cs" company="Accenture">
+// <copyright file="MyEventFiringWebDriver.cs" company="Accenture">
 // Copyright (c) Objectivity Bespoke Software Specialists. All rights reserved.
 // </copyright>
 // <license>
@@ -80,7 +80,7 @@ namespace Ocaramba.Logger
         protected override void OnElementValueChanged(WebElementValueEventArgs e)
         {
             Logger.Trace(CultureInfo.CurrentCulture, "On Element Value Changed: {0}", ToStringElement(e));
-            base.OnElementValueChanging(e);
+            base.OnElementValueChanged(e);
         }
 
         /// <summary>
