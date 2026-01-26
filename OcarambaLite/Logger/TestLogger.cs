@@ -24,6 +24,7 @@ namespace OcarambaLite.Logger
 {
     using System;
     using System.Globalization;
+    using System.Runtime.ExceptionServices;
     using NLog;
     using Ocaramba;
 
@@ -122,7 +123,7 @@ namespace OcarambaLite.Logger
         public void LogError(Exception e)
         {
             this.Error($"Error occurred: {e}");
-            throw e;
+            ExceptionDispatchInfo.Capture(e).Throw();
         }
     }
 }
