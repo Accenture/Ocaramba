@@ -1,4 +1,4 @@
-﻿// <copyright file="WaitHelper.cs" company="Accenture">
+// <copyright file="WaitHelper.cs" company="Accenture">
 // Copyright (c) Objectivity Bespoke Software Specialists. All rights reserved.
 // </copyright>
 // <license>
@@ -101,6 +101,12 @@ namespace Ocaramba.Helpers
             {
                 if (taskConditionCheck.IsCompleted)
                 {
+                    if (taskConditionCheck.IsFaulted)
+                    {
+                        // Re-throw the exception from the condition check task
+                        throw taskConditionCheck.Exception!.InnerException ?? taskConditionCheck.Exception;
+                    }
+
                     return true;
                 }
 
