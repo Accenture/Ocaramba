@@ -18,7 +18,7 @@
     </PackageReference>
 	<PackageReference Include="Selenium.Support" Version="4.40.0" />
     <PackageReference Include="Selenium.WebDriver" Version="4.40.0" />
-    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="144.0.7559.9600" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="144.0.7559.10900" />
     <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.36.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
   </ItemGroup>
