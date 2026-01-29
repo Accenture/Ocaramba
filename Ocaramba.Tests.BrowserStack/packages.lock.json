@@ -4,14 +4,14 @@
     "net8.0": {
       "BrowserStack.TestAdapter": {
         "type": "Direct",
-        "requested": "[0.21.11, )",
-        "resolved": "0.21.11",
-        "contentHash": "PuGhdEEM5YgZGL+Cv5C84neU32gHXrdyioxKJr2OeYw6d+KEjrpPy5i565KzjIFjcvOrpCLzVBZA8ki2W+kfTQ==",
+        "requested": "[0.22.0, )",
+        "resolved": "0.22.0",
+        "contentHash": "mFCmlbSlj1i2WhODSmqPU9iotqlk23TU4qbVFPquW8XKmEpOmIOk1A7h09T9xajxg0EBuwSCROWuv34xjqQ7Xg==",
         "dependencies": {
           "Google.Protobuf": "3.30.2",
           "Grpc.Net.Client": "2.71.0",
           "Grpc.Tools": "2.71.0",
-          "Lib.Harmony": "2.3.6",
+          "Lib.Harmony": "2.4.2",
           "Microsoft.CodeAnalysis.CSharp": "4.7.0",
           "Microsoft.TestPlatform.ObjectModel": "16.11.0",
           "NLog": "5.0.4",
@@ -240,11 +240,8 @@
       },
       "Lib.Harmony": {
         "type": "Transitive",
-        "resolved": "2.3.6",
-        "contentHash": "HqXPz33Z+R8ZDCLS5pJZthg33AMdF1bQXUbz2V7Neb9E+sMQOf4S1wquhM4pLIZFX7BZcOQubclbVreiM1+qmw==",
-        "dependencies": {
-          "System.Text.Json": "8.0.5"
-        }
+        "resolved": "2.4.2",
+        "contentHash": "D2X9ojVjqbqdqWVK3VQETrEb56yVoXxtEp6tP5UvW0PP+bA4uJiswqOxF8GhH02ECwyevUa9vwhwdLzyXfksbw=="
       },
       "Markdig.Signed": {
         "type": "Transitive",
