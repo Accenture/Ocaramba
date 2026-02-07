@@ -112,9 +112,9 @@
       },
       "Selenium.WebDriver.MSEdgeDriver": {
         "type": "Direct",
-        "requested": "[144.0.3719.82, )",
-        "resolved": "144.0.3719.82",
-        "contentHash": "adedsDdIIYJd1s4v3bK/VLdmeX9wTxACcaiwzZp8oebWJ4B8YYptD01+glxHA8rq/5fxPXedFpa/fmFZG614Xw=="
+        "requested": "[144.0.3719.104, )",
+        "resolved": "144.0.3719.104",
+        "contentHash": "l/S0os9EywQMbGWjCosuqLT81QPc/qu3UqbAPdKm/hBwOS9EyBy9/HMNfwNpC6zDXkJvnItBDrt3Kdb3jJFAfA=="
       },
       "SixLabors.ImageSharp": {
         "type": "Direct",
