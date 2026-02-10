@@ -21,7 +21,7 @@
     <PackageReference Include="Selenium.WebDriver" Version="4.40.0" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="10.0.2" />
     <PackageReference Include="System.Text.Json" Version="10.0.1" />
-    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="144.0.7559.10900" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="144.0.7559.13300" />
     <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.36.0" />
     <PackageReference Include="SpecFlow" Version="3.9.74" />
     <PackageReference Include="SpecFlow.NUnit" Version="3.9.74" />
