@@ -1961,7 +1961,7 @@
           "OcarambaLite": "[1.0.0, )",
           "Selenium.Support": "[4.40.0, )",
           "Selenium.WebDriver": "[4.40.0, )",
-          "Selenium.WebDriver.ChromeDriver": "[144.0.7559.10900, )",
+          "Selenium.WebDriver.ChromeDriver": "[145.0.7632.6700, )",
           "Selenium.WebDriver.GeckoDriver": "[0.36.0, )",
           "System.Configuration.ConfigurationManager": "[10.0.2, )",
           "System.Data.Common": "[4.3.0, )",
