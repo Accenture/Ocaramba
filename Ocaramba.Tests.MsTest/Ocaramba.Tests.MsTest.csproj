@@ -13,7 +13,7 @@
     <PackageReference Include="Selenium.WebDriver" Version="4.40.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="4.1.0" />
     <PackageReference Include="MSTest.TestFramework" Version="4.1.0" />
-    <PackageReference Include="NLog" Version="6.0.4" />
+    <PackageReference Include="NLog" Version="6.1.0" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="144.0.7559.10900" />
     <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.36.0" />
 		<PackageReference Include="Selenium.WebDriver.MSEdgeDriver" Version="144.0.3719.104" />
