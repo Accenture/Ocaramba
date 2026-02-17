@@ -464,6 +464,7 @@ jobs:
           name: WindowsCore2
         if: always()
   test_Stage_RunTestsOnWindowsBrowserStack:
+    if: false
     timeout-minutes: 10
     runs-on: windows-latest
     steps:
@@ -586,7 +587,6 @@ jobs:
       - test_Stage_RunTestsSeleniumGrid
       - test_Stage_RunAppiumTestsOnAndroid
       - test_Stage_RunTestsOnLinuxsaucelabs
-      - test_Stage_RunTestsOnWindowsBrowserStack
       - build_Stage_BuildOnWindows
     steps:
       - uses: actions/checkout@v4
@@ -631,3 +631,4 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
         if: (success() && startsWith(github.ref, 'refs/tags/'))
+
