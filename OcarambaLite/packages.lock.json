@@ -153,6 +153,12 @@
           "System.Security.Cryptography.ProtectedData": "10.0.2"
         }
       },
+      "System.Text.Encodings.Web": {
+        "type": "Direct",
+        "requested": "[10.0.3, )",
+        "resolved": "10.0.3",
+        "contentHash": "l8QNBPp92bVzl9Kw8nNtm1uYRNNhUrdulZjM4a8YK/QGNa8z9utKsC0bDoPB+Vq8LOlbD3fIyGlabtz80jT7cw=="
+      },
       "System.Text.Json": {
         "type": "Direct",
         "requested": "[10.0.1, )",
@@ -817,11 +823,6 @@
         "type": "Transitive",
         "resolved": "8.0.0",
         "contentHash": "OZIsVplFGaVY90G2SbpgU7EnCoOO5pw1t4ic21dBF3/1omrJFpAGoNAVpPyMVOC90/hvgkGG3VFqR13YgZMQfg=="
-      },
-      "System.Text.Encodings.Web": {
-        "type": "Transitive",
-        "resolved": "10.0.1",
-        "contentHash": "cVAka0o1rJJ5/De0pjNs7jcaZk5hUGf1HGzUyVmE2MEB1Vf0h/8qsWxImk1zjitCbeD2Avaq2P2+usdvqgbeVQ=="
       },
       "System.Threading.AccessControl": {
         "type": "Transitive",

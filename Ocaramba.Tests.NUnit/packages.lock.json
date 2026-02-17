@@ -140,9 +140,9 @@
       },
       "System.Text.Encodings.Web": {
         "type": "Direct",
-        "requested": "[10.0.1, )",
-        "resolved": "10.0.1",
-        "contentHash": "cVAka0o1rJJ5/De0pjNs7jcaZk5hUGf1HGzUyVmE2MEB1Vf0h/8qsWxImk1zjitCbeD2Avaq2P2+usdvqgbeVQ=="
+        "requested": "[10.0.3, )",
+        "resolved": "10.0.3",
+        "contentHash": "l8QNBPp92bVzl9Kw8nNtm1uYRNNhUrdulZjM4a8YK/QGNa8z9utKsC0bDoPB+Vq8LOlbD3fIyGlabtz80jT7cw=="
       },
       "System.Text.Json": {
         "type": "Direct",
@@ -156,10 +156,10 @@
       },
       "Appium.WebDriver": {
         "type": "Transitive",
-        "resolved": "8.0.1",
-        "contentHash": "vFEZA0Gfe2lPvIXZ9Ar1GfND8nPnwaxA5RreopO5ebklZ4OOPQXQy9L8i9VyNvntwM0R2BP0FypOlPwcvlHXIA==",
+        "resolved": "8.1.0",
+        "contentHash": "JlwERed3yo04O21bxGGORoW3qKfVlaH+h7d0lTNTGvZWRM2+IdLHQiWhNGHdPa9dv9pYkC8vfXgWOTigN60hnA==",
         "dependencies": {
-          "Selenium.WebDriver": "4.35.0",
+          "Selenium.WebDriver": "4.36.0",
           "System.Drawing.Common": "8.0.10"
         }
       },
@@ -1145,7 +1145,7 @@
       "ocarambalite": {
         "type": "Project",
         "dependencies": {
-          "Appium.WebDriver": "[8.0.1, )",
+          "Appium.WebDriver": "[8.1.0, )",
           "Microsoft.CSharp": "[4.7.0, )",
           "Microsoft.Extensions.Configuration": "[10.0.1, )",
           "Microsoft.Extensions.Configuration.Binder": "[10.0.1, )",
@@ -1157,6 +1157,7 @@
           "Selenium.Support": "[4.40.0, )",
           "Selenium.WebDriver": "[4.40.0, )",
           "System.Configuration.ConfigurationManager": "[10.0.2, )",
+          "System.Text.Encodings.Web": "[10.0.3, )",
           "System.Text.Json": "[10.0.1, )"
         }
       }
