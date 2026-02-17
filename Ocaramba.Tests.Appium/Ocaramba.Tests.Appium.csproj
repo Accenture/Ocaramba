@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Appium.WebDriver" Version="8.0.1" />
+    <PackageReference Include="Appium.WebDriver" Version="8.1.0" />
     <PackageReference Include="DotNetSeleniumExtras.WaitHelpers" Version="3.11.0" />
     <PackageReference Include="Selenium.Support" Version="4.40.0" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="145.0.7632.6700" />

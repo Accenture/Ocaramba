@@ -26,7 +26,7 @@
   <ItemGroup>
     <None Include="..\icon.png" Pack="true" PackagePath="\" />
 	 <None Include="..\README.md" Pack="true" PackagePath="\" />
-	 <PackageReference Include="Appium.WebDriver" Version="8.0.1" />
+	 <PackageReference Include="Appium.WebDriver" Version="8.1.0" />
 	<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
 	<PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="10.0.1" />
     <PackageReference Include="Selenium.WebDriver" Version="4.40.0" />
