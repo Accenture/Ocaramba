@@ -14,9 +14,9 @@
     <PackageReference Include="NUnit.Runners" Version="3.12.0" />
     <PackageReference Include="Selenium.WebDriver.MSEdgeDriver" Version="144.0.3719.104" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="10.0.2" />
-    <PackageReference Include="System.Text.Json" Version="10.0.1" />
+    <PackageReference Include="System.Text.Json" Version="10.0.3" />
     <PackageReference Include="System.Memory" Version="4.6.3" />
-    <PackageReference Include="System.Text.Encodings.Web" Version="10.0.1" />
+    <PackageReference Include="System.Text.Encodings.Web" Version="10.0.3" />
     <PackageReference Include="NUnit3TestAdapter" Version="6.1.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
