@@ -25,6 +25,16 @@
           "Microsoft.TestPlatform.TestHost": "18.0.1"
         }
       },
+      "Microsoft.TestPlatform.TestHost": {
+        "type": "Direct",
+        "requested": "[18.3.0, )",
+        "resolved": "18.3.0",
+        "contentHash": "twmsoelXnp1uWMU3VGip9f0Jr1mZ0PZqgJdF35CIrdYgYrkHIJMV1m8uKyhcdjLdsQDESHAgkR7KhS9i1qpJag==",
+        "dependencies": {
+          "Microsoft.TestPlatform.ObjectModel": "18.3.0",
+          "Newtonsoft.Json": "13.0.3"
+        }
+      },
       "NLog": {
         "type": "Direct",
         "requested": "[6.1.0, )",
@@ -375,19 +385,10 @@
       },
       "Microsoft.TestPlatform.ObjectModel": {
         "type": "Transitive",
-        "resolved": "18.0.1",
-        "contentHash": "qT/mwMcLF9BieRkzOBPL2qCopl8hQu6A1P7JWAoj/FMu5i9vds/7cjbJ/LLtaiwWevWLAeD5v5wjQJ/l6jvhWQ==",
+        "resolved": "18.3.0",
+        "contentHash": "AEIEX2aWdPO9XbtR96eBaJxmXRD9vaI9uQ1T/JbPEKlTAZwYx0ZrMzKyULMdh/HH9Sg03kXCoN7LszQ90o6nPQ==",
         "dependencies": {
           "System.Reflection.Metadata": "8.0.0"
-        }
-      },
-      "Microsoft.TestPlatform.TestHost": {
-        "type": "Transitive",
-        "resolved": "18.0.1",
-        "contentHash": "uDJKAEjFTaa2wHdWlfo6ektyoh+WD4/Eesrwb4FpBFKsLGehhACVnwwTI4qD3FrIlIEPlxdXg3SyrYRIcO+RRQ==",
-        "dependencies": {
-          "Microsoft.TestPlatform.ObjectModel": "18.0.1",
-          "Newtonsoft.Json": "13.0.3"
         }
       },
       "Microsoft.Win32.Registry.AccessControl": {
