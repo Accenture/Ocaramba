@@ -133,9 +133,9 @@
       },
       "Selenium.WebDriver": {
         "type": "Direct",
-        "requested": "[4.40.0, )",
-        "resolved": "4.40.0",
-        "contentHash": "y7ESRFracAgUjQEieM42gPdkUEPvffrwmu5XZ4scGCjZ20nJKaJ+qcULegO01g4Chl5+IpVe61mdzXwPM91ddg=="
+        "requested": "[4.41.0, )",
+        "resolved": "4.41.0",
+        "contentHash": "oQPPzUGYy7M5+m3cMlGUKiswVLX/TbGySKH0jHsT0B9ZNfPZO6b0aqKNopR0FmDbSgjUsHoA9Vdur81/WW4DGg=="
       },
       "StyleCop.Analyzers": {
         "type": "Direct",

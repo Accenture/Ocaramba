@@ -8,7 +8,7 @@
   <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.1" />
   
   <PackageReference Include="Selenium.Support" Version="4.40.0" />
-    <PackageReference Include="Selenium.WebDriver" Version="4.40.0" />
+    <PackageReference Include="Selenium.WebDriver" Version="4.41.0" />
     <PackageReference Include="NLog" Version="6.1.0" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="145.0.7632.6700" />
     <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.36.0" />
