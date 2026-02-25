@@ -60,9 +60,9 @@
       },
       "Selenium.WebDriver.ChromeDriver": {
         "type": "Direct",
-        "requested": "[145.0.7632.6700, )",
-        "resolved": "145.0.7632.6700",
-        "contentHash": "TjwIYmbPVmHSa4P6i1pELEq0n8o8cbjcM8rjJR/W+zghy5k+8r9WqKTGXqTYQgyAc9eCgp3vLn58vejbD8Hxxw=="
+        "requested": "[145.0.7632.11700, )",
+        "resolved": "145.0.7632.11700",
+        "contentHash": "UfgVB5oGDbiUTwBp1Sk66pg8EA40rHwl0ZTwSidOp1W1Ga0mw7wJRKqUT+j+G9/mX9et2Z5A+OyKxw/GCz+hBw=="
       },
       "Selenium.WebDriver.GeckoDriver": {
         "type": "Direct",
@@ -685,18 +685,18 @@
       },
       "Microsoft.TestPlatform.ObjectModel": {
         "type": "Transitive",
-        "resolved": "18.0.1",
-        "contentHash": "qT/mwMcLF9BieRkzOBPL2qCopl8hQu6A1P7JWAoj/FMu5i9vds/7cjbJ/LLtaiwWevWLAeD5v5wjQJ/l6jvhWQ==",
+        "resolved": "18.3.0",
+        "contentHash": "AEIEX2aWdPO9XbtR96eBaJxmXRD9vaI9uQ1T/JbPEKlTAZwYx0ZrMzKyULMdh/HH9Sg03kXCoN7LszQ90o6nPQ==",
         "dependencies": {
           "System.Reflection.Metadata": "8.0.0"
         }
       },
       "Microsoft.TestPlatform.TestHost": {
         "type": "Transitive",
-        "resolved": "18.0.1",
-        "contentHash": "uDJKAEjFTaa2wHdWlfo6ektyoh+WD4/Eesrwb4FpBFKsLGehhACVnwwTI4qD3FrIlIEPlxdXg3SyrYRIcO+RRQ==",
+        "resolved": "18.3.0",
+        "contentHash": "twmsoelXnp1uWMU3VGip9f0Jr1mZ0PZqgJdF35CIrdYgYrkHIJMV1m8uKyhcdjLdsQDESHAgkR7KhS9i1qpJag==",
         "dependencies": {
-          "Microsoft.TestPlatform.ObjectModel": "18.0.1",
+          "Microsoft.TestPlatform.ObjectModel": "18.3.0",
           "Newtonsoft.Json": "13.0.3"
         }
       },
@@ -1961,7 +1961,7 @@
           "OcarambaLite": "[1.0.0, )",
           "Selenium.Support": "[4.40.0, )",
           "Selenium.WebDriver": "[4.40.0, )",
-          "Selenium.WebDriver.ChromeDriver": "[145.0.7632.6700, )",
+          "Selenium.WebDriver.ChromeDriver": "[145.0.7632.11700, )",
           "Selenium.WebDriver.GeckoDriver": "[0.36.0, )",
           "System.Configuration.ConfigurationManager": "[10.0.2, )",
           "System.Data.Common": "[4.3.0, )",
@@ -1974,11 +1974,12 @@
         "dependencies": {
           "Microsoft.Extensions.Configuration.Json": "[10.0.1, )",
           "Microsoft.NET.Test.Sdk": "[18.0.1, )",
+          "Microsoft.TestPlatform.TestHost": "[18.3.0, )",
           "NLog": "[6.1.0, )",
           "OcarambaLite": "[1.0.0, )",
           "Selenium.Support": "[4.40.0, )",
           "Selenium.WebDriver": "[4.40.0, )",
-          "Selenium.WebDriver.ChromeDriver": "[145.0.7632.6700, )",
+          "Selenium.WebDriver.ChromeDriver": "[145.0.7632.11700, )",
           "Selenium.WebDriver.GeckoDriver": "[0.36.0, )",
           "System.Configuration.ConfigurationManager": "[10.0.2, )",
           "System.Text.Json": "[10.0.3, )"
