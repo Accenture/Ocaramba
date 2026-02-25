@@ -36,11 +36,11 @@
       },
       "Microsoft.TestPlatform.TestHost": {
         "type": "Direct",
-        "requested": "[18.0.1, )",
-        "resolved": "18.0.1",
-        "contentHash": "uDJKAEjFTaa2wHdWlfo6ektyoh+WD4/Eesrwb4FpBFKsLGehhACVnwwTI4qD3FrIlIEPlxdXg3SyrYRIcO+RRQ==",
+        "requested": "[18.3.0, )",
+        "resolved": "18.3.0",
+        "contentHash": "twmsoelXnp1uWMU3VGip9f0Jr1mZ0PZqgJdF35CIrdYgYrkHIJMV1m8uKyhcdjLdsQDESHAgkR7KhS9i1qpJag==",
         "dependencies": {
-          "Microsoft.TestPlatform.ObjectModel": "18.0.1",
+          "Microsoft.TestPlatform.ObjectModel": "18.3.0",
           "Newtonsoft.Json": "13.0.3"
         }
       },
@@ -139,10 +139,10 @@
       },
       "Appium.WebDriver": {
         "type": "Transitive",
-        "resolved": "8.0.1",
-        "contentHash": "vFEZA0Gfe2lPvIXZ9Ar1GfND8nPnwaxA5RreopO5ebklZ4OOPQXQy9L8i9VyNvntwM0R2BP0FypOlPwcvlHXIA==",
+        "resolved": "8.1.0",
+        "contentHash": "JlwERed3yo04O21bxGGORoW3qKfVlaH+h7d0lTNTGvZWRM2+IdLHQiWhNGHdPa9dv9pYkC8vfXgWOTigN60hnA==",
         "dependencies": {
-          "Selenium.WebDriver": "4.35.0",
+          "Selenium.WebDriver": "4.36.0",
           "System.Drawing.Common": "8.0.10"
         }
       },
@@ -592,8 +592,8 @@
       },
       "Microsoft.TestPlatform.ObjectModel": {
         "type": "Transitive",
-        "resolved": "18.0.1",
-        "contentHash": "qT/mwMcLF9BieRkzOBPL2qCopl8hQu6A1P7JWAoj/FMu5i9vds/7cjbJ/LLtaiwWevWLAeD5v5wjQJ/l6jvhWQ==",
+        "resolved": "18.3.0",
+        "contentHash": "AEIEX2aWdPO9XbtR96eBaJxmXRD9vaI9uQ1T/JbPEKlTAZwYx0ZrMzKyULMdh/HH9Sg03kXCoN7LszQ90o6nPQ==",
         "dependencies": {
           "System.Reflection.Metadata": "8.0.0"
         }
@@ -907,8 +907,8 @@
       },
       "System.IO.Pipelines": {
         "type": "Transitive",
-        "resolved": "10.0.1",
-        "contentHash": "26LbFXHKd7PmRnWlkjnYgmjd5B6HYVG+1MpTO25BdxTJnx6D0O16JPAC/S4YBqjtt4YpfGj1QO/Ss6SPMGEGQw=="
+        "resolved": "10.0.3",
+        "contentHash": "WMxiA2jGdHnRBmoVK55YUq5VPaxW0Sg2frPtXV+urUMvpqHIga6lleV/YuryHIuGsAKVjQAjv6PrQ6IJpoLohQ=="
       },
       "System.IO.Ports": {
         "type": "Transitive",
@@ -1119,16 +1119,16 @@
       },
       "System.Text.Encodings.Web": {
         "type": "Transitive",
-        "resolved": "10.0.1",
-        "contentHash": "cVAka0o1rJJ5/De0pjNs7jcaZk5hUGf1HGzUyVmE2MEB1Vf0h/8qsWxImk1zjitCbeD2Avaq2P2+usdvqgbeVQ=="
+        "resolved": "10.0.3",
+        "contentHash": "l8QNBPp92bVzl9Kw8nNtm1uYRNNhUrdulZjM4a8YK/QGNa8z9utKsC0bDoPB+Vq8LOlbD3fIyGlabtz80jT7cw=="
       },
       "System.Text.Json": {
         "type": "Transitive",
-        "resolved": "10.0.1",
-        "contentHash": "EsgwDgU1PFqhrFA9l5n+RBu76wFhNGCEwu8ITrBNhjPP3MxLyklroU5GIF8o6JYpYg6T4KD/VICfMdgPAvNp5g==",
+        "resolved": "10.0.3",
+        "contentHash": "NTUt9DL+maqbgrIYCAmeZUbX0NoXaueySyjW/bdOlFdSUDC1l51XnsbVEuj5tuad12vdq5Sviskp9uMVGgCNLw==",
         "dependencies": {
-          "System.IO.Pipelines": "10.0.1",
-          "System.Text.Encodings.Web": "10.0.1"
+          "System.IO.Pipelines": "10.0.3",
+          "System.Text.Encodings.Web": "10.0.3"
         }
       },
       "System.Threading.AccessControl": {
@@ -1156,6 +1156,7 @@
         "dependencies": {
           "Microsoft.Extensions.Configuration.Json": "[10.0.1, )",
           "Microsoft.NET.Test.Sdk": "[18.0.1, )",
+          "Microsoft.TestPlatform.TestHost": "[18.3.0, )",
           "NLog": "[6.1.0, )",
           "OcarambaLite": "[1.0.0, )",
           "Selenium.Support": "[4.40.0, )",
@@ -1163,13 +1164,13 @@
           "Selenium.WebDriver.ChromeDriver": "[145.0.7632.6700, )",
           "Selenium.WebDriver.GeckoDriver": "[0.36.0, )",
           "System.Configuration.ConfigurationManager": "[10.0.2, )",
-          "System.Text.Json": "[10.0.1, )"
+          "System.Text.Json": "[10.0.3, )"
         }
       },
       "ocarambalite": {
         "type": "Project",
         "dependencies": {
-          "Appium.WebDriver": "[8.0.1, )",
+          "Appium.WebDriver": "[8.1.0, )",
           "Microsoft.CSharp": "[4.7.0, )",
           "Microsoft.Extensions.Configuration": "[10.0.1, )",
           "Microsoft.Extensions.Configuration.Binder": "[10.0.1, )",
@@ -1181,7 +1182,7 @@
           "Selenium.Support": "[4.40.0, )",
           "Selenium.WebDriver": "[4.40.0, )",
           "System.Configuration.ConfigurationManager": "[10.0.2, )",
-          "System.Text.Json": "[10.0.1, )"
+          "System.Text.Json": "[10.0.3, )"
         }
       }
     }
