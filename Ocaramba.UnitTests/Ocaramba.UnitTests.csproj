@@ -21,7 +21,7 @@
     <PackageReference Include="Selenium.WebDriver" Version="4.40.0" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="145.0.7632.6700" />
     <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.36.0" />
-	  <PackageReference Include="Selenium.WebDriver.MSEdgeDriver" Version="144.0.3719.104" />
+	  <PackageReference Include="Selenium.WebDriver.MSEdgeDriver" Version="145.0.3800.58" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="10.0.2" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
   </ItemGroup>
