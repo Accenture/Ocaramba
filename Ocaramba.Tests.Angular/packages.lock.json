@@ -4,12 +4,12 @@
     "net8.0": {
       "Microsoft.NET.Test.Sdk": {
         "type": "Direct",
-        "requested": "[18.0.1, )",
-        "resolved": "18.0.1",
-        "contentHash": "WNpu6vI2rA0pXY4r7NKxCN16XRWl5uHu6qjuyVLoDo6oYEggIQefrMjkRuibQHm/NslIUNCcKftvoWAN80MSAg==",
+        "requested": "[18.3.0, )",
+        "resolved": "18.3.0",
+        "contentHash": "xW3kXuWRQtgoxJp4J+gdhHSQyK+6Wb/AZDSd7lMvuMRYlZ1tnpkojyfZlWilB5G4dmZ0Y0ZxU/M23TlubndNkw==",
         "dependencies": {
-          "Microsoft.CodeCoverage": "18.0.1",
-          "Microsoft.TestPlatform.TestHost": "18.0.1"
+          "Microsoft.CodeCoverage": "18.3.0",
+          "Microsoft.TestPlatform.TestHost": "18.3.0"
         }
       },
       "NLog": {
@@ -60,9 +60,9 @@
       },
       "Selenium.WebDriver.ChromeDriver": {
         "type": "Direct",
-        "requested": "[145.0.7632.11700, )",
-        "resolved": "145.0.7632.11700",
-        "contentHash": "UfgVB5oGDbiUTwBp1Sk66pg8EA40rHwl0ZTwSidOp1W1Ga0mw7wJRKqUT+j+G9/mX9et2Z5A+OyKxw/GCz+hBw=="
+        "requested": "[145.0.7632.6700, )",
+        "resolved": "145.0.7632.6700",
+        "contentHash": "TjwIYmbPVmHSa4P6i1pELEq0n8o8cbjcM8rjJR/W+zghy5k+8r9WqKTGXqTYQgyAc9eCgp3vLn58vejbD8Hxxw=="
       },
       "Selenium.WebDriver.GeckoDriver": {
         "type": "Direct",
@@ -176,8 +176,8 @@
       },
       "Microsoft.CodeCoverage": {
         "type": "Transitive",
-        "resolved": "18.0.1",
-        "contentHash": "O+utSr97NAJowIQT/OVp3Lh9QgW/wALVTP4RG1m2AfFP4IyJmJz0ZBmFJUsRQiAPgq6IRC0t8AAzsiPIsaUDEA=="
+        "resolved": "18.3.0",
+        "contentHash": "23BNy/vziREC20Wwhb50K7+kZe0m07KlLWDQv4qjJ9tt3QjpDpDIqJFrhYHmMEo9xDkuSp55U/8h4bMF7MiB+g=="
       },
       "Microsoft.CSharp": {
         "type": "Transitive",
@@ -973,13 +973,13 @@
         "type": "Project",
         "dependencies": {
           "Microsoft.Extensions.Configuration.Json": "[10.0.1, )",
-          "Microsoft.NET.Test.Sdk": "[18.0.1, )",
+          "Microsoft.NET.Test.Sdk": "[18.3.0, )",
           "Microsoft.TestPlatform.TestHost": "[18.3.0, )",
           "NLog": "[6.1.0, )",
           "OcarambaLite": "[1.0.0, )",
           "Selenium.Support": "[4.40.0, )",
           "Selenium.WebDriver": "[4.41.0, )",
-          "Selenium.WebDriver.ChromeDriver": "[145.0.7632.6700, )",
+          "Selenium.WebDriver.ChromeDriver": "[145.0.7632.11700, )",
           "Selenium.WebDriver.GeckoDriver": "[0.36.0, )",
           "System.Configuration.ConfigurationManager": "[10.0.2, )",
           "System.Text.Json": "[10.0.3, )"
