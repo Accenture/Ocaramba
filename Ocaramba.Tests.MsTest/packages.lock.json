@@ -55,9 +55,9 @@
       },
       "Selenium.WebDriver.ChromeDriver": {
         "type": "Direct",
-        "requested": "[145.0.7632.6700, )",
-        "resolved": "145.0.7632.6700",
-        "contentHash": "TjwIYmbPVmHSa4P6i1pELEq0n8o8cbjcM8rjJR/W+zghy5k+8r9WqKTGXqTYQgyAc9eCgp3vLn58vejbD8Hxxw=="
+        "requested": "[145.0.7632.11700, )",
+        "resolved": "145.0.7632.11700",
+        "contentHash": "UfgVB5oGDbiUTwBp1Sk66pg8EA40rHwl0ZTwSidOp1W1Ga0mw7wJRKqUT+j+G9/mX9et2Z5A+OyKxw/GCz+hBw=="
       },
       "Selenium.WebDriver.GeckoDriver": {
         "type": "Direct",
@@ -73,9 +73,9 @@
       },
       "Selenium.WebDriver.MSEdgeDriver": {
         "type": "Direct",
-        "requested": "[144.0.3719.104, )",
-        "resolved": "144.0.3719.104",
-        "contentHash": "l/S0os9EywQMbGWjCosuqLT81QPc/qu3UqbAPdKm/hBwOS9EyBy9/HMNfwNpC6zDXkJvnItBDrt3Kdb3jJFAfA=="
+        "requested": "[145.0.3800.58, )",
+        "resolved": "145.0.3800.58",
+        "contentHash": "rn/2E5Eed4t7I0+pJXS5uNPoDw9E54Nqnsv9Hrf+g1s2ibgqUOgfKMoFbG+EjWYYfYGVDJWbaG267+3gx9afsQ=="
       },
       "System.Configuration.ConfigurationManager": {
         "type": "Direct",
