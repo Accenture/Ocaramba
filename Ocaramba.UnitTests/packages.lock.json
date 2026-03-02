@@ -92,9 +92,9 @@
       },
       "Selenium.WebDriver.MSEdgeDriver": {
         "type": "Direct",
-        "requested": "[145.0.3800.58, )",
-        "resolved": "145.0.3800.58",
-        "contentHash": "rn/2E5Eed4t7I0+pJXS5uNPoDw9E54Nqnsv9Hrf+g1s2ibgqUOgfKMoFbG+EjWYYfYGVDJWbaG267+3gx9afsQ=="
+        "requested": "[145.0.3800.82, )",
+        "resolved": "145.0.3800.82",
+        "contentHash": "WQLhOtFrvbMkZADF+Nkjn9tTqpo5vwH7UwtHFZ1bbcwfLAtXYu31c2/3JiYMJk6XiumjFEn3ELnmgUvfYvUg1g=="
       },
       "System.Configuration.ConfigurationManager": {
         "type": "Direct",
@@ -133,8 +133,8 @@
       },
       "BouncyCastle.Cryptography": {
         "type": "Transitive",
-        "resolved": "2.4.0",
-        "contentHash": "SwXsAV3sMvAU/Nn31pbjhWurYSjJ+/giI/0n6tCrYoupEK34iIHCuk3STAd9fx8yudM85KkLSVdn951vTng/vQ=="
+        "resolved": "2.6.2",
+        "contentHash": "7oWOcvnntmMKNzDLsdxAYqApt+AjpRpP2CShjMfIa3umZ42UQMvH0tl1qAliYPNYO6vTdcGMqnRrCPmsfzTI1w=="
       },
       "Enums.NET": {
         "type": "Transitive",
@@ -667,10 +667,10 @@
       },
       "NPOI": {
         "type": "Transitive",
-        "resolved": "2.7.5",
-        "contentHash": "KmEHqThmfAdq/Q3LLTahpvFKHQMQJrzJNAFIoSZCGIZWUmYBtvxDArmpLF+Zyw1tzCem/rZsefCqJgqfIz2l4w==",
+        "resolved": "2.7.6",
+        "contentHash": "itLDt6M2VFcWjTGpzeRNy7Axmp2cVjHpTtf4zVLm6XQvuINlkHFBabBd4s8iCRAupx/NBSzqPxqe7+5fJOY8NQ==",
         "dependencies": {
-          "BouncyCastle.Cryptography": "2.4.0",
+          "BouncyCastle.Cryptography": "2.6.2",
           "Enums.NET": "5.0.0",
           "ExtendedNumerics.BigDecimal": "2025.1001.2.129",
           "MathNet.Numerics.Signed": "5.0.0",
@@ -1144,7 +1144,7 @@
           "Microsoft.NET.Test.Sdk": "[18.0.1, )",
           "Microsoft.TestPlatform.TestHost": "[18.3.0, )",
           "NLog": "[6.1.0, )",
-          "NPOI": "[2.7.5, )",
+          "NPOI": "[2.7.6, )",
           "NUnit": "[4.4.0, )",
           "NUnit.Runners": "[3.12.0, )",
           "Ocaramba.Tests.PageObjects": "[1.0.0, )",
@@ -1153,7 +1153,7 @@
           "Selenium.WebDriver": "[4.41.0, )",
           "Selenium.WebDriver.ChromeDriver": "[145.0.7632.11700, )",
           "Selenium.WebDriver.GeckoDriver": "[0.36.0, )",
-          "Selenium.WebDriver.MSEdgeDriver": "[145.0.3800.58, )",
+          "Selenium.WebDriver.MSEdgeDriver": "[145.0.3800.82, )",
           "SixLabors.ImageSharp": "[3.1.12, )",
           "System.Configuration.ConfigurationManager": "[10.0.2, )",
           "System.Memory": "[4.6.3, )",
