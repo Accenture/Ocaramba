@@ -4,9 +4,9 @@
     "net8.0": {
       "BrowserStack.TestAdapter": {
         "type": "Direct",
-        "requested": "[0.23.2, )",
-        "resolved": "0.23.2",
-        "contentHash": "vSAIMDvrKjFvNMJrx4iegjWL/HaM7XxE2WNXEKvi2+tBVrU4RlDfF43bYUJavwskwr9HeJZvX4RMHumItNPbBw==",
+        "requested": "[0.24.0, )",
+        "resolved": "0.24.0",
+        "contentHash": "ay/kJsUs5luAqZ1opKSH0Os0Z77Xk0Twel14dhYSSSaIaQA2tzMajCBL4q8cQxDppBb9Et/lOwGiFined32RyA==",
         "dependencies": {
           "Google.Protobuf": "3.30.2",
           "Grpc.Net.Client": "2.71.0",
@@ -2089,7 +2089,7 @@
           "OcarambaLite": "[1.0.0, )",
           "Selenium.Support": "[4.40.0, )",
           "Selenium.WebDriver": "[4.41.0, )",
-          "Selenium.WebDriver.ChromeDriver": "[145.0.7632.6700, )",
+          "Selenium.WebDriver.ChromeDriver": "[145.0.7632.11700, )",
           "Selenium.WebDriver.GeckoDriver": "[0.36.0, )",
           "System.Configuration.ConfigurationManager": "[10.0.2, )",
           "System.Text.Json": "[10.0.3, )"
