@@ -40,9 +40,9 @@
       },
       "NUnit": {
         "type": "Direct",
-        "requested": "[4.4.0, )",
-        "resolved": "4.4.0",
-        "contentHash": "7IWJcT9xWNhG9dEGdgAWdH6maCE0eVbeVnizvXACKbAyxbjoJ9+WaEb8qsCTJi3hsb18AJBtoqvWa3G7YYUQfw=="
+        "requested": "[4.5.1, )",
+        "resolved": "4.5.1",
+        "contentHash": "x1sIqU9i0IkxqFayqthzmJs/75jTMbrfNMixj4vtfTi7rRzGbtuY27V+iAhfTY02u5k2qvW3QBGM414OG4q8Lw=="
       },
       "NUnit.Runners": {
         "type": "Direct",
@@ -1145,7 +1145,7 @@
           "Microsoft.TestPlatform.TestHost": "[18.3.0, )",
           "NLog": "[6.1.0, )",
           "NPOI": "[2.7.6, )",
-          "NUnit": "[4.4.0, )",
+          "NUnit": "[4.5.1, )",
           "NUnit.Runners": "[3.12.0, )",
           "Ocaramba.Tests.PageObjects": "[1.0.0, )",
           "OcarambaLite": "[1.0.0, )",
