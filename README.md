@@ -12,7 +12,7 @@ Test Framework was designed in Objectivity to propose a common way how people sh
 <img align="left" src="https://user-images.githubusercontent.com/12324498/73060119-73159700-3e97-11ea-99d3-1b21584c6baa.png">
 Project API documentation can be found here: http://Accenture.github.io/Ocaramba
 
-AI generated documentation [DeepWiki](https://deepwiki.com/Accenture/Ocaramba)<br /><br />
+AI generated documentation [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/Accenture/Ocaramba)
 
 <img align="left" src="https://github.com/Accenture/Ocaramba/wiki/images/ocarambadiagram.png">
 
