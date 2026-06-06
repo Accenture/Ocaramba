@@ -90,8 +90,8 @@
       },
       "Appium.WebDriver": {
         "type": "Transitive",
-        "resolved": "8.1.0",
-        "contentHash": "JlwERed3yo04O21bxGGORoW3qKfVlaH+h7d0lTNTGvZWRM2+IdLHQiWhNGHdPa9dv9pYkC8vfXgWOTigN60hnA==",
+        "resolved": "8.2.0",
+        "contentHash": "wz6+2WnVffxh+0fVHKtoquw6yh9vcIagOnFk0UlAQ4WNXmlxyFy0poQsX1utMyYjGBEvhZuKTK5if++q/1snyg==",
         "dependencies": {
           "Selenium.WebDriver": "4.36.0",
           "System.Drawing.Common": "8.0.10"
@@ -853,7 +853,7 @@
       "ocarambalite": {
         "type": "Project",
         "dependencies": {
-          "Appium.WebDriver": "[8.1.0, )",
+          "Appium.WebDriver": "[8.2.0, )",
           "Microsoft.CSharp": "[4.7.0, )",
           "Microsoft.Extensions.Configuration": "[10.0.1, )",
           "Microsoft.Extensions.Configuration.Binder": "[10.0.1, )",
