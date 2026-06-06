@@ -744,8 +744,8 @@
       },
       "System.Security.Cryptography.Xml": {
         "type": "Transitive",
-        "resolved": "8.0.2",
-        "contentHash": "aDM/wm0ZGEZ6ZYJLzgqjp2FZdHbDHh6/OmpGfb7AdZ105zYmPn/83JRU2xLIbwgoNz9U1SLUTJN0v5th3qmvjA==",
+        "resolved": "8.0.3",
+        "contentHash": "1cHAWDYwOyyoRy+nxS7/Ro/Zcio6i5yHoIJ6xUA+fU8lNu4yGQgja5dEovAxBVud3RnfwRVWOl0B2vr+9LP/mg==",
         "dependencies": {
           "System.Security.Cryptography.Pkcs": "8.0.1"
         }
@@ -865,6 +865,7 @@
           "Selenium.Support": "[4.40.0, )",
           "Selenium.WebDriver": "[4.41.0, )",
           "System.Configuration.ConfigurationManager": "[10.0.2, )",
+          "System.Security.Cryptography.Xml": "[8.0.3, )",
           "System.Text.Json": "[10.0.3, )"
         }
       }
