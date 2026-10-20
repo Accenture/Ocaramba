@@ -4,16 +4,16 @@
     "net8.0": {
       "BrowserStack.TestAdapter": {
         "type": "Direct",
-        "requested": "[0.25.1, )",
-        "resolved": "0.25.1",
-        "contentHash": "O4DN7S8a7K02U87X9HTAFiZX/mADivvCZZBofvfDiBXlykQi+6bBrO4wQ0mOoJa7JSBSov2c0t+GwYjP9kb2Ug==",
+        "requested": "[0.33.2, )",
+        "resolved": "0.33.2",
+        "contentHash": "Iysi6MoRty8vNAyF/k5vxhsmqvjEWf24qRTL0/HA+MwuTQSujTkOqsuIYd/GlCTAs1SKCrpHQ3LBWJN6eodGiw==",
         "dependencies": {
           "Google.Protobuf": "3.30.2",
           "Grpc.Net.Client": "2.71.0",
           "Grpc.Tools": "2.71.0",
           "Lib.Harmony": "2.4.2",
           "Microsoft.CodeAnalysis.CSharp": "4.7.0",
-          "Microsoft.TestPlatform.ObjectModel": "16.11.0",
+          "Microsoft.TestPlatform.ObjectModel": "18.0.1",
           "NLog": "5.0.4",
           "Newtonsoft.Json": "13.0.2",
           "PercyIO.Appium": "3.0.2",
