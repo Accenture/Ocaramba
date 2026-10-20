@@ -90,11 +90,12 @@
       },
       "Appium.WebDriver": {
         "type": "Transitive",
-        "resolved": "8.2.0",
-        "contentHash": "wz6+2WnVffxh+0fVHKtoquw6yh9vcIagOnFk0UlAQ4WNXmlxyFy0poQsX1utMyYjGBEvhZuKTK5if++q/1snyg==",
+        "resolved": "9.0.0",
+        "contentHash": "c6PrmUTFORT7mPdSpbQR2ZtvCrk/1hXwUChtkmY9HZZRLYGWORwb9s6JU9yiiOa7noIO5GWOmCdnO9jnEU3ipQ==",
         "dependencies": {
-          "Selenium.WebDriver": "4.36.0",
-          "System.Drawing.Common": "8.0.10"
+          "Selenium.WebDriver": "4.46.0",
+          "System.Drawing.Common": "10.0.12",
+          "System.Text.Json": "10.0.11"
         }
       },
       "Humanizer.Core": {
@@ -398,8 +399,8 @@
       },
       "Microsoft.Win32.SystemEvents": {
         "type": "Transitive",
-        "resolved": "8.0.0",
-        "contentHash": "9opKRyOKMCi2xJ7Bj7kxtZ1r9vbzosMvRrdEhVhDz8j8MoBGgB+WmC94yH839NPH+BclAjtQ/pyagvi/8gDLkw=="
+        "resolved": "10.0.12",
+        "contentHash": "kdj5cqOwgZCMltEhQ4+WVUoFkMHG08EJfy1MDyS9H+FBg66vTTFyX8YcNl8IQh5wRQv79P+iduQgDGY8ucBR+w=="
       },
       "Microsoft.Windows.Compatibility": {
         "type": "Transitive",
@@ -612,10 +613,10 @@
       },
       "System.Drawing.Common": {
         "type": "Transitive",
-        "resolved": "8.0.19",
-        "contentHash": "UWMINQeKPH2+t/4oNySDVPf7URFMYCRdkAG1s+2nLyHauu4GiyIoBjSHxN3aNULCNmyHB+ByU1TQ1jtMi7G6wQ==",
+        "resolved": "10.0.12",
+        "contentHash": "FBUxiucg2gsnyItbpGgyXI5u8FYLcqdLKS1XJkHHTj3RK1c6kpsJr/Y9i4edUNF7LqCYFrHqpHEvpt8/lNBe9w==",
         "dependencies": {
-          "Microsoft.Win32.SystemEvents": "8.0.0"
+          "Microsoft.Win32.SystemEvents": "10.0.12"
         }
       },
       "System.Formats.Asn1": {
@@ -853,7 +854,7 @@
       "ocarambalite": {
         "type": "Project",
         "dependencies": {
-          "Appium.WebDriver": "[8.2.0, )",
+          "Appium.WebDriver": "[9.0.0, )",
           "Microsoft.CSharp": "[4.7.0, )",
           "Microsoft.Extensions.Configuration": "[10.0.1, )",
           "Microsoft.Extensions.Configuration.Binder": "[10.0.1, )",
@@ -863,9 +864,9 @@
           "Microsoft.WSMan.Management": "[7.4.12, )",
           "NLog": "[6.1.0, )",
           "Selenium.Support": "[4.40.0, )",
-          "Selenium.WebDriver": "[4.41.0, )",
+          "Selenium.WebDriver": "[4.46.0, )",
           "System.Configuration.ConfigurationManager": "[10.0.2, )",
-          "System.Text.Json": "[10.0.3, )"
+          "System.Text.Json": "[10.0.11, )"
         }
       }
     }
