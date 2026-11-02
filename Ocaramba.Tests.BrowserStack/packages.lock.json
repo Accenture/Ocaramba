@@ -4,9 +4,9 @@
     "net8.0": {
       "BrowserStack.TestAdapter": {
         "type": "Direct",
-        "requested": "[0.33.2, )",
-        "resolved": "0.33.2",
-        "contentHash": "Iysi6MoRty8vNAyF/k5vxhsmqvjEWf24qRTL0/HA+MwuTQSujTkOqsuIYd/GlCTAs1SKCrpHQ3LBWJN6eodGiw==",
+        "requested": "[0.47.1, )",
+        "resolved": "0.47.1",
+        "contentHash": "dJk+HtrcTPIwPq4Q3nFnNDQvmUGX7OyYH45s9ddcnmEg4KcLBrqC8YraqXr3PLjYF7ChTTFgUvS5Qh+wbuj9lw==",
         "dependencies": {
           "Google.Protobuf": "3.30.2",
           "Grpc.Net.Client": "2.71.0",
@@ -155,8 +155,8 @@
       },
       "Appium.WebDriver": {
         "type": "Transitive",
-        "resolved": "8.1.0",
-        "contentHash": "JlwERed3yo04O21bxGGORoW3qKfVlaH+h7d0lTNTGvZWRM2+IdLHQiWhNGHdPa9dv9pYkC8vfXgWOTigN60hnA==",
+        "resolved": "8.2.0",
+        "contentHash": "wz6+2WnVffxh+0fVHKtoquw6yh9vcIagOnFk0UlAQ4WNXmlxyFy0poQsX1utMyYjGBEvhZuKTK5if++q/1snyg==",
         "dependencies": {
           "Selenium.WebDriver": "4.36.0",
           "System.Drawing.Common": "8.0.10"
@@ -2098,7 +2098,7 @@
       "ocarambalite": {
         "type": "Project",
         "dependencies": {
-          "Appium.WebDriver": "[8.1.0, )",
+          "Appium.WebDriver": "[8.2.0, )",
           "Microsoft.CSharp": "[4.7.0, )",
           "Microsoft.Extensions.Configuration": "[10.0.1, )",
           "Microsoft.Extensions.Configuration.Binder": "[10.0.1, )",
