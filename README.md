@@ -12,13 +12,13 @@ Test Framework was designed in Objectivity to propose a common way how people sh
 <img align="left" src="https://user-images.githubusercontent.com/12324498/73060119-73159700-3e97-11ea-99d3-1b21584c6baa.png">
 Project API documentation can be found here: http://Accenture.github.io/Ocaramba
 
-AI generated documentation [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/Accenture/Ocaramba)
+AI generated documentation [Ask DeepWiki](https://deepwiki.com/Accenture/Ocaramba)
 
 <img align="left" src="https://github.com/Accenture/Ocaramba/wiki/images/ocarambadiagram.png">
 
 **It provides the following features:**
 
-- .NET 8.0 supported
+- .NET 10.0 supported
 - Cross-Platform Windows, Linux and macOS systems supported
 - Supports [Appium](https://appium.io/docs/en/latest/)-based UI automation of many app platforms, including mobile e.g. iOS, Android, Tizen, more details [here](https://github.com/Accenture/Ocaramba/wiki/Ocaramba-framework-with-Appium)
 - Supports continuous integration tools like Azure DevOps, Teamcity, Jenkins and others.
