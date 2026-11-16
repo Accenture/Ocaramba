@@ -16,7 +16,6 @@ permissions:
   pages: write
   issues: write
   pull-requests: write
-  id-token: write
 env:
   solution: ${{ github.workspace }}/Ocaramba.sln
   buildPlatform: Any CPU
@@ -572,6 +571,9 @@ jobs:
         if: always()
   release_Stage_PublishNuget:
     runs-on: windows-latest
+    permissions:
+      contents: read
+      id-token: write
     needs:
       - test_Stage_RunTestsOnDocker
       - test_Stage_RunTestsOnLinux
@@ -599,11 +601,20 @@ jobs:
       - shell: pwsh
         run: |
           Get-ChildItem -Recurse
+      - name: NuGet login
+        id: nuget-login
+        uses: NuGet/login@v1
+        with:
+          user: raczeja
       - name: Push Nuget Package
-        run: dotnet nuget push .\Ocaramba.${{ env.frameworkVersion }}.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
+        env:
+          NUGET_API_KEY: ${{ steps.nuget-login.outputs.NUGET_API_KEY }}
+        run: dotnet nuget push .\Ocaramba.${{ env.frameworkVersion }}.nupkg -s https://api.nuget.org/v3/index.json -k $env:NUGET_API_KEY
         if: (success() && startsWith(github.ref, 'refs/tags/'))
       - name: Push Nuget Package
-        run: dotnet nuget push .\OcarambaLite.${{ env.frameworkVersion }}.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
+        env:
+          NUGET_API_KEY: ${{ steps.nuget-login.outputs.NUGET_API_KEY }}
+        run: dotnet nuget push .\OcarambaLite.${{ env.frameworkVersion }}.nupkg -s https://api.nuget.org/v3/index.json -k $env:NUGET_API_KEY
         if: (success() && startsWith(github.ref, 'refs/tags/'))
   deploy:
     needs:
