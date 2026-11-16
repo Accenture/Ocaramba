@@ -4,7 +4,7 @@ Write-Output '********************************************BrowserStack tests****
 $Env:ASPNETCORE_ENVIRONMENT="Linux"
 
 Write-Output $Env:ASPNETCORE_ENVIRONMENT
-cd Ocaramba.Tests.BrowserStack/bin/Release/net8.0/
+cd Ocaramba.Tests.BrowserStack/bin/Release/
 dotnet browserstack-sdk Ocaramba.Tests.BrowserStack.dll /Logger:"trx;LogFileName=Ocaramba.Tests.BrowserStacknetcoreapp.xml"
 
 Copy-Item -Path "*.log" -Destination "./TestOutput/" -Recurse

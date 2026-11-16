@@ -21,6 +21,7 @@ env:
   solution: ${{ github.workspace }}/Ocaramba.sln
   buildPlatform: Any CPU
   buildConfiguration: Release
+  dotnetSdkVersion: 10.0.x
   frameworkVersion: 4.2.6
   TestResultsDirWindows: D:\a\Ocaramba\Ocaramba\TestResults
   ChromeDriverVersion: 137.0.7151.6800
@@ -33,7 +34,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 9.0.x
+          dotnet-version: ${{ env.dotnetSdkVersion }}
       - name: Get latest Git tag
         shell: powershell
         run: |
@@ -175,6 +176,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.dotnetSdkVersion }}
       - run: find . -name '*.csproj' -exec sed -i -e 's/109.0.5414.7400/${{ env.ChromeDriverVersion }}/g' {} \;
       - run: |
           ls
@@ -202,13 +207,17 @@ jobs:
         if: always()
         with:
           name: ExecutingTestsOnLinux
-          path: ./Ocaramba.Tests.NUnit/bin/Release/net8.0/ExecutingTestsOnLinux${{ github.run_id }}.zip
+          path: ./Ocaramba.Tests.NUnit/bin/Release/ExecutingTestsOnLinux${{ github.run_id }}.zip
   test_Stage_RunAppiumTestsOnAndroid:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.dotnetSdkVersion }}
       - run: |
-          wget -P ./Ocaramba.Tests.Appium/bin/Release/net8.0/ https://github.com/appium/android-apidemos/releases/download/v6.0.3/ApiDemos-debug.apk
+          wget -P ./Ocaramba.Tests.Appium/bin/Release/ https://github.com/appium/android-apidemos/releases/download/v6.0.3/ApiDemos-debug.apk
           export ASPNETCORE_ENVIRONMENT=Linux
           echo $ASPNETCORE_ENVIRONMENT
           sed -i '/Documentation/,+5 d' ./Ocaramba.sln ; sed -i '/CloudProviderCrossBrowser/,+1 d' ./Ocaramba.sln; sed -i '/UnitTests/,+1 d' ./Ocaramba.sln; sed -i '/BrowserStack/,+1 d' ./Ocaramba.sln; sed -i '/MsTest/,+1 d' ./Ocaramba.sln;sed -i '/Features/,+1 d' ./Ocaramba.sln;sed -i '/Xunit/,+1 d' ./Ocaramba.sln;sed -i '/NUnitExtentReports/,+1 d' ./Ocaramba.sln;sed -i '/NUnit/,+1 d' ./Ocaramba.sln;sed -i '/Angular/,+1 d' ./Ocaramba.sln
@@ -243,15 +252,15 @@ jobs:
           disable-animations: true
           script: |
             echo "Installing APK on emulator 5554..."
-            adb -s emulator-5554 install -t -g ./Ocaramba.Tests.Appium/bin/Release/net8.0/ApiDemos-debug.apk
+            adb -s emulator-5554 install -t -g ./Ocaramba.Tests.Appium/bin/Release/ApiDemos-debug.apk
 
             echo "Checking packages on emulator 5554:"
             adb -s emulator-5554 shell pm list packages | grep io.appium.android.apis || echo "Package not found on emulator 5554"
             adb shell dumpsys package com.google.android.webview | grep -m1 versionName 
             adb shell cmd package list packages | grep webview
-            bash ./Ocaramba.Tests.Appium/bin/Release/net8.0/setup_chromedriver.sh
-            dotnet vstest ./Ocaramba.Tests.Appium/bin/Release/net8.0/Ocaramba.Tests.Appium.dll --logger:"trx;LogFileName=Ocaramba.Tests.Appium.xml"
-            pwsh -Command "Compress-Archive -Path './Ocaramba.Tests.Appium/bin/Release/net8.0/TestOutput/*' -DestinationPath './Ocaramba.Tests.Appium/bin/Release/net8.0/ExecutingTestsOnAndroid.zip'"
+            bash ./Ocaramba.Tests.Appium/bin/Release/setup_chromedriver.sh
+            dotnet vstest ./Ocaramba.Tests.Appium/bin/Release/Ocaramba.Tests.Appium.dll --logger:"trx;LogFileName=Ocaramba.Tests.Appium.xml"
+            pwsh -Command "Compress-Archive -Path './Ocaramba.Tests.Appium/bin/Release/TestOutput/*' -DestinationPath './Ocaramba.Tests.Appium/bin/Release/ExecutingTestsOnAndroid.zip'"
             echo "Closing connection with emulator-5554"
             adb -s emulator-5554 emu kill || true
       - name: Publish Test Results
@@ -266,7 +275,7 @@ jobs:
         if: always()
         with:
           name: ExecutingTestsOnAndroid
-          path: ./Ocaramba.Tests.Appium/bin/Release/net8.0/ExecutingTestsOnAndroid.zip
+          path: ./Ocaramba.Tests.Appium/bin/Release/ExecutingTestsOnAndroid.zip
   test_Stage_RunTestsOnLinuxBrowserStack:
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -275,7 +284,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: "8.0.x"
+          dotnet-version: ${{ env.dotnetSdkVersion }}
       - name: Set up Docker
         uses: docker/setup-buildx-action@v2
       - name: Run the-internet app in Docker
@@ -326,12 +335,16 @@ jobs:
         if: always()
         with:
           name: ExecutingTestsOnBrowserStackLinux
-          path: ./Ocaramba.Tests.BrowserStack/bin/Release/net8.0/ExecutingTestsOnBrowserStackLinux${{ github.run_id }}.zip
+          path: ./Ocaramba.Tests.BrowserStack/bin/Release/ExecutingTestsOnBrowserStackLinux${{ github.run_id }}.zip
   test_Stage_RunTestsOnLinuxsaucelabs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.dotnetSdkVersion }}
       - run: |
           ls 
           export ASPNETCORE_ENVIRONMENT=Linux
@@ -360,7 +373,7 @@ jobs:
         if: always()
         with:
           name: ExecutingTestsOnsaucelabsLinux
-          path: ./Ocaramba.Tests.CloudProviderCrossBrowser/bin/Release/net8.0/ExecutingTestsOnsaucelabLinux${{ github.run_id }}.zip
+          path: ./Ocaramba.Tests.CloudProviderCrossBrowser/bin/Release/ExecutingTestsOnsaucelabLinux${{ github.run_id }}.zip
   test_Stage_RunTestsOnWindowsCore1:
     runs-on: windows-latest
     steps:
@@ -368,7 +381,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: "8.x"
+          dotnet-version: ${{ env.dotnetSdkVersion }}
       - shell: pwsh
         run: |
           (Get-Content ./Ocaramba.sln) | ForEach-Object -Begin { $skip = 0 } -Process {
@@ -418,7 +431,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: "8.x"
+          dotnet-version: ${{ env.dotnetSdkVersion }}
       - shell: pwsh
         run: |
           (Get-Content ./Ocaramba.sln) | ForEach-Object -Begin { $skip = 0 } -Process {
@@ -468,7 +481,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: "8.x"
+          dotnet-version: ${{ env.dotnetSdkVersion }}
       - shell: pwsh
         run: |
           (Get-Content ./Ocaramba.sln) | ForEach-Object -Begin { $skip = 0 } -Process {
@@ -519,7 +532,7 @@ jobs:
       - name: Archive logs
         if: always()
         run: |
-          $dest = "./Ocaramba.Tests.BrowserStack/bin/Release/net8.0"
+          $dest = "./Ocaramba.Tests.BrowserStack/bin/Release"
           Get-ChildItem -Path "./**/TestResults/*" -Recurse | Select-Object FullName
           Compress-Archive -Path "./**/TestResults/*" -DestinationPath "$dest/ExecutingTestsOnWindowsBrowserStackReport$env:GITHUB_RUN_ID.zip"
       - name: "Stop BrowserStackLocal"
@@ -537,13 +550,13 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: BROWSERSTACK_Report
-          path: /Ocaramba.Tests.BrowserStack/bin/Release/net8.0/ExecutingTestsOnWindowsBrowserStack${{ github.run_id }}.zip
+          path: /Ocaramba.Tests.BrowserStack/bin/Release/ExecutingTestsOnWindowsBrowserStack${{ github.run_id }}.zip
       - name: Upload zip logs as artifact
         uses: actions/upload-artifact@v4
         if: always()
         with:
           name: ExecutingTestsOnBrowserStackWindows
-          path: ./Ocaramba.Tests.BrowserStack/bin/Release/net8.0/ExecutingTestsOnBrowserStackWindows${{ github.run_id }}.zip
+          path: ./Ocaramba.Tests.BrowserStack/bin/Release/ExecutingTestsOnBrowserStackWindows${{ github.run_id }}.zip
   test_Stage_RunTestsSeleniumGrid:
     runs-on: ubuntu-latest
     steps:
