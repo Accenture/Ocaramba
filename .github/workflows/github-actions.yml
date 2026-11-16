@@ -620,6 +620,9 @@ jobs:
     needs:
       - build_Stage_BuildOnWindows
       - release_Stage_PublishNuget
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
