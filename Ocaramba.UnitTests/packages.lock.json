@@ -4,11 +4,11 @@
     "net10.0": {
       "Magick.NET-Q16-AnyCPU": {
         "type": "Direct",
-        "requested": "[14.15.0, )",
-        "resolved": "14.15.0",
-        "contentHash": "TB1Wc2hojzOMJ4tkBcXubASgtYSjEovoFpOjnfTjJXKVtKHGaN60juR+5YWFFhch1UUENcThaRWUXOWRcoGKkQ==",
+        "requested": "[15.1.0, )",
+        "resolved": "15.1.0",
+        "contentHash": "Kd/emkp1qInFIHdCtm3z7u4+Gtvwvvuokt0DzhfOl69OXGH/ZugziGJSNhvl9G4EqdSKoWWTC9ulYhsd1D0U2g==",
         "dependencies": {
-          "Magick.NET.Core": "14.15.0"
+          "Magick.NET.Core": "15.1.0"
         }
       },
       "Microsoft.AspNetCore.Hosting.Abstractions": {
@@ -194,8 +194,8 @@
       },
       "Magick.NET.Core": {
         "type": "Transitive",
-        "resolved": "14.15.0",
-        "contentHash": "xgD1zqb4KQ1gMQcd3eIRp8hFMHBxzW9fOpLLDR7BWN0oCwZ0i6NW7rIUiCdsEi/NuZi1UlCLWBHh3v7Y2E3LIw=="
+        "resolved": "15.1.0",
+        "contentHash": "WIaemRN4tJvw5BNUfsO8/V3LojV5FOCojQ/sQ4ruXme1o2frRYfcvHPhKV5E6TbYoEdVEvtGX+8Wbut0F2lJHg=="
       },
       "Markdig.Signed": {
         "type": "Transitive",
@@ -236,6 +236,11 @@
         "type": "Transitive",
         "resolved": "8.0.0",
         "contentHash": "3WA9q9yVqJp222P3x1wYIGDAkpjAku0TMUaaQV22g6L67AI0LdOIrVS7Ht2vJfLHGSPVuqN94vIr15qn+HEkHw=="
+      },
+      "Microsoft.Build.Tasks.Git": {
+        "type": "Transitive",
+        "resolved": "10.0.111",
+        "contentHash": "IRJmiczCoN50PaT8pCFVGXEN1erN1kqWJaink4zN/2QprrQ/4rFhuhawaOQRoxnXQQw0ZFc+Hd+WuxNwz9RqbQ=="
       },
       "Microsoft.CodeAnalysis.Analyzers": {
         "type": "Transitive",
@@ -1057,6 +1062,7 @@
         "type": "Project",
         "dependencies": {
           "Appium.WebDriver": "[8.2.0, )",
+          "Microsoft.Build.Tasks.Git": "[10.0.111, )",
           "Microsoft.Extensions.Configuration": "[10.0.4, )",
           "Microsoft.Extensions.Configuration.Binder": "[10.0.4, )",
           "Microsoft.Extensions.Configuration.Json": "[10.0.1, )",
