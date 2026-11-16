@@ -32,8 +32,7 @@ namespace Ocaramba.Tests.NUnit.DataDriven
     using System.Xml.Linq;
     using global::NUnit.Framework;
     using NLog;
-    using NPOI.SS.UserModel;
-    using NPOI.XSSF.UserModel;
+    using ClosedXML.Excel;
     using Ocaramba.Exceptions;
 
     /// <summary>
@@ -219,76 +218,77 @@ namespace Ocaramba.Tests.NUnit.DataDriven
         public static IEnumerable<TestCaseData> ReadXlsxDataDriveFile(string path, string sheetName, [Optional] string[] diffParam, [Optional] string testName)
         {
             Logger.Debug("Sheet {0} in file: {1}", sheetName, path);
-            XSSFWorkbook wb;
-
-            using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read))
+            using (var wb = new XLWorkbook(path))
             {
-                wb = new XSSFWorkbook(fs);
-            }
+                var sh = wb.Worksheet(sheetName);
+                int totalRows = sh.LastRowUsed().RowNumber();
+                int totalCols = sh.Row(1).LastCellUsed().Address.ColumnNumber;
 
-            // get sheet
-            var sh = (XSSFSheet)wb.GetSheet(sheetName);
-
-            int startRow = 1;
-            int startCol = 0;
-            int totalRows = sh.LastRowNum;
-            int totalCols = sh.GetRow(0).LastCellNum;
-
-            var row = 1;
-            for (int i = startRow; i <= totalRows; i++, row++)
-            {
-                var column = 0;
-                var testParams = new Dictionary<string, string>();
-                for (int j = startCol; j < totalCols; j++, column++)
+                var row = 1;
+                for (int i = 2; i <= totalRows; i++, row++)
                 {
-                    if (sh.GetRow(0).GetCell(column).CellType != CellType.String)
+                    var column = 0;
+                    var testParams = new Dictionary<string, string>();
+                    for (int j = 1; j <= totalCols; j++, column++)
                     {
-                        throw new InvalidOperationException(string.Format("Cell with name of parameter must be string only, file {0} at sheet {1} row {2} column {3}", path, sheetName, 0, column));
+                        var headerCell = sh.Row(1).Cell(j);
+                        if (headerCell.HasFormula || headerCell.DataType != XLDataType.Text)
+                        {
+                            throw new InvalidOperationException(string.Format("Cell with name of parameter must be string only, file {0} at sheet {1} row {2} column {3}", path, sheetName, 0, column));
+                        }
+
+                        var cell = sh.Row(i).Cell(j);
+                        if (cell.HasFormula)
+                        {
+                            throw new InvalidOperationException(string.Format("Not supported cell type Formula in file {0} at sheet {1} row {2} column {3}", path, sheetName, row, column));
+                        }
+
+                        switch (cell.DataType)
+                        {
+                            case XLDataType.Text:
+                                testParams.Add(headerCell.GetString(), cell.GetString());
+                                break;
+                            case XLDataType.Number:
+                                testParams.Add(headerCell.GetString(), cell.GetDouble().ToString(CultureInfo.CurrentCulture));
+                                break;
+                            case XLDataType.DateTime:
+                                testParams.Add(headerCell.GetString(), cell.GetDateTime().ToOADate().ToString(CultureInfo.CurrentCulture));
+                                break;
+                            default:
+                                throw new InvalidOperationException(string.Format("Not supported cell type {0} in file {1} at sheet {2} row {3} column {4}", cell.DataType, path, sheetName, row, column));
+                        }
                     }
 
-                    var cellType = sh.GetRow(row).GetCell(column).CellType;
-                    switch (cellType)
+                    // set test name
+                    var testCaseName = string.IsNullOrEmpty(testName) ? sheetName : testName;
+
+                    if (diffParam != null && diffParam.Any())
                     {
-                        case CellType.String:
-                            testParams.Add(sh.GetRow(0).GetCell(column).StringCellValue, sh.GetRow(row).GetCell(column).StringCellValue);
-                            break;
-                        case CellType.Numeric:
-                            testParams.Add(sh.GetRow(0).GetCell(column).StringCellValue, sh.GetRow(row).GetCell(column).NumericCellValue.ToString(CultureInfo.CurrentCulture));
-                            break;
-                        default:
-                            throw new InvalidOperationException(string.Format("Not supported cell type {0} in file {1} at sheet {2} row {3} column {4}", cellType, path, sheetName, row, column));
+                        try
+                        {
+                            testCaseName = TestCaseName(diffParam, testParams, testCaseName);
+                        }
+                        catch (DataDrivenReadException e)
+                        {
+                            throw new DataDrivenReadException(
+                                string.Format(
+                                    " Exception while reading Excel Data Driven file\n searched key '{0}' not found at sheet '{1}' \n for test {2} in file '{3}' at row {4}",
+                                    e.Message,
+                                    sheetName,
+                                    testName,
+                                    path,
+                                    row));
+                        }
                     }
+                    else
+                    {
+                        testCaseName = testCaseName + "_row(" + row + ")";
+                    }
+
+                    var data = new TestCaseData(testParams);
+                    data.SetName(testCaseName);
+                    yield return data;
                 }
-
-                // set test name
-                var testCaseName = string.IsNullOrEmpty(testName) ? sheetName : testName;
-
-                if (diffParam != null && diffParam.Any())
-                {
-                    try
-                    {
-                        testCaseName = TestCaseName(diffParam, testParams, testCaseName);
-                    }
-                    catch (DataDrivenReadException e)
-                    {
-                        throw new DataDrivenReadException(
-                            string.Format(
-                                " Exception while reading Excel Data Driven file\n searched key '{0}' not found at sheet '{1}' \n for test {2} in file '{3}' at row {4}",
-                                e.Message,
-                                sheetName,
-                                testName,
-                                path,
-                                row));
-                    }
-                }
-                else
-                {
-                    testCaseName = testCaseName + "_row(" + row + ")";
-                }
-
-                var data = new TestCaseData(testParams);
-                data.SetName(testCaseName);
-                yield return data;
             }
         }
 
