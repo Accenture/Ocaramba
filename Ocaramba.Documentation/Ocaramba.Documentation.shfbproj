@@ -33,10 +33,6 @@
       <Argument Key="baseSourceCodeUrl" Value="https://github.com/ObjectivityLtd/Ocaramba/tree/master/OcarambaLite" />
       <Argument Key="requestExampleUrl" Value="https://github.com/ObjectivityLtd/Ocaramba/issues/new" />
     </TransformComponentArguments>
-    <DocumentationSources>
-      <DocumentationSource sourceFile="..\OcarambaLite\OcarambaLite.csproj" xmlns="" />
-      <DocumentationSource sourceFile="..\Ocaramba\Ocaramba.csproj" />
-    </DocumentationSources>
     <HelpFileFormat>Website</HelpFileFormat>
     <SyntaxFilters>C#</SyntaxFilters>
     <PresentationStyle>VS2013</PresentationStyle>
@@ -64,6 +60,8 @@
     <DocumentationSources>
       <DocumentationSource sourceFile="..\OcarambaLite\OcarambaLite.csproj" />
       <DocumentationSource sourceFile="..\Ocaramba\Ocaramba.csproj" />
+      <DocumentationSource sourceFile="$(NuGetPackageRoot)selenium.webdriver\4.41.0\lib\net8.0\WebDriver.dll" />
+      <DocumentationSource sourceFile="$(NuGetPackageRoot)selenium.support\4.40.0\lib\netstandard2.0\WebDriver.Support.dll" />
     </DocumentationSources>
     <VisibleItems>InheritedMembers, InheritedFrameworkMembers, Protected, ProtectedInternalAsProtected, NonBrowsable</VisibleItems>
     <ApiFilter>
