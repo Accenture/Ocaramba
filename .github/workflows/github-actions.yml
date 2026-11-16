@@ -147,7 +147,7 @@ jobs:
         with:
           severity: MEDIUM,HIGH,CRITICAL
           image-ref: ocaramba/selenium:latest
-      - run: docker compose -f docker-compose.yml up -d
+      - run: docker compose -f docker-compose.yml up -d --build
       - shell: pwsh
         run: ./scripts/ExecutingTestsOnDockerGithubActions.ps1
         if: true

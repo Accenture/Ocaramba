@@ -1,4 +1,4 @@
 FROM ocaramba/selenium
-COPY ./ /Ocaramba
+COPY --chown=ocaramba:ocaramba ./ /Ocaramba
 WORKDIR /Ocaramba
 RUN ls
