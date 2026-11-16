@@ -22,7 +22,7 @@ env:
   buildPlatform: Any CPU
   buildConfiguration: Release
   dotnetSdkVersion: 10.0.x
-  frameworkVersion: 4.2.6
+  frameworkVersion: ${{ github.ref_type == 'tag' && github.ref_name || '4.2.6' }}
   TestResultsDirWindows: D:\a\Ocaramba\Ocaramba\TestResults
   ChromeDriverVersion: 137.0.7151.6800
   NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
@@ -35,12 +35,6 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: ${{ env.dotnetSdkVersion }}
-      - name: Get latest Git tag
-        shell: powershell
-        run: |
-          $latestTag = git describe --tags (git rev-list --tags --max-count=1)
-          echo "frameworkVersion=$latestTag" >> $env:GITHUB_ENV
-        if: startsWith(github.ref, 'refs/tags/')
       - run: echo $frameworkVersion
       - name: Remove test sub projects from solution
         shell: powershell
@@ -590,12 +584,6 @@ jobs:
       - build_Stage_BuildOnWindows
     steps:
       - uses: actions/checkout@v4
-      - name: Get latest Git tag
-        shell: powershell
-        run: |
-          $latestTag = git describe --tags (git rev-list --tags --max-count=1)
-          echo "frameworkVersion=$latestTag" >> $env:GITHUB_ENV
-        if: startsWith(github.ref, 'refs/tags/')
       - uses: actions/download-artifact@v4
         with:
           name: Ocaramba${{ env.frameworkVersion }}
