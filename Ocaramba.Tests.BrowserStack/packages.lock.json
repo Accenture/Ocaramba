@@ -4,9 +4,9 @@
     "net10.0": {
       "BrowserStack.TestAdapter": {
         "type": "Direct",
-        "requested": "[0.47.1, )",
-        "resolved": "0.47.1",
-        "contentHash": "dJk+HtrcTPIwPq4Q3nFnNDQvmUGX7OyYH45s9ddcnmEg4KcLBrqC8YraqXr3PLjYF7ChTTFgUvS5Qh+wbuj9lw==",
+        "requested": "[0.52.1, )",
+        "resolved": "0.52.1",
+        "contentHash": "n0DXcT4bX8wnB7krxcteh+ry5uXrVtfXsYDRHXSM4lZ+4WLxS9WODImHjt3DsLNxok7kLm9jI3xhLRkqAymhPw==",
         "dependencies": {
           "Google.Protobuf": "3.30.2",
           "Grpc.Net.Client": "2.71.0",
@@ -218,6 +218,11 @@
         "type": "Transitive",
         "resolved": "8.0.0",
         "contentHash": "3WA9q9yVqJp222P3x1wYIGDAkpjAku0TMUaaQV22g6L67AI0LdOIrVS7Ht2vJfLHGSPVuqN94vIr15qn+HEkHw=="
+      },
+      "Microsoft.Build.Tasks.Git": {
+        "type": "Transitive",
+        "resolved": "10.0.111",
+        "contentHash": "IRJmiczCoN50PaT8pCFVGXEN1erN1kqWJaink4zN/2QprrQ/4rFhuhawaOQRoxnXQQw0ZFc+Hd+WuxNwz9RqbQ=="
       },
       "Microsoft.CodeAnalysis.Analyzers": {
         "type": "Transitive",
@@ -1026,6 +1031,7 @@
         "type": "Project",
         "dependencies": {
           "Appium.WebDriver": "[8.2.0, )",
+          "Microsoft.Build.Tasks.Git": "[10.0.111, )",
           "Microsoft.Extensions.Configuration": "[10.0.4, )",
           "Microsoft.Extensions.Configuration.Binder": "[10.0.4, )",
           "Microsoft.Extensions.Configuration.Json": "[10.0.1, )",
