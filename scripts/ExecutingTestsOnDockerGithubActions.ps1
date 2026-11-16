@@ -1,8 +1,20 @@
 docker info
          
 docker ps -a
-docker exec -u ocaramba ocaramba_selenium bash -c "ls ; sed -i '/Documentation/,+5 d' ./Ocaramba.sln ; sed -i '/CloudProviderCrossBrowser/,+1 d' ./Ocaramba.sln; sed -i '/UnitTests/,+1 d' ./Ocaramba.sln; sed -i '/BrowserStack/,+1 d' ./Ocaramba.sln; sed -i '/MsTest/,+1 d' ./Ocaramba.sln;sed -i '/Features/,+1 d' ./Ocaramba.sln;sed -i '/Xunit/,+1 d' ./Ocaramba.sln;sed -i '/NUnitExtentReports/,+1 d' ./Ocaramba.sln;sed -i '/Appium/,+1 d' ./Ocaramba.sln;sed -i '/Angular/,+1 d' ./Ocaramba.sln;dotnet build ./Ocaramba.sln --configuration $env:buildConfiguration"
+docker exec -u ocaramba ocaramba_selenium bash -c "set -e; ls ; sed -i '/Documentation/,+5 d' ./Ocaramba.sln ; sed -i '/CloudProviderCrossBrowser/,+1 d' ./Ocaramba.sln; sed -i '/UnitTests/,+1 d' ./Ocaramba.sln; sed -i '/BrowserStack/,+1 d' ./Ocaramba.sln; sed -i '/MsTest/,+1 d' ./Ocaramba.sln;sed -i '/Features/,+1 d' ./Ocaramba.sln;sed -i '/Xunit/,+1 d' ./Ocaramba.sln;sed -i '/NUnitExtentReports/,+1 d' ./Ocaramba.sln;sed -i '/Appium/,+1 d' ./Ocaramba.sln;sed -i '/Angular/,+1 d' ./Ocaramba.sln;dotnet build ./Ocaramba.sln --configuration $env:buildConfiguration"
+$buildExitCode = $LASTEXITCODE
+if ($buildExitCode -ne 0) {
+    Write-Error "The Docker test project build failed with exit code $buildExitCode."
+    exit $buildExitCode
+}
+
 docker exec -u ocaramba ocaramba_selenium bash -c 'pwsh ./scripts/set_AppConfig_for_tests.ps1 "./Ocaramba.Tests.NUnit/bin/Release" "appsettings.Linux.json" "appSettings" "browser|PathToChromeDriverDirectory|protocol|host" "Chrome|/usr/local/bin/|http|the-internet:5000" -logValues -json'
+$configExitCode = $LASTEXITCODE
+if ($configExitCode -ne 0) {
+    Write-Error "Failed to configure the Docker test appsettings (exit code $configExitCode)."
+    exit $configExitCode
+}
+
 docker exec -u ocaramba ocaramba_selenium bash -c 'mkdir -p /Ocaramba/TestResults && rm -f /Ocaramba/TestResults/Ocaramba.Tests.Docker.trx && dotnet vstest ./Ocaramba.Tests.NUnit/bin/Release/Ocaramba.Tests.NUnit.dll /TestCaseFilter:"(TestCategory!=NotImplementedInCoreOrUploadDownload)" /Parallel --logger:"trx;LogFileName=Ocaramba.Tests.Docker.trx" --ResultsDirectory:/Ocaramba/TestResults'
 $testExitCode = $LASTEXITCODE
 docker exec -u ocaramba ocaramba_selenium bash -c 'mkdir -p /tmp/TestOutput && ls ./Ocaramba.Tests.NUnit/bin/Release/TestOutput/ && cp -r ./Ocaramba.Tests.NUnit/bin/Release/TestOutput/. /tmp/TestOutput'
