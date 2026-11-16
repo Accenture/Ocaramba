@@ -153,10 +153,10 @@ jobs:
         if: true
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action/linux@v2
-        if: true
+        if: always()
         with:
           files: |
-            /home/runner/**/Ocaramba.Tests.Docker.trx
+            ./Ocaramba.Tests.Docker.trx
           check_name: TestsOnDocker
       - name: Upload zip logs as artifact
         uses: actions/upload-artifact@v4
