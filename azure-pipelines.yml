@@ -27,6 +27,7 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
+  dotnetSdkVersion: '10.0.x'
   frameworkVersion: '4.0.0'
   BuildVersion: '$(frameworkVersion)$(Build.BuildNumber)'
   seleniumGridVersion: 'selenium-server-4.8.0.jar'
@@ -57,6 +58,10 @@ stages:
 
 
         - task: NuGetToolInstaller@1
+        - task: UseDotNet@2
+          inputs:
+            packageType: 'sdk'
+            version: '$(dotnetSdkVersion)'
         - task: Cache@2
           displayName: Cache
           inputs:
@@ -259,7 +264,7 @@ stages:
         - task: ArchiveFiles@2
           condition: always()
           inputs:
-            rootFolderOrFile: '$(System.DefaultWorkingDirectory)/Ocaramba.Tests.NUnitExtentReports/bin/Release/net6.0/TestOutput'
+            rootFolderOrFile: '$(System.DefaultWorkingDirectory)/Ocaramba.Tests.NUnitExtentReports/bin/Release/TestOutput'
             includeRootFolder: true
             archiveType: 'zip'
             archiveFile: '$(Build.ArtifactStagingDirectory)/ExtentReports_$(Build.BuildId).zip'

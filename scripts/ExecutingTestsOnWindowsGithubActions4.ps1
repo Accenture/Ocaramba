@@ -1,7 +1,7 @@
 echo '********************************************CloudProviderCrossBrowser tests********************************************'
         
 echo '********************************************BrowserStack tests********************************************'
-cd Ocaramba.Tests.BrowserStack/bin/Release/net8.0/
+cd Ocaramba.Tests.BrowserStack/bin/Release/
 
 dotnet browserstack-sdk Ocaramba.Tests.BrowserStack.dll /Logger:"trx;LogFileName=Ocaramba.Tests.BrowserStack.xml"
 

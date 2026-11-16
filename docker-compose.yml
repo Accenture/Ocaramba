@@ -1,7 +1,7 @@
 version: "3.7"
 services:
   ocaramba_selenium_container:
-    image: ocaramba/selenium
+    image: ocaramba/selenium-test-runner
     build:
       context: .
       dockerfile: DockerfileBuild

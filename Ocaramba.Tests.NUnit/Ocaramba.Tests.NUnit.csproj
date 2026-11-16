@@ -1,9 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-	<TargetFrameworks>net8.0</TargetFrameworks>
-	<TargetFrameworks Condition="'$(OS)' != 'Unix'">net8.0</TargetFrameworks>
-  </PropertyGroup>
 <ItemGroup>
   
     <PackageReference Include="Microsoft.TestPlatform.TestHost" Version="18.3.0" />

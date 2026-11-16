@@ -1,8 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	<TargetFrameworks>net8.0</TargetFrameworks>
-	<TargetFrameworks Condition="'$(OS)' != 'Unix'">net8.0</TargetFrameworks>
 	  <IsTestProject>true</IsTestProject>
   </PropertyGroup>
 <ItemGroup>
