@@ -18,7 +18,7 @@ AI generated documentation [Ask DeepWiki](https://deepwiki.com/Accenture/Ocaramb
 
 **It provides the following features:**
 
-- .NET 8.0 supported
+- .NET 10.0 supported
 - Cross-Platform Windows, Linux and macOS systems supported
 - Supports [Appium](https://appium.io/docs/en/latest/)-based UI automation of many app platforms, including mobile e.g. iOS, Android, Tizen, more details [here](https://github.com/Accenture/Ocaramba/wiki/Ocaramba-framework-with-Appium)
 - Supports continuous integration tools like Azure DevOps, Teamcity, Jenkins and others.
