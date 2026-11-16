@@ -50,25 +50,6 @@
         "resolved": "6.1.0",
         "contentHash": "K4UdxS4fuJeCM0sm+JTXWoJgOtcXX7X5kvE94bR07UB8JOB6A2+ski7q1tf2qdv+N0H3gsoWtteScJCHa3+zpw=="
       },
-      "NPOI": {
-        "type": "Direct",
-        "requested": "[2.7.6, )",
-        "resolved": "2.7.6",
-        "contentHash": "itLDt6M2VFcWjTGpzeRNy7Axmp2cVjHpTtf4zVLm6XQvuINlkHFBabBd4s8iCRAupx/NBSzqPxqe7+5fJOY8NQ==",
-        "dependencies": {
-          "BouncyCastle.Cryptography": "2.6.2",
-          "Enums.NET": "5.0.0",
-          "ExtendedNumerics.BigDecimal": "2025.1001.2.129",
-          "MathNet.Numerics.Signed": "5.0.0",
-          "Microsoft.IO.RecyclableMemoryStream": "3.0.1",
-          "NSax": "1.0.2",
-          "SharpZipLib": "1.4.2",
-          "SixLabors.Fonts": "1.0.1",
-          "SixLabors.ImageSharp": "2.1.11",
-          "System.Security.Cryptography.Xml": "8.0.2",
-          "ZString": "2.6.0"
-        }
-      },
       "NUnit": {
         "type": "Direct",
         "requested": "[4.4.0, )",
@@ -121,12 +102,6 @@
         "resolved": "0.36.0",
         "contentHash": "jUdrPcwkVt8OJon4iWv6pNTPIAdViJYB9cbd4ct0Bt2RzPzynQiN8bBUfOA1iSxTppI9SH8L1eMfg5NRijlBsw=="
       },
-      "SixLabors.ImageSharp": {
-        "type": "Direct",
-        "requested": "[3.1.12, )",
-        "resolved": "3.1.12",
-        "contentHash": "iAg6zifihXEFS/t7fiHhZBGAdCp3FavsF4i2ZIDp0JfeYeDVzvmlbY1CNhhIKimaIzrzSi5M/NBFcWvZT2rB/A=="
-      },
       "System.Configuration.ConfigurationManager": {
         "type": "Direct",
         "requested": "[10.0.2, )",
@@ -145,21 +120,6 @@
           "Selenium.WebDriver": "4.36.0",
           "System.Drawing.Common": "8.0.10"
         }
-      },
-      "BouncyCastle.Cryptography": {
-        "type": "Transitive",
-        "resolved": "2.6.2",
-        "contentHash": "7oWOcvnntmMKNzDLsdxAYqApt+AjpRpP2CShjMfIa3umZ42UQMvH0tl1qAliYPNYO6vTdcGMqnRrCPmsfzTI1w=="
-      },
-      "Enums.NET": {
-        "type": "Transitive",
-        "resolved": "5.0.0",
-        "contentHash": "NfGq1iLJZ15XZPgBhjk4Ns1XZ+beaGk6cog6B4LxcROdGoSMdgCJqYXF70P6VTd3dz/vFRY4h1u1lAMqW/DC2w=="
-      },
-      "ExtendedNumerics.BigDecimal": {
-        "type": "Transitive",
-        "resolved": "2025.1001.2.129",
-        "contentHash": "+woGT1lsBtwkntOpx2EZbdbySv0aWPefE0vrfvclxVdbi4oa2bbtphFPWgMiQe+kRCPICbfFJwp6w1DuR7Ge2Q=="
       },
       "Humanizer.Core": {
         "type": "Transitive",
@@ -192,11 +152,6 @@
         "type": "Transitive",
         "resolved": "0.33.0",
         "contentHash": "/BE/XANxmocgEqajbWB/ur4Jei+j1FkXppWH9JFmEuoq8T3xJndkQKZVCW/7lTdc9Ru6kfEAkwSXFOv30EkU2Q=="
-      },
-      "MathNet.Numerics.Signed": {
-        "type": "Transitive",
-        "resolved": "5.0.0",
-        "contentHash": "PSrHBVMf41SjbhlnpOMnoir8YgkyEJ6/nwxvjYpH+vJCexNcx2ms6zRww5yLVqLet1xLJgZ39swtKRTLhWdnAw=="
       },
       "Microsoft.ApplicationInsights": {
         "type": "Transitive",
@@ -388,11 +343,6 @@
         "type": "Transitive",
         "resolved": "10.0.1",
         "contentHash": "DO8XrJkp5x4PddDuc/CH37yDBCs9BYN6ijlKyR3vMb55BP1Vwh90vOX8bNfnKxr5B2qEI3D8bvbY1fFbDveDHQ=="
-      },
-      "Microsoft.IO.RecyclableMemoryStream": {
-        "type": "Transitive",
-        "resolved": "3.0.1",
-        "contentHash": "s/s20YTVY9r9TPfTrN5g8zPF1YhwxyqO6PxUkrYTGI2B+OGPe9AdajWZrLhFqXIvqIW23fnUE4+ztrUWNU1+9g=="
       },
       "Microsoft.Management.Infrastructure": {
         "type": "Transitive",
@@ -651,11 +601,6 @@
         "resolved": "13.0.3",
         "contentHash": "HrC5BXdl00IP9zeV+0Z848QWPAoCr9P3bDEZguI+gkLcBKAOxix/tLEAAHC+UvDNPv4a2d18lOReHMOagPa+zQ=="
       },
-      "NSax": {
-        "type": "Transitive",
-        "resolved": "1.0.2",
-        "contentHash": "7txlId2RJTQBL3YdSGO7x70+r3HUOCw725lu0OoBgThRl/e3RhAZ2QKYxW2y9dPRtqbFZYHVa8siIeB8+L//Cg=="
-      },
       "NUnit.Console": {
         "type": "Transitive",
         "resolved": "3.12.0",
@@ -770,16 +715,6 @@
         "type": "Transitive",
         "resolved": "4.4.0",
         "contentHash": "YhEdSQUsTx+C8m8Bw7ar5/VesXvCFMItyZF7G1AUY+OM0VPZUOeAVpJ4Wl6fydBGUYZxojTDR3I6Bj/+BPkJNA=="
-      },
-      "SharpZipLib": {
-        "type": "Transitive",
-        "resolved": "1.4.2",
-        "contentHash": "yjj+3zgz8zgXpiiC3ZdF/iyTBbz2fFvMxZFEBPUcwZjIvXOf37Ylm+K58hqMfIBt5JgU/Z2uoUS67JmTLe973A=="
-      },
-      "SixLabors.Fonts": {
-        "type": "Transitive",
-        "resolved": "1.0.1",
-        "contentHash": "ljezRHWc7N0azdQViib7Aa5v+DagRVkKI2/93kEbtjVczLs+yTkSq6gtGmvOcx4IqyNbO3GjLt7SAQTpLkySNw=="
       },
       "System.CodeDom": {
         "type": "Transitive",
@@ -1034,11 +969,6 @@
         "type": "Transitive",
         "resolved": "8.0.0",
         "contentHash": "Obg3a90MkOw9mYKxrardLpY2u0axDMrSmy4JCdq2cYbelM2cUwmUir5Bomvd1yxmPL9h5LVHU1tuKBZpUjfASg=="
-      },
-      "ZString": {
-        "type": "Transitive",
-        "resolved": "2.6.0",
-        "contentHash": "XE8a+11nZg0LRaf+RGABEWaHIf8yGd5w8v/Ra1iWxMBmAVzwuKbW7G21mS0U7w7sh1lYcgckInWGgnz4qyET8A=="
       },
       "ocaramba.tests.pageobjects": {
         "type": "Project",
