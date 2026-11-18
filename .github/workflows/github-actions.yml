@@ -86,12 +86,13 @@ jobs:
         run: dotnet build Ocaramba\Ocaramba.csproj --no-restore --configuration ${{ env.buildConfiguration }}
       - name: Build Documentation
         run: dotnet build Ocaramba.Documentation/Ocaramba.Documentation.shfbproj --no-restore --configuration ${{ env.buildConfiguration }} -p:AlwaysLoadProject=true
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
-        if: always()
+      - name: Upload API documentation
+        uses: actions/upload-artifact@v4
+        if: startsWith(github.ref, 'refs/tags/')
         with:
+          name: api-documentation
           path: ./Ocaramba.Documentation/Help
+          include-hidden-files: true
       - uses: actions/upload-artifact@v4
         with:
           path: ./Ocaramba/bin/Release/Ocaramba.${{ env.frameworkVersion }}.nupkg
@@ -160,6 +161,15 @@ jobs:
         with:
           name: ExecutingTestsOnDocker
           path: ./ExecutingTestsOnDocker${{ github.run_id }}.zip
+      - name: Upload Docker test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results-docker
+          path: |
+            **/Ocaramba.Tests.*.xml
+            **/Ocaramba.Tests.*.trx
+          if-no-files-found: warn
   test_Stage_RunTestsOnLinux:
     runs-on: ubuntu-latest
     steps:
@@ -196,6 +206,15 @@ jobs:
         with:
           name: ExecutingTestsOnLinux
           path: ./Ocaramba.Tests.NUnit/bin/Release/ExecutingTestsOnLinux${{ github.run_id }}.zip
+      - name: Upload Linux test results for statistics
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results-linux
+          path: |
+            **/Ocaramba.Tests.*.xml
+            **/Ocaramba.Tests.*.trx
+          if-no-files-found: warn
   test_Stage_RunAppiumTestsOnAndroid:
     runs-on: ubuntu-latest
     steps:
@@ -264,6 +283,15 @@ jobs:
         with:
           name: ExecutingTestsOnAndroid
           path: ./Ocaramba.Tests.Appium/bin/Release/ExecutingTestsOnAndroid.zip
+      - name: Upload Android test results for statistics
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results-android
+          path: |
+            **/Ocaramba.Tests.*.xml
+            **/Ocaramba.Tests.*.trx
+          if-no-files-found: warn
   test_Stage_RunTestsOnLinuxBrowserStack:
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -324,6 +352,15 @@ jobs:
         with:
           name: ExecutingTestsOnBrowserStackLinux
           path: ./Ocaramba.Tests.BrowserStack/bin/Release/ExecutingTestsOnBrowserStackLinux${{ github.run_id }}.zip
+      - name: Upload Linux BrowserStack test results for statistics
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results-linux-browserstack
+          path: |
+            **/Ocaramba.Tests.*.xml
+            **/Ocaramba.Tests.*.trx
+          if-no-files-found: warn
   test_Stage_RunTestsOnLinuxsaucelabs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -362,6 +399,15 @@ jobs:
         with:
           name: ExecutingTestsOnsaucelabsLinux
           path: ./Ocaramba.Tests.CloudProviderCrossBrowser/bin/Release/ExecutingTestsOnsaucelabLinux${{ github.run_id }}.zip
+      - name: Upload Linux cloud-provider test results for statistics
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results-linux-cloud-provider
+          path: |
+            **/Ocaramba.Tests.*.xml
+            **/Ocaramba.Tests.*.trx
+          if-no-files-found: warn
   test_Stage_RunTestsOnWindowsCore1:
     runs-on: windows-latest
     steps:
@@ -412,6 +458,15 @@ jobs:
           path: WindowsCore1${{ github.run_id }}.zip
           name: WindowsCore1
         if: always()
+      - name: Upload Windows Core 1 test results for statistics
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results-windows-core-1
+          path: |
+            **/Ocaramba.Tests.*.xml
+            **/Ocaramba.Tests.*.trx
+          if-no-files-found: warn
   test_Stage_RunTestsOnWindowsCore2:
     runs-on: windows-latest
     steps:
@@ -460,6 +515,15 @@ jobs:
           path: WindowsCore2${{ github.run_id }}.zip
           name: WindowsCore2
         if: always()
+      - name: Upload Windows Core 2 test results for statistics
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results-windows-core-2
+          path: |
+            **/Ocaramba.Tests.*.xml
+            **/Ocaramba.Tests.*.trx
+          if-no-files-found: warn
   test_Stage_RunTestsOnWindowsBrowserStack:
     if: false
     timeout-minutes: 10
@@ -545,6 +609,15 @@ jobs:
         with:
           name: ExecutingTestsOnBrowserStackWindows
           path: ./Ocaramba.Tests.BrowserStack/bin/Release/ExecutingTestsOnBrowserStackWindows${{ github.run_id }}.zip
+      - name: Upload Windows BrowserStack test results for statistics
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results-windows-browserstack
+          path: |
+            **/Ocaramba.Tests.*.xml
+            **/Ocaramba.Tests.*.trx
+          if-no-files-found: warn
   test_Stage_RunTestsSeleniumGrid:
     runs-on: ubuntu-latest
     steps:
@@ -569,6 +642,15 @@ jobs:
           path: WindowsCore5${{ github.run_id }}.zip
           name: WindowsCore5SeleniumGrid
         if: always()
+      - name: Upload Selenium Grid test results for statistics
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results-selenium-grid
+          path: |
+            **/Ocaramba.Tests.*.xml
+            **/Ocaramba.Tests.*.trx
+          if-no-files-found: warn
   release_Stage_PublishNuget:
     if: ${{ github.event_name != 'workflow_dispatch' }}
     runs-on: windows-latest
@@ -621,17 +703,76 @@ jobs:
     needs:
       - build_Stage_BuildOnWindows
       - release_Stage_PublishNuget
-    if: ${{ always() && needs.build_Stage_BuildOnWindows.result == 'success' && (needs.release_Stage_PublishNuget.result == 'success' || needs.release_Stage_PublishNuget.result == 'skipped') && (startsWith(github.ref, 'refs/tags/') || github.event_name == 'workflow_dispatch') }}
+      - test_Stage_RunTestsOnDocker
+      - test_Stage_RunTestsOnLinux
+      - test_Stage_RunAppiumTestsOnAndroid
+      - test_Stage_RunTestsOnLinuxBrowserStack
+      - test_Stage_RunTestsOnLinuxsaucelabs
+      - test_Stage_RunTestsOnWindowsCore1
+      - test_Stage_RunTestsOnWindowsCore2
+      - test_Stage_RunTestsOnWindowsBrowserStack
+      - test_Stage_RunTestsSeleniumGrid
+    if: ${{ always() }}
     permissions:
       pages: write
       id-token: write
+    concurrency:
+      group: github-pages
+      cancel-in-progress: false
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      # Deploy Documentation to GitHub Pages
+      - name: Download API documentation
+        uses: actions/download-artifact@v4
+        if: ${{ startsWith(github.ref, 'refs/tags/') && needs.build_Stage_BuildOnWindows.result == 'success' }}
+        with:
+          name: api-documentation
+          path: site
+      - name: Checkout published API documentation
+        if: ${{ !startsWith(github.ref, 'refs/tags/') || needs.build_Stage_BuildOnWindows.result != 'success' }}
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: site
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Download all test results
+        uses: actions/download-artifact@v4
+        with:
+          pattern: test-results-*
+          path: test-results
+          merge-multiple: false
+      - name: Restore published test history
+        shell: bash
+        run: |
+          mkdir -p site/stats/history
+          for report in stats/history/runs.json stats/runs.json; do
+            response=$(curl --silent --show-error --location \
+              --output "site/$report" --write-out '%{http_code}' \
+              "https://Accenture.github.io/Ocaramba/$report")
+            case "$response" in
+              200) echo "Restored $report" ;;
+              404) rm -f "site/$report"; echo "No published $report yet" ;;
+              *) echo "Unable to restore $report (HTTP $response)" >&2; exit 1 ;;
+            esac
+          done
+      - name: Collect test statistics
+        uses: raczeja/test-stats-gh-pages-action@fb384f6dcc9d42eb8867a5222509d485e71cdcf4 # v1.1.6
+        with:
+          result-files: test-results/**/Ocaramba.Tests.*
+          site-directory: site
+          stats-subdirectory: stats/history
+          history-days: 30
+          report-name: All test projects
+          dashboard-url: https://Accenture.github.io/Ocaramba/stats/
+          shell-test-results: test-results/**/Ocaramba.Tests.*
+      - name: Upload site to GitHub Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      # Deploy test statistics on every run with API documentation from gh-pages or the release artifact.
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
