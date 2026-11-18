@@ -710,7 +710,6 @@ jobs:
       - test_Stage_RunTestsOnLinuxsaucelabs
       - test_Stage_RunTestsOnWindowsCore1
       - test_Stage_RunTestsOnWindowsCore2
-      - test_Stage_RunTestsOnWindowsBrowserStack
       - test_Stage_RunTestsSeleniumGrid
     if: ${{ always() }}
     permissions:
@@ -776,4 +775,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
