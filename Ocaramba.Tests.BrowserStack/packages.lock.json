@@ -4,9 +4,9 @@
     "net10.0": {
       "BrowserStack.TestAdapter": {
         "type": "Direct",
-        "requested": "[0.52.1, )",
-        "resolved": "0.52.1",
-        "contentHash": "n0DXcT4bX8wnB7krxcteh+ry5uXrVtfXsYDRHXSM4lZ+4WLxS9WODImHjt3DsLNxok7kLm9jI3xhLRkqAymhPw==",
+        "requested": "[0.53.0, )",
+        "resolved": "0.53.0",
+        "contentHash": "18mb3fPW8UDofW8z0ewnX81JKcway6hbvKRBVvYg0Zfl+NgJ8tcXeeGcTwu6bqj428eb5CN1OnYcmgClQHAaHw==",
         "dependencies": {
           "Google.Protobuf": "3.30.2",
           "Grpc.Net.Client": "2.71.0",
