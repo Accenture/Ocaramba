@@ -88,6 +88,7 @@ jobs:
         run: dotnet build Ocaramba.Documentation/Ocaramba.Documentation.shfbproj --no-restore --configuration ${{ env.buildConfiguration }} -p:AlwaysLoadProject=true
       - name: Upload API documentation
         uses: actions/upload-artifact@v4
+        if: startsWith(github.ref, 'refs/tags/')
         with:
           name: api-documentation
           path: ./Ocaramba.Documentation/Help
@@ -711,7 +712,7 @@ jobs:
       - test_Stage_RunTestsOnWindowsCore2
       - test_Stage_RunTestsOnWindowsBrowserStack
       - test_Stage_RunTestsSeleniumGrid
-    if: ${{ always() && needs.build_Stage_BuildOnWindows.result == 'success' && (needs.release_Stage_PublishNuget.result == 'success' || needs.release_Stage_PublishNuget.result == 'skipped') && (startsWith(github.ref, 'refs/tags/') || github.event_name == 'workflow_dispatch' || github.event_name == 'schedule' || (github.event_name == 'push' && github.ref == 'refs/heads/master')) }}
+    if: ${{ always() }}
     permissions:
       pages: write
       id-token: write
@@ -725,9 +726,25 @@ jobs:
     steps:
       - name: Download API documentation
         uses: actions/download-artifact@v4
+        if: ${{ startsWith(github.ref, 'refs/tags/') && needs.build_Stage_BuildOnWindows.result == 'success' }}
         with:
           name: api-documentation
           path: site
+      - name: Restore published API documentation
+        if: ${{ !startsWith(github.ref, 'refs/tags/') || needs.build_Stage_BuildOnWindows.result != 'success' }}
+        shell: bash
+        run: |
+          url="https://Accenture.github.io/Ocaramba/"
+          status=$(curl --silent --show-error --location --output /dev/null --write-out '%{http_code}' "$url")
+          case "$status" in
+            200)
+              wget --recursive --no-parent --no-host-directories --cut-dirs=1 \
+                --directory-prefix=site --domains=Accenture.github.io \
+                --reject-regex='/Ocaramba/stats(/|$)' "$url"
+              ;;
+            404) echo "No published API documentation yet" ;;
+            *) echo "Unable to restore API documentation (HTTP $status)" >&2; exit 1 ;;
+          esac
       - name: Download all test results
         uses: actions/download-artifact@v4
         with:
@@ -762,7 +779,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: site
-      # Deploy API documentation and test statistics to GitHub Pages.
+      # Deploy test statistics on every run and API documentation on releases.
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
