@@ -730,21 +730,14 @@ jobs:
         with:
           name: api-documentation
           path: site
-      - name: Restore published API documentation
+      - name: Checkout published API documentation
         if: ${{ !startsWith(github.ref, 'refs/tags/') || needs.build_Stage_BuildOnWindows.result != 'success' }}
-        shell: bash
-        run: |
-          url="https://Accenture.github.io/Ocaramba/"
-          status=$(curl --silent --show-error --location --output /dev/null --write-out '%{http_code}' "$url")
-          case "$status" in
-            200)
-              wget --recursive --no-parent --no-host-directories --cut-dirs=1 \
-                --directory-prefix=site --domains=Accenture.github.io \
-                --reject-regex='/Ocaramba/stats(/|$)' "$url"
-              ;;
-            404) echo "No published API documentation yet" ;;
-            *) echo "Unable to restore API documentation (HTTP $status)" >&2; exit 1 ;;
-          esac
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: site
+          fetch-depth: 1
+          persist-credentials: false
       - name: Download all test results
         uses: actions/download-artifact@v4
         with:
@@ -779,7 +772,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: site
-      # Deploy test statistics on every run and API documentation on releases.
+      # Deploy test statistics on every run with API documentation from gh-pages or the release artifact.
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
