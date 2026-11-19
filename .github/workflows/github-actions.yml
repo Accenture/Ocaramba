@@ -759,7 +759,7 @@ jobs:
             esac
           done
       - name: Collect test statistics
-        uses: raczeja/test-stats-gh-pages-action@v1.1.7
+        uses: raczeja/test-stats-gh-pages-action@v1.1.8
         with:
           result-files: test-results/**/Ocaramba.Tests.*
           site-directory: site
