@@ -1,0 +1,78 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    ":semanticCommitsDisabled",
+    ":dependencyDashboard",
+    "helpers:pinGitHubActionDigests"
+  ],
+  "timezone": "Europe/Warsaw",
+  "schedule": ["before 6am on monday"],
+  "prConcurrentLimit": 5,
+  "prHourlyLimit": 2,
+  "labels": ["dependencies"],
+  "rebaseWhen": "conflicted",
+  "enabledManagers": ["nuget", "github-actions", "dotnet-sdk"],
+  "nuget": {
+    "enabled": true
+  },
+  "packageRules": [
+    {
+      "description": "Group minor/patch updates of regular NuGet packages",
+      "matchManagers": ["nuget"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "nuget minor/patch",
+      "automerge": false
+    },
+    {
+      "description": "Selenium packages move together",
+      "matchManagers": ["nuget"],
+      "matchPackageNames": ["/^Selenium\\./", "/^DotNetSeleniumExtras/"],
+      "groupName": "Selenium"
+    },
+    {
+      "description": "Test frameworks and runners",
+      "matchManagers": ["nuget"],
+      "matchPackageNames": [
+        "/^NUnit/",
+        "/^MSTest/",
+        "/^Microsoft\\.NET\\.Test\\.Sdk$/",
+        "/^xunit/",
+        "/^coverlet/"
+      ],
+      "groupName": "test frameworks"
+    },
+    {
+      "description": "Microsoft.Extensions.* / System.* packages",
+      "matchManagers": ["nuget"],
+      "matchPackageNames": [
+        "/^Microsoft\\.Extensions\\./",
+        "/^System\\./"
+      ],
+      "groupName": "Microsoft/System packages"
+    },
+    {
+      "description": "Major updates need manual review, separate PRs",
+      "matchUpdateTypes": ["major"],
+      "dependencyDashboardApproval": true,
+      "labels": ["dependencies", "major"]
+    },
+    {
+      "description": "Group and automerge GitHub Actions minor/patch",
+      "matchManagers": ["github-actions"],
+      "matchUpdateTypes": ["minor", "patch", "digest"],
+      "groupName": "github actions",
+      "automerge": true
+    },
+    {
+      "description": "Don't touch target frameworks / SDK pins without review",
+      "matchManagers": ["dotnet-sdk"],
+      "dependencyDashboardApproval": true
+    }
+  ],
+  "vulnerabilityAlerts": {
+    "labels": ["security"],
+    "schedule": ["at any time"],
+    "automerge": false
+  }
+}
