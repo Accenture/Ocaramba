@@ -8,52 +8,29 @@
     "helpers:pinGitHubActionDigests"
   ],
   "timezone": "Europe/Warsaw",
-  "schedule": [
-    "before 6am on monday"
-  ],
+  "schedule": ["before 6am on monday"],
   "prConcurrentLimit": 5,
   "prHourlyLimit": 2,
-  "labels": [
-    "dependencies"
-  ],
+  "labels": ["dependencies"],
   "rebaseWhen": "conflicted",
-  "enabledManagers": [
-    "nuget",
-    "github-actions",
-    "dotnet-sdk"
-  ],
-  "nuget": {
-    "enabled": true
-  },
+  "enabledManagers": ["nuget", "github-actions"],
   "packageRules": [
     {
       "description": "Group minor/patch updates of regular NuGet packages",
-      "matchManagers": [
-        "nuget"
-      ],
-      "matchUpdateTypes": [
-        "minor",
-        "patch"
-      ],
+      "matchManagers": ["nuget"],
+      "matchUpdateTypes": ["minor", "patch"],
       "groupName": "nuget minor/patch",
       "automerge": false
     },
     {
       "description": "Selenium packages move together",
-      "matchManagers": [
-        "nuget"
-      ],
-      "matchPackageNames": [
-        "/^Selenium\\./",
-        "/^DotNetSeleniumExtras/"
-      ],
+      "matchManagers": ["nuget"],
+      "matchPackageNames": ["/^Selenium\\./", "/^DotNetSeleniumExtras/"],
       "groupName": "Selenium"
     },
     {
       "description": "Test frameworks and runners",
-      "matchManagers": [
-        "nuget"
-      ],
+      "matchManagers": ["nuget"],
       "matchPackageNames": [
         "/^NUnit/",
         "/^MSTest/",
@@ -65,54 +42,32 @@
     },
     {
       "description": "Microsoft.Extensions.* / System.* packages",
-      "matchManagers": [
-        "nuget"
-      ],
-      "matchPackageNames": [
-        "/^Microsoft\\.Extensions\\./",
-        "/^System\\./"
-      ],
+      "matchManagers": ["nuget"],
+      "matchPackageNames": ["/^Microsoft\\.Extensions\\./", "/^System\\./"],
       "groupName": "Microsoft/System packages"
     },
     {
-      "description": "Major updates need manual review, separate PRs",
-      "matchUpdateTypes": [
-        "major"
-      ],
+      "description": "Major updates need manual review",
+      "matchUpdateTypes": ["major"],
       "dependencyDashboardApproval": true,
-      "labels": [
-        "dependencies",
-        "major"
-      ]
+      "labels": ["dependencies", "major"]
     },
     {
       "description": "Group and automerge GitHub Actions minor/patch",
-      "matchManagers": [
-        "github-actions"
-      ],
-      "matchUpdateTypes": [
-        "minor",
-        "patch",
-        "digest"
-      ],
+      "matchManagers": ["github-actions"],
+      "matchUpdateTypes": ["minor", "patch", "digest"],
       "groupName": "github actions",
       "automerge": true
     },
     {
-      "description": "Don't touch target frameworks / SDK pins without review",
-      "matchManagers": [
-        "dotnet-sdk"
-      ],
+      "description": "SDK pins in global.json need review",
+      "matchDepTypes": ["dotnet-sdk"],
       "dependencyDashboardApproval": true
     }
   ],
   "vulnerabilityAlerts": {
-    "labels": [
-      "security"
-    ],
-    "schedule": [
-      "at any time"
-    ],
+    "labels": ["security"],
+    "schedule": ["at any time"],
     "automerge": false
   }
 }
