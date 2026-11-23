@@ -113,15 +113,9 @@
       },
       "Microsoft.WSMan.Management": {
         "type": "Direct",
-        "requested": "[7.4.12, )",
-        "resolved": "7.4.12",
-        "contentHash": "XWKZX+9cNJ6thtPjZD39WwPm3PIRaSvBQk+CN2t+AaBE1f6pMfPOU2mjxH9GVm5/BwjhTSg9gzd3nQ+OBzTFNQ==",
-        "dependencies": {
-          "Microsoft.WSMan.Runtime": "7.4.12",
-          "System.Diagnostics.EventLog": "8.0.2",
-          "System.Management.Automation": "7.4.12",
-          "System.ServiceProcess.ServiceController": "8.0.1"
-        }
+        "requested": "[7.7.0, )",
+        "resolved": "7.7.0",
+        "contentHash": "9heOhkDXczexXFRpomrsbKTKgKcdtDl8SG/damC9lcH/Imw9U5g3wSW4F2yWI9An08/jFF84aV3xqt8RORR4Nw=="
       },
       "NLog": {
         "type": "Direct",
@@ -439,11 +433,6 @@
           "System.Speech": "8.0.0",
           "System.Web.Services.Description": "4.10.3"
         }
-      },
-      "Microsoft.WSMan.Runtime": {
-        "type": "Transitive",
-        "resolved": "7.4.12",
-        "contentHash": "3Oi74bp2yWR8iZezzh1Y65bWNgojYaPexXIiHhjaGboKZsVsUTGEd5vjcPqMmhP55/axhh9eRDH53bNX0hz8wQ=="
       },
       "Newtonsoft.Json": {
         "type": "Transitive",

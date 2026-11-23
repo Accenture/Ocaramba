@@ -107,15 +107,9 @@
       },
       "Microsoft.WSMan.Management": {
         "type": "Direct",
-        "requested": "[7.4.12, )",
-        "resolved": "7.4.12",
-        "contentHash": "XWKZX+9cNJ6thtPjZD39WwPm3PIRaSvBQk+CN2t+AaBE1f6pMfPOU2mjxH9GVm5/BwjhTSg9gzd3nQ+OBzTFNQ==",
-        "dependencies": {
-          "Microsoft.WSMan.Runtime": "7.4.12",
-          "System.Diagnostics.EventLog": "8.0.2",
-          "System.Management.Automation": "7.4.12",
-          "System.ServiceProcess.ServiceController": "8.0.1"
-        }
+        "requested": "[7.7.0, )",
+        "resolved": "7.7.0",
+        "contentHash": "9heOhkDXczexXFRpomrsbKTKgKcdtDl8SG/damC9lcH/Imw9U5g3wSW4F2yWI9An08/jFF84aV3xqt8RORR4Nw=="
       },
       "NLog": {
         "type": "Direct",
@@ -257,8 +251,11 @@
       },
       "Microsoft.Build.Tasks.Git": {
         "type": "Transitive",
-        "resolved": "10.0.111",
-        "contentHash": "IRJmiczCoN50PaT8pCFVGXEN1erN1kqWJaink4zN/2QprrQ/4rFhuhawaOQRoxnXQQw0ZFc+Hd+WuxNwz9RqbQ=="
+        "resolved": "11.0.100",
+        "contentHash": "juE7HH7MfWolKodshqdxaJjFK3A4wp/UqMN69sVtBBU2hT2Bs1vwjAy0dwdsIUFlff0jEOqT7qcXQiD8l3+z3A==",
+        "dependencies": {
+          "System.IO.Hashing": "11.0.0"
+        }
       },
       "Microsoft.CodeAnalysis.Analyzers": {
         "type": "Transitive",
@@ -607,11 +604,6 @@
           "System.Web.Services.Description": "4.10.3"
         }
       },
-      "Microsoft.WSMan.Runtime": {
-        "type": "Transitive",
-        "resolved": "7.4.12",
-        "contentHash": "3Oi74bp2yWR8iZezzh1Y65bWNgojYaPexXIiHhjaGboKZsVsUTGEd5vjcPqMmhP55/axhh9eRDH53bNX0hz8wQ=="
-      },
       "Newtonsoft.Json": {
         "type": "Transitive",
         "resolved": "13.0.3",
@@ -778,6 +770,11 @@
           "Microsoft.IdentityModel.JsonWebTokens": "7.7.1",
           "Microsoft.IdentityModel.Tokens": "7.7.1"
         }
+      },
+      "System.IO.Hashing": {
+        "type": "Transitive",
+        "resolved": "11.0.0",
+        "contentHash": "U+Bv2qCYt6eONi+arSP0QIp4uTO6os6uceBsqiAwruZ+Wo2HrRhO/0tj38M9URJtS+4DhAtT3ka2TGNFYsnhyQ=="
       },
       "System.IO.Packaging": {
         "type": "Transitive",
@@ -947,13 +944,13 @@
         "type": "Project",
         "dependencies": {
           "Appium.WebDriver": "[8.2.0, )",
-          "Microsoft.Build.Tasks.Git": "[10.0.111, )",
+          "Microsoft.Build.Tasks.Git": "[11.0.100, )",
           "Microsoft.Extensions.Configuration": "[10.0.4, )",
           "Microsoft.Extensions.Configuration.Binder": "[10.0.4, )",
           "Microsoft.Extensions.Configuration.Json": "[10.0.1, )",
           "Microsoft.PowerShell.Commands.Diagnostics": "[7.4.12, )",
           "Microsoft.PowerShell.SDK": "[7.4.12, )",
-          "Microsoft.WSMan.Management": "[7.4.12, )",
+          "Microsoft.WSMan.Management": "[7.7.0, )",
           "NLog": "[6.1.0, )",
           "Selenium.Support": "[4.40.0, )",
           "Selenium.WebDriver": "[4.41.0, )",
