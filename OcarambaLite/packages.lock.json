@@ -61,12 +61,9 @@
       },
       "Microsoft.PowerShell.Commands.Diagnostics": {
         "type": "Direct",
-        "requested": "[7.4.12, )",
-        "resolved": "7.4.12",
-        "contentHash": "Cp2ueN1dPzAm7NSAMLW4yDEvQDQ1gSwp8QiAuD8jXY5uqW9gYYHDnI7WURuXQa57ESblv55gPumNBR/xbhzstg==",
-        "dependencies": {
-          "System.Management.Automation": "7.4.12"
-        }
+        "requested": "[7.7.0, )",
+        "resolved": "7.7.0",
+        "contentHash": "mBLsoe3GgjMl43X/wnMs/VTUWWi/dgVUjMXxNuZeMAMJLOjGKjH54rX92tr8X4Lx2uxfEJd5x16ebIb1drD/+g=="
       },
       "Microsoft.PowerShell.SDK": {
         "type": "Direct",
